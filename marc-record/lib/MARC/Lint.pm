@@ -237,16 +237,6 @@ sub check_245 {
 	}
 }
 
-sub check_260 {
-	my $self = shift;
-	my $field = shift;
-
-	if ( not $field->subfield( "c" ) ) {
-		$self->warn( "260: Must have a subfield _c." );
-	}
-}
-
-
 =head1 SEE ALSO
 
 Check the docs for L<MARC::Record>.  All software links are there.
