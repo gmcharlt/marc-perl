@@ -4,6 +4,8 @@ Revision history for Perl extension MARC::Record.
 	- Moved new_from_usmarc() docs & code up right after new() to 
 	be more prominent. Thanks to Chris Biemesderfer for pointing this 
 	out.
+	- Added Chris Biemesderfer's section to the tutorial which 
+	discusses using MARC::Record with Net::Z3950.
 
 1.12	October 9, 2002 
 	- Makefile.PL will now generate PDF and HTML documentation for 
