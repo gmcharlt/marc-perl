@@ -8,7 +8,7 @@ lib/MARC/Lint.pm
 lib/MARC/File.pm
 lib/MARC/File/USMARC.pm
 lib/MARC/File/MicroLIF.pm
-lib/MARC/File/Batch.pm
+lib/MARC/Batch.pm
 pl/marcdump
 pl/marclint
 t/00.load.t
@@ -17,3 +17,5 @@ t/10.camel.t
 t/20.clone.t
 t/50.batch.t
 t/camel.usmarc
+t/sample100.lif
+t/sample20.lif
