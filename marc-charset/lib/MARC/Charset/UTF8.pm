@@ -9,6 +9,18 @@ MARC::Charset::UTF8 - UTF-8 => MARC-8 mapping
  use MARC::Charset::UTF8;
  my $cs = MARC::Charset::UTF8->new();
 
+ ## convert some utf8 to marc8
+ my $marc8 = $cs->to_marc8( $unicode );
+
+ ## see what charsets have been used so far by this charset object
+ my @charsets = $cs->charsets();
+
+ ## what is the current G0 charset
+ my $g0 = $cs->g0();
+
+ ## what is the current G1 charset
+ my $g1 = $cs->g1();
+
 =head1 DESCRIPTION
 
 Unlike all the other MARC::Charset::* classes, MARC::Charset::UTF8 attempts to
@@ -41,7 +53,7 @@ tie( my %unicode2marc, 'DB_File', $db, O_RDONLY )
 
 my %combining;
 
-=head1 
+=head1 new()
 
 The constructor, which will return you a MARC::Charset::UTF8 object.
 

@@ -45,13 +45,14 @@ WARNING
 ## from. These dbs are used for large mappings, that are used off 
 ## disk instead of putting huge hashes into memory.
 ##
-## Note: last I check DB_File didn't handle UTF8 as values very well
-## so we just store the hex as a string and unicodeify it when we need
-## to in MARC::Charset::EastAsian::lookup()
+## Note: last I checked DB_File didn't handle UTF8 as values very well
+## so we just store the character as an integer and unicodeify it when we 
+## need to in MARC::Charset::EastAsian::lookup()
 ##
-## The idea here was to make it easy to extend this code if we wanted
-## to use Berkeley DBs for other character lookups. But it's just East
-## Asian at the moment + the reverse mapping for UTF-8 => MARC-8
+## The reverse mapping database maps the hex value of a unicode
+## character to a delimited string which contains the MARC-8 character, 
+## the character set it belongs to, and a flag indicating if it is a 
+## combining character or not.
 
 sub makeDbs {
 
@@ -61,7 +62,7 @@ sub makeDbs {
     tie( my %reverse, 'DB_File', 'lib/MARC/Charset/UTF8.db' )
 	|| die 'unable to create lib/MARC/Charset/UTF8.db';
 
-    ## now cycle through dbs that we need forwards mapping for
+    ## cycle through dbs that we need forwards mapping for
     foreach my $db ( 'EastAsian' ) {
 	next if ! -f "data/$db.txt";
 	tie( my %db, "DB_File", "lib/MARC/Charset/$db.db" )
@@ -74,9 +75,9 @@ sub makeDbs {
 	    my @from = ( $cols[0] =~ /(..)(..)(..)/ );
 	    my $key;
 	    foreach ( @from ) { $key .= chr( hex($_) ); }
-	    my $value = $cols[1] + 0;
+	    my $value = hex( $cols[1] ); 
 	    $db{ $key } = $value;
-	    $reverse{ $value } = join( '~~', $key, $db, 0 );
+	    $reverse{ $value } = squish( $key, $db, 0 );
 	}
 	untie(%db);
     }
@@ -98,9 +99,12 @@ sub makeDbs {
 	while ( my ($marc8,$utf8) = 
 	    each %{"MARC::Charset::${charset}::marc2unicode"} ) {
 	    my $ord = ord( $utf8 );
+	    ## look up character in perl's character db to see if it is
+	    ## a combining character
 	    my $char = charinfo( $ord );
-	    $reverse{ $ord } = join( '~~' ,
-		$marc8, $charset, $char->{ combining } );
+	    my $hex = hex( $ord );
+	    $reverse{ $hex } = squish( $marc8, $charset, 
+		$char->{ combining } );
 	}
 
     }
@@ -116,6 +120,14 @@ if ( shift eq 'sfdocs' ) {
     unlink <*~~>;
     system( "tar cvfz sfdocs.tar.gz sfdocs/ > /dev/null");
     system( "rm -rf sfdocs" );
+}
+
+
+## build delimited string for mapping table
+
+sub squish {
+    my ( $char, $charset, $combining ) = @_;
+    return( join( '~~',$char,$charset,$combining) );
 }
 
 
