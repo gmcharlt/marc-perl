@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+
+use utf8;
+use MARC::Charset;
+
+# slurp
+$/ = undef;
+my $string = <>;
+
+my $charset = MARC::Charset->new();
+print $charset->to_unicode($string);
