@@ -1,5 +1,8 @@
 package MARC::Charset::EastAsian;
 
+use MARC::Charset::Generic qw( :all );
+use base qw( MARC::Charset::Generic );
+
 =head1 NAME
 
 MARC::Charset::EastAsian - MARC8/UTF8 mappings 
@@ -19,6 +22,9 @@ Because there are so many EastAsian characters, lookup() uses a tied Berkeley DB
 file so as to conserve memory. This db was built and installed when you
 installed MARC::Charset.
 
+MARC::Charset::EastAsian inherits from MARC::Charset::Generic, so you'll need
+to look at those docs as well to see all the available methods.
+
 =head1 METHODS
 
 =cut 
@@ -37,8 +43,6 @@ if ( ! -f $db ) { die "couldn't located EastAsian.db" };
 tie( my %marc2unicode, 'DB_File', $db, O_RDONLY )
     || die "unable to locate EastAsian.db at $db!";
 
-my %combining;
-
 =head1 
 
 The constructor, which will return you a MARC::Charset::EastAsian object.
@@ -48,18 +52,12 @@ The constructor, which will return you a MARC::Charset::EastAsian object.
 
 sub new {
     my $class = shift;
-    return bless {}, ref($class) || $class;
-}
-
-=head1 name()
-
-Returns the name of the character set.
-
-=cut
-
-
-sub name {
-    return('EastAsian');
+    return bless 
+	{
+	    NAME	=> 'EastAsian',
+	    CHARSETCODE	=> CJK,
+	    CHARSIZE	=> 3
+	}, ref($class) || $class;
 }
 
 =head1 lookup()
@@ -89,22 +87,19 @@ sub combining {
     return(undef);
 }
 
-=head1 getCharSize()
-
-Returns the number of bytes in each character of this character set.
-
-=cut
-
-
-sub getCharSize {
-    return(CHAR_SIZE);
-}
-
 =head1 TODO
 
 =over 4 
 
-=item *
+=item Nothing
+
+=back
+
+=head1 SEE ALSO
+
+=over 4
+
+=item MARC::Charset::Generic
 
 =back
 

@@ -1,5 +1,8 @@
 package MARC::Charset::ASCII;
 
+use MARC::Charset::Generic qw( :all );
+use base qw( MARC::Charset::Generic );
+
 =head1 NAME
 
 MARC::Charset::ASCII - MARC8/UTF8 mappings for ASCII
@@ -13,14 +16,15 @@ MARC::Charset::ASCII - MARC8/UTF8 mappings for ASCII
 
 MARC::Charset::ASCII provides a mapping between the MARC8 ASCII character
 set and Unicode(UTF8). It is typically used by MARC::Charset, so you 
-probably don't need to use this yourself. 
+probably don't need to use this yourself. It inherits from
+MARC::Charset::Generic so you'll have to look at those docs to see 
+all the methods you can call.
 
 =head1 METHODS
 
 =cut 
 
 use strict;
-use constant CHAR_SIZE	    => 1;
 our %marc2unicode;
 
 =head1 
@@ -31,17 +35,12 @@ The constructor, which will return you a MARC::Charset::ASCII object.
 
 sub new {
     my $class = shift;
-    return bless {}, ref($class) || $class;
-}
-
-=head1 name()
-
-Returns the name of the character set.
-
-=cut
-
-sub name {
-    return('ASCII');
+    return bless 
+	{ 
+	    NAME	=> 'ASCII',
+	    CHARSETCODE => ASCII_DEFAULT, 
+	    CHARSIZE	=> 1 
+	} , ref($class) || $class;
 }
 
 =head1 lookup()
@@ -66,17 +65,6 @@ a combining character, and false (undef) if it is not.
 sub combining {
     return(undef); ## no combining ASCII characters
 }
-
-=head1 getCharSize()
-
-Returns the number of bytes in each character of this character set.
-
-=cut
-
-sub getCharSize {
-    return(CHAR_SIZE);
-}
-
 
 %marc2unicode = (
 
@@ -183,6 +171,14 @@ chr(0x7E)=>chr(0x007E), # SPACING TILDE / TILDE
 =over 4 
 
 =item *
+
+=back
+
+=head1 SEE ALSO
+
+=over 4 
+
+=item MARC::Charset::Generic
 
 =back
 

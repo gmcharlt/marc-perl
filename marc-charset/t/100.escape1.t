@@ -4,7 +4,9 @@ use Test::More tests => 3;
 ## as documents at http://lcweb.loc.gov/marc/specifications/speccharmarc8.html
 ## Technique 1: Greek Symbols, Subscript, and Superscript Characters
 
-use MARC::Charset qw(:all);
+use strict;
+use MARC::Charset;
+use MARC::Charset::Generic qw( :all );
 
 my $cs = MARC::Charset->new();
 

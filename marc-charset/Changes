@@ -1,4 +1,12 @@
-Revision history for Perl extension MARC-Charset-0.1.
+Revision history for MARC::Charset
+
+0.4  Fri Apr 11 06:47:00 2003
+    - all Charset classes inherit from MARC::Charset::Generic
+    - added MARC::Charset::UTF8
+    - added MARC::Charset::to_marc8() for conversion of UTF8 back to MARC8
+    - t/115.utf8.t basic tests of to_marc8()
+    - modified Makefile.PL to create a reverse mapping database for mapping
+      UTF8 characters back to their MARC8 equivalent.
 
 0.3  Tue Dec  3 17:09:23 2002
     - revamped to_utf8() to handle multibyte character sets. It is no longer

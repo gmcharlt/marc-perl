@@ -4,6 +4,8 @@ use ExtUtils::MakeMaker;
 use File::Find;
 use File::Copy;
 use Unicode::UCD qw( charinfo );
+use MARC::Charset;
+use MARC::Charset::Generic qw( :all );
 
 find( \&filecheck, "." );
 
@@ -11,11 +13,9 @@ eval( 'use DB_File' );
 if ( !$@ ) { makeDbs() }
 else { print <<WARNING; exit(0); }
 
-DB_File not installed, so we can't build East Asian character
-database. This is BAD if you want to work with EastAsian character 
-data. DB_File is used to lower the memory footprint of MARC::Charset when 
-working with EastAsian character data. Please install DB_File available from 
-you nearest CPAN mirror. 
+DB_File does not appear to be installed. You must have DB_File installed to
+work with EastAsian character sets, and to reverse map UTF-8 to MARC-8
+characters. You can download DB_File from CPAN.
 
 WARNING
 
@@ -27,16 +27,19 @@ WARNING
 	ABSTRACT_FROM	=> 'lib/MARC/Charset.pm',
 	PMLIBDIRS	=> [ qw( lib/ ) ],
 	AUTHOR		=> 'Ed Summers <ehs@pobox.com>',
-	PREREQ_PM	=> {
+	PREREQ_PM	=> 
+			    {
 			    'Test::More'    => 0,
 			    'DB_File'	    => 1,
 			    },
-	dist 		=> {
-			    COMPRESS => 'gzip -9f', 
-			    SUFFIX => 'gz',
+	dist 		=> 
+			    {
+			    COMPRESS	    => 'gzip -9f', 
+			    SUFFIX	    => 'gz',
 			    },
-	depend		=> { 
-			    Makefile => '$(VERSION_FROM)'
+	depend		=> 
+			    { 
+			    Makefile	    => '$(VERSION_FROM)'
 			    },
 	);
 
@@ -59,55 +62,57 @@ sub makeDbs {
     print "creating character mapping databases...this might take a while\n";
 
     ## create a berkeley db for our reverse mapping (UTF-8 => MARC-8)
+    unlink( "lib/MARC/Charset/UTF8.db" ) if -f "lib/MARC/Charset/UTF8.db";
     tie( my %reverse, 'DB_File', 'lib/MARC/Charset/UTF8.db' )
 	|| die 'unable to create lib/MARC/Charset/UTF8.db';
 
-    ## cycle through dbs that we need forwards mapping for
-    foreach my $db ( 'EastAsian' ) {
-	next if ! -f "data/$db.txt";
-	tie( my %db, "DB_File", "lib/MARC/Charset/$db.db" )
-	    || die "unable to create lib/MARC/Charset/$db.db: $!";
-	open( IN, "data/$db.txt" ) 
-	    || die "couldn't find data/$db.txt: $!";
-	while ( my $line = <IN> ) {
-	    next if $line =~ /^#/; ## skip any comments
-	    my @cols = split/,/,$line;
-	    my @from = ( $cols[0] =~ /(..)(..)(..)/ );
-	    my $key;
-	    foreach ( @from ) { $key .= chr( hex($_) ); }
-	    my $value = hex( $cols[1] ); 
-	    $db{ $key } = $value;
-	    $reverse{ $value } = squish( $key, $db, 0 );
-	}
-	untie(%db);
+    ## we need a forward mapping db for EastAsian since it is so huge
+    ## but we'll add to the reverse mapping as we go along
+    unlink( "lib/MARC/Charset/EastAsian.db" ) 
+	if -f "lib/MARC/Charset/EastAsian.db";
+    tie( my %db, "DB_File", "lib/MARC/Charset/EastAsian.db" )
+	|| die "unable to create lib/MARC/Charset/EastAsian.db: $!";
+    open( IN, "data/EastAsian.txt" ) 
+	|| die "couldn't find data/EastAsian.txt: $!";
+    while ( my $line = <IN> ) {
+	next if $line =~ /^#/; ## skip any comments
+	my @cols = split/,/,$line;
+	my @from = ( $cols[0] =~ /(..)(..)(..)/ );
+	my $key;
+	foreach ( @from ) { $key .= chr( hex($_) ); }
+	my $value = hex( $cols[1] ); 
+	$db{ $key } = $value;
+	$reverse{ $value } = MARC::Charset::_pack( $key, CJK, 0 );
     }
+    untie( %db );
 
-    ## add additional charsets to reverse mapping db
-    my @charsets = qw(
-	Ansel ArabicBasic ArabicExtended ASCII 
-	CyrillicBasic CyrillicExtended Greek 
-	GreekSymbols Hebrew Subscripts Superscripts 
+    ## the order here is significant since there can be some overlap
+    my @charsetCodes = (
+	ASCII_DEFAULT, EXTENDED_LATIN, 
+	BASIC_ARABIC, EXTENDED_ARABIC,
+	BASIC_CYRILLIC, EXTENDED_CYRILLIC, 
+	BASIC_GREEK, BASIC_HEBREW,
+	GREEK_SYMBOLS, SUBSCRIPTS, SUPERSCRIPTS
     );
 
     no strict;
+    foreach my $code ( @charsetCodes ) {
 
-    foreach my $charset ( @charsets ) {
+	$charset = MARC::Charset::_getCharset( $code );
+	$marc2unicode = ref( $charset ) . '::marc2unicode';
 
-	eval "use MARC::Charset::$charset";
-	die "couldn't use MARC::Charset::$charset" if $@;
-
-	while ( my ($marc8,$utf8) = 
-	    each %{"MARC::Charset::${charset}::marc2unicode"} ) {
+	while ( my ($marc8,$utf8) = each %{ $marc2unicode } ) {
 	    my $ord = ord( $utf8 );
-	    ## look up character in perl's character db to see if it is
-	    ## a combining character
 	    my $char = charinfo( $ord );
-	    my $hex = hex( $ord );
-	    $reverse{ $hex } = squish( $marc8, $charset, 
+	    ## if there is already a mapping for this character we don't
+	    ## overwrite the existing one
+	    next if exists( $reverse{ $ord } ); 
+	    $reverse{ $ord } = MARC::Charset::_pack( $marc8, $code, 
 		$char->{ combining } );
 	}
 
     }
+    untie( %reverse ); 
 
 }
 
@@ -120,14 +125,6 @@ if ( shift eq 'sfdocs' ) {
     unlink <*~~>;
     system( "tar cvfz sfdocs.tar.gz sfdocs/ > /dev/null");
     system( "rm -rf sfdocs" );
-}
-
-
-## build delimited string for mapping table
-
-sub squish {
-    my ( $char, $charset, $combining ) = @_;
-    return( join( '~~',$char,$charset,$combining) );
 }
 
 

@@ -4,19 +4,22 @@ use Test::More tests=>3;
 ## as documents at http://lcweb.loc.gov/marc/specifications/speccharmarc8.html
 ## "Technique 2: Other Alternate Graphic Character Sets"
 
-use MARC::Charset qw(:all); 
+use strict;
+use MARC::Charset;
+use MARC::Charset::Generic qw( :all );
+
 my $cs = MARC::Charset->new();
 
 ## test some ASCII & Greek mixed together
 
-$test = 
+my $test = 
     'this is greek' .			    ## regular ASCII
     ESCAPE . SINGLE_G0_A . BASIC_GREEK .    ## set G0 to Greek
     chr(0x49) .				    ## zeta
     ESCAPE . SINGLE_G0_A . BASIC_LATIN .    ## set GO to ASCII
     'this is not';			    ## regular ASCII
 
-$expected = 'this is greek' . chr(0x0396) . 'this is not';
+my $expected = 'this is greek' . chr(0x0396) . 'this is not';
 
 is ( $cs->to_utf8($test), $expected, 'escape type 2 to Greek' );
 

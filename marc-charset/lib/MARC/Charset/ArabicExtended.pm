@@ -1,5 +1,8 @@
 package MARC::Charset::ArabicExtended;
 
+use MARC::Charset::Generic qw( :all );
+use base qw( MARC::Charset::Generic );
+
 =head1 NAME
 
 MARC::Charset::ArabicExtended - MARC8/UTF8 mappings for Extended Arabic
@@ -13,16 +16,17 @@ MARC::Charset::ArabicExtended - MARC8/UTF8 mappings for Extended Arabic
 
 MARC::Charset::ArabicExtended provides a mapping between the MARC8 Extended 
 Arabic character set and Unicode(UTF8). It is typically used by MARC::Charset, 
-so you probably don't need to use this yourself. 
+so you probably don't need to use this yourself. It inherits from
+MARC::Charset::Generic, so to see all the methods you can call you need to look
+at those docs.
 
 =head1 METHODS
 
 =cut 
 
 use strict;
-use constant CHAR_SIZE	    => 1;
-my %marc2unicode;
-my %combining;
+our %marc2unicode;
+our %combining;
 
 =head1 
 
@@ -33,18 +37,12 @@ The constructor, which will return you a MARC::Charset::ArabicExtended object.
 
 sub new {
     my $class = shift;
-    return bless {}, ref($class) || $class;
-}
-
-=head1 name()
-
-Returns the name of the character set.
-
-=cut
-
-
-sub name {
-    return('Arabic-Extended');
+    return bless 
+	{
+	    NAME	=> 'Arabic-Extended',
+	    CHARSETCODE	=> EXTENDED_ARABIC,
+	    CHARSIZE	=> 1
+	}, ref($class) || $class;
 }
 
 =head1 lookup()
@@ -72,18 +70,6 @@ sub combining {
     my ($self,$char) = @_;
     return($combining{$char});
 }
-
-=head1 getCharSize()
-
-Returns the number of bytes in each character of this character set.
-
-=cut
-
-
-sub getCharSize {
-    return(CHAR_SIZE);
-}
-
 
 %marc2unicode = (
 
@@ -191,7 +177,15 @@ chr(0xFE)=>1, #SHORT U / COMBINING CARON
 
 =over 4 
 
-=item *
+=item Nothing 
+
+=back
+
+=head1 SEE ALSO
+
+=over 4
+
+=item MARC::Charset::Generic
 
 =back
 

@@ -1,4 +1,7 @@
-package MARC::Charset::EastAsian;
+package MARC::Charset::UTF8;
+
+use MARC::Charset::Generic qw( :all );
+use base qw( MARC::Charset::Generic ); 
 
 =head1 NAME
 
@@ -40,16 +43,17 @@ which you installed MARC::Charset::UTF8 into.
 use strict;
 use DB_File;
 use Config;
-use constant CHAR_SIZE	    => 3;
 
-## trickery to locate where we can find UTF9/db when we are 
+## trickery to locate where we can find UTF8/db when we are 
 ## testing and after install.
 
 my $db .= $Config{ 'sitelib' } . '/MARC/Charset/UTF8.db';
 if ( ! -f $db ) { $db = 'blib/lib/MARC/Charset/UTF8.db'; }
 if ( ! -f $db ) { die "couldn't locate UTF8.db" };
-tie( my %unicode2marc, 'DB_File', $db, O_RDONLY )
-    || die "unable to locate UTF8.db at $db!";
+tie( my %unicode2marc, 'DB_File', $db, O_RDONLY );
+if ( !%unicode2marc ) { die "unable to locate UTF8.db at $db!"; }
+
+print STDERR "Tied: $db\n";
 
 my %combining;
 
@@ -62,33 +66,25 @@ The constructor, which will return you a MARC::Charset::UTF8 object.
 
 sub new {
     my $class = shift;
-    return bless {}, ref($class) || $class;
-}
-
-=head1 name()
-
-Returns the name of the character set.
-
-=cut
-
-
-sub name {
-    return('UTF8');
+    return bless 
+	{
+	    NAME	=> 'UTF8',
+	    CHARSETCODE	=> '-',
+	    CHARSIZE	=> 1
+	}, ref($class) || $class;
 }
 
 =head1 lookup()
 
 The workhorse method that does the lookup. Pass it an a character and you'll
-get back the MARC8 character.
+get back some data identifying a MARC8 character. 
 
 =cut
 
 
 sub lookup {
     my ($self,$char) = @_; 
-    my $hex = $marc2unicode{$char};
-    return( chr(hex($hex) ) ) if $hex;
-    return(undef);
+    return( MARC::Charset::_unpack( $unicode2marc{ ord( $char ) } ) );
 }
 
 =head1 combining()
@@ -98,20 +94,8 @@ a combining character, and false (undef) if it is not.
 
 =cut
 
-
 sub combining {
     return(undef);
-}
-
-=head1 getCharSize()
-
-Returns the number of bytes in each character of this character set.
-
-=cut
-
-
-sub getCharSize {
-    return(CHAR_SIZE);
 }
 
 =head1 TODO

@@ -1,5 +1,8 @@
 package MARC::Charset::ArabicBasic;
 
+use MARC::Charset::Generic qw( :all );
+use base qw( MARC::Charset::Generic );
+
 =head1 NAME
 
 MARC::Charset::ArabicBasic - A MARC8/UTF8 mapping for Basic Arabic.
@@ -13,15 +16,16 @@ MARC::Charset::ArabicBasic - A MARC8/UTF8 mapping for Basic Arabic.
 
 MARC::Charset::ArabicBasic provides a mapping between the MARC8 Basic Arabic 
 character set and Unicode(UTF8). It is typically used by MARC::Charset, so you 
-probably don't need to use this yourself. 
+probably don't need to use this yourself. It inherits from
+MARC::Charset::Generic so you will have to look at those docs to see all the
+methods you can call.
 
 =head1 METHODS
 
 =cut 
 
 use strict;
-use constant CHAR_SIZE	    => 1;
-my %marc2unicode;
+our %marc2unicode;
 
 =head1 
 
@@ -32,18 +36,12 @@ The constructor, which will return you a MARC::Charset::ArabicBasic object.
 
 sub new {
     my $class = shift;
-    return bless {}, ref($class) || $class;
-}
-
-=head1 name()
-
-Returns the name of the character set.
-
-=cut
-
-
-sub name {
-    return('Arabic-Basic');
+    return bless 
+	{
+	    NAME	=> 'Arabic-Basic',
+	    CHARSETCODE	=> BASIC_ARABIC,
+	    CHARSIZE	=> 1
+	}, ref($class) || $class;
 }
 
 =head1 lookup()
@@ -69,17 +67,6 @@ a combining character, and false (undef) if it is not.
 
 sub combining {
     return(undef);
-}
-
-=head1 getCharSize()
-
-Returns the number of bytes in each character of this character set.
-
-=cut
-
-
-sub getCharSize {
-    return(CHAR_SIZE);
 }
 
 %marc2unicode = (
@@ -176,7 +163,13 @@ chr(0x7A)=>chr(0x201C), #LEFT DOUBLE QUOTATION MARK
 
 =item *
 
+Nothing
+
 =back
+
+=head1 SEE ALSO
+
+=item MARC::Charset::Generic
 
 =head1 AUTHORS
 

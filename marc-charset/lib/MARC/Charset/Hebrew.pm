@@ -1,5 +1,8 @@
 package MARC::Charset::Hebrew;
 
+use MARC::Charset::Generic qw( :all );
+use base qw( MARC::Charset::Generic );
+
 =head1 NAME
 
 MARC::Charset::Hebrew - MARC8/UTF8 mappings for Hebrew
@@ -13,15 +16,17 @@ MARC::Charset::Hebrew - MARC8/UTF8 mappings for Hebrew
 
 MARC::Charset::Hebrew provides a mapping between the MARC8 Hebrew character
 set and Unicode(UTF8). It is typically used by MARC::Charset, so you 
-probably don't need to use this yourself. 
+probably don't need to use this yourself. It inherits from
+MARC::Charset::Generic so look at those docs to see all the methods that are
+available.
 
 =head1 METHODS
 
 =cut 
 
 use strict;
-use constant CHAR_SIZE	    => 1;
-my (%marc2unicode,%combining);
+our %marc2unicode;
+our %combining;
 
 =head1 
 
@@ -32,18 +37,12 @@ The constructor, which will return you a MARC::Charset::Hebrew object.
 
 sub new {
     my $class = shift;
-    return bless {}, ref($class) || $class;
-}
-
-=head1 name()
-
-Returns the name of the character set.
-
-=cut
-
-
-sub name {
-    return('Hebrew');
+    return bless 
+	{
+	    NAME	=> 'Hebrew',
+	    CHARSETCODE	=> BASIC_HEBREW,
+	    CHARSIZE	=> 1
+	}, ref($class) || $class;
 }
 
 =head1 lookup()
@@ -52,7 +51,6 @@ The workhorse method that does the lookup. Pass it an a character and you'll
 get back the UTF8 character.
 
 =cut
-
 
 sub lookup {
     my ($self,$char) = @_; 
@@ -66,22 +64,9 @@ a combining character, and false (undef) if it is not.
 
 =cut
 
-
 sub combining {
     return(undef); ## none???
 }
-
-=head1 getCharSize()
-
-Returns the number of bytes in each character of this character set.
-
-=cut
-
-
-sub getCharSize {
-    return(CHAR_SIZE);
-}
-
 
 %marc2unicode = (
 
@@ -173,7 +158,15 @@ chr(0x7D)=>chr(0x05F2), #HEBREW LIGATURE YIDDISH DOUBLE YOD / TSVEY YUDN
 
 =over 4 
 
-=item *
+=item Are some of these combining characters?
+
+=back
+
+=head1 SEE ALSO
+
+=over 4
+
+=item MARC::Charset::Generic
 
 =back
 

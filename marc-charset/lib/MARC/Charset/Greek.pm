@@ -1,5 +1,8 @@
 package MARC::Charset::Greek;
 
+use MARC::Charset::Generic qw( :all );
+use base qw( MARC::Charset::Generic );
+
 =head1 NAME
 
 MARC::Charset::Greek - MARC8/UTF8 mappings 
@@ -13,16 +16,17 @@ MARC::Charset::Greek - MARC8/UTF8 mappings
 
 MARC::Charset::Greek provides a mapping between the MARC8 Greek character
 set and Unicode(UTF8). It is typically used by MARC::Charset, so you 
-probably don't need to use this yourself. 
+probably don't need to use this yourself. It inherits from
+MARC::Charset::Generic so you'll need to look at those docs to see all the
+methods that are available.
 
 =head1 METHODS
 
 =cut 
 
 use strict;
-use constant CHAR_SIZE	    => 1;
-my %marc2unicode;
-my %combining;
+our %marc2unicode;
+our %combining;
 
 =head1 
 
@@ -30,21 +34,14 @@ The constructor, which will return you a MARC::Charset::Greek object.
 
 =cut
 
-
 sub new {
     my $class = shift;
-    return bless {}, ref($class) || $class;
-}
-
-=head1 name()
-
-Returns the name of the character set.
-
-=cut
-
-
-sub name {
-    return('Greek');
+    return bless 
+	{
+	    NAME	=> 'Greek',
+	    CHARSETCODE	=> BASIC_GREEK,
+	    CHARSIZE	=> 1
+	}, ref($class) || $class;
 }
 
 =head1 lookup()
@@ -53,7 +50,6 @@ The workhorse method that does the lookup. Pass it an a character and you'll
 get back the UTF8 character.
 
 =cut
-
 
 sub lookup {
     my ($self,$char) = @_; 
@@ -67,23 +63,10 @@ a combining character, and false (undef) if it is not.
 
 =cut
 
-
 sub combining {
     my ($self,$char) = @_;
     return($combining{$char}) 
 }
-
-=head1 getCharSize()
-
-Returns the number of bytes in each character of this character set.
-
-=cut
-
-
-sub getCharSize {
-    return(CHAR_SIZE);
-}
-
 
 %marc2unicode = (
 
@@ -179,7 +162,15 @@ chr(0x27)=>1, #COMBINING GREEK YPOGEGRAMMENI / IOTA SUBSCRIPT
 
 =over 4 
 
-=item *
+=item Nothing 
+
+=back
+
+=head1 SEE ALSO
+
+=over 4
+
+=item MARC::Charset::Generic
 
 =back
 

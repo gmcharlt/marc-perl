@@ -1,11 +1,13 @@
+use strict;
 use Test::More;
+use MARC::Charset;
+use MARC::Charset::Generic qw( :all );
 
 BEGIN: {
     eval ( "use DB_File" ); 
     if ( $@ ) { 
 	plan skip_all => "DB_File required for testing East Asian characters";
     }
-    use MARC::Charset qw(:all);
 }
 
 plan tests => 15741;
@@ -38,7 +40,7 @@ is ( $c->to_utf8( $marc8 ), $utf8, 'to_utf8() with escapes' );
 $c->g0( MARC::Charset::EastAsian->new() );
 
 open( IN, "data/EastAsian.txt" )
-    || die "couldn't find data/$db.txt: $!";
+    || die "couldn't find data/EastAsian.txt: $!";
 
 while ( my $line = <IN> ) {
     next if $line =~ /^#/;

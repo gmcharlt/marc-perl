@@ -8,7 +8,10 @@ MARC::Charset - A module for doing MARC-8/UTF8 translation
 
 use 5.8.0;
 use strict;
-use base qw( Exporter );
+use Config;
+use DB_File;
+use MARC::Charset::Generic qw( :all );
+use Carp qw( croak );
 
 our $VERSION = 0.4;
 
@@ -72,6 +75,7 @@ use MARC::Charset::Superscripts;
 use MARC::Charset::GreekSymbols;
 
 my $controls = MARC::Charset::Controls->new();
+my $uni2marc; 
 
 
 ## Constants for object attributes
@@ -81,61 +85,6 @@ my $controls = MARC::Charset::Controls->new();
 use constant G0			=> 0;
 use constant G1			=> 1;
 use constant DIAGNOSTICS	=> 2;
-
-
-## Constants for escaping to different character sets
-## we allow export of these constants for testing purposes
-
-## Technique #1
-
-use constant ESCAPE		=> chr(0x1B);
-use constant GREEK_SYMBOLS	=> chr(0x67);
-use constant SUBSCRIPTS		=> chr(0x62);
-use constant SUPERSCRIPTS	=> chr(0x70);
-use constant ASCII_DEFAULT	=> chr(0x73);
-
-## Technique #2 
-
-use constant SINGLE_G0_A	=> chr(0x28);
-use constant SINGLE_G0_B	=> chr(0x2C);
-use constant MULTI_G0_A		=> chr(0x24);
-use constant MULTI_G0_B		=> chr(0x24) . chr(0x2C);
-
-use constant SINGLE_G1_A	=> chr(0x29);
-use constant SINGLE_G1_B	=> chr(0x2D);
-use constant MULTI_G1_A		=> chr(0x24) . chr(0x29);
-use constant MULTI_G1_B		=> chr(0x24) . chr(0x2D);
-
-use constant BASIC_ARABIC	=> chr(0x33);
-use constant EXTENDED_ARABIC	=> chr(0x34);
-use constant BASIC_LATIN	=> chr(0x42);
-use constant EXTENDED_LATIN	=> chr(0x45);
-use constant CJK		=> chr(0x31);
-use constant BASIC_CYRILLIC	=> chr(0x4E);
-use constant EXTENDED_CYRILLIC	=> chr(0x51);
-use constant BASIC_GREEK	=> chr(0x53);
-use constant BASIC_HEBREW	=> chr(0x32);
-
-our %EXPORT_TAGS = ( all => 
-	[ qw( 
-	ESCAPE  GREEK_SYMBOLS  SUBSCRIPTS  SUPERSCRIPTS  ASCII_DEFAULT 
-	SINGLE_G0_A  SINGLE_G0_B  MULTI_G0_A  MULTI_G0_B  SINGLE_G1_A 
-	SINGLE_G1_B  MULTI_G1_A  MULTI_G1_B  BASIC_ARABIC  
-	EXTENDED_ARABIC  BASIC_LATIN  EXTENDED_LATIN CJK  BASIC_CYRILLIC  
-	EXTENDED_CYRILLIC BASIC_GREEK BASIC_HEBREW
-	) ]
-    );
-
-our @EXPORT_OK = qw(
-	ESCAPE  GREEK_SYMBOLS  SUBSCRIPTS  SUPERSCRIPTS  ASCII_DEFAULT 
-	SINGLE_G0_A  SINGLE_G0_B  MULTI_G0_A  MULTI_G0_B  SINGLE_G1_A 
-	SINGLE_G1_B  MULTI_G1_A  MULTI_G1_B  BASIC_ARABIC  
-	EXTENDED_ARABIC  BASIC_LATIN  EXTENDED_LATIN CJK  BASIC_CYRILLIC  
-	EXTENDED_CYRILLIC BASIC_GREEK BASIC_HEBREW
-    );
-
-
-
 
 =head1 METHODS
 
@@ -200,15 +149,136 @@ Extended), Cyrillic (Basic + Extended), and East Asian.
 
 =cut
 
-sub to_utf8 ($) {
+sub to_utf8 {
 
     my ($self,$str) = @_;
+    my $index = 0;
+    my $length = length($str);
+    my $newString = '';
+    my $combining = '';
 
-    ## we delegate the work to an internal method which takes 
-    ## a reference to a string (to avoid copying if the string is very long), 
-    ## as well as the initial left and right index which will 
-    ## change as _marc2unicode is called recursively
-    return( $self->_marc2utf8(\$str,0,length($str)) );
+    CHAR_LOOP: while ( $index < $length ) {
+
+	my @G = ( $self->[G0], $self->[G1], $controls );
+	my $new;
+	my $saveIndex = $index;
+
+	CHARSET_LOOP: foreach my $g ( @G ) {
+
+	    my $charSize = $g->getCharSize();
+	    my $old = substr( $str, $index, $charSize );
+	    if ( $old =~ /^\x1B/ ) { 
+		my $newIndex = $self->_escape(\$str,$index,$length);
+		if ( $newIndex != $index ) { 
+		    $index = $newIndex;
+		    next CHAR_LOOP;
+		}
+	    }
+
+	    if ( $g->combining($old) ) {
+		$combining .= $g->lookup($old);
+		$index += $charSize;
+		next CHAR_LOOP;
+	    }
+
+	    $new = $g->lookup( $old );
+	    if ( defined($new) ) {
+		$index += $charSize;
+		last CHARSET_LOOP;
+	    }
+
+	}
+
+	if ( ! defined( $new ) and $combining eq '' ) { 
+	    if ( $self->[ DIAGNOSTICS ] ) {
+		my $g0 = $self->[G0];
+		my $g1 = $self->[G1];
+		_warning(
+		    "no mapping to a valid character at position ".
+		    ($saveIndex+1) .  ': considered ' .
+		    _getHex( $str, $g0, $saveIndex ) . " in " . $g0->name(). 
+		    ' ; ' . 
+		    _getHex( $str, $g1, $saveIndex ) . " in " . $g1->name().
+		    ' ; ' . 
+		    _getHex( $str, $controls, $saveIndex ) . " in ".
+		    $controls->name()
+		);
+	    }
+	    $index++;
+	}
+	
+	else {
+	    $newString .= $new . $combining;
+	    $combining = '';
+	}
+
+    }
+
+    return( $newString.$combining ); 
+
+}
+
+=head1 to_marc8()
+
+When you pass this method a UTF8 string you will be returned a MARC8 encoded
+string. to_marc8() handles creating the appropriate character escapes.
+
+=cut
+
+sub to_marc8 {
+
+    my ($self,$str) = @_;
+    my $length = length( $str );
+    my $index = 0;
+    my $newStr = '';
+
+    ## create an object for mapping utf8 to marc8
+    if ( ! defined( $uni2marc ) ) {
+	eval( "use MARC::Charset::UTF8" );
+	$uni2marc = MARC::Charset::UTF8->new();
+    }
+
+    ## determine currently active G0 character set 
+    my $g0 = $self->g0();
+    my $g1 = $self->g1();
+
+    ## and their codes 
+    my $code0 = $g0->getCharsetCode() 
+	|| croak( "No charset code defined for " . ref($g0) ); 
+    my $code1 = $g1->getCharsetCode()
+	|| croak( "No charset code defined for " . ref($g1) );
+
+    while ( $index < $length ) {
+
+	my $utf8 = substr( $str, $index, 1 ); 
+	my ($marc8,$charsetCode,$combining) = $uni2marc->lookup( $utf8 );
+	croak( "No MARC8 mapping for UTF8 character: "._hexifyU($utf8) ) 
+	    if !defined($marc8);
+
+	if ( $charsetCode ne $code0 and $charsetCode ne $code1 ) {
+	    $newStr .= _escapeToCharset( $charsetCode );
+	    $code0 = $charsetCode;
+	}
+
+	## combining characters need to be moved left of the last character
+	if ( $combining ) {
+	    my $charSize = ( $charsetCode eq CJK ) ? 3 : 1;
+	    my $tmp = substr( $newStr, -$charSize, $charSize );
+	    substr( $newStr, -$charSize, $charSize ) = $marc8 . $tmp; 
+	}
+	## otherwise just tack it on
+	else { $newStr .= $marc8; }
+
+	$index++;
+
+    }
+
+    ## escape G0 charset back to original if it has changed 
+    if ( $self->g0->getCharsetCode() ne $code0 ) {
+	$newStr .= _escapeToCharset( $self->g0->getCharsetCode() );
+    }
+
+    return( $newStr );
 
 }
 
@@ -261,6 +331,8 @@ A function for going from Unicode to MARC-8 character encodings.
 
 =over 4
 
+=item L<MARC::Charset::Generic>
+
 =item L<MARC::Charset::ASCII>
 
 =item L<MARC::Charset::Ansel>
@@ -289,19 +361,6 @@ A function for going from Unicode to MARC-8 character encodings.
 
 =back
 
-=head1 VERSION HISTORY
-
-=over 4
-
-=item * 
-
-v.01 - 2002.07.17 (ehs)
-
-=back 
-
-=cut
-
-
 =head1 AUTHORS
 
 =over 4
@@ -313,84 +372,10 @@ v.01 - 2002.07.17 (ehs)
 =cut
 
 
-
 ## Internal Subroutines & Methods
 
 
-## This is our workhorse for doing the translation, and is normally 
-## only called by to_utf8() which optimizes some stuff by making sure 
-## _marc2unicode() gets a reference to a string, a left index, a right index 
-
-sub _marc2utf8 {
-
-    my ($self,$strRef) = @_;
-    my $index = 0;
-    my $length = length($$strRef);
-    my $newString = '';
-    my $combining = '';
-    
-    CHAR_LOOP: while ( $index < $length ) {
-
-	my @G = ( $self->[G0], $self->[G1], $controls );
-	my $new;
-	my $saveIndex = $index;
-
-	CHARSET_LOOP: foreach my $g ( @G ) {
-
-	    my $charSize = $g->getCharSize();
-	    my $old = substr( $$strRef, $index, $charSize );
-	    if ( $old =~ /^\x1B/ ) { 
-		my $newIndex = $self->_escape($strRef,$index,$length);
-		if ( $newIndex != $index ) { 
-		    $index = $newIndex;
-		    next CHAR_LOOP;
-		}
-	    }
-
-	    if ( $g->combining($old) ) {
-		$combining .= $g->lookup($old);
-		$index += $charSize;
-		next CHAR_LOOP;
-	    }
-
-	    $new = $g->lookup( $old );
-	    if ( defined($new) ) {
-		$index += $charSize;
-		last CHARSET_LOOP;
-	    }
-
-	}
-
-	if ( ! defined( $new ) and $combining eq '' ) { 
-	    if ( $self->[ DIAGNOSTICS ] ) {
-		my $g0 = $self->[G0];
-		my $g1 = $self->[G1];
-		_warning(
-		    "no mapping to a valid character at position ".
-		    ($saveIndex+1) .  ': considered ' .
-		    _getHex( $strRef, $g0, $saveIndex ) . " in " . $g0->name(). 
-		    ' ; ' . 
-		    _getHex( $strRef, $g1, $saveIndex ) . " in " . $g1->name().
-		    ' ; ' . 
-		    _getHex( $strRef, $controls, $saveIndex ) . " in ".
-		    $controls->name()
-		);
-	    }
-	    $index++;
-	}
-	
-	else {
-	    $newString .= $new . $combining;
-	    $combining = '';
-	}
-
-    }
-
-    return( $newString.$combining ); 
-
-}
-
-sub _escape($$$$) {
+sub _escape {
 
     ## this stuff is kind of scary ... for an explanation of what is 
     ## going on here check out the MARC-8 specs at LC. 
@@ -537,7 +522,62 @@ sub _getCharset {
 	eval( "use MARC::Charset::Hebrew; 1;" );
 	return( MARC::Charset::Hebrew->new() );
     } 
+
+    elsif ( $code eq GREEK_SYMBOLS ) { 
+	eval( "use MARC::Charset::GreekSymbols; 1;" );
+	return( MARC::Charset::GreekSymbols->new() );
+    }
+
+    elsif ( $code eq SUBSCRIPTS ) { 
+	eval( "use MARC::Charset::Subscripts; 1;" );
+	return( MARC::Charset::Subscripts->new() );
+    }
+
+    elsif ( $code eq SUPERSCRIPTS ) { 
+	eval( "use MARC::Charset::Superscripts; 1;" );
+	return( MARC::Charset::Superscripts->new() );
+    }
+
+    elsif ( $code eq ASCII_DEFAULT ) {
+	eval( "use MARC::Charset::ASCII; 1;" );
+	return( MARC::Charset::ASCII->new() );
+    }
     
+    else {
+	_warning( sprintf("unknown charset hex(%x)",$code) );
+	return(undef);
+    }
+
+}
+
+## this accepts a charset code, and generates an appropriate 
+## escape sequence for utf8->marc8 translation.
+
+sub _escapeToCharset() {
+    my $code = shift;
+
+    if ( $code eq GREEK_SYMBOLS 
+	or $code eq SUBSCRIPTS
+	or $code eq SUPERSCRIPTS
+	or $code eq ASCII_DEFAULT ) {
+	return( ESCAPE . $code );
+    }
+
+    elsif ( $code eq BASIC_ARABIC 
+	or $code eq EXTENDED_ARABIC 
+	or $code eq BASIC_LATIN 
+	or $code eq EXTENDED_LATIN
+	or $code eq BASIC_CYRILLIC
+	or $code eq EXTENDED_CYRILLIC 
+	or $code eq BASIC_GREEK 
+	or $code eq BASIC_HEBREW ) {
+	return( ESCAPE . SINGLE_G0_A . $code );
+    }
+
+    elsif ( $code eq CJK ) {
+	return( ESCAPE . MULTI_G0_A . CJK );
+    } 
+     
     else {
 	_warning( sprintf("unknown charset hex(%x)",$code) );
 	return(undef);
@@ -551,11 +591,11 @@ sub _getCharset {
 ## generating hex values. It is primarily used when generating warnings. 
 
 sub _getHex {
-    my ( $strRef, $g, $i ) = @_;
+    my ( $str, $g, $i ) = @_;
     my $hex = '';
     my $literal = '';
     for ( my $j=$i; $j < $i+$g->getCharSize(); $j++ ) {
-	my $char = substr( $$strRef, $j, 1 );
+	my $char = substr( $str, $j, 1 );
 	$literal .= $char;
 	$hex .= _hexify( $char ) .  ' ';
     }
@@ -569,6 +609,16 @@ sub _hexify {
 
 sub _hexifyU {
     return sprintf( "0x%04X", ord( shift ) );
+}
+
+sub _pack {
+    return( pack( 'A3A1A1', @_ ) );
+}
+
+sub _unpack {
+    my $x = shift;
+    return( undef ) if ! defined( $x );
+    return ( unpack( 'A3A1A1', $x ) );
 }
 
 1;
