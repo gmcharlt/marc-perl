@@ -1,11 +1,9 @@
 Revision history for Perl extension MARC::Record.
 
-0.95	May 13, 2002
-	- Changed method call description for as_usmarc() in MARC::Record.
-	- Removed IDEA for cloning in MARC::Record docs since it's been done.
-
 0.93	???? ?, 2002
 	- Added Ed Summers' MARC::Doc::Tutorial.
+	- Changed method call description for as_usmarc() in MARC::Record.
+	- Removed IDEA for cloning in MARC::Record docs since it's been done.
 
 0.92    April 2, 2002
 	- Fixed marclint to use the new MARC::File object
