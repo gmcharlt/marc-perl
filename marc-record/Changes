@@ -1,5 +1,9 @@
 Revision history for Perl extension MARC::Record.
 
+1.17	Jan???
+	[ENHANCEMENTS]
+	- Minor speed tweaks when checking for tags < 010
+
 1.16	January 28, 2003
 	[ENHANCEMENTS]
 	- title() and author() now return empty strings, rather than

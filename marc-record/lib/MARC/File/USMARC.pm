@@ -17,7 +17,7 @@ use vars qw( $ERROR );
 
 Version 1.16
 
-    $Id: USMARC.pm,v 1.34 2003/01/28 21:41:40 petdance Exp $
+    $Id: USMARC.pm,v 1.35 2003/01/29 16:24:00 petdance Exp $
 
 =cut
 
@@ -155,7 +155,7 @@ sub decode {
 	    or $marc->_warn( "Directory offsets $location are out of whack for tag $tagno" );
 	$databytesused += $len;
 
-	if ( _isnum($tagno) and $tagno < 10 ) {
+	if ( ($tagno =~ /^\d+$/) && ($tagno < 10) ) {
 	    if ( ! defined( $tagdata ) ) {
 		$marc->_warn( "Did not find tag data $location for tag $tagno" );
 		next;
@@ -281,12 +281,6 @@ sub encode() {
 
     # Glomp it all together
     return join("",$marc->leader, @$directory, END_OF_FIELD, @$fields, END_OF_RECORD);
-}
-
-sub _isnum {
-    my $x = shift;
-    return(1) if $x =~ /^[0-9]+$/;
-    return(0);
 }
 
 1;
