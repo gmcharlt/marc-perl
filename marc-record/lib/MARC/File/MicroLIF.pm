@@ -15,7 +15,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 0.90
 
-    $Id: MicroLIF.pm,v 1.2 2002/04/01 21:34:43 petdance Exp $
+    $Id: MicroLIF.pm,v 1.3 2002/04/01 22:19:05 petdance Exp $
 
 =cut
 
@@ -44,19 +44,6 @@ None.
 
 =head1 METHODS
 
-=head2 next()
-
-Reads the next record from the file handle passed in.
-
-=cut
-
-sub next {
-    my $self = shift;
-
-    my $usmarc = $self->_next();
-
-    return $usmarc ? MARC::Record->new_from_usmarc($usmarc) : undef;
-}
 
 sub _next {
     my $self = shift;

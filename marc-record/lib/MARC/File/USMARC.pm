@@ -15,7 +15,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 0.90
 
-    $Id: USMARC.pm,v 1.3 2002/04/01 21:34:43 petdance Exp $
+    $Id: USMARC.pm,v 1.4 2002/04/01 22:18:38 petdance Exp $
 
 =cut
 
@@ -48,19 +48,11 @@ None.
 
 =head1 METHODS
 
-=head2 next()
+=for internal
 
-Reads the next record from the file handle passed in.
+Internal function to get the next raw record out of a file.
 
 =cut
-
-sub next {
-    my $self = shift;
-
-    my $usmarc = $self->_next();
-
-    return $usmarc ? $self->decode($usmarc) : undef;
-}
 
 sub _next {
     my $self = shift;
@@ -79,24 +71,6 @@ sub _next {
 	or return $self->_gripe( "Error reading $reclen byte record: $!" );
 
     return $usmarc;
-}
-
-=head2 skip
-
-Skips over the next record in the file.  Same as C<next()>,
-without the overhead of parsing a record you're going to throw away
-anyway.
-
-Returns 1 or undef.
-
-=cut
-
-sub skip {
-    my $self = shift;
-
-    my $usmarc = $self->_next();
-
-    return $usmarc ? 1 : undef;
 }
 
 =head2 decode()
