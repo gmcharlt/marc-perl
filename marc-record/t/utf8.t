@@ -15,7 +15,7 @@ use Encode;
 SKIP: {
 
     ## cannot do these tests unless we are running 5.8.1 or better
-    skip "need Perl v5.8.1 or better for UTF8 testing", 8
+    skip "utf8 handling not safe", 8
         if ! MARC::File::utf8_safe();
 
     ## we are going to create a MARC record with a utf8 character in

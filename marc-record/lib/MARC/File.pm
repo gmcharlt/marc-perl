@@ -211,9 +211,10 @@ Tells whether the version of Perl we're using is UFT8-safe.
 =cut
 
 sub utf8_safe {
+    return 0; ## XXX eventually we should be able to handle utf8  
     return 1 if $] >= 5.008001;
 
-    return;
+    return 0;
 }
 
 1;
