@@ -1,4 +1,4 @@
-use Test::More tests => 31;
+use Test::More tests => 29;
 
 use strict;
 
@@ -46,11 +46,6 @@ is( $field->subfield('a'), '123', 'update()' );
 
 is_deeply( $field->subfields(), [ 'a' => 123 ], 'subfields()' );
 is( $field->tag(), 'RAZ', 'tag()' );
-
-my $d = $field->data();
-is( $d, undef, 'calling data() on field>10 returned undef' );
-my @w = $field->warnings();
-like( $w[0], qr/data\(\) is only for tags less than 010/, 'warning available' );
 
 is( $field->indicator(1), '1', 'indicator(1)' );
 is( $field->indicator(2), '2', 'indicator(2)' );

@@ -1,4 +1,4 @@
-use Test::More tests => 5;
+use Test::More tests => 6;
 
 use strict;
 
@@ -17,3 +17,12 @@ is( $subfieldA, 'foo', 'subfield() in scalar context' );
 my @subfieldsA = $field->subfield( 'a' );
 is( $subfieldsA[0], 'foo', 'subfield() in list context 1' );
 is( $subfieldsA[1], 'baz', 'subfield() in list context 2' );
+
+## should not be able to call subfield on field < 010
+$field = MARC::Field->new( '000', 'foobar' );
+eval { $field->subfield( 'a' ) };
+like( 
+    $@, qr/Fields below 010 do not have subfields/, 
+    'subfield cannot be called on fields < 010' 
+);
+

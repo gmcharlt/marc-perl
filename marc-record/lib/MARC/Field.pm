@@ -151,8 +151,8 @@ sub subfield {
 	my $self = shift;
 	my $code_wanted = shift;
 
-	$self->_warn( "Fields below 010 do not have subfields" )
-	    if $self->is_control_tag();
+        croak( "Fields below 010 do not have subfields, use data()" )
+            if $self->is_control_tag();
 
 	my @data = @{$self->{_subfields}};
 	my @found;
@@ -201,8 +201,8 @@ Returns the data part of the field, if the tag number is less than 10.
 sub data($) {
 	my $self = shift;
 
-	$self->_warn( "data() is only for tags less than 010" )
-	    unless $self->is_control_tag();
+        croak( "data() is only for tags less than 010, use subfield()" )
+            unless $self->is_control_tag();
 		
 	$self->{_data} = $_[0] if @_;
 
@@ -478,7 +478,6 @@ sub clone {
 
     return $clone;
 }
-
 =head2 warnings()
 
 Returns the warnings that were created when the record was read.
@@ -496,23 +495,16 @@ sub warnings() {
 	return @{$self->{_warnings}};
 }
 
-=head2 is_control_tag()
-
-Tells whether the current field is one of the control tags, numbered
-001-009.  These tags do not have subfields.
-
-=cut
-
-sub is_control_tag {
-    my $self = shift;
-    return ($self->{_tag} =~ /^\d+$/) && ($self->{_tag} < 10);
-}
-
 # NOTE: _warn is an object method
 sub _warn($) {
 	my $self = shift;
 
 	push( @{$self->{_warnings}}, join( "", @_ ) );
+}
+
+sub is_control_tag {
+    my $self = shift;
+    return ($self->{_tag} =~ /^\d+$/) && ($self->{_tag} < 10);
 }
 
 sub _gripe(@) {
