@@ -48,17 +48,20 @@ for ( @lines ) {
     s/\s+$//;
     next if $_ eq "";
 
-    if (/^(\d\d\d) -/) {
+    if ( /^(\d\d\d)/ ) {
 	my $tag = $1;
 	if (/OBSOLETE/) { 
 	    $in_tag = 0;
 	    next; 
 	}
+
+	/$tag - (.+) \((N?R)\)/ or die "Tag $tag is invalid format";
+	my $desc = $1;
+	my $nr = $2;
 	++$ntags;
 	$in_tag = 1;
-	my $r = /\(NR\)/ ? "NR" : "R";
 	print "\n" if $ntags > 1;
-	print "$tag\t$r\n";
+	print "$tag\t$nr\t$desc\n";
 	$i1 = $i2 = "";
 	next;
     }
