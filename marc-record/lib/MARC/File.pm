@@ -15,7 +15,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 0.90
 
-    $Id: File.pm,v 1.4 2002/04/01 22:15:40 petdance Exp $
+    $Id: File.pm,v 1.5 2002/04/01 22:58:36 petdance Exp $
 
 =cut
 
@@ -25,7 +25,7 @@ our $VERSION = '0.90';
 
     use MARC::File::USMARC;
 
-    my $file = MARC::File::USMARC::in( $filename );
+    my $file = MARC::File::USMARC->in( $filename );
     
     while ( my $marc = $file->next() ) {
 	# Do something
@@ -143,12 +143,6 @@ L<MARC::Record>
 =item * C<out()> method
 
 We only handle files for input right now.
-
-=item * autodispatch
-
-Make some sort of autodispatch so that you don't have to explicitly
-specify the MARC::File::X subclass, sort of like how DBI knows to
-use DBD::Oracle or DBD::Mysql.
 
 =back
 
