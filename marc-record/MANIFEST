@@ -10,7 +10,6 @@ lib/MARC/File/USMARC.pm
 lib/MARC/File/MicroLIF.pm
 pl/marcdump
 pl/marclint
-pl/lif2marc
 t/00.load.t
 t/00.version.t
 t/10.camel.t
