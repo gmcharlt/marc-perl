@@ -15,7 +15,7 @@ FROM_FILE: {
     my $lint = new MARC::Lint;
     isa_ok( $lint, 'MARC::Lint' );
 
-    my $filename = File::Spec->catfile(File::Spec->updir(), 't', 'camel.usmarc');
+    my $filename = File::Spec->catfile( 't', 'camel.usmarc');
 
     my $file = MARC::File::USMARC->in( $filename );
     while ( my $marc = $file->next() ) {
