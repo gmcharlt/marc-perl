@@ -13,6 +13,10 @@ Revision history for Perl extension MARC::Record.
         - Fixed the doc and example for MARC::Field::subfields() so that
           they match the behavior of the function, namely returning a list
           rather than a list ref.
+        - Added tests to make sure that MARC::Record::leader() adds warnings
+          if called as a setter with data that isn't the right length.
+        - Added explicit tests for convenience function behavior (title(),
+          edition(), etc.) when there's no data.
 
         [ENHANCEMENTS]
         - added MARC::Field::delete_subfields() and tests to t/67.subfield.t
