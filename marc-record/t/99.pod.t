@@ -21,19 +21,15 @@ if ($@) {
 	my $checker = Pod::Simple->new;
 	my $dummy;
 
-	$checker->parse_file( $file );
 	$checker->output_string( \$dummy );
+	$checker->parse_file( $file );
 
-	if ( $checker->any_errata_seen ) {
-	    fail( $file );
-
+	unless ( ok( !$checker->any_errata_seen, $file ) ) {
 	    my $lines = $checker->{errata};
 	    for my $line ( sort { $a<=>$b } keys %$lines ) {
 		my $errors = $lines->{$line};
 		diag( "Line $line: $_" ) for @$errors;
 	    }
-	} else {
-	    pass( $file );
 	}
     }
 }
