@@ -10,9 +10,12 @@ Revision history for Perl extension MARC::Record.
 	  Added the warnings_on() warnings_off() methods to turn on/off 
 	  warnings on STDERR. Also added strict_on() and strict_off() to 
 	  change the behavior of next() when an error is encountered.
+	  Thanks to Rob Fox of Notre Dame for providing guidance on the type
+	  of behavior that is really needed when batch processing.
 	- Added new tests for the improved handling of errors in MARC::Batch.
 	- Added new warnings and strict methods to MARC::Doc::Tutorial, also
 	  added more use of MARC::Batch instead of using MARC::File directly.
+	- Added details about return codes to MARC::Batch.
 
 1.12	October 9, 2002 
 	- Makefile.PL will now generate PDF and HTML documentation for 
