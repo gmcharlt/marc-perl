@@ -238,6 +238,9 @@ sub decode {
 
     my $marc = MARC::Record->new();
 
+    # for ease, make the newlines match this platform
+    $text =~ s/[\x0a\x0d]+/\n/g if defined $text;
+
     my @lines = split( /\n/, $text );
     for my $line ( @lines ) {
 
