@@ -4,6 +4,7 @@ Revision history for Perl extension MARC::Record.
 	[FIXES]
 	- Fixed an incorrect instruction in MARC::File::MicroLIF.
 	- Added sample usage for insert_grouped_fields()
+	- Added example about subfield v to x conversion to tutorial.
 
 1.29	June 05, 2003	
 	[ENHANCEMENTS]
