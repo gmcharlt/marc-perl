@@ -9,7 +9,7 @@ use MARC::File::SAX;
 use IO::File;
 use Carp qw( croak );
 
-our $VERSION = '0.65';
+our $VERSION = '0.66';
 
 my $handler = MARC::File::SAX->new();
 my $parser = XML::SAX::ParserFactory->parser( Handler => $handler );
@@ -201,11 +201,16 @@ different portions.
 
 Returns a string of XML to use as the header to your XML file.
 
+This method takes an optional $encoding parameter to set the output encoding
+to something other than 'UTF-8'.  This is meant mainly to support slightly
+broken records that are in ISO-8859-1 (ANSI) format with 8-bit characters.
+
 =cut 
 
 sub header {
+    my $encoding = shift || 'UTF-8';
     return( <<MARC_XML_HEADER );
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="$encoding"?>
 <collection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd" xmlns="http://www.loc.gov/MARC21/slim">
 MARC_XML_HEADER
 }
@@ -325,19 +330,23 @@ sub decode {
     
 }
 
-=head2 encode()
+=head2 encode([$encoding])
 
 You probably want to use the as_marc() method on your MARC::Record object
 instead of calling this directly. But if you want to you just need to 
 pass in the MARC::Record object you wish to encode as XML, and you will be
 returned the XML as a scalar.
 
+This method takes an optional $encoding parameter to set the output encoding
+to something other than 'UTF-8'.  This is meant mainly to support slightly
+broken records that are in ISO-8859-1 (ANSI) format with 8-bit characters.
+
 =cut
 
 sub encode {
     my $record = shift;
     my @xml = ();
-    push( @xml, header() );
+    push( @xml, header(shift) );
     push( @xml, record( $record ) );
     push( @xml, footer() );
     return( join( "\n", @xml ) );
