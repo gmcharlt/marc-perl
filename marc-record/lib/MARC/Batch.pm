@@ -8,7 +8,6 @@ MARC::Batch - Perl module for handling files of MARC::Record objects
 
 use strict;
 use integer;
-eval 'use warnings' if $] >= 5.006;
 
 use constant STRICT_ON		=> 1;
 use constant STRICT_OFF		=> 2;
@@ -19,11 +18,12 @@ use constant WARNINGS_OFF	=> 2;
 
 Version 1.18
 
-    $Id: Batch.pm,v 1.26 2003/02/25 22:02:29 petdance Exp $
+    $Id: Batch.pm,v 1.27 2003/02/26 05:32:49 petdance Exp $
 
 =cut
 
-use vars '$VERSION'; $VERSION = '1.18';
+use vars '$VERSION';
+$VERSION='1.18'; # Must be on its own line
 
 =head1 SYNOPSIS
 
