@@ -308,14 +308,14 @@ sub _marc2utf8 ($$$$) {
     my $charSize = 1;
     my $char = substr($$strRef,$left,$charSize);
 
-    ## if we've found an escape character check if we've got
-    ## a character escape sequence
     if ( $char eq  ESCAPE ) {
-	$left = $self->_escape($strRef,$left,$right);
-	$g0 = $self->[ G0 ];
-	$g1 = $self->[ G1 ];
-	## reset charSize here when we've got East Asian support
-	$char = substr($$strRef,$left,$charSize);
+	my $newLeft = $self->_escape($strRef,$left,$right);
+	## $newLeft will be different from $left if _escape() was 
+	## able to determine a character escape sequence, in which 
+	## case we will recur with the new index
+	if ( $newLeft != $left ) {
+	    return( $self->_marc2utf8($strRef,$newLeft,$right) );
+	}
     }
 
     ## handle sequences of valid combining characters by putting them
@@ -468,31 +468,49 @@ sub _getCharset {
 
     my $code = shift;
 
+    ## not the use of 1; to ensure that the eval doesn't emit warnings
+
     if ( $code eq BASIC_ARABIC ) { 
-	eval { use MARC::Charset::ArabicBasic };
+	eval { use MARC::Charset::ArabicBasic; 1; };
 	return( MARC::Charset::ArabicBasic->new() );
-    } elsif ( $code eq EXTENDED_ARABIC ) {
-	eval { use MARC::Charset::ArabicExtended };
+    } 
+    
+    elsif ( $code eq EXTENDED_ARABIC ) {
+	eval { use MARC::Charset::ArabicExtended; 1; };
 	return( MARC::Charset::ArabicExtended->new() );
-    } elsif ( $code eq BASIC_LATIN ) {
-	eval { use MARC::Charset::ASCII };
+    } 
+    
+    elsif ( $code eq BASIC_LATIN ) {
+	eval { use MARC::Charset::ASCII; 1; };
 	return( MARC::Charset::ASCII->new() );
-    } elsif ( $code eq CJK ) {
+    } 
+    
+    elsif ( $code eq CJK ) {
 	_warning( 'MARC::Charset does not support CJK yet!' );
 	return( undef );
-    } elsif ( $code eq BASIC_CYRILLIC ) {
-	eval { use MARC::Charset::CyrillicBasic };
+    } 
+    
+    elsif ( $code eq BASIC_CYRILLIC ) {
+	eval { use MARC::Charset::CyrillicBasic; 1; };
 	return( MARC::Charset::CyrillicBasic->new() );
-    } elsif ( $code eq EXTENDED_CYRILLIC ) { 
-	eval { use MARC::Charset::CyrillicExtended };
+    } 
+    
+    elsif ( $code eq EXTENDED_CYRILLIC ) { 
+	eval { use MARC::Charset::CyrillicExtended; 1; };
 	return( MARC::Charset::CyrillicExtended->new() );
-    } elsif ( $code eq BASIC_GREEK ) {
-	eval { use MARC::Charset::Greek };
+    } 
+    
+    elsif ( $code eq BASIC_GREEK ) {
+	eval { use MARC::Charset::Greek; 1; };
 	return( MARC::Charset::Greek->new() );
-    } elsif ( $code eq BASIC_HEBREW ) {
-	eval { use MARC::Charset::Hebrew };
+    } 
+    
+    elsif ( $code eq BASIC_HEBREW ) {
+	eval { use MARC::Charset::Hebrew; 1; };
 	return( MARC::Charset::Hebrew->new() );
-    } else {
+    } 
+    
+    else {
 	_warning( sprintf("unknown charset hex(%x)",$code) );
 	return(undef);
     }
