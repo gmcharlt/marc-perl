@@ -117,11 +117,11 @@ sub next {
     }
 
     # Get the next file off the stack, if there is one
-    $self->{filename} = shift @{$self->{filestack}} or return undef;
+    $self->{filename} = shift @{$self->{filestack}} or return;
 
     # Instantiate a filename for it
     my $marcclass = $self->{marcclass};
-    $self->{file} = $marcclass->in( $self->{filename} ) or return undef;
+    $self->{file} = $marcclass->in( $self->{filename} ) or return;
 
     # call this method again now that we've got a file open
     return( $self->next() );

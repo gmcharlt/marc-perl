@@ -140,7 +140,7 @@ sub warn {
 
 	push( @{$self->{_warnings}}, join( "", @_ ) );
 
-	return undef;
+	return;
 }
 
 =head2 C<check_record(marc)>

@@ -276,7 +276,7 @@ sub subfield {
 		shift @data;
 	}
 
-	return undef;
+	return;
 }
 
 =head2 subfields()
@@ -312,7 +312,7 @@ sub _gripe(@) {
 
 	warn $ERROR;
 
-	return undef;
+	return;
 }
 
 =head2 data()

@@ -45,7 +45,7 @@ sub _next {
     my $fh = $self->{fh};
 
     my $reclen;
-    return undef if eof($fh);
+    return if eof($fh);
 
     local $/ = END_OF_RECORD;
     my $usmarc = <$fh>;
@@ -53,7 +53,7 @@ sub _next {
     # remove illegal garbage that sometimes occurs between records
     $usmarc =~ s/^[ \x00\x0a\x0d]+//;
 
-    return undef if ! $usmarc;
+    return unless $usmarc;
 
     if ( length($usmarc) < 5 ) {
 	$self->_warn( "Couldn't find record length" );

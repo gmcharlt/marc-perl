@@ -16,7 +16,7 @@ use Carp qw(croak);
 
 =head1 VERSION 1.26
 
-    $Id: Record.pm,v 1.59 2003/05/09 05:48:29 petdance Exp $
+    $Id: Record.pm,v 1.60 2003/05/20 20:31:16 petdance Exp $
 
 =cut
 
@@ -238,7 +238,7 @@ sub subfield {
     my $tag = shift;
     my $subfield = shift;
 
-    my $field = $self->field($tag) or return undef;
+    my $field = $self->field($tag) or return;
     return $field->subfield($subfield);
 } # subfield()
 
@@ -629,7 +629,7 @@ sub _gripe {
 
     warn $ERROR;
 
-    return undef;
+    return;
 }
 
 
