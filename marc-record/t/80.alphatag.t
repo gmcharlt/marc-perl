@@ -80,18 +80,19 @@ is( scalar(@fields), 2, 'field(regex)' );
 
 my $marc = $record->as_usmarc();
 
-open(OUT,">$0.usmarc");
+my $filename = "$$.usmarc";
+open(OUT,">$filename");
 print OUT $record->as_usmarc();
 close(OUT);
 
-my $file = MARC::File::USMARC->in( "$0.usmarc" );
-isa_ok( $file, 'MARC::File::USMARC' );
+my $file = MARC::File::USMARC->in( $filename );
+isa_ok( $file, 'MARC::File::USMARC', "Opened $filename" );
 
 my $newRec = $file->next();
 isa_ok( $newRec, 'MARC::Record' );
 
 is( $newRec->as_usmarc(), $marc, 'as_usmarc()' );
-unlink( "$0.usmarc" );
+unlink( $filename );
 
 
 ## test output as MicroLIF
