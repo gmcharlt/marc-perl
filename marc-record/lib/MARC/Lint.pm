@@ -10,13 +10,13 @@ MARC::Lint - Perl extension for checking validity of MARC records
 
 =head1 VERSION
 
-Version 1.15
+Version 1.16
 
-    $Id: Lint.pm,v 1.19 2002/12/18 20:13:18 edsummers Exp $
+    $Id: Lint.pm,v 1.20 2003/01/28 21:41:36 petdance Exp $
 
 =cut
 
-use vars '$VERSION'; $VERSION = '1.15';
+use vars '$VERSION'; $VERSION = '1.16';
 
 use MARC::Record;
 use MARC::Field;

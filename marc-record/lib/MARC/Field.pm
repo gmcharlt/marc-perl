@@ -17,13 +17,13 @@ MARC::Field - Perl extension for handling MARC fields
 
 =head1 VERSION
 
-Version 1.15
+Version 1.16
 
-    $Id: Field.pm,v 1.27 2002/12/18 20:13:18 edsummers Exp $
+    $Id: Field.pm,v 1.28 2003/01/28 21:41:36 petdance Exp $
 
 =cut
 
-use vars '$VERSION'; $VERSION = '1.15';
+use vars '$VERSION'; $VERSION = '1.16';
 
 =head1 SYNOPSIS
 

@@ -1,6 +1,6 @@
 Revision history for Perl extension MARC::Record.
 
-1.16	XXXX XX, 2003
+1.16	January 28, 2003
 	[ENHANCEMENTS]
 	- title() and author() now return empty strings, rather than
 	  "<No XXX found>"
