@@ -18,11 +18,13 @@ sub filecheck {
 	ABSTRACT_FROM	=> 'lib/MARC/Record.pm',
 	PMLIBDIRS	=> [ qw( lib/ ) ],
 	AUTHOR		=> 'Andy Lester <andy@petdance.com>',
-	PREREQ_PM	=> {},
+	PREREQ_PM	=> {
+			    'Test::More' => 0,
+			    },
 	EXE_FILES	=> [ qw( pl/marcdump pl/marclint pl/lif2marc ) ],
 	dist 		=> {
-				COMPRESS => 'gzip -9f', 
-				SUFFIX => 'gz',
-				},
+			    COMPRESS => 'gzip -9f', 
+			    SUFFIX => 'gz',
+			    },
 	);
 
