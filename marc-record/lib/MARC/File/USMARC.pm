@@ -13,13 +13,13 @@ use vars qw( $VERSION $ERROR );
 
 =head1 VERSION
 
-Version 0.93
+Version 0.94
 
-    $Id: USMARC.pm,v 1.10 2002/05/30 14:30:42 petdance Exp $
+    $Id: USMARC.pm,v 1.11 2002/06/11 18:45:17 petdance Exp $
 
 =cut
 
-our $VERSION = '0.93';
+our $VERSION = '0.94';
 
 use MARC::File;
 our @ISA = qw( MARC::File );
