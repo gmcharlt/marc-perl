@@ -14,9 +14,9 @@ use vars qw( $ERROR );
 use MARC::Field;
 use Carp qw(croak);
 
-=head1 VERSION 1.31
+=head1 VERSION 1.32
 
-    $Id: Record.pm,v 1.66 2003/10/21 16:27:08 edsummers Exp $
+    $Id: Record.pm,v 1.67 2003/11/05 19:36:25 edsummers Exp $
 
 =cut
 
@@ -242,47 +242,6 @@ sub subfield {
     return $field->subfield($subfield);
 } # subfield()
 
-=head2 insert_grouped_field(field)
-
-Will insert the specified MARC::Field object into the record in 'grouped
-order' and return true (1) on success, and false (undef) on failure.
-For example, if a '650' field is inserted with insert_grouped_field()
-it will be inserted at the end of the 6XX group of tags. After some discussion
-on the perl4lib list it was decided that this is ordinarily what you will 
-want. If you would like to insert at a specific point in the record you can use 
-insert_fields_after() and insert_fields_before() methods which are described 
-below. 
-
-    my $field = MARC::Field->new( '510', 'Indexed by Google.' );
-    $record->insert_grouped_field( $field );
-
-=cut
-
-sub insert_grouped_field {
-    my ($self,$new) = @_;
-    _all_parms_are_fields($new) or croak('Argument must be MARC::Field object');
-
-    ## try to find the end of the field group and insert it there
-    my $limit = int($new->tag() / 100);
-    my $found = 0;
-    foreach my $field ($self->fields()) {
-	if ( int($field->tag() / 100) > $limit ) {
-	    $self->insert_fields_before($field,$new);
-	    $found = 1;
-	    last;
-	}
-    }
-
-    ## if we couldn't find the end of the group, then we must not have 
-    ## any tags this high yet, so just append it
-    if (!$found) {
-	$self->append_fields($new); 
-    }
-
-    return(1);
-
-}
-
 =for internal
 
 =cut
@@ -384,6 +343,82 @@ sub insert_fields_after {
     splice(@$fields,$pos+1,0,@new);
     return scalar @new;
 }
+
+=head2 insert_fields_ordered(@new_fields)
+
+Will insert fields in strictly numerical order. So a 008 will be filed
+after a 001 field.
+
+=cut
+
+sub insert_fields_ordered {
+    my ( $self, @new ) = @_;
+
+    _all_parms_are_fields(@new) 
+	or croak('All arguments must be MARC::Field objects');
+
+    ## go through each new field
+    NEW_FIELD: foreach my $newField ( @new ) { 
+
+	## find location before which it should be inserted
+	EXISTING_FIELD: foreach my $field ( @{ $self->{_fields} } ) { 
+	    if ( $field->tag() >= $newField->tag() ) {
+		$self->insert_fields_before( $field, $newField );
+		print "added ".$newField->tag()." before ".$field->tag()."\n";
+		next NEW_FIELD;
+	    }
+	}
+
+	## if we fell through then this new field is higher than
+	## all the existing fields, so we append.
+	print "appending ".$newField->tag()."\n";
+	$self->append_fields( $newField );
+
+    }
+    return( scalar( @new ) );
+}
+
+=head2 insert_grouped_field(field)
+
+Will insert the specified MARC::Field object into the record in 'grouped
+order' and return true (1) on success, and false (undef) on failure.
+For example, if a '650' field is inserted with insert_grouped_field()
+it will be inserted at the end of the 6XX group of tags. After some discussion
+on the perl4lib list it was decided that this is ordinarily what you will 
+want. If you would like to insert at a specific point in the record you can use 
+insert_fields_after() and insert_fields_before() methods which are described 
+below. 
+
+    my $field = MARC::Field->new( '510', 'Indexed by Google.' );
+    $record->insert_grouped_field( $field );
+
+=cut
+
+sub insert_grouped_field {
+    my ($self,$new) = @_;
+    _all_parms_are_fields($new) or croak('Argument must be MARC::Field object');
+
+    ## try to find the end of the field group and insert it there
+    my $limit = int($new->tag() / 100);
+    my $found = 0;
+    foreach my $field ($self->fields()) {
+	if ( int($field->tag() / 100) > $limit ) {
+	    $self->insert_fields_before($field,$new);
+	    $found = 1;
+	    last;
+	}
+    }
+
+    ## if we couldn't find the end of the group, then we must not have 
+    ## any tags this high yet, so just append it
+    if (!$found) {
+	$self->append_fields($new); 
+    }
+
+    return(1);
+
+}
+
 
 =head2 delete_field($field)
 

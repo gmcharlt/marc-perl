@@ -1,5 +1,9 @@
 Revision history for Perl extension MARC::Record.
 
+1.32	November 5th, 2003
+	[ENHANCEMENTS]
+	- added insert_ordered_fields(), thanks Leif Andersson.
+
 1.31	October 16th, 2003
 	[FIXES]
 	- set_leader_lengths() will now also set other MARC21 leader defaults.
