@@ -17,6 +17,8 @@ use MARC::Field;
 
 Version 0.15
 
+    $Id: Record.pm,v 1.4 2002/03/20 15:46:56 petdance Exp $
+
 =cut
 
 $VERSION = '0.15';

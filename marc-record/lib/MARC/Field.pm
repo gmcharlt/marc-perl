@@ -13,6 +13,8 @@ use vars qw( $ERROR );
 
 MARC::Field - Perl extension for handling MARC fields
 
+    $Id: Field.pm,v 1.3 2002/03/20 15:46:56 petdance Exp $
+
 =head1 SYNOPSIS
 
   use MARC::Field;
