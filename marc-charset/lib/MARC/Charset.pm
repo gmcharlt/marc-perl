@@ -218,7 +218,7 @@ sub to_utf8 {
 
 }
 
-=head1 to_marc8()
+=head2 to_marc8()
 
 When you pass this method a UTF8 string you will be returned a MARC8 encoded
 string. to_marc8() handles creating the appropriate character escapes.
