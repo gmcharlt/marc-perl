@@ -53,8 +53,6 @@ if ( ! -f $db ) { die "couldn't locate UTF8.db" };
 tie( my %unicode2marc, 'DB_File', $db, O_RDONLY );
 if ( !%unicode2marc ) { die "unable to locate UTF8.db at $db!"; }
 
-print STDERR "Tied: $db\n";
-
 my %combining;
 
 =head1 new()
