@@ -28,6 +28,17 @@
         - removed updir usage so 'make test' works properly
 
         [ENHANCEMENTS]
+        - added check for subfield delimiters in fields lower than 010
+         - updated lint.t and camel.usmarc with a test for this new code
+
+        - added check_020( $field ):
+         - uses Business::ISBN to validate 020$a and 020$z ISBNs. The current
+         version needs work for ISBN-13 checking. Uses an internal sub,
+         _isbn13_check_digit($ean) to validate 13 digit ISBNs, based on code in
+         Business::ISBN. Checking of subfield z needs work (it is currently
+         written for nonstandard practice).
+
+        - added check020.t to test the new check_020 method
         
         - added check_041( $field ):
          - warns if subfields are not evenly divisible by 3 unless second

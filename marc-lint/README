@@ -17,11 +17,12 @@ To install this module type the following:
 DEPENDENCIES
 
 - MARC::Record
+- Business::ISBN
 
 COPYRIGHT AND LICENCE
 
 This software is free software and may be distributed under the same
 terms as Perl itself .
 
-Copyright (C) 2001-2004  Baldus, Lester, Summers
+Copyright (C) 2001-2005  Baldus, Lester, Summers
 

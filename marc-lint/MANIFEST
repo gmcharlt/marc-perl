@@ -9,6 +9,7 @@ MANIFEST
 META.yml
 README
 t/camel.usmarc
-t/lint.t
+t/check020.t
 t/check041043.t
 t/check245.t
+t/lint.t

@@ -10,6 +10,7 @@ use ExtUtils::MakeMaker;
     PREREQ_PM     => {
                         'Test::More' => 0,
                         'MARC::Record' => 0,
+                        'Business::ISBN' => 0,
                      },
     EXE_FILES     => [ qw( bin/marclint ) ],
 );
