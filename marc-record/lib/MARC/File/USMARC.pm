@@ -15,13 +15,13 @@ use vars qw( $ERROR );
 
 =head1 VERSION
 
-Version 1.14
+Version 1.15
 
-    $Id: USMARC.pm,v 1.32 2002/12/06 22:00:13 petdance Exp $
+    $Id: USMARC.pm,v 1.33 2002/12/18 20:13:18 edsummers Exp $
 
 =cut
 
-use vars '$VERSION'; $VERSION = '1.14';
+use vars '$VERSION'; $VERSION = '1.15';
 
 use MARC::File;
 use vars qw( @ISA ); @ISA = qw( MARC::File );
@@ -95,15 +95,18 @@ sub decode {
     my $text;
     my $location = '';
 
-    ## decode can be called as a MARC::File::* object method, or as a function
-    ## we need to handle our parms slightly different in each case, and 
-    ## (if appropriate) capture the record number for warnings messages.
-    if ( $self =~ /^MARC::File/ ) {
+    ## decode can be called in a variety of ways
+    ## $object->decode( $string )
+    ## MARC::File::USMARC->decode( $string )
+    ## MARC::File::USMARC::decode( $string )
+    ## this bit of code covers all three
+ 
+    if ( ref($self) =~ /^MARC::File/ ) {
 	$location = 'in record '.$self->{recnum};
 	$text = shift;
     } else {
 	$location = 'in record 1';
-	$text = $self; 
+	$text = $self=~/MARC::File/ ? shift : $self;
     }
 
     my $marc = MARC::Record->new();

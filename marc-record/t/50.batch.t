@@ -1,10 +1,10 @@
-# $Id: 50.batch.t,v 1.6 2002/08/25 21:27:59 petdance Exp $
+# $Id: 50.batch.t,v 1.7 2002/12/18 20:13:18 edsummers Exp $
 
 use strict;
 use integer;
 eval 'use warnings' if $] >= 5.006;
 
-use Test::More tests=>136;
+use Test::More tests=>137;
 
 BEGIN {
     use_ok( 'MARC::Batch' );
@@ -29,7 +29,7 @@ USMARC: {
 
 MicroLIF: {
     my @files = <t/sample*.lif>;
-    is( scalar @files, 2, 'Only have 2 sample*.lif files' );
+    is( scalar @files, 3, 'Only have 3 sample*.lif files' );
 
     my $batch = new MARC::Batch( 'MicroLIF', @files );
     isa_ok( $batch, 'MARC::Batch', 'MicroLIF batch' );
@@ -39,5 +39,5 @@ MicroLIF: {
 	isa_ok( $marc, 'MARC::Record' );
 	++$n;
     }
-    is( $n, 120, 'Got 120 LIF records' );
+    is( $n, 121, 'Got 120 LIF records' );
 }

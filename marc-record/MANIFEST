@@ -29,9 +29,12 @@ t/66.grouped.t
 t/70.croak.t
 t/75.warnings.t
 t/80.alphatag.t
+t/81.decode.t
 t/alphatag.lif
 t/99.pod.t
 t/badldr.usmarc
 t/camel.usmarc
+t/sample1.lif
+t/sample1.usmarc
 t/sample100.lif
 t/sample20.lif

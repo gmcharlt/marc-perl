@@ -1,9 +1,13 @@
 Revision history for Perl extension MARC::Record.
 
-1.15	????, 2002
+1.15	December 8, 2002
 	[FIXES]
 	- Ignores and warns about any completely empty subfields (i.e. not
 	  even any indicators)
+	- MARC::File::USMARC::decode and MARC::File::MicroLIF::decode needed to
+	  be able to be called in a variety of ways: $obj->decode(), 
+	  MARC::File::MicroLIF->decode() and MARC::File::MicroLIF::decode()
+	  Added t/081.decode.t to make sure things are shipshape.
 
 1.14	November 27, 2002
 	[FIXES]
