@@ -2,9 +2,12 @@ Revision history for Perl extension MARC::Record.
 
 1.34	
 	[FIXES]
-	- etc/specs modified to correctly parse LCs docs to get the 250 $b properly. Thanks Bryan Baldus
-	  at Quality Books.
+	- etc/specs modified to correctly parse LCs docs to get the 250 $b 
+	  properly. Thanks Bryan Baldus at Quality Books.
 	- new Lint.pm with 250 $b.
+	- MARC::Field now leaves alphabetic indicators as they are instead
+          of squashing to a space. Added test of new functionailty. Thanks 
+	  Leif Andersson from Stockholms Universitet.
 
 1.33    November 24th, 2003
 	MARC::Record should now run on Perls back to 5.00503!

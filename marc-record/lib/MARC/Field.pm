@@ -74,7 +74,7 @@ sub new($) {
 	} else {
 		for my $indcode ( qw( _ind1 _ind2 ) ) {
 			my $indicator = shift;
-			if ( $indicator !~ /^[0-9 ]$/ ) {
+			if ( $indicator !~ /^[0-9 A-z]$/ ) {
 				$self->_warn( "Invalid indicator \"$indicator\" forced to blank" ) unless ($indicator eq "");
 				$indicator = " ";
 			}

@@ -37,6 +37,7 @@ t/75.warnings.t
 t/80.alphatag.t
 t/81.decode.t
 t/82.baddir.t
+t/83.indicators.t
 t/alphatag.lif
 t/baddir.usmarc
 t/badldr.usmarc
