@@ -28,9 +28,9 @@ our $VERSION = 0.1;
 =head1 DESCRIPTION
 
 MARC::Charset is a package that allows you to easily convert between
-the MARC-8 character encodings and Unicode (UTF-8). If you are interested
-the Library of Congress maintains some essential mapping tables and 
-information about the MARC-8 and Unicode environments at
+the MARC-8 character encodings and Unicode (UTF-8). The Library of Congress 
+maintains some essential mapping tables and information about the MARC-8 and 
+Unicode environments at:
 
  http://www.loc.gov/marc/specifications/spechome.html
 
@@ -52,7 +52,7 @@ found at LC, and supports the following character sets:
 =back
 
 Since the East Asian character set is 32 bit, there isn't support just yet
-in MARC::Char for them. It's been built with an eye for the future, and so 
+in MARC::Charset for them. It's been built with an eye for the future, and so 
 when more is understood about how 32 bit graphical character sets are
 designated as working G0 and G1 sets, then more will be done.
 
@@ -189,7 +189,7 @@ sub new {
 
 =head2 to_utf8()
 
-Pass to_unicode() a string of MARC encoded characters and get back a string
+Pass to_utf8() a string of MARC8 encoded characters and get back a string
 of UTF8 characters. to_utf8() will handle escape sequences within the string 
 that change the working character sets to Greek, Hebrew, Arabic (Basic + 
 Extended), Cyrillic (Basic + Extended)...but not 32 bit East Asian (see TODO).
@@ -212,18 +212,15 @@ sub to_utf8 ($) {
 =head2 g0() 
 
 Returns an object representing the character set that is being used as 
-the first graphic character set (G0). If you pass in a MARC::CHAR:* object you
-will set the G0 character set, and as a side effect you'll get the previous
-G0 value returned to you. You probably don't ever need to call this since 
-character settting is handled internally, but it's here if you want it.
+the first graphic character set (G0). If you pass in a MARC::Charset::* 
+object you will set the G0 character set, and as a side effect you'll get the 
+previous G0 value returned to you. You probably don't ever need to call this 
+since character set changes are handled when you call to_utf8(), but it's here 
+if you want it.
 
-
- ## figure out the currenty 
+ ## set the G0 character set to Greek
  my $charset = MARC::Charset->new();
- my $g0 = MARC::Charset->g0();
-
- my $newg0 = MARC::Charset::Greek;
- my $oldg0 = $charset->g0($newg0);
+ $charset->g0( MARC::Charset::Greek->new() );
 
 =cut
 
@@ -249,6 +246,10 @@ sub g1 {
 =head1 TODO
 
 =over 4
+
+=item * to_marc8()
+
+A function for going from Unicode to MARC-8 character encodings.
 
 =item * Support for 32bit MARC-8 characters: 
 
@@ -292,7 +293,7 @@ v.01 - 2002.07.17 (ehs)
 
 
 ## This is our workhorse for doing the translation, and is normally 
-## only called by to_unicode() which optimizes some stuff by making sure 
+## only called by to_utf8() which optimizes some stuff by making sure 
 ## _marc2unicode() gets a reference to a string, a left index, a right index 
 
 sub _marc2utf8 ($$$$) {
