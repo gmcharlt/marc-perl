@@ -17,7 +17,7 @@ use MARC::Field;
 
 Version 0.15
 
-    $Id: Record.pm,v 1.4 2002/03/20 15:46:56 petdance Exp $
+    $Id: Record.pm,v 1.5 2002/03/20 16:06:32 petdance Exp $
 
 =cut
 
@@ -574,7 +574,8 @@ sub as_formatted() {
 
 =head2 title()
 
-Returns the title from the 245 tag
+Returns the title from the 245 tag.
+Note that it is a string, not a C<MARC::Field> record.
 
 =cut
 
@@ -589,6 +590,7 @@ sub title() {
 =head2 author()
 
 Returns the author from the 100, 110 or 111 tag.
+Note that it is a string, not a C<MARC::Field> record.
 
 =cut
 
