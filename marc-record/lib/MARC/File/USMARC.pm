@@ -15,7 +15,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 0.93
 
-    $Id: USMARC.pm,v 1.9 2002/05/30 13:56:30 petdance Exp $
+    $Id: USMARC.pm,v 1.10 2002/05/30 14:30:42 petdance Exp $
 
 =cut
 
@@ -119,11 +119,11 @@ sub decode {
 
     my $databytesused = 0;
     while ( @directory ) {
-	warn "Next tag specs: ", join( "|", @directory[0..3] ), "\n" if $MARC::Record::DEBUG;
 	my $tagno = shift @directory;
 	my $len = shift @directory;
 	my $offset = shift @directory;
 	my $tagdata = shift @fields;
+	warn "Specs: ", join( "|", $tagno, $len, $offset, $tagdata ), "\n" if $MARC::Record::DEBUG;
 
 	# Check directory validity
 	($tagno =~ /^\d\d\d$/)
