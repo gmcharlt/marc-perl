@@ -6,7 +6,6 @@ MARC::Record - Perl extension for handling MARC records
 
 =cut
 
-use warnings;
 use strict;
 use integer;
 
@@ -15,14 +14,14 @@ use vars qw( $ERROR );
 use MARC::Field;
 use Carp qw(croak);
 
-=head1 VERSION 1.25
+=head1 VERSION 1.26
 
-    $Id: Record.pm,v 1.58 2003/04/23 02:57:30 petdance Exp $
+    $Id: Record.pm,v 1.59 2003/05/09 05:48:29 petdance Exp $
 
 =cut
 
 use vars qw( $VERSION );
-$VERSION = '1.25';
+$VERSION = '1.26';
 
 use Exporter;
 use vars qw( @ISA @EXPORTS @EXPORT_OK );

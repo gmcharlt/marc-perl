@@ -1,6 +1,5 @@
 package MARC::Field;
 
-use warnings;
 use strict;
 use integer;
 use Carp;

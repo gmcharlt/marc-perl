@@ -1,6 +1,5 @@
 package MARC::Lint;
 
-use warnings;
 use strict;
 use integer;
 

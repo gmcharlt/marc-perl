@@ -1,5 +1,13 @@
 Revision history for Perl extension MARC::Record.
 
+1.26	May 8, 2003
+	[FIXES]
+	- Removed the "use warnings" in the couple of files that used it.
+	  This obviates the need for the pre5006.patch file.
+
+	- Fixed some warnings for undefs.  These only turned up because
+	  Test::Harness now has warnings turned on.
+
 1.25	April 22, 2003
 	NO CHANGES.  Just compensating for upload problems.
 

@@ -8,7 +8,6 @@ MARC::File - Base class for files of MARC records
 
 use strict;
 use integer;
-use warnings;
 
 use vars qw( $ERROR );
 
