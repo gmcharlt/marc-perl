@@ -15,7 +15,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 0.90
 
-    $Id: USMARC.pm,v 1.4 2002/04/01 22:18:38 petdance Exp $
+    $Id: USMARC.pm,v 1.5 2002/04/02 03:41:08 petdance Exp $
 
 =cut
 
@@ -230,15 +230,14 @@ sub _build_tag_directory {
 	return (\@fields, \@directory, $total, $baseaddress);
 }
 
-=head2 encoded()
+=head2 encode()
 
 Returns a string of characters suitable for writing out to a USMARC file,
 including the leader, directory and all the fields.
 
 =cut
 
-sub encoded() {
-    my $self = shift;
+sub encode() {
     my $marc = shift;
     $marc = shift if (ref($marc)||$marc) =~ /^MARC::File/;
 
