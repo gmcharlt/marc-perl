@@ -32,8 +32,7 @@ use warnings;
 use strict;
 use integer;
 
-use lib qw( /home/alester/marc/lib );
-use MARC::Record;
+use MARC::File::USMARC;
 use MARC::Lint;
 use Getopt::Long;
 
@@ -65,18 +64,18 @@ die USAGE if $help or (not $rc) or (@files == 0);
 my $linter = new MARC::Lint;
 my %counts;
 my %errors;
-for my $IN ( @files ) {
-	$counts{$IN} = 0;
-	$errors{$IN} = 0;
 
-	warn "$IN\n" unless $quiet;
-	open( IN, "<", $IN ) or die "Couldn't open $IN: $!\n";
+for my $filename ( @files ) {
+	$counts{$filename} = 0;
+	$errors{$filename} = 0;
 
-	while ( !eof(IN) ) {
-		my $marc = MARC::Record::next_from_file( *IN );
+	my $file = MARC::File::USMARC->in( $filename ) or die $MARC::File::ERROR;
+	warn "$filename\n" unless $quiet;
+
+	while ( my $marc = $file->next() ) {
 		if ( not $marc ) {
 			warn $MARC::Record::ERROR;
-			++$errors{$IN};
+			++$errors{$filename};
 		}
 
 	        $linter->check_record( $marc );
@@ -88,10 +87,10 @@ for my $IN ( @files ) {
 				"",
 				"",
 			);
-			++$errors{$IN};
+			++$errors{$filename};
 		}
 	} # while
-	close IN;
+	$file->close();
 } # for 
 
 if ( $stats ) {
