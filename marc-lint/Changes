@@ -1,6 +1,50 @@
 1.41    unreleased
+        [THINGS THAT MAY BREAK YOUR CODE]
+        - check_245( $field ) updated:
+         - Makes sure $a exists (and is first subfield).
+         - Warns if last character of field is not a period
+         -- Follows LCRI 1.0C, Nov. 2003 rather than MARC21 rule
+         - Verifies that $c is preceded by / (space-/)
+         - Verifies that initials in $c are not spaced
+         - Verifies that $b is preceded by :;= (space-colon, space-semicolon,
+         space-equals)
+         - Verifies that $h is not preceded by space unless it is dash-space
+         - Verifies that data of $h is enclosed in square brackets
+         - Verifies that $n is preceded by . (period)
+         -- As part of that, looks for no-space period, or dash-space-period
+         (for replaced elipses)
+         - Verifies that $p is preceded by , (no-space-comma) when following $n
+         and . (period) when following other subfields.
+         - Performs rudimentary check of 245 2nd indicator vs. 1st word of 245$a
+         (for manual verification). This could use some reworking, and was
+         developed based on a predominantly English collection. Uses the
+         internal _check_article( $field ) method.
+
+        - added _check_article( $field ) internal method for comparing
+         nonfiling indicator against first word of title field
+        - added check245.t to test the new check_245 functionality
+
         - updated lint.t to use File::Spec for path to camel.usmarc
-        - reomved updir usage so 'make test' works properly
+        - removed updir usage so 'make test' works properly
+
+        [ENHANCEMENTS]
+        
+        - added check_041( $field ):
+         - warns if subfields are not evenly divisible by 3 unless second
+         indicator is 7
+         (future implementation would ensure that each subfield is exactly 3
+         characters unless ind2 is 7--since subfields are now repeatable. This
+         is not implemented here due to the large number of records needing to
+         be corrected.).
+         - validates against the MARC Code List for Languages
+         (L<http://www.loc.gov/marc/>) using the MARC::Lint::CodeData data pack
+         
+        - added check_043( $field )
+         - warns if each subfield a is not exactly 7 characters.
+         - validates each code against the MARC code list for Geographic Areas
+         (L<http://www.loc.gov/marc/>) using the MARC::Lint::CodeData data pack
+
+        - added check041043.t to test the new check_041 and check_043 methods
         
 1.40    Mon Dec 20 14:01:53 CST 2004
         - added DATA for tags 001-008
