@@ -17,44 +17,23 @@ use MARC::Field;
 
 Version 0.90
 
-    $Id: Record.pm,v 1.7 2002/04/01 20:34:24 petdance Exp $
+    $Id: Record.pm,v 1.8 2002/04/01 21:34:43 petdance Exp $
 
 =cut
 
 $VERSION = '0.90';
 
-use constant SUBFIELD_INDICATOR	=> "\x1F";
-use constant END_OF_FIELD	=> "\x1E";
-use constant END_OF_RECORD	=> "\x1D";
+use Exporter;
+our @ISA = qw( Exporter );
+our @EXPORTS = qw();
+our @EXPORT_OK = qw( LEADER_LEN );
 
-use constant LEADER_LEN 		=> 24;
-use constant DIRECTORY_ENTRY_LEN 	=> 12;
-
-
-=head1 SYNOPSIS
-
-    use MARC::Record;
-
-    open( IN, "<", $filename ) or die "Couldn't open $filename: $!\n";
-    binmode( IN ); # for the Windows folks
-    while ( !eof(IN) ) {
-  	my $marc = MARC::Record::next_from_file( *IN );
-	die $MARC::Record::ERROR unless $marc;
-
-	# Print the title tag
-	print $marc->subfield(245,"a"), "\n";
-
-	# Find any subject tags and print their _a subfields
-	for my $subject ( $marc->field( "6XX" ) ) {
-		print "\t", $subject->tag, ": ", $subject->subfield("a"), "\n";
-	} # for subject
-    } # while
-
-    close IN or die "Error closing $filename: $!\n";
+use constant LEADER_LEN	=> 24;
 
 =head1 DESCRIPTION
 
-Module for handling MARC records as objects, and reading them from USMARC files.
+Module for handling MARC records as objects.  The file-handling stuff is
+in MARC::File::*.
 
 =head1 EXPORT
 
@@ -85,145 +64,6 @@ sub new($) {
 } # new()
 
 
-=head2 new_from_usmarc()
-
-Constructor for handling data from a USMARC file.  This function takes care of all
-the tag directory parsing & mangling.
-
-Any warnings or coercions can be checked in the C<warnings()> function.
-
-=cut
-
-sub new_from_usmarc($) {
-	my $class = shift;
-	my $text = shift;
-	my $self = new($class);
-
-
-	# Check for an all-numeric record length
-	($text =~ /^(\d{5})/)
-		or return _gripe( "Record length \"", substr( $text, 0, 5 ), "\" is not numeric" );
-
-	my $reclen = $1;
-	($reclen == length($text))
-		or return _gripe( "Invalid record length: Leader says $reclen bytes, but it's actually ", length( $text ) );
-
-	$self->leader( substr( $text, 0, LEADER_LEN ) );
-	my @fields = split( END_OF_FIELD, substr( $text, LEADER_LEN ) );
-	my $dir = shift @fields or return _gripe( "No directory found" );
-
-	(length($dir) % 12 == 0)
-		or return _gripe( "Invalid directory length" );
-	my $nfields = length($dir)/12;
-
-	my $finalfield = pop @fields;
-	# Check for the record terminator, and ignore it
-	($finalfield eq END_OF_RECORD)
-		or $self->_warn( "Invalid record terminator: \"$finalfield\"" );
-
-	# Walk thru the directories, and shift off the fields while we're at it
-	# Shouldn't be any non-digits anywhere in any directory entry
-	my @directory = unpack( "A3 A4 A5" x $nfields, $dir );
-	my @bad = grep /\D/, @directory;
-	if ( @bad ) { 
-		return _gripe( "Non-numeric entries in the tag directory: ", join( ", ", map { "\"$_\"" } @bad ) );
-	}
-
-	my $databytesused = 0;
-	while ( @directory ) {
-		my $tagno = shift @directory;
-		my $len = shift @directory;
-		my $offset = shift @directory;
-		my $tagdata = shift @fields;
-
-		# Check directory validity
-		($tagno =~ /^\d\d\d$/)
-			or return _gripe( "Invalid field number in directory: \"$tagno\"" );
-
-		($len == length($tagdata) + 1)
-			or $self->_warn( "Invalid length in the directory for tag $tagno" );
-
-		($offset == $databytesused)
-			or $self->_warn( "Directory offsets are out of whack" );
-		$databytesused += $len;
-
-		if ( $tagno < 10 ) {
-			$self->add_fields( $tagno, $tagdata )
-				or return undef; # We're relying on add_fields() having set $MARC::Record::ERROR
-		} else {
-			my @subfields = split( SUBFIELD_INDICATOR, $tagdata );
-			my $indicators = shift @subfields
-				or return _gripe( "No subfields found." );
-			my ($ind1,$ind2);
-			if ( $indicators =~ /^([0-9 ])([0-9 ])$/ ) {
-				($ind1,$ind2) = ($1,$2);
-			} else {
-				$self->_warn( "Invalid indicators \"$indicators\" forced to blanks\n" );
-				($ind1,$ind2) = (" "," ");
-			}
-				
-			# Split the subfield data into subfield name and data pairs
-			my @subfield_data = map { (substr($_,0,1),substr($_,1)) } @subfields;
-			$self->add_fields( $tagno, $ind1, $ind2, @subfield_data )
-				or return undef;
-		}
-	} # while
-
-	# Once we're done, there shouldn't be any fields left over: They should all have shifted off.
-	(@fields == 0)
-		or return _gripe( "I've got leftover fields that weren't in the directory" );
-
-	return $self;
-}
-
-=head2 new_from_microlif()
-
-Constructor for handling data from a microlif file.  This function takes care of all
-the directory parsing & mangling.
-
-Any warnings or coercions can be checked in the C<warnings()> function.
-
-Note that we are NOT expecting to get the trailing "`" mark at the end of the last line.
-
-=cut
-
-sub new_from_microlif($) {
-	my $class = shift;
-	my $text = shift;
-	my $self = new($class);
-
-	my @lines = split( /\n/, $text );
-	for my $line ( @lines ) {
-		# Ignore the file header if the calling program hasn't already dealt with it
-		next if $line =~ /^HDR/;
-
-		($line =~ s/^(\d\d\d|LDR)//) or
-			return _gripe( "Invalid tag number: ", substr( $line, 0, 3 ) );
-		my $tagno = $1;
-
-		($line =~ s/\^$//) or
-			$self->_warn( "Tag $tagno is missing a trailing caret." );
-
-		if ( $tagno eq "LDR" ) {
-			$self->leader( substr( $line, 0, LEADER_LEN ) );
-		} elsif ( $tagno < 10 ) {
-			$self->add_fields( $tagno, $line );
-		} else {
-			$line =~ s/^(.)(.)//;
-			my ($ind1,$ind2) = ($1,$2);
-			my @subfields;
-			my @subfield_data_pairs = split( /_(?=[a-z0-9])/, $line );
-			shift @subfield_data_pairs; # Leading _ makes an empty pair
-			for my $pair ( @subfield_data_pairs ) {
-				my ($subfield,$data) = (substr( $pair, 0, 1 ), substr( $pair, 1 ));
-				push( @subfields, $subfield, $data );
-			}
-			$self->add_fields( $tagno, $ind1, $ind2, @subfields );
-		}
-	} # for
-
-	return $self;
-}
 
 =head2 clone( [field specs] )
 
@@ -262,7 +102,7 @@ sub clone {
 	    }
     }
 
-    $clone->update_leader();
+    # XXX FIX THIS $clone->update_leader();
 
     return $clone;
 }
@@ -291,36 +131,20 @@ sub leader($) {
 	return $self->{_leader};
 } # leader()
 
-=head2 update_leader()
 
-If any changes get made to the MARC record, the first 5 bytes of the
-leader (the length) will be invalid.  This function updates the 
-leader with the correct length of the record as it would be if
-written out to a file.
-
-=cut
-
-sub update_leader() {
-	my $self = shift;
-
-	my (undef,undef,$reclen,$baseaddress) = $self->_build_tag_directory();
-
-	$self->_set_leader_lengths( $reclen, $baseaddress );
-}
-
-=pod
+=head2 set_leader_lengths( $reclen, $baseaddr )
 
 Internal function for updating the leader's length and base address.
 
 =cut
 
-sub _set_leader_lengths($$) {
-	my $self = shift;
-	my $reclen = shift;
-	my $baseaddr = shift;
+sub set_leader_lengths($$) {
+    my $self = shift;
+    my $reclen = shift;
+    my $baseaddr = shift;
 
-	substr($self->{_leader},0,5)  = sprintf("%05d",$reclen);
-	substr($self->{_leader},12,5) = sprintf("%05d",$baseaddr);
+    substr($self->{_leader},0,5)  = sprintf("%05d",$reclen);
+    substr($self->{_leader},12,5) = sprintf("%05d",$baseaddr);
 }
 
 =head2 add_fields()
@@ -546,70 +370,6 @@ sub author() {
 	return "<No author tag found>";
 }
 
-
-=head2 _build_tag_directory()
-
-Function for internal use only: Builds the tag directory that gets
-put in front of the data in a MARC record.
-
-Returns two array references, and two lengths: The tag directory, and the data fields themselves,
-the length of all data (including the Leader that we expect will be added),
-and the size of the Leader and tag directory.
-
-=cut
-
-sub _build_tag_directory() {
-	my $self = shift;
-
-	my @fields;
-	my @directory;
-
-	my $dataend = 0;
-	for my $field ( $self->fields() ) {
-		# Dump data into proper format
-		my $str = $field->as_usmarc;
-		push( @fields, $str );
-
-		# Create directory entry
-		my $len = length $str;
-		my $direntry = sprintf( "%03d%04d%05d", $field->tag, $len, $dataend );
-		push( @directory, $direntry );
-		$dataend += $len;
-	}
-
-	my $baseaddress = 
-		LEADER_LEN +    # better be 24
-		( @directory * DIRECTORY_ENTRY_LEN ) +
-				# all the directory entries
-		1;           	# end-of-field marker
-
-
-	my $total = 
-		$baseaddress +	# stuff before first field
-		$dataend + 	# Length of the fields
-		1;		# End-of-record marker
-
-
-
-	return (\@fields, \@directory, $total, $baseaddress);
-}
-
-=head2 as_usmarc()
-
-Returns a string of characters suitable for writing out to a USMARC file,
-including the leader, directory and all the fields.
-
-=cut
-
-sub as_usmarc() {
-	my $self = shift;
-
-	my ($fields,$directory,$reclen,$baseaddress) = $self->_build_tag_directory();
-	$self->_set_leader_lengths( $reclen, $baseaddress );
-
-	# Glomp it all together
-	return join("",$self->leader, @$directory, END_OF_FIELD, @$fields, END_OF_RECORD);
-}
 
 
 =head2 warnings()

@@ -15,7 +15,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 0.90
 
-    $Id: MicroLIF.pm,v 1.1 2002/04/01 20:34:25 petdance Exp $
+    $Id: MicroLIF.pm,v 1.2 2002/04/01 21:34:43 petdance Exp $
 
 =cut
 
@@ -93,6 +93,55 @@ sub skip {
     my $usmarc = $self->_next();
 
     return $usmarc ? 1 : undef;
+}
+
+=head2 new_from_microlif()
+
+Constructor for handling data from a microlif file.  This function takes care of all
+the directory parsing & mangling.
+
+Any warnings or coercions can be checked in the C<warnings()> function.
+
+Note that we are NOT expecting to get the trailing "`" mark at the end of the last line.
+
+=cut
+
+sub new_from_microlif($) {
+	my $class = shift;
+	my $text = shift;
+	my $self = new($class);
+
+	my @lines = split( /\n/, $text );
+	for my $line ( @lines ) {
+		# Ignore the file header if the calling program hasn't already dealt with it
+		next if $line =~ /^HDR/;
+
+		($line =~ s/^(\d\d\d|LDR)//) or
+			return _gripe( "Invalid tag number: ", substr( $line, 0, 3 ) );
+		my $tagno = $1;
+
+		($line =~ s/\^$//) or
+			$self->_warn( "Tag $tagno is missing a trailing caret." );
+
+		if ( $tagno eq "LDR" ) {
+			$self->leader( substr( $line, 0, LEADER_LEN ) );
+		} elsif ( $tagno < 10 ) {
+			$self->add_fields( $tagno, $line );
+		} else {
+			$line =~ s/^(.)(.)//;
+			my ($ind1,$ind2) = ($1,$2);
+			my @subfields;
+			my @subfield_data_pairs = split( /_(?=[a-z0-9])/, $line );
+			shift @subfield_data_pairs; # Leading _ makes an empty pair
+			for my $pair ( @subfield_data_pairs ) {
+				my ($subfield,$data) = (substr( $pair, 0, 1 ), substr( $pair, 1 ));
+				push( @subfields, $subfield, $data );
+			}
+			$self->add_fields( $tagno, $ind1, $ind2, @subfields );
+		}
+	} # for
+
+	return $self;
 }
 
 1;

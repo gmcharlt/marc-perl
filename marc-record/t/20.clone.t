@@ -11,7 +11,6 @@ BEGIN {
     use_ok( 'MARC::File::USMARC' );
 }
 
-# Test 1: Testing as_usmarc()
 my $file = MARC::File::USMARC->in( 't/camel.usmarc' );
 ok( defined $file,  'Created $file object' );
 my $marc = $file->next();

@@ -15,7 +15,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 0.90
 
-    $Id: File.pm,v 1.2 2002/04/01 20:34:24 petdance Exp $
+    $Id: File.pm,v 1.3 2002/04/01 21:34:43 petdance Exp $
 
 =cut
 
@@ -83,9 +83,10 @@ sub _unimplemented() {
     warn "Method $method must be overridden";
 }
 
-sub next { $_[0]->_unimplemented("next"); }
-sub skip { $_[0]->_unimplemented("skip"); }
-sub write { $_[0]->_unimplemented("write"); }
+sub next    { $_[0]->_unimplemented("next"); }
+sub skip    { $_[0]->_unimplemented("skip"); }
+sub write   { $_[0]->_unimplemented("write"); }
+sub decode  { $_[0]->_unimplemented("decode"); }
 
 # NOTE: _gripe can be called as an object method, or not.  Your choice.
 sub _gripe(@) {
