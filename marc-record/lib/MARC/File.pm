@@ -16,7 +16,7 @@ use vars qw( $ERROR );
 
 Version 1.13
 
-    $Id: File.pm,v 1.22 2002/11/26 20:51:12 edsummers Exp $
+    $Id: File.pm,v 1.23 2002/11/26 21:30:05 petdance Exp $
 
 =cut
 
@@ -27,7 +27,7 @@ use vars '$VERSION'; $VERSION = '1.13';
     use MARC::File::USMARC;
 
     my $file = MARC::File::USMARC->in( $filename );
-    
+
     while ( my $marc = $file->next() ) {
 	# Do something
     }
@@ -43,6 +43,8 @@ None.
 =head2 in()
 
 Opens a file for input.
+
+Returns a MARC::File object, or C<undef> on failure.
 
 =cut
 
@@ -77,7 +79,9 @@ sub out {
 
 =head2 next()
 
-Reads the next record from the file handle passed in. 
+Reads the next record from the file handle passed in.
+
+Returns a MARC::Record reference, or C<undef> on error.
 
 =cut
 
