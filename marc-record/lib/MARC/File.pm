@@ -29,7 +29,7 @@ None.
 
 =head1 METHODS
 
-=head2 C<in()>
+=head2 in()
 
 Opens a file for import. Ordinarily you will use C<MARC::File::USMARC>
 or C<MARC::File::MicroLIF> to do this.
@@ -122,7 +122,7 @@ sub skip {
     return 1;
 }
 
-=head2 C<warnings()>
+=head2 warnings()
 
 Simlilar to the methods in L<MARC::Record> and L<MARC::Batch>,
 C<warnings()> will return any warnings that have accumulated while

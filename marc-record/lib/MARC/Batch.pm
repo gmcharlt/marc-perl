@@ -80,7 +80,7 @@ sub new {
 } # new()
 
 
-=head2 C<next()>
+=head2 next()
 
 Read the next record from that batch, and return it as a MARC::Record
 object.  If the current file is at EOF, close it and open the next

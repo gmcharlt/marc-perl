@@ -3,6 +3,9 @@ package MARC::Lint;
 use strict;
 use integer;
 
+use MARC::Record;
+use MARC::Field;
+
 =head1 NAME
 
 MARC::Lint - Perl extension for checking validity of MARC records
@@ -68,17 +71,14 @@ None.  Everything is done through objects.
 
 =head1 METHODS
 
-=head2 C<new()>
+=head2 new()
 
 No parms needed.  The C<MARC::Lint> object is little more than a list of warnings 
 and a bunch of rules.
 
 =cut
 
-use MARC::Record;
-use MARC::Field;
-
-sub new() {
+sub new {
 	my $class = shift;
 	$class = ref($class) || $class;
 
@@ -92,7 +92,7 @@ sub new() {
 	return $self;
 }
 
-=head2 C<warnings()>
+=head2 warnings()
 
 Returns a list of warnings found by C<check_record()> and its brethren.
 
@@ -104,7 +104,7 @@ sub warnings {
 	return wantarray ? @{$self->{_warnings}} : scalar @{$self->{_warnings}};
 }
 
-=head2 C<clear_warnings()>
+=head2 clear_warnings()
 
 Clear the list of warnings for this linter object.  It's automatically called
 when you call C<check_record()>.
@@ -117,7 +117,7 @@ sub clear_warnings {
 	$self->{_warnings} = [];
 }
 
-=head2 C<warn(str[,str...])>
+=head2 warn( $str [, $str...] )
 
 Create a warning message, built from strings passed, like a C<print> statement.
 
@@ -134,9 +134,9 @@ sub warn {
 	return;
 }
 
-=head2 C<check_record(marc)>
+=head2 check_record( $marc )
 
-Does all sorts of lint-like checks on the MARC record I<marc>, both on the record as a whole,
+Does all sorts of lint-like checks on the MARC record I<$marc>, both on the record as a whole,
 and on the individual fields & subfields.
 
 =cut
@@ -214,7 +214,7 @@ sub check_record {
 	return;
 }
 
-=head2 C<check_I<xxx>(field)>
+=head2 check_I<xxx>( $field )
 
 Various functions to check the different fields.  If the function doesn't exist, 
 then it doesn't get checked.
