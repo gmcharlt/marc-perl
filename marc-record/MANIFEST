@@ -14,4 +14,5 @@ t/00.load.t
 t/00.version.t
 t/10.camel.t
 t/20.clone.t
+t/50.batch.t
 t/camel.usmarc
