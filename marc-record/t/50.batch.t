@@ -1,8 +1,7 @@
-#!perl 
+#!perl -Tw
 
 use strict;
 use integer;
-use warnings;
 use File::Spec;
 
 use Test::More tests=>267;
