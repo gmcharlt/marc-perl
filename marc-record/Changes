@@ -2,7 +2,8 @@ Revision history for Perl extension MARC::Record.
 
 1.13    XXXXXX, X, XXXX
 	- Moved new_from_usmarc() docs & code up right after new() to 
-	be more prominent.
+	be more prominent. Thanks to Chris Biemesderfer for pointing this 
+	out.
 
 1.12	October 9, 2002 
 	- Makefile.PL will now generate PDF and HTML documentation for 
