@@ -11,7 +11,7 @@ MARC::Lint - Perl extension for checking validity of MARC records
 
 Version 1.00
 
-    $Id: Lint.pm,v 1.9 2002/07/15 19:41:55 petdance Exp $
+    $Id: Lint.pm,v 1.10 2002/07/29 15:03:37 edsummers Exp $
 
 =cut
 
@@ -26,6 +26,7 @@ use MARC::Field;
   use MARC::Lint;
 
   my $linter = new MARC::Lint;
+  my $filename = shift;
 
   open( IN, "<", $filename ) or die "Couldn't open $filename: $!\n";
   binmode( IN ); # for the Windows folks
