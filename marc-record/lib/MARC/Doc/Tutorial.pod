@@ -43,14 +43,22 @@ module for working with MARC data. MARC.pm was quite successful since it
 grew to include many new options that were requested by the Perl/library
 community.  However, in adding these features the module swiftly outgrew it's
 own clothes, and maintenance and addition of new features became extremely
-difficult. 
+difficult. In addition, as libraries began using MARC.pm to process large MARC
+data files (>1000 records) they noticed that memory consumption would skyrocket.
+Memory consumption became an issue for large batches of records because 
+MARC.pm's object model was based on the 'batch' rather than the record...so 
+each record in the file would often be read into memory. There were ways of 
+getting around this, but they were not obvious. Some effort was made to 
+reconcile the two approaches (batch and record), but with limited success.
 
 In mid 2001 Andy Lester released MARC::Record and MARC::Field
 which provided a much more simpler and maintainable package for processing
-MARC data with Perl. Instead of forking the two projects the developers agreed
-to encourage use of the MARC::Record framework, and to work on enhancing 
-MARC::Record rather than extending MARC.pm further.
-
+MARC data with Perl. As its name suggests MARC::Record treats an individual 
+MARC record as the primary Perl object, rather than having the object represent
+a given set of records. Instead of forking the two projects the developers 
+agreed to encourage use of the MARC::Record framework, and to work on enhancing 
+MARC::Record rather than extending MARC.pm further. Soon afterwards MARC::Batch
+was added which allows you to read in a large data file without having to worry about memory consumption. 
 
 =head2 Brief Overview of MARC classes
 
