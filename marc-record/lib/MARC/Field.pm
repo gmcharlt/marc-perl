@@ -83,6 +83,40 @@ sub new($) {
 	return $self;
 } # new()
 
+=head2 C<clone()>
+
+Makes a copy of the field.  Note that this is not just the same as saying
+
+    my $newfield = $field;
+
+since that just makes a copy of the reference.  To get a new object, you must
+
+    my $newfield = $field->clone;
+
+=cut
+
+sub clone {
+    my $self = shift;
+
+    my $tagno = $self->tag;
+
+    my $clone = 
+	bless {
+	    _tag => $tagno,
+	    _warnings => [],
+	}, ref($self);
+
+    if ( $tagno < 10 ) {
+	$clone->{_data} = $self->{_data};
+    } else {
+	$clone->{_ind1} = $self->{_ind1};
+	$clone->{_ind2} = $self->{_ind2};
+	$clone->{_subfields} = [@{$self->{_subfields}}]; 
+    }
+
+    return $clone;
+}
+
 =head2 C<tag()>
 
 Returns the three digit tag for the field.

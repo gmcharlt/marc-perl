@@ -15,11 +15,11 @@ use MARC::Field;
 
 =head1 VERSION
 
-Version 0.14
+Version 0.15
 
 =cut
 
-$VERSION = '0.14';
+$VERSION = '0.15';
 $DEBUG = 0;
 
 use constant SUBFIELD_INDICATOR	=> "\x1F";
@@ -75,10 +75,8 @@ Base constructor for the class.
 sub new($) {
 	my $class = shift;
 	$class = ref($class) || $class;
-
 	my $self = {
 		_leader => undef,
-		_leader_refresh => 0,
 		_fields => [],
 		_warnings => [],
 		};
@@ -284,6 +282,41 @@ sub skip_from_file(*) {
 	return $usmarc ? 1 : undef;
 }
 
+=head2 clone( [field specs] )
+
+The C<clone()> method makes a copy of an existing MARC record and returns
+the new version.  Note that you cannot just say:
+
+    my $newmarc = $oldmarc;
+
+This just makes a copy of the reference, not a new object.  You must use
+the C<clone()> method like so:
+
+    my $newmarc = $oldmarc->clone;
+
+You can also specify field specs to filter down only a 
+certain subset of fields.  For instance, if you only wanted the
+title and ISBN tags from a record, you could do this:
+
+    my $small_marc = $marc->clone( 245, '020' );
+
+The order of the fields is preserved as it was in the original record.
+
+=cut
+
+sub clone {
+    my $self = shift;
+
+    my $clone = $self->new();
+    $clone->{_leader} = $self->{_leader};
+
+    for my $field ( $self->fields() ) {
+	$clone->add_fields( $field->clone );
+    }
+
+    return $clone;
+}
+
 =head2 leader([text])
 
 Returns the leader for the record.  Sets the leader if I<text> is defined.
@@ -451,7 +484,7 @@ sub fields() {
 	return @{$self->{_fields}};
 }
 
-=head2 field(tagspec)
+=head2 field(tagspec(s))
 
 Returns a list of tags that match the field specifier, or in scalar
 context, just the first matching tag.
@@ -464,28 +497,30 @@ of wildcarding (i.e. subject tags are "6XX").
 
 my %field_regex;
 
-sub field($) {
+sub field {
 	my $self = shift;
-	my $tag = shift;
-
-	my $regex = $field_regex{ $tag };
-
-	# Compile & stash it if necessary
-	if ( not defined $regex ) {
-		my $pattern = $tag;
-		$pattern =~ s/X/\\d/g;
-		$regex = qr/^$pattern$/;
-		$field_regex{ $tag } = $regex;
-	} # not defined
+	my @specs = @_;
 
 	my @list = ();
-	for my $maybe ( $self->fields ) {
-		if ( $maybe->tag =~ $regex ) {
-			return $maybe unless wantarray;
+	for my $tag ( @specs ) {
+		my $regex = $field_regex{ $tag };
 
-			push( @list, $maybe );
-		} # if
-	} # for
+		# Compile & stash it if necessary
+		if ( not defined $regex ) {
+			my $pattern = $tag;
+			$pattern =~ s/X/\\d/g;
+			$regex = qr/^$pattern$/;
+			$field_regex{ $tag } = $regex;
+		} # not defined
+
+		for my $maybe ( $self->fields ) {
+			if ( $maybe->tag =~ $regex ) {
+				return $maybe unless wantarray;
+
+				push( @list, $maybe );
+			} # if
+		} # for $maybe
+	} # for $tag
 
 	return @list;
 }
