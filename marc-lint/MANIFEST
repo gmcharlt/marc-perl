@@ -1,0 +1,11 @@
+bin/marclint
+Changes
+etc/ecbdlist.html
+etc/specs
+lib/MARC/Lint.pm
+Makefile.PL
+MANIFEST
+META.yml
+README
+t/camel.usmarc
+t/lint.t
