@@ -328,7 +328,7 @@ The techniques in this section would allow you to write programs that
 create MARC records that could then be loaded into an online catalog, or
 sent to a third party.
 
-=head2 Creating a record (pt. 1)
+=head2 Creating a record 
 
 To create a record you need to:
 
@@ -810,7 +810,7 @@ Perl's localtime() to generate the data we need for this field.
 
 =head2 Reordering subfields
 
-You may find yourself in the situtation where you would like to
+You may find yourself in the situation where you would like to
 programatically reorder, and possibly modify subfields in a particular
 field. For example, imagine that you have a batch of records that have
 856 fields which contain subfields z, u, and possibly subfield 3...
@@ -854,32 +854,35 @@ Here is the example in detail:
    8   
    9     my $existing = $record->field('856');
   10   
-  11     ## if the record doesn't contain an 856 field we can skip it 
-  12     next if !$existing; 
+  11     ## make sure the record has an 856 field we can edit 
+  12     if ($existing) { 
   13   
-  14     ## now we're going to build a list of our new subfields (in order)
-  15     my @subfields = ();
-  16   
-  17     ## if the 856 field has a subfield 3 add it
-  18     if (defined($existing->subfield('3'))) {
-  19       push(@subfields,'3',$existing->subfield('3'));
-  20     }
-  21   
-  22     ## now add subfields z and u
-  23     push(@subfields,'z','Access restricted','u',$existing->subfield('u'));
-  24   
-  25     ## create a new 856 field using the new reordered subfields
-  26     my $new = MARC::Field->new( 
-  27       '856', $existing->indicator(1), $existing->indicator(2), @subfields
-  28       );
-  29   
-  30     ## replace the existing subfield with our new one
-  31     $existing->replace_with($new);
-  32   
-  33     ## write out the new record
-  34     print OUT $record->as_usmarc();
-  35   
-  36   }
+  14       ## now we're going to build a list of our new subfields (in order)
+  15       my @subfields = ();
+  16       
+  17       ## if the 856 field has a subfield 3 add it
+  18       if (defined($existing->subfield('3'))) {
+  19   	     push(@subfields,'3',$existing->subfield('3'));
+  20       }
+  21       
+  22       ## now add subfields z and u
+  23       push(@subfields,'z','Access restricted',
+  24         'u',$existing->subfield('u'));
+  25       
+  26       ## create a new 856 field using the new reordered subfields
+  27       my $new = MARC::Field->new( 
+  28   	     '856', $existing->indicator(1), $existing->indicator(2), @subfields
+  29   	   );
+  30       
+  31       ## replace the existing subfield with our new one
+  32       $existing->replace_with($new);
+  33   
+  34     }
+  35       
+  36     ## write out the record
+  37     print OUT $record->as_usmarc();
+  38   
+  39   }
 
 
 =head1 VALIDATING
@@ -990,6 +993,8 @@ records. Here's an example:
   23   }
   24    
   25    
+
+
    1   ## Then create a separate program that uses your subclass to validate
    2   ## NOTE: you need to make sure your program is able to find your 
    3   ## module MyLint.pm ... this can be achieved by putting both MyLint.pm 
@@ -1039,7 +1044,7 @@ comprised of a years worth of diary entries plus extra topics at the end, and
 was entitled "A Year With Swollen Appendices". The following section is a grab 
 bag group of appendices. Many of them are probably not filled in yet, this is 
 because they are just ideas...so perhaps the appendices aren't that swollen 
-yet. Feel free to suggest new ones. 
+yet. Feel free to suggest new ones, or to fill these in. 
 
 =head2 Comparing Collections
 
