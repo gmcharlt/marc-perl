@@ -19,7 +19,7 @@ MARC::Field - Perl extension for handling MARC fields
 
 Version 1.16
 
-    $Id: Field.pm,v 1.28 2003/01/28 21:41:36 petdance Exp $
+    $Id: Field.pm,v 1.29 2003/01/29 15:20:58 petdance Exp $
 
 =cut
 
@@ -471,11 +471,7 @@ sub _warn($) {
 	push( @{$self->{_warnings}}, join( "", @_ ) );
 }
 
-sub _isnum {
-    my $x = shift;
-    return(1) if $x =~ /^\d+$/;
-    return(0);
-}
+sub _isnum { return $_[0] =~ /^\d+$/ }
 
 1;
 
