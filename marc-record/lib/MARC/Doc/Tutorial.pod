@@ -1,0 +1,419 @@
+=head1 NAME
+
+MARC::Doc::Tutorial - A documention-only module for new users of MARC::Record
+
+=head1 INTRODUCTION
+
+=head2 What is MARC?
+
+=head2 What is the MARC/Perl Cookbook?
+
+=head2 History of MARC on CPAN
+
+=head2 Overview of MARC classes
+
+
+=head1 READING
+
+=head2 Reading a record from a file
+
+Let's say you have a USMARC record in a file called 'file.dat' and you would 
+like to read in the record and print out it's title.
+
+
+   1   ## Example 1.1 
+   2   
+   3   ## create a MARC::FILE::USMARC object
+   4   use MARC::File::USMARC;
+   5   my $file = MARC::File::USMARC->in('file.dat');
+   6   
+   7   ## get a marc record from the MARC::File object
+   8   ## $record will be a MARC::Record object
+   9   my $record = $file->next();
+  10   
+  11   ## print the title contained in the record
+  12   print $record->title(),"\n";
+  13   
+  14   ## we're done so close the file
+  15   $file->close();
+
+
+=head2 Checking for errors
+
+It is a good idea to get in the habit of checking for errors. MARC::* has 
+been designed to help you do this. Here is example B<1.1> rewritten to use 
+the C<$MARC::File::ERROR> and C<$MARC::Record::ERROR> variables. To save space
+many of the examples in the cookbook will not do this error checking.
+
+
+   1   ## Example 1.2 
+   2   
+   3   ## create a MARC::FILE::USMARC object
+   4   use MARC::File::USMARC;
+   5   my $file = MARC::File::USMARC->in('file.dat');
+   6   
+   7   ## if $file isn't defined we had trouble with the file
+   8   ## so exit
+   9   if (not($file)) {
+  10     print $MARC::File::ERROR,"\n";
+  11     exit(0);
+  12   }
+  13   
+  14   ## get a marc record from the MARC::File object
+  15   ## $record will be a MARC::Record object
+  16   my $record = $file->next();
+  17   
+  18   ## if $record is not defined then we had trouble reading a record
+  19   if (not($record)) {
+  20     print $MARC::Record::ERROR,"\n";
+  21     exit(0);
+  22   }
+  23   
+  24   ## print the title contained in the record
+  25   print $record->title(),"\n";
+  26   
+  27   ## we're done so close the file
+  28   $file->close();
+
+
+Lines 7-12 check to make sure that C<$file> contains a valid MARC::File::USMARC
+object.  If the call to C<MARC::File::USMARC-E<gt>in()> fails it will return C<undef>
+and set the C<$MARC::File::ERROR> variable to something meaningful. The same
+goes for lines 18-22 which check to see that valid record was obtained from
+the file.
+
+=head2 Iterating through a batch file
+
+Now imagine that 'file.dat' actually contains multiple records and 
+we want to print out the title for all of them. Our program doesn't have 
+to change very much at all: we just need to add a loop around our call
+to C<next()>.
+
+
+   1   ## Example 1.3 
+   2   
+   3   ## create a MARC::FILE::USMARC object
+   4   use MARC::File::USMARC;
+   5   my $file = MARC::File::USMARC->in('file.dat');
+   6   
+   7   ## if $file isn't defined we had trouble with the file
+   8   ## so exit
+   9   if (not($file)) {
+  10     print $MARC::File::ERROR,"\n";
+  11     exit(0);
+  12   }
+  13   
+  14   while (my $record = $file->next()) {
+  15   
+  16     ## print the title contained in the record
+  17     print $record->title(),"\n";
+  18   
+  19   }
+  20   
+  21   ## we're done so close the file
+  22   $file->close();
+
+
+The call to the next() method at line 14 returns the next record from the 
+file. next() returns C<undef> when there are no more records left in the file,
+which causes the while loop to end. This is a useful idiom for reading in 
+all the records in a file.
+
+
+=head2 Looking at a field 
+
+Examples 1.1 - 1.3 use MARC::Record's title() method to easily access the
+245 field...but you probably will want to write programs that access lots
+of other MARC fields.
+
+MARC::Record's field() method gives you complete access the data 
+found in any MARC field. The field() method returns a MARC::Field object
+which can be used to access the data, indicators, and even the individual 
+subfields. Example 1.4 shows you how this is done. 
+
+
+   1   ## Example 1.4
+   2   
+   3   ## open a file
+   4   use MARC::File::USMARC;
+   5   my $file = MARC::File::USMARC->in('file.dat');
+   6   
+   7   ## read a record
+   8   my $record = $file->next();
+   9   
+  10   ## get the record's 100 field as a MARC::Field object
+  11   my $field = $record->field('100'); 
+  12   print "The 100 field contains: ",$field->as_string(),"\n"; 
+  13   print "The 1st indicator is ",$field->indicator(1),"\n";
+  14   print "The 2nd indicator is ",$field->indicator(2),"\n";
+  15   print "Subfield d contains: ",$field->subfield('d'),"\n";
+
+
+=head2 Looking at repeatable fields
+
+So how do you retrieve data from repeatable fields? The field() method
+can help you with this as well.  Above in example 1.4 on line 11 the 
+field() method was used in a I<scalar> context, since the result was being 
+assigned to the variable $field. 
+
+However in a I<list> context field() will return all the fields in the 
+record of that particular type. For example:
+
+
+   1   ## Example 1.5 
+   2   
+   3   use MARC::File::USMARC;
+   4   my $file = MARC::File::USMARC->in('file.dat');
+   5   my $record = $file->next();
+   6   
+   7   ## get all the 650 fields (list context)
+   8   my @fields = $record->field('650');
+   9   
+  10   ## examine each 650 field and print it out
+  11   foreach my $field (@fields) {
+  12     print $field->as_string(),"\n";
+  13   }
+
+
+=head2 Looking at a set of related fields
+
+field() also allows you to retrieve similar fields using 'X' as a wildcard. 
+For example, this functionality allows you to retrieve all the note fields
+in one shot.
+
+
+   1   ## Example 1.6
+   2   
+   3   use MARC::File::USMARC;
+   4   my $file = MARC::File::USMARC->in('file.dat');
+   5   my $record = $file->next();
+   6   
+   7   foreach my $field ($record->field('5XX')) {
+   8     print $field->tag(),' contains ',$field->as_string(),"\n";
+   9   }
+
+
+Notice the shorthand in line 7 which compacts lines 7-13 of Example 1.5. 
+Instead of storing the fields in an array, the field() still returns a list
+in the for loop. Line 8 uses the tag() method which returns the tag number
+for a particular MARC field--which is useful when you aren't certain what
+tag you are dealing with.
+
+
+=head2 Looking at all the fields in a record
+
+The last example in this section illustrates how to retrieve I<all> the fields
+in a record using the fields() method. 
+
+
+   1   ## Example 1.7
+   2   
+   3   use MARC::File::USMARC;
+   4   my $file = MARC::File::USMARC->in('file.dat');
+   5   my $record = $file->next();
+   6   
+   7   ## get all of the fields useing the fields() method
+   8   my @fields = $record->fields();
+   9   
+  10   ## print out the tag, the indicators and the field contents
+  11   foreach my $field (@fields) {
+  12     print 
+  13       $field->tag(), " ", 
+  14       $field->indicator(1),
+  15       $field->indicator(2), " ",
+  16       $field->as_string, " ",
+  17       "\n";
+  18   }
+
+
+=head1 CREATING
+
+The examples in the section 1 covered how to read in existing USMARC data
+in a file. Section 2 will show you how to create a MARC record from scratch.
+The techniques in this section would allow you to write programs that 
+create MARC records that could then be loaded into an online catalog, or
+sent to a third party.
+
+=head2 Creating a record (pt. 1)
+
+To create a record you need to:
+
+=over 4
+
+=item 1 
+
+Create a MARC::Record object. 
+
+=item 2
+
+Add a leader to the record.
+
+=item 3
+
+Create MARC::Field objects for each field you want to have in the record.
+
+=item 4
+
+Add each of the MARC::Field objects to the MARC::Record object.
+
+=back
+
+For example:
+
+
+   1   ## Example 2.1
+   2   
+   3   ## create a MARC::Record object
+   4   use MARC::Record;
+   5   my $record = MARC::Record->new();
+   6   
+   7   ## add the leader to the record 
+   8   $record->leader('00903pam   2200265 a 4500');
+   9   
+  10   ## create an author field 
+  11   my $author = MARC::Field->new(
+  12     '100',1,'',
+  13       a => 'Logan, Robert K.',
+  14       d => '1939-'
+  15     );
+  16   
+  17   ## create a title field
+  18   my $title = MARC::Field->new(
+  19     '245','1','4',
+  20       'a' => 'The alphabet effect /',
+  21       'c' => 'Robert K. Logan.'
+  22      );
+  23   
+  24   ## now add the fields to the record
+  25   $record->add_fields($author,$title);
+
+
+=head2 Creating a record (pt. 2)
+
+MARC::Record has some shortcuts to make it possible to add fields
+without having to create separate MARC::Field objects for each field.
+
+
+   1   ## Example 2.2
+   2   
+   3   ## create MARC::Record object
+   4   use MARC::Record;
+   5   my $record = MARC::Record->new();
+   6   
+   7   ## add the leader to the record
+   8   $record->leader('00903pam  2200265 a 4500');
+   9   
+  10   ## add the author
+  11   $record->add_fields(
+  12     '100',1,'',
+  13       a => 'Logan, Robert K.',
+  14       d => '1939-'
+  15     );
+  16   
+  17   ## add the title
+  18   $record->add_fields(
+  19     '245','1','4',
+  20       'a' => 'The alphabet effect /',
+  21       'c' => 'Robert K. Logan.'
+  22     );
+
+
+Notice how MARC::Field objects ($author and $title in Example 2.1) are 
+not created?
+
+
+=head2 Creating a record (pt. 3)
+
+add_fields() supports another short cut which allows you to add all the fields 
+in one fell swoop.
+
+   1   ## Example 2.3 
+   2   
+   3   ## create MARC object
+   4   use MARC::Record;
+   5   my $record = MARC::Record->new();
+   6   
+   7   ## add the leader to the record
+   8   $record->leader('00903pam  2200265 a 4500');
+   9   
+  10   ## now add all the fields
+  11   $record->add_fields(
+  12     [ '100','1','', a =>'Logan, Robert K.', d=>'1939-' ],
+  13     [ '245','1','4', a=>'The alphabet effect /', c=>'Robert K. Logan.' ]
+  14     );
+
+
+The three idioms for adding fields to a record all have the exact same 
+effect. If you find one more readable or understandable than the other 
+then use it with abandon!
+
+
+=head2 Creating a record based on data in a file
+
+=head2 Creating a record from raw MARC data in a variable
+
+=head2 Cloning a record
+
+
+=head1 WRITING
+
+=head2 Writing a record to disk
+
+=head2 Writing a set of records to a batch file
+
+
+=head1 UPDATING
+
+=head2 Adding a field
+
+=head2 Adding a subfield
+
+=head2 Deleting a field
+
+=head2 Deleting a subfield
+
+=head2 Changing the a record leader
+
+
+=head1 SEARCHING & FILTERING
+
+=head2 Finding particular records
+
+=head2 Removing particular records from a batch
+
+=head2 Outputting specific information from a batch 
+
+=head2 Comparing collections of records
+
+
+=head1 VALIDATING
+
+=head2 using MARC::Record::ERROR
+
+=head2 using MARC::Lint
+
+=head2 extending MARC::Lint
+
+
+=head1 SPECIAL TOPICS
+
+=head2 URLs
+
+=head2 ISBN/ISSNs
+
+=head2 Call numbers
+
+=head2 Subject headings
+
+=head2 HTML
+
+=head2 XML
+
+=head2 Excel
+
+=head2 Databases
+
+=head2 Z39.50
+
+=head2 Procite/Endnote
+
