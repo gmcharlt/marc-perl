@@ -1,6 +1,6 @@
 Revision history for Perl extension MARC::Record.
 
-1.39_02
+1.39_02 Tue Dec 21 09:29:45 CST 2004
 
         [THINGS THAT MAY BREAK YOUR CODE]
         - Removed the ability to call new from an instance of MARC::Record
@@ -33,24 +33,32 @@ Revision history for Perl extension MARC::Record.
           call in a scalar context was going to get 0, which if used as
           a MARC::Field would bomb.  We therefore don't expect the change
           to affect anything that wasn't already blowing up.
+
         - Fixed the doc and example for MARC::Field::subfields() so that
           they match the behavior of the function, namely returning a list
           rather than a list ref.
+
         - Fixed behavior of MARC::Batch::next() to not reset warnings
           on the MARC::Record object that it returns. Also added test to 
           t/75.warnings.t
+
         - Turned off utf8 handling until it can safely be done without 
           converting all MARC data to utf8.
+
         - Made marcdump respect --noquiet as documented.
 
         [ENHANCEMENTS]
         - added MARC::Field::delete_subfields() and tests to t/67.subfield.t
+
         - Added tests to make sure that MARC::Record::leader() adds warnings
           if called as a setter with data that isn't the right length.
+
         - Added explicit tests for convenience function behavior (title(),
           edition(), etc.) when there's no data.
+
         - Added test to verify insert_fields_before() behavior when the
           field to insert before isn't in the record.
+
         - Added tests to MARC::Field::indicator() to make sure that when
           called on a control field the return is undef.
 
@@ -60,11 +68,16 @@ Revision history for Perl extension MARC::Record.
         - Support for UTF8 in Perls >= 5.8.1. When using a utf8 friendly Perl
           all file streams will be opened in utf8 mode, and the bytes pragma
           will be used to create and use direcotry byte offsets. 
+
         - Added MARC::File::Utils which contains utf8 safe functions.
+
         - marcdump now sets STDOUT to utf8 if it is able to.
+
         - t/utf8.t is no longer skipped.
+
         - removed redundant record length check in MARC::File::USMARC::_next()
           and adjusted tests in t/75.warnings.t
+
         - All tests run under -T.
 
 1.38    March 16th, 2004
