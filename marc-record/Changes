@@ -1,5 +1,12 @@
 Revision history for Perl extension MARC::Record.
 
+1.27	???
+	[FIXES]
+	- updated MARC::Lint to use the latest field/subfield designations from
+	  the Library of Congress...thanks to Colin Campbell from Sirsi.
+	- removed MARC::Lint check_260() since a subfield c is not 
+	  mandatory (see RT #1565).
+
 1.26	May 8, 2003
 	[FIXES]
 	- Removed the "use warnings" in the couple of files that used it.
