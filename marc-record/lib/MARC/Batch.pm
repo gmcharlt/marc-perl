@@ -17,13 +17,13 @@ use constant WARNINGS_OFF	=> 2;
 
 =head1 VERSION
 
-Version 1.16
+Version 1.17
 
-    $Id: Batch.pm,v 1.23 2003/01/28 21:41:33 petdance Exp $
+    $Id: Batch.pm,v 1.24 2003/01/29 18:16:06 petdance Exp $
 
 =cut
 
-use vars '$VERSION'; $VERSION = '1.16';
+use vars '$VERSION'; $VERSION = '1.17';
 
 =head1 SYNOPSIS
 
