@@ -1,6 +1,6 @@
 Revision history for Perl extension MARC::Record.
 
-1.34	
+1.34	December 16th, 2003
 	[ENHANCEMENTS]
 	- modified MARC::File::in() to allow passing in filehandles instead
 	  of a filename. Useful in situations where you might have data
