@@ -38,8 +38,9 @@ Revision history for Perl extension MARC::Record.
         - Fixed behavior of MARC::Batch::next() to not reset warnings
           on the MARC::Record object that it returns. Also added test to 
           t/75.warnings.t
-        - Truned off utf8 handling until it can safely be done without 
+        - Turned off utf8 handling until it can safely be done without 
           converting all MARC data to utf8.
+        - Made marcdump respect --noquiet as documented.
 
         [ENHANCEMENTS]
         - added MARC::Field::delete_subfields() and tests to t/67.subfield.t
