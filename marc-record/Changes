@@ -1,6 +1,6 @@
 Revision history for Perl extension MARC::Record.
 
-1.27	???
+1.27	May 22, 2003
 	[ENHNACMENTS]
 	- MARC::Field::update() by default will append any subfields which do
 	  not exist in the record to the end of the field. Added tests to test
