@@ -3,21 +3,21 @@
 package MARC::Lint::CodeData;
 
 #declare the necessary variables
-use vars qw($VERSION @EXPORT_OK %GeogAreaCodes %ObsoleteGeogAreaCodes %LanguageCodes %ObsoleteLanguageCodes %CountryCodes %ObsoleteCountryCodes);
+use vars qw($VERSION @EXPORT_OK %GeogAreaCodes %ObsoleteGeogAreaCodes %LanguageCodes %ObsoleteLanguageCodes %CountryCodes %ObsoleteCountryCodes %Sources600_651 %ObsoleteSources600_651 %Sources655 %ObsoleteSources655);
 
-$VERSION = '1.00';
+$VERSION = '1.01';
 
 use base qw(Exporter AutoLoader);
 
-@EXPORT_OK = qw(%GeogAreaCodes %ObsoleteGeogAreaCodes %LanguageCodes %ObsoleteLanguageCodes %CountryCodes %ObsoleteCountryCodes);
-
-$VERSION = '1.00';
+@EXPORT_OK = qw(%GeogAreaCodes %ObsoleteGeogAreaCodes %LanguageCodes %ObsoleteLanguageCodes %CountryCodes %ObsoleteCountryCodes %Sources600_651 %ObsoleteSources600_651 %Sources655 %ObsoleteSources655);
 
 =head1 NAME
 
 MARC::Lint::CodeData -- Contains codes from the MARC code lists for Geographic Areas, Languages, and Countries.
 
 Code data is used for validating fields 008, 040, 041, and 043.
+
+Also, sources for subfield 2 in 600-651 and 655.
 
 Stores codes in hashes, %MARC::Lint::CodeData::[name].
 
@@ -30,8 +30,13 @@ use MARC::Lint::CodeData;
 #%MARC::Lint::CodeData::ObsoleteGeogAreaCodes;
 #%MARC::Lint::CodeData::LanguageCodes;
 #%MARC::Lint::CodeData::ObsoleteLanguageCodes;
-#%MARC::Lint::CodeData::CountryCodes
-#%MARC::Lint::CodeData::ObsoleteCountryCodes
+#%MARC::Lint::CodeData::CountryCodes;
+#%MARC::Lint::CodeData::ObsoleteCountryCodes;
+#%MARC::Lint::CodeData::Sources600_651;
+#%MARC::Lint::CodeData::ObsoleteSources600_651;
+#%MARC::Lint::CodeData::Sources655;
+#%MARC::Lint::CodeData::ObsoleteSources655;
+
 
 #or, import specific code list data
 use MARC::Lint::CodeData qw(%GeogAreaCodes);
@@ -44,13 +49,21 @@ print "Geographic Area Code $gac is valid\n" if $validgac;
 =head1 EXPORT
 
 None by default. 
-@EXPORT_OK: %GeogAreaCodes, %ObsoleteGeogAreaCodes, %LanguageCodes, %ObsoleteLanguageCodes, %CountryCodes, %ObsoleteCountryCodes.
+@EXPORT_OK: %GeogAreaCodes, %ObsoleteGeogAreaCodes, %LanguageCodes, %ObsoleteLanguageCodes, %CountryCodes, %ObsoleteCountryCodes, %Sources600_651, %ObsoleteSources600_651, %Sources655, %ObsoleteSources655.
 
 =head1 TO DO
 
+Check on Sears as 655 term--it is not listed as valid?
+
 Update codes as needed (see L<http://www.loc.gov/marc/>).
 
-Add codes for MARC Code Lists for Relators, Sources, Description Conventions.
+Add other codes for MARC Code Lists for Relators, Sources, Description Conventions.
+
+Determine what to do about 600-655 codes with indicators (cash, lcsh, lcshac,
+mesh, nal, and rvm). Currently, these are duplicated in valid and obsolete
+hashes. Validation routines should probably treat these differently due to large
+numbers of records using these codes, created before the indicators were
+allowed.
 
 Determine whether three blank spaces should be in the LanguageCodes (for 008 validation) or not. 
 If it is here, then 041 would be allowed to have three blank spaces as a valid code 
@@ -76,7 +89,11 @@ They output tab-separated codes for updating the data below.
 
 =head1 VERSION HISTORY
 
-Version 1.00 (original version): First release, Dec. 5, 2004.
+Version 1.01: Updated Jan. 5-22, 2005. Released.
+
+ -Added code list data for 600-651 subfield 2 and for 655 subfield 2 sources.
+
+Version 1.00 (original version): First release, Dec. 5, 2004. Uploaded to SourceForge CVS, Jan. 3, 2005.
  -Included in MARC::Errorchecks distribution on CPAN.
  -Used by MARC::Lintadditions.
 
@@ -92,7 +109,7 @@ Version 1.00 (original version): First release, Dec. 5, 2004.
 
 #fill the valid Language Codes hash
 
-%LanguageCodes = map {($_, 1)} (split "\t", ("   	abk	ace	ach	ada	ady	aar	afh	afr	afa	aka	akk	alb	ale	alg	tut	amh	apa	ara	arg	arc	arp	arw	arm	art	asm	ath	aus	map	ava	ave	awa	aym	aze	ast	ban	bat	bal	bam	bai	bad	bnt	bas	bak	baq	btk	bej	bel	bem	ben	ber	bho	bih	bik	bis	bos	bra	bre	bug	bul	bua	bur	cad	car	cat	cau	ceb	cel	cai	chg	cmc	cha	che	chr	chy	chb	chi	chn	chp	cho	chu	chv	cop	cor	cos	cre	mus	crp	cpe	cpf	cpp	crh	scr	cus	cze	dak	dan	dar	day	del	din	div	doi	dgr	dra	dua	dut	dum	dyu	dzo	bin	efi	egy	eka	elx	eng	enm	ang	epo	est	gez	ewe	ewo	fan	fat	fao	fij	fin	fiu	fon	fre	frm	fro	fry	fur	ful	glg	lug	gay	gba	geo	ger	gmh	goh	gem	gil	gon	gor	got	grb	grc	gre	grn	guj	gwi	gaa	hai	hat	hau	haw	heb	her	hil	him	hin	hmo	hit	hmn	hun	hup	iba	ice	ido	ibo	ijo	ilo	smn	inc	ine	ind	inh	ina	ile	iku	ipk	ira	gle	mga	sga	iro	ita	jpn	jav	jrb	jpr	kbd	kab	kac	xal	kal	kam	kan	kau	kaa	kar	kas	kaw	kaz	kha	khm	khi	kho	kik	kmb	kin	kom	kon	kok	kor	kpe	kro	kua	kum	kur	kru	kos	kut	kir	lad	lah	lam	lao	lat	lav	ltz	lez	lim	lin	lit	nds	loz	lub	lua	lui	smj	lun	luo	lus	mac	mad	mag	mai	mak	mlg	may	mal	mlt	mnc	mdr	man	mni	mno	glv	mao	arn	mar	chm	mah	mwr	mas	myn	men	mic	min	mis	moh	mol	mkh	lol	mon	mos	mul	mun	nah	nau	nav	nbl	nde	ndo	nap	nep	new	nia	nic	ssa	niu	nog	nai	sme	nso	nor	nob	nno	nub	nym	nya	nyn	nyo	nzi	oci	oji	non	peo	ori	orm	osa	oss	oto	pal	pau	pli	pam	pag	pan	pap	paa	per	phi	phn	pol	pon	por	pra	pro	pus	que	roh	raj	rap	rar	roa	rom	rum	run	rus	sal	sam	smi	smo	sad	sag	san	sat	srd	sas	sco	gla	sel	sem	scc	srr	shn	sna	iii	sid	sgn	bla	snd	sin	sit	sio	sms	den	sla	slo	slv	sog	som	son	snk	wen	sot	sai	sma	spa	suk	sux	sun	sus	swa	ssw	swe	syr	tgl	tah	tai	tgk	tmh	tam	tat	tel	tem	ter	tet	tha	tib	tir	tig	tiv	tli	tpi	tkl	tog	ton	chk	tsi	tso	tsn	tum	tup	tur	ota	tuk	tvl	tyv	twi	udm	uga	uig	ukr	umb	und	urd	uzb	vai	ven	vie	vol	vot	wak	wal	wln	war	was	wel	wol	xho	sah	yao	yap	yid	yor	ypk	znd	zap	zen	zha	zul	zun"));
+%LanguageCodes = map {($_, 1)} (split "\t", ("   	abk	ace	ach	ada	ady	aar	afh	afr	afa	aka	akk	alb	ale	alg	tut	amh	apa	ara	arg	arc	arp	arw	arm	art	asm	ath	aus	map	ava	ave	awa	aym	aze	ast	ban	bat	bal	bam	bai	bad	bnt	bas	bak	baq	btk	bej	bel	bem	ben	ber	bho	bih	bik	bis	bos	bra	bre	bug	bul	bua	bur	cad	car	cat	cau	ceb	cel	cai	chg	cmc	cha	che	chr	chy	chb	chi	chn	chp	cho	chu	chv	cop	cor	cos	cre	mus	crp	cpe	cpf	cpp	crh	scr	csh	cus	cze	dak	dan	dar	day	del	din	div	doi	dgr	dra	dua	dut	dum	dyu	dzo	bin	efi	egy	eka	elx	eng	enm	ang	epo	est	gez	ewe	ewo	fan	fat	fao	fij	fil	fin	fiu	fon	fre	frm	fro	fry	fur	ful	glg	lug	gay	gba	geo	ger	gmh	goh	gem	gil	gon	gor	got	grb	grc	gre	grn	guj	gwi	gaa	hai	hat	hau	haw	heb	her	hil	him	hin	hmo	hit	hmn	hun	hup	iba	ice	ido	ibo	ijo	ilo	smn	inc	ine	ind	inh	ina	ile	iku	ipk	ira	gle	mga	sga	iro	ita	jpn	jav	jrb	jpr	kbd	kab	kac	xal	kal	kam	kan	kau	kaa	kar	kas	kaw	kaz	kha	khm	khi	kho	kik	kmb	kin	kom	kon	kok	kor	kpe	krc	kro	kua	kum	kur	kru	kos	kut	kir	lad	lah	lam	lao	lat	lav	ltz	lez	lim	lin	lit	nds	loz	lub	lua	lui	smj	lun	luo	lus	mac	mad	mag	mai	mak	mlg	may	mal	mlt	mnc	mdr	man	mni	mno	glv	mao	arn	mar	chm	mah	mwr	mas	myn	mdf	men	mic	min	mis	moh	mol	mkh	lol	mon	mos	mul	mun	mwl	myv	nah	nau	nav	nbl	nde	ndo	nap	nep	new	nia	nic	ssa	niu	nog	nai	sme	nso	nor	nob	nno	nub	nwc	nym	nya	nyn	nyo	nzi	oci	oji	non	peo	ori	orm	osa	oss	oto	pal	pau	pli	pam	pag	pan	pap	paa	per	phi	phn	pol	pon	por	pra	pro	pus	que	roh	raj	rap	rar	roa	rom	rum	run	rus	sal	sam	smi	smo	sad	sag	san	sat	srd	sas	scn	sco	gla	sel	sem	scc	srr	shn	sna	iii	sid	sgn	bla	snd	sin	sit	sio	sms	den	sla	slo	slv	sog	som	son	snk	wen	sot	sai	sma	spa	srn	suk	sux	sun	sus	swa	ssw	swe	syr	tgl	tah	tai	tgk	tmh	tam	tat	tel	tem	ter	tet	tha	tib	tir	tig	tiv	tli	tpi	tkl	tlh	tog	ton	chk	tsi	tso	tsn	tum	tup	tur	ota	tuk	tvl	tyv	twi	udm	uga	uig	ukr	umb	und	urd	uzb	vai	ven	vie	vol	vot	wak	wal	wln	war	was	wel	wol	xho	sah	yao	yap	yid	yor	ypk	znd	zap	zen	zha	zul	zun"));
 
 #fill the obsolete Language Codes hash
 
@@ -105,6 +122,18 @@ Version 1.00 (original version): First release, Dec. 5, 2004.
 #fill the obsolete Country Codes hash
 
 %ObsoleteCountryCodes = map {($_, 1)} (split "\t", ("ai 	air	ac 	ajr	bwr	cn 	cz 	cp 	ln 	cs 	err	gsr	ge 	gn 	hk 	iw 	iu 	jn 	kzr	kgr	lvr	lir	mh 	mvr	nm 	pt 	rur	ry 	xi 	sk 	xxr	sb 	sv 	tar	tt 	tkr	unr	uk 	ui 	us 	uzr	vn 	vs 	wb 	ys "));
+
+%Sources600_651 = map {($_, 1)} (split "\t", ("aass	aat	abne	agrifors	agrovoc	agrovocf	agrovocs	albt	allars	amg	apaist	asft	asth	atla	barn	bella	bet	bhammf	bhashe	bicssc	bidex	blmlsh	bt	cabt	cash	ccte	cctf	ceeus	cht	ciesiniv	cilla	csahssa	csalsct	csapa	csh	cstud	ddcrit	dissao	dit	drama	dtict	ebfem	eclas	eks	ericd	est	fast	fgtpcm	fmesh	francis	galestne	gem	georeft	gtt	hapi	helecon	henn	hlasstg	huc	iaat	ica	icpsr	idas	iescs	iest	ilot	ilpt	inist	inspect	ipat	ipsp	isis	itoamc	itrt	jlabsh	kaa	kao	kaunokki	kdm	kitu	kssbar	kta	ktpt	ktta	kula	kupu	larpcal	lcsh	lcshac	lctgm	lemac	lemb	liv	lnmmbr	local	ltcsh	lua	maaq	mar	masa	mesh	mipfesd	mmm	mpirdes	mtirdes	musa	nal	nasat	ncjt	ndllsh	nicem	nimacsc	ntcpsc	ntcsd	ntissc	nznb	opms	pascal	peri	pha	pmbok	poliscit	popinte	precis	prvt	psychit	qrma	qrmak	ram	rasuqam	renib	rero	reveal	rpe	rswk	rugeo	rurkp	rvm	sao	sbiao	scgdst	scisshl	scot	sears	sfit	shbe	she	sigle	sipri	sk	slem	smda	sosa	swd	swemesh	taika	taxhs	tbit	test	tgn	tlka	tlsh	toit	trt	trtsa	tsht	ttka	umitrist	unbisn	unbist	unescot	usaidt	vmj	waqaf	watrest	wot	wpicsh	ysa"));
+
+#The codes cash, lcsh, lcshac, mesh, nal, and rvm are covered by 2nd indicators in 600-655
+#they are only used when indicators are not available
+%ObsoleteSources600_651 = map {($_, 1)} (split "\t", ("cash	lcsh	lcshac	mesh	nal	rvm"));
+
+%Sources655 = map {($_, 1)} (split "\t", ("	aat	amg	asth	barn	bt	cash	dct	ericd	estc	fast	fbg	galestne	gem	gmgpc	gsafd	gtlm	hapi	ica	ilot	itrt	lcsh	lcshac	lctgm	lemac	local	maaq	mar	marcgt	mesh	migfg	mim	nal	ngl	nimafc	nmc	nznb	opms	qrmak	radfg	rbbin	rbgenr	rbpap	rbpri	rbprov	rbpub	rbtyp	reveal	rugeo	rvm	sao	sears	sgp	sipri	swemesh	tbit	toit	tsht	vmj	waqaf"));
+
+#The codes cash, lcsh, lcshac, mesh, nal, and rvm are covered by 2nd indicators in 600-655
+#they are only used when indicators are not available
+%ObsoleteSources655 = map {($_, 1)} (split "\t", ("cash	ftamc	lcsh	lcshac	mesh	nal	rvm"));
 
 1;
 
@@ -120,7 +149,7 @@ employers of the various contributors to the code.
 Bryan Baldus
 eijabb@cpan.org
 
-Copyright (c) 2004.
+Copyright (c) 2004-2005.
 
 =cut
 
