@@ -2,6 +2,7 @@
 
 use strict;
 use File::Find;
+use File::Copy;
 
 print "making HTML and PDF for SourceForge, sfdocs.tar.gz\n";
 mkdir("sfdocs");
