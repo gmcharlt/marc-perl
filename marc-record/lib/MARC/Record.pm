@@ -16,12 +16,12 @@ use Carp qw(croak);
 
 =head1 VERSION 1.32
 
-    $Id: Record.pm,v 1.67 2003/11/05 19:36:25 edsummers Exp $
+    $Id: Record.pm,v 1.68 2003/11/05 19:39:53 edsummers Exp $
 
 =cut
 
 use vars qw( $VERSION );
-$VERSION = '1.31';
+$VERSION = '1.32';
 
 use Exporter;
 use vars qw( @ISA @EXPORTS @EXPORT_OK );
@@ -364,14 +364,12 @@ sub insert_fields_ordered {
 	EXISTING_FIELD: foreach my $field ( @{ $self->{_fields} } ) { 
 	    if ( $field->tag() >= $newField->tag() ) {
 		$self->insert_fields_before( $field, $newField );
-		print "added ".$newField->tag()." before ".$field->tag()."\n";
 		next NEW_FIELD;
 	    }
 	}
 
 	## if we fell through then this new field is higher than
 	## all the existing fields, so we append.
-	print "appending ".$newField->tag()."\n";
 	$self->append_fields( $newField );
 
     }

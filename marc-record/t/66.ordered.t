@@ -1,7 +1,7 @@
 use strict;
 use integer;
 
-use Test::More qw( no_plan ); 
+use Test::More tests => 9; 
 
 BEGIN {
     use_ok( 'MARC::Record' );
@@ -22,8 +22,6 @@ $r->insert_fields_ordered(
     MARC::Field->new( '105', '', '', b => 'bez' ),
     MARC::Field->new( '008', '', '', c => 'fez' )
 );
-
-print $r->as_formatted();
 
 @fields = $r->fields();
 my @tags = ();
