@@ -9,6 +9,7 @@ Revision history for Perl extension MARC::Record.
 	- Fixed useage of MARC::Record::append_fields() in example 17
 	  of the Tutorial.
 	- Added TODO test for utf8 handling (utf8.t)
+	- Fixed doc bug in MARC::File::USMARC (#2937)
 
 1.29	June 05, 2003	
 	[ENHANCEMENTS]

@@ -24,7 +24,7 @@ use constant DIRECTORY_ENTRY_LEN    => 12;
 
     use MARC::File::USMARC;
 
-    my $file = MARC::File::USMARC::in( $filename );
+    my $file = MARC::File::USMARC->in( $filename );
     
     while ( my $marc = $file->next() ) {
 	# Do something
