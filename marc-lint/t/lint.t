@@ -2,6 +2,7 @@
 
 use strict;
 use warnings;
+use File::Spec;
 use Test::More tests=>35;
 
 BEGIN { use_ok( 'MARC::File::USMARC' ); }
@@ -14,7 +15,7 @@ FROM_FILE: {
     my $lint = new MARC::Lint;
     isa_ok( $lint, 'MARC::Lint' );
 
-    my $filename = "t/camel.usmarc";
+    my $filename = File::Spec->catfile(File::Spec->updir(), 't', 'camel.usmarc');
 
     my $file = MARC::File::USMARC->in( $filename );
     while ( my $marc = $file->next() ) {
