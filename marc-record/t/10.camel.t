@@ -1,18 +1,16 @@
-# $Id: 10.camel.t,v 1.15 2003/02/26 05:22:30 petdance Exp $
+# $Id: 10.camel.t,v 1.16 2003/04/23 03:19:34 petdance Exp $
 # Test creating a MARC record for the Camel book
 #
 # Bugs, comments, suggestions welcome: marc@petdance.com
 
 use strict;
 
-use Test::More tests => 31;
+use Test::More tests => 30;
 
 BEGIN {
     use_ok( 'MARC::Record' );
     use_ok( 'MARC::File::USMARC' );
 }
-
-pass( 'Loaded modules' );
 
 # Test 1: Testing as_usmarc()
 my $marc = MARC::Record->new();

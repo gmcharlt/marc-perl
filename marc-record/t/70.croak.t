@@ -3,8 +3,10 @@ use Test::More tests=>9;
 ## methods should croak when called wrong so that MARC::Record users can 
 ## identify the location of their mistakes.
 
-use_ok( "MARC::Record" );
-use_ok( "MARC::Field" );
+BEGIN {
+    use_ok( "MARC::Record" );
+    use_ok( "MARC::Field" );
+}
 
 my $record = MARC::Record->new();
 isa_ok( $record, "MARC::Record" );

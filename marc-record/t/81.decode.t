@@ -1,9 +1,12 @@
 use Test::More tests => 32;
 
 use strict;
-use_ok( 'MARC::Record' );
-use_ok( 'MARC::File::MicroLIF' );
-use_ok( 'MARC::File::USMARC' );
+
+BEGIN {
+    use_ok( 'MARC::Record' );
+    use_ok( 'MARC::File::MicroLIF' );
+    use_ok( 'MARC::File::USMARC' );
+}
 
 ## decode can be called in a variety of ways
 ##

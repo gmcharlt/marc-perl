@@ -2,11 +2,13 @@ use Test::More tests => 30;
 
 use strict;
 
-use_ok( 'MARC::Record' );
-use_ok( 'MARC::Field' );
-use_ok( 'MARC::File' );
-use_ok( 'MARC::File::USMARC' );
-use_ok( 'MARC::File::MicroLIF' );
+BEGIN {
+    use_ok( 'MARC::Record' );
+    use_ok( 'MARC::Field' );
+    use_ok( 'MARC::File' );
+    use_ok( 'MARC::File::USMARC' );
+    use_ok( 'MARC::File::MicroLIF' );
+}
 
 ## According to the MARC spec tags can have alphanumeric
 ## characters in them. They are rarely seen, but they are 

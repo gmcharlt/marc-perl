@@ -1,7 +1,7 @@
 use Test::More tests=>17;
 use strict;
 
-BEGIN: {
+BEGIN {
     use_ok( 'MARC::Batch' );
 }
 

@@ -1,7 +1,10 @@
-use Test::More ( tests => 4 );
+use Test::More ( tests => 5 );
 
 use strict;
-use MARC::Batch;
+
+BEGIN {
+    use_ok( 'MARC::Batch' );
+}
 
 my $b = MARC::Batch->new( 'USMARC', 't/camel.usmarc' );
 isa_ok( $b, 'MARC::Batch' );
