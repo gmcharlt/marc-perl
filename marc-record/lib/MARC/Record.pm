@@ -19,7 +19,7 @@ use Carp qw(croak);
 
 Version 1.11
 
-    $Id: Record.pm,v 1.34 2002/09/12 16:19:07 edsummers Exp $
+    $Id: Record.pm,v 1.35 2002/09/12 16:25:54 edsummers Exp $
 
 =cut
 
@@ -375,7 +375,7 @@ sub author() {
     return "<No author tag found>";
 }
 
-=head2 leader([text])
+=head2 leader()
 
 Returns the leader for the record.  Sets the leader if I<text> is defined.
 No error checking is done on the validity of the leader.
@@ -409,7 +409,7 @@ sub set_leader_lengths {
     substr($self->{_leader},12,5) = sprintf("%05d",$baseaddr);
 }
 
-=head2 clone( [field specs] )
+=head2 clone()
 
 The C<clone()> method makes a copy of an existing MARC record and returns
 the new version.  Note that you cannot just say:

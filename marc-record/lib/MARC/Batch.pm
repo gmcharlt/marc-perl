@@ -14,7 +14,7 @@ eval 'use warnings' if $] >= 5.006;
 
 Version 1.11
 
-    $Id: Batch.pm,v 1.15 2002/09/12 16:01:07 edsummers Exp $
+    $Id: Batch.pm,v 1.16 2002/09/12 16:25:53 edsummers Exp $
 
 =cut
 
@@ -39,7 +39,7 @@ None.  Everything is a class method.
 
 =head1 METHODS
 
-=head2 new( $type, [@files] )
+=head2 new( $type, @files )
 
 Create a C<MARC::Batch> object that will process C<@files>.
 
