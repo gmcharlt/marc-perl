@@ -1,6 +1,6 @@
 Revision history for Perl extension MARC::Record.
 
-1.28
+1.28	May 23, 2003
 	[FIXES]
 	- Fixed MARC::Lint::check_record()'s checking for multiple 1XX tags.
 
