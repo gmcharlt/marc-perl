@@ -8,8 +8,6 @@ marcdump - MARC record dump utility
 
 B<marcdump> [options] file(s)
 
-=back
-
 =cut
 
 use warnings;
@@ -35,14 +33,14 @@ my $rc =
 	"help"	    => \$opt_help,
 	);
 
-if ( not $rc || $opt_help || (@ARGV == 0) ) {
+my @files = @ARGV;
+if ( $opt_help || !@files || !$rc ) {
     print <DATA>;
     exit 1;
 }
 	
 my %counts;
 my %errors;
-my @files = @ARGV;
 for my $filename ( @files ) {
 	$counts{$filename} = 0;
 	$errors{$filename} = 0;
@@ -82,11 +80,8 @@ Usage: marcdump [options] file(s)
 Options:
     --help	    Print this summary
     --[no]print	    Print a MicroLIF-style dump of each record
-    --field=spec    Specify a field, and optional subfield, to be
-		    included in the output.  There may be multiples.
+    --field=spec    Specify a field spec to include.  There may be many.
 		    Examples:
-			--field=245
-			--field=020a
-			--field=6XX
+			--field=245 --field=1XX
     --[no]quiet	    Print status messages
     --[no]stats	    Print a statistical summary by file at the end

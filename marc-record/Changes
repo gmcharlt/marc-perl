@@ -1,5 +1,17 @@
 Revision history for Perl extension MARC::Record.
 
+0.15	March 19, 2002
+	- Added clone() methods for MARC::Field and MARC::Record, so
+	you can make a copy of an existing record.  Plus, this acts
+	as a filter to create records that are subsets of another.
+	
+	- Added selective printing of fields in marcdump.  Now you
+	can do something like this:
+
+	    marcdump myfile.marc --field=245 --field=1XX
+
+	and only get back the title and author fields
+
 0.14	March 7, 2002
 	- Added skip_from_file() to read and ignore a record.  It's the
 	same as next_from_file(), without the overhead of the parsing.
