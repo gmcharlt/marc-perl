@@ -126,13 +126,21 @@ sub indicator($) {
 
 =head2 subfield(code)
 
-Returns the text from the first subfield matching the subfield code.
-If no matching subfields are found, C<undef> is returned.
+When called in a scalar context returns the text from the first subfield 
+matching the subfield code.
+
+    my $subfield = $field->subfield( 'a' );
+
+Or if you think there might be more than one you can get all of them by 
+calling in a list context:
+
+    my @subfields = $field->subfield( 'a' );
+
+If no matching subfields are found, C<undef> is returned in a scalar context
+and an empty list in a list context.
 
 If the tag is less than an 010, C<undef> is returned and
 C<$MARC::Field::ERROR> is set.
-
-    my $subA = $field->subfield('a');
 
 =cut
 
@@ -144,12 +152,13 @@ sub subfield {
 	    if $self->is_control_tag();
 
 	my @data = @{$self->{_subfields}};
+	my @found;
 	while ( defined( my $code = shift @data ) ) {
-		return shift @data if ( $code eq $code_wanted );
-		shift @data;
+		if ( $code eq $code_wanted ) { push( @found, shift @data ); }
+		else { shift @data; }
 	}
-
-	return;
+	if ( wantarray() ) { return @found; }
+	return( $found[0] );
 }
 
 =head2 subfields()

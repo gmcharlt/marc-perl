@@ -1,5 +1,10 @@
 Revision history for Perl extension MARC::Record.
 
+1.29	????? ??, 2003	
+	[ENHANCEMENTS]
+	- MARC::Field::subfield() will return a list of all subfield data when
+	  called in a list context...and only the first when called in a scalar           context. Also added a test 67.subfield.t to test new functionality. 
+
 1.28	May 23, 2003
 	[FIXES]
 	- Fixed MARC::Lint::check_record()'s checking for multiple 1XX tags.
@@ -7,7 +12,7 @@ Revision history for Perl extension MARC::Record.
 	- Fixed the docs for MARC::Lint and what errors it says it catches.
 
 1.27	May 22, 2003
-	[ENHNACMENTS]
+	[ENHANCMENTS]
 	- MARC::Field::update() by default will append any subfields which do
 	  not exist in the record to the end of the field. Added tests to test
 	  the new functionality to 60.update.t
