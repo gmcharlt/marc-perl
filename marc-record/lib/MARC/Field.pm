@@ -478,6 +478,7 @@ sub clone {
 
     return $clone;
 }
+
 =head2 warnings()
 
 Returns the warnings that were created when the record was read.
@@ -495,16 +496,23 @@ sub warnings() {
 	return @{$self->{_warnings}};
 }
 
+=head2 is_control_tag()
+
+Tells whether the current field is one of the control tags, numbered
+001-009.  These tags do not have subfields.
+
+=cut
+
+sub is_control_tag {
+    my $self = shift;
+    return ($self->{_tag} =~ /^\d+$/) && ($self->{_tag} < 10);
+}
+
 # NOTE: _warn is an object method
 sub _warn($) {
 	my $self = shift;
 
 	push( @{$self->{_warnings}}, join( "", @_ ) );
-}
-
-sub is_control_tag {
-    my $self = shift;
-    return ($self->{_tag} =~ /^\d+$/) && ($self->{_tag} < 10);
 }
 
 sub _gripe(@) {
