@@ -10,7 +10,7 @@ use 5.6.0;
 use strict;
 use base qw( Exporter );
 
-our $VERSION = 0.1;
+our $VERSION = 0.2;
 
 =head1 SYNOPSIS
 
@@ -108,6 +108,7 @@ use constant MULTI_G1_B		=> chr(0x24) . chr(0x2D);
 use constant BASIC_ARABIC	=> chr(0x33);
 use constant EXTENDED_ARABIC	=> chr(0x34);
 use constant BASIC_LATIN	=> chr(0x42);
+use constant EXTENDED_LATIN	=> chr(0x45);
 use constant CJK		=> chr(0x31);
 use constant BASIC_CYRILLIC	=> chr(0x4E);
 use constant EXTENDED_CYRILLIC	=> chr(0x51);
@@ -119,7 +120,7 @@ our %EXPORT_TAGS = ( all =>
 	ESCAPE  GREEK_SYMBOLS  SUBSCRIPTS  SUPERSCRIPTS  ASCII_DEFAULT 
 	SINGLE_G0_A  SINGLE_G0_B  MULTI_G0_A  MULTI_G0_B  SINGLE_G1_A 
 	SINGLE_G1_B  MULTI_G1_A  MULTI_G1_B  BASIC_ARABIC  
-	EXTENDED_ARABIC  BASIC_LATIN  CJK  BASIC_CYRILLIC  
+	EXTENDED_ARABIC  BASIC_LATIN  EXTENDED_LATIN CJK  BASIC_CYRILLIC  
 	EXTENDED_CYRILLIC BASIC_GREEK BASIC_HEBREW
 	) ]
     );
@@ -128,7 +129,7 @@ our @EXPORT_OK = qw(
 	ESCAPE  GREEK_SYMBOLS  SUBSCRIPTS  SUPERSCRIPTS  ASCII_DEFAULT 
 	SINGLE_G0_A  SINGLE_G0_B  MULTI_G0_A  MULTI_G0_B  SINGLE_G1_A 
 	SINGLE_G1_B  MULTI_G1_A  MULTI_G1_B  BASIC_ARABIC  
-	EXTENDED_ARABIC  BASIC_LATIN  CJK  BASIC_CYRILLIC  
+	EXTENDED_ARABIC  BASIC_LATIN  EXTENDED_LATIN CJK  BASIC_CYRILLIC  
 	EXTENDED_CYRILLIC BASIC_GREEK BASIC_HEBREW
     );
 
@@ -514,6 +515,11 @@ sub _getCharset {
 	eval { use MARC::Charset::ASCII; 1; };
 	return( MARC::Charset::ASCII->new() );
     } 
+
+    elsif ( $code eq EXTENDED_LATIN ) {
+	eval { use MARC::Charset::Ansel; 1; };
+	return( MARC::Charset::Ansel->new() );
+    }
     
     elsif ( $code eq CJK ) {
 	_warning( 'MARC::Charset does not support CJK yet!' );

@@ -1,4 +1,7 @@
 Revision history for Perl extension MARC-Charset-0.1.
 
+0.02  Sat Oct 19 03:24:22 2002
+    - Added the 'Final character' to identify Extended Latin.
+
 0.01  Fri Jul 26 09:10:36 2002
     - Original version
