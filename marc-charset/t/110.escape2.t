@@ -1,4 +1,4 @@
-use Test::More tests=>1;
+use Test::More tests=>3;
 
 ## this test will exercise the first type of character escapes 
 ## as documents at http://lcweb.loc.gov/marc/specifications/speccharmarc8.html
