@@ -4,7 +4,6 @@ package MARC::Charset::CyrillicBasic;
 
 MARC::Charset::CyrillicBasic - MARC8/UTF8 encodings for Basic Cyrillic.
 
-
 =head1 SYNOPSIS
 
  use MARC::Charset::CyrillicBasic;

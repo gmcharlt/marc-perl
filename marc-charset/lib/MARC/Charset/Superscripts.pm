@@ -15,15 +15,9 @@ MARC::Charset::Superscripts provides a mapping between the MARC8 Superscript
 character set and Unicode(UTF8). It is typically used by MARC::Charset, so 
 you probably don't need to use this yourself. 
 
-
-=cut
-
-
 =head1 METHODS
 
 =cut 
-
-
 
 use strict;
 use utf8;

@@ -4,15 +4,10 @@ package MARC::Charset::ASCII;
 
 MARC::Charset::ASCII - MARC8/UTF8 mappings for ASCII
 
-=cut 
-
-
 =head1 SYNOPSIS
 
-=cut
-
-use MARC::Charset::ASCII;
-my $c = MARC::Charset::ASCII->new();
+ use MARC::Charset::ASCII;
+ my $c = MARC::Charset::ASCII->new();
 
 =head1 DESCRIPTION
 

@@ -4,12 +4,7 @@ package MARC::Charset::Ansel;
 
 MARC::Charset::Ansel - MARC8/UTF8 mappings for Ansel
 
-=cut 
-
-
 =head1 SYNOPSIS
-
-=cut
 
  use MARC::Charset::Ansel;
  my $cs = MARC::Charset::Ansel->new();
@@ -20,14 +15,9 @@ MARC::Charset::Ansel provides a mapping between the MARC8 Ansel character
 set and Unicode(UTF8). It is typically used by MARC::Charset, so you 
 probably don't need to use this yourself. 
 
-
-=cut
-
-
 =head1 METHODS
 
 =cut 
-
 
 use strict;
 use utf8;
