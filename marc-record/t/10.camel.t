@@ -1,4 +1,5 @@
-# camel.t - Test creating a MARC record for the Camel book
+# $Id: 10.camel.t,v 1.9 2002/07/01 15:45:27 petdance Exp $
+# Test creating a MARC record for the Camel book
 #
 # Bugs, comments, suggestions welcome: marc@petdance.com
 

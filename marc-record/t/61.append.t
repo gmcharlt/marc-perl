@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+# $Id: 61.append.t,v 1.3 2002/07/01 15:45:27 petdance Exp $
 
 use strict;
 use integer;

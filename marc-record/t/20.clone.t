@@ -1,4 +1,5 @@
-# clone.t - Test creating a MARC record for the Camel book
+# $Id: 20.clone.t,v 1.5 2002/07/01 15:45:27 petdance Exp $
+# Test creating a MARC record for the Camel book
 #
 # Bugs, comments, suggestions welcome: marc@petdance.com
 

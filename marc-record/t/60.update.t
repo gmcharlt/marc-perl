@@ -1,6 +1,5 @@
-# update.t - Test updating a MARC record for the Camel book
-#
-# Bugs, comments, suggestions welcome: marc@petdance.com
+# $Id: 60.update.t,v 1.4 2002/07/01 15:45:27 petdance Exp $
+# Test updating a MARC record for the Camel book
 
 use strict;
 use integer;
