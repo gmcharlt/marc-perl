@@ -1,13 +1,13 @@
-# $Id: convenience.t,v 1.1 2003/01/28 21:14:33 petdance Exp $
+# $Id: convenience.t,v 1.2 2003/01/28 21:23:30 petdance Exp $
 
 use strict;
 use integer;
-use Data::Dumper;
 eval 'use warnings' if $] >= 5.006;
 
-use constant CAMEL_RECORD => 8;
+use constant PERLCONF_SKIPS => 6;
+use constant CAMEL_SKIPS => 2;
 
-use Test::More tests=>( 7 + CAMEL_RECORD );
+use Test::More tests=>( 2 + (5*2) + CAMEL_SKIPS + PERLCONF_SKIPS );
 
 BEGIN {
     use_ok( 'MARC::File::USMARC' );
@@ -17,14 +17,27 @@ my $file = MARC::File::USMARC->in( 't/camel.usmarc' );
 isa_ok( $file, 'MARC::File::USMARC', 'USMARC file' );
 
 my $marc;
-for ( 1..8 ) { # Skip to the camel
+for ( 1..PERLCONF_SKIPS ) { # Skip to the Perl conference
     $marc = $file->next();
     isa_ok( $marc, 'MARC::Record', 'Got a record' );
 }
-$file->close;
+
+is( $marc->author,		'Perl Conference 4.0 (2000 : Monterey, Calif.)' );
+is( $marc->title,		'Proceedings of the Perl Conference 4.0 : July 17-20, 2000, Monterey, California.' );
+is( $marc->title_proper,	'Proceedings of the Perl Conference 4.0 :' );
+is( $marc->edition,		'1st ed.' );
+is( $marc->publication_date,	'2000.' );
+
+for ( 1..CAMEL_SKIPS ) { # Skip to the camel
+    $marc = $file->next();
+    isa_ok( $marc, 'MARC::Record', 'Got a record' );
+}
 
 is( $marc->author,		'Wall, Larry.' );
 is( $marc->title,		'Programming Perl / Larry Wall, Tom Christiansen & Jon Orwant.' );
 is( $marc->title_proper,	'Programming Perl /' );
 is( $marc->edition,		'3rd ed.' );
 is( $marc->publication_date,	'2000.' );
+
+$file->close;
+
