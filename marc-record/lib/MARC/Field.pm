@@ -279,54 +279,54 @@ Returns the number of items modified.
 =cut
 
 sub update {
+    my $self = shift;
 
-  my $self = shift;
-
-  ## tags 000 - 009 don't have indicators or subfields
-  if ( $self->is_control_field ) {
-    $self->{_data} = shift;
-    return(1);
-  }
-
-  ## otherwise we need to update subfields and indicators
-  my @data = @{$self->{_subfields}};
-  my $changes = 0;
-
-  while ( @_ ) {
-
-    my $arg = shift;
-    my $val = shift;
-
-    ## indicator update
-    if ($arg =~ /^ind[12]$/) {
-      $self->{"_$arg"} = $val;
-      $changes++;
+    ## tags 000 - 009 don't have indicators or subfields
+    if ( $self->is_control_field ) {
+	$self->{_data} = shift;
+	return(1);
     }
 
-    ## subfield update
-    else {
-      my $found = 0;
-      ## update existing subfield
-      for (my $i=0; $i<@data; $i=$i+2) {
-        if ($data[$i] eq $arg) {
-          $data[$i+1] = $val;
-          $found = 1;
-          $changes++;
-          last;
-        }
-      }
-      ## append new subfield
-      if ( !$found ) {
-        push( @data, $arg, $val );
-        $changes++;
-      }
-    }
+    ## otherwise we need to update subfields and indicators
+    my @data = @{$self->{_subfields}};
+    my $changes = 0;
 
-  }
+    while ( @_ ) {
 
-  ## synchronize our subfields
-  $self->{_subfields} = \@data;
-  return($changes);
+	my $arg = shift;
+	my $val = shift;
+
+	## indicator update
+	if ($arg =~ /^ind[12]$/) {
+	    $self->{"_$arg"} = $val;
+	    $changes++;
+	}
+
+	## subfield update
+	else {
+	    my $found = 0;
+	    ## update existing subfield
+	    for ( my $i=0; $i<@data; $i+=2 ) {
+		if ($data[$i] eq $arg) {
+		    $data[$i+1] = $val;
+		    $found = 1;
+		    $changes++;
+		    last;
+		}
+	    } # for
+
+	    ## append new subfield
+	    if ( !$found ) {
+		push( @data, $arg, $val );
+		$changes++;
+	    }
+	}
+
+    } # while
+
+    ## synchronize our subfields
+    $self->{_subfields} = \@data;
+    return($changes);
 
 }
 
