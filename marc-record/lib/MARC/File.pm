@@ -16,7 +16,7 @@ use vars qw( $ERROR );
 
 Version 1.00
 
-    $Id: File.pm,v 1.16 2002/08/30 22:15:10 petdance Exp $
+    $Id: File.pm,v 1.17 2002/08/30 22:32:06 edsummers Exp $
 
 =cut
 
@@ -52,7 +52,7 @@ sub in {
 
     my $self = {
 	filename => $filename,
-	warnings => [],
+	_warnings => [],
     };
 
     bless $self, $class;

@@ -17,7 +17,7 @@ use vars qw( $ERROR );
 
 Version 1.00
 
-    $Id: USMARC.pm,v 1.20 2002/08/30 22:14:19 petdance Exp $
+    $Id: USMARC.pm,v 1.21 2002/08/30 22:32:06 edsummers Exp $
 
 =cut
 
@@ -68,13 +68,15 @@ sub _next {
     my $usmarc = <$fh>;
 
     if ( length($usmarc) < 5 ) {
-	return $self->_warn( "Couldn't find record length" );
+	$self->_warn( "Couldn't find record length" );
+	return $self->_next();
     }
 
     $reclen = substr($usmarc,0,5);
 
     if ( $reclen !~ /^\d{5}$/ or $reclen != length($usmarc) ) {
-	return $self->_warn( "Invalid record length \"$reclen\"" );
+	$self->_warn( "Invalid record length \"$reclen\"" );
+	return $self->_next();
     }
 
     return $usmarc;

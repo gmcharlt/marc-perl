@@ -1,4 +1,4 @@
-use Test::More 'no_plan'; # This should go back to # of tests.
+use Test::More tests=>2;
 
 ## badldr.usmarc is a batch of records that contains bad data between
 ## records, which corrupts the record length. We are going to make sure
@@ -13,20 +13,12 @@ use_ok( 'MARC::Batch' );
 my $batch = MARC::Batch->new('USMARC','t/badldr.usmarc');
 my $count = 0;
 
-## this should change once we decide how to signal bad records 
+## there is a bad leader in one of 7 records, we should be able to read
+## right past it
 
 while (defined ( my $record = $batch->next() ) ) {
-    if ($record == 0) {
-	my @warnings = $batch->warnings();
-	is( $warnings[0],"Couldn't find record length", 'correct warning');
-	next;
-    }
     $count++;
 }
 
-TODO: {
-    local $TODO = "Not yet able to skip corrupted records.";
-
-    is($count,6,'able to skip corrupted records');
-}
+is($count,6,'able to skip corrupted records');
 
