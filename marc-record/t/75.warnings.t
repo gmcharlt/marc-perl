@@ -1,4 +1,4 @@
-use Test::More tests=>5;
+use Test::More tests=>17;
 use strict;
 
 BEGIN: {
@@ -8,13 +8,15 @@ BEGIN: {
 ## when strict is on, errors cause next() to return undef
 
 STRICT_ON: {
-
     my $batch = MARC::Batch->new( 'USMARC', 't/badldr.usmarc' );
+    isa_ok( $batch, 'MARC::Batch' );
+
     $batch->warnings_off(); # avoid clutter on STDERR
     $batch->strict_on(); # the default, but might as well test
 
     my $count = 0;
     while ( my $r = $batch->next() ) {
+	isa_ok( $r, "MARC::Record" );
 	$count++;
     }
     
@@ -27,13 +29,15 @@ STRICT_ON: {
 ## when strict is off you can keep on reading past errors
 
 STRICT_OFF: {
-
     my $batch = MARC::Batch->new( 'USMARC', 't/badldr.usmarc' );
+    isa_ok( $batch, 'MARC::Batch' );
+
     $batch->warnings_off(); # avoid clutter on STDERR
     $batch->strict_off(); # turning off default behavior
     
     my $count = 0;
     while ( my $r = $batch->next() ) {
+	isa_ok( $r, "MARC::Record" );
 	$count++;
     }
 
