@@ -5,7 +5,7 @@
 use strict;
 use integer;
 
-use Test::More tests => 28;
+use Test::More tests => 27;
 
 BEGIN {
     use_ok( 'MARC::Record' );
@@ -16,8 +16,7 @@ pass( 'Loaded modules' );
 
 # Test 1: Testing as_usmarc()
 my $marc = MARC::Record->new();
-ok( defined $marc,		'Constructor returned' );
-is( ref $marc, 'MARC::Record',	'   and type is correct' );
+isa_ok( $marc, 'MARC::Record', 'MARC record' );
 
 $marc->leader("00000nam  22?????8a 4500"); # The ????? represents meaningless digits at this point
 my $nfields = $marc->add_fields(
@@ -61,7 +60,7 @@ is( MARC::File::USMARC->encode( $marc ), $expected,  'encode()' );
 is( $marc->as_usmarc(), $expected,  'as_usmarc()' );
 
 my $marc_from_blob = MARC::Record->new_from_usmarc( $expected );
-ok( defined $marc_from_blob, 'Imported from a blob' );
+isa_ok( $marc_from_blob, 'MARC::Record', 'MARC record imported from a blob' );
 is( $marc->as_usmarc(), $expected,  'MARC from blob encodes correctly' ); 
 
 # Test 2: as_string()

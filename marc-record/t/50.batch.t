@@ -14,7 +14,7 @@ BEGIN {
 # Test the USMARC stuff
 USMARC: {
     my $batch = new MARC::Batch( 'MARC::File::USMARC', 't/camel.usmarc' );
-    ok( defined $batch, 'Batch created OK' );
+    isa_ok( $batch, 'MARC::Batch', 'MARC batch' );
 
     my $n = 0;
     while ( my $marc = $batch->next() ) {
@@ -30,7 +30,7 @@ MicroLIF: {
     is( scalar @files, 2, 'Only have 2 sample*.lif files' );
 
     my $batch = new MARC::Batch( 'MicroLIF', @files );
-    ok( defined $batch, 'Batch created OK' );
+    isa_ok( $batch, 'MARC::Batch', 'MicroLIF batch' );
 
     my $n = 0;
     while ( my $marc = $batch->next() ) {
