@@ -5,7 +5,9 @@ README
 lib/MARC/Record.pm
 lib/MARC/Field.pm
 lib/MARC/Lint.pm
-lib/MARC/Batch.pm
+lib/MARC/File.pm
+lib/MARC/File/USMARC.pm
+lib/MARC/File/MicroLIF.pm
 pl/marcdump
 pl/marclint
 pl/lif2marc

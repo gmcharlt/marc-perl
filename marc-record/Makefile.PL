@@ -1,4 +1,4 @@
-use 5.005;
+use 5.6.0;
 use strict;
 use ExtUtils::MakeMaker;
 
@@ -25,6 +25,9 @@ sub filecheck {
 	dist 		=> {
 			    COMPRESS => 'gzip -9f', 
 			    SUFFIX => 'gz',
+			    },
+	depend		=> { 
+			    Makefile => '$(VERSION_FROM)'
 			    },
 	);
 
