@@ -1,9 +1,9 @@
-use Test::More tests => 22;
+use Test::More tests => 25;
 
 use strict;
-use MARC::Record;
-use MARC::File::MicroLIF;
-use MARC::File::USMARC;
+use_ok( 'MARC::Record' );
+use_ok( 'MARC::File::MicroLIF' );
+use_ok( 'MARC::File::USMARC' );
 
 ## decode can be called in a variety of ways
 ##
@@ -23,13 +23,17 @@ my $str = join( '', <IN> );
 
 ## attempt to use decode() on it
 
-my $rec = MARC::File::MicroLIF->decode( $str );
-isa_ok( $rec, 'MARC::Record' );
-like( $rec->title(), qr/all about whales/i, 'retrieved title' );
+DECODE_MICROLIF_METHOD: {
+    my $rec = MARC::File::MicroLIF->decode( $str );
+    isa_ok( $rec, 'MARC::Record' );
+    like( $rec->title(), qr/all about whales/i, 'retrieved title' );
+}
 
-$rec = MARC::File::MicroLIF::decode( $str );
-isa_ok( $rec, 'MARC::Record' );
-like( $rec->title(), qr/all about whales/i, 'retrieved title' );
+DECODE_MICROLIF_FUNCTION: {
+    my $rec = MARC::File::MicroLIF::decode( $str );
+    isa_ok( $rec, 'MARC::Record' );
+    like( $rec->title(), qr/all about whales/i, 'retrieved title' );
+}
 
 ## slurp up some usmarc
 open(IN, 't/sample1.usmarc' );
@@ -37,13 +41,17 @@ $str = join( '', <IN> );
 
 ## attempt to use decode on it
 
-$rec = MARC::File::USMARC->decode( $str );
-isa_ok( $rec, 'MARC::Record' );
-like( $rec->title(), qr/all about whales/i, 'retrieved title' );
+DECODE_USMARC_METHOD: {
+    my $rec = MARC::File::USMARC->decode( $str );
+    isa_ok( $rec, 'MARC::Record' );
+    like( $rec->title(), qr/all about whales/i, 'retrieved title' );
+}
 
-$rec = MARC::File::USMARC::decode( $str );
-isa_ok( $rec, 'MARC::Record' );
-like( $rec->title(), qr/all about whales/i, 'retrieved title' );
+DECODE_USMARC_FUNCTION: {
+    my $rec = MARC::File::USMARC::decode( $str );
+    isa_ok( $rec, 'MARC::Record' );
+    like( $rec->title(), qr/all about whales/i, 'retrieved title' );
+}
 
 
 #
@@ -73,27 +81,31 @@ my @fragments = (
     "\x1d"
 );
 
-$rec = MARC::File::USMARC->decode( join('', @fragments) );
-my @w = $rec->warnings();
-is( scalar @w, 0, 'should be no warnings' );
-is( $rec->field('245')->as_usmarc(), "10\x1f" . "aTitle.\x1e", 'gap after field data should not be returned' );
-my $the260 = $rec->field('260');
-isa_ok( $the260, "MARC::Field" );
-is( $the260->indicator(1), '3', 'indicators in tag after gap should be OK' );
-is( $the260->subfield('a'), "Place : ", 'subfield a in tag after gap should be OK' );
-is( $the260->subfield('b'), "Publisher, ", 'subfield b in tag after gap should be OK' );
-is( $the260->subfield('c'), "Year.", 'subfield c in tag after gap should be OK' );
+INITIAL_FRAGMENTS: {
+    my $rec = MARC::File::USMARC->decode( join('', @fragments) );
+    my @w = $rec->warnings();
+    is( scalar @w, 0, 'should be no warnings' );
+    is( $rec->field('245')->as_usmarc(), "10\x1f" . "aTitle.\x1e", 'gap after field data should not be returned' );
+    my $the260 = $rec->field('260');
+    isa_ok( $the260, "MARC::Field" );
+    is( $the260->indicator(1), '3', 'indicators in tag after gap should be OK' );
+    is( $the260->subfield('a'), "Place : ", 'subfield a in tag after gap should be OK' );
+    is( $the260->subfield('b'), "Publisher, ", 'subfield b in tag after gap should be OK' );
+    is( $the260->subfield('c'), "Year.", 'subfield c in tag after gap should be OK' );
+}
 
 # rearrange the directory for next test
 @fragments[1,6] = @fragments[6,1];
 @fragments[2,5] = @fragments[5,2];
 
-$rec = MARC::File::USMARC->decode( join('', @fragments) );
-isa_ok( $rec, "MARC::Record" );
-is( $rec->field('001')->as_string(), 'control number', '001 field correct' );
-is( $rec->field('010')->as_string(), 'LCCN', '010 field correct' );
-is( $rec->field('100')->as_string(), 'Name, Inverted.', '100 field correct' );
-is( $rec->field('245')->as_string(), 'Title.', '245 field correct' );
-is( $rec->field('260')->as_string(), 'Place :  Publisher,  Year.', '260 field correct' );
-is( $rec->field('650')->as_string(), 'LC subject heading.', '650 field correct' );
+SHUFFLED_FRAGMENTS: {
+    my $rec = MARC::File::USMARC->decode( join('', @fragments) );
+    isa_ok( $rec, "MARC::Record" );
+    is( $rec->field('001')->as_string(), 'control number', '001 field correct' );
+    is( $rec->field('010')->as_string(), 'LCCN', '010 field correct' );
+    is( $rec->field('100')->as_string(), 'Name, Inverted.', '100 field correct' );
+    is( $rec->field('245')->as_string(), 'Title.', '245 field correct' );
+    is( $rec->field('260')->as_string(), 'Place :  Publisher,  Year.', '260 field correct' );
+    is( $rec->field('650')->as_string(), 'LC subject heading.', '650 field correct' );
+}
 
