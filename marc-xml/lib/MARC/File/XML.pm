@@ -67,7 +67,7 @@ sub _next {
     return( $xml );
 }
 
-=head1 decode()
+=head2 decode()
 
 You probably don't ever want to call this method directly. If you do 
 you should pass in a MARC::Record as the first argument, and a chunk of XML 
