@@ -178,12 +178,10 @@ sub _unget_chunk {
 sub _next {
     my $self = shift;
 
-    my $fh = $self->{fh};
-
     my $lifrec = $self->_get_chunk();
 
     # for ease, make the newlines match this platform
-    $lifrec =~ s/[\x0a\x0d]+/\n/g;
+    $lifrec =~ s/[\x0a\x0d]+/\n/g if defined $lifrec;
 
     return $lifrec;
 }
