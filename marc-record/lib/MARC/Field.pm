@@ -539,6 +539,6 @@ employers of the various contributors to the code.
 
 =head1 AUTHOR
 
-Andy Lester, E<lt>marc@petdance.comE<gt>
+Andy Lester, C<< <andy@petdance.com> >>
 
 =cut

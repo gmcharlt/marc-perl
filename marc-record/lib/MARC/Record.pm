@@ -16,7 +16,7 @@ use Carp qw(croak);
 
 =head1 VERSION 1.33
 
-    $Id: Record.pm,v 1.72 2003/12/01 03:23:17 petdance Exp $
+    $Id: Record.pm,v 1.73 2003/12/16 17:26:30 petdance Exp $
 
 =cut
 
@@ -780,15 +780,20 @@ Imagine something like this:
 
 =head1 BUGS, WISHES AND CORRESPONDENCE
 
-Please feel free to email me at andy@petdance.com.  I'm glad to help as
-best I can, and I'm always interested in bugs, suggestions and patches.
+Please feel free to email me at C<< <andy@petdance.com> >>.  I'm glad
+to help as best I can, and I'm always interested in bugs, suggestions
+and patches.
+
+An excellent place to look for information, and get quick help, is from
+the perl4lib mailing list.  See L<http://perl4lib.perl.org> for more
+information about this list, and other helpful MARC information.
 
 The MARC::Record development team uses the RT bug tracking system at
 L<http://rt.cpan.org>.  If your email is about a bug or suggestion,
-please report it through the RT system.  This is a huge help for
-the team, and you'll be notified of progress as things get fixed or
-updated.  If you prefer not to use the website, you can send your bug
-to bug-MARC-Record@rt.cpan.org.
+please report it through the RT system.  This is a huge help for the
+team, and you'll be notified of progress as things get fixed or updated.
+If you prefer not to use the website, you can send your bug to C<<
+<bug-MARC-Record@rt.cpan.org> >>
 
 =head1 IDEAS
 
@@ -811,7 +816,7 @@ employers of the various contributors to the code.
 
 =head1 AUTHOR
 
-Andy Lester, E<lt>marc@petdance.comE<gt>
+Andy Lester, C<< <andy@petdance.com> >>
 
 =cut
 

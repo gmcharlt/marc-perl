@@ -212,7 +212,7 @@ employers of the various contributors to the code.
 
 =head1 AUTHOR
 
-Andy Lester, C< <<andy@petdance.com>> >
+Andy Lester, C<< <andy@petdance.com> >>
 
 =cut
 
