@@ -34,7 +34,7 @@ is ( $field->as_string(), 'foo bez', 'delete_subfields() one field' );
 
 ## make sure we can delete multiple subfields
 $field = MARC::Field->new( '245', '', '', a=>'foo', b=>'bar', c=>'bez' );
-is( $field->delete_subfields( 'b', 'c' ), 2,
+is( $field->delete_subfields( 'bc' ), 2,
     'delete_subfields() return two fields');
 is ( $field->as_string(), 'foo', 'delete_subfields() two fields' );
 

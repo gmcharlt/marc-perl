@@ -248,13 +248,19 @@ sub add_subfields {
 =head2 delete_subfields()
 
 delete_subfields() will remove *all* of a particular type of subfield from 
-a field. In addition you can pass in a list of subfields you want to delete.
-delete_subfields() returns the amount of subfields deleted.
+a field.
+
+    my $count = $field->subfields( 'a' );
+    print "deleted $count subfield 'a' from the field\n";
+
+    my $count = $field->subfields( 'xz' );
+    print "deleted $count subfields 'x' and 'z' from the field\n";
    
 =cut
 
 sub delete_subfields {
-    my ( $self, @deletes ) = @_;
+    my ( $self, $deletes ) = @_;
+    my @deletes = split //, $deletes;
     my @subfields = @{ $self->{_subfields} };
     my @new_subfields;
     for ( my $i=0; $i<@subfields; $i=$i+2 ) {
