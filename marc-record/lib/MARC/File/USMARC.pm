@@ -40,10 +40,6 @@ None.
 
 =head1 METHODS
 
-=for internal
-
-Internal function to get the next raw record out of a file.
-
 =cut
 
 sub _next {
