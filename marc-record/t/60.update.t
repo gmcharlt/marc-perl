@@ -1,11 +1,11 @@
-# $Id: 60.update.t,v 1.7 2003/02/25 20:42:01 petdance Exp $
+# $Id: 60.update.t,v 1.8 2003/02/26 05:30:45 petdance Exp $
 # Test updating a MARC record for the Camel book
 
 use strict;
 use integer;
 use Data::Dumper;
 
-use Test::More tests=>10;
+use Test::More tests=>13;
 
 BEGIN {
     use_ok( 'MARC::File::USMARC' );
@@ -36,8 +36,11 @@ is( $nchanges, 2 );
 ## make sure we can update fields with no subfields or indicators (000-009)
 
 my $f003 = $marc->field('003');
-$f003->update('XXXX');
+isa_ok( $f003, 'MARC::Field' );
+my $n = $f003->update('XXXX');
+is( $n, 1 );
 
 $f003 = $marc->field('003');
-is ( $f003->as_string(), 'XXXX', 'Update for fields 000-009 works' ); 
+isa_ok( $f003, 'MARC::Field' );
+is( $f003->as_string(), 'XXXX', 'Update for fields 000-009 works' ); 
 
