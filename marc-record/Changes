@@ -1,5 +1,10 @@
 Revision history for Perl extension MARC::Record.
 
+1.18	February 16, 2003
+	[ENHANCEMENTS]
+	- when MARC::Batch::no_strict() will allow you to read in 
+	  records with invalid record lengths.
+	[FIXES]
 	- Changes to MARC::File::USMARC->decode() to fix the
 	  rt.cpan.org bug #2017, "MARC::File::USMARC assumes 
 	  that fields apper in directory order".

@@ -15,13 +15,13 @@ use vars qw( $ERROR );
 
 =head1 VERSION
 
-Version 1.17
+Version 1.18
 
-    $Id: USMARC.pm,v 1.38 2003/02/03 22:50:21 moregan Exp $
+    $Id: USMARC.pm,v 1.39 2003/02/16 23:24:28 edsummers Exp $
 
 =cut
 
-use vars '$VERSION'; $VERSION = '1.17';
+use vars '$VERSION'; $VERSION = '1.18';
 
 use MARC::File;
 use vars qw( @ISA ); @ISA = qw( MARC::File );
@@ -142,15 +142,14 @@ sub decode {
 
     # Check for an all-numeric record length
     ($text =~ /^(\d{5})/)
-	or return $marc->_warn( "Record length \"", substr( $text, 0, 5 ), "\" is not numeric $location" );
+	or $marc->_warn( "Record length \"", substr( $text, 0, 5 ), "\" is not numeric $location" );
 
     my $reclen = $1;
     ($reclen == length($text))
-	or return $marc->_warn( "Invalid record length $location: Leader says $reclen bytes, but it's actually ", length( $text ) );
+	or $marc->_warn( "Invalid record length $location: Leader says $reclen bytes, but it's actually ", length( $text ) );
 
     (substr($text, -1, 1) eq END_OF_RECORD)
-    	or return $marc->_warn( "Invalid record terminator $location" );  # XXX should this problem really be fatal?
-
+    	or $marc->_warn( "Invalid record terminator $location" ); 
 
     $marc->leader( substr( $text, 0, LEADER_LEN ) );
 

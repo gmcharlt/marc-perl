@@ -14,13 +14,13 @@ use vars qw( $ERROR );
 
 =head1 VERSION
 
-Version 1.17
+Version 1.18
 
-    $Id: File.pm,v 1.28 2003/01/29 18:16:07 petdance Exp $
+    $Id: File.pm,v 1.29 2003/02/16 23:24:28 edsummers Exp $
 
 =cut
 
-use vars '$VERSION'; $VERSION = '1.17';
+use vars '$VERSION'; $VERSION = '1.18';
 
 =head1 SYNOPSIS
 
