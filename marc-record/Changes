@@ -1,8 +1,13 @@
 Revision history for Perl extension MARC::Record.
 
 X.XX    XXXX XX, XXXX
-	[ENHANCEMENTS]
+	[FIXES]
+	- fixed behavior in MARC::File::USMARC which was causing 
+	  MARC::File::next() to return a partial record when the record
+	  lacked a proper end of directory byte. RT #4474. Added regression
+	  test t/82.baddir.t.
 	- we now warn on improper 010 tag access, not croak.
+	- fixed t/80.alphatag to test new MARC::Field::data() behavior
 	- doc fix to insert_field_grouped()
 	- tons of fixes and additions to MARC::Doc::Tutorial
 

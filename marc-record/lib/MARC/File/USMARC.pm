@@ -150,11 +150,11 @@ sub decode {
 
     # character after the directory must be \x1e
     (substr($text, $data_start-1, 1) eq END_OF_FIELD) 
-	or return $marc->_warn( "No directory found $location" );
+	or $marc->_warn( "No directory found $location" );
 
     # all directory entries 12 bytes long, so length % 12 must be 0
     (length($dir) % DIRECTORY_ENTRY_LEN == 0)
-	or return $marc->_warn( "Invalid directory length $location" );
+	or $marc->_warn( "Invalid directory length $location" );
 
 
     # go through all the fields

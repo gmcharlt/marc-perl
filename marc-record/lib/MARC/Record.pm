@@ -16,7 +16,7 @@ use Carp qw(croak);
 
 =head1 VERSION 1.32
 
-    $Id: Record.pm,v 1.69 2003/11/06 15:30:26 edsummers Exp $
+    $Id: Record.pm,v 1.70 2003/11/25 00:00:50 edsummers Exp $
 
 =cut
 
@@ -662,7 +662,7 @@ sub add_fields {
 sub _warn {
     my $self = shift;
     push( @{$self->{_warnings}}, join( "", @_ ) );
-    return($self);
+    return( $self );
 }
 
 
