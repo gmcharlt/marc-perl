@@ -31,11 +31,20 @@ MARC::File::XML - Work with MARC data encoded as XML
     ## serialize a single MARC::Record object as XML
     print $record->as_xml();
 
-    ## or serializing more than one MARC::Record objects as XML
-    print MARC::File::XML::header();
-    print MARC::File::XML::record( $record1 );
-    print MARC::File::XML::record( $record2 );
-    print MARC::File::XML::footer();
+    ## write a bunch of records to a file
+    my $file = MARC::File::XML->out( 'myfile.xml' );
+    $file->write( $record1 );
+    $file->write( $record2 );
+    $file->write( $record3 );
+    $file->close();
+
+    ## instead of writing to disk, get the xml directly 
+    my $xml = join( "\n", 
+        MARC::File::XML::header(),
+        MARC::File::XML::record( $record1 ),
+        MARC::File::XML::record( $record2 ),
+        MARC::File::XML::footer()
+    );
 
 =head1 DESCRIPTION
 
