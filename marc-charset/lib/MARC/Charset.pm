@@ -111,6 +111,8 @@ use constant BASIC_LATIN	=> chr(0x42);
 use constant CJK		=> chr(0x31);
 use constant BASIC_CYRILLIC	=> chr(0x4E);
 use constant EXTENDED_CYRILLIC	=> chr(0x51);
+use constant BASIC_GREEK	=> chr(0x53);
+use constant BASIC_HEBREW	=> chr(0x32);
 
 our %EXPORT_TAGS = ( all => 
 	[ qw( 
@@ -118,7 +120,7 @@ our %EXPORT_TAGS = ( all =>
 	SINGLE_G0_A  SINGLE_G0_B  MULTI_G0_A  MULTI_G0_B  SINGLE_G1_A 
 	SINGLE_G1_B  MULTI_G1_A  MULTI_G1_B  BASIC_ARABIC  
 	EXTENDED_ARABIC  BASIC_LATIN  CJK  BASIC_CYRILLIC  
-	EXTENDED_CYRILLIC
+	EXTENDED_CYRILLIC BASIC_GREEK BASIC_HEBREW
 	) ]
     );
 
@@ -127,7 +129,7 @@ our @EXPORT_OK = qw(
 	SINGLE_G0_A  SINGLE_G0_B  MULTI_G0_A  MULTI_G0_B  SINGLE_G1_A 
 	SINGLE_G1_B  MULTI_G1_A  MULTI_G1_B  BASIC_ARABIC  
 	EXTENDED_ARABIC  BASIC_LATIN  CJK  BASIC_CYRILLIC  
-	EXTENDED_CYRILLIC
+	EXTENDED_CYRILLIC BASIC_GREEK BASIC_HEBREW
     );
 
 
@@ -345,7 +347,7 @@ sub _marc2utf8 ($$$$) {
 	## give em a warning if they want them
 	if ( $self->[ DIAGNOSTICS ] ) {
 	    my $hex = sprintf("0x%2x",ord($char));
-	    warning(
+	    _warning(
 		"chr($hex) is not a valid character in " . 
 		'the control sets or the current working sets ' .  
 		$g0->name() . '(G0), ' . $g1->name() . '(G1)'
@@ -367,6 +369,11 @@ sub _marc2utf8 ($$$$) {
 
 sub _escape($$$$) {
 
+    ## this stuff is kind of scary ... for an explanation of what is 
+    ## going on here check out the MARC-8 specs at LC. 
+    ## http://lcweb.loc.gov/marc/specifications/speccharmarc8.html
+    ## see the section "Technique 2: Other Alternate Graphic Character Sets"
+
     my ($self,$strRef,$left,$right) = @_;
 
     ## if we don't have at least one character after the escape
@@ -374,7 +381,9 @@ sub _escape($$$$) {
     return($left) if ($left+1 >= $right); 
 
     my $escChar1 = substr($$strRef,$left+1,1);
-    my $newCharset;
+    my $newLeft = $left+2;
+
+    my ( $newCharset, $setNumber );
 
     ## the first method of escaping for limited character sets
 
@@ -390,12 +399,53 @@ sub _escape($$$$) {
 
     if ($newCharset) {
 	$self->g0($newCharset); 
-	return($left+2);
+	return($newLeft);
     }
 
-    ## otherwise try the second method of escaping for other sets 
+    ## the second more complicated method of escaping to lots of charsets 
 
-    return($left+3);
+    return($left) if ($left+2 >= $right);
+    $newLeft = $left+3;
+
+    my $escChar2 = substr($$strRef,$left+2,1);
+    my $escChars = $escChar1.$escChar2;
+
+
+    if ( $escChar1 eq SINGLE_G0_A or $escChar1 eq SINGLE_G0_B ) {
+	$setNumber = 0;
+	$newCharset = _getCharset( $escChar2 );
+    }
+
+    elsif ( $escChar1 eq SINGLE_G1_A or $escChar1 eq SINGLE_G1_B ) {
+	$setNumber = 1;
+	$newCharset = _getCharset( $escChar2 );
+    }
+
+    elsif ( ( $escChars eq MULTI_G1_A  or $escChars eq MULTI_G1_B ) and 
+	    ($left + 3 < $right) ) {
+	$setNumber = 1;
+	$newLeft = $left+4;
+	$newCharset = _getCharset( substr( $$strRef, $left+3, 1 ) );
+    }
+
+    elsif ( $escChars eq MULTI_G0_B and ($left + 3 < $right ) ) {
+	$setNumber = 0;
+	$newLeft = $left+4;
+	$newCharset = _getCharset( substr( $$strRef, $left+3, 1 ) );
+    }
+
+    elsif ( $escChar1 eq MULTI_G0_A ) {
+	$setNumber = 0;
+	$newCharset = _getCharset( $escChar2 );
+    }
+
+    if ($newCharset) {
+	$self->_g( $setNumber, $newCharset );
+    } else {
+	_warning( "invalid character escape at position $left" );
+	return($left);
+    }
+	
 }
 
 sub _g {
@@ -408,9 +458,45 @@ sub _g {
     return($self->[ $g ]);
 }
 
-sub warning {
+sub _warning {
     my $message = shift;
     print STDERR __PACKAGE__ . " : $message\n";
 }
+
+sub _getCharset {
+
+    my $code = shift;
+
+    if ( $code eq BASIC_ARABIC ) { 
+	eval { use MARC::Charset::ArabicBasic };
+	return( MARC::Charset::ArabicBasic->new() );
+    } elsif ( $code eq EXTENDED_ARABIC ) {
+	eval { use MARC::Charset::ArabicExtended };
+	return( MARC::Charset::ArabicExtended->new() );
+    } elsif ( $code eq BASIC_LATIN ) {
+	eval { use MARC::Charset::ASCII };
+	return( MARC::Charset::ASCII->new() );
+    } elsif ( $code eq CJK ) {
+	_warning( 'MARC::Charset does not support CJK yet!' );
+	return( undef );
+    } elsif ( $code eq BASIC_CYRILLIC ) {
+	eval { use MARC::Charset::CyrillicBasic };
+	return( MARC::Charset::CyrillicBasic->new() );
+    } elsif ( $code eq EXTENDED_CYRILLIC ) { 
+	eval { use MARC::Charset::CyrillicExtended };
+	return( MARC::Charset::CyrillicExtended->new() );
+    } elsif ( $code eq BASIC_GREEK ) {
+	eval { use MARC::Charset::Greek };
+	return( MARC::Charset::GreekBasic->new() );
+    } elsif ( $code eq BASIC_HEBREW ) {
+	eval { use MARC::Charset::Hebrew };
+	return( MARC::Charset::Hebrew->new() );
+    } else {
+	_warning( sprintf("unknown charset hex(%x)",$code) );
+	return(undef);
+    }
+
+}
+
 
 1;
