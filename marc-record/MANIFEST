@@ -14,6 +14,7 @@ lib/MARC/Field.pm
 lib/MARC/File/MicroLIF.pm
 lib/MARC/File.pm
 lib/MARC/File/USMARC.pm
+lib/MARC/File/Utils.pm
 lib/MARC/Lint.pm
 lib/MARC/Record.pm
 t/00.load.t

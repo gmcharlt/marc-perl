@@ -1,5 +1,15 @@
 Revision history for Perl extension MARC::Record.
 
+1.4     May 19, 2004
+        
+        [ENHANCEMENTS]
+        - Support for UTF8 in Perls >= 5.8.1. When using a utf8 friendly Perl
+          all file streams will be opened in utf8 mode, and the bytes pragma
+          will be used to create and use direcotry byte offsets. 
+        - Added MARC::File::Utils which contains utf8 safe functions.
+        - marcdump now sets STDOUT to utf8 if it is able to.
+        - t/utf8.t is no longer skipped.
+
 1.38	March 16th, 2004
 
         [ENHANCEMENTS]

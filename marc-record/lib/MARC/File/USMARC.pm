@@ -12,6 +12,7 @@ use integer;
 use vars qw( $ERROR );
 
 use MARC::File;
+use MARC::File::Utils;
 use vars qw( @ISA ); @ISA = qw( MARC::File );
 
 use MARC::Record qw( LEADER_LEN );
@@ -175,9 +176,9 @@ sub decode {
         ($offset + $len <= $reclen)
             or $marc->_warn( "Directory entry $location runs off the end of the record tag $tagno" );
 
-        my $tagdata = substr( $text, $data_start + $offset, $len );
+        my $tagdata = MARC::File::Utils::safe_substr( $text, $data_start + $offset, $len ); 
 
-        ($len == length($tagdata))
+        ($len == MARC::File::Utils::safe_length($tagdata))
             or $marc->_warn( "Invalid length in directory for tag $tagno $location" );
 
         if ( substr($tagdata, -1, 1) eq END_OF_FIELD ) {
@@ -281,7 +282,7 @@ sub _build_tag_directory {
                 push( @fields, $str );
 
                 # Create directory entry
-                my $len = length $str;
+                my $len = MARC::File::Utils::safe_length( $str );
                 my $direntry = sprintf( "%03s%04d%05d", $field->tag, $len, $dataend );
                 push( @directory, $direntry );
                 $dataend += $len;

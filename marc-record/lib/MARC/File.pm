@@ -8,6 +8,7 @@ MARC::File - Base class for files of MARC records
 
 use strict;
 use integer;
+use MARC::File::Utils;
 
 use vars qw( $ERROR );
 
@@ -58,6 +59,7 @@ sub in {
     if ( $ishandle ) {
         $filename = scalar( $arg );
         $fh = $arg;
+        binmode( $fh, ':utf8' ) if MARC::File::Utils::utf8_safe();
     }
 
     ## otherwise check if it's a filename, and
@@ -69,6 +71,8 @@ sub in {
             $MARC::File::ERROR = "Couldn't open $filename: $@";
             return;
         }
+        ## all file streams are assumed to be utf8 if we have a modern perl
+        binmode( $fh, ':utf8' ) if MARC::File::Utils::utf8_safe();
     }
 
     binmode( $fh );
