@@ -18,7 +18,7 @@ use Carp qw(croak);
 
 Version 1.39_01
 
-    $Id: Record.pm,v 1.87 2004/08/24 19:13:28 moregan Exp $
+    $Id: Record.pm,v 1.88 2004/09/30 03:41:26 moregan Exp $
 
 =cut
 
@@ -765,7 +765,7 @@ Combine MARC.pm and MARC::* into one distribution.
 
 Imagine something like this:
 
-  my @sears_headings = $marc->tag_grep( /Sears/ );
+  my @sears_headings = $marc->tag_grep( qr/Sears/ );
 
 (from Mike O'Regan)
 
