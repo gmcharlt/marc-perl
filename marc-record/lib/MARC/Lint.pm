@@ -152,8 +152,10 @@ sub check_record {
 	(ref($marc) eq "MARC::Record")
 		or return $self->warn( "Must pass a MARC::Record object to check_record" );
 
-	if ( (my @_1xx = $marc->field( "1XX" )) > 1 ) {
-		$self->warn( "1XX: Only one 1XX tag is allowed, but I found ", scalar @_1xx, " of them." );
+	my @_1xx = $marc->field( "1.." );
+	my $n1xx = scalar @_1xx;
+	if ( $n1xx > 1 ) {
+		$self->warn( "1XX: Only one 1XX tag is allowed, but I found $n1xx of them." );
 	}
 
 	if ( not $marc->field( 245 ) ) {

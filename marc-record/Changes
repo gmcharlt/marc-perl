@@ -1,5 +1,9 @@
 Revision history for Perl extension MARC::Record.
 
+1.28
+	[FIXES]
+	- Fixed MARC::Lint::check_record()'s checking for multiple 1XX tags.
+
 1.27	May 22, 2003
 	[ENHNACMENTS]
 	- MARC::Field::update() by default will append any subfields which do
