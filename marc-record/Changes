@@ -8,6 +8,10 @@ Revision history for Perl extension MARC::Record.
 	- The file-handling has been removed from the MARC::Record class
 	and moved into its own MARC::File::* set of classes.
 
+	- First rudimentary MARC::Batch functionality.  This will make
+	it easy to handle bunches of files at once without having to
+	muck with what file you're on.
+
 	- Now fully embracing all the glory of 5.6+ Perl, such as the
 	"our" keyword and $fh filehandles.
 
