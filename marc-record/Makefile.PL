@@ -46,7 +46,7 @@ if ( shift eq 'sfdocs' ) {
 }
 
 sub sfdocs {
-    if ( $File::Find::name =~ m|.+/(.+)\.pm$| ) {
+    if ( $File::Find::name =~ m{.+/(.+)\.(pm|pod)$} ) {
 	my $html = "$1.html";
 	my $pdf = "$1.pdf";
 	system( "pod2html $File::Find::name > sfdocs/$html" );
