@@ -104,7 +104,7 @@ sub next {
 	my @warnings = $self->{file}->warnings();
 	if ( @warnings ) {
 	    $self->warnings( @warnings );
-	    return( undef ) if $self->{ strict } == STRICT_ON; 
+	    return if $self->{ strict } == STRICT_ON; 
 	}
 
 	if ($rec) {
@@ -114,7 +114,7 @@ sub next {
 
 	    if (@warnings) {
 		$self->warnings( @warnings );
-		return( undef ) if $self->{ strict } == STRICT_ON;
+		return if $self->{ strict } == STRICT_ON;
 	    }
 
 	    # return the MARC::Record object

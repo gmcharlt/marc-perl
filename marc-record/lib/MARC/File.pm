@@ -144,7 +144,7 @@ sub decode  { $_[0]->_unimplemented("decode"); }
 sub _warn {
     my ($self,$warning) = @_;
     push( @{ $self->{warnings} }, "$warning in record ".$self->{recnum} );
-    return(undef);
+    return;
 }
 
 # NOTE: _gripe can be called as an object method, or not.  Your choice.
@@ -165,7 +165,7 @@ sub _gripe(@) {
 	warn $ERROR;
     }
 
-    return(undef);
+    return;
 }
 
 1;
