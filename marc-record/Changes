@@ -1,5 +1,8 @@
 Revision history for Perl extension MARC::Record.
 
+1.01	????, 2002
+	- Removed the "use 5.6.0" from all the files.
+
 1.00	July 3, 2002
         - _gripe() fires off warnings instead of dying silently.
 	- MARC::File::USMARC no longer creates an error if it's and the

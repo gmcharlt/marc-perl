@@ -6,7 +6,6 @@ MARC::Record - Perl extension for handling MARC records
 
 =cut
 
-use 5.6.0;
 use strict;
 use integer;
 use vars qw( $VERSION $ERROR );
@@ -17,7 +16,7 @@ use MARC::Field;
 
 Version 1.00
 
-    $Id: Record.pm,v 1.23 2002/07/03 20:17:14 petdance Exp $
+    $Id: Record.pm,v 1.24 2002/07/15 19:41:55 petdance Exp $
 
 =cut
 

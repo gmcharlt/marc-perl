@@ -6,7 +6,6 @@ MARC::File - Base class for files of MARC records
 
 =cut
 
-use 5.6.0;
 use strict;
 use integer;
 use vars qw( $VERSION $ERROR );
@@ -15,7 +14,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 1.00
 
-    $Id: File.pm,v 1.11 2002/07/03 21:33:03 petdance Exp $
+    $Id: File.pm,v 1.12 2002/07/15 19:41:55 petdance Exp $
 
 =cut
 

@@ -6,7 +6,6 @@ MARC::Batch - Perl module for handling files of MARC::Record objects
 
 =cut
 
-use 5.6.0;
 use strict;
 use integer;
 
@@ -14,7 +13,7 @@ use integer;
 
 Version 1.00
 
-    $Id: Batch.pm,v 1.8 2002/07/03 20:17:14 petdance Exp $
+    $Id: Batch.pm,v 1.9 2002/07/15 19:41:55 petdance Exp $
 
 =cut
 

@@ -1,6 +1,5 @@
 package MARC::Field;
 
-use 5.6.0;
 use strict;
 use integer;
 
@@ -17,7 +16,7 @@ MARC::Field - Perl extension for handling MARC fields
 
 Version 1.00
 
-    $Id: Field.pm,v 1.12 2002/07/03 20:17:14 petdance Exp $
+    $Id: Field.pm,v 1.13 2002/07/15 19:41:55 petdance Exp $
 
 =cut
 

@@ -6,7 +6,6 @@ MARC::File::MicroLIF - MicroLIF-specific file handling
 
 =cut
 
-use 5.6.0;
 use strict;
 use integer;
 use vars qw( $VERSION $ERROR );
@@ -15,7 +14,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 1.00
 
-    $Id: MicroLIF.pm,v 1.9 2002/07/03 20:17:14 petdance Exp $
+    $Id: MicroLIF.pm,v 1.10 2002/07/15 19:41:55 petdance Exp $
 
 =cut
 

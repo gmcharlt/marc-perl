@@ -1,6 +1,5 @@
 package MARC::Lint;
 
-use 5.6.0;
 use strict;
 use integer;
 
@@ -12,7 +11,7 @@ MARC::Lint - Perl extension for checking validity of MARC records
 
 Version 1.00
 
-    $Id: Lint.pm,v 1.8 2002/07/03 20:17:14 petdance Exp $
+    $Id: Lint.pm,v 1.9 2002/07/15 19:41:55 petdance Exp $
 
 =cut
 

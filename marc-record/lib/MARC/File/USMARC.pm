@@ -6,7 +6,6 @@ MARC::File::USMARC - USMARC-specific file handling
 
 =cut
 
-use 5.6.0;
 use strict;
 use integer;
 use vars qw( $VERSION $ERROR );
@@ -15,7 +14,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 1.00
 
-    $Id: USMARC.pm,v 1.14 2002/07/03 21:53:54 petdance Exp $
+    $Id: USMARC.pm,v 1.15 2002/07/15 19:41:55 petdance Exp $
 
 =cut
 
