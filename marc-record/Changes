@@ -6,6 +6,8 @@ Revision history for Perl extension MARC::Record.
 	  the Library of Congress...thanks to Colin Campbell from Sirsi.
 	- removed MARC::Lint check_260() since a subfield c is not 
 	  mandatory (see RT #1565).
+	- added test to 60.update.t to test that you are not able to update a
+	  subfield which is not already present in the field.
 
 1.26	May 8, 2003
 	[FIXES]
