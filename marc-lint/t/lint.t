@@ -3,14 +3,14 @@
 use strict;
 use warnings;
 use File::Spec;
-use Test::More tests=>38;
+use Test::More tests=>40;
 
 BEGIN { use_ok( 'MARC::File::USMARC' ); }
 BEGIN { use_ok( 'MARC::Lint' ); }
 
 
 FROM_FILE: {
-    my @expected = ( (undef) x 9, [ q{100: Indicator 1 must be 0, 1 or 3 but it's "2"} ] );
+    my @expected = ( (undef) x 9, [ q{100: Indicator 1 must be 0, 1 or 3 but it's "2"} ], [ q{007: Subfields are not allowed in fields lower than 010} ] );
 
     my $lint = new MARC::Lint;
     isa_ok( $lint, 'MARC::Lint' );
