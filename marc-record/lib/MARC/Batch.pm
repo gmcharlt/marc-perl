@@ -19,7 +19,7 @@ use constant WARNINGS_OFF	=> 2;
 
 Version 1.13
 
-    $Id: Batch.pm,v 1.19 2002/11/26 20:51:12 edsummers Exp $
+    $Id: Batch.pm,v 1.20 2002/11/26 21:39:38 edsummers Exp $
 
 =cut
 
@@ -49,7 +49,8 @@ None.  Everything is a class method.
 Create a C<MARC::Batch> object that will process C<@files>.
 
 C<$type> must be either "USMARC" or "MicroLIF".  If you want to specify 
-"MARC::File::USMARC" or "MARC::File::MicroLIF", that's OK, too.
+"MARC::File::USMARC" or "MARC::File::MicroLIF", that's OK, too. new() returns a
+new MARC::Batch object.
 
 =cut
 
@@ -83,9 +84,9 @@ sub new {
 
 =head2 next()
 
-Read the next record from the files.  If the current file is at EOF, close
-it and open the next one. next() will return C<undef> when there is no more
-data to be read from any batch files.
+Read the next record from that batch, and return it as a MARC::Record object.  
+If the current file is at EOF, close it and open the next one. next() will 
+return C<undef> when there is no more data to be read from any batch files.
 
 By default, next() also will return C<undef> if an error is encountered while
 reading from the batch. If not checked for this can cause your iteration to
@@ -142,6 +143,7 @@ sub next {
 
 If you would like MARC::Batch to continue after it has encountered what 
 it believes to be bad MARC data then use this method to turn strict B<OFF>.
+A call to strict_off() always returns true (1).
 
 strict_off() can be handy when you don't care about the quality of your MARC
 data, and just want to plow through it. For safety MARC::Batch strict is B<ON> 
@@ -152,6 +154,7 @@ by default.
 sub strict_off {
     my $self = shift;
     $self->{ strict } = STRICT_OFF;
+    return(1);
 }
 
 =head2 strict_on()
@@ -159,13 +162,14 @@ sub strict_off {
 The opposite of strict_off(), and the default state. You shouldn't have to use
 this method unless you've previously used strict_off(), and want it back on
 again.  When strict is B<ON> calls to next() will return undef when an error is
-encountered while reading MARC data.
+encountered while reading MARC data. strict_on() always returns true (1).
 
 =cut
 
 sub strict_on {
     my $self = shift;
     $self->{ strict } = STRICT_ON;
+    return(1);
 }
 
 =head2 warnings() 
@@ -177,6 +181,8 @@ batch file. As a side effect the warning buffer will be cleared.
 
 This method is also used internally to set warnings, so you probably don't
 want to be passing in anything as this will set warnings on your batch object.
+
+warnings() will return the empty list when there are no warnings.
 
 =cut
 
@@ -199,6 +205,8 @@ Turns off the default behavior of printing warnings to STDERR. However, even
 with warnings off the messages can still be retrieved using the warnings() 
 method if you wish to check for them.
 
+warnings_off() always returns true (1).
+
 =cut
 
 sub warnings_off {
@@ -212,6 +220,8 @@ Turns on warnings so that diagnostic information is printed to STDERR. This
 is on by default so you shouldn't have to use it unless you've previously
 turned off warnings using warnings_off(). 
 
+warnings_on() always returns true (1).
+
 =cut 
 
 sub warnings_on {
@@ -221,7 +231,8 @@ sub warnings_on {
 
 =head2 filename()
 
-Returns the currently open filename.
+Returns the currently open filename or C<undef> if there is not currently a file
+open on this batch object.
 
 =cut
 
