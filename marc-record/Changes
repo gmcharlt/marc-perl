@@ -1,5 +1,8 @@
 Revision history for Perl extension MARC::Record.
 
+1.25	April 22, 2003
+	NO CHANGES.  Just compensating for upload problems.
+
 1.24	April 22, 2003
 	[ENHANCEMENTS]
 	- expanded documentation for MARC::Field::as_string()
