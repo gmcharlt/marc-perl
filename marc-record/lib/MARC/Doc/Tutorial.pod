@@ -800,7 +800,7 @@ Perl's localtime() to generate the data we need for this field.
   20       $year,$mon,$mday,$hour,$min,$sec); 
   21     
   22     ## create a new 005 field using our new datetime
-  23     $record->append_fields('005',$datetime);
+  23     $record->append_fields( MARC::Field->new('005',$datetime) );
   24   
   25     ## save record to a file
   26     print OUT $record->as_usmarc();
