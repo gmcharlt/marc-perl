@@ -1215,14 +1215,14 @@ Here's a script that will do a Z39.50 query (using Chris Biemesderfer's zm.pl
 as a model), get a MARC record back, and store it as a binary blob in a MySQL
 table of this structure:
 
-+---------------+---------------+------+-----+---------+----------------+
-| Field         | Type          | Null | Key | Default | Extra          |
-+---------------+---------------+------+-----+---------+----------------+   
-| TitleID       | int(7)        |      | PRI | NULL    | auto_increment |
-| RecLastMod    | timestamp(14) | YES  |     | NULL    |                |
-| ISSN          | text          | YES  |     | NULL    |                |
-| RawMARCRecord | blob          | YES  |     | NULL    |                |
-+---------------+---------------+------+-----+---------+----------------+
+ +---------------+---------------+------+-----+---------+----------------+
+ | Field         | Type          | Null | Key | Default | Extra          |
+ +---------------+---------------+------+-----+---------+----------------+   
+ | TitleID       | int(7)        |      | PRI | NULL    | auto_increment |
+ | RecLastMod    | timestamp(14) | YES  |     | NULL    |                |
+ | ISSN          | text          | YES  |     | NULL    |                |
+ | RawMARCRecord | blob          | YES  |     | NULL    |                |
+ +---------------+---------------+------+-----+---------+----------------+
 
    1 #!/usr/bin/perl -w
    2 
