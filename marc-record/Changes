@@ -1,16 +1,20 @@
 Revision history for Perl extension MARC::Record.
 
-1.01	????, 2002
-	- Removed the "use 5.6.0" from all the files.
+1.10	August 30, 2002
+	[ENHANCEMENTS]
+	- Now runs under Perl 5.005.  All you people who have older Perls can
+	  now share in the joy that is MARC::Record.
 	- Added warnings() and _warn methods to MARC::Batch, MARC::File to 
 	  support warning collection and reporting.
+	- Added use bytes to MARC::File::USMARC so that calls to length() will
+	  return actual bytes rather than characters if Unicode characters are
+	  found in the data.  This only works if you're using 5.6.0+.
+
+	[FIXES]
 	- Modified MARC::File::USMARC::_next() to slurp in a record using
 	  local $/ = 0x1D, rather than reading record length and then calling
 	  read(). This will allow recovery from invalid leaders in batch 
 	  reading. 
-	- Added use bytes to MARC::File::USMARC so that calls to length() will
-	  return actual bytes rather than characters if Unicode characters are
-	  found in the data.
 
 1.00	July 3, 2002
         - _gripe() fires off warnings instead of dying silently.

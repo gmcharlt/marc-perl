@@ -16,13 +16,13 @@ use MARC::Field;
 
 =head1 VERSION
 
-Version 1.00
+Version 1.10
 
-    $Id: Record.pm,v 1.28 2002/08/26 14:58:37 petdance Exp $
+    $Id: Record.pm,v 1.29 2002/08/30 22:43:10 petdance Exp $
 
 =cut
 
-use vars '$VERSION'; $VERSION = '1.00';
+use vars '$VERSION'; $VERSION = '1.10';
 
 use Exporter;
 use vars qw( @ISA @EXPORTS @EXPORT_OK );
