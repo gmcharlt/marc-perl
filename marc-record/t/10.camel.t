@@ -1,11 +1,11 @@
-# $Id: 10.camel.t,v 1.14 2003/02/25 20:41:56 petdance Exp $
+# $Id: 10.camel.t,v 1.15 2003/02/26 05:22:30 petdance Exp $
 # Test creating a MARC record for the Camel book
 #
 # Bugs, comments, suggestions welcome: marc@petdance.com
 
 use strict;
 
-use Test::More tests => 27;
+use Test::More tests => 31;
 
 BEGIN {
     use_ok( 'MARC::Record' );
@@ -72,17 +72,33 @@ ok( $generated eq $expected,	'as_formatted()' );
 
 
 # Test 3: multiple fields by number
-my @field = $marc->field("700");
-is( scalar @field, 2,	'Multiple 700 tags' );
-is( $field[0]->subfield("a"), 'Christiansen, Tom.', '  Tom Christiansen' );
-is( $field[1]->subfield("a"), 'Orwant, Jon.', '  Jon Orwant' );
+TEST3: {
+    my @fields = $marc->field("700");
+    is( scalar @fields, 2, 'Multiple 700 tags' );
+
+    my $field = $fields[0];
+    isa_ok( $field, "MARC::Field" );
+    is( $field->subfield("a"), 'Christiansen, Tom.', '  Tom Christiansen' );
+
+    $field = $fields[1];
+    isa_ok( $field, "MARC::Field" );
+    is( $field->subfield("a"), 'Orwant, Jon.', '  Jon Orwant' );
+}
 
 
 # Test 4: multiple fields by the ".." notation
-@field = $marc->field("7..");
-is( scalar @field, 2,	'Multiple 700 tags via 7..' );
-is( $field[0]->subfield("a"), 'Christiansen, Tom.', '  Tom Christiansen' );
-is( $field[1]->subfield("a"), 'Orwant, Jon.', '  Jon Orwant' );
+TEST4: {
+    my @fields = $marc->field("7..");
+    is( scalar @fields, 2, 'Multiple 7.. tags' );
+
+    my $field = $fields[0];
+    isa_ok( $field, "MARC::Field" );
+    is( $field->subfield("a"), 'Christiansen, Tom.', '  Tom Christiansen' );
+
+    $field = $fields[1];
+    isa_ok( $field, "MARC::Field" );
+    is( $field->subfield("a"), 'Orwant, Jon.', '  Jon Orwant' );
+}
 
 # Test 5: field/subfield
 is( $marc->subfield( 100, "a" ), "Wall, Larry.", 'Field/subfield lookup' );
