@@ -49,6 +49,10 @@ sub _next {
 
     local $/ = END_OF_RECORD;
     my $usmarc = <$fh>;
+
+    # remove illegal garbage that sometimes occurs between records
+    $usmarc =~ s/^[ \x00\x0a\x0d]+//;
+
     return undef if ! $usmarc;
 
     if ( length($usmarc) < 5 ) {
