@@ -118,10 +118,11 @@ sub clear_warnings {
 
 =head2 warn( $str [, $str...] )
 
-Create a warning message, built from strings passed, like a C<print> statement.
+Create a warning message, built from strings passed, like a C<print>
+statement.
 
-Typically, you'll leave this to C<check_record()>, but industrious programmers
-may want to do their own checking as well.
+Typically, you'll leave this to C<check_record()>, but industrious
+programmers may want to do their own checking as well.
 
 =cut
 
@@ -135,8 +136,9 @@ sub warn {
 
 =head2 check_record( $marc )
 
-Does all sorts of lint-like checks on the MARC record I<$marc>, both on the record as a whole,
-and on the individual fields & subfields.
+Does all sorts of lint-like checks on the MARC record I<$marc>,
+both on the record as a whole, and on the individual fields &
+subfields.
 
 =cut
 
@@ -295,15 +297,15 @@ sub _parse_tag_rules {
     my $rules = ($self->{_rules}->{$tagno} ||= {});
     $rules->{$repeatable} = $repeatable;
 
-    for ( @lines ) {
-        my @keyvals = split( /\s+/, $_, 3 );
+    for my $line ( @lines ) {
+        my @keyvals = split( /\s+/, $line, 3 );
         my $key = shift @keyvals;
         my $val = shift @keyvals;
 
-        $rules->{$key} = $val;
-
         # Do magic for indicators
         if ( $key =~ /^ind/ ) {
+            $rules->{$key} = $val;
+
             my $desc;
             my $regex;
 
@@ -316,10 +318,18 @@ sub _parse_tag_rules {
                 $regex = qr/^[$val]$/;
             }
 
-        $rules->{$key."_desc"} = $desc;
-        $rules->{$key."_regex"} = $regex;
+            $rules->{$key."_desc"} = $desc;
+            $rules->{$key."_regex"} = $regex;
         } # if indicator
-    } # while
+        else {
+            if ( $key =~ /(.)-(.)/ ) {
+                my ($min,$max) = ($1,$2);
+                $rules->{$_} = $val for ($min..$max);
+            } else {
+                $rules->{$key} = $val;
+            }
+        } # not an indicator
+    } # for $line
 }
 
 
@@ -2819,7 +2829,11 @@ ind1    012     Type of field
 ind2    blank   Undefined
 a       NR      Tag of the foreign MARC field
 b       NR      Content of the foreign MARC field
+c-z     NR      Foreign MARC subfield
+0-1     NR      Foreign MARC subfield
 2       NR      Source of data
+4       NR      Source of data
+3-9     NR      Source of data
 
 887     R       NON-MARC INFORMATION FIELD
 ind1    blank   Undefined
