@@ -2,9 +2,13 @@
 
 MARC::Doc::Tutorial - A documentation-only module for new users of MARC::Record
 
+
+
 =head1 SYNOPSIS
 
  perldoc MARC::Doc::Tutorial
+
+
 
 =head1 INTRODUCTION
 
@@ -16,246 +20,284 @@ catalogs into a digital format. The advantages of having computerized card
 catalogs were soon realized, and now MARC is being used by all sorts of
 libraries around the world to provide computerized access to their collections.
 MARC data in transmission format is optimized for processing by computers, so 
-it's not very readable for the normal human. For more about the MARC format
+it's not very readable for the normal human. For more about the MARC format,
 visit the Library of Congress at http://www.loc.gov/marc/
 
 =head2 What is this Tutorial?
 
 The document you are reading is a beginners guide to using Perl to processing
-MARC data, written in the 'cookbook' style. Inside you will find recipes on 
+MARC data, written in the 'cookbook' style. Inside, you will find recipes on 
 how to read, write, update and convert MARC data using the MARC::Record CPAN 
-package. As with any cookbook you should feel free to dip in at any section
-and use the recipe you find interesting. If you are new to Perl you may 
+package. As with any cookbook, you should feel free to dip in at any section
+and use the recipe you find interesting. If you are new to Perl, you may 
 want to read from the beginning.
 
 The document you are reading is distributed with the MARC::Record package, 
-however in case you are reading it somewhere else you can find the latest 
-version at CPAN http://www.cpan.org/modules/by-module/MARC/. 
-
-You'll notice that some sections aren't filled in yet, which is a result
-of this document being a work in progress. If you have ideas for new sections
-please let the make a suggestion on perl4lib http://www.rice.edu/perl4lib/
+however in case you are reading it somewhere else, you can find the latest 
+version at CPAN: http://www.cpan.org/modules/by-module/MARC/. You'll notice
+that some sections aren't filled in yet, which is a result of this document
+being a work in progress. If you have ideas for new sections please make a
+suggestion to perl4lib: http://www.rice.edu/perl4lib/.
 
 =head2 History of MARC on CPAN
 
-In 1999 a group of developers began working on MARC.pm to provide a Perl 
+In 1999, a group of developers began working on MARC.pm to provide a Perl 
 module for working with MARC data. MARC.pm was quite successful since it 
 grew to include many new options that were requested by the Perl/library
-community.  However, in adding these features the module swiftly outgrew it's
+community.  However, in adding these features the module swiftly outgrew its
 own clothes, and maintenance and addition of new features became extremely
 difficult. In addition, as libraries began using MARC.pm to process large MARC
 data files (>1000 records) they noticed that memory consumption would skyrocket.
 Memory consumption became an issue for large batches of records because 
-MARC.pm's object model was based on the 'batch' rather than the record...so 
+MARC.pm's object model was based on the 'batch' rather than the record... so 
 each record in the file would often be read into memory. There were ways of 
 getting around this, but they were not obvious. Some effort was made to 
 reconcile the two approaches (batch and record), but with limited success.
 
-In mid 2001 Andy Lester released MARC::Record and MARC::Field
-which provided a much more simpler and maintainable package for processing
-MARC data with Perl. As its name suggests MARC::Record treats an individual 
-MARC record as the primary Perl object, rather than having the object represent
-a given set of records. Instead of forking the two projects the developers 
-agreed to encourage use of the MARC::Record framework, and to work on enhancing 
-MARC::Record rather than extending MARC.pm further. Soon afterwards MARC::Batch
-was added which allows you to read in a large data file without having to worry about memory consumption. 
+In mid 2001, Andy Lester released MARC::Record and MARC::Field which provided
+a much simpler and maintainable package for processing MARC data with Perl.
+As its name suggests, MARC::Record treats an individual MARC record as the
+primary Perl object, rather than having the object represent a given set of
+records. Instead of forking the two projects, the developers agreed to
+encourage use of the MARC::Record framework, and to work on enhancing
+MARC::Record rather than extending MARC.pm further. Soon afterwards,
+MARC::Batch was added, which allows you to read in a large data file
+without having to worry about memory consumption.
 
-=head2 Brief Overview of MARC classes
+=head2 Brief Overview of MARC Classes
 
 The MARC::Record package is made up of several separate packages. This
 can be somewhat confusing to people new to Perl, or Object Oriented 
 Programming. However this framework allows easy extension, and is built
 to support new input/output formats as their need arises. For a good 
-introduction to using the object oriented features of Perl see 
+introduction to using the object oriented features of Perl, see 
 the perlboot documentation that came with your version of Perl:
 
  perldoc perlboot
 
-Here are the packages that get installed when you install the MARC::Record
-patch.
+Here are the packages that get installed when you install MARC::Record:
 
 =over 4
-
-=item MARC::Record
-
-The primary class, which represents the data held in a MARC record. It is
-basically a container class for multiple MARC::Field objects. 
-
-=item MARC::Field
-
-An object for representing the indicators and subfields contained in a 
-single MARC field. 
 
 =item MARC::Batch
 
 A convenience class for accessing MARC data contained in an external file.
 
-=item MARC::File
+=item MARC::Field
 
-A superclass for representing files of MARC data.
+An object for representing the indicators and subfields of a single MARC field. 
 
-=item MARC::File::USMARC
+=item MARC::Lint
 
-A subclass of MARC::File for working with data encoded in the USMARC format.
+An extension to check the validity of MARC records.
 
-=item MARC::File::MicroLIF
+=item MARC::Record
 
-A subclass of MARC::File for working with data encoded in the MicroLIF format.
+This primary class represents a MARC record, being a container for multiple MARC::Field objects. 
 
 =item MARC::Doc::Tutorial
 
 This document!
 
+=item MARC::File
+
+A superclass for representing files of MARC data.
+
+=item MARC::File::MicroLIF
+
+A subclass of MARC::File for working with data encoded in the MicroLIF format.
+
+=item MARC::File::USMARC
+
+A subclass of MARC::File for working with data encoded in the USMARC format.
+
 =back
 
 =head2 Help Wanted!
 
-It's already been mentioned but it's worth mentioning again: 
+It's already been mentioned but it's worth mentioning again:
 MARC::Doc::Tutorial is a work in progress, and you are encouraged to submit
-any suggestions for additional recipes via the perl4lib listserv 
-http://www.rice.edu/perl4lib . Also, the development group is always looking 
-for additional developers with good ideas, if you are interested you can 
-sign up at SourceForge http://sourceforge.net/projects/marcpm/
+any suggestions for additional recipes via the perl4lib mailing list at
+http://www.rice.edu/perl4lib . Also, the development group is always looking
+for additional developers with good ideas; if you are interested you can
+sign up at SourceForge: http://sourceforge.net/projects/marcpm/.
+
 
 
 =head1 READING
 
 =head2 Reading a record from a file
 
-Let's say you have a USMARC record in a file called 'file.dat' and you would 
-like to read in the record and print out it's title. 
+Let's say you have a USMARC record in a file called 'file.dat' and
+you'd like to read in the record and print out its title.
 
    1   ## Example 1 
    2   
-   3   ## create a MARC::Batch object
+   3   ## create a MARC::Batch object.
    4   use MARC::Batch;
-   5   my $batch = MARC::Batch( 'USMARC', 'file.dat');
+   5   my $batch = MARC::Batch('USMARC', 'file.dat');
    6   
-   7   ## get a marc record from the MARC::Batch object
-   8   ## $record will be a MARC::Record object
+   7   ## get a MARC record from the MARC::Batch object.
+   8   ## $record will be a MARC::Record object.
    9   my $record = $batch->next();
   10   
-  11   ## print the title contained in the record
+  11   ## print the title contained in the record.
   12   print $record->title(),"\n";
+
+Using the distribution's 't/camel.usmarc', your result should be:
+
+  ActivePerl with ASP and ADO / Tobias Martinsson.
 
 =head2 Iterating through a batch file
 
 Now imagine that 'file.dat' actually contains multiple records and 
-we want to print out the title for all of them. Our program doesn't have 
+we want to print the title for all of them. Our program doesn't have 
 to change very much at all: we just need to add a loop around our call
 to C<next()>.
 
    1   ## Example 2 
    2   
-   3   ## create a MARC::Batch object
+   3   ## create a MARC::Batch object.
    4   use MARC::Batch;
    5   my $batch = MARC::Batch->new('USMARC','file.dat');
    6   
    7   while (my $record = $batch->next()) {
    8   
-   9     ## print the title contained in the record
+   9     ## print the title contained in the record.
   10     print $record->title(),"\n";
   11   
   12   }
 
-The call to the next() method at line 7 returns the next record from the 
-file. next() returns C<undef> when there are no more records left in the file,
-which causes the while loop to end. This is a useful idiom for reading in 
-all the records in a file.
+The call to the C<next()> method at line 7 returns the next record from the 
+file. C<next()> returns C<undef> when there are no more records left in the file,
+which causes the C<while> loop to end. This is a useful idiom for reading in 
+all the records in a file. Your results with 'camel.usmarc' should be:
+
+  ActivePerl with ASP and ADO / Tobias Martinsson.
+  Programming the Perl DBI / Alligator Descartes and Tim Bunce.
+  .
+  .
+  .
+  Cross-platform Perl / Eric F. Johnson.
 
 =head2 Checking for errors
 
 It is a good idea to get in the habit of checking for errors. MARC/Perl has 
-been designed to help you do this. Calls to next() when iterating through a
-batch file will return C<undef> when there are no more records to
-return...B<AND> when an error was encountered. You probably want to make sure
+been designed to help you do this. Calls to C<next()> when iterating through a
+batch file will return C<undef> when there are no more records to return...
+B<AND> when an error was encountered. You probably want to make sure
 that you didn't abruptly stop reading a batch file because of an error.
 
    1   ## Example 3 
    2   
-   3   ## create a MARC::Batch object
+   3   ## create a MARC::Batch object.
    4   use MARC::Batch;
    5   my $batch = MARC::Batch->new('USMARC','file.dat');
    6   
-   7   ## get a marc record from the MARC::Batch object
-   8   ## $record will be a MARC::Record object
+   7   ## get a marc record from the MARC::Batch object.
+   8   ## $record will be a MARC::Record object.
    9   while ( my $record = $batch->next() ) {
-  10       print $record->title();
+  10       print $record->title(),"\n";
   11   }
   12   
-  13   ## make sure there weren't any problems 
-  14   my @warnings = $batch->warnings();
-  15   if ( @warnings ) {
-  16       print "we found some warnings!", join("\n",@warnings);
-  17   }
+  13   ## make sure there weren't any problems.
+  14   if ( my @warnings = $batch->warnings() ) {
+  15       print "\nWarnings were detected!\n", @warnings;
+  16   }
 
-The call to warnings() at line 14 will retrieve any warning messages and store
-them in the array @warnings. This allows you to detect when next() has 
-aborted prematurely (before the end of the file has been reached).
+The call to C<warnings()> at line 14 will retrieve any warning messages and store
+them in the C<@warnings>. This allows you to detect when C<next()> has aborted
+prematurely (before the end of the file has been reached). When a warning is
+detected, an explanation is sent to C<STDERR>. By introducing an error into
+'camel.usmarc', we'll receive the following output to C<STDOUT>: 
+
+  Warnings were detected!
+  Invalid indicators "a0" forced to blanks in record 1 for tag 245
 
 =head2 Recovering from errors 
 
-You may want to keep reading a batch file even after an error has been
-encountered.  If so you will want to turn strict mode off using the strict_off()
-method. You can also prevent warnings from being printed to STDERR using the 
-warnings_off() method.
+You may want to keep reading a batch file even after an error has been encountered.
+If so, you will want to turn strict mode off using the C<strict_off()> method. You
+can also prevent warnings from being printed to C<STDERR> using the C<warnings_off()>
+method.
 
    1   ## Example 4
    2   
    3   use MARC::Batch;
-   4   my $batch = MARC::Batch->new( 'USMARC', 'file.dat' );
+   4   my $batch = MARC::Batch->new('USMARC', 'file.dat');
    5   $batch->strict_off();
-   6   $batch->warnings_off();
-   7   
-   8   while ( my $record = $batch->next() ) {
-   9      print $record->title();
-  10   }
+   6   
+   7   while ( my $record = $batch->next() ) {
+   8      print $record->title(),"\n";
+   9   }
+  10
+  11   ## make sure there weren't any problems.
+  12   if ( my @warnings = $batch->warnings() ) {
+  13       print "\nWarnings were detected!\n", @warnings;
+  14   }
 
-Use of strict_off() allows you to continue reading after an error is 
-encountered.  By default strict is on as a safety precaution to prevent you from
-using corrupt MARC data.  Once off you can turn both strict and warnings back on
-again with the strict_on() and warnings_on() methods. 
+Introducing a second error to the 'camel.usmarc' file gives the following:
+
+   ActivePerl with ASP and ADO / Tobias Martinsson.
+   Programming the Perl DBI / Alligator Descartes and Tim Bunce.
+   .
+   .
+   .
+   Cross-platform Perl / Eric F. Johnson.
+
+   Warnings were detected!
+   Invalid indicators "a0" forced to blanks in record 1 for tag 245
+   Invalid indicators "a0" forced to blanks in record 5 for tag 245
+
+Use of C<strict_off()> allows you to continue reading after an error is encountered.
+By default, strict is on as a safety precaution to prevent you from using corrupt MARC
+data.  Once off, you can turn both strict and warnings back on again with the 
+C<strict_on()> and C<warnings_on()> methods. 
 
 =head2 Looking at a field 
 
-Examples 1.1 - 1.3 use MARC::Record's title() method to easily access the
-245 field...but you probably will want to write programs that access lots
-of other MARC fields.
+Our previous examples use MARC::Record's C<title()> method to easily access
+the 245 field... but you probably will want to write programs that access
+lots of other MARC fields. MARC::Record's C<field()> method gives you
+complete access the data found in any MARC field. The C<field()> method
+returns a MARC::Field object which can be used to access the data,
+indicators, and even the individual subfields. Our next example shows how
+this is done.
 
-MARC::Record's field() method gives you complete access the data 
-found in any MARC field. The field() method returns a MARC::Field object
-which can be used to access the data, indicators, and even the individual 
-subfields. Example 1.4 shows you how this is done. 
-
-
-   1   ## Example 4
+   1   ## Example 5
    2   
-   3   ## open a file
+   3   ## open a file.
    4   use MARC::Batch;
    5   my $batch = MARC::Batch->new('USMARC','file.dat');
    6   
-   7   ## read a record
+   7   ## read a record.
    8   my $record = $batch->next();
    9   
-  10   ## get the record's 100 field as a MARC::Field object
+  10   ## get the 100 field as a MARC::Field object.
   11   my $field = $record->field('100'); 
   12   print "The 100 field contains: ",$field->as_string(),"\n"; 
   13   print "The 1st indicator is ",$field->indicator(1),"\n";
   14   print "The 2nd indicator is ",$field->indicator(2),"\n";
   15   print "Subfield d contains: ",$field->subfield('d'),"\n";
 
+Which results in:
+
+  The 100 field contains: Martinsson, Tobias, 1976-
+  The 1st indicator is 1
+  The 2nd indicator is  
+  Subfield d contains: 1976-
+
+As before, use a C<while> loop to iterate through all the records in a batch.
+
 =head2 Looking at repeatable fields
 
-So how do you retrieve data from repeatable fields? The field() method
-can help you with this as well.  Above in example 1.4 on line 11 the 
-field() method was used in a I<scalar> context, since the result was being 
-assigned to the variable $field. 
+So how do you retrieve data from repeatable fields? The C<field()> method
+can help you with this as well.  In our previous example's line 11, the 
+C<field()> method was used in a I<scalar> context, since the result was being 
+assigned to the variable C<$field>. However in a I<list> context C<field()>
+will return all the fields in the record of that particular type. For example:
 
-However in a I<list> context field() will return all the fields in the 
-record of that particular type. For example:
-
-
-   1   ## Example 5 
+   1   ## Example 6
    2   
    3   use MARC::Batch;
    4   my $file = MARC::Batch->new('USMARC','file.dat');
@@ -269,55 +311,76 @@ record of that particular type. For example:
   12     print $field->as_string(),"\n";
   13   }
 
+Which prints out the following for the first record of 'camel.usmarc':
+
+  Active server pages.
+  ActiveX.
 
 =head2 Looking at a set of related fields
 
-field() also allows you to retrieve similar fields using '.' as a wildcard. 
-For example, this functionality allows you to retrieve all the note fields
-in one shot.
+C<field()> also allows you to retrieve similar fields using '.' as a wildcard. 
+For example, this functionality allows you to retrieve all the title fields
+in one shot:
 
-
-   1   ## Example 6
+   1   ## Example 7
    2   
    3   use MARC::Batch;
    4   my $batch = MARC::Batch->new('USMARC','file.dat');
    5   my $record = $batch->next();
    6   
-   7   foreach my $field ($record->field('5..')) {
+   7   foreach my $field ($record->field('2..')) {
    8     print $field->tag(),' contains ',$field->as_string(),"\n";
    9   }
 
+Notice the shorthand in line 7 which compacts lines 7-13 of our previous example.
+Instead of storing the fields in an array, the C<field()> still returns a list
+in the C<for> loop. Line 8 uses the C<tag()> method which returns the tag number
+for a particular MARC field - which is useful when you aren't certain what
+tag you are dealing with. Sample output from this recipe:
 
-Notice the shorthand in line 7 which compacts lines 7-13 of Example 1.5. 
-Instead of storing the fields in an array, the field() still returns a list
-in the for loop. Line 8 uses the tag() method which returns the tag number
-for a particular MARC field--which is useful when you aren't certain what
-tag you are dealing with.
+   245 contains ActivePerl with ASP and ADO / Tobias Martinsson.
+   260 contains New York : John Wiley & Sons, 2000.
+
+You  can also return all tags for a specific record by using '...'
+in C<field>. See also the next recipe.
 
 =head2 Looking at all the fields in a record
 
 The last example in this section illustrates how to retrieve I<all> the fields
-in a record using the fields() method. 
+in a record using the C<fields()> method. This method is similar to passing
+'...' as a wildcard (see previous recipe).
 
-
-   1   ## Example 7
+   1   ## Example 8
    2   
    3   use MARC::Batch;
    4   my $file = MARC::Batch->new('USMARC','file.dat');
    5   my $record = $batch->next();
    6   
-   7   ## get all of the fields useing the fields() method
+   7   ## get all of the fields using the fields() method
    8   my @fields = $record->fields();
    9   
   10   ## print out the tag, the indicators and the field contents
   11   foreach my $field (@fields) {
   12     print 
   13       $field->tag(), " ", 
-  14       $field->indicator(1),
-  15       $field->indicator(2), " ",
-  16       $field->as_string, " ",
-  17       "\n";
-  18   }
+  14       defined $field->indicator(1) ? $field->indicator(1) : "",
+  15       defined $field->indicator(2) ? $field->indicator(2) : "",
+  16       " ", $field->as_string, " \n";
+  17   }
+
+The above code would print the following for the first record of 'camel.usmarc':
+
+  001  fol05731351  
+  003  IMchF 
+  .
+  .
+  .
+  300    xxi, 289 p. : ill. ; 23 cm. + 1 computer  laser disc (4 3/4 in.) 
+  500    "Wiley Computer Publishing." 
+  650  0 Perl (Computer program language) 
+  630 00 Active server pages. 
+  630 00 ActiveX. 
+
 
 
 =head1 CREATING
@@ -587,7 +650,7 @@ example:
   25   
   26   }
 
-insert_fields_after() works in a simliar fashion to insert_fields_before()
+insert_fields_after() works in a similar fashion to insert_fields_before()
 but with the expected change of behavior.
 
 
@@ -595,7 +658,7 @@ but with the expected change of behavior.
 
 You can also delete fields that you don't want. But you will want to check 
 that the field contains what you expect before deleting it. Let's say Enron 
-has gone out of busines and the 590 field needs to be deleted. 
+has gone out of business and the 590 field needs to be deleted. 
 
 
    1   ## Example 13 
@@ -732,7 +795,7 @@ indicator should be '4' for titles beginning with 'The'.
 
 
 The call to update() at line 17 sets the second indicator of the
-existing 245 field to 4. In a simliar fashion you can also update individual
+existing 245 field to 4. In a similar fashion you can also update individual
 or multiple subfields.
 
   $field_245->update( a => 'History of the World :', b => 'part 1' );
@@ -811,7 +874,7 @@ Perl's localtime() to generate the data we need for this field.
 =head2 Reordering subfields
 
 You may find yourself in the situation where you would like to
-programatically reorder, and possibly modify subfields in a particular
+programmatically reorder, and possibly modify subfields in a particular
 field. For example, imagine that you have a batch of records that have
 856 fields which contain subfields z, u, and possibly subfield 3...
 in any order! Now imagine that you'd like to standardize the subfield z, 
@@ -1102,11 +1165,11 @@ MyLint inherits from the MARC::Lint class, which allows $linter to inherit
 all the functionality of a normal MARC::Lint object *plus* the new 
 functionality found in the check_856 method.
 
-Notice also that we don't have to call check_856() directy. The call to 
+Notice also that we don't have to call check_856() directly. The call to 
 check_record() automatically looks for any check_XXX methods that it can
 call to verify the record. Pretty neat stuff. If you've added validation
 checks that you think could be of use to general public please share them
-on the perl4lib listserv, or become a developer and add them to the source!
+on the perl4lib mailing list, or become a developer and add them to the source!
 
 =head1 SWOLLEN APPENDICES 
 
@@ -1211,7 +1274,7 @@ Chris' program is a command line utility which you can run like so:
 where 0596000278 is an ISBN (for the 3rd edition of the Camel incidentally).
 The program will query the Library of Congress Z39.50 server for the ISBN, 
 and dump out the retrieved MARC record on the screen. The program is designed
-to lookup mutliple ISBNs if you separate them with a space.  This is just an 
+to lookup multiple ISBNs if you separate them with a space.  This is just an 
 example showing what is possible.
 
    1   #! /usr/bin/perl -w
@@ -1274,6 +1337,10 @@ Many thanks to all the contributors who have made this document possible.
 =item *
 
 Chris Biemesderfer <chris@seagoat.com>
+
+=item * 
+
+Morbus Iff <morbus@disobey.com>
 
 =item * 
 
