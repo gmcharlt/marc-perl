@@ -1,11 +1,16 @@
 Revision history for Perl extension MARC::Record.
 
-1.13    XXXXXX, X, XXXX
+1.13    November, 26, 2002 
 	- Moved new_from_usmarc() docs & code up right after new() to 
 	be more prominent. Thanks to Chris Biemesderfer for pointing this 
 	out.
 	- Added Chris Biemesderfer's section to the tutorial which 
 	discusses using MARC::Record with Net::Z3950.
+	- Yet another overhaul to MARC::Batch to allow for error trapping. 
+	Added the warnings_on() warnings_off() methods to turn on/off 
+	warnings on STDERR. Also added strict_on() and strict_off() to 
+	change the behavior of next() when an error is encountered.
+	- Added new tests for the improved handling of errors in MARC::Batch.
 
 1.12	October 9, 2002 
 	- Makefile.PL will now generate PDF and HTML documentation for 

@@ -17,7 +17,7 @@ use vars qw( $ERROR );
 
 Version 1.13
 
-    $Id: USMARC.pm,v 1.27 2002/10/24 22:08:02 edsummers Exp $
+    $Id: USMARC.pm,v 1.28 2002/11/26 20:51:13 edsummers Exp $
 
 =cut
 
@@ -58,7 +58,6 @@ Internal function to get the next raw record out of a file.
 
 sub _next {
     my $self = shift;
-
     my $fh = $self->{fh};
 
     my $reclen;
@@ -66,6 +65,7 @@ sub _next {
 
     local $/ = END_OF_RECORD;
     my $usmarc = <$fh>;
+    return undef if ! $usmarc;
 
     if ( length($usmarc) < 5 ) {
 	$self->_warn( "Couldn't find record length" );
@@ -90,31 +90,44 @@ Any warnings or coercions can be checked in the C<warnings()> function.
 =cut
 
 sub decode {
-    my $text = shift;
-    $text = shift if (ref($text)||$text) =~ /^MARC::File/;
+
+    my $self = shift;
+    my $text;
+    my $location = '';
+
+    ## decode can be called as a MARC::File::* object method, or as a function
+    ## we need to handle our parms slightly different in each case, and 
+    ## (if appropriate) capture the record number for warnings messages.
+    if ( $self =~ /^MARC::File/ ) {
+	$location = 'in record '.$self->{recnum};
+	$text = shift;
+    } else {
+	$location = 'in record 1';
+	$text = $self; 
+    }
 
     my $marc = MARC::Record->new();
 
     # Check for an all-numeric record length
     ($text =~ /^(\d{5})/)
-	or return $marc->_warn( "Record length \"", substr( $text, 0, 5 ), "\" is not numeric" );
+	or $marc->_warn( "Record length \"", substr( $text, 0, 5 ), "\" is not numeric $location" );
 
     my $reclen = $1;
     ($reclen == length($text))
-	or return $marc->_warn( "Invalid record length: Leader says $reclen bytes, but it's actually ", length( $text ) );
+	or $marc->_warn( "Invalid record length $location: Leader says $reclen bytes, but it's actually ", length( $text ) );
 
     $marc->leader( substr( $text, 0, LEADER_LEN ) );
     my @fields = split( END_OF_FIELD, substr( $text, LEADER_LEN ) );
-    my $dir = shift @fields or return $marc->_warn( "No directory found" );
+    my $dir = shift @fields or $marc->_warn( "No directory found $location" );
 
     (length($dir) % 12 == 0)
-	or return $marc->_warn( "Invalid directory length" );
+	or $marc->_warn( "Invalid directory length $location" );
     my $nfields = length($dir)/12;
 
     my $finalfield = pop @fields;
     # Check for the record terminator, and ignore it
     ($finalfield eq END_OF_RECORD)
-    	or return $marc->_warn( "Invalid record terminator: \"$finalfield\"" );
+    	or $marc->_warn( "Invalid record terminator $location" );
 
     # Walk thru the directories, and shift off the fields while we're at it
     # Shouldn't be any non-digits anywhere in any directory entry
@@ -130,40 +143,47 @@ sub decode {
 
 	# Check directory validity
 	($tagno =~ /^[0-9A-Za-z]{3}$/)
-	    or return $marc->_warn( "Invalid tag in directory: \"$tagno\"" );
+	    or $marc->_warn( "Invalid tag in directory $location: \"$tagno\"" );
 
 	($len == length($tagdata) + 1)
-	    or return $marc->_warn( "Invalid length in the directory for tag $tagno" );
+	    or $marc->_warn( "Invalid length in directory $location for tag $tagno $location" );
 
 	($offset == $databytesused)
-	    or return $marc->_warn( "Directory offsets are out of whack" );
+	    or $marc->_warn( "Directory offsets $location are out of whack for tag $tagno" );
 	$databytesused += $len;
 
 	if ( _isnum($tagno) and $tagno < 10 ) {
-	    $marc->add_fields( $tagno, $tagdata )
-		or return undef; # We're relying on add_fields() having set $MARC::Record::ERROR
+	    if ( ! defined( $tagdata ) ) {
+		$marc->_warn( "Did not find tag data $location for tag $tagno" );
+		next;
+	    }
+	    $marc->append_fields( MARC::Field->new( $tagno, $tagdata ) );
 	} else {
 	    my @subfields = split( SUBFIELD_INDICATOR, $tagdata );
-	    my $indicators = shift @subfields
-		or return $marc->_warn( "No subfields found." );
+	    my $indicators = shift @subfields;
 	    my ($ind1,$ind2);
 	    if ( $indicators =~ /^([0-9 ])([0-9 ])$/ ) {
 		($ind1,$ind2) = ($1,$2);
 	    } else {
-		$marc->_warn( "Invalid indicators \"$indicators\" forced to blanks\n" );
+		$marc->_warn( "Invalid indicators \"$indicators\" forced to blanks $location for tag $tagno\n" );
 		($ind1,$ind2) = (" "," ");
 	    }
 
 	    # Split the subfield data into subfield name and data pairs
 	    my @subfield_data = map { (substr($_,0,1),substr($_,1)) } @subfields;
-	    $marc->add_fields( $tagno, $ind1, $ind2, @subfield_data )
-		or return $marc->_warn(''); 
+	    if ( !@subfield_data ) {
+		$marc->_warn( "no subfield data found $location for tag $tagno" );
+		next;
+	    }
+
+	    $marc->append_fields( MARC::Field->new($tagno, $ind1, $ind2, 
+		@subfield_data ) );
 	}
     } # while
 
     # Once we're done, there shouldn't be any fields left over: They should all have shifted off.
     (@fields == 0)
-    	or return $marc->_warn( "I've got leftover fields that weren't in the directory" );
+    	or $marc->_warn( "I've got leftover fields that weren't in the directory $location" );
 
     return $marc;
 }

@@ -16,7 +16,7 @@ use vars qw( $ERROR );
 
 Version 1.13
 
-    $Id: File.pm,v 1.21 2002/10/24 22:08:02 edsummers Exp $
+    $Id: File.pm,v 1.22 2002/11/26 20:51:12 edsummers Exp $
 
 =cut
 
@@ -51,8 +51,9 @@ sub in {
     my $filename = shift;
 
     my $self = {
-	filename => $filename,
-	_warnings => [],
+	filename    => $filename,
+	recnum	    => 0,
+	warnings   => [],
     };
 
     bless $self, $class;
@@ -82,6 +83,7 @@ Reads the next record from the file handle passed in.
 
 sub next {
     my $self = shift;
+    $self->{recnum}++;
     my $rec = $self->_next();
     return $rec ? $self->decode($rec) : undef;
 }
@@ -114,8 +116,8 @@ side-effect will clear the warnings buffer.
 
 sub warnings {
     my $self = shift;
-    my @warnings = @{ $self->{_warnings} };
-    $self->{_warnings} = [];
+    my @warnings = @{ $self->{warnings} };
+    $self->{warnings} = [];
     return(@warnings);
 }
 
@@ -143,11 +145,12 @@ sub decode  { $_[0]->_unimplemented("decode"); }
 
 sub _warn {
     my ($self,$warning) = @_;
-    push( @{ $self->{_warnings} }, $warning );
+    push( @{ $self->{warnings} }, "$warning in record ".$self->{recnum} );
     return(undef);
 }
 
 # NOTE: _gripe can be called as an object method, or not.  Your choice.
+# NOTE: it's use is now depracated use _warn instead
 sub _gripe(@) {
     my @parms = @_;
     if ( @parms ) {

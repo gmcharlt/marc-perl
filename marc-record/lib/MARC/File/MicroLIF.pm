@@ -16,7 +16,7 @@ use vars qw( $ERROR );
 
 Version 1.13
 
-    $Id: MicroLIF.pm,v 1.18 2002/10/24 22:08:02 edsummers Exp $
+    $Id: MicroLIF.pm,v 1.19 2002/11/26 20:51:13 edsummers Exp $
 
 =cut
 
@@ -60,8 +60,20 @@ sub _next {
 }
 
 sub decode {
-    my $text = shift;
-    $text = shift if (ref($text)||$text) =~ /^MARC::File/; # Handle being called as a method
+    my $self = shift;
+    my $location = '';
+    my $text = '';
+
+    ## decode can be called as a MARC::File::* object method, or as a function
+    ## we need to handle our parms slightly different in each case, and 
+    ## (if appropriate) capture the record number for warnings messages.
+    if ( $self =~ /^MARC::File/ ) {
+	$location = 'in record '.$self->{recnum};
+	$text = shift;
+    } else {
+	$location = 'in record 1';
+	$text = $self;
+    }
 
     my $marc = MARC::Record->new();
 
@@ -71,11 +83,11 @@ sub decode {
 	next if $line =~ /^HDR/;
 
 	($line =~ s/^([0-9A-Za-z]{3})//) or
-	return $marc->_gripe( "Invalid tag number: ", substr( $line, 0, 3 ) );
+	    $marc->_warn( "Invalid tag number: ".substr( $line, 0, 3 )." $location" );
 	my $tagno = $1;
 
-	($line =~ s/\^$//) 
-	    or $marc->_warn( "Tag $tagno is missing a trailing caret." );
+	($line =~ s/\^`?$//) 
+	    or $marc->_warn( "Tag $tagno $location is missing a trailing caret." );
 
 	if ( $tagno eq "LDR" ) {
 	    $marc->leader( substr( $line, 0, LEADER_LEN ) );
@@ -105,8 +117,6 @@ __END__
 =head1 TODO
 
 =over 4
-
-=item * Squawks about the final field missing a caret
 
 =back
 
