@@ -2,6 +2,7 @@
 
 use strict;
 use integer;
+use File::Spec;
 
 use Test::More tests=>16;
 
@@ -10,7 +11,8 @@ BEGIN {
     use_ok( 'MARC::Field' );
 }
 
-my $batch = new MARC::Batch( 'MARC::File::USMARC', 't/camel.usmarc' );
+my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'camel.usmarc' );
+my $batch = new MARC::Batch( 'MARC::File::USMARC', $filename );
 isa_ok( $batch, 'MARC::Batch', 'Batch object creation' );
 
 my $record = $batch->next();
