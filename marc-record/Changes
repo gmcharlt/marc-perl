@@ -28,6 +28,11 @@ Revision history for Perl extension MARC::Record.
         - Fixed t/50.batch.t to use File::Spec in the MicroLIF section
         - Other tests in t/ also use File::Spec to specify paths
 
+        - MARC::File::USMARC ignores \x1a, the DOS end-of-file character,
+        between records and at the end of files.
+        - Added corresponding tests dosEOF.t, cameleof.usmarc, and
+        sample1eof.usmarc.
+
         [FIXES]
         - Clarified docs on the interface to field(), and fixed problem
           whereby in scalar context if no match was found we were
