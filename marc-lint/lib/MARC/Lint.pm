@@ -5,7 +5,9 @@ use integer;
 use MARC::Record;
 use MARC::Field;
 
-our $VERSION = 1.40;
+use MARC::Lint::CodeData qw(%GeogAreaCodes %ObsoleteGeogAreaCodes %LanguageCodes %ObsoleteLanguageCodes);
+
+our $VERSION = 1.41;
 
 =head1 NAME
 
@@ -221,20 +223,431 @@ sub check_record {
 Various functions to check the different fields.  If the function doesn't exist,
 then it doesn't get checked.
 
+=head2 check_041( $field )
+
+Warns if subfields are not evenly divisible by 3 unless second indicator is 7
+(future implementation would ensure that each subfield is exactly 3 characters
+unless ind2 is 7--since subfields are now repeatable. This is not implemented
+here due to the large number of records needing to be corrected.). Validates
+against the MARC Code List for Languages (L<http://www.loc.gov/marc/>) using the
+MARC::Lint::CodeData data pack to MARC::Lint (%LanguageCodes,
+%ObsoleteLanguageCodes).
+
+=cut
+
+sub check_041 {
+
+
+	my $self = shift;
+	my $field = shift;
+
+	# break subfields into code-data array (so the entire field is in one array)
+
+	my @subfields = $field->subfields();
+	my @newsubfields = ();
+
+	while (my $subfield = pop(@subfields)) {
+		my ($code, $data) = @$subfield;
+		unshift (@newsubfields, $code, $data);
+	} # while
+
+	#warn if length of each subfield is not divisible by 3 unless ind2 is 7
+	unless ($field->indicator(2) eq '7') {
+		for (my $index = 0; $index <=$#newsubfields; $index+=2) {
+			if (length ($newsubfields[$index+1]) %3 != 0) {
+				$self->warn( "041: Subfield _$newsubfields[$index] must be evenly divisible by 3 or exactly three characters if ind2 is not 7, ($newsubfields[$index+1])." );
+			} #if field length not divisible evenly by 3
+##############################################
+# validation against code list data
+## each subfield has a multiple of 3 chars
+# need to look at each group of 3 characters
+			else {
+
+				#break each character of the subfield into an array position
+				my @codechars = split '', $newsubfields[$index+1];
+
+				my $pos = 0;
+				#store each 3 char code in a slot of @codes041
+				my @codes041 = ();
+				while ($pos <= $#codechars) {
+					push @codes041, (join '', @codechars[$pos..$pos+2]);
+					$pos += 3;
+				}
+
+
+				foreach my $code041 (@codes041) {
+					#see if language code matches valid code
+					my $validlang = 1 if ($LanguageCodes{$code041});
+					#look for invalid code match if valid code was not matched
+					my $obsoletelang = 1 if ($ObsoleteLanguageCodes{$code041});
+
+					# skip valid subfields
+					unless ($validlang) {
+#report invalid matches as possible obsolete codes
+						if ($obsoletelang) {
+							$self->warn( "041: Subfield _$newsubfields[$index], $newsubfields[$index+1], may be obsolete.");
+						}
+						else {
+							$self->warn( "041: Subfield _$newsubfields[$index], $newsubfields[$index+1] ($code041), is not valid.");
+						} #else code not found 
+					} # unless found valid code
+				} #foreach code in 041
+			} # else subfield has multiple of 3 chars
+##############################################
+		} # foreach subfield
+	} #unless ind2 is 7
+} #check_041
+
+=head2 check_043( $field )
+
+Warns if each subfield a is not exactly 7 characters. Validates each code
+against the MARC code list for Geographic Areas (L<http://www.loc.gov/marc/>)
+using the MARC::Lint::CodeData data pack to MARC::Lint (%GeogAreaCodes,
+%ObsoleteGeogAreaCodes).
+
+=cut
+
+sub check_043 {
+
+	my $self = shift;
+	my $field = shift;
+
+	# break subfields into code-data array (so the entire field is in one array)
+
+	my @subfields = $field->subfields();
+	my @newsubfields = ();
+
+	while (my $subfield = pop(@subfields)) {
+		my ($code, $data) = @$subfield;
+		unshift (@newsubfields, $code, $data);
+	} # while
+
+	#warn if length of subfield a is not exactly 7
+	for (my $index = 0; $index <=$#newsubfields; $index+=2) {
+		if (($newsubfields[$index] eq 'a') && (length ($newsubfields[$index+1]) != 7)) {
+			$self->warn( "043: Subfield _a must be exactly 7 characters, $newsubfields[$index+1]" );
+		} # if suba and length is not 7
+		#check against code list for geographic areas.
+		elsif ($newsubfields[$index] eq 'a') {
+
+			#see if geog area code matches valid code
+			my $validgac = 1 if ($GeogAreaCodes{$newsubfields[$index+1]});
+			#look for obsolete code match if valid code was not matched
+			my $obsoletegac = 1 if ($ObsoleteGeogAreaCodes{$newsubfields[$index+1]});
+
+			# skip valid subfields
+			unless ($validgac) {
+				#report invalid matches as possible obsolete codes
+				if ($obsoletegac) {
+					$self->warn( "043: Subfield _a, $newsubfields[$index+1], may be obsolete.");
+				}
+				else {
+					$self->warn( "043: Subfield _a, $newsubfields[$index+1], is not valid.");
+				} #else code not found 
+			} # unless found valid code
+
+		} #elsif suba
+	} #foreach subfield
+} #check_043
+
 =head2 check_245( $field )
 
-Makes sure that the 245 has an _a subfield.
+ -Makes sure $a exists (and is first subfield).
+ -Warns if last character of field is not a period
+ --Follows LCRI 1.0C, Nov. 2003 rather than MARC21 rule
+ -Verifies that $c is preceded by / (space-/)
+ -Verifies that initials in $c are not spaced
+ -Verifies that $b is preceded by :;= (space-colon, space-semicolon, space-equals)
+ -Verifies that $h is not preceded by space unless it is dash-space
+ -Verifies that data of $h is enclosed in square brackets
+ -Verifies that $n is preceded by . (period)
+  --As part of that, looks for no-space period, or dash-space-period (for replaced elipses)
+ -Verifies that $p is preceded by , (no-space-comma) when following $n and . (period) when following other subfields.
+ -Performs rudimentary article check of 245 2nd indicator vs. 1st word of 245$a (for manual verification).
+
+ Article checking is done by internal _check_article method, which should work for 130, 240, 245, 440, 630, 730, and 830.
 
 =cut
 
 sub check_245 {
-    my $self = shift;
-    my $field = shift;
 
-    if ( not $field->subfield( "a" ) ) {
-        $self->warn( "245: Must have a subfield _a." );
-    }
-}
+	my $self = shift;
+	my $field = shift;
+	
+	if ( not $field->subfield( "a" ) ) {
+		$self->warn( "245: Must have a subfield _a." );
+	}
+
+	# break subfields into code-data array (so the entire field is in one array)
+
+	my @subfields = $field->subfields();
+	my @newsubfields = ();
+
+	while (my $subfield = pop(@subfields)) {
+		my ($code, $data) = @$subfield;
+		unshift (@newsubfields, $code, $data);
+	} # while
+		
+	# 245 must end in period (may want to make this less restrictive by allowing trailing spaces)
+	#do 2 checks--for final punctuation (MARC21 rule), and for period (LCRI 1.0C, Nov. 2003)
+	if ($newsubfields[$#newsubfields] !~ /[.?!]$/) {
+		$self->warn ( "245: Must end with . (period).");
+	}
+	elsif($newsubfields[$#newsubfields] =~ /[?!]$/) {
+		$self->warn ( "245: MARC21 allows ? or ! as final punctuation but LCRI 1.0C, Nov. 2003, requires period.");	
+	}
+
+#subfield a should be first subfield
+	if ($newsubfields[0] ne 'a') {
+		$self->warn ( "245: First subfield must be _a, but it is _$newsubfields[0]");
+	}
+	
+	#subfield c, if present, must be preceded by /
+	#also look for space between initials
+	if ($field->subfield("c")) {
+	
+		for (my $index = 2; $index <=$#newsubfields; $index+=2) {
+# 245 subfield c must be preceded by / (space-/)
+			if ($newsubfields[$index] eq 'c') { 
+				$self->warn ( "245: Subfield _c must be preceded by /") if ($newsubfields[$index-1] !~ /\s\/$/);
+				# 245 subfield c initials should not have space
+				$self->warn ( "245: Subfield _c initials should not have a space.") if (($newsubfields[$index+1] =~ /\b\w\. \b\w\./) && ($newsubfields[$index+1] !~ /\[\bi\.e\. \b\w\..*\]/));
+				last;
+			} #if
+		} #for
+	} # subfield c exists
+
+	#each subfield b, if present, should be preceded by :;= (colon, semicolon, or equals sign)
+	### Are there others? ###
+	if ($field->subfield("b")) {
+
+		# 245 subfield b should be preceded by space-:;= (colon, semicolon, or equals sign)
+		for (my $index = 2; $index <=$#newsubfields; $index+=2) {
+#report error if subfield 'b' is not preceded by space-:;= (colon, semicolon, or equals sign)
+			if (($newsubfields[$index] eq 'b') && ($newsubfields[$index-1] !~ / [:;=]$/)) {
+				$self->warn ( "245: Subfield _b should be preceded by space-colon, space-semicolon, or space-equals sign.");
+			} #if
+		} #for
+	} # subfield b exists
+
+
+	#each subfield h, if present, should be preceded by non-space
+	if ($field->subfield("h")) {
+
+		# 245 subfield h should not be preceded by space
+		for (my $index = 2; $index <=$#newsubfields; $index+=2) {
+			#report error if subfield 'h' is preceded by space (unless dash-space)
+			if (($newsubfields[$index] eq 'h') && ($newsubfields[$index-1] !~ /(\S$)|(\-\- $)/)) {
+				$self->warn ( "245: Subfield _h should not be preceded by space.");
+			} #if h and not preceded by no-space (unless dash)
+			#report error if subfield 'h' does not start with open square bracket with a matching close bracket
+			##could have check against list of valid values here
+			if (($newsubfields[$index] eq 'h') && ($newsubfields[$index+1] !~ /^\[\w*\s*\w*\]/)) {
+				$self->warn ( "245: Subfield _h must have matching square brackets, $newsubfields[$index].");
+			}
+		} #for
+	} # subfield h exists
+
+	#each subfield n, if present, must be preceded by . (period)
+	if ($field->subfield("n")) {
+
+		# 245 subfield n must be preceded by . (period)
+		for (my $index = 2; $index <=$#newsubfields; $index+=2) {
+			#report error if subfield 'n' is not preceded by non-space-period or dash-space-period
+			if (($newsubfields[$index] eq 'n') && ($newsubfields[$index-1] !~ /(\S\.$)|(\-\- \.$)/)) {
+				$self->warn ( "245: Subfield _n must be preceded by . (period).");
+			} #if
+		} #for
+	} # subfield n exists
+
+	#each subfield p, if present, must be preceded by a , (no-space-comma) if it follows subfield n, or by . (no-space-period or dash-space-period) following other subfields
+	if ($field->subfield("p")) {
+
+		# 245 subfield p must be preceded by . (period) or , (comma)
+		for (my $index = 2; $index <=$#newsubfields; $index+=2) {
+#only looking for subfield p
+			if ($newsubfields[$index] eq 'p') {
+# case for subfield 'n' being field before this one (allows dash-space-comma)
+				if (($newsubfields[$index-2] eq 'n') && ($newsubfields[$index-1] !~ /(\S,$)|(\-\- ,$)/)) {
+					$self->warn ( "245: Subfield _p must be preceded by , (comma) when it follows subfield _n.");
+				} #if subfield n precedes this one
+				# elsif case for subfield before this one is not n
+				elsif (($newsubfields[$index-2] ne 'n') && ($newsubfields[$index-1] !~ /(\S\.$)|(\-\- \.$)/)) {
+					$self->warn ( "245: Subfield _p must be preceded by . (period) when it follows a subfield other than _n.");
+				} #elsif subfield p preceded by non-period when following a non-subfield 'n'
+			} #if index is looking at subfield p
+		} #for
+	} # subfield p exists
+
+######################################
+#check for invalid 2nd indicator
+$self->_check_article($field);
+
+} # check_245
+
+
+
+
+############
+# Internal #
+############
+
+=head2 _check_article
+
+Check of articles is based on code from Ian Hamilton. This version is more
+limited in that it focuses on English, Spanish, French, Italian and German
+articles. Certain possible articles have been removed if they are valid English
+non-articles. This version also disregards 008_language/041 codes and just uses
+the list of articles to provide warnings/suggestions.
+
+source for articles = L<http://www.loc.gov/marc/bibliographic/bdapp-e.html>
+
+Should work with fields 130, 240, 245, 440, 630, 730, and 830. Reports error if
+another field is passed in.
+
+=cut
+
+sub _check_article {
+
+	my $self = shift;
+	my $field = shift;
+
+#add articles here as needed
+##Some omitted due to similarity with valid words (e.g. the German 'die').
+	my %article = (
+		'a' => 'eng glg hun por',
+		'an' => 'eng',
+		'das' => 'ger',
+		'dem' => 'ger',
+		'der' => 'ger',
+		'ein' => 'ger',
+		'eine' => 'ger',
+		'einem' => 'ger',
+		'einen' => 'ger',
+		'einer' => 'ger',
+		'eines' => 'ger',
+		'el' => 'spa',
+		'en' => 'cat dan nor swe',
+		'gl' => 'ita',
+		'gli' => 'ita',
+		'il' => 'ita mlt',
+		'l' => 'cat fre ita mlt',
+		'la' => 'cat fre ita spa',
+		'las' => 'spa',
+		'le' => 'fre ita',
+		'les' => 'cat fre',
+		'lo' => 'ita spa',
+		'los' => 'spa',
+		'os' => 'por',
+		'the' => 'eng',
+		'um' => 'por',
+		'uma' => 'por',
+		'un' => 'cat spa fre ita',
+		'una' => 'cat spa ita',
+		'une' => 'fre',
+		'uno' => 'ita',
+	);
+
+#add exceptions here as needed
+# may want to make keys lowercase
+	my %exceptions = (
+		'A & E' => 1,
+		'A-' => 1,
+		'A+' => 1,
+		'A is ' => 1,
+		'A l\'' => 1,
+		'A la ' => 1,
+		'El Nino' => 1,
+		'El Salvador' => 1,
+		'L-' => 1,
+		'La Salle' => 1,
+		'Las Vegas' => 1,
+		'Lo mein' => 1,
+		'Los Alamos' => 1,
+		'Los Angeles' => 1,
+	);
+
+	#get tagno to determine which indicator to check and for reporting
+	my $tagno = $field->tag();
+
+	#$ind holds nonfiling character indicator value
+	my $ind = '';
+	#$first_or_second holds which indicator is for nonfiling char value 
+	my $first_or_second = '';
+	if ($tagno !~ /^(?:130|240|245|440|630|730|830)$/) {
+		print $tagno, " is not a valid field for article checking\n";
+		return;
+	} #if field is not one of those checked for articles
+	#130, 630, 730 => ind1
+	elsif ($tagno =~ /^(?:130|630|730)$/) {
+		$ind = $field->indicator(1);
+		$first_or_second = '1st';
+	} #if field is 130, 630, or 730
+	#240, 245, 440, 830 => ind2
+	elsif ($tagno =~ /^(?:240|245|440|830)$/) {
+		$ind = $field->indicator(2);
+		$first_or_second = '2nd';
+	} #if field is 240, 245, 440, or 830
+
+
+	#report non-numeric non-filing indicators as invalid
+	$self->warn ( $tagno, ": Non-filing indicator is non-numeric" ) unless ($ind =~ /^[0-9]$/);
+	#get subfield 'a' of the title field
+	my $title = $field->subfield('a');
+
+
+	my $char1_notalphanum = 0;
+	#check for apostrophe, quote, bracket,  or parenthesis, before first word
+	#remove if found and add to non-word counter
+	while ($title =~ /^["'\[\(*]/){
+		$char1_notalphanum++;
+		$title =~ s/^["'\[\(*]//;
+	}
+	# split title into first word + rest on space, apostrophe or hyphen
+	$title =~ /^([^ '\-]+)([ '\-])?(.*)/i;
+	my $firstword=$1, my $separator=$2; my $etc=$3;
+	#get length of first word plus the number of chars removed above plus one for the separator
+	my $nonfilingchars = length($firstword) + $char1_notalphanum + 1;
+
+	my $isan_exception =0;
+	#check to see if first word is an exception
+	$isan_exception = grep {$title =~ /^\Q$_\E/i} (keys %exceptions);
+
+	#lowercase chars of $firstword for comparison with article list
+	$firstword = lc($firstword);
+
+	my $isan_article = 0;
+
+	#see if first word is in the list of articles and not an exception
+	$isan_article = 1 if (($article{$firstword}) && !($isan_exception));
+
+	#if article then $nonfilingchars should match $ind
+	if ($isan_article) {
+		#account for quotes or apostrophes before 2nd word (only checks for 1)
+		if (($separator eq ' ') && ($etc =~ /^['"]/)) {
+			$nonfilingchars++;
+		}
+		#special case for 'en' (unsure why)
+		if ($firstword eq 'en') {
+			$self->warn ( $tagno, ": First word, , $firstword, may be an article, check $first_or_second indicator ($ind)." ) unless (($ind == 3) || ($ind == 0));
+		}
+		elsif ($nonfilingchars != $ind) {
+			$self->warn ( $tagno, ": First word, $firstword, may be an article, check $first_or_second indicator ($ind)." );
+		} #unless ind is same as length of first word and nonfiling characters
+	} #if first word is in article list
+	#not an article so warn if $ind is not 0
+	else {
+		unless ($ind == 0) {
+			$self->warn ( $tagno, ": First word, $firstword, does not appear to be an article, check $first_or_second indicator ($ind)." );
+		} #unless ind is 0
+	} #else not in article list
+
+#######################################
+
+} #_check_article
+
+
+############
 
 =head1 SEE ALSO
 
@@ -248,6 +661,19 @@ Check the docs for L<MARC::Record>.  All software links are there.
 
 We can check the 020 and 022 fields with the C<Business::ISBN> and
 C<Business::ISSN> modules, respectively.
+
+=item * check_041 cleanup
+
+Splitting subfield code strings every 3 chars could probably be written more efficiently.
+
+=item * check_245 cleanup
+
+The article checking in particular.
+
+=item * Method for turning off checks
+
+Provide a way for users to skip checks more easily when using check_record, or a
+specific check_xxx method (e.g. skip article checking).
 
 =back
 
