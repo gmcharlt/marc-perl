@@ -1,6 +1,6 @@
 Revision history for Perl extension MARC::Record.
 
-next version
+1.21	March 14, 2003
 	[ENHANCEMENTS]
 	- MARC::File::MicroLIF now reads the MicroLIF header from
 	  the input file and makes it available via the header()
@@ -17,6 +17,7 @@ next version
 	  allowing MARC::Field to croak().
 	- Updated data files used to test MARC::File::MicroLIF
 	  so that they have a header.
+
 	[FIXES]
 	- MARC:File::MicroLIF now supports input files with any
 	  type of line ending--\x0d, \x0a, or \x0d\0a.  A file no
