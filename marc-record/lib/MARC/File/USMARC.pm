@@ -201,12 +201,14 @@ sub decode {
 	} else {
 	    my @subfields = split( SUBFIELD_INDICATOR, $tagdata );
 	    my $indicators = shift @subfields;
-	    my ($ind1,$ind2);
-	    if ( $indicators =~ /^([0-9 ])([0-9 ])$/ ) {
-		($ind1,$ind2) = ($1,$2);
-	    } else {
+	    my ($ind1, $ind2);
+
+	    if ( length( $indicators ) > 2 or length( $indicators ) == 0 ) { 
 		$marc->_warn( "Invalid indicators \"$indicators\" forced to blanks $location for tag $tagno\n" );
-		($ind1,$ind2) = (" "," ");
+		($ind1,$ind2) = (" ", " ");
+	    } else {
+		$ind1 = substr( $indicators,0, 1 );
+		$ind2 = substr( $indicators,1, 1 );
 	    }
 
 	    # Split the subfield data into subfield name and data pairs
@@ -224,8 +226,11 @@ sub decode {
 		next;
 	    }
 
-	    $marc->append_fields( MARC::Field->new($tagno, $ind1, $ind2, 
-		@subfield_data ) );
+	    my $field = MARC::Field->new($tagno, $ind1, $ind2, @subfield_data );
+	    if ( $field->warnings() ) { 
+		$marc->_warn( $field->warnings() );
+	    }
+	    $marc->append_fields( $field );
 	}
     } # looping through all the fields
 

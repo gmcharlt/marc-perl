@@ -8,6 +8,9 @@ Revision history for Perl extension MARC::Record.
 	- MARC::Field now leaves alphabetic indicators as they are instead
           of squashing to a space. Added test of new functionailty. Thanks 
 	  Leif Andersson from Stockholms Universitet.
+	- MARC::File::USMARC no longer checks the validity of indicators
+	  but leaves that up to MARC::Field (instead of having the check
+	  twice).
 
 1.33    November 24th, 2003
 	MARC::Record should now run on Perls back to 5.00503!

@@ -40,6 +40,7 @@ t/82.baddir.t
 t/83.indicators.t
 t/alphatag.lif
 t/baddir.usmarc
+t/badind.usmarc
 t/badldr.usmarc
 t/batch-filter.t
 t/camel.usmarc
