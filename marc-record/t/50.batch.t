@@ -1,10 +1,10 @@
 #!/usr/bin/perl -w
-# $Id: 50.batch.t,v 1.3 2002/07/01 15:45:27 petdance Exp $
+# $Id: 50.batch.t,v 1.4 2002/07/02 04:03:44 petdance Exp $
 
 use strict;
 use integer;
 
-use Test::More tests=>6;
+use Test::More tests=>136;
 
 BEGIN {
     use_ok( 'MARC::Batch' );
@@ -19,6 +19,7 @@ USMARC: {
 
     my $n = 0;
     while ( my $marc = $batch->next() ) {
+	isa_ok( $marc, 'MARC::Record' );
 	++$n;
     }
     is( $n, 10, 'Got 10 USMARC records' );
@@ -35,6 +36,7 @@ MicroLIF: {
 
     my $n = 0;
     while ( my $marc = $batch->next() ) {
+	isa_ok( $marc, 'MARC::Record' );
 	++$n;
     }
     is( $n, 120, 'Got 120 LIF records' );
