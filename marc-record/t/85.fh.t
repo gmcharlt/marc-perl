@@ -2,6 +2,7 @@
 
 use Test::More tests => 11;
 use strict;
+use IO::File;
 
 use_ok( 'MARC::File::USMARC' );
 use_ok( 'MARC::File::MicroLIF' );
@@ -24,9 +25,6 @@ USMARC_FILE_GLOB: {
 # now try IO::File objects with MARC::File::USMARC
 
 USMARC_IO_FILE: {
-
-    eval( "use IO::File" );
-    skip( 'no IO::File to use in test', 1 ) if $@;
 
     my $fh = IO::File->new( 't/camel.usmarc' );
     my $file = MARC::File::USMARC->in( $fh );
