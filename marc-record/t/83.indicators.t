@@ -1,6 +1,6 @@
 #!perl -Tw
 
-use Test::More tests => 11;
+use Test::More tests => 17;
 use strict;
 
 use_ok( 'MARC::Record' );
@@ -39,3 +39,18 @@ is( $warnings[0], 'Invalid indicator "-" forced to blank',
 
 is( $r->field(245)->indicator(1),' ','hyphen forced to blank in indicator 1' );
 is( $r->field(245)->indicator(2),'0','indicator 2 undisturbed' );
+
+
+CONTROLFIELD: {
+    my $field;
+    
+    $field = MARC::Field->new( '003', 'ICrlF' );
+    is( scalar($field->warnings()), 0, 'no warnings for field' );
+    ok( !defined $field->indicator(1), 'indicator(1) for control field returns undef' );
+    is( scalar($field->warnings()), 1, 'indicator(1) for control field generates warning' );
+
+    $field = MARC::Field->new( '003', 'ICrlF' );
+    is( scalar($field->warnings()), 0, 'no warnings for field' );
+    ok( !defined $field->indicator(2), 'indicator(2) for control field returns undef' );
+    is( scalar($field->warnings()), 1, 'indicator(2) for control field generates warning' );
+}
