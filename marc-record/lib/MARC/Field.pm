@@ -17,12 +17,10 @@ MARC::Field - Perl extension for handling MARC fields
 
   use MARC::Field;
 
-  my $field = 
-  	MARC::Field->new( 
-		245, '1', '0',
-			'a' => 'Raccoons and ripe corn / ',
-			'c' => 'Jim Arnosky.'
-		);
+  my $field = MARC::Field->new( 245, '1', '0',
+       'a' => 'Raccoons and ripe corn / ',
+       'c' => 'Jim Arnosky.'
+  );
   $field->add_subfields( "a", "1st ed." );
 
 =head1 DESCRIPTION
@@ -37,16 +35,21 @@ C<$MARC::Record> usually bubbles up to C<$MARC::Record::ERROR>.
 
 =head1 METHODS
 
-=head2 new(tag,indicator1,indicator2,code,data[,code,data...])
+=head2 new()
 
-  my $record = 
-  	MARC::Field->new( 
-		245, '1', '0',
-			'a' => 'Raccoons and ripe corn / ',
-			'c' => 'Jim Arnosky.'
-		);
+The constructor, which will return a MARC::Field object. Typically you will 
+pass in the tag number, indicator 1, indicator 2, and then a list of any 
+subfield/data pairs. For example:
 
-Returns a MARC::Field record.
+  my $field = MARC::Field->new( 
+       245, '1', '0',
+       'a' => 'Raccoons and ripe corn / ',
+       'c' => 'Jim Arnosky.'
+  );
+
+Or if you want to add a field < 010 that does not have indicators. 
+
+  my $field = MARC::Field->new( '001', ' 14919759' );
 
 =cut
 
