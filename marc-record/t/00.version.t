@@ -1,23 +1,11 @@
-# $Id: 00.version.t,v 1.1 2002/04/01 03:19:59 petdance Exp $
+# $Id: 00.version.t,v 1.2 2002/04/01 03:56:00 petdance Exp $
 
-# Pretty lame, huh?  We'll fix it later
-print "1..1\n";
-print "ok 1\n";
+use Test::More tests=>7;
 
-=pod
-
-use Test::More 'no_plan';
-
-our @modules = qw( MARC::Field MARC::Record MARC::Lint MARC::Batch );
-
-plan( 2*@modules );
-
-for my $module ( @modules ) {
-    use_ok( $module, "Loaded $module" );
-
-    my $version = $module . "::VERSION";
-    is( $$version, $MARC::Record::VERSION, 'All versions in sync' );
-    diag( "$MARC::Record::VERSION" );
+BEGIN {
+    use_ok( $_, "Loaded $_" ) for qw( MARC::Field MARC::Record MARC::Lint MARC::Batch );
 }
 
-=cut
+is( $MARC::Record::VERSION, $MARC::Field::VERSION, 'Field matches' );
+is( $MARC::Record::VERSION, $MARC::Batch::VERSION, 'Batch matches' );
+is( $MARC::Record::VERSION, $MARC::Lint::VERSION,  'Lint matches' );
