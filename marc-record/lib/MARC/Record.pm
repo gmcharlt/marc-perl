@@ -17,7 +17,7 @@ use MARC::Field;
 
 Version 0.92
 
-    $Id: Record.pm,v 1.15 2002/05/13 21:11:09 petdance Exp $
+    $Id: Record.pm,v 1.16 2002/05/13 22:15:23 edsummers Exp $
 
 =cut
 
@@ -388,7 +388,7 @@ sub new_from_usmarc {
     return MARC::File::USMARC::decode( $blob );
 }
 
-=head2 as_usmarc( $marcblob )
+=head2 as_usmarc()
 
 This is a wrapper around C<MARC::File::USMARC::encode()> for compatibility with
 older versions of MARC::Record.
@@ -548,8 +548,6 @@ Ideas are things that have been considered, but nobody's actually asked for.
 =item * Create multiple output formats.
 
 These could be ASCII, XML, or MarcMaker.
-
-=item * Create a clone of a record based on criteria
 
 =back
 
