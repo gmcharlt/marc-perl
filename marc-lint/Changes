@@ -1,3 +1,6 @@
+1.41    unreleased
+        - updated lint.t to use File::Spec for path to camel.usmarc
+        
 1.40    Mon Dec 20 14:01:53 CST 2004
         - added DATA for tags 001-008
         - updated DATA to incorporate update 4 (Oct. 2004)
