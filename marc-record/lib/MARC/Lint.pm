@@ -31,29 +31,29 @@ MARC::Lint - Perl extension for checking validity of MARC records
 
 Given the following MARC record:
 
-        LDR 00000nam  22002538a 4500
-        100 14 _aWall, Larry.
-        110 1  _aO'Reilly & Associates.
-        245 90 _aProgramming Perl /
-               _aBig Book of Perl /
-               _cLarry Wall, Tom Christiansen & Jon Orwant.
-        250    _a3rd ed.
-        250    _a3rd ed.
-        260    _aCambridge, Mass. :
-               _bO'Reilly,
-               _r2000.
-        590 4  _aPersonally signed by Larry.
-        856 43 _uhttp://www.perl.com/
+    LDR 00000nam  22002538a 4500
+    100 14 _aWall, Larry.
+    110 1  _aO'Reilly & Associates.
+    245 90 _aProgramming Perl /
+           _aBig Book of Perl /
+           _cLarry Wall, Tom Christiansen & Jon Orwant.
+    250    _a3rd ed.
+    250    _a3rd ed.
+    260    _aCambridge, Mass. :
+           _bO'Reilly,
+           _r2000.
+    590 4  _aPersonally signed by Larry.
+    856 43 _uhttp://www.perl.com/
 
 the following errors are generated:
 
-        1XX: Only one 1XX tag is allowed, but I found 2 of them.
-        100: Indicator 2 must be blank
-        245: Indicator 1 must be 0 or 1
-        245: Subfield _a is not repeatable.
-        250: Field is not repeatable.
-        260: Subfield _r is not valid.
-        856: Indicator 2 must be blank, 0, 1, 2 or 8
+    1XX: Only one 1XX tag is allowed, but I found 2 of them.
+    100: Indicator 2 must be blank
+    245: Indicator 1 must be 0 or 1
+    245: Subfield _a is not repeatable.
+    250: Field is not repeatable.
+    260: Subfield _r is not valid.
+    856: Indicator 2 must be blank, 0, 1, 2 or 8
 
 =head1 DESCRIPTION
 
@@ -79,17 +79,16 @@ and a bunch of rules.
 =cut
 
 sub new {
-        my $class = shift;
-        $class = ref($class) || $class;
+    my $class = shift;
 
-        my $self = {
-                _warnings => [],
-        };
-        bless $self, $class;
+    my $self = {
+        _warnings => [],
+    };
+    bless $self, $class;
 
-        $self->_read_rules();
+    $self->_read_rules();
 
-        return $self;
+    return $self;
 }
 
 =head2 warnings()
@@ -112,9 +111,9 @@ when you call C<check_record()>.
 =cut
 
 sub clear_warnings {
-        my $self = shift;
+    my $self = shift;
 
-        $self->{_warnings} = [];
+    $self->{_warnings} = [];
 }
 
 =head2 warn( $str [, $str...] )
@@ -127,11 +126,11 @@ may want to do their own checking as well.
 =cut
 
 sub warn {
-        my $self = shift;
+    my $self = shift;
 
-        push( @{$self->{_warnings}}, join( "", @_ ) );
+    push( @{$self->{_warnings}}, join( "", @_ ) );
 
-        return;
+    return;
 }
 
 =head2 check_record( $marc )
@@ -142,76 +141,76 @@ and on the individual fields & subfields.
 =cut
 
 sub check_record {
-        my $self = shift;
-        my $marc = shift;
+    my $self = shift;
+    my $marc = shift;
 
-        $self->clear_warnings();
+    $self->clear_warnings();
 
-        (ref($marc) eq "MARC::Record")
-                or return $self->warn( "Must pass a MARC::Record object to check_record" );
+    (ref($marc) eq "MARC::Record")
+        or return $self->warn( "Must pass a MARC::Record object to check_record" );
 
-        my @_1xx = $marc->field( "1.." );
-        my $n1xx = scalar @_1xx;
-        if ( $n1xx > 1 ) {
-                $self->warn( "1XX: Only one 1XX tag is allowed, but I found $n1xx of them." );
+    my @_1xx = $marc->field( "1.." );
+    my $n1xx = scalar @_1xx;
+    if ( $n1xx > 1 ) {
+        $self->warn( "1XX: Only one 1XX tag is allowed, but I found $n1xx of them." );
+    }
+
+    if ( not $marc->field( 245 ) ) {
+        $self->warn( "245: No 245 tag." );
+    }
+
+
+    my %field_seen;
+    my $rules = $self->{_rules};
+    for my $field ( $marc->fields ) {
+        my $tagno = $field->tag;
+        my $tagrules = $rules->{$tagno} or next;
+
+        if ( $tagrules->{NR} && $field_seen{$tagno} ) {
+            $self->warn( "$tagno: Field is not repeatable." );
         }
 
-        if ( not $marc->field( 245 ) ) {
-                $self->warn( "245: No 245 tag." );
+        if ( $tagno >= 10 ) {
+            for my $ind ( 1..2 ) {
+                my $indvalue = $field->indicator($ind);
+                if ( not ($indvalue =~ $tagrules->{"ind$ind" . "_regex"}) ) {
+                    $self->warn(
+                        "$tagno: Indicator $ind must be ",
+                        $tagrules->{"ind$ind" . "_desc"},
+                        " but it's \"$indvalue\""
+                    );
+                }
+            } # for
+
+            my %sub_seen;
+            for my $subfield ( $field->subfields ) {
+                my ($code,$data) = @$subfield;
+
+                my $rule = $tagrules->{$code};
+                if ( not defined $rule ) {
+                    $self->warn( "$tagno: Subfield _$code is not allowed." );
+                } elsif ( ($rule eq "NR") && $sub_seen{$code} ) {
+                    $self->warn( "$tagno: Subfield _$code is not repeatable." );
+                }
+
+                if ( $data =~ /[\t\r\n]/ ) {
+                    $self->warn( "$tagno: Subfield _$code has an invalid control character" );
+                }
+
+                ++$sub_seen{$code};
+            } # for $subfields
+        } # if $tagno >= 10
+
+        # Check to see if a check_xxx() function exists, and call it on the field if it does
+        my $checker = "check_$tagno";
+        if ( $self->can( $checker ) ) {
+            $self->$checker( $field );
         }
 
+        ++$field_seen{$tagno};
+    } # for my $fields
 
-        my %field_seen;
-        my $rules = $self->{_rules};
-        for my $field ( $marc->fields ) {
-                my $tagno = $field->tag;
-                my $tagrules = $rules->{$tagno} or next;
-
-                if ( $tagrules->{NR} && $field_seen{$tagno} ) {
-                        $self->warn( "$tagno: Field is not repeatable." );
-                }
-
-                if ( $tagno >= 10 ) {
-                        for my $ind ( 1..2 ) {
-                                my $indvalue = $field->indicator($ind);
-                                if ( not ($indvalue =~ $tagrules->{"ind$ind" . "_regex"}) ) {
-                                        $self->warn(
-                                                "$tagno: Indicator $ind must be ",
-                                                $tagrules->{"ind$ind" . "_desc"},
-                                                " but it's \"$indvalue\""
-                                        );
-                                }
-                        }
-
-                        my %sub_seen;
-                        for my $subfield ( $field->subfields ) {
-                                my ($code,$data) = @$subfield;
-
-                                my $rule = $tagrules->{$code};
-                                if ( not defined $rule ) {
-                                        $self->warn( "$tagno: Subfield _$code is not allowed." );
-                                } elsif ( ($rule eq "NR") && $sub_seen{$code} ) {
-                                        $self->warn( "$tagno: Subfield _$code is not repeatable." );
-                                }
-
-                                if ( $data =~ /[\t\r\n]/ ) {
-                                        $self->warn( "$tagno: Subfield _$code has an invalid control character" );
-                                }
-
-                                ++$sub_seen{$code};
-                        }
-                }
-
-                # Check to see if a check_xxx() function exists, and call it on the field if it does
-                my $checker = "check_$tagno";
-                if ( $self->can( $checker ) ) {
-                        $self->$checker( $field );
-                }
-
-                ++$field_seen{$tagno};
-        } # for
-
-        return;
+    return;
 }
 
 =head2 check_I<xxx>( $field )
@@ -226,12 +225,12 @@ Makes sure that the 245 has an _a subfield.
 =cut
 
 sub check_245 {
-        my $self = shift;
-        my $field = shift;
+    my $self = shift;
+    my $field = shift;
 
-        if ( not $field->subfield( "a" ) ) {
-                $self->warn( "245: Must have a subfield _a." );
-        }
+    if ( not $field->subfield( "a" ) ) {
+        $self->warn( "245: Must have a subfield _a." );
+    }
 }
 
 =head1 SEE ALSO
@@ -288,61 +287,61 @@ sub _read_rules() {
 }
 
 sub _parse_tag_rules {
-        my $self = shift;
-        my $tagno = shift;
-        my $repeatable = shift;
-        my @lines = @_;
+    my $self = shift;
+    my $tagno = shift;
+    my $repeatable = shift;
+    my @lines = @_;
 
-        my $rules = ($self->{_rules}->{$tagno} ||= {});
-        $rules->{$repeatable} = $repeatable;
+    my $rules = ($self->{_rules}->{$tagno} ||= {});
+    $rules->{$repeatable} = $repeatable;
 
-        for ( @lines ) {
-                my @keyvals = split( /\s+/, $_, 3 );
-                my $key = shift @keyvals;
-                my $val = shift @keyvals;
+    for ( @lines ) {
+        my @keyvals = split( /\s+/, $_, 3 );
+        my $key = shift @keyvals;
+        my $val = shift @keyvals;
 
-                $rules->{$key} = $val;
+        $rules->{$key} = $val;
 
-                # Do magic for indicators
-                if ( $key =~ /^ind/ ) {
-                        my $desc;
-                        my $regex;
+        # Do magic for indicators
+        if ( $key =~ /^ind/ ) {
+            my $desc;
+            my $regex;
 
-                        if ( $val eq "blank" ) {
-                                $desc = "blank";
-                                $regex = qr/^ $/;
-                        } else {
-                                $desc = _nice_list($val);
-                                $val =~ s/^b/ /;
-                                $regex = qr/^[$val]$/;
-                        }
+            if ( $val eq "blank" ) {
+                $desc = "blank";
+                $regex = qr/^ $/;
+            } else {
+                $desc = _nice_list($val);
+                $val =~ s/^b/ /;
+                $regex = qr/^[$val]$/;
+            }
 
-                $rules->{$key."_desc"} = $desc;
-                $rules->{$key."_regex"} = $regex;
-                } # if indicator
-        } # while
+        $rules->{$key."_desc"} = $desc;
+        $rules->{$key."_regex"} = $regex;
+        } # if indicator
+    } # while
 }
 
 
 sub _nice_list($) {
-        my $str = shift;
+    my $str = shift;
 
-        if ( $str =~ s/(\d)-(\d)/$1 thru $2/ ) {
-                return $str;
-        }
+    if ( $str =~ s/(\d)-(\d)/$1 thru $2/ ) {
+        return $str;
+    }
 
-        my @digits = split( //, $str );
-        $digits[0] = "blank" if $digits[0] eq "b";
-        my $last = pop @digits;
-        return join( ", ", @digits ) . " or $last";
+    my @digits = split( //, $str );
+    $digits[0] = "blank" if $digits[0] eq "b";
+    my $last = pop @digits;
+    return join( ", ", @digits ) . " or $last";
 }
 
 sub _ind_regex($) {
-        my $str = shift;
+    my $str = shift;
 
-        return qr/^ $/ if $str eq "blank";
+    return qr/^ $/ if $str eq "blank";
 
-        return qr/^[$str]$/;
+    return qr/^[$str]$/;
 }
 
 
