@@ -3,6 +3,7 @@ Revision history for Perl extension MARC::Record.
 X.XX    XXXX XX, XXXX
 	[ENHANCEMENTS]
 	- doc fix to insert_field_grouped()
+	- tons of fixes and additions to MARC::Doc::Tutorial
 
 1.32	November 5th, 2003
 	[ENHANCEMENTS]
