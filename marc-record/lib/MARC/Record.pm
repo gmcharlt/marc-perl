@@ -17,7 +17,7 @@ use MARC::Field;
 
 Version 0.93
 
-    $Id: Record.pm,v 1.17 2002/05/22 03:32:56 petdance Exp $
+    $Id: Record.pm,v 1.18 2002/05/30 13:56:30 petdance Exp $
 
 =cut
 
@@ -27,6 +27,8 @@ use Exporter;
 our @ISA = qw( Exporter );
 our @EXPORTS = qw();
 our @EXPORT_OK = qw( LEADER_LEN );
+
+our $DEBUG = 0;
 
 use constant LEADER_LEN	=> 24;
 
