@@ -3,6 +3,7 @@ Revision history for Perl extension MARC::Record.
 1.30
 	[FIXES]
 	- Fixed an incorrect instruction in MARC::File::MicroLIF.
+	- Added sample usage for insert_grouped_fields()
 
 1.29	June 05, 2003	
 	[ENHANCEMENTS]

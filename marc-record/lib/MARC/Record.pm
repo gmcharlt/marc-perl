@@ -16,7 +16,7 @@ use Carp qw(croak);
 
 =head1 VERSION 1.29
 
-    $Id: Record.pm,v 1.63 2003/06/05 18:51:53 edsummers Exp $
+    $Id: Record.pm,v 1.64 2003/07/03 16:54:12 edsummers Exp $
 
 =cut
 
@@ -253,7 +253,10 @@ want. If you would like to insert at a specific point in the record you can use
 insert_fields_after() and insert_fields_before() methods which are described 
 below. 
 
-=cut 
+    my $field = MARC::Field->new( '510', 'Indexed by Google.' );
+    $record->insert_grouped_field( $field );
+
+=cut
 
 sub insert_grouped_field {
     my ($self,$new) = @_;
