@@ -15,7 +15,6 @@ lib/MARC/File/MicroLIF.pm
 lib/MARC/File.pm
 lib/MARC/File/USMARC.pm
 lib/MARC/File/Utils.pm
-lib/MARC/Lint.pm
 lib/MARC/Record.pm
 t/00.load.t
 t/10.camel.t
@@ -53,7 +52,6 @@ t/lineendings-0a.lif
 t/lineendings-0d0a.lif
 t/lineendings-0d.lif
 t/lineendings.t
-t/lint.t
 t/pod.t
 t/pod-coverage.t
 t/sample100.lif

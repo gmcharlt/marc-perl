@@ -22,7 +22,7 @@ Revision history for Perl extension MARC::Record.
               my $rec = MARC::Record->new();
               ...
               my $another = MARC::Record->new();
-
+        - removed MARC::Lint to a separate package on CPAN.
 
         [FIXES]
         - Clarified docs on the interface to field(), and fixed problem
