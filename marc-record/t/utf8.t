@@ -7,8 +7,8 @@ use MARC::File::USMARC;
 ## MARC::Record is not able to read MARC data back from disk if the
 ## record has Unicode (UTF-8) in it. This may be for a variety of
 ## reasons: calculating leader lengths based on character rather than
-## byte length; using directory values and substr() to extra fields when
-## substr uses character lengths rather than byte lengths; open files
+## byte length; using directory values and substr() to extract fields when
+## substr() uses character lengths rather than byte lengths; open files
 ## from disk without using the ':utf8' pragma, etc.
 
 TODO: {
