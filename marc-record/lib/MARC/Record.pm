@@ -17,7 +17,7 @@ use MARC::Field;
 
 Version 0.90
 
-    $Id: Record.pm,v 1.8 2002/04/01 21:34:43 petdance Exp $
+    $Id: Record.pm,v 1.9 2002/04/01 21:37:38 petdance Exp $
 
 =cut
 
@@ -53,14 +53,13 @@ Base constructor for the class.
 =cut
 
 sub new($) {
-	my $class = shift;
-	$class = ref($class) || $class;
-	my $self = {
-		_leader => undef,
-		_fields => [],
-		_warnings => [],
-		};
-	return bless $self, $class;
+    my $class = shift;
+    my $self = {
+	_leader => undef,
+	_fields => [],
+	_warnings => [],
+    };
+    return bless $self, $class;
 } # new()
 
 
@@ -97,9 +96,9 @@ sub clone {
     my $filtered = @keeper_tags ? [$self->field( @keeper_tags )] : undef;
 
     for my $field ( $self->fields() ) {
-	    if ( !$filtered || (grep {$field==$_} @$filtered ) ) {
-		    $clone->add_fields( $field->clone );
-	    }
+        if ( !$filtered || (grep {$field==$_} @$filtered ) ) {
+	    $clone->add_fields( $field->clone );
+        }
     }
 
     # XXX FIX THIS $clone->update_leader();
@@ -115,20 +114,20 @@ No error checking is done on the validity of the leader.
 =cut
 
 sub leader($) {
-	my $self = shift;
-	my $text = shift;
+    my $self = shift;
+    my $text = shift;
 
-	if ( defined $text ) {
-		(length($text) eq 24)
-			or $self->_warn( "Leader must be 24 bytes long" );
+    if ( defined $text ) {
+    	(length($text) eq 24)
+	    or $self->_warn( "Leader must be 24 bytes long" );
 =pod
-		($text =~ /4500$/)
-			$self->_warn( "Leader must end with 4500" );
+	($text =~ /4500$/)
+	    $self->_warn( "Leader must end with 4500" );
 =cut
-		$self->{_leader} = $text;
-	} # set the leader
+	$self->{_leader} = $text;
+    } # set the leader
 
-	return $self->{_leader};
+    return $self->{_leader};
 } # leader()
 
 
