@@ -16,7 +16,7 @@ use MARC::Field;
 
 Version 1.00
 
-    $Id: Record.pm,v 1.24 2002/07/15 19:41:55 petdance Exp $
+    $Id: Record.pm,v 1.25 2002/07/30 15:32:51 edsummers Exp $
 
 =cut
 
@@ -451,12 +451,16 @@ The warnings are items that you might be interested in, or might
 not.  It depends on how stringently you're checking data.  If
 you're doing some grunt data analysis, you probably don't care.
 
+A side effect of calling warnings() is that the warning buffer will
+be cleared.
+
 =cut
 
 sub warnings() {
     my $self = shift;
-
-    return @{$self->{_warnings}};
+    my @warnings = @{$self->{_warnings}};
+    $self->{_warnings} = []; 
+    return @warnings;
 }
 
 =head2 add_fields()

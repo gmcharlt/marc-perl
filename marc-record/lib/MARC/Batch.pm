@@ -13,7 +13,7 @@ use integer;
 
 Version 1.00
 
-    $Id: Batch.pm,v 1.9 2002/07/15 19:41:55 petdance Exp $
+    $Id: Batch.pm,v 1.10 2002/07/30 15:32:51 edsummers Exp $
 
 =cut
 
@@ -111,6 +111,21 @@ sub filename {
 
     return $self->{filename};
 }
+
+=head2 warnings() 
+
+Returns any warnings that have accumulated while processing a particular 
+batch file. As a side effect the warning buffer will be cleared.
+
+=cut
+
+sub warnings {
+    my $self = shift;
+    my $file = $self->{file}; 
+    return(undef) if !$file;
+    return ($file->warnings());
+}
+
 
 1;
 

@@ -14,7 +14,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 1.00
 
-    $Id: File.pm,v 1.12 2002/07/15 19:41:55 petdance Exp $
+    $Id: File.pm,v 1.13 2002/07/30 15:32:51 edsummers Exp $
 
 =cut
 
@@ -50,6 +50,7 @@ sub in {
 
     my $self = {
 	filename => $filename,
+	warnings => [],
     };
 
     bless $self, $class;
@@ -68,19 +69,17 @@ sub out {
 
 =head2 next()
 
-Reads the next record from the file handle passed in.
+Reads the next record from the file handle passed in. 
 
 =cut
 
 sub next {
     my $self = shift;
-
     my $rec = $self->_next();
-
     return $rec ? $self->decode($rec) : undef;
 }
 
-=head2 skip
+=head2 skip()
 
 Skips over the next record in the file.  Same as C<next()>,
 without the overhead of parsing a record you're going to throw away
@@ -96,6 +95,21 @@ sub skip {
     my $rec = $self->_next();
 
     return $rec ? 1 : undef;
+}
+
+=head2 warnings()
+
+Simlilar to MARC::Record and MARC::Batch, warnings() will return any 
+warnings that have accumulated while processing this file; and as a 
+side-effect will clear the warnings buffer.
+
+=cut 
+
+sub warnings {
+    my $self = shift;
+    my @warnings = @{ $self->{_warnings} };
+    $self->{_warnings} = [];
+    return(@warnings);
 }
 
 sub close {
@@ -118,6 +132,14 @@ sub _unimplemented() {
 sub write   { $_[0]->_unimplemented("write"); }
 sub decode  { $_[0]->_unimplemented("decode"); }
 
+# NOTE: _warn must be called as an object method
+
+sub _warn {
+    my ($self,$warning) = @_;
+    push( @{ $self->{_warnings} }, $warning );
+    return(undef);
+}
+
 # NOTE: _gripe can be called as an object method, or not.  Your choice.
 sub _gripe(@) {
     my @parms = @_;
@@ -135,7 +157,7 @@ sub _gripe(@) {
 	warn $ERROR;
     }
 
-    return undef;
+    return(undef);
 }
 
 1;
