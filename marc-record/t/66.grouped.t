@@ -1,8 +1,7 @@
-# $Id: 66.grouped.t,v 1.1 2002/09/12 16:01:07 edsummers Exp $
+# $Id: 66.grouped.t,v 1.2 2003/02/25 20:42:07 petdance Exp $
 
 use strict;
 use integer;
-eval 'use warnings' if $] >= 5.006;
 
 use Test::More tests=>6;
 

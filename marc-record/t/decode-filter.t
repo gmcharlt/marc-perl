@@ -1,10 +1,9 @@
-# $Id: decode-filter.t,v 1.1 2003/01/29 18:04:46 petdance Exp $
+# $Id: decode-filter.t,v 1.2 2003/02/25 20:42:07 petdance Exp $
 # Test creating a MARC record for the Camel book
 #
 # Bugs, comments, suggestions welcome: marc@petdance.com
 
 use strict;
-eval 'use warnings' if $] >= 5.006;
 
 use Test::More tests => 2;
 

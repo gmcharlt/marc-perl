@@ -1,11 +1,10 @@
-# $Id: 20.clone.t,v 1.6 2002/08/25 21:27:59 petdance Exp $
+# $Id: 20.clone.t,v 1.7 2003/02/25 20:41:58 petdance Exp $
 # Test creating a MARC record for the Camel book
 #
 # Bugs, comments, suggestions welcome: marc@petdance.com
 
 use integer;
 use strict;
-eval 'use warnings' if $] >= 5.006;
 
 use Test::More tests=>6;
 

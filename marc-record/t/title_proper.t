@@ -1,8 +1,7 @@
-# $Id: title_proper.t,v 1.2 2003/01/30 03:28:06 petdance Exp $
+# $Id: title_proper.t,v 1.3 2003/02/25 20:42:10 petdance Exp $
 
 use strict;
 use integer;
-eval 'use warnings' if $] >= 5.006;
 
 use Test::More tests=>14;
 

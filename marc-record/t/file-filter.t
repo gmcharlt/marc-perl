@@ -1,8 +1,7 @@
-# $Id: file-filter.t,v 1.1 2003/01/29 18:14:35 petdance Exp $
+# $Id: file-filter.t,v 1.2 2003/02/25 20:42:08 petdance Exp $
 
 use strict;
 use integer;
-eval 'use warnings' if $] >= 5.006;
 
 use constant CAMEL_SKIPS => 8;
 

@@ -1,8 +1,7 @@
-# $Id: convenience.t,v 1.3 2003/01/28 21:40:57 petdance Exp $
+# $Id: convenience.t,v 1.4 2003/02/25 20:42:07 petdance Exp $
 
 use strict;
 use integer;
-eval 'use warnings' if $] >= 5.006;
 
 use constant PERLCONF_SKIPS => 6;
 use constant CAMEL_SKIPS => 2;

@@ -1,8 +1,7 @@
-# $Id: 60.insert.t,v 1.6 2002/08/25 21:27:59 petdance Exp $
+# $Id: 60.insert.t,v 1.7 2003/02/25 20:42:00 petdance Exp $
 
 use strict;
 use integer;
-eval 'use warnings' if $] >= 5.006;
 
 use Test::More tests=>12;
 

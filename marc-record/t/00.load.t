@@ -1,7 +1,6 @@
-# $Id: 00.load.t,v 1.2 2002/08/25 21:27:59 petdance Exp $
+# $Id: 00.load.t,v 1.3 2003/02/25 20:41:52 petdance Exp $
 
 use strict;
-eval 'use warnings' if $] >= 5.006;
 
 use Test::More tests=>2;
 

@@ -1,8 +1,7 @@
-# $Id: 50.batch.t,v 1.8 2003/02/24 23:16:28 edsummers Exp $
+# $Id: 50.batch.t,v 1.9 2003/02/25 20:41:59 petdance Exp $
 
 use strict;
 use integer;
-eval 'use warnings' if $] >= 5.006;
 
 use Test::More tests=>268;
 

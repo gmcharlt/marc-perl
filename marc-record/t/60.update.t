@@ -1,10 +1,9 @@
-# $Id: 60.update.t,v 1.6 2002/08/26 17:34:13 edsummers Exp $
+# $Id: 60.update.t,v 1.7 2003/02/25 20:42:01 petdance Exp $
 # Test updating a MARC record for the Camel book
 
 use strict;
 use integer;
 use Data::Dumper;
-eval 'use warnings' if $] >= 5.006;
 
 use Test::More tests=>10;
 
