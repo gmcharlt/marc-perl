@@ -1,11 +1,13 @@
 package MARC::File::XML;
 
+use warnings;
 use strict;
 use base qw( MARC::File );
 use MARC::Record;
+use MARC::Field;
 use MARC::File::SAX;
 
-our $VERSION = '0.53';
+our $VERSION = '0.6';
 
 my $handler = MARC::File::SAX->new();
 my $parser = XML::SAX::ParserFactory->parser( Handler => $handler );
@@ -16,11 +18,22 @@ MARC::File::XML - Work with MARC data encoded as XML
 
 =head1 SYNOPSIS
 
+    ## reading
+
     my $batch = MARC::Batch->new( 'XML', $filename );
     my $record = $batch->next();
 
     my $file = MARC::File::XML::in( $filename );
     my $record = $file->next();
+
+    ## serialize a single MARC::Record object as XML
+    print $record->as_xml();
+
+    ## serializing more than one MARC::Record objects as XML
+    print MARC::File::XML::xml_header();
+    print MARC::File::XML::xml_record( $record1 );
+    print MARC::File::XML::xml_record( $record2 );
+    print MARC::File::XML::xml_footer();
 
 =head1 DESCRIPTION
 
@@ -44,18 +57,95 @@ at L<http://perl4lib.perl.org>.
 
 =head1 METHODS
 
+When you use MARC::File::XML your MARC::Record objects will have two new
+additional methods available to them: 
+
+=head2 new_from_xml()
+
+=head2 as_xml()
+
+=cut 
+
+sub MARC::Record::as_xml {
+    my $record = shift;
+    return MARC::File::XML::encode( $record );
+}
+
+=pod
+
+If you end up building batches of records in XML files you will probably want 
+to use these functions instead:
+
+=head2 xml_header() 
+
+=cut 
+
+sub xml_header {
+    return( <<MARC_XML_HEADER );
+<?xml version="1.0" encoding="UTF-8"?>
+<collection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd" xmlns="http://www.loc.gov/MARC21/slim">
+MARC_XML_HEADER
+}
+
+=head2 xml_footer()
+
 =cut
+
+sub xml_footer {
+    return( "</collection>" );
+}
+
+=head2 xml_record()
+
+=cut
+
+sub xml_record {
+    my $record = shift;
+    my @xml = ();
+    push( @xml, "<record>" );
+    push( @xml, "  <leader>" . $record->leader() . "</leader>" );
+    foreach my $field ( $record->fields() ) {
+        my $tag = $field->tag();
+        if ( $field->is_control_tag() ) { 
+            my $data = $field->data();
+            push( @xml, qq(  <controlfield tag="$tag">$data</controlfield>) );
+        } else {
+            my $i1 = $field->indicator( 1 );
+            my $i2 = $field->indicator( 2 );
+            push( @xml, qq(  <datafield tag="$tag" ind1="$i1" ind2="$i2">) );
+            foreach my $subfield ( $field->subfields() ) { 
+                my ( $code, $data ) = @$subfield;
+                push( @xml, qq(    <subfield code="$code">$data</subfield>) );
+            }
+            push( @xml, "  </datafield>" );
+        }
+    }
+    push( @xml, "</record>\n" );
+    return( join( "\n", @xml ) );
+}
 
 sub _next {
     my $self = shift;
+    my $xml = $self->{ xml } || '';
     my $fh = $self->{ fh };
 
     ## return undef at the end of the file
     return if eof($fh);
 
     ## get a chunk of xml for a record
-    local $/ = '</record>';
-    my $xml = <$fh>;
+    my $found = 0;
+    while ( ! $found ) { 
+	my $line = <$fh>;
+	last if ! defined( $line );
+	my ( $pre, $end, $post ) = $line =~ m{^ (.*) (</record.*?>) (.*) $}ix;
+	if ( ! $end ) { 
+	    $xml .= $line;
+	} else {
+	    $found = 1;
+	    $xml .= $pre;
+	    $self->{ xml } = $post;
+	}
+    }
 
     ## trim stuff before the start record element 
     $xml =~ s/.*<record.*?>/<record>/s;
@@ -70,8 +160,7 @@ sub _next {
 =head2 decode()
 
 You probably don't ever want to call this method directly. If you do 
-you should pass in a MARC::Record as the first argument, and a chunk of XML 
-text as the second.
+you should pass in a chunk of XML as the argument. 
 
 It is normally invoked by a call to next(), see L<MARC::Batch> or L<MARC::File>.
 
@@ -102,9 +191,22 @@ sub decode {
     
 }
 
+=head2 encode()
+
+You probably want to use the as_marc() method on your MARC::Record object
+instead of calling this directly. But if you want to you just need to 
+pass in the MARC::Record object you wish to encode as XML, and you will be
+returned the XML as a scalar.
+
+=cut
+
 sub encode {
-    # not implemented yet
-    # interested? let me know ehs@pobox.com
+    my $record = shift;
+    my @xml = ();
+    push( @xml, xml_header() );
+    push( @xml, xml_record( $record ) );
+    push( @xml, xml_footer() );
+    return( join( "\n", @xml ) );
 }
 
 =head1 TODO
