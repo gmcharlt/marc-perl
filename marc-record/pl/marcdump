@@ -58,19 +58,20 @@ Usage: marcdump [options] file(s)
             Print a statistical summary by file at the end
 END
 
-my $print = 1;
-my $quiet = 0;
-my $stats = 1;
-my $help = 0;
+my $opt_print = 1;
+my $opt_quiet = 0;
+my $opt_stats = 1;
+my $opt_help = 0;
 
-my $rc = GetOptions(
-	"print!" => \$print,
-	"quiet"  => \$quiet,
-	"stats!" => \$stats,
-	"help"   => \$help,
+my $rc =
+    GetOptions(
+	"print!" => \$opt_print,
+	"quiet"  => \$opt_quiet,
+	"stats!" => \$opt_stats,
+	"help"   => \$opt_help,
 	);
 
-die USAGE if $help;
+die USAGE if $opt_help;
 	
 if ( not $rc ) {
 	warn "Illegal command-line option (use --help for usage)\n";
@@ -85,28 +86,28 @@ if ( @files == 0 ) {
 
 my %counts;
 my %errors;
-for my $IN ( @files ) {
-	$counts{$IN} = 0;
-	$errors{$IN} = 0;
+for my $filename ( @files ) {
+	$counts{$filename} = 0;
+	$errors{$filename} = 0;
 
-	warn "$IN\n" unless $quiet;
-	open( IN, "<", $IN ) or die "Couldn't open $IN: $!\n";
+	warn "$filename\n" unless $opt_quiet;
+	open( $fh, "<", $filename ) or die "Couldn't open $filename: $!\n";
 
-	while ( !eof(IN) ) {
-		++$counts{$IN};
-		warn "$counts{$IN} records\n" if ( !$quiet && ($counts{$IN} % 1000 == 0) );
-		my $marc = MARC::Record::next_from_file( *IN ) or die $MARC::Record::ERROR;
+	while ( !eof($fh) ) {
+		++$counts{$filename};
+		warn "$counts{$filename} records\n" if ( !$opt_quiet && ($counts{$filename} % 1000 == 0) );
+		my $marc = MARC::Record::next_from_file( *$fh ) or die $MARC::Record::ERROR;
 
-		print $marc->as_formatted, "\n\n" if $print;
+		print $marc->as_formatted, "\n\n" if $opt_print;
 		if ( $marc->warnings() ) {
-			++$errors{$IN};
+			++$errors{$filename};
 			print join( "\n", $marc->warnings(), "" );
 		}
 	} # while
-	close IN;
+	close $fh;
 } # for 
 
-if ( $stats ) {
+if ( $opt_stats ) {
 	print " Recs  Errs Filename\n";
 	print "----- ----- --------\n";
 	for my $key ( sort keys %counts ) {
