@@ -15,7 +15,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 1.00
 
-    $Id: File.pm,v 1.10 2002/07/03 20:14:31 petdance Exp $
+    $Id: File.pm,v 1.11 2002/07/03 21:33:03 petdance Exp $
 
 =cut
 
@@ -121,18 +121,18 @@ sub decode  { $_[0]->_unimplemented("decode"); }
 
 # NOTE: _gripe can be called as an object method, or not.  Your choice.
 sub _gripe(@) {
-    if ( @_ ) {
-	my $self;
+    my @parms = @_;
+    if ( @parms ) {
+	my $self = shift @parms;
 
-	$self = shift if ref($_[0]) =~ /^MARC::File/;	# Skip first parm if it's a $self
-	my @parms = @_;
-	
-	if ( $self ) {
+	if ( ref($self) =~ /^MARC::File/ ) {
 	    push( @parms, " at byte ", tell($self->{fh}) ) if $self->{fh};
 	    push( @parms, " in file ", $self->{filename} ) if $self->{filename};
+	} else {
+	    unshift( @parms, $self );
 	}
 
-	$ERROR = join( "", @_ );
+	$ERROR = join( "", @parms );
 	warn $ERROR;
     }
 
