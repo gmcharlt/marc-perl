@@ -3,13 +3,16 @@
 use strict;
 use integer;
 
+use File::Spec;
+
 use Test::More 'no_plan';
 
 BEGIN {
     use_ok( 'MARC::File::USMARC' );
 }
 
-my $file = MARC::File::USMARC->in( 't/filler.usmarc' );
+my $filename = File::Spec->catfile( 't', 'filler.usmarc' );
+my $file = MARC::File::USMARC->in( $filename );
 isa_ok( $file, 'MARC::File::USMARC', 'opened the test file' );
 
 
