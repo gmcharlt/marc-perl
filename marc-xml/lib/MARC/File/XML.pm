@@ -18,18 +18,18 @@ MARC::File::XML - Work with MARC data encoded as XML
 
 =head1 SYNOPSIS
 
-    ## reading
-
+    ## reading with MARC::Batch
     my $batch = MARC::Batch->new( 'XML', $filename );
     my $record = $batch->next();
 
+    ## or reading with MARC::File::XML explicitly
     my $file = MARC::File::XML::in( $filename );
     my $record = $file->next();
 
     ## serialize a single MARC::Record object as XML
     print $record->as_xml();
 
-    ## serializing more than one MARC::Record objects as XML
+    ## or serializing more than one MARC::Record objects as XML
     print MARC::File::XML::xml_header();
     print MARC::File::XML::xml_record( $record1 );
     print MARC::File::XML::xml_record( $record2 );
@@ -62,13 +62,24 @@ additional methods available to them:
 
 =head2 new_from_xml()
 
+=cut 
+
+sub MARC::Record::new_from_xml {
+    my $xml = shift;
+    ## to allow calling as MARC::Record::new_from_xml()
+    ## or MARC::Record->new_from_xml()
+    $xml = shift if ( ref($xml) || ($xml eq "MARC::Record") );
+    return( MARC::File::XML::decode( $xml ) );
+}
+
+
 =head2 as_xml()
 
 =cut 
 
 sub MARC::Record::as_xml {
     my $record = shift;
-    return MARC::File::XML::encode( $record );
+    return(  MARC::File::XML::encode( $record ) );
 }
 
 =pod
