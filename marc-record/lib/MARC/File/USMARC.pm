@@ -15,9 +15,9 @@ use vars qw( $ERROR );
 
 =head1 VERSION
 
-Version 1.13
+Version 1.14
 
-    $Id: USMARC.pm,v 1.30 2002/11/27 16:39:16 edsummers Exp $
+    $Id: USMARC.pm,v 1.31 2002/11/27 20:12:03 petdance Exp $
 
 =cut
 
