@@ -1,0 +1,86 @@
+#!/usr/bin/perl
+
+
+
+# Quick & Dirty script to turn
+# http://www.loc.gov/marc/bibliographic/ecbdist.html into
+# the format used by MARC::Lint.pm
+# takes text version of ecbdist.html as input
+# skips fixed fields and data marked [OBSOLETE]
+# Dosn't handle the tags 841-88X properly excise these manually
+
+my $v = 0;
+while(<>) {
+    unless ($v) {
+	if (/010/) {
+	    $v = 1;
+	} else {
+	    next;
+	}
+    }
+    s/^ *//;
+    if (/^(\d\d\d) -/) {
+	$tag = $1;
+	if (/OBSOLETE/) { 
+	    $in_tag = 0;
+	    next; 
+	}
+	$in_tag = 1;
+	if (/\(NR\)/) {
+	    print "\n$tag\tNR\n";
+	} else {
+	    print "\n$tag\tR\n";
+	}
+	$i1 = $i2 = '';
+	next;
+    }
+    if ($in_tag) {
+	next if /OBSOLETE/;
+	if (/^First/) {
+	    $i = 1;
+	} elsif (/^Second/) {
+	    $i = 2;
+	    if ($i1=~m/^#$/) {
+		print "ind1\tblank\n";
+	    } else {
+		$i1=~s/#/b/;
+		print "ind1\t$i1\n";
+	    }
+	} elsif (/^Subfield/) {
+	    $i = 0;
+	    if ($i2=~m/^#$/) {
+		print "ind2\tblank\n";
+	    } else {
+		$i2=~s/#/b/;
+		print "ind2\t$i2\n";
+	    }
+	} else {
+	    if ($i) {
+		next if /OBSOLETE/;
+		$data = '';
+		if (/^(\d-\d)/) {
+		    $data = $1;
+		} elsif (/^[#0123456789]/) {
+		    $data = substr($_, 0, 1);
+		}
+		if ($i == 1) {
+		    $i1 .= $data;
+		} elsif ($i == 2) {
+		    $i2 .= $data;
+		}
+
+	    } else {
+		next if /OBSOLETE/;
+		if (/\$(.) -/) {
+		    print "$1\t";
+		    if (/\(R\)/) {
+			print "R\n";
+		    } else {
+			print "NR\n";
+		    }
+		}
+	    }
+	}
+    }
+}
+
