@@ -1,5 +1,15 @@
 Revision history for Perl extension MARC::Record.
 
+1.00	March 31, 2002
+	- MARC::Record et al have been at 0.whatever for long enough,
+	and I think they've proven themselves.  Numbering starts now
+	at 1.00.
+
+	- Created MARC::Batch as the basis for future data processing.
+
+	- Now fully embracing all the glory of 5.6+ Perl, such as the
+	"our" keyword and $fh filehandles.
+
 0.15	March 19, 2002
 	- Added clone() methods for MARC::Field and MARC::Record, so
 	you can make a copy of an existing record.  Plus, this acts
