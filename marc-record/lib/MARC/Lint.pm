@@ -50,8 +50,6 @@ the following errors are generated:
 	245: Subfield _a is not repeatable.
 	250: Field is not repeatable.
 	260: Subfield _r is not valid.
-	260: Must have a subfield _c.
-	590: Indicator 1 must be blank
 	856: Indicator 2 must be blank, 0, 1, 2 or 8
 
 =head1 DESCRIPTION

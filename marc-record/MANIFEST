@@ -45,6 +45,7 @@ t/lineendings-0a.lif
 t/lineendings-0d.lif
 t/lineendings-0d0a.lif
 t/lineendings.t
+t/lint.t
 t/sample1.lif
 t/sample1.usmarc
 t/sample100.lif
