@@ -17,7 +17,7 @@ use MARC::Field;
 
 Version 0.90
 
-    $Id: Record.pm,v 1.9 2002/04/01 21:37:38 petdance Exp $
+    $Id: Record.pm,v 1.10 2002/04/01 22:16:19 petdance Exp $
 
 =cut
 
@@ -48,12 +48,15 @@ Warnings are kept with the record and accessible in the C<warnings()> method.
 
 =head2 new()
 
-Base constructor for the class. 
+Base constructor for the class.  It just returns a completely empty record.
+To get real data, you'll need to populate it with fields, or use one of
+the MARC::File::* modules to read from a file.
 
 =cut
 
-sub new($) {
+sub new {
     my $class = shift;
+    $class = ref($class) || $class; # Handle cloning
     my $self = {
 	_leader => undef,
 	_fields => [],
