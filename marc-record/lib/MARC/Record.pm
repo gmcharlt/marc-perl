@@ -17,7 +17,7 @@ use MARC::Field;
 
 Version 0.93
 
-    $Id: Record.pm,v 1.18 2002/05/30 13:56:30 petdance Exp $
+    $Id: Record.pm,v 1.19 2002/06/10 22:07:49 edsummers Exp $
 
 =cut
 
@@ -69,6 +69,297 @@ sub new {
 
 
 
+
+=head2 fields()
+
+Returns a list of all the fields in the record. The list contains 
+a MARC::Field object for each field in the record.
+
+=cut
+
+sub fields() {
+    my $self = shift;
+    return @{$self->{_fields}};
+}
+
+=head2 field(tagspec(s))
+
+Returns a list of tags that match the field specifier, or in scalar
+context, just the first matching tag.
+
+The field specifier can be a simple number (i.e. "245"), or use the "X" 
+notation of wildcarding (i.e. subject tags are "6XX").
+
+=cut
+
+my %field_regex;
+
+sub field {
+    my $self = shift;
+    my @specs = @_;
+
+    my @list = ();
+    for my $tag ( @specs ) {
+	my $regex = $field_regex{ $tag };
+
+	# Compile & stash it if necessary
+	if ( not defined $regex ) {
+	    my $pattern = $tag;
+	    $pattern =~ s/X/\\d/g;
+	    $regex = qr/^$pattern$/;
+	    $field_regex{ $tag } = $regex;
+	} # not defined
+
+	for my $maybe ( $self->fields ) {
+	    if ( $maybe->tag =~ $regex ) {
+		return $maybe unless wantarray;
+
+		push( @list, $maybe );
+	    } # if
+	} # for $maybe
+    } # for $tag
+
+    return @list;
+}
+
+=head2 subfield(tag,subfield)
+
+Shortcut method for getting just a subfield for a tag.  These are equivalent:
+
+  my $title = $marc->field(245)->subfield("a");
+  my $title = $marc->subfield(245,"a");
+
+If either the field or subfield can't be found, C<undef> is returned.
+
+=cut
+
+sub subfield($$) {
+    my $self = shift;
+    my $tag = shift;
+    my $subfield = shift;
+
+    my $field = $self->field($tag) or return undef;
+    return $field->subfield($subfield);
+} # subfield()
+
+=head2 append_field(C<$field>)
+
+Appends the field specified by $field to the end of the record. $field
+needs to be a MARC::Field object.
+
+    my $field = MARC::Field->new('590','','','a' => 'My local note.');
+    $record->append_field($field);
+
+=cut
+
+sub append_field($) {
+    my ($r,$f) = @_;
+    if (ref($f) ne 'MARC::Field') {
+	return(_gripe('argument must be a MARC::Field object'))
+    }
+    push(@{ $r->{_fields} }, $f); 
+    return(1);
+}
+
+=head2 insert_field_before($before_field,$new_field)
+
+Inserts the field specified by $new_field before the field $before_field. 
+Returns TRUE (1) on success, FALSE (0) otherwise. Both $new_field and 
+$before_field need to be MARC::Field objects.
+
+    my $before_field = $record->field('260');
+    my $new_field = MARC::Field->new('250','','','a' => '2nd ed.');
+    $record->insert_field_before($before_field,$after_field);
+
+=cut
+
+sub insert_field_before() {
+
+    my ($self,$before,$new) = @_;
+    if (ref($before) ne 'MARC::Field' or ref($new) ne 'MARC::Field') {
+	return(_gripe('Arguments must be two MARC::Field objects'))
+    }
+
+    ## find position of $before
+    my $fields = $self->{_fields};
+    my $pos = 0;
+    foreach my $f (@$fields) {
+	last if ($f == $before);
+	$pos++;
+    }
+
+    ## insert before $before 
+    if ($pos >= @$fields) {
+	return(_gripe("Couldn't find field to insert before"));
+    }
+    splice(@$fields,$pos,0,$new);
+    return(1);
+
+}
+
+=head2 insert_field_after($after_field,$new_field)
+
+Inserts the field specified by $new_field after the field $after_field in the
+MARC::Record object. Returns true (1) on success, and false (0) otherwise.
+Both $new_field and $after_field need to be MARC::Field objects.
+
+    my $after_field = $record->field('245');
+    my $new_field = MARC::Field->new('250','','','a' => '2nd ed.');
+    $record->insert_field_after($after_field,$new_field);
+
+=cut
+
+sub insert_field_after($$) {
+
+    my ($self,$after,$new) = @_;
+    if (ref($after) ne 'MARC::Field' or ref($new) ne 'MARC::Field') {
+	return(_gripe('Arguments must be two MARC::Field objects'));
+    }
+
+    ## find position of $after
+    my $fields = $self->{_fields};
+    my $pos = 0;
+    foreach my $f (@$fields) {
+	last if ($f == $after);
+	$pos++;
+    }
+
+    ## insert after $after
+    if ($pos+1 >= @$fields) { 
+	return(_gripe("Couldn't find field to insert after"));
+    }
+    splice(@$fields,$pos+1,0,$new);
+    return(1);
+
+}
+
+=head2 delete_field(C<$field>)
+
+Deletes a field from the record.
+
+The field must have been retrieved from the record using the 
+C<field()> method.  For example, to delete a 526 tag if it exists:
+
+    my $tag526 = $marc->field( "526" );
+    if ( $tag526 ) {
+	$marc->delete_field( $tag526 );
+    }
+
+C<delete_field()> returns the number of fields that were deleted.
+This shouldn't be 0 unless you didn't get the tag properly.
+
+=cut
+
+sub delete_field($) {
+    my $self = shift;
+    my $deleter = shift;
+    my $list = $self->{_fields};
+
+    my $old_count = @$list;
+    @$list = grep { $_ != $deleter } @$list;
+    return $old_count - @$list;
+}
+
+=head2 as_usmarc()
+
+This is a wrapper around C<MARC::File::USMARC::encode()> for compatibility with
+older versions of MARC::Record.
+
+=cut
+
+sub as_usmarc {
+    my $self = shift;
+
+    require MARC::File::USMARC;
+
+    return MARC::File::USMARC::encode( $self );
+}
+
+=head2 as_formatted()
+
+Returns a pretty string for printing in a MARC dump.
+
+=cut
+
+sub as_formatted() {
+    my $self = shift;
+	    
+    my @lines = ( "LDR " . ($self->{_leader} || "") );
+    for my $field ( @{$self->{_fields}} ) {
+	    push( @lines, $field->as_formatted() );
+    }
+
+    return join( "\n", @lines );
+} # as_formatted
+
+=head2 title()
+
+Returns the title from the 245 tag.
+Note that it is a string, not a MARC::Field record.
+
+=cut
+
+sub title() {
+    my $self = shift;
+
+    my $field = $self->field(245) or return "<no 245 tag found>";
+
+    return $field->as_string;
+}
+
+=head2 author()
+
+Returns the author from the 100, 110 or 111 tag.
+Note that it is a string, not a MARC::Field record.
+
+=cut
+
+sub author() {
+    my $self = shift;
+
+    for my $tag ( qw( 100 110 111 ) ) {
+	my $field = $self->field($tag);
+	return $field->as_string() if $field;
+    }
+
+    return "<No author tag found>";
+}
+
+=head2 leader([text])
+
+Returns the leader for the record.  Sets the leader if I<text> is defined.
+No error checking is done on the validity of the leader.
+
+=cut
+
+sub leader($) {
+    my $self = shift;
+    my $text = shift;
+
+    if ( defined $text ) {
+    	(length($text) eq 24)
+	    or $self->_warn( "Leader must be 24 bytes long" );
+	$self->{_leader} = $text;
+    } # set the leader
+
+    return $self->{_leader};
+} # leader()
+
+=head2 set_leader_lengths( $reclen, $baseaddr )
+
+Internal function for updating the leader's length and base address.
+
+=cut
+
+sub set_leader_lengths($$) {
+    my $self = shift;
+    my $reclen = shift;
+    my $baseaddr = shift;
+
+    substr($self->{_leader},0,5)  = sprintf("%05d",$reclen);
+    substr($self->{_leader},12,5) = sprintf("%05d",$baseaddr);
+}
+
 =head2 clone( [field specs] )
 
 The C<clone()> method makes a copy of an existing MARC record and returns
@@ -111,50 +402,31 @@ sub clone {
     return $clone;
 }
 
-=head2 leader([text])
+=head2 warnings()
 
-Returns the leader for the record.  Sets the leader if I<text> is defined.
-No error checking is done on the validity of the leader.
+Returns the warnings that were created when the record was read.
+These are things like "Invalid indicators converted to blanks".
+
+The warnings are items that you might be interested in, or might
+not.  It depends on how stringently you're checking data.  If
+you're doing some grunt data analysis, you probably don't care.
 
 =cut
 
-sub leader($) {
+sub warnings() {
     my $self = shift;
-    my $text = shift;
 
-    if ( defined $text ) {
-    	(length($text) eq 24)
-	    or $self->_warn( "Leader must be 24 bytes long" );
-=pod
-	($text =~ /4500$/)
-	    $self->_warn( "Leader must end with 4500" );
-=cut
-	$self->{_leader} = $text;
-    } # set the leader
-
-    return $self->{_leader};
-} # leader()
-
-
-=head2 set_leader_lengths( $reclen, $baseaddr )
-
-Internal function for updating the leader's length and base address.
-
-=cut
-
-sub set_leader_lengths($$) {
-    my $self = shift;
-    my $reclen = shift;
-    my $baseaddr = shift;
-
-    substr($self->{_leader},0,5)  = sprintf("%05d",$reclen);
-    substr($self->{_leader},12,5) = sprintf("%05d",$baseaddr);
+    return @{$self->{_warnings}};
 }
 
 =head2 add_fields()
 
-Adds MARC::Field objects to the end of the list.  Returns the number
-of fields added, or C<undef> if there was an error.
+add_fields() is now deprecated, and users are encouraged to use append_field(), 
+insert_field_after(), and insert_field_before() since they do what you want 
+probably. It is still here though, for backwards compatability.
+
+add_fields() adds MARC::Field objects to the end of the list.  Returns the 
+number of fields added, or C<undef> if there was an error.
 
 There are three ways of calling C<add_fields()> to add data to the record.
 
@@ -187,191 +459,39 @@ There are three ways of calling C<add_fields()> to add data to the record.
 =cut
 
 sub add_fields(@) {
-	my $self = shift;
+    my $self = shift;
 
-	my $nfields = 0;
-	my $fields = $self->{_fields};
+    my $nfields = 0;
+    my $fields = $self->{_fields};
 
-	while ( my $parm = shift ) {
-		# User handed us a list of data (most common possibility)
-		if ( ref($parm) eq "" ) {
-			my $field = MARC::Field->new( $parm, @_ )
-				or return _gripe( $MARC::Field::ERROR );
-			push( @$fields, $field );
-			++$nfields;
-			last; # Bail out, we're done eating parms
+    while ( my $parm = shift ) {
+	# User handed us a list of data (most common possibility)
+	if ( ref($parm) eq "" ) {
+	    my $field = MARC::Field->new( $parm, @_ )
+		    or return _gripe( $MARC::Field::ERROR );
+	    push( @$fields, $field );
+	    ++$nfields;
+	    last; # Bail out, we're done eating parms
 
-		# User handed us an object.
-		} elsif ( ref($parm) eq "MARC::Field" ) {
-			push( @$fields, $parm );
-			++$nfields;
+	# User handed us an object.
+	} elsif ( ref($parm) eq "MARC::Field" ) {
+	    push( @$fields, $parm );
+	    ++$nfields;
 
-		# User handed us an anonymous list of parms
-		} elsif ( ref($parm) eq "ARRAY" ) {
-			my $field = MARC::Field->new(@$parm) 
-				or return _gripe( $MARC::Field::ERROR );
-			push( @$fields, $field );
-			++$nfields;
+	# User handed us an anonymous list of parms
+	} elsif ( ref($parm) eq "ARRAY" ) {
+	    my $field = MARC::Field->new(@$parm) 
+		or return _gripe( $MARC::Field::ERROR );
+	    push( @$fields, $field );
+	    ++$nfields;
 
-		} else {
-			return _gripe( "Unknown parm of type", ref($parm), " passed to add_fields()" );
-		} # if
+	} else {
+	    return _gripe( "Unknown parm of type", ref($parm), " passed to add_fields()" );
+	} # if
 
-	} # while
+    } # while
 
-	return $nfields;
-}
-
-=head2 delete_field(C<$field>)
-
-Deletes a field from the record.
-
-The field must have been retrieved from the record using the 
-C<field()> method.  For example, to delete a 526 tag if it exists:
-
-    my $tag526 = $marc->field( "526" );
-    if ( $tag526 ) {
-	$marc->delete_field( $tag526 );
-    }
-
-C<delete_field()> returns the number of fields that were deleted.
-This shouldn't be 0 unless you didn't get the tag properly.
-
-=cut
-
-sub delete_field($) {
-	my $self = shift;
-	my $deleter = shift;
-	my $list = $self->{_fields};
-
-	my $old_count = @$list;
-	@$list = grep { $_ != $deleter } @$list;
-	return $old_count - @$list;
-}
-
-
-=head2 fields()
-
-Returns a list of all the fields in the record.
-
-=cut
-
-sub fields() {
-	my $self = shift;
-
-	return @{$self->{_fields}};
-}
-
-=head2 field(tagspec(s))
-
-Returns a list of tags that match the field specifier, or in scalar
-context, just the first matching tag.
-
-The field
-specifier can be a simple number (i.e. "245"), or use the "X" notation
-of wildcarding (i.e. subject tags are "6XX").
-
-=cut
-
-my %field_regex;
-
-sub field {
-	my $self = shift;
-	my @specs = @_;
-
-	my @list = ();
-	for my $tag ( @specs ) {
-		my $regex = $field_regex{ $tag };
-
-		# Compile & stash it if necessary
-		if ( not defined $regex ) {
-			my $pattern = $tag;
-			$pattern =~ s/X/\\d/g;
-			$regex = qr/^$pattern$/;
-			$field_regex{ $tag } = $regex;
-		} # not defined
-
-		for my $maybe ( $self->fields ) {
-			if ( $maybe->tag =~ $regex ) {
-				return $maybe unless wantarray;
-
-				push( @list, $maybe );
-			} # if
-		} # for $maybe
-	} # for $tag
-
-	return @list;
-}
-
-=head2 subfield(tag,subfield)
-
-Shortcut method for getting just a subfield for a tag.  These are equivalent:
-
-  my $title = $marc->field(245)->subfield("a");
-  my $title = $marc->subfield(245,"a");
-
-If either the field or subfield can't be found, C<undef> is returned.
-
-=cut
-
-sub subfield($$) {
-	my $self = shift;
-	my $tag = shift;
-	my $subfield = shift;
-
-	my $field = $self->field($tag) or return undef;
-	return $field->subfield($subfield);
-} # subfield()
-
-
-=head2 as_formatted()
-
-Returns a pretty string for printing in a MARC dump.
-
-=cut
-
-sub as_formatted() {
-	my $self = shift;
-		
-	my @lines = ( "LDR " . ($self->{_leader} || "") );
-	for my $field ( @{$self->{_fields}} ) {
-		push( @lines, $field->as_formatted() );
-	}
-
-	return join( "\n", @lines );
-} # as_formatted
-
-=head2 title()
-
-Returns the title from the 245 tag.
-Note that it is a string, not a MARC::Field record.
-
-=cut
-
-sub title() {
-	my $self = shift;
-
-	my $field = $self->field(245) or return "<no 245 tag found>";
-
-	return $field->as_string;
-}
-
-=head2 author()
-
-Returns the author from the 100, 110 or 111 tag.
-Note that it is a string, not a MARC::Field record.
-
-=cut
-
-sub author() {
-	my $self = shift;
-
-	for my $tag ( qw( 100 110 111 ) ) {
-		my $field = $self->field($tag);
-		return $field->as_string() if $field;
-	}
-
-	return "<No author tag found>";
+    return $nfields;
 }
 
 =head2 new_from_usmarc( $marcblob )
@@ -390,52 +510,20 @@ sub new_from_usmarc {
     return MARC::File::USMARC::decode( $blob );
 }
 
-=head2 as_usmarc()
-
-This is a wrapper around C<MARC::File::USMARC::encode()> for compatibility with
-older versions of MARC::Record.
-
-=cut
-
-sub as_usmarc {
-    my $self = shift;
-
-    require MARC::File::USMARC;
-
-    return MARC::File::USMARC::encode( $self );
-}
-
-
-=head2 warnings()
-
-Returns the warnings that were created when the record was read.
-These are things like "Invalid indicators converted to blanks".
-
-The warnings are items that you might be interested in, or might
-not.  It depends on how stringently you're checking data.  If
-you're doing some grunt data analysis, you probably don't care.
-
-=cut
-
-sub warnings() {
-	my $self = shift;
-
-	return @{$self->{_warnings}};
-}
 
 # NOTE: _warn is an object method
 sub _warn($) {
-	my $self = shift;
+    my $self = shift;
 
-	push( @{$self->{_warnings}}, join( "", @_ ) );
+    push( @{$self->{_warnings}}, join( "", @_ ) );
 }
 
 
 # NOTE: _gripe is NOT an object method
 sub _gripe(@) {
-	$ERROR = join( "", @_ );
+    $ERROR = join( "", @_ );
 
-	return undef;
+    return undef;
 }
 
 
