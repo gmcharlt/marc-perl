@@ -19,7 +19,7 @@ use Carp qw(croak);
 
 Version 1.17
 
-    $Id: Record.pm,v 1.49 2003/02/12 15:21:12 edsummers Exp $
+    $Id: Record.pm,v 1.50 2003/02/12 15:59:52 edsummers Exp $
 
 =cut
 
@@ -464,7 +464,7 @@ sub leader {
     return $self->{_leader};
 } # leader()
 
-=head2 set_leader_lengths( $reclen, $baseaddr )
+=head2 set_leader_lengths($reclen,$baseaddr)
 
 Internal function for updating the leader's length and base address.
 
