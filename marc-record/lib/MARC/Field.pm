@@ -419,11 +419,11 @@ sub as_formatted() {
     } else {
         my $hanger = sprintf( "%03s %1.1s%1.1s", $self->{_tag}, $self->{_ind1}, $self->{_ind2} );
 
-        my @subdata = @{$self->{_subfields}};
-        while ( @subdata ) {
-            my $code = shift @subdata;
-            my $text = shift @subdata;
-            push( @lines, sprintf( "%-6.6s _%1.1s%s", $hanger, $code, $text ) );
+	my $subs = $self->{_subfields};
+	my $nfields = @$subs / 2;
+	my $offset = 0;
+	for my $i ( 1..$nfields ) {
+            push( @lines, sprintf( "%-6.6s _%1.1s%s", $hanger, $subs->[$offset++], $subs->[$offset++] ) );
             $hanger = "";
         } # for
     }
