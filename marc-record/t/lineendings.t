@@ -1,22 +1,26 @@
-# $Id: lineendings.t,v 1.1 2003/03/12 20:19:22 moregan Exp $
+# $Id: lineendings.t,v 1.2 2003/05/08 03:01:52 petdance Exp $
 # Test creating a MARC record for the Camel book
 #
 # Bugs, comments, suggestions welcome: marc@petdance.com
 
 use strict;
 
-use Test::More 'no_plan';
+use Test::More;
+our @endings;
 
 BEGIN {
+    @endings = qw( 0a 0d 0d0a );
+    plan( tests => @endings*13 + 2 );
     use_ok( 'MARC::Record' );
     use_ok( 'MARC::File::MicroLIF' );
 }
 
 
-foreach my $filename ( qw(t/lineendings-0a.lif t/lineendings-0d0a.lif t/lineendings-0d.lif) ) {
+foreach my $ending ( @endings ) {
+    my $filename = "t/lineendings-$ending.lif";
     my $file = MARC::File::MicroLIF->in( $filename );
-    isa_ok( $file, 'MARC::File::MicroLIF', 'is a MARC::File::MicroLIF' );
-    is( scalar $file->warnings(), 0, 'no file warnings' );
+    isa_ok( $file, 'MARC::File::MicroLIF' );
+    is( scalar $file->warnings(), 0, 'no file warnings for $filename' );
 
     my $record = $file->next();
     isa_ok( $record, 'MARC::Record', 'successfully decoded' );
