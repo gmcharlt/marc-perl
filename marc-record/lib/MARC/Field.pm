@@ -17,7 +17,7 @@ MARC::Field - Perl extension for handling MARC fields
 
 Version 0.92
 
-    $Id: Field.pm,v 1.7 2002/05/21 17:23:16 edsummers Exp $
+    $Id: Field.pm,v 1.8 2002/05/21 18:00:10 petdance Exp $
 
 =cut
 
@@ -132,7 +132,7 @@ sub clone {
 Allows you to change the values of the field. You can update indicators
 and subfields like this:
 
-  $field->update( 2 => '4', a => 'The ballad of Abe Lincoln');
+  $field->update( ind2 => '4', a => 'The ballad of Abe Lincoln');
 
 The amount of items modified will be returned to you as a result of the
 method call.
@@ -146,27 +146,23 @@ you need to create a new field and use C<replace_with()>.
 sub update {
 
   my $self = shift;
-  my $tagno = $self->tag;
   my @data = @{$self->{_subfields}}; 
   my $changes = 0;
 
-  while (my $arg = shift(@_)) {
+  while ( @_ ) {
+    my $arg = shift;
+    my $val = shift;
 
     ## indicator update
-    if ($arg eq 1) {
-      $self->{_ind1} = shift(@_); 
-      $changes++;
-    } elsif ($arg eq 2) {
-      $self->{_ind2} = shift(@_);
+    if ($arg =~ /^ind[12]$/) {
+      $self->{"_$arg"} = $val;
       $changes++;
     }
-
     ## subfield update
     else {
-      my $value = shift(@_);
       for (my $i=0; $i<@data; $i=$i+2) {
 	if ($data[$i] eq $arg) {
-	  $data[$i+1] = $value;
+	  $data[$i+1] = $val;
 	  $changes++;
 	  last;
 	}
