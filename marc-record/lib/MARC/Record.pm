@@ -306,13 +306,20 @@ The order of the fields is preserved as it was in the original record.
 
 sub clone {
     my $self = shift;
+    my @keeper_tags = @_;
 
     my $clone = $self->new();
     $clone->{_leader} = $self->{_leader};
 
+    my $filtered = @keeper_tags ? [$self->field( @keeper_tags )] : undef;
+
     for my $field ( $self->fields() ) {
-	$clone->add_fields( $field->clone );
+	    if ( !$filtered || (grep {$field==$_} @$filtered ) ) {
+		    $clone->add_fields( $field->clone );
+	    }
     }
+
+    $clone->update_leader();
 
     return $clone;
 }
