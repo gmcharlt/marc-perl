@@ -1,4 +1,4 @@
-# $Id: filler.t,v 1.1 2003/04/09 23:04:44 moregan Exp $
+# $Id: filler.t,v 1.2 2003/04/23 02:31:29 petdance Exp $
 
 use strict;
 use integer;
@@ -25,26 +25,26 @@ $marc = $file->next();
 isa_ok( $marc, 'MARC::Record', 'got record 1' );
 is( scalar $marc->fields(), 18, 'should be 18 fields' );
 is( scalar $marc->warnings(), 0, 'should be 0 warnings' );
-is( $MARC::Record::ERROR, undef, 'should be no errors' );
+ok( !defined $MARC::Record::ERROR, 'should be no errors' );
 
 $marc = $file->next();
 isa_ok( $marc, 'MARC::Record', 'got record 2' );
 is( scalar $marc->fields(), 18, 'should be 18 fields' );
 is( scalar $marc->warnings(), 0, 'should be 0 warnings' );
-is( $MARC::Record::ERROR, undef, 'should be no errors' );
+ok( !defined $MARC::Record::ERROR, 'should be no errors' );
 
 $marc = $file->next();
 isa_ok( $marc, 'MARC::Record', 'got record 3' );
 is( scalar $marc->fields(), 15, 'should be 15 fields' );
 is( scalar $marc->warnings(), 0, 'should be 0 warnings' );
-is( $MARC::Record::ERROR, undef, 'should be no errors' );
+ok( !defined $MARC::Record::ERROR, 'should be no errors' );
 
 # Last record has been read.  The only thing remaining
 # before eof is a newline, which should be consumed
 # by this next() and undef then returned because we're
 # at the file eof.
 $marc = $file->next();
-is( $marc, undef, 'no record, just eof' );
-is( $MARC::Record::ERROR, undef, 'should be no errors' );
+ok( !defined $marc, 'no record, just eof' );
+ok( !defined $MARC::Record::ERROR, 'should be no errors' );
 
 $file->close;
