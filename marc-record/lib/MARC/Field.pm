@@ -15,13 +15,13 @@ MARC::Field - Perl extension for handling MARC fields
 
 =head1 VERSION
 
-Version 0.94
+Version 1.00
 
-    $Id: Field.pm,v 1.11 2002/06/11 18:45:17 petdance Exp $
+    $Id: Field.pm,v 1.12 2002/07/03 20:17:14 petdance Exp $
 
 =cut
 
-our $VERSION = '0.94';
+our $VERSION = '1.00';
 
 =head1 SYNOPSIS
 
@@ -293,6 +293,8 @@ sub subfields {
 
 sub _gripe(@) {
 	$ERROR = join( "", @_ );
+
+	warn $ERROR;
 
 	return undef;
 }

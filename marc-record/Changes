@@ -1,6 +1,7 @@
 Revision history for Perl extension MARC::Record.
 
-0.95??	???
+1.00	July 3, 2002
+        - _gripe() fires off warnings instead of dying silently.
 	- Tests use the isa_ok() function to be more stringent in checking
 	  return values from functions.
 

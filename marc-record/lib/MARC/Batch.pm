@@ -12,13 +12,13 @@ use integer;
 
 =head1 VERSION
 
-Version 0.94
+Version 1.00
 
-    $Id: Batch.pm,v 1.7 2002/06/11 18:45:16 petdance Exp $
+    $Id: Batch.pm,v 1.8 2002/07/03 20:17:14 petdance Exp $
 
 =cut
 
-our $VERSION = '0.94';
+our $VERSION = '1.00';
 
 =head1 SYNOPSIS
 

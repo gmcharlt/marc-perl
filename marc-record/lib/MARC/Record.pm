@@ -15,13 +15,13 @@ use MARC::Field;
 
 =head1 VERSION
 
-Version 0.94
+Version 1.00
 
-    $Id: Record.pm,v 1.22 2002/06/17 16:41:24 edsummers Exp $
+    $Id: Record.pm,v 1.23 2002/07/03 20:17:14 petdance Exp $
 
 =cut
 
-our $VERSION = '0.94';
+our $VERSION = '1.00';
 
 use Exporter;
 our @ISA = qw( Exporter );
@@ -563,6 +563,8 @@ sub _warn {
 # NOTE: _gripe is NOT an object method
 sub _gripe {
     $ERROR = join( "", @_ );
+
+    warn $ERROR;
 
     return undef;
 }
