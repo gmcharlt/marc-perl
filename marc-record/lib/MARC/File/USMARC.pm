@@ -17,7 +17,7 @@ use vars qw( $ERROR );
 
 Version 1.18
 
-    $Id: USMARC.pm,v 1.39 2003/02/16 23:24:28 edsummers Exp $
+    $Id: USMARC.pm,v 1.40 2003/02/25 22:02:33 petdance Exp $
 
 =cut
 
@@ -357,7 +357,7 @@ employers of the various contributors to the code.
 
 =head1 AUTHOR
 
-Andy Lester, E<lt>marc@petdance.comE<gt> or E<lt>alester@flr.follett.comE<gt>
+Andy Lester, E<lt>marc@petdance.comE<gt>
 
 =cut
 

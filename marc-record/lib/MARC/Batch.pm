@@ -19,7 +19,7 @@ use constant WARNINGS_OFF	=> 2;
 
 Version 1.18
 
-    $Id: Batch.pm,v 1.25 2003/02/16 23:24:27 edsummers Exp $
+    $Id: Batch.pm,v 1.26 2003/02/25 22:02:29 petdance Exp $
 
 =cut
 
@@ -264,7 +264,7 @@ employers of the various contributors to the code.
 
 =head1 AUTHOR
 
-Andy Lester, E<lt>marc@petdance.comE<gt> or E<lt>alester@flr.follett.comE<gt>
+Andy Lester, E<lt>marc@petdance.comE<gt>
 
 =cut
 

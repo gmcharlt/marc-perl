@@ -12,7 +12,7 @@ MARC::Lint - Perl extension for checking validity of MARC records
 
 Version 1.18
 
-    $Id: Lint.pm,v 1.22 2003/02/16 23:24:28 edsummers Exp $
+    $Id: Lint.pm,v 1.23 2003/02/25 22:02:32 petdance Exp $
 
 =cut
 
@@ -282,7 +282,7 @@ employers of the various contributors to the code.
 
 =head1 AUTHOR
 
-Andy Lester, E<lt>marc@petdance.comE<gt> or E<lt>alester@flr.follett.comE<gt>
+Andy Lester, E<lt>marc@petdance.comE<gt>
 
 =cut
 

@@ -19,7 +19,7 @@ MARC::Field - Perl extension for handling MARC fields
 
 Version 1.18
 
-    $Id: Field.pm,v 1.33 2003/02/16 23:24:27 edsummers Exp $
+    $Id: Field.pm,v 1.34 2003/02/25 22:02:30 petdance Exp $
 
 =cut
 
@@ -504,6 +504,6 @@ employers of the various contributors to the code.
 
 =head1 AUTHOR
 
-Andy Lester, E<lt>marc@petdance.comE<gt> or E<lt>alester@flr.follett.comE<gt>
+Andy Lester, E<lt>marc@petdance.comE<gt>
 
 =cut
