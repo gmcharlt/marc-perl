@@ -15,13 +15,13 @@ use MARC::Field;
 
 =head1 VERSION
 
-Version 0.93
+Version 0.94
 
-    $Id: Record.pm,v 1.20 2002/06/10 22:36:11 petdance Exp $
+    $Id: Record.pm,v 1.21 2002/06/10 23:12:18 petdance Exp $
 
 =cut
 
-our $VERSION = '0.93';
+our $VERSION = '0.94';
 
 use Exporter;
 our @ISA = qw( Exporter );
@@ -153,10 +153,10 @@ sub _all_parms_are_fields {
     return 1;
 }
 
-=head2 append_field(C<$field>)
+=head2 append_field(C<@fields>)
 
-Appends the field specified by $field to the end of the record. $field
-needs to be a MARC::Field object.
+Appends the field specified by C<$field> to the end of the record. 
+C<@fields> need to be MARC::Field objects.
 
     my $field = MARC::Field->new('590','','','a' => 'My local note.');
     $record->append_field($field);
@@ -176,7 +176,7 @@ sub append_fields {
 
 =head2 insert_fields_before($before_field,@new_fields)
 
-Inserts the field specified by $new_field before the field $before_field. 
+Inserts the field specified by C<$new_field> before the field C<$before_field>.
 Returns the number of fields inserted, or undef on failures.
 Both C<$before_field> and all C<@new_fields> need to be MARC::Field objects.
 
@@ -271,7 +271,7 @@ older versions of MARC::Record.
 
 =cut
 
-sub as_usmarc {
+sub as_usmarc() {
     my $self = shift;
 
     require MARC::File::USMARC;
@@ -336,7 +336,7 @@ No error checking is done on the validity of the leader.
 
 =cut
 
-sub leader($) {
+sub leader {
     my $self = shift;
     my $text = shift;
 
@@ -355,7 +355,7 @@ Internal function for updating the leader's length and base address.
 
 =cut
 
-sub set_leader_lengths($$) {
+sub set_leader_lengths {
     my $self = shift;
     my $reclen = shift;
     my $baseaddr = shift;
@@ -425,11 +425,11 @@ sub warnings() {
 
 =head2 add_fields()
 
-add_fields() is now deprecated, and users are encouraged to use append_field(), 
-insert_field_after(), and insert_field_before() since they do what you want 
+C<add_fields()> is now deprecated, and users are encouraged to use C<append_field()>,
+C<insert_field_after()>, and C<insert_field_before()> since they do what you want 
 probably. It is still here though, for backwards compatability.
 
-add_fields() adds MARC::Field objects to the end of the list.  Returns the 
+C<add_fields()> adds MARC::Field objects to the end of the list.  Returns the 
 number of fields added, or C<undef> if there was an error.
 
 There are three ways of calling C<add_fields()> to add data to the record.
@@ -462,7 +462,7 @@ There are three ways of calling C<add_fields()> to add data to the record.
 
 =cut
 
-sub add_fields(@) {
+sub add_fields {
     my $self = shift;
 
     my $nfields = 0;
@@ -516,7 +516,7 @@ sub new_from_usmarc {
 
 
 # NOTE: _warn is an object method
-sub _warn($) {
+sub _warn {
     my $self = shift;
 
     push( @{$self->{_warnings}}, join( "", @_ ) );
@@ -524,7 +524,7 @@ sub _warn($) {
 
 
 # NOTE: _gripe is NOT an object method
-sub _gripe(@) {
+sub _gripe {
     $ERROR = join( "", @_ );
 
     return undef;
