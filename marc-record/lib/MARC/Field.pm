@@ -489,6 +489,7 @@ sub clone {
 
     return $clone;
 }
+
 =head2 warnings()
 
 Returns the warnings that were created when the record was read.
