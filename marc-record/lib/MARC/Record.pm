@@ -19,7 +19,7 @@ use Carp qw(croak);
 
 Version 1.17
 
-    $Id: Record.pm,v 1.48 2003/01/30 03:25:45 petdance Exp $
+    $Id: Record.pm,v 1.49 2003/02/12 15:21:12 edsummers Exp $
 
 =cut
 
@@ -250,7 +250,7 @@ Will insert the specified MARC::Field object into the record in 'grouped
 order' and return true (1) on success, and false (undef) on failure.
 For example, if a '650' field is inserted with insert_grouped_field()
 it will be inserted at the end of the 6XX group of tags. After some discussion
-on the perl4lib list it was descided that this is ordinarily what you will 
+on the perl4lib list it was decided that this is ordinarily what you will 
 want. If you would like to insert at a specific point in the record you can use 
 insert_fields_after() and insert_fields_before() methods which are described 
 below. 
@@ -319,6 +319,7 @@ sub append_fields {
 Inserts the field specified by C<$new_field> before the field C<$before_field>.
 Returns the number of fields inserted, or undef on failures.
 Both C<$before_field> and all C<@new_fields> need to be MARC::Field objects.
+If they are not an exception will be thrown.
 
     my $before_field = $record->field('260');
     my $new_field = MARC::Field->new('250','','','a' => '2nd ed.');
@@ -355,7 +356,8 @@ sub insert_fields_before {
 =head2 insert_fields_after($after_field,@new_fields)
 
 Identical to C<insert_fields_before()>, but fields are added after 
-C<$after_field>.
+C<$after_field>. Remeber, $after_field and any new fields must be 
+valid MARC::Field objects or else an exception will be thrown.
 
 =cut
 
