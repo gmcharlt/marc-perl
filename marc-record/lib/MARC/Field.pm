@@ -131,6 +131,15 @@ and subfields like this:
 
   $field->update( ind2 => '4', a => 'The ballad of Abe Lincoln');
 
+If you attempt to update a subfield which does not currently exist in the field,
+then a new subfield will be appended to the field. If you don't like this
+auto-vivification you must check for the existence of the subfield prior to
+update.
+
+  if ( $field->subfield( 'a' ) ) {
+    $field->update( 'a' => 'Cryptonomicon' );
+  }
+
 If you want to update a field that has no indicators or subfields (000-009)
 just call update() with one argument, the string that you would like to 
 set the field to. 
@@ -140,7 +149,7 @@ set the field to.
 
 Note: when doing subfield updates be aware that C<update()> will only 
 update the first occurrence. If you need to do anything more complicated
-you need to create a new field and use C<replace_with()>. 
+you will probably need to create a new field and use C<replace_with()>. 
 
 Returns the number of items modified.
 
@@ -170,14 +179,23 @@ sub update {
       $self->{"_$arg"} = $val;
       $changes++;
     }
+
     ## subfield update
     else {
+      my $found = 0;
+      ## update existing subfield
       for (my $i=0; $i<@data; $i=$i+2) {
 	if ($data[$i] eq $arg) {
 	  $data[$i+1] = $val;
+	  $found = 1;
 	  $changes++;
 	  last;
 	}
+      }
+      ## append new subfield
+      if ( !$found ) { 
+	push( @data, $arg, $val );
+	$changes++;
       }
     }
 

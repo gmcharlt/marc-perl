@@ -1,11 +1,11 @@
-# $Id: 60.update.t,v 1.9 2003/05/20 20:53:26 edsummers Exp $
+# $Id: 60.update.t,v 1.10 2003/05/21 13:42:59 edsummers Exp $
 # Test updating a MARC record for the Camel book
 
 use strict;
 use integer;
 use Data::Dumper;
 
-use Test::More tests=>15;
+use Test::More tests=>20;
 
 BEGIN {
     use_ok( 'MARC::File::USMARC' );
@@ -44,11 +44,18 @@ $f003 = $marc->field('003');
 isa_ok( $f003, 'MARC::Field' );
 is( $f003->as_string(), 'XXXX', 'Update for fields 000-009 works' ); 
 
-## should not be able to update subfields that do not exist
+## if an update is attempted on a non existent subfield it will be 
+## appended to the end of the subfield
 
 $field = $marc->field( '245' );
 isa_ok( $field, 'MARC::Field', 'got 245' );
-$field->update( 'z' => 'foo bar' );
-isnt( $field->subfield( 'z' ), 'foo bar', 'update() failed as expected' );
+$n = $field->update( 'z' => 'foo bar' );
+is( $n, 1, 'numer of changes correct' );
+is( $field->subfield( 'z' ), 'foo bar', 'update() append worked' );
 
+$n = $field->update( 'x' => 'homer', 'y' => 'plato', 'z' => 'bart' );
+is( $n, 3, 'number of changes correct' );
+is( $field->subfield( 'x' ), 'homer', 'update() append 1' );
+is( $field->subfield( 'y' ), 'plato', 'update() append 2' );
+is( $field->subfield( 'z' ), 'bart', 'update() append 3' );
 
