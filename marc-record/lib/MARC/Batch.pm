@@ -8,6 +8,7 @@ MARC::Batch - Perl module for handling files of MARC::Record objects
 
 use strict;
 use integer;
+use Carp qw( croak );
 
 use constant STRICT_ON		=> 1;
 use constant STRICT_OFF		=> 2;
@@ -82,15 +83,22 @@ reading from the batch. If not checked for this can cause your iteration to
 terminate prematurely. To alter this behavior see strict_off(). You can 
 retrieve warning messages using the warnings() method.
 
+Optionally you can pass in a filter function as a subroutine reference 
+if you are only interested in particular fields from the record. This
+can boost performance.
+
 =cut
 
 sub next {
-    my $self = shift;
+    my ( $self, $filter ) = @_;
+    if ( $filter and ref($filter) ne 'CODE' ) { 
+	croak( "filter function in next() must be a subroutine reference" );
+    }
 
     if ( $self->{file} ) {
     
 	# get the next record
-	my $rec = $self->{file}->next();
+	my $rec = $self->{file}->next( $filter );
 
 	# collect warnings from MARC::File::* object
 	my @warnings = $self->{file}->warnings();
@@ -124,7 +132,7 @@ sub next {
     $self->{file} = $marcclass->in( $self->{filename} ) or return;
 
     # call this method again now that we've got a file open
-    return( $self->next() );
+    return( $self->next( $filter ) );
 
 }
 
