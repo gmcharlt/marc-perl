@@ -1,0 +1,54 @@
+Revision history for Perl extension MARC::Record.
+
+0.14	March 7, 2002
+	- Added skip_from_file() to read and ignore a record.  It's the
+	same as next_from_file(), without the overhead of the parsing.
+
+0.13    November 18, 2001
+	- MARC::Lint now squawks if there are inappropriate control
+	  characters in the data.
+
+0.12	November 13, 2001
+	- new_from_microlif() now allows underscores that are embedded in a
+	  subfield, and ignores any HDR line that gets passed to it.
+
+0.11	November 12, 2001
+	- Added inbound microlif support.
+	- Added lif2marc program.
+
+0.10	September 27, 2001
+	- Correctly updates the base address in the leader.  Thanks to
+	Tim Wentz (twentz@mc.net) for finding & fixing.
+
+0.09	August 9, 2001
+	- Updated rules from "Understanding MARC" book.
+	- Added delete_field() method.
+
+0.08	May 25, 2001
+	- Added MARC::Record::title and ::author methods
+	- Added the marclint program.
+	- Added the rest of the rules for the 5XX tags forward.
+	- Made the modules compatible with Perl 5.004.  The exception
+	  is MARC::Lint, which requires 5.005 because of the qr//
+	  operator.
+	- as_string() methods now return raw strings, without any special
+	  formatting.  To get the formatted strings from versions <=0.07,
+	  use as_formatted().
+
+0.07	May 22, 2001
+	- Added the rudimentary MARC::Lint module.
+	- Added parms to marcdump program
+
+0.06	May 16, 2001
+	- Added marcdump program as demo and actual useful code
+
+0.05	May 16, 2001
+	- Created t/camel.t as the basis for a test suite. 
+	- Removed the MARC::Field::subfields() method
+	- Documentation cleanup.
+
+0.04	May 15, 2001
+	- Sped up the MARC::Record and MARC::Field constructors about 30%.
+
+0.01	Apr 20, 2001
+	- First version.

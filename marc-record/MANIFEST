@@ -1,0 +1,12 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+lib/MARC/Record.pm
+lib/MARC/Field.pm
+lib/MARC/Lint.pm
+pl/marcdump
+pl/marclint
+pl/lif2marc
+t/camel.t
+t/camel.usmarc

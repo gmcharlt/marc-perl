@@ -1,0 +1,115 @@
+#!/usr/bin/perl -w
+
+
+=head1 NAME
+
+marcdump - MARC record dump utility
+
+=head1 SYNOPSIS
+
+B<marcdump> [options] file(s)
+
+=over 4
+
+=item options
+
+=over 4
+
+=item --help
+
+Print a summary of commands
+
+=item --[no]print
+
+Print a MicroLIF-style dump of each record.  (Default: on)
+
+=item --[no]quiet
+
+Don't print status messages (Default: off)
+
+=item --[no]stats
+
+Print a statistical summary by file at the end.  (Default: on)
+
+=back
+
+=back
+
+=cut
+
+use warnings;
+use strict;
+use integer;
+
+use lib qw( /home/alester/marc/lib );
+use MARC::Record;
+use Getopt::Long;
+
+use constant USAGE => <<"END";
+Usage: marcdump [options] file(s)
+    options
+        --help
+	    Print a summary of commands
+        --[no]print
+            Print a MicroLIF-style dump of each record
+	--[no]quiet
+	    Don't print status messages
+        --[no]stats
+            Print a statistical summary by file at the end
+END
+
+my $print = 1;
+my $quiet = 0;
+my $stats = 1;
+my $help = 0;
+
+my $rc = GetOptions(
+	"print!" => \$print,
+	"quiet"  => \$quiet,
+	"stats!" => \$stats,
+	"help"   => \$help,
+	);
+
+die USAGE if $help;
+	
+if ( not $rc ) {
+	warn "Illegal command-line option (use --help for usage)\n";
+	die USAGE;
+}
+
+my @files = @ARGV;
+if ( @files == 0 ) {
+	warn "No filenames specified  (use --help for usage)\n";
+	die USAGE;
+}
+
+my %counts;
+my %errors;
+for my $IN ( @files ) {
+	$counts{$IN} = 0;
+	$errors{$IN} = 0;
+
+	warn "$IN\n" unless $quiet;
+	open( IN, "<", $IN ) or die "Couldn't open $IN: $!\n";
+
+	while ( !eof(IN) ) {
+		++$counts{$IN};
+		warn "$counts{$IN} records\n" if ( !$quiet && ($counts{$IN} % 1000 == 0) );
+		my $marc = MARC::Record::next_from_file( *IN ) or die $MARC::Record::ERROR;
+
+		print $marc->as_formatted, "\n\n" if $print;
+		if ( $marc->warnings() ) {
+			++$errors{$IN};
+			print join( "\n", $marc->warnings(), "" );
+		}
+	} # while
+	close IN;
+} # for 
+
+if ( $stats ) {
+	print " Recs  Errs Filename\n";
+	print "----- ----- --------\n";
+	for my $key ( sort keys %counts ) {
+		printf( "%5d %5d %s\n", $counts{$key}, $errors{$key}, $key );
+	} # for
+} # if stats
