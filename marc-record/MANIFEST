@@ -29,7 +29,6 @@ t/66.grouped.t
 t/70.croak.t
 t/75.warnings.t
 t/80.alphatag.t
-t/85.utf8.t
 t/81.decode.t
 t/99.pod.t
 t/alphatag.lif

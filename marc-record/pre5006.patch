@@ -1,6 +1,6 @@
-diff -bur --exclude=CVS marc-record/lib/MARC/Field.pm marc-record/modified/MARC/Field.pm
---- marc-record/lib/MARC/Field.pm	Sun Mar 23 11:31:16 2003
-+++ marc-record/modified/MARC/Field.pm	Sun Mar 23 11:15:00 2003
+diff -bur --exclude=CVS marc-record/lib/MARC/Field.pm marc-record/new/MARC/Field.pm
+--- marc-record/lib/MARC/Field.pm	Sun Mar 23 12:08:07 2003
++++ marc-record/new/MARC/Field.pm	Sun Mar 30 17:37:13 2003
 @@ -1,6 +1,5 @@
  package MARC::Field;
  
@@ -8,31 +8,9 @@ diff -bur --exclude=CVS marc-record/lib/MARC/Field.pm marc-record/modified/MARC/
  use strict;
  use integer;
  use Carp;
-diff -bur --exclude=CVS marc-record/lib/MARC/File/MicroLIF.pm marc-record/modified/MARC/File/MicroLIF.pm
---- marc-record/lib/MARC/File/MicroLIF.pm	Sun Mar 23 11:55:38 2003
-+++ marc-record/modified/MARC/File/MicroLIF.pm	Sun Mar 23 11:15:11 2003
-@@ -8,7 +8,6 @@
- 
- use strict;
- use integer;
--use bytes;
- 
- ##MAKEFILE.PL_MACRO ($>=5.008) : use bytes;
- 
-diff -bur --exclude=CVS marc-record/lib/MARC/File/USMARC.pm marc-record/modified/MARC/File/USMARC.pm
---- marc-record/lib/MARC/File/USMARC.pm	Sun Mar 23 11:54:34 2003
-+++ marc-record/modified/MARC/File/USMARC.pm	Sun Mar 23 11:15:21 2003
-@@ -8,7 +8,6 @@
- 
- use strict;
- use integer;
--use bytes;
- 
- use vars qw( $ERROR );
- 
-diff -bur --exclude=CVS marc-record/lib/MARC/File.pm marc-record/modified/MARC/File.pm
---- marc-record/lib/MARC/File.pm	Sun Mar 23 11:31:16 2003
-+++ marc-record/modified/MARC/File.pm	Sun Mar 23 11:15:30 2003
+diff -bur --exclude=CVS marc-record/lib/MARC/File.pm marc-record/new/MARC/File.pm
+--- marc-record/lib/MARC/File.pm	Sun Mar 23 12:08:07 2003
++++ marc-record/new/MARC/File.pm	Sun Mar 30 17:37:24 2003
 @@ -8,7 +8,6 @@
  
  use strict;
@@ -41,9 +19,9 @@ diff -bur --exclude=CVS marc-record/lib/MARC/File.pm marc-record/modified/MARC/F
  
  use vars qw( $ERROR );
  
-diff -bur --exclude=CVS marc-record/lib/MARC/Lint.pm marc-record/modified/MARC/Lint.pm
---- marc-record/lib/MARC/Lint.pm	Sun Mar 23 11:31:16 2003
-+++ marc-record/modified/MARC/Lint.pm	Sun Mar 23 11:15:37 2003
+diff -bur --exclude=CVS marc-record/lib/MARC/Lint.pm marc-record/new/MARC/Lint.pm
+--- marc-record/lib/MARC/Lint.pm	Sun Mar 23 12:08:08 2003
++++ marc-record/new/MARC/Lint.pm	Sun Mar 30 17:37:35 2003
 @@ -1,6 +1,5 @@
  package MARC::Lint;
  
@@ -51,9 +29,9 @@ diff -bur --exclude=CVS marc-record/lib/MARC/Lint.pm marc-record/modified/MARC/L
  use strict;
  use integer;
  
-diff -bur --exclude=CVS marc-record/lib/MARC/Record.pm marc-record/modified/MARC/Record.pm
---- marc-record/lib/MARC/Record.pm	Sun Mar 23 11:31:16 2003
-+++ marc-record/modified/MARC/Record.pm	Sun Mar 23 11:15:45 2003
+diff -bur --exclude=CVS marc-record/lib/MARC/Record.pm marc-record/new/MARC/Record.pm
+--- marc-record/lib/MARC/Record.pm	Sun Mar 23 12:17:46 2003
++++ marc-record/new/MARC/Record.pm	Sun Mar 30 17:37:43 2003
 @@ -6,7 +6,6 @@
  
  =cut

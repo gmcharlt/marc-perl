@@ -8,7 +8,6 @@ MARC::File::USMARC - USMARC-specific file handling
 
 use strict;
 use integer;
-use bytes;
 
 use vars qw( $ERROR );
 

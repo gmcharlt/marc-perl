@@ -1,5 +1,14 @@
 Revision history for Perl extension MARC::Record.
 
+1.23	March 30, 2003
+	[FIX]
+	- removed t/85.utf8.t since it did not work
+	- removed bytes pragma usage since there is no feasible way to 
+	  get MARC::Record to properly handle utf8 while it is using 
+	  substr() so heavily. substr() uses character lengths, and 
+	  directory positions measure lengths in bytes.
+	- updated pre5006.patch to only remove warnings pragma
+
 1.22	March 23, 2003
 	- added t/85.utf8.t to test record lengths work when utf8 data
 	  is present in a record (regression test for RT #2165)
