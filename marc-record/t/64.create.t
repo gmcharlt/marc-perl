@@ -11,13 +11,13 @@ BEGIN {
 }
 
 my $record = MARC::Record->new();
-ok( defined $record, 'Record object creation' );
+isa_ok( $record, 'MARC::Record', 'Record object creation' );
 
 my $f245 = MARC::Field->new('245','1','0','a','Test create.');
-ok( defined $f245, '245 creation');
+isa_ok( $f245, 'MARC::Field', '245 creation');
 
 my $f650 = MARC::Field->new('650','','0','a','World Wide Web.');
-ok( defined $f650, '650 creation');
+isa_ok( $f650, 'MARC::Field', '650 creation');
 
 $record->append_fields($f245,$f650);
 $record->as_usmarc(); ## side effect is that leader offsets are calculated  

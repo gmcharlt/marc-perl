@@ -5,18 +5,22 @@
 use strict;
 use integer;
 
-use Test::More tests=>7;
+use Test::More tests=>9;
 
 BEGIN {
     use_ok( 'MARC::File::USMARC' );
 }
 
 my $file = MARC::File::USMARC->in( 't/camel.usmarc' );
+isa_ok( $file, 'MARC::File::USMARC', 'USMARC file' );
+
 my $marc = $file->next();
-ok( $marc ) or die "Can't read the test record";
+isa_ok( $marc, 'MARC::Record' ) or die "Can't read the test record";
 $file->close;
 
 my $field = $marc->field('245');
+isa_ok( $field, 'MARC::Field', 'new 245' );
+
 my $nchanges = $field->update('a' => 'Programming Python /', 'ind1' => '4' );
 is( $marc->subfield('245','a') => 'Programming Python /',
   'Updated 1 subfield' );

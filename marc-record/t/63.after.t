@@ -11,16 +11,16 @@ BEGIN {
 }
 
 my $batch = new MARC::Batch( 'MARC::File::USMARC', 't/camel.usmarc' );
-ok( defined $batch, 'Batch object creation' );
+isa_ok( $batch, 'MARC::Batch', 'Batch object creation' );
 
 my $record = $batch->next();
-ok( defined $record, 'Record object creation' );
+isa_ok( $record, 'MARC::Record', 'Record object creation' );
 
 my $f650 = $record->field('650');
-ok( defined $f650, 'Field retrieval');
+isa_ok( $f650, 'MARC::Field', 'Field retrieval');
 
 my $new = MARC::Field->new('650','','0','a','World Wide Web.');
-ok( defined $new, 'Field creation');
+isa_ok( $new, 'MARC::Field', 'Field creation');
 
 $record->insert_fields_after($f650,$new);
 
