@@ -4,15 +4,105 @@ MARC::Doc::Tutorial - A documention-only module for new users of MARC::Record
 
 =head1 SYNOPSIS
 
+ perldoc MARC::Doc::Tutorial
+
 =head1 INTRODUCTION
 
 =head2 What is MARC?
 
+The MAchine Readable Cataloging format was designed by the Library of
+Congress in the late 1960s in order to allow libraries to convert their card
+catalogs into a digital format. The advantages of having computerized card
+catalogs were soon realized, and now MARC is being used by all sorts of
+libraries around the world to provide computerized access to their collections.
+MARC data in transmission format is optimized for processing by computers, so 
+it's not very readable for the normal human. For more about the MARC format
+visit the Library of Congress at http://www.loc.gov/marc/
+
 =head2 What is this Tutorial?
+
+The document you are reading is a beginners guide to use Perl to processing
+MARC data, written in the 'cookbook' style. Inside you will find recipes on 
+how to read, write, update and convert MARC data using the MARC::Record CPAN 
+package. 
+
+The document you are reading is distributed with the MARC::Record package, 
+however in case you are reading it somewhere else you can find the latest 
+version at CPAN http://www.cpan.org/modules/by-module/MARC/. 
+
+You'll notice that some sections aren't filled in yet, which is a result
+of this document being a work in progress. If you have ideas for new sections
+please let the make a suggestion on perl4lib http://www.rice.edu/perl4lib.
 
 =head2 History of MARC on CPAN
 
-=head2 Overview of MARC classes
+In 1999 a group of developers began working on MARC.pm to provide a Perl 
+module for working with MARC data. MARC.pm was quite successful since it 
+grew to include many new options that were requested by the Perl/library
+community.  However, in adding these features the module swiftly outgrew it's
+own clothes, and maintenance and addition of new features became extremely
+difficult. 
+
+In mid 2001 Andy Lester released MARC::Record and MARC::Field
+which provided a much more simpler and maintainable package for processing
+MARC data with Perl. Instead of forking the two projects the developers agreed
+to encourage use of the MARC::Record framework, and to work on enhancing 
+MARC::Record rather than extending MARC.pm further.
+
+
+=head2 Brief Overview of MARC classes
+
+The MARC::Record package is made up of several separate packages. This
+can be somewhat confusing to people new to Perl, or Object Oriented 
+Programming. However this framework allows easy extension, and is built
+to support new input/output formats as their need arises. For a good 
+introduction to using the object oriented features of Perl see 
+the perlboot documentation that came with your version of Perl:
+
+ perldoc perlboot
+
+Here are the packages that get installed when you install the MARC::Record
+patch.
+
+=over 4
+
+=item MARC::Record
+
+The primary class, which represents the data held in a MARC record. It is
+basically a container class for multiple MARC::Field objects. 
+
+=item MARC::Field
+
+An object for representing the indicators and subfields contained in a 
+single MARC field. 
+
+=item MARC::Batch
+
+A convenience class for accessing MARC data contained in an external file.
+
+=item MARC::File
+
+A superclass for representing files of MARC data.
+
+=item MARC::File::USMARC
+
+A subclass of MARC::File for working with data encoded in the USMARC format.
+
+=item MARC::File::MicroLIF
+
+A subclass of MARC::File for working with data encoded in the MicroLIF format.
+
+=back
+
+=head2 Help Wanted!
+
+It's already been mentioned but it's worth mentioning again: 
+MARC::Doc::Tutorial is a work in progress, and you are encouraged to submit
+any suggestions for additional recipes via the perl4lib listserv 
+http://www.rice.edu/perl4lib . Also, the development group is always looking 
+for additional developers with good ideas, if you are interested you can 
+sign up at SourceForge http://sourceforge.net/projects/marcpm/
+
 
 =head1 READING
 
@@ -41,7 +131,7 @@ like to read in the record and print out it's title.
 =head2 Checking for errors
 
 It is a good idea to get in the habit of checking for errors. MARC::* has 
-been designed to help you do this. Here is example B<1.1> rewritten to use 
+been designed to help you do this. Here is example 1 rewritten to use 
 the C<$MARC::File::ERROR> and C<$MARC::Record::ERROR> variables. To save space
 many of the examples in the cookbook will not do this error checking.
 
@@ -197,7 +287,6 @@ Instead of storing the fields in an array, the field() still returns a list
 in the for loop. Line 8 uses the tag() method which returns the tag number
 for a particular MARC field--which is useful when you aren't certain what
 tag you are dealing with.
-
 
 =head2 Looking at all the fields in a record
 
@@ -475,7 +564,7 @@ cataloging...which computers are notably bad at!
 
 =head2 Adding a field
 
-Imagine that you have a batch of records in a file called 'file_1.dat'
+Imagine that you have a batch of records in a file called 'file.dat'
 and that you would like to add a local note to (590) to each record and save
 it as 'file_2.dat'. 
 
@@ -484,10 +573,10 @@ it as 'file_2.dat'.
    2   
    3   ## create our MARC::Batch object
    4   use MARC::Batch;
-   5   my $batch = MARC::Batch->new('USMARC','file_1.dat');
+   5   my $batch = MARC::Batch->new('USMARC','file.dat');
    6   
    7   ## open a file handle to write to
-   8   open(OUT,'>file_2.dat');
+   8   open(OUT,'>new.dat');
    9   
   10   ## read in each record 
   11   while ( my $record = $batch->next() ) {
@@ -518,8 +607,8 @@ has gone out of busines and the 590 field needs to be deleted.
    1   ## Example 14 
    2   
    3   use MARC::Batch;
-   4   my $batch = MARC::Batch->new('USMARC','file_2.dat');
-   5   open(OUT,'>file_3.dat');
+   4   my $batch = MARC::Batch->new('USMARC','new.dat');
+   5   open(OUT,'>newer.dat');
    6   
    7   while ( my $record = $batch->next() ) {
    8   
@@ -562,48 +651,101 @@ Retrieve the field you want to update.
 
 =item 3
 
-Extract any information from the field that you want to keep (if any).
+Call the field's update() method or replace_with() method to modify
+the contents of the field.
 
 =item 4 
 
-Delete the field. 
-
-=item 5 
-
-Add the new modified field.
-
-=item 6 
-
-Save the modified record.
+Save the record.
 
 =back
+
+Below is an example of updating any existing 590 field's containing the
+word 'enron' to indicate that access is now provided through Arthur Andersen.
 
 
    1   ## Example 15
    2   
    3   use MARC::Batch;
-   4   my $batch = MARC::Batch->new('USMARC','file_2.dat');
-   5   open(OUT,'>file_4.dat');
+   4   my $batch = MARC::Batch->new('USMARC','new.dat');
+   5   open(OUT,'>newer.dat');
    6   
    7   while ( my $record = $batch->next() ) {
    8   
-   9     ## look for and delete the 590 field containing 'enron'
+   9     ## look for and a 590 field containing 'enron'
   10     my $field = $record->field('590');
   11     if ( $field and $field->as_string =~ /enron/i ) {
-  12       $record->delete_field($field);
-  13     }
+  12   
+  13       ## create a new 590 field
+  14       my $new_field = MARC::Field->new(
+  15         '590','','',
+  16           a => 'Access provided by Arthur Andersen.'
+  17         );
+  18   
+  19       ## replace existing 590 field with the our new one
+  20       $field->replace_with($new_field);
+  21   
+  22     }
+  23   
+  24     ## print out our (possibly) modified record
+  25     print OUT $record->as_usmarc();
+  26   
+  27   }
+
+
+In this example we used MARC::Field's method replace_with() to replace
+an existing field in the record with a new field that we created. To use 
+replace_with() you need to retrieve the field you want to replace from
+a MARC::Record object (line 7), create a new field to replace the existing
+one with (lines 13-17), and then call the existing field's replace_with() 
+method passing the new field as an argument (lines 19-20). You must pass
+replace_with() a valid MARC::Field object for things to work.
+
+
+=head2 Updating subfields and indicators 
+
+If you'd rather not replace an existing field with a new one, you can also 
+edit the contents of the field itself using the update() method. Let's say 
+you've got a batch of records and you want to make sure that the 2nd indicator 
+for the 245 field is properly set for titles that begin with 'The'. The 2nd 
+indicator should be '4' for titles beginning with 'The'.
+
+
+   1   ## Example 16
+   2   
+   3   use MARC::Batch;
+   4   my $batch = MARC::Batch->new('USMARC','file.dat');
+   5   open(OUT,'>new.dat');
+   6   
+   7   while (my $record = $batch->next()) {
+   8   
+   9     ## retrieve the 245 record
+  10     my $field_245 = $record->field('245');
+  11   
+  12     ## if we got the 245 and it starts with 'The'
+  13     if ($field_245 and $field_245->as_string() =~ /^The /) {
   14   
-  15     ## create a new 590 field for Arthur Andersen. 
-  16     $record->add_fields( 
-  17       '590', '', '', 
-  18         'a' => 'Access provided by Arthur Andersen.'
-  19       );
-  20   
-  21     ## print out our modified record
+  15       ## if the 2nd indicator isn't 4 we need to update
+  16       if ($field_245->indicator(2) != 4) { 
+  17        $field_245->update( ind2 => 4 );
+  18       }
+  19   
+  20     }
+  21   
   22     print OUT $record->as_usmarc();
   23   
   24   }
 
+
+The call to update() at line 17 sets the second indicator of the
+existing 245 field to 4. In a simliar fashion you can also update individual
+or multiple subfields.
+
+  $field_245->update( a => 'History of the World :', b => 'part 1' );
+
+But beware, you can only update the first occurrence of a subfield using
+update(). If you need to do more finer grained updates you are advised to
+build a new field and replace the existing field with replace_with().
 
 =head2 Changing a record's leader
 
@@ -615,11 +757,11 @@ to update position 6 of a records leader to reflect that the record is for
 a computer file.
 
 
-   1   ## Example 16
+   1   ## Example 17
    2   
    3   use MARC::Batch;
-   4   my $batch = MARC::Batch->new('USMARC','file_4.dat');
-   5   open(OUT,'>file_5.dat');
+   4   my $batch = MARC::Batch->new('USMARC','file.dat');
+   5   open(OUT,'>new.dat');
    6   my $record = $batch->next();
    7   
    8   ## get the current leader
@@ -635,11 +777,41 @@ a computer file.
   18   print OUT $record->as_usmarc();
 
 
-=head2 Cloning a record
+=head2 Modifying tags without indicators
 
-=head2 Cloning a field
+MARC::Record and MARC::Field are smart and know that you don't have field
+indicators with tags less than 010. Here's an example of updating/adding
+an 005 field to indicate a new transaction time. For a little pizzazz we use 
+Perl's localtime() to generate the data we need for this field.
 
-=head2 Cloning a subfield
+   1   ## Example 18
+   2   
+   3   use MARC::Batch;
+   4   my $batch = MARC::Batch->new('USMARC','file.dat');
+   5   open(OUT,'>new.dat');
+   6   
+   7   while (my $record = $batch->next() ) {
+   8   
+   9     ## see if there is a 005 field 
+  10     my $field_005 = $record->field('005');
+  11   
+  12     ## delete it if we found it
+  13     $record->delete_field($field_005) if $field_005;
+  14   
+  15     ## figure out the contents of our new 005 field
+  16     my ($sec,$min,$hour,$mday,$mon,$year) = localtime();
+  17     $year += 1900;
+  18     $mon += 1;
+  19     my $datetime = sprintf("%4d%02d%02d%02d%02d%02d.0",
+  20       $year,$mon,$mday,$hour,$min,$sec); 
+  21     
+  22     ## create a new 005 field using our new datetime
+  23     $record->add_fields('005',$datetime);
+  24   
+  25     ## save record to a file
+  26     print OUT $record->as_usmarc();
+  27   
+  28   }
 
 
 =head1 SEARCHING & FILTERING
