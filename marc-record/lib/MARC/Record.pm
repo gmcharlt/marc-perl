@@ -16,7 +16,7 @@ use Carp qw(croak);
 
 =head1 VERSION 1.36
 
-    $Id: Record.pm,v 1.79 2004/03/09 23:25:18 petdance Exp $
+    $Id: Record.pm,v 1.80 2004/03/12 23:10:35 petdance Exp $
 
 =cut
 
@@ -31,7 +31,7 @@ use vars qw( @ISA @EXPORTS @EXPORT_OK );
 
 use vars qw( $DEBUG ); $DEBUG = 0;
 
-use constant LEADER_LEN	=> 24;
+use constant LEADER_LEN => 24;
 
 =head1 DESCRIPTION
 
@@ -40,12 +40,12 @@ in MARC::File::*.
 
 =head1 EXPORT
 
-None.  
+None.
 
 =head1 ERROR HANDLING
 
-Any errors generated are stored in C<$MARC::Record::ERROR>. 
-Warnings are kept with the record and accessible in the C<warnings()> method. 
+Any errors generated are stored in C<$MARC::Record::ERROR>.
+Warnings are kept with the record and accessible in the C<warnings()> method.
 
 =head1 CONSTRUCTORS
 
@@ -61,9 +61,9 @@ sub new {
     my $class = shift;
     $class = ref($class) || $class; # Handle cloning
     my $self = {
-	_leader => ' ' x 24,
-	_fields => [],
-	_warnings => [],
+        _leader => ' ' x 24,
+        _fields => [],
+        _warnings => [],
     };
     return bless $self, $class;
 } # new()
@@ -125,9 +125,9 @@ sub title_proper() {
     my $field = $self->field(245);
 
     if ( $field ) {
-	return $field->as_string('anp');
+        return $field->as_string('anp');
     } else {
-	return "";
+        return "";
     }
 }
 
@@ -174,7 +174,7 @@ sub publication_date() {
 
 =head2 fields()
 
-Returns a list of all the fields in the record. The list contains 
+Returns a list of all the fields in the record. The list contains
 a MARC::Field object for each field in the record.
 
 =cut
@@ -189,7 +189,7 @@ sub fields() {
 Returns a list of tags that match the field specifier, or in scalar
 context, just the first matching tag.
 
-The field specifier can be a simple number (i.e. "245"), or use the "." 
+The field specifier can be a simple number (i.e. "245"), or use the "."
 notation of wildcarding (i.e. subject tags are "6..").
 
 =cut
@@ -202,21 +202,21 @@ sub field {
 
     my @list = ();
     for my $tag ( @specs ) {
-	my $regex = $field_regex{ $tag };
+        my $regex = $field_regex{ $tag };
 
-	# Compile & stash it if necessary
-	if ( not defined $regex ) {
-	    $regex = qr/^$tag$/;
-	    $field_regex{ $tag } = $regex;
-	} # not defined
+        # Compile & stash it if necessary
+        if ( not defined $regex ) {
+            $regex = qr/^$tag$/;
+            $field_regex{ $tag } = $regex;
+        } # not defined
 
-	for my $maybe ( $self->fields ) {
-	    if ( $maybe->tag =~ $regex ) {
-		return $maybe unless wantarray;
+        for my $maybe ( $self->fields ) {
+            if ( $maybe->tag =~ $regex ) {
+                return $maybe unless wantarray;
 
-		push( @list, $maybe );
-	    } # if
-	} # for $maybe
+                push( @list, $maybe );
+            } # if
+        } # for $maybe
     } # for $tag
 
     return @list;
@@ -248,14 +248,14 @@ sub subfield {
 
 sub _all_parms_are_fields {
     for ( @_ ) {
-	return 0 unless ref($_) eq 'MARC::Field';
+        return 0 unless ref($_) eq 'MARC::Field';
     }
     return 1;
 }
 
 =head2 append_fields( @fields )
 
-Appends the field specified by C<$field> to the end of the record. 
+Appends the field specified by C<$field> to the end of the record.
 C<@fields> need to be MARC::Field objects.
 
     my $field = MARC::Field->new('590','','','a' => 'My local note.');
@@ -270,7 +270,7 @@ sub append_fields {
 
     _all_parms_are_fields(@_) or croak('Arguments must be MARC::Field objects');
 
-    push(@{ $self->{_fields} }, @_); 
+    push(@{ $self->{_fields} }, @_);
     return scalar @_;
 }
 
@@ -290,8 +290,8 @@ If they are not an exception will be thrown.
 sub insert_fields_before {
     my $self = shift;
 
-    _all_parms_are_fields(@_) 
-	or croak('All arguments must be MARC::Field objects');
+    _all_parms_are_fields(@_)
+        or croak('All arguments must be MARC::Field objects');
 
     my ($before,@new) = @_;
 
@@ -299,14 +299,14 @@ sub insert_fields_before {
     my $fields = $self->{_fields};
     my $pos = 0;
     foreach my $f (@$fields) {
-	last if ($f == $before);
-	$pos++;
+        last if ($f == $before);
+        $pos++;
     }
 
-    ## insert before $before 
+    ## insert before $before
     if ($pos >= @$fields) {
-	$self->_warn("Couldn't find field to insert before");
-	return;
+        $self->_warn("Couldn't find field to insert before");
+        return;
     }
     splice(@$fields,$pos,0,@new);
     return scalar @new;
@@ -331,14 +331,14 @@ sub insert_fields_after {
     my $fields = $self->{_fields};
     my $pos = 0;
     foreach my $f (@$fields) {
-	last if ($f == $after);
-	$pos++;
+        last if ($f == $after);
+        $pos++;
     }
 
     ## insert after $after
-    if ($pos+1 >= @$fields) { 
-	$self->_warn("Couldn't find field to insert after");
-	return;
+    if ($pos+1 >= @$fields) {
+        $self->_warn("Couldn't find field to insert after");
+        return;
     }
     splice(@$fields,$pos+1,0,@new);
     return scalar @new;
@@ -354,23 +354,23 @@ after a 001 field. See C<insert_grouped_field()> for an additional ordering.
 sub insert_fields_ordered {
     my ( $self, @new ) = @_;
 
-    _all_parms_are_fields(@new) 
-	or croak('All arguments must be MARC::Field objects');
+    _all_parms_are_fields(@new)
+        or croak('All arguments must be MARC::Field objects');
 
     ## go through each new field
-    NEW_FIELD: foreach my $newField ( @new ) { 
+    NEW_FIELD: foreach my $newField ( @new ) {
 
-	## find location before which it should be inserted
-	EXISTING_FIELD: foreach my $field ( @{ $self->{_fields} } ) { 
-	    if ( $field->tag() >= $newField->tag() ) {
-		$self->insert_fields_before( $field, $newField );
-		next NEW_FIELD;
-	    }
-	}
+        ## find location before which it should be inserted
+        EXISTING_FIELD: foreach my $field ( @{ $self->{_fields} } ) {
+            if ( $field->tag() >= $newField->tag() ) {
+                $self->insert_fields_before( $field, $newField );
+                next NEW_FIELD;
+            }
+        }
 
-	## if we fell through then this new field is higher than
-	## all the existing fields, so we append.
-	$self->append_fields( $newField );
+        ## if we fell through then this new field is higher than
+        ## all the existing fields, so we append.
+        $self->append_fields( $newField );
 
     }
     return( scalar( @new ) );
@@ -386,10 +386,10 @@ order and return true (1) on success, and false (undef) on failure.
 
 For example, if a '650' field is inserted with C<insert_grouped_field()>
 it will be inserted at the end of the 6XX group of tags. After discussion
-most people wanted the ability to add a new field to the end of the 
+most people wanted the ability to add a new field to the end of the
 hundred group where it belonged. The reason is that according to the MARC
-format, fields within a record are supposed to be grouped by block 
-(hundred groups). This means that fields may not necessarily be in tag 
+format, fields within a record are supposed to be grouped by block
+(hundred groups). This means that fields may not necessarily be in tag
 order.
 
 =cut
@@ -402,17 +402,17 @@ sub insert_grouped_field {
     my $limit = int($new->tag() / 100);
     my $found = 0;
     foreach my $field ($self->fields()) {
-	if ( int($field->tag() / 100) > $limit ) {
-	    $self->insert_fields_before($field,$new);
-	    $found = 1;
-	    last;
-	}
+        if ( int($field->tag() / 100) > $limit ) {
+            $self->insert_fields_before($field,$new);
+            $found = 1;
+            last;
+        }
     }
 
-    ## if we couldn't find the end of the group, then we must not have 
+    ## if we couldn't find the end of the group, then we must not have
     ## any tags this high yet, so just append it
     if (!$found) {
-	$self->append_fields($new); 
+        $self->append_fields($new);
     }
 
     return(1);
@@ -424,12 +424,12 @@ sub insert_grouped_field {
 
 Deletes a field from the record.
 
-The field must have been retrieved from the record using the 
+The field must have been retrieved from the record using the
 C<field()> method.  For example, to delete a 526 tag if it exists:
 
     my $tag526 = $marc->field( "526" );
     if ( $tag526 ) {
-	$marc->delete_field( $tag526 );
+        $marc->delete_field( $tag526 );
     }
 
 C<delete_field()> returns the number of fields that were deleted.
@@ -470,10 +470,10 @@ Returns a pretty string for printing in a MARC dump.
 
 sub as_formatted() {
     my $self = shift;
-	    
+
     my @lines = ( "LDR " . ($self->{_leader} || "") );
     for my $field ( @{$self->{_fields}} ) {
-	    push( @lines, $field->as_formatted() );
+            push( @lines, $field->as_formatted() );
     }
 
     return join( "\n", @lines );
@@ -492,9 +492,9 @@ sub leader {
     my $text = shift;
 
     if ( defined $text ) {
-    	(length($text) eq 24)
-	    or $self->_warn( "Leader must be 24 bytes long" );
-	$self->{_leader} = $text;
+        (length($text) eq 24)
+            or $self->_warn( "Leader must be 24 bytes long" );
+        $self->{_leader} = $text;
     } # set the leader
 
     return $self->{_leader};
@@ -529,7 +529,7 @@ the C<clone()> method like so:
 
     my $newmarc = $oldmarc->clone;
 
-You can also specify field specs to filter down only a 
+You can also specify field specs to filter down only a
 certain subset of fields.  For instance, if you only wanted the
 title and ISBN tags from a record, you could do this:
 
@@ -550,7 +550,7 @@ sub clone {
 
     for my $field ( $self->fields() ) {
         if ( !$filtered || (grep {$field eq $_} @$filtered ) ) {
-	    $clone->add_fields( $field->clone );
+            $clone->add_fields( $field->clone );
         }
     }
 
@@ -578,18 +578,18 @@ be cleared.
 sub warnings() {
     my $self = shift;
     my @warnings = @{$self->{_warnings}};
-    $self->{_warnings} = []; 
+    $self->{_warnings} = [];
     return @warnings;
 }
 
 =head2 add_fields()
 
-C<add_fields()> is now deprecated, and users are encouraged to use 
-C<append_fields()>, C<insert_fields_after()>, and C<insert_fields_before()> 
-since they do what you want probably. It is still here though, for backwards 
+C<add_fields()> is now deprecated, and users are encouraged to use
+C<append_fields()>, C<insert_fields_after()>, and C<insert_fields_before()>
+since they do what you want probably. It is still here though, for backwards
 compatability.
 
-C<add_fields()> adds MARC::Field objects to the end of the list.  Returns the 
+C<add_fields()> adds MARC::Field objects to the end of the list.  Returns the
 number of fields added, or C<undef> if there was an error.
 
 There are three ways of calling C<add_fields()> to add data to the record.
@@ -599,8 +599,8 @@ There are three ways of calling C<add_fields()> to add data to the record.
 =item 1 Create a MARC::Field object and add it
 
   my $author = MARC::Field->new(
-	        100, "1", " ", a => "Arnosky, Jim."
-	        );
+                100, "1", " ", a => "Arnosky, Jim."
+                );
   $marc->add_fields( $author );
 
 =item 2 Add the data fields directly, and let C<add_fields()> take care of the objectifying.
@@ -609,14 +609,14 @@ There are three ways of calling C<add_fields()> to add data to the record.
         245, "1", "0",
                 a => "Raccoons and ripe corn /",
                 c => "Jim Arnosky.",
-        	);
+                );
 
 =item 3 Same as #2 above, but pass multiple fields of data in anonymous lists
 
   $marc->add_fields(
-	[ 250, " ", " ", a => "1st ed." ],
-	[ 650, "1", " ", a => "Raccoons." ],
-	);
+        [ 250, " ", " ", a => "1st ed." ],
+        [ 650, "1", " ", a => "Raccoons." ],
+        );
 
 =back
 
@@ -629,29 +629,29 @@ sub add_fields {
     my $fields = $self->{_fields};
 
     while ( my $parm = shift ) {
-	# User handed us a list of data (most common possibility)
-	if ( ref($parm) eq "" ) {
-	    my $field = MARC::Field->new( $parm, @_ )
-		    or return _gripe( $MARC::Field::ERROR );
-	    push( @$fields, $field );
-	    ++$nfields;
-	    last; # Bail out, we're done eating parms
+        # User handed us a list of data (most common possibility)
+        if ( ref($parm) eq "" ) {
+            my $field = MARC::Field->new( $parm, @_ )
+                    or return _gripe( $MARC::Field::ERROR );
+            push( @$fields, $field );
+            ++$nfields;
+            last; # Bail out, we're done eating parms
 
-	# User handed us an object.
-	} elsif ( ref($parm) eq "MARC::Field" ) {
-	    push( @$fields, $parm );
-	    ++$nfields;
+        # User handed us an object.
+        } elsif ( ref($parm) eq "MARC::Field" ) {
+            push( @$fields, $parm );
+            ++$nfields;
 
-	# User handed us an anonymous list of parms
-	} elsif ( ref($parm) eq "ARRAY" ) {
-	    my $field = MARC::Field->new(@$parm) 
-		or return _gripe( $MARC::Field::ERROR );
-	    push( @$fields, $field );
-	    ++$nfields;
+        # User handed us an anonymous list of parms
+        } elsif ( ref($parm) eq "ARRAY" ) {
+            my $field = MARC::Field->new(@$parm)
+                or return _gripe( $MARC::Field::ERROR );
+            push( @$fields, $field );
+            ++$nfields;
 
-	} else {
-	    croak( "Unknown parm of type", ref($parm), " passed to add_fields()" );
-	} # if
+        } else {
+            croak( "Unknown parm of type", ref($parm), " passed to add_fields()" );
+        } # if
 
     } # while
 
@@ -688,7 +688,7 @@ A brief discussion of why MARC::Record is done the way it is:
 
 =item * It's built for quick prototyping
 
-One of the areas Perl excels is in allowing the programmer to 
+One of the areas Perl excels is in allowing the programmer to
 create easy solutions quickly.  MARC::Record is designed along
 those same lines.  You want a program to dump all the 6XX
 tags in a file?  MARC::Record is your friend.
@@ -768,8 +768,8 @@ Imagine something like this:
 =item * Allow deleting a field
 
   for my $field ( $record->field( "856" ) ) {
-	$record->delete_field( $field ) unless useful($field);
-	} # for
+        $record->delete_field( $field ) unless useful($field);
+        } # for
 
 (from Anne Highsmith hismith@tamu.edu)
 
@@ -809,7 +809,7 @@ These could be ASCII, XML, or MarcMaker.
 
 =head1 LICENSE
 
-This code may be distributed under the same terms as Perl itself. 
+This code may be distributed under the same terms as Perl itself.
 
 Please note that these modules are not products of or supported by the
 employers of the various contributors to the code.

@@ -15,9 +15,9 @@ use MARC::File;
 use vars qw( @ISA ); @ISA = qw( MARC::File );
 
 use MARC::Record qw( LEADER_LEN );
-use constant SUBFIELD_INDICATOR	    => "\x1F";
-use constant END_OF_FIELD	    => "\x1E";
-use constant END_OF_RECORD	    => "\x1D";
+use constant SUBFIELD_INDICATOR     => "\x1F";
+use constant END_OF_FIELD           => "\x1E";
+use constant END_OF_RECORD          => "\x1D";
 use constant DIRECTORY_ENTRY_LEN    => 12;
 
 =head1 SYNOPSIS
@@ -25,16 +25,16 @@ use constant DIRECTORY_ENTRY_LEN    => 12;
     use MARC::File::USMARC;
 
     my $file = MARC::File::USMARC->in( $filename );
-    
+
     while ( my $marc = $file->next() ) {
-	# Do something
+        # Do something
     }
     $file->close();
     undef $file;
 
 =head1 EXPORT
 
-None.  
+None.
 
 =head1 METHODS
 
@@ -56,13 +56,13 @@ sub _next {
     return unless $usmarc;
 
     if ( length($usmarc) < 5 ) {
-	$self->_warn( "Couldn't find record length" );
+        $self->_warn( "Couldn't find record length" );
     }
 
     $reclen = substr($usmarc,0,5);
 
     if ( $reclen !~ /^\d{5}$/ or $reclen != length($usmarc) ) {
-	$self->_warn( "Invalid record length \"$reclen\"" );
+        $self->_warn( "Invalid record length \"$reclen\"" );
     }
 
     return $usmarc;
@@ -70,7 +70,7 @@ sub _next {
 
 =head2 decode( $string [, \&filter_func ] )
 
-Constructor for handling data from a USMARC file.  This function takes care of 
+Constructor for handling data from a USMARC file.  This function takes care of
 all the tag directory parsing & mangling.
 
 Any warnings or coercions can be checked in the C<warnings()> function.
@@ -86,9 +86,9 @@ For example, if you only want title and subject tags in your MARC record,
 try this:
 
     sub filter {
-	my ($tagno,$tagdata) = @_;
+        my ($tagno,$tagdata) = @_;
 
-	return ($tagno == 245) || ($tagno >= 600 && $tagno <= 699);
+        return ($tagno == 245) || ($tagno >= 600 && $tagno <= 699);
     }
 
     my $marc = MARC::File::USMARC->decode( $string, \&filter );
@@ -114,14 +114,14 @@ sub decode {
     ## MARC::File::USMARC->decode( $string )
     ## MARC::File::USMARC::decode( $string )
     ## this bit of code covers all three
- 
+
     my $self = shift;
     if ( ref($self) =~ /^MARC::File/ ) {
-	$location = 'in record '.$self->{recnum};
-	$text = shift;
+        $location = 'in record '.$self->{recnum};
+        $text = shift;
     } else {
-	$location = 'in record 1';
-	$text = $self=~/MARC::File/ ? shift : $self;
+        $location = 'in record 1';
+        $text = $self=~/MARC::File/ ? shift : $self;
     }
 
     my $filter_func = shift;
@@ -130,14 +130,14 @@ sub decode {
 
     # Check for an all-numeric record length
     ($text =~ /^(\d{5})/)
-	or return $marc->_warn( "Record length \"", substr( $text, 0, 5 ), "\" is not numeric $location" );
+        or return $marc->_warn( "Record length \"", substr( $text, 0, 5 ), "\" is not numeric $location" );
 
     my $reclen = $1;
     ($reclen == length($text))
-	or $marc->_warn( "Invalid record length $location: Leader says $reclen bytes, but it's actually ", length( $text ) );
+        or $marc->_warn( "Invalid record length $location: Leader says $reclen bytes, but it's actually ", length( $text ) );
 
     (substr($text, -1, 1) eq END_OF_RECORD)
-    	or $marc->_warn( "Invalid record terminator $location" ); 
+        or $marc->_warn( "Invalid record terminator $location" );
 
     $marc->leader( substr( $text, 0, LEADER_LEN ) );
 
@@ -149,89 +149,89 @@ sub decode {
     my $dir = substr( $text, LEADER_LEN, $data_start - LEADER_LEN - 1 );  # -1 to allow for \x1e at end of directory
 
     # character after the directory must be \x1e
-    (substr($text, $data_start-1, 1) eq END_OF_FIELD) 
-	or $marc->_warn( "No directory found $location" );
+    (substr($text, $data_start-1, 1) eq END_OF_FIELD)
+        or $marc->_warn( "No directory found $location" );
 
     # all directory entries 12 bytes long, so length % 12 must be 0
     (length($dir) % DIRECTORY_ENTRY_LEN == 0)
-	or $marc->_warn( "Invalid directory length $location" );
+        or $marc->_warn( "Invalid directory length $location" );
 
 
     # go through all the fields
     my $nfields = length($dir)/DIRECTORY_ENTRY_LEN;
     for ( my $n = 0; $n < $nfields; $n++ ) {
-	my ( $tagno, $len, $offset ) = unpack( "A3 A4 A5", substr($dir, $n*DIRECTORY_ENTRY_LEN, DIRECTORY_ENTRY_LEN) );
+        my ( $tagno, $len, $offset ) = unpack( "A3 A4 A5", substr($dir, $n*DIRECTORY_ENTRY_LEN, DIRECTORY_ENTRY_LEN) );
 
-	# Check directory validity
-	($tagno =~ /^[0-9A-Za-z]{3}$/)
-	    or $marc->_warn( "Invalid tag in directory $location: \"$tagno\"" );
+        # Check directory validity
+        ($tagno =~ /^[0-9A-Za-z]{3}$/)
+            or $marc->_warn( "Invalid tag in directory $location: \"$tagno\"" );
 
-	($len =~ /^\d{4}$/)
-	    or $marc->_warn( "Invalid length in directory $location tag $tagno: \"$len\"" );
+        ($len =~ /^\d{4}$/)
+            or $marc->_warn( "Invalid length in directory $location tag $tagno: \"$len\"" );
 
-	($offset =~ /^\d{5}$/)
-	    or $marc->_warn( "Invalid offset in directory $location tag $tagno: \"$offset\"" );
+        ($offset =~ /^\d{5}$/)
+            or $marc->_warn( "Invalid offset in directory $location tag $tagno: \"$offset\"" );
 
-	($offset + $len <= $reclen)
-	    or $marc->_warn( "Directory entry $location runs off the end of the record tag $tagno" );
+        ($offset + $len <= $reclen)
+            or $marc->_warn( "Directory entry $location runs off the end of the record tag $tagno" );
 
-	my $tagdata = substr( $text, $data_start + $offset, $len );
+        my $tagdata = substr( $text, $data_start + $offset, $len );
 
-	($len == length($tagdata))
-	    or $marc->_warn( "Invalid length in directory for tag $tagno $location" );
+        ($len == length($tagdata))
+            or $marc->_warn( "Invalid length in directory for tag $tagno $location" );
 
-	if ( substr($tagdata, -1, 1) eq END_OF_FIELD ) {
-	    # get rid of the end-of-tag character
-	    chop $tagdata;
-	    --$len;
-	} else {
-	    $marc->_warn( "field does not end in end of field character in tag $tagno $location" );
-	}
+        if ( substr($tagdata, -1, 1) eq END_OF_FIELD ) {
+            # get rid of the end-of-tag character
+            chop $tagdata;
+            --$len;
+        } else {
+            $marc->_warn( "field does not end in end of field character in tag $tagno $location" );
+        }
 
-	warn "Specs: ", join( "|", $tagno, $len, $offset, $tagdata ), "\n" if $MARC::Record::DEBUG;
-
-
-	if ( $filter_func ) {
-	    next unless $filter_func->( $tagno, $tagdata );
-	}
+        warn "Specs: ", join( "|", $tagno, $len, $offset, $tagdata ), "\n" if $MARC::Record::DEBUG;
 
 
-	if ( ($tagno =~ /^\d+$/) && ($tagno < 10) ) {
-	    $marc->append_fields( MARC::Field->new( $tagno, $tagdata ) );
-	} else {
-	    my @subfields = split( SUBFIELD_INDICATOR, $tagdata );
-	    my $indicators = shift @subfields;
-	    my ($ind1, $ind2);
+        if ( $filter_func ) {
+            next unless $filter_func->( $tagno, $tagdata );
+        }
 
-	    if ( length( $indicators ) > 2 or length( $indicators ) == 0 ) { 
-		$marc->_warn( "Invalid indicators \"$indicators\" forced to blanks $location for tag $tagno\n" );
-		($ind1,$ind2) = (" ", " ");
-	    } else {
-		$ind1 = substr( $indicators,0, 1 );
-		$ind2 = substr( $indicators,1, 1 );
-	    }
 
-	    # Split the subfield data into subfield name and data pairs
-	    my @subfield_data;
-	    for ( @subfields ) {
-		if ( length > 0 ) {
-		    push( @subfield_data, substr($_,0,1),substr($_,1) );
-		} else {
-		    $marc->_warn( "Entirely empty subfield found in tag $tagno" );
-		}
-	    }
+        if ( ($tagno =~ /^\d+$/) && ($tagno < 10) ) {
+            $marc->append_fields( MARC::Field->new( $tagno, $tagdata ) );
+        } else {
+            my @subfields = split( SUBFIELD_INDICATOR, $tagdata );
+            my $indicators = shift @subfields;
+            my ($ind1, $ind2);
 
-	    if ( !@subfield_data ) {
-		$marc->_warn( "no subfield data found $location for tag $tagno" );
-		next;
-	    }
+            if ( length( $indicators ) > 2 or length( $indicators ) == 0 ) {
+                $marc->_warn( "Invalid indicators \"$indicators\" forced to blanks $location for tag $tagno\n" );
+                ($ind1,$ind2) = (" ", " ");
+            } else {
+                $ind1 = substr( $indicators,0, 1 );
+                $ind2 = substr( $indicators,1, 1 );
+            }
 
-	    my $field = MARC::Field->new($tagno, $ind1, $ind2, @subfield_data );
-	    if ( $field->warnings() ) { 
-		$marc->_warn( $field->warnings() );
-	    }
-	    $marc->append_fields( $field );
-	}
+            # Split the subfield data into subfield name and data pairs
+            my @subfield_data;
+            for ( @subfields ) {
+                if ( length > 0 ) {
+                    push( @subfield_data, substr($_,0,1),substr($_,1) );
+                } else {
+                    $marc->_warn( "Entirely empty subfield found in tag $tagno" );
+                }
+            }
+
+            if ( !@subfield_data ) {
+                $marc->_warn( "no subfield data found $location for tag $tagno" );
+                next;
+            }
+
+            my $field = MARC::Field->new($tagno, $ind1, $ind2, @subfield_data );
+            if ( $field->warnings() ) {
+                $marc->_warn( $field->warnings() );
+            }
+            $marc->append_fields( $field );
+        }
     } # looping through all the fields
 
 
@@ -241,18 +241,18 @@ sub decode {
 =head2 update_leader()
 
 If any changes get made to the MARC record, the first 5 bytes of the
-leader (the length) will be invalid.  This function updates the 
+leader (the length) will be invalid.  This function updates the
 leader with the correct length of the record as it would be if
 written out to a file.
 
 =cut
 
 sub update_leader() {
-	my $self = shift;
+        my $self = shift;
 
-	my (undef,undef,$reclen,$baseaddress) = $self->_build_tag_directory();
+        my (undef,undef,$reclen,$baseaddress) = $self->_build_tag_directory();
 
-	$self->_set_leader_lengths( $reclen, $baseaddress );
+        $self->_set_leader_lengths( $reclen, $baseaddress );
 }
 
 =head2 _build_tag_directory()
@@ -267,41 +267,41 @@ and the size of the Leader and tag directory.
 =cut
 
 sub _build_tag_directory {
-	my $marc = shift;
-	$marc = shift if (ref($marc)||$marc) =~ /^MARC::File/;
-	die "Wanted a MARC::Record but got a ", ref($marc) unless ref($marc) eq "MARC::Record";
+        my $marc = shift;
+        $marc = shift if (ref($marc)||$marc) =~ /^MARC::File/;
+        die "Wanted a MARC::Record but got a ", ref($marc) unless ref($marc) eq "MARC::Record";
 
-	my @fields;
-	my @directory;
+        my @fields;
+        my @directory;
 
-	my $dataend = 0;
-	for my $field ( $marc->fields() ) {
-		# Dump data into proper format
-		my $str = $field->as_usmarc;
-		push( @fields, $str );
+        my $dataend = 0;
+        for my $field ( $marc->fields() ) {
+                # Dump data into proper format
+                my $str = $field->as_usmarc;
+                push( @fields, $str );
 
-		# Create directory entry
-		my $len = length $str;
-		my $direntry = sprintf( "%03s%04d%05d", $field->tag, $len, $dataend );
-		push( @directory, $direntry );
-		$dataend += $len;
-	}
+                # Create directory entry
+                my $len = length $str;
+                my $direntry = sprintf( "%03s%04d%05d", $field->tag, $len, $dataend );
+                push( @directory, $direntry );
+                $dataend += $len;
+        }
 
-	my $baseaddress = 
-		LEADER_LEN +    # better be 24
-		( @directory * DIRECTORY_ENTRY_LEN ) +
-				# all the directory entries
-		1;           	# end-of-field marker
-
-
-	my $total = 
-		$baseaddress +	# stuff before first field
-		$dataend + 	# Length of the fields
-		1;		# End-of-record marker
+        my $baseaddress =
+                LEADER_LEN +    # better be 24
+                ( @directory * DIRECTORY_ENTRY_LEN ) +
+                                # all the directory entries
+                1;              # end-of-field marker
 
 
+        my $total =
+                $baseaddress +  # stuff before first field
+                $dataend +      # Length of the fields
+                1;              # End-of-record marker
 
-	return (\@fields, \@directory, $total, $baseaddress);
+
+
+        return (\@fields, \@directory, $total, $baseaddress);
 }
 
 =head2 encode()
@@ -343,7 +343,7 @@ if you don't want to take the performance hit.
 
 =head1 LICENSE
 
-This code may be distributed under the same terms as Perl itself. 
+This code may be distributed under the same terms as Perl itself.
 
 Please note that these modules are not products of or supported by the
 employers of the various contributors to the code.

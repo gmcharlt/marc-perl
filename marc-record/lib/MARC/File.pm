@@ -18,14 +18,14 @@ use vars qw( $ERROR );
     my $file = MARC::File::USMARC->in( $filename );
 
     while ( my $marc = $file->next() ) {
-	# Do something
+        # Do something
     }
     $file->close();
     undef $file;
 
 =head1 EXPORT
 
-None.  
+None.
 
 =head1 METHODS
 
@@ -36,8 +36,8 @@ or C<MARC::File::MicroLIF> to do this.
 
     my $file = MARC::File::USMARC->in( 'file.marc' );
 
-Returns a C<MARC::File> object, or C<undef> on failure. If you 
-encountered an error the error message will be stored in 
+Returns a C<MARC::File> object, or C<undef> on failure. If you
+encountered an error the error message will be stored in
 C<$MARC::File::ERROR>.
 
 Optionally you can also pass in a filehandle, and C<MARC::File>.
@@ -56,27 +56,27 @@ sub in {
     ## if a valid filehandle was passed in
     my $ishandle = do { no strict; defined fileno($arg); };
     if ( $ishandle ) {
-	$filename = scalar( $arg );
-	$fh = $arg;
+        $filename = scalar( $arg );
+        $fh = $arg;
     }
 
-    ## otherwise check if it's a filename, and 
+    ## otherwise check if it's a filename, and
     ## return undef if we weren't able to open it
     else {
-	$filename = $arg;
-	$fh = eval { local *FH; open( FH, $arg ) or die; *FH{IO}; };
-	if ( $@ ) { 
-	    $MARC::File::ERROR = "Couldn't open $filename: $@";
-	    return;
-	}
+        $filename = $arg;
+        $fh = eval { local *FH; open( FH, $arg ) or die; *FH{IO}; };
+        if ( $@ ) {
+            $MARC::File::ERROR = "Couldn't open $filename: $@";
+            return;
+        }
     }
 
     binmode( $fh );
     my $self = {
-	filename    => $filename, 
-	fh	    => $fh,
-	recnum	    => 0,
-	warnings    => [],
+        filename    => $filename,
+        fh          => $fh,
+        recnum      => 0,
+        warnings    => [],
     };
 
     return( bless $self, $class );
@@ -128,7 +128,7 @@ Simlilar to the methods in L<MARC::Record> and L<MARC::Batch>,
 C<warnings()> will return any warnings that have accumulated while
 processing this file; and as a side-effect will clear the warnings buffer.
 
-=cut 
+=cut
 
 sub warnings {
     my $self = shift;
@@ -185,18 +185,18 @@ sub _warn {
 sub _gripe(@) {
     my @parms = @_;
     if ( @parms ) {
-	my $self = shift @parms;
+        my $self = shift @parms;
 
-	if ( ref($self) =~ /^MARC::File/ ) {
-	    push( @parms, " at byte ", tell($self->{fh}) ) 
-		if $self->{fh};
-	    push( @parms, " in file ", $self->{filename} ) if $self->{filename};
-	} else {
-	    unshift( @parms, $self );
-	}
+        if ( ref($self) =~ /^MARC::File/ ) {
+            push( @parms, " at byte ", tell($self->{fh}) )
+                if $self->{fh};
+            push( @parms, " in file ", $self->{filename} ) if $self->{filename};
+        } else {
+            unshift( @parms, $self );
+        }
 
-	$ERROR = join( "", @parms );
-	warn $ERROR;
+        $ERROR = join( "", @parms );
+        warn $ERROR;
     }
 
     return;
@@ -224,7 +224,7 @@ We only handle files for input right now.
 
 =head1 LICENSE
 
-This code may be distributed under the same terms as Perl itself. 
+This code may be distributed under the same terms as Perl itself.
 
 Please note that these modules are not products of or supported by the
 employers of the various contributors to the code.

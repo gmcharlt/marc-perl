@@ -14,7 +14,7 @@ multiple-file aspects.
 
     my $batch = new MARC::Batch-new( 'USMARC', @files );
     while ( my $marc = $batch->next ) {
-	print $marc->subfield(245,"a"), "\n";
+        print $marc->subfield(245,"a"), "\n";
     }
 
 =head1 EXPORT
@@ -33,7 +33,7 @@ use Carp qw( croak );
 
 Create a C<MARC::Batch> object that will process C<@files>.
 
-C<$type> must be either "USMARC" or "MicroLIF".  If you want to specify 
+C<$type> must be either "USMARC" or "MicroLIF".  If you want to specify
 "MARC::File::USMARC" or "MARC::File::MicroLIF", that's OK, too. C<new()> returns a
 new MARC::Batch object.
 
@@ -65,13 +65,13 @@ sub new {
     my @files = @_;
 
     my $self = {
-	filestack   =>	\@files,
-	filename    =>	undef,
-	marcclass   =>	$marcclass,
-	file	    =>  undef,
-	warnings    =>  [],
-	'warn'	    =>  1,
-	strict	    =>  1,
+        filestack   =>  \@files,
+        filename    =>  undef,
+        marcclass   =>  $marcclass,
+        file        =>  undef,
+        warnings    =>  [],
+        'warn'      =>  1,
+        strict      =>  1,
     };
 
     bless $self, $class;
@@ -101,36 +101,36 @@ can boost performance.
 
 sub next {
     my ( $self, $filter ) = @_;
-    if ( $filter and ref($filter) ne 'CODE' ) { 
-	croak( "filter function in next() must be a subroutine reference" );
+    if ( $filter and ref($filter) ne 'CODE' ) {
+        croak( "filter function in next() must be a subroutine reference" );
     }
 
     if ( $self->{file} ) {
-    
-	# get the next record
-	my $rec = $self->{file}->next( $filter );
 
-	# collect warnings from MARC::File::* object
-	my @warnings = $self->{file}->warnings();
-	if ( @warnings ) {
-	    $self->warnings( @warnings );
-	    return if $self->{ strict };
-	}
+        # get the next record
+        my $rec = $self->{file}->next( $filter );
 
-	if ($rec) {
+        # collect warnings from MARC::File::* object
+        my @warnings = $self->{file}->warnings();
+        if ( @warnings ) {
+            $self->warnings( @warnings );
+            return if $self->{ strict };
+        }
 
-	    # collect warnings from the MARC::Record object
-	    my @warnings = $rec->warnings();
+        if ($rec) {
 
-	    if (@warnings) {
-		$self->warnings( @warnings );
-		return if $self->{ strict };
-	    }
+            # collect warnings from the MARC::Record object
+            my @warnings = $rec->warnings();
 
-	    # return the MARC::Record object
-	    return($rec);
+            if (@warnings) {
+                $self->warnings( @warnings );
+                return if $self->{ strict };
+            }
 
-	}
+            # return the MARC::Record object
+            return($rec);
+
+        }
 
     }
 
@@ -148,7 +148,7 @@ sub next {
 
 =head2 strict_off()
 
-If you would like C<MARC::Batch> to continue after it has encountered what 
+If you would like C<MARC::Batch> to continue after it has encountered what
 it believes to be bad MARC data then use this method to turn strict B<OFF>.
 A call to C<strict_off()> always returns true (1).
 
@@ -180,10 +180,10 @@ sub strict_on {
     return(1);
 }
 
-=head2 warnings() 
+=head2 warnings()
 
-Returns a list of warnings that have accumulated while processing a particular 
-batch file. As a side effect the warning buffer will be cleared. 
+Returns a list of warnings that have accumulated while processing a particular
+batch file. As a side effect the warning buffer will be cleared.
 
     my @warnings = $batch->warnings();
 
@@ -197,20 +197,20 @@ C<warnings()> will return the empty list when there are no warnings.
 sub warnings {
     my ($self,@new) = @_;
     if ( @new ) {
-	push( @{ $self->{warnings} }, @new );
-	print STDERR join( "\n", @new ) if $self->{'warn'};
+        push( @{ $self->{warnings} }, @new );
+        print STDERR join( "\n", @new ) if $self->{'warn'};
     } else {
-	my @old = @{ $self->{warnings} };
-	$self->{warnings} = [];
-	return(@old);
+        my @old = @{ $self->{warnings} };
+        $self->{warnings} = [];
+        return(@old);
     }
 }
 
 
-=head2 warnings_off() 
+=head2 warnings_off()
 
 Turns off the default behavior of printing warnings to STDERR. However, even
-with warnings off the messages can still be retrieved using the warnings() 
+with warnings off the messages can still be retrieved using the warnings()
 method if you wish to check for them.
 
 C<warnings_off()> always returns true (1).
@@ -226,13 +226,13 @@ sub warnings_off {
 
 =head2 warnings_on()
 
-Turns on warnings so that diagnostic information is printed to STDERR. This 
+Turns on warnings so that diagnostic information is printed to STDERR. This
 is on by default so you shouldn't have to use it unless you've previously
-turned off warnings using warnings_off(). 
+turned off warnings using warnings_off().
 
 warnings_on() always returns true (1).
 
-=cut 
+=cut
 
 sub warnings_on {
     my $self = shift;
@@ -267,7 +267,7 @@ None yet.  Send me your ideas and needs.
 
 =head1 LICENSE
 
-This code may be distributed under the same terms as Perl itself. 
+This code may be distributed under the same terms as Perl itself.
 
 Please note that these modules are not products of or supported by the
 employers of the various contributors to the code.
