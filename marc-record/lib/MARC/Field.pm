@@ -17,7 +17,7 @@ MARC::Field - Perl extension for handling MARC fields
 
 Version 0.92
 
-    $Id: Field.pm,v 1.6 2002/04/02 16:43:31 petdance Exp $
+    $Id: Field.pm,v 1.7 2002/05/21 17:23:16 edsummers Exp $
 
 =cut
 
@@ -126,6 +126,83 @@ sub clone {
 
     return $clone;
 }
+
+=head2 C<update()>
+
+Allows you to change the values of the field. You can update indicators
+and subfields like this:
+
+  $field->update( 2 => '4', a => 'The ballad of Abe Lincoln');
+
+The amount of items modified will be returned to you as a result of the
+method call.
+
+Note: when doing subfield updates be aware that C<update()> will only 
+update the first occurrence. If you need to do anything more complicated
+you need to create a new field and use C<replace_with()>. 
+
+=cut
+
+sub update {
+
+  my $self = shift;
+  my $tagno = $self->tag;
+  my @data = @{$self->{_subfields}}; 
+  my $changes = 0;
+
+  while (my $arg = shift(@_)) {
+
+    ## indicator update
+    if ($arg eq 1) {
+      $self->{_ind1} = shift(@_); 
+      $changes++;
+    } elsif ($arg eq 2) {
+      $self->{_ind2} = shift(@_);
+      $changes++;
+    }
+
+    ## subfield update
+    else {
+      my $value = shift(@_);
+      for (my $i=0; $i<@data; $i=$i+2) {
+	if ($data[$i] eq $arg) {
+	  $data[$i+1] = $value;
+	  $changes++;
+	  last;
+	}
+      }
+    }
+
+  }
+
+  ## synchronize our subfields 
+  $self->{_subfields} = \@data;
+  return($changes);
+
+}
+
+=head2 C<replace_with()> 
+
+Allows you to replace an existing field with a new one. You need to pass 
+C<replace()> a MARC::Field object to replace the existing field with. For 
+example:
+
+  $field = $record->field('245');
+  my $new_field = CTAH::Field('245','0','4','The ballad of Abe Lincoln.');
+  $field->replace_with($new_field);
+
+=cut 
+
+sub replace_with {
+
+  my ($self,$new) = @_;
+  ref($new) =~ /^MARC::Field$/ 
+    or return _gripe("Must pass a MARC::Field object");
+
+  %$self = %$new;
+    
+}
+
 
 =head2 C<tag()>
 
