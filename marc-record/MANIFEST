@@ -64,3 +64,4 @@ t/sample20.lif
 t/title_proper.t
 t/title_proper.usmarc
 t/utf8.t
+t/utils.t

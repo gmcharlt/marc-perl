@@ -59,7 +59,6 @@ sub in {
     if ( $ishandle ) {
         $filename = scalar( $arg );
         $fh = $arg;
-        binmode( $fh, ':utf8' ) if MARC::File::Utils::utf8_safe();
     }
 
     ## otherwise check if it's a filename, and
@@ -72,10 +71,9 @@ sub in {
             return;
         }
         ## all file streams are assumed to be utf8 if we have a modern perl
-        binmode( $fh, ':utf8' ) if MARC::File::Utils::utf8_safe();
     }
 
-    binmode( $fh );
+    utf8_safe() ? binmode( $fh, ':utf8' ) : binmode( $fh );
     my $self = {
         filename    => $filename,
         fh          => $fh,
@@ -204,6 +202,11 @@ sub _gripe(@) {
     }
 
     return;
+}
+
+sub utf8_safe {
+    return( 1 ) if $] >= 5.008001;
+    return( 0 );
 }
 
 1;

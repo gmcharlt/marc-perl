@@ -12,8 +12,11 @@ use integer;
 use vars qw( $ERROR );
 
 use MARC::File;
-use MARC::File::Utils;
 use vars qw( @ISA ); @ISA = qw( MARC::File );
+
+## conditionally use this module for doing byte oriented 
+## substr() and length() on utf8 data.
+eval( "use MARC::File::Utils" ) if MARC::File::utf8_safe();
 
 use MARC::Record qw( LEADER_LEN );
 use constant SUBFIELD_INDICATOR     => "\x1F";
@@ -134,8 +137,11 @@ sub decode {
         or return $marc->_warn( "Record length \"", substr( $text, 0, 5 ), "\" is not numeric $location" );
 
     my $reclen = $1;
-    ($reclen == length($text))
-        or $marc->_warn( "Invalid record length $location: Leader says $reclen bytes, but it's actually ", length( $text ) );
+    my $realLength = MARC::File::utf8_safe() 
+        ? MARC::File::Utils::byte_length($text)
+        : length( $text );
+    $marc->_warn( "Invalid record length $location: Leader says $reclen " . 
+        "bytes but it's actually $realLength" ) unless $reclen == $realLength;
 
     (substr($text, -1, 1) eq END_OF_RECORD)
         or $marc->_warn( "Invalid record terminator $location" );
@@ -143,8 +149,9 @@ sub decode {
     $marc->leader( substr( $text, 0, LEADER_LEN ) );
 
     # bytes 12 - 16 of leader give offset to the body of the record
-    my $data_start = 0 + substr( $text, 12, 5 );
-
+    my $data_start = 0 + MARC::File::utf8_safe() 
+        ? MARC::File::Utils::byte_substr( $text, 12, 5 )
+        : substr( $text, 12, 5 );
 
     # immediately after the leader comes the directory (no separator)
     my $dir = substr( $text, LEADER_LEN, $data_start - LEADER_LEN - 1 );  # -1 to allow for \x1e at end of directory
@@ -176,10 +183,14 @@ sub decode {
         ($offset + $len <= $reclen)
             or $marc->_warn( "Directory entry $location runs off the end of the record tag $tagno" );
 
-        my $tagdata = MARC::File::Utils::safe_substr( $text, $data_start + $offset, $len ); 
+        my $tagdata = MARC::File::utf8_safe() 
+            ? MARC::File::Utils::byte_substr($text,$data_start+$offset,$len) 
+            : substr( $text, $data_start+$offset, $len ); 
 
-        ($len == MARC::File::Utils::safe_length($tagdata))
-            or $marc->_warn( "Invalid length in directory for tag $tagno $location" );
+        $marc->_warn( "Invalid length in directory for tag $tagno $location" )
+            unless ( $len == MARC::File::utf8_safe() 
+                ? MARC::File::Utils::byte_length($tagdata) 
+                : length($tagdata) );
 
         if ( substr($tagdata, -1, 1) eq END_OF_FIELD ) {
             # get rid of the end-of-tag character
@@ -282,7 +293,10 @@ sub _build_tag_directory {
                 push( @fields, $str );
 
                 # Create directory entry
-                my $len = MARC::File::Utils::safe_length( $str );
+                my $len = MARC::File::utf8_safe()
+                    ? MARC::File::Utils::byte_length( $str )
+                    : length( $str );
+
                 my $direntry = sprintf( "%03s%04d%05d", $field->tag, $len, $dataend );
                 push( @directory, $direntry );
                 $dataend += $len;
@@ -322,7 +336,6 @@ sub encode() {
     # Glomp it all together
     return join("",$marc->leader, @$directory, END_OF_FIELD, @$fields, END_OF_RECORD);
 }
-
 1;
 
 __END__

@@ -3,7 +3,6 @@ use Test::More tests => 3;
 use strict;
 use MARC::Record;
 use MARC::File::USMARC;
-use MARC::File::Utils;
 use Encode;
 
 ## test that utf8 safe Perls are able to write and read back UTF8 
@@ -15,7 +14,7 @@ SKIP: {
 
     ## cannot do these tests unless we are running 5.8.1 or better
     skip "need Perl v5.8.1 or better for UTF8 testing", 3
-        if ! MARC::File::Utils::utf8_safe();
+        if ! MARC::File::utf8_safe();
 
     ## we are going to create a MARC record with a utf8 character in
     ## it (a Hebrew Aleph), write it to disk, and then attempt to
@@ -39,6 +38,7 @@ SKIP: {
     
     my $f = MARC::File::USMARC->in( 't/utf8.marc' );
     my $r2 = $f->next();
+    print join( "\n", $r2->warnings() );
     is( scalar( $r2->warnings() ), 0, 'no warnings' ); 
 
     my $a = $r2->field( 245 )->subfield( 'a' );
