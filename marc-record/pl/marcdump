@@ -49,6 +49,8 @@ if ( $opt_version ) {
     exit 1;
 }
 
+my $wants_leader = grep { /LDR/ } @opt_field;
+
 my $class = $opt_lif ? "MARC::File::MicroLIF" : "MARC::File::USMARC";
 eval "require $class"; # Must be quoted to get path searching
 	
@@ -68,6 +70,7 @@ for my $filename ( @files ) {
 
 		if ( @opt_field ) {
 			$marc = $marc->clone( @opt_field );
+			$marc->leader('') unless $wants_leader;
 		}
 
 		print $marc->as_formatted, "\n\n" if $opt_print;
