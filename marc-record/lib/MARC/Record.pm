@@ -18,12 +18,12 @@ use Carp qw(croak);
 
 Version 1.39_01
 
-    $Id: Record.pm,v 1.83 2004/07/26 18:58:22 petdance Exp $
+    $Id: Record.pm,v 1.84 2004/08/17 18:22:27 edsummers Exp $
 
 =cut
 
 use vars qw( $VERSION );
-$VERSION = '1.39_01';
+$VERSION = '1.4';
 
 use Exporter;
 use vars qw( @ISA @EXPORTS @EXPORT_OK );

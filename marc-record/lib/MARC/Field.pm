@@ -53,7 +53,7 @@ Or if you want to add a field < 010 that does not have indicators.
 
 =cut
 
-sub new($) {
+sub new {
     my $class = shift;
     $class = ref($class) || $class;
 
@@ -214,7 +214,7 @@ Returns the data part of the field, if the tag number is less than 10.
 
 =cut
 
-sub data($) {
+sub data {
     my $self = shift;
 
     croak( "data() is only for tags less than 010, use subfield()" )
@@ -235,7 +235,7 @@ Returns the number of subfields added, or C<undef> if there was an error.
 
 =cut
 
-sub add_subfields(@) {
+sub add_subfields {
     my $self = shift;
 
     croak( "Subfields are only for tags >= 10" )
@@ -245,7 +245,25 @@ sub add_subfields(@) {
     return @_/2;
 }
 
+=head2 delete_subfields()
 
+delete_subfields() will remove *all* of a particular type of subfield from 
+a field. In addition you can pass in a list of subfields you want to delete.
+delete_subfields() returns the amount of subfields deleted.
+   
+=cut
+
+sub delete_subfields {
+    my ( $self, @deletes ) = @_;
+    my @subfields = @{ $self->{_subfields} };
+    my @new_subfields;
+    for ( my $i=0; $i<@subfields; $i=$i+2 ) {
+        push( @new_subfields, $subfields[$i], $subfields[$i+1] )
+            unless grep { $_ eq $subfields[$i] } @deletes;
+    }
+    $self->{_subfields} = \@new_subfields;
+    return( (@subfields - @new_subfields)/2 );
+}
 
 =head2 update()
 

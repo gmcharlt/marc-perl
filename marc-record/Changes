@@ -1,5 +1,9 @@
 Revision history for Perl extension MARC::Record.
 
+1.4     XXX 
+        [ENHANCEMENTS]
+        - added MARC::Field::delete_subfields() and tests to t/67.subfield.t
+
 1.39_01 Mon Jul 26 11:48:33 PDT 2004
 
         [ENHANCEMENTS]
