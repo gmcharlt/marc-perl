@@ -8,6 +8,9 @@ Revision history for Perl extension MARC::Record.
 	  This effects MARC::Batch of course as well, which has had its
 	  documentation updated. 
 	- added t/85.fh.t to test new filehandle passing
+	- Incorrect filetypes passed in to the MARC::Batch constructor
+	  now croak instead of die, so you can see where in your code it
+	  was called.
 
 	[FIXES]
 	- etc/specs modified to correctly parse LCs docs to get the 250 $b 
@@ -19,6 +22,7 @@ Revision history for Perl extension MARC::Record.
 	- MARC::File::USMARC no longer checks the validity of indicators
 	  but leaves that up to MARC::Field (instead of having the check
 	  twice).
+	- In MARC::Batch, the 'warn' elements weren't quoted.
 
 1.33    November 24th, 2003
 	MARC::Record should now run on Perls back to 5.00503!
