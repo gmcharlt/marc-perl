@@ -63,9 +63,9 @@ designated as working G0 and G1 sets, then more will be done.
 ## We will load larger character sets dynamically as needed to hopefully 
 ## save a bit on our memory footprint
 
+use MARC::Charset::Controls;
 use MARC::Charset::ASCII;
 use MARC::Charset::Ansel;
-use MARC::Charset::Controls;
 use MARC::Charset::Subscripts;
 use MARC::Charset::Superscripts;
 use MARC::Charset::GreekSymbols;
@@ -385,7 +385,7 @@ sub _escape($$$$) {
 
     my ( $newCharset, $setNumber );
 
-    ## the first method of escaping for limited character sets
+    ## the first method of escaping to small character sets
 
     if ( $escChar1 eq GREEK_SYMBOLS ) {
 	$newCharset = MARC::Charset::GreekSymbols->new();
@@ -402,7 +402,7 @@ sub _escape($$$$) {
 	return($newLeft);
     }
 
-    ## the second more complicated method of escaping to lots of charsets 
+    ## the second more complicated method of escaping to bigger charsets 
 
     return($left) if ($left+2 >= $right);
     $newLeft = $left+3;
