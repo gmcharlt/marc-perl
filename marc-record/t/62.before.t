@@ -1,9 +1,9 @@
-# $Id: 62.before.t,v 1.6 2003/02/25 20:42:04 petdance Exp $
+# $Id: 62.before.t,v 1.7 2003/02/26 05:57:49 petdance Exp $
 
 use strict;
 use integer;
 
-use Test::More tests=>7;
+use Test::More tests=>8;
 
 BEGIN {
     use_ok( 'MARC::Batch' );
@@ -22,7 +22,8 @@ isa_ok( $f650, 'MARC::Field', 'Field retrieval');
 my $new = MARC::Field->new('650','','0','a','World Wide Web.');
 isa_ok( $new, 'MARC::Field', 'Field creation');
 
-$record->insert_fields_before($f650,$new);
+my $nadds = $record->insert_fields_before($f650,$new);
+is( $nadds, 1 );
 
 my $expected = 
 <<MARC_DATA;
