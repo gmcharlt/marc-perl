@@ -16,11 +16,11 @@ use vars qw( $ERROR );
 
 Version 1.13
 
-    $Id: MicroLIF.pm,v 1.19 2002/11/26 20:51:13 edsummers Exp $
+    $Id: MicroLIF.pm,v 1.20 2002/11/27 16:39:15 edsummers Exp $
 
 =cut
 
-use vars '$VERSION'; $VERSION = '1.13';
+use vars '$VERSION'; $VERSION = '1.14';
 
 use MARC::File;
 use vars qw( @ISA ); @ISA = qw( MARC::File );

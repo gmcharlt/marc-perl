@@ -17,11 +17,11 @@ use vars qw( $ERROR );
 
 Version 1.13
 
-    $Id: USMARC.pm,v 1.29 2002/11/27 16:33:42 edsummers Exp $
+    $Id: USMARC.pm,v 1.30 2002/11/27 16:39:16 edsummers Exp $
 
 =cut
 
-use vars '$VERSION'; $VERSION = '1.13';
+use vars '$VERSION'; $VERSION = '1.14';
 
 use MARC::File;
 use vars qw( @ISA ); @ISA = qw( MARC::File );

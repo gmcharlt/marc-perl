@@ -1,5 +1,10 @@
 Revision history for Perl extension MARC::Record.
 
+1.14	November 27, 2002
+
+	- Fixed bug in MARC::File::USMARC that was set off by failure of 
+	  t/75.warnings.t under ActivePerl and CygWin.
+
 1.13    November 26, 2002 
 	[ENHANCEMENTS]
 	- Moved new_from_usmarc() docs & code up right after new() to 

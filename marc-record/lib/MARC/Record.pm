@@ -17,13 +17,13 @@ use Carp qw(croak);
 
 =head1 VERSION
 
-Version 1.13
+Version 1.14
 
-    $Id: Record.pm,v 1.38 2002/10/24 22:07:33 edsummers Exp $
+    $Id: Record.pm,v 1.39 2002/11/27 16:39:14 edsummers Exp $
 
 =cut
 
-use vars '$VERSION'; $VERSION = '1.13';
+use vars '$VERSION'; $VERSION = '1.14';
 
 use Exporter;
 use vars qw( @ISA @EXPORTS @EXPORT_OK );
