@@ -7,6 +7,7 @@ Revision history for Perl extension MARC::Record.
 	- Added append_fields(), insert_fields_after(), 
 	  insert_fields_before() and deprecated add_fields()
 	- Added test of new methods (t/60.insert.t)
+	- Updated MARC::Doc::Tutorial to reflect change in add_fields()
 
 0.93	May 21, 2002
 	- Added update() and replace_with() methods to MARC::Field (ehs)
