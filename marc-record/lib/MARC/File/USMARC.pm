@@ -8,13 +8,14 @@ MARC::File::USMARC - USMARC-specific file handling
 
 use strict;
 use integer;
+use bytes; 
 use vars qw( $VERSION $ERROR );
 
 =head1 VERSION
 
 Version 1.00
 
-    $Id: USMARC.pm,v 1.15 2002/07/15 19:41:55 petdance Exp $
+    $Id: USMARC.pm,v 1.16 2002/07/30 15:36:33 edsummers Exp $
 
 =cut
 
@@ -59,16 +60,20 @@ sub _next {
     my $fh = $self->{fh};
 
     my $reclen;
-
     return undef if eof($fh);
-    read( $fh, $reclen, 5 )
-	or return $self->_gripe( "Error reading record length: $!" );
 
-    $reclen =~ /^\d{5}$/
-	or return $self->_gripe( "Invalid record length \"$reclen\"" );
-    my $usmarc = $reclen;
-    read( $fh, substr($usmarc,5), $reclen-5 )
-	or return $self->_gripe( "Error reading $reclen byte record: $!" );
+    local $/ = END_OF_RECORD;
+    my $usmarc = <$fh>;
+
+    if ( length($usmarc) < 5 ) {
+	return $self->_warn( "Couldn't find record length" );
+    }
+
+    $reclen = substr($usmarc,0,5);
+
+    if ( $reclen !~ /^\d{5}$/ or $reclen != length($usmarc) ) {
+	return $self->_warn( "Invalid record length \"$reclen\"" );
+    }
 
     return $usmarc;
 }
@@ -90,7 +95,7 @@ sub decode {
 
     # Check for an all-numeric record length
     ($text =~ /^(\d{5})/)
-	or return $marc->_gripe( "Record length \"", substr( $text, 0, 5 ), "\" is not numeric" );
+	or return $marc->_warn( "Record length \"", substr( $text, 0, 5 ), "\" is not numeric" );
 
     my $reclen = $1;
     ($reclen == length($text))
@@ -98,7 +103,7 @@ sub decode {
 
     $marc->leader( substr( $text, 0, LEADER_LEN ) );
     my @fields = split( END_OF_FIELD, substr( $text, LEADER_LEN ) );
-    my $dir = shift @fields or return $marc->_gripe( "No directory found" );
+    my $dir = shift @fields or return $marc->_warn( "No directory found" );
 
     (length($dir) % 12 == 0)
 	or return $marc->_gripe( "Invalid directory length" );
@@ -107,7 +112,7 @@ sub decode {
     my $finalfield = pop @fields;
     # Check for the record terminator, and ignore it
     ($finalfield eq END_OF_RECORD)
-    	or $marc->_warn( "Invalid record terminator: \"$finalfield\"" );
+    	or $marc->_gripe( "Invalid record terminator: \"$finalfield\"" );
 
     # Walk thru the directories, and shift off the fields while we're at it
     # Shouldn't be any non-digits anywhere in any directory entry
