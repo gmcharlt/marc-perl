@@ -75,6 +75,8 @@ for my $filename ( @files ) {
 		if ( not $marc ) {
 			warn $MARC::Record::ERROR;
 			++$errors{$filename};
+		} else {
+			++$counts{$filename};
 		}
 
 	        $linter->check_record( $marc );
