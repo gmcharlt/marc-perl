@@ -390,10 +390,12 @@ sub as_string() {
 
     my @subs;
 
-    my @subdata = @{$self->{_subfields}};
-    while ( @subdata ) {
-        my $code = shift @subdata;
-        my $text = shift @subdata;
+    my $subs = $self->{_subfields};
+    my $nfields = @$subs / 2;
+    for my $i ( 1..$nfields ) {
+	my $offset = ($i-1)*2;
+        my $code = $subs->[$offset];
+        my $text = $subs->[$offset+1];
         push( @subs, $text ) if !$subfields || $code =~ /^[$subfields]$/;
     } # for
 
