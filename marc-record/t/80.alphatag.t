@@ -6,7 +6,6 @@ use MARC::Field;
 use MARC::File;
 use MARC::File::USMARC;
 use MARC::File::MicroLIF;
-use Data::Dumper;
 
 ## According to the MARC spec tags can have alphanumeric
 ## characters in them. They are rarely seen, but they are 
@@ -60,10 +59,10 @@ $record->append_fields( $field );
 my $new = $record->field('RAZ');
 isa_ok( $new, 'MARC::Field', 'able to grab field with alpha tag' );
 
-$new = MARC::Field->new('100', '', '', 'a' => 'Gumble, Seth');
+$new = MARC::Field->new('100', '', '', 'a' => 'Gates, Bill');
 $record->append_fields( $new );
 
-$new = MARC::Field->new('110', '', '', 'a' => 'Follett Library Resources');
+$new = MARC::Field->new('110', '', '', 'a' => 'Microsoft');
 $record->append_fields( $new );
 
 my @fields = $record->field( '1..' );
