@@ -6,7 +6,7 @@ SYNOPSIS
 The MARC::* series of modules create a simple object-oriented 
 abstraction of MARC record handling.  The files are:
 
-MARC::Tutorial
+MARC::Doc::Tutorial
     A tutorial explaining how to use MARC::Record.
 
 MARC::Record
