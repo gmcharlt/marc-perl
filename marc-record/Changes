@@ -1,10 +1,15 @@
 Revision history for Perl extension MARC::Record.
 
-1.12	XXX XX, XXXX
+1.12	October 9, 2002 
 	- Makefile.PL will now generate PDF and HTML documentation for 
 	  Sourceforge when asked to.
 	- Added a test for insert_field_grouped()
 	- Added subject heading example to Tutorial
+	- Fixed typo in docs for MARC::Record::append_fields()
+	- Added code (and tests) for allowing users to specify alphanumeric
+	  tags. This is little used, but it's in the spec, and someone asked
+	  for it (Notre Dame). Edits were to MARC::Field and to a lesser
+	  extent MARC::Record.
 
 1.11	September 10, 2002
 	[ENHANCEMENTS]

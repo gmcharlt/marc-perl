@@ -272,7 +272,7 @@ record of that particular type. For example:
 
 =head2 Looking at a set of related fields
 
-field() also allows you to retrieve similar fields using 'X' as a wildcard. 
+field() also allows you to retrieve similar fields using '.' as a wildcard. 
 For example, this functionality allows you to retrieve all the note fields
 in one shot.
 
@@ -283,7 +283,7 @@ in one shot.
    4   my $file = MARC::File::USMARC->in('file.dat');
    5   my $record = $file->next();
    6   
-   7   foreach my $field ($record->field('5XX')) {
+   7   foreach my $field ($record->field('5..')) {
    8     print $field->tag(),' contains ',$field->as_string(),"\n";
    9   }
 
@@ -1071,7 +1071,7 @@ heading appeared in the batch.
    7   my $file = MARC::File::USMARC->in( $filename );
    8   
    9   while ( my $marc = $file->next() ) {
-  10       for my $field ( $marc->field("6XX") ) {
+  10       for my $field ( $marc->field("6..") ) {
   11           my $heading = $field->subfield('a');
   12   
   13           # Remove certain trailing whitespace and punctuation.

@@ -19,11 +19,11 @@ use Carp qw(croak);
 
 Version 1.11
 
-    $Id: Record.pm,v 1.35 2002/09/12 16:25:54 edsummers Exp $
+    $Id: Record.pm,v 1.36 2002/10/10 02:36:09 edsummers Exp $
 
 =cut
 
-use vars '$VERSION'; $VERSION = '1.11';
+use vars '$VERSION'; $VERSION = '1.12';
 
 use Exporter;
 use vars qw( @ISA @EXPORTS @EXPORT_OK );
@@ -90,8 +90,8 @@ sub fields() {
 Returns a list of tags that match the field specifier, or in scalar
 context, just the first matching tag.
 
-The field specifier can be a simple number (i.e. "245"), or use the "X" 
-notation of wildcarding (i.e. subject tags are "6XX").
+The field specifier can be a simple number (i.e. "245"), or use the "." 
+notation of wildcarding (i.e. subject tags are "6..").
 
 =cut
 
@@ -107,9 +107,7 @@ sub field {
 
 	# Compile & stash it if necessary
 	if ( not defined $regex ) {
-	    my $pattern = $tag;
-	    $pattern =~ s/X/\\d/g;
-	    $regex = qr/^$pattern$/;
+	    $regex = qr/^$tag$/;
 	    $field_regex{ $tag } = $regex;
 	} # not defined
 
@@ -200,7 +198,7 @@ Appends the field specified by C<$field> to the end of the record.
 C<@fields> need to be MARC::Field objects.
 
     my $field = MARC::Field->new('590','','','a' => 'My local note.');
-    $record->append_field($field);
+    $record->append_fields($field);
 
 Returns the number of fields appended.
 
@@ -441,7 +439,7 @@ sub clone {
     my $filtered = @keeper_tags ? [$self->field( @keeper_tags )] : undef;
 
     for my $field ( $self->fields() ) {
-        if ( !$filtered || (grep {$field==$_} @$filtered ) ) {
+        if ( !$filtered || (grep {$field eq $_} @$filtered ) ) {
 	    $clone->add_fields( $field->clone );
         }
     }
