@@ -1,7 +1,9 @@
 Revision history for Perl extension MARC-XML
 
 0.51  Thu Sep 04 10:33:12 2003 <Summer>
-    - docfix
+    - fixed warnings in MARC::File::SAX which were emitted under new 
+      Test::Harness.
+    - docfix in MARC::File::XML.
 
 0.5   Thu Jul 29 13:55:38 2003 <Summers>
     - updated so that it uses LC's MARCXML schema

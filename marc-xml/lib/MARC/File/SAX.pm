@@ -69,7 +69,8 @@ sub end_element {
 
 sub characters {
     my ( $self, $chars ) = @_;
-    if ( $self->{ subcode } or ( $self->{ tag } and $self->{ tag } < 10 ) ) { 
+    if ( $self->{ subcode } or ( $self->{ tag } and 
+	( $self->{ tag } eq 'LDR' or $self->{ tag } < 10 ) ) ) { 
 	$self->{ chars } .= $chars->{ Data };
     } 
 }
