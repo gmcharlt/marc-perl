@@ -119,63 +119,16 @@ like to read in the record and print out it's title.
 
    1   ## Example 1 
    2   
-   3   ## create a MARC::FILE::USMARC object
-   4   use MARC::File::USMARC;
-   5   my $file = MARC::File::USMARC->in('file.dat');
+   3   ## create a MARC::Batch object
+   4   use MARC::Batch;
+   5   my $batch = MARC::Batch( 'USMARC', 'file.dat');
    6   
-   7   ## get a marc record from the MARC::File object
+   7   ## get a marc record from the MARC::Batch object
    8   ## $record will be a MARC::Record object
-   9   my $record = $file->next();
+   9   my $record = $batch->next();
   10   
   11   ## print the title contained in the record
   12   print $record->title(),"\n";
-  13   
-  14   ## we're done so close the file
-  15   $file->close();
-
-
-=head2 Checking for errors
-
-It is a good idea to get in the habit of checking for errors. MARC::* has 
-been designed to help you do this. Here is example 1 rewritten to use 
-the C<$MARC::File::ERROR> and C<$MARC::Record::ERROR> variables. To save space
-many of the examples in the cookbook will not do this error checking.
-
-   1   ## Example 2 
-   2   
-   3   ## create a MARC::FILE::USMARC object
-   4   use MARC::File::USMARC;
-   5   my $file = MARC::File::USMARC->in('file.dat');
-   6   
-   7   ## if $file isn't defined we had trouble with the file
-   8   ## so exit
-   9   if (not($file)) {
-  10     print $MARC::File::ERROR,"\n";
-  11     exit(0);
-  12   }
-  13   
-  14   ## get a marc record from the MARC::File object
-  15   ## $record will be a MARC::Record object
-  16   my $record = $file->next();
-  17   
-  18   ## if $record is not defined then we had trouble reading a record
-  19   if (not($record)) {
-  20     print $MARC::Record::ERROR,"\n";
-  21     exit(0);
-  22   }
-  23   
-  24   ## print the title contained in the record
-  25   print $record->title(),"\n";
-  26   
-  27   ## we're done so close the file
-  28   $file->close();
-
-
-Lines 7-12 check to make sure that C<$file> contains a valid MARC::File::USMARC
-object.  If the call to C<MARC::File::USMARC-E<gt>in()> fails it will return C<undef>
-and set the C<$MARC::File::ERROR> variable to something meaningful. The same
-goes for lines 18-22 which check to see that valid record was obtained from
-the file.
 
 =head2 Iterating through a batch file
 
@@ -184,36 +137,79 @@ we want to print out the title for all of them. Our program doesn't have
 to change very much at all: we just need to add a loop around our call
 to C<next()>.
 
-
-   1   ## Example 3 
+   1   ## Example 2 
    2   
-   3   ## create a MARC::File::USMARC object
-   4   use MARC::File::USMARC;
-   5   my $file = MARC::File::USMARC->in('file.dat');
+   3   ## create a MARC::Batch object
+   4   use MARC::Batch;
+   5   my $batch = MARC::Batch->new('USMARC','file.dat');
    6   
-   7   ## if $file isn't defined we had trouble with the file
-   8   ## so exit
-   9   if (not($file)) {
-  10     print $MARC::File::ERROR,"\n";
-  11     exit(0);
+   7   while (my $record = $file->next()) {
+   8   
+   9     ## print the title contained in the record
+  10     print $record->title(),"\n";
+  11   
   12   }
   13   
-  14   while (my $record = $file->next()) {
-  15   
-  16     ## print the title contained in the record
-  17     print $record->title(),"\n";
-  18   
-  19   }
-  20   
-  21   ## we're done so close the file
-  22   $file->close();
+  14   ## we're done so close the file
+  15   $file->close();
 
-
-The call to the next() method at line 14 returns the next record from the 
+The call to the next() method at line 7 returns the next record from the 
 file. next() returns C<undef> when there are no more records left in the file,
 which causes the while loop to end. This is a useful idiom for reading in 
 all the records in a file.
 
+=head2 Checking for errors
+
+It is a good idea to get in the habit of checking for errors. MARC/Perl has 
+been designed to help you do this. Calls to next() when iterating through a
+batch file will return C<undef> when there are no more records to
+return...B<AND> when an error was encountered. You probably want to make sure
+that you didn't abruptly stop reading a batch file because of an error.
+
+   1   ## Example 3 
+   2   
+   3   ## create a MARC::Batch object
+   4   use MARC::Batch;
+   5   my $batch = MARC::Batch->new('USMARC','file.dat');
+   6   
+   7   ## get a marc record from the MARC::Batch object
+   8   ## $record will be a MARC::Record object
+   9   while ( my $record = $batch->next() ) {
+  10       print $record->title();
+  11   }
+  12   
+  13   ## make sure there weren't any problems 
+  14   my @warnings = $batch->warnings();
+  15   if ( @warnings ) {
+  16       print "we found some warnings!", join("\n",@warnings);
+  17   }
+
+The call to warnings() at line 14 will retrieve any warning messages and store
+them in the array @warnings. This allows you to detect when next() has 
+aborted prematurely (before the end of the file has been reached).
+
+=head2 Recovering from errors 
+
+You may want to keep reading a batch file even after an error has been
+encountered.  If so you will want to turn strict mode off using the strict_off()
+method. You can also prevent warnings from being printed to STDERR using the 
+warnings_off() method.
+
+   1   ## Example 4
+   2   
+   3   use MARC::Batch;
+   4   my $batch = MARC::Batch->new( 'USMARC', 'file.dat' );
+   5   $batch->strict_off();
+   6   $batch->warnings_off();
+   7   
+   8   while ( my $record = $batch->next() ) {
+   9      print $record->title();
+  10   }
+
+Use of strict_off() allows you to continue reading after an error is 
+encountered.  By default strict is on as a safety precaution to prevent you from
+using corrupt MARC data.  Once off you can turn both strict and warnings back on
+again with the strict_on() and warnings_on() methods. 
 
 =head2 Looking at a field 
 
@@ -230,11 +226,11 @@ subfields. Example 1.4 shows you how this is done.
    1   ## Example 4
    2   
    3   ## open a file
-   4   use MARC::File::USMARC;
-   5   my $file = MARC::File::USMARC->in('file.dat');
+   4   use MARC::Batch;
+   5   my $batch = MARC::Batch->new('USMARC','file.dat');
    6   
    7   ## read a record
-   8   my $record = $file->next();
+   8   my $record = $batch->next();
    9   
   10   ## get the record's 100 field as a MARC::Field object
   11   my $field = $record->field('100'); 
@@ -242,7 +238,6 @@ subfields. Example 1.4 shows you how this is done.
   13   print "The 1st indicator is ",$field->indicator(1),"\n";
   14   print "The 2nd indicator is ",$field->indicator(2),"\n";
   15   print "Subfield d contains: ",$field->subfield('d'),"\n";
-
 
 =head2 Looking at repeatable fields
 
@@ -257,9 +252,9 @@ record of that particular type. For example:
 
    1   ## Example 5 
    2   
-   3   use MARC::File::USMARC;
-   4   my $file = MARC::File::USMARC->in('file.dat');
-   5   my $record = $file->next();
+   3   use MARC::Batch;
+   4   my $file = MARC::Batch->new('USMARC','file.dat');
+   5   my $record = $batch->next();
    6   
    7   ## get all the 650 fields (list context)
    8   my @fields = $record->field('650');
@@ -279,9 +274,9 @@ in one shot.
 
    1   ## Example 6
    2   
-   3   use MARC::File::USMARC;
-   4   my $file = MARC::File::USMARC->in('file.dat');
-   5   my $record = $file->next();
+   3   use MARC::Batch;
+   4   my $batch = MARC::Batch->new('USMARC','file.dat');
+   5   my $record = $batch->next();
    6   
    7   foreach my $field ($record->field('5..')) {
    8     print $field->tag(),' contains ',$field->as_string(),"\n";
@@ -302,9 +297,9 @@ in a record using the fields() method.
 
    1   ## Example 7
    2   
-   3   use MARC::File::USMARC;
-   4   my $file = MARC::File::USMARC->in('file.dat');
-   5   my $record = $file->next();
+   3   use MARC::Batch;
+   4   my $file = MARC::Batch->new('USMARC','file.dat');
+   5   my $record = $batch->next();
    6   
    7   ## get all of the fields useing the fields() method
    8   my @fields = $record->fields();
