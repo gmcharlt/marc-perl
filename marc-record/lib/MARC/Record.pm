@@ -14,14 +14,14 @@ use vars qw( $ERROR );
 use MARC::Field;
 use Carp qw(croak);
 
-=head1 VERSION 1.29
+=head1 VERSION 1.31
 
-    $Id: Record.pm,v 1.64 2003/07/03 16:54:12 edsummers Exp $
+    $Id: Record.pm,v 1.65 2003/10/16 15:59:42 edsummers Exp $
 
 =cut
 
 use vars qw( $VERSION );
-$VERSION = '1.29';
+$VERSION = '1.31';
 
 use Exporter;
 use vars qw( @ISA @EXPORTS @EXPORT_OK );
@@ -477,6 +477,9 @@ sub set_leader_lengths {
     my $baseaddr = shift;
     substr($self->{_leader},0,5)  = sprintf("%05d",$reclen);
     substr($self->{_leader},12,5) = sprintf("%05d",$baseaddr);
+    # MARC21 defaults: http://www.loc.gov/marc/bibliographic/ecbdldrd.html
+    substr($self->{_leader},10,2) = '22';
+    substr($self->{_leader},20,4) = '4500';
 }
 
 =head2 clone()

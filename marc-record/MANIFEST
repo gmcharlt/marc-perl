@@ -19,6 +19,7 @@ t/00.load.t
 t/01.version.t
 t/10.camel.t
 t/11.astring.t
+t/12.ldr.t
 t/20.clone.t
 t/50.batch.t
 t/60.insert.t
@@ -36,6 +37,7 @@ t/81.decode.t
 t/99.pod.t
 t/alphatag.lif
 t/badldr.usmarc
+t/batch-filter.t
 t/camel.usmarc
 t/convenience.t
 t/decode-filter.t
@@ -53,3 +55,4 @@ t/sample20.lif
 t/title_proper.t
 t/title_proper.usmarc
 t/utf8.t
+META.yml                                 Module meta-data (added by MakeMaker)

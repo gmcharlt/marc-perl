@@ -1,4 +1,4 @@
-# $Id: 64.create.t,v 1.7 2003/02/26 05:57:16 petdance Exp $
+# $Id: 64.create.t,v 1.8 2003/10/16 15:59:42 edsummers Exp $
 
 use strict;
 use integer;
@@ -20,13 +20,13 @@ my $f650 = MARC::Field->new('650','','0','a','World Wide Web.');
 isa_ok( $f650, 'MARC::Field', '650 creation');
 
 my $nadds = $record->append_fields($f245,$f650);
-is( $nadds, 2 );
+is( $nadds, 2, 'two fields appended' );
 
 $record->as_usmarc(); ## side effect is that leader offsets are calculated  
 
 my $expected = 
 <<MARC_DATA;
-LDR 00087       00049       
+LDR 00087     2200049   4500
 245 10 _aTest create.
 650  0 _aWorld Wide Web.
 MARC_DATA
