@@ -3,8 +3,7 @@
 # This isn't meant to be installed, just used by the maintainer.
 
 my @vers = qw( 5.5.3 5.6.0 5.6.1 5.6.2 5.8.0 5.8.1 5.8.2 blead );
-#@vers = ( @vers, shuffle( @vers ), reverse( @vers ) );
-@vers = reverse( @vers );
+@vers = ( @vers, shuffle( @vers ), reverse( @vers ) );
 
 for my $perlver ( @vers ) {
     my $perl = "perl$perlver";
