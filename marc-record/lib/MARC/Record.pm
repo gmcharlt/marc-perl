@@ -19,7 +19,7 @@ use Carp qw(croak);
 
 Version 1.17
 
-    $Id: Record.pm,v 1.47 2003/01/29 23:52:24 petdance Exp $
+    $Id: Record.pm,v 1.48 2003/01/30 03:25:45 petdance Exp $
 
 =cut
 
@@ -127,8 +127,7 @@ sub title_proper() {
     my $field = $self->field(245);
 
     if ( $field ) {
-	my @subs = map { $_->[0] =~ /^[anp]$/ ? $_->[1] : "" } $field->subfields;
-	return join( " ", @subs );
+	return $field->as_string('anp');
     } else {
 	return "";
     }
@@ -144,7 +143,7 @@ sub author() {
     my $self = shift;
 
     my $field = $self->field('100|110|111');
-    return $field ? $field->as_string() : "";
+    return $field ? $field->as_string : "";
 }
 
 =head2 edition()
