@@ -20,6 +20,9 @@ sub filecheck {
 	AUTHOR		=> 'Andy Lester <andy@petdance.com>',
 	PREREQ_PM	=> {
 			    'Test::More' => 0,
+			    'File::Spec' => 0,
+			    'File::Find' => 0,
+			    'Carp' => 0,
 			    },
 	EXE_FILES	=> [ qw( pl/marcdump pl/marclint ) ],
 	dist 		=> {

@@ -1,6 +1,6 @@
 Revision history for Perl extension MARC::Record.
 
-1.31	
+1.31	October 16th, 2003
 	[FIXES]
 	- set_leader_lengths() will now also set other MARC21 leader defaults.
 	  Postitions 10-11, 20-23. For details on the defaults see:
@@ -17,6 +17,8 @@ Revision history for Perl extension MARC::Record.
 	  of the Tutorial.
 	- Added TODO test for utf8 handling (utf8.t)
 	- Fixed doc bug in MARC::File::USMARC (#2937)
+
+1.30	There is no 1.30.  We skipped a number.
 
 1.29	June 05, 2003	
 	[ENHANCEMENTS]
