@@ -93,13 +93,9 @@ for ( @lines ) {
 	    }
 
 	} else {
-	    if (/\$(.) -/) {
-		print "$1\t";
-		if (/\(R\)/) {
-		    print "R\n";
-		} else {
-		    print "NR\n";
-		}
+	    if ( /^\$(.) - (.+) \((N?R)\)/ ) {
+		my ($sub,$desc,$nr) = ($1,$2,$3);
+		print "$sub\t$nr\t$desc\n";
 	    }
 	}
     }
