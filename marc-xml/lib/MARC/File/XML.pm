@@ -5,7 +5,7 @@ use base qw( MARC::File );
 use MARC::Record;
 use MARC::File::SAX;
 
-our $VERSION = '0.51';
+our $VERSION = '0.52';
 
 my $handler = MARC::File::SAX->new();
 my $parser = XML::SAX::ParserFactory->parser( Handler => $handler );
