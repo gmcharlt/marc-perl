@@ -16,7 +16,7 @@ use vars qw( $ERROR );
 
 Version 1.00
 
-    $Id: File.pm,v 1.15 2002/08/25 21:27:59 petdance Exp $
+    $Id: File.pm,v 1.16 2002/08/30 22:15:10 petdance Exp $
 
 =cut
 
@@ -57,10 +57,15 @@ sub in {
 
     bless $self, $class;
 
-    if ( !open( $self->{fh}, "<", $filename ) ) {
+    my $fh = eval { local *FH; open( FH, $filename ) or die; *FH{IO}; };
+
+    if ( $@ ) {
 	undef $self;
-	$MARC::File::ERROR = "Couldn't open $filename: $!";
+	$MARC::File::ERROR = "Couldn't open $filename: $@";
+    } else {
+	$self->{fh} = $fh;
     }
+	
 
     return $self;
 } # new()
