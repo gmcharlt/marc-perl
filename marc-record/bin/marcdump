@@ -14,12 +14,11 @@ use strict;
 use integer;
 
 use MARC::File;
-use MARC::File::Utils;
 use MARC::Record;
 use Getopt::Long;
 
 ## flag STDOUT for UTF8
-binmode( STDOUT, ':utf8' ) if MARC::File::Utils::utf8_safe();
+binmode( STDOUT, ':utf8' ) if MARC::File::utf8_safe();
 
 my $opt_print = 1;
 my $opt_quiet = 0;

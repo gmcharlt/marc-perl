@@ -21,7 +21,7 @@ STRICT_ON: {
     }
     
     my @warnings = $batch->warnings();
-    is( scalar(@warnings), 2, "warnings() w/ strict on" );
+    is( scalar(@warnings), 1, "warnings() w/ strict on" );
     is( $count, 2, "next() w/ strict on" );
 
 }
@@ -42,7 +42,7 @@ STRICT_OFF: {
     }
 
     my @warnings = $batch->warnings();
-    is( scalar(@warnings), 6, "warnings() w/ strict off" );
+    is( scalar(@warnings), 2, "warnings() w/ strict off" );
     is( $count, 8, "next() w/ strict off" );
 
 }

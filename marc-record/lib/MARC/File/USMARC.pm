@@ -57,18 +57,6 @@ sub _next {
     # remove illegal garbage that sometimes occurs between records
     $usmarc =~ s/^[ \x00\x0a\x0d]+//;
 
-    return unless $usmarc;
-
-    if ( length($usmarc) < 5 ) {
-        $self->_warn( "Couldn't find record length" );
-    }
-
-    $reclen = substr($usmarc,0,5);
-
-    if ( $reclen !~ /^\d{5}$/ or $reclen != length($usmarc) ) {
-        $self->_warn( "Invalid record length \"$reclen\"" );
-    }
-
     return $usmarc;
 }
 
