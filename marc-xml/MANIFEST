@@ -2,6 +2,8 @@ Changes
 Makefile.PL
 MANIFEST
 README
+bin/marc2xml
+bin/xml2marc
 lib/MARC/File/XML.pm
 lib/MARC/File/SAX.pm
 t/batch.t

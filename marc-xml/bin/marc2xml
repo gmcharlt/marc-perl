@@ -45,10 +45,17 @@ else {
 binmode( STDOUT, ':utf8' );
 binmode( $fh, ':utf8' );
 
+my $found = 0;
 my $batch = MARC::Batch->new( 'USMARC', $fh );
 while ( my $record = $batch->next() ) { 
-   print $record->as_xml();
+    if ( ! $found ) { 
+        print MARC::File::XML::header();
+        $found = 1;
+    }
+    print MARC::File::XML::record( $record );
 }
+
+print MARC::File::XML::footer() if $found;
 
 sub fatal {
     print STDERR shift, "\n";
