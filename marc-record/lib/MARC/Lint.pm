@@ -9,29 +9,22 @@ MARC::Lint - Perl extension for checking validity of MARC records
 
 =head1 SYNOPSIS
 
-  use MARC::Record;
-  use MARC::Lint;
+    use MARC::File::USMARC;
+    use MARC::Lint;
 
-  my $linter = new MARC::Lint;
-  my $filename = shift;
+    my $lint = new MARC::Lint;
+    my $filename = shift;
 
-  open( IN, "<", $filename ) or die "Couldn't open $filename: $!\n";
-  binmode( IN ); # for the Windows folks
-  while ( !eof(IN) ) {
-  	my $marc = MARC::Record::next_from_file( *IN );
-	die $MARC::Record::ERROR unless $marc;
-
-	$linter->check_record( $marc );
-
+    my $file = MARC::File::USMARC->in( $filename );
+    while ( my $marc = $file->next() ) {
+	$lint->check_record( $marc );
 
 	# Print the title tag
-	print $marc->subfield(245,"a"), "\n";
+	print $marc->title, "\n";
 
 	# Print the errors that were found
 	print join( "\n", $linter->warnings ), "\n";
-  } # while
-
-  close IN or die "Error closing $filename: $!\n";
+    } # while
 
 Given the following MARC record:
 
