@@ -19,7 +19,7 @@ use Carp qw(croak);
 
 Version 1.10
 
-    $Id: Record.pm,v 1.30 2002/09/03 14:37:15 edsummers Exp $
+    $Id: Record.pm,v 1.31 2002/09/03 14:45:06 edsummers Exp $
 
 =cut
 
@@ -194,7 +194,7 @@ sub _all_parms_are_fields {
     return 1;
 }
 
-=head2 append_field(C<@fields>)
+=head2 append_fields(C<@fields>)
 
 Appends the field specified by C<$field> to the end of the record. 
 C<@fields> need to be MARC::Field objects.
