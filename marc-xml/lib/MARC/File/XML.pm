@@ -14,6 +14,7 @@ our $VERSION = '0.6';
 my $handler = MARC::File::SAX->new();
 my $parser = XML::SAX::ParserFactory->parser( Handler => $handler );
 
+
 =head1 NAME
 
 MARC::File::XML - Work with MARC data encoded as XML 
@@ -229,25 +230,44 @@ sub record {
     my $record = shift;
     my @xml = ();
     push( @xml, "<record>" );
-    push( @xml, "  <leader>" . $record->leader() . "</leader>" );
+    push( @xml, "  <leader>" . escape($record->leader()) . "</leader>" );
     foreach my $field ( $record->fields() ) {
         my $tag = $field->tag();
         if ( $field->is_control_tag() ) { 
             my $data = $field->data();
-            push( @xml, qq(  <controlfield tag="$tag">$data</controlfield>) );
+            push( @xml, qq(  <controlfield tag="$tag">) .
+                escape($data). qq(</controlfield>) );
         } else {
             my $i1 = $field->indicator( 1 );
             my $i2 = $field->indicator( 2 );
             push( @xml, qq(  <datafield tag="$tag" ind1="$i1" ind2="$i2">) );
             foreach my $subfield ( $field->subfields() ) { 
                 my ( $code, $data ) = @$subfield;
-                push( @xml, qq(    <subfield code="$code">$data</subfield>) );
+                push( @xml, qq(    <subfield code="$code">).
+                    escape($data).qq(</subfield>) );
             }
             push( @xml, "  </datafield>" );
         }
     }
     push( @xml, "</record>\n" );
     return( join( "\n", @xml ) );
+}
+
+my %ESCAPES = (
+    '&'     => '&amp;',
+    '<'     => '&lt;',
+    '>'     => '&gt;',
+);
+my $ESCAPE_REGEX = 
+    eval 'qr/' . 
+    join( '|', map { $_ = "\Q$_\E" } keys %ESCAPES ) .
+    '/;'
+    ;
+
+sub escape {
+    my $string = shift;
+    $string =~ s/($ESCAPE_REGEX)/$ESCAPES{$1}/oge;
+    return( $string );
 }
 
 sub _next {
@@ -326,8 +346,6 @@ sub encode {
 =head1 TODO
 
 =over 4
-
-=item * Implement MARC::File::XML::encode() for encoding as XML.
 
 =item * Support for character translation using MARC::Charset.
 
