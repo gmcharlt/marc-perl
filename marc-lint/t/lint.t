@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 use File::Spec;
-use Test::More tests=>35;
+use Test::More tests=>38;
 
 BEGIN { use_ok( 'MARC::File::USMARC' ); }
 BEGIN { use_ok( 'MARC::Lint' ); }
@@ -43,6 +43,13 @@ FROM_TEXT: {
 
     $marc->leader("00000nam  22002538a 4500"); # The ????? represents meaningless digits at this point
     my $nfields = $marc->add_fields(
+        ['041', "0", "",
+            a => 'end',
+            a => 'fren',
+            ],
+        ['043', "", "",
+            a => 'n-us-pn',
+            ],
         [100, "1","4", 
             a => "Wall, Larry",
             ],
@@ -76,10 +83,13 @@ FROM_TEXT: {
             q => "Another foreign thing",
             ],
     );
-    is( $nfields, 9, "All the fields added OK" );
+    is( $nfields, 11, "All the fields added OK" );
 
     my @expected = (
         q{1XX: Only one 1XX tag is allowed, but I found 2 of them.},
+        q{041: Subfield _a, end (end), is not valid.},
+        q{041: Subfield _a must be evenly divisible by 3 or exactly three characters if ind2 is not 7, (fren).},
+        q{043: Subfield _a, n-us-pn, is not valid.},
         q{100: Indicator 2 must be blank but it's "4"},
         q{245: Indicator 1 must be 0 or 1 but it's "9"},
         q{245: Subfield _a is not repeatable.},
