@@ -15,13 +15,13 @@ use MARC::Field;
 
 =head1 VERSION
 
-Version 1.00;
+Version 0.90
 
-    $Id: Record.pm,v 1.6 2002/04/01 02:50:06 petdance Exp $
+    $Id: Record.pm,v 1.7 2002/04/01 20:34:24 petdance Exp $
 
 =cut
 
-$VERSION = '1.00';
+$VERSION = '0.90';
 
 use constant SUBFIELD_INDICATOR	=> "\x1F";
 use constant END_OF_FIELD	=> "\x1E";
@@ -223,64 +223,6 @@ sub new_from_microlif($) {
 	} # for
 
 	return $self;
-}
-
-sub _next_from_file {
-	my $fh = shift;
-
-	my $reclen;
-
-	read( $fh, $reclen, 5 )
-		or return _gripe( "Error reading record length: $!" );
-
-	$reclen =~ /^\d{5}$/
-		or return _gripe( "Invalid record length \"$reclen\"" );
-	my $usmarc = $reclen;
-	read( $fh, substr($usmarc,5), $reclen-5 )
-		or return _gripe( "Error reading $reclen byte record: $!" );
-
-	return $usmarc;
-}
-
-=head2 next_from_file(*FILEHANDLE)
-
-Reads the next record from the file handle passed in.
-
-  open( IN, "foo.marc" );
-  while ( !eof(IN) ) {
-	  my $marc = MARC::Record::next_from_file(*IN);
-  } # while
-  close IN;
-
-=cut
-
-sub next_from_file(*) {
-	my $fh = shift;
-
-	my $usmarc = _next_from_file($fh);
-
-	return $usmarc ? MARC::Record->new_from_usmarc($usmarc) : undef;
-}
-
-=head2 skip_from_file(*FILEHANDLE)
-
-Skips over the next record in the file.  Same as C<next_from_file()>,
-without the overhead of parsing a record you're going to throw away
-anyway.
-
-This is preferable to manipulating the filehandle directly because you
-still get the benefit of validating the record that's getting skipped.
-
-Returns 1 or undef.
-
-=cut
-
-sub skip_from_file(*) {
-	my $fh = shift;
-
-	my $usmarc = _next_from_file($fh);
-
-	return $usmarc ? 1 : undef;
 }
 
 =head2 clone( [field specs] )

@@ -15,7 +15,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 0.90
 
-    $Id: File.pm,v 1.1 2002/04/01 17:18:28 petdance Exp $
+    $Id: File.pm,v 1.2 2002/04/01 20:34:24 petdance Exp $
 
 =cut
 
@@ -55,8 +55,26 @@ sub in {
 
     bless $self, $class;
 
+    if ( !open( $self->{fh}, "<", $filename ) ) {
+	undef $self;
+	$MARC::File::ERROR = "Couldn't open $filename: $!";
+    }
+
     return $self;
 } # new()
+
+sub out {
+    die "Not yet written";
+}
+
+sub close {
+    my $self = shift;
+
+    close( $self->{fh} );
+    delete $self->{fh};
+
+    return;
+}
 
 sub _unimplemented() {
     my $self = shift;
@@ -68,6 +86,16 @@ sub _unimplemented() {
 sub next { $_[0]->_unimplemented("next"); }
 sub skip { $_[0]->_unimplemented("skip"); }
 sub write { $_[0]->_unimplemented("write"); }
+
+# NOTE: _gripe can be called as an object method, or not.  Your choice.
+sub _gripe(@) {
+    if ( @_ ) {
+	shift if ref($_[0]) =~ /^MARC::File/;	# Skip first parm if it's a $self
+	$ERROR = join( "", @_ );
+    }
+
+    return undef;
+}
 
 1;
 

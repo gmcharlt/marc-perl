@@ -15,7 +15,9 @@ use strict;
 use integer;
 
 use lib qw( /home/alester/marc-record/lib );
-use MARC::Record;
+
+use MARC::File;
+use MARC::File::USMARC;
 use Getopt::Long;
 
 my $opt_print = 1;
@@ -46,12 +48,12 @@ for my $filename ( @files ) {
 	$errors{$filename} = 0;
 
 	warn "$filename\n" unless $opt_quiet;
-	open( my $fh, "<", $filename ) or die "Couldn't open $filename: $!\n";
 
-	while ( !eof($fh) ) {
+	my $file = MARC::File::USMARC->in( $filename ) or die $MARC::File::ERROR;
+
+	while ( my $marc = $file->next() ) {
 		++$counts{$filename};
 		warn "$counts{$filename} records\n" if ( !$opt_quiet && ($counts{$filename} % 1000 == 0) );
-		my $marc = MARC::Record::next_from_file( $fh ) or die $MARC::Record::ERROR;
 
 		if ( @opt_field ) {
 			$marc = $marc->clone( @opt_field );
@@ -63,7 +65,7 @@ for my $filename ( @files ) {
 			print join( "\n", $marc->warnings(), "" );
 		}
 	} # while
-	close $fh;
+	$file->close();
 } # for 
 
 if ( $opt_stats ) {

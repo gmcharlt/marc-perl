@@ -1,8 +1,8 @@
-package MARC::File::USMARC;
+package MARC::File::MicroLIF;
 
 =head1 NAME
 
-MARC::File::USMARC - USMARC-specific file handling
+MARC::File::MicroLIF - MicroLIF-specific file handling
 
 =cut
 
@@ -15,7 +15,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 0.90
 
-    $Id: USMARC.pm,v 1.2 2002/04/01 20:34:25 petdance Exp $
+    $Id: MicroLIF.pm,v 1.1 2002/04/01 20:34:25 petdance Exp $
 
 =cut
 
@@ -28,9 +28,9 @@ use MARC::Record;
 
 =head1 SYNOPSIS
 
-    use MARC::File::USMARC;
+    use MARC::File::MicroLIF;
 
-    my $file = MARC::File::USMARC::in( $filename );
+    my $file = MARC::File::MicroLIF::in( $filename );
     
     while ( my $marc = $file->next() ) {
 	# Do something
@@ -88,7 +88,7 @@ Returns 1 or undef.
 =cut
 
 sub skip {
-    my $self = shift;
+    my $fh = shift;
 
     my $usmarc = $self->_next();
 
@@ -101,13 +101,7 @@ __END__
 
 =head1 RELATED MODULES
 
-L<MARC::Record>
-
-=head1 TODO
-
-Make some sort of autodispatch so that you don't have to explicitly
-specify the MARC::File::X subclass, sort of like how DBI knows to
-use DBD::Oracle or DBD::Mysql.
+L<MARC::File>
 
 =head1 LICENSE
 

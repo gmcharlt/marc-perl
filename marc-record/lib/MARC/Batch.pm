@@ -10,17 +10,23 @@ use 5.6.0;
 use strict;
 use integer;
 
-use MARC::Record;
+use MARC::File;
 
 =head1 VERSION
 
-Version 1.00
+Version 0.90
 
-    $Id: Batch.pm,v 1.1 2002/04/01 02:40:26 petdance Exp $
+    $Id: Batch.pm,v 1.2 2002/04/01 20:34:24 petdance Exp $
 
 =cut
 
-our $VERSION = '1.00';
+our $VERSION = '0.90';
+
+1;
+
+# EVerything below is in flux until I figure out the file handling stuff
+
+__DATA__
 
 =head1 SYNOPSIS
 
@@ -52,9 +58,10 @@ sub new {
     my @files = @_;
 
     my $self = {
-	files => [@files],
-	filestack => [@files],
-	fh => undef,
+	files =>	[@files],
+	filestack =>	[@files],
+	currfile =>	undef
+	file =>		undef,
     };
 
     bless $self, $class;
@@ -71,6 +78,31 @@ it and open the next one.
 
 sub next {
     my $self = shift;
+
+    my $file = $self->_file or return undef;
+
+    return $self->{file}->next();
+}
+
+=for internal
+
+Opens the next file if necessary 
+
+=cut
+
+sub _fh {
+    my $self = shift;
+
+    my $fh = $self->{fh};
+
+    if ( !$fh || eof($fh) ) {
+	close $fh if $fh;
+
+	my $nextfile = $self->{currfile} = shift @{$self->{filestack}} or return undef;
+	open( $fh, "<", $nextfile ) or die "Can't open $nextfile: $!";
+    }
+
+    return ($self->{fh} = $fh);
 }
 
 1;
