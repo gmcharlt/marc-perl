@@ -18,18 +18,19 @@ use MARC::Field;
 
 Version 1.00
 
-    $Id: Record.pm,v 1.27 2002/08/25 21:27:59 petdance Exp $
+    $Id: Record.pm,v 1.28 2002/08/26 14:58:37 petdance Exp $
 
 =cut
 
 use vars '$VERSION'; $VERSION = '1.00';
 
 use Exporter;
-our @ISA = qw( Exporter );
-our @EXPORTS = qw();
-our @EXPORT_OK = qw( LEADER_LEN );
+use vars qw( @ISA @EXPORTS @EXPORT_OK );
+@ISA = qw( Exporter );
+@EXPORTS = qw();
+@EXPORT_OK = qw( LEADER_LEN );
 
-our $DEBUG = 0;
+use vars qw( $DEBUG ); $DEBUG = 0;
 
 use constant LEADER_LEN	=> 24;
 

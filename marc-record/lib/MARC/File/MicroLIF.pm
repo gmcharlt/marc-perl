@@ -16,14 +16,14 @@ use vars qw( $ERROR );
 
 Version 1.00
 
-    $Id: MicroLIF.pm,v 1.12 2002/08/25 21:27:59 petdance Exp $
+    $Id: MicroLIF.pm,v 1.13 2002/08/26 14:58:37 petdance Exp $
 
 =cut
 
 use vars '$VERSION'; $VERSION = '1.00';
 
 use MARC::File;
-our @ISA = qw( MARC::File );
+use vars qw( @ISA ); @ISA = qw( MARC::File );
 
 use MARC::Record qw( LEADER_LEN );
 
