@@ -1,5 +1,6 @@
 #!/usr/bin/perl
 
+use warnings;
 use strict;
 
 =head1 specs
@@ -25,21 +26,29 @@ while ( <$fh> ) {
 }
 close $fh;
 
+local $/ = undef;
+my $text = <>;
+$text =~ s/(<BR>|\r|\n)+/\n/ig;
+my @lines = split( /\n/, $text );
+
+
 my $in_tag = undef;
 my $i;
 my $i1;
 my $i2;
+my $curr_indicator;
 
-my $v = 0;
-while(<>) {
-    unless ($v) {
-	if (/010/) {
-	    $v = 1;
-	} else {
-	    next;
-	}
+my $started = 0;
+for ( @lines ) {
+    unless ($started) {
+	$started=1 if /Number and Code Fields/;
+	next;
     }
-    s/^ *//;
+    s/^\s+//;
+    s/\s+$//;
+    next if $_ eq "";
+
+    #print ">> $_\n";
     if (/^(\d\d\d) -/) {
 	my $tag = $1;
 	if (/OBSOLETE/) { 
@@ -47,62 +56,58 @@ while(<>) {
 	    next; 
 	}
 	$in_tag = 1;
-	if (/\(NR\)/) {
-	    print "\n$tag\tNR\n";
-	} else {
-	    print "\n$tag\tR\n";
-	}
-	$i1 = $i2 = '';
+	my $r = /\(NR\)/ ? "NR" : "R";
+	print "\n$tag\t$r\n";
+	$i1 = $i2 = "";
 	next;
     }
-    if ($in_tag) {
-	next if /OBSOLETE/;
-	if (/^First/) {
-	    $i = 1;
-	} elsif (/^Second/) {
-	    $i = 2;
-	    if ($i1=~m/^#$/) {
-		print "ind1\tblank\n";
-	    } else {
-		$i1=~s/#/b/;
-		print "ind1\t$i1\n";
-	    }
-	} elsif (/^Subfield/) {
-	    $i = 0;
-	    if ($i2=~m/^#$/) {
-		print "ind2\tblank\n";
-	    } else {
-		$i2=~s/#/b/;
-		print "ind2\t$i2\n";
-	    }
-	} else {
-	    if ($i) {
-		next if /OBSOLETE/;
-		my $data = '';
-		if (/^(\d-\d)/) {
-		    $data = $1;
-		} elsif (/^[#0123456789]/) {
-		    $data = substr($_, 0, 1);
-		}
-		if ($i == 1) {
-		    $i1 .= $data;
-		} elsif ($i == 2) {
-		    $i2 .= $data;
-		}
 
-	    } else {
-		next if /OBSOLETE/;
-		if (/\$(.) -/) {
-		    print "$1\t";
-		    if (/\(R\)/) {
-			print "R\n";
-		    } else {
-			print "NR\n";
-		    }
+    next unless $in_tag;
+    next if /OBSOLETE/;
+    
+    if (/^First/) {
+	$curr_indicator = 1;
+    } elsif (/^Second/) {
+	print_indicator( 1, $i1 );
+	$curr_indicator = 2;
+    } elsif (/^Subfield/) {
+	print_indicator( 2, $i2 );
+	$curr_indicator = 0;
+    } else {
+	if ($curr_indicator) {
+	    my $data = '';
+	    if (/^(\d-\d)/) {
+		$data = $1;
+	    } elsif (/^([#0123456789])/) {
+		$data = $1;
+	    }
+	    $data = "b" if $data eq "#";
+	    if ($curr_indicator == 1) {
+		$i1 .= $data;
+	    } elsif ($curr_indicator == 2) {
+		$i2 .= $data;
+	    }
+
+	} else {
+	    if (/\$(.) -/) {
+		print "$1\t";
+		if (/\(R\)/) {
+		    print "R\n";
+		} else {
+		    print "NR\n";
 		}
 	    }
 	}
     }
+} # main while
+
+sub print_indicator {
+    my $n = shift;
+    my $val = shift;
+
+    $val = "blank" if $val eq "b";
+
+    print "ind$n\t$val\n";
 }
 
 # Dump the hardcoded ones that aren't in the HTML file.
