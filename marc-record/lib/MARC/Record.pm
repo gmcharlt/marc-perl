@@ -16,7 +16,7 @@ use Carp qw(croak);
 
 =head1 VERSION 1.33
 
-    $Id: Record.pm,v 1.71 2003/11/25 00:06:57 edsummers Exp $
+    $Id: Record.pm,v 1.72 2003/12/01 03:23:17 petdance Exp $
 
 =cut
 
@@ -49,7 +49,7 @@ Warnings are kept with the record and accessible in the C<warnings()> method.
 
 =head1 CONSTRUCTORS
 
-=head2 new()
+=head2 C<new()>
 
 Base constructor for the class.  It just returns a completely empty record.
 To get real data, you'll need to populate it with fields, or use one of
@@ -68,7 +68,7 @@ sub new {
     return bless $self, $class;
 } # new()
 
-=head2 new_from_usmarc( $marcblob [, \&filter_func($tagno,$tagdata)] )
+=head2 C<new_from_usmarc( $marcblob [, \&filter_func($tagno,$tagdata)] )>
 
 This is a wrapper around C<MARC::File::USMARC::decode()> for compatibility with
 older versions of MARC::Record.
@@ -91,7 +91,7 @@ sub new_from_usmarc {
 Following are a number of convenience methods for commonly-retrieved
 data fields.  Please note that they each return strings, not MARC::Field
 objects.  They return empty strings if the appropriate field or subfield
-is not found.  This is as opposed to the field()/subfield() methods
+is not found.  This is as opposed to the C<field()>/C<subfield()> methods
 which return C<undef> if something's not found.  My assumption is that
 these methods are used for quick & dirty reports and you don't want to
 mess around with noting if something is undef.
@@ -100,7 +100,7 @@ Also note that no punctuation cleanup is done.  If the 245a is
 "Programming Perl / ", then that's what you'll get back, rather than
 "Programming Perl".
 
-=head2 title()
+=head2 C<title()>
 
 Returns the title from the 245 tag.
 
@@ -113,7 +113,7 @@ sub title() {
     return $field ? $field->as_string : "";
 }
 
-=head2 title_proper()
+=head2 C<title_proper()>
 
 Returns the title proper from the 245 tag, subfields a, n and p.
 
@@ -131,7 +131,7 @@ sub title_proper() {
     }
 }
 
-=head2 author()
+=head2 C<author()>
 
 Returns the author from the 100, 110 or 111 tag.
 
@@ -144,7 +144,7 @@ sub author() {
     return $field ? $field->as_string : "";
 }
 
-=head2 edition()
+=head2 C<edition()>
 
 Returns the edition from the 250 tag, subfield a.
 
@@ -157,7 +157,7 @@ sub edition() {
     return defined $str ? $str : "";
 }
 
-=head2 publication_date()
+=head2 C<publication_date()>
 
 Returns the publication date from the 260 tag, subfield c.
 
@@ -172,7 +172,7 @@ sub publication_date() {
 
 =head1 FIELD & SUBFIELD ACCESS METHODS
 
-=head2 fields()
+=head2 C<fields()>
 
 Returns a list of all the fields in the record. The list contains 
 a MARC::Field object for each field in the record.
@@ -184,7 +184,7 @@ sub fields() {
     return @{$self->{_fields}};
 }
 
-=head2 field(tagspec(s))
+=head2 C<field( I<tagspec(s)> )>
 
 Returns a list of tags that match the field specifier, or in scalar
 context, just the first matching tag.
@@ -222,7 +222,7 @@ sub field {
     return @list;
 }
 
-=head2 subfield(tag,subfield)
+=head2 C<subfield( $tag, $subfield )>
 
 Shortcut method for getting just a subfield for a tag.  These are equivalent:
 
@@ -253,7 +253,7 @@ sub _all_parms_are_fields {
     return 1;
 }
 
-=head2 append_fields(@fields)
+=head2 C<append_fields( @fields )>
 
 Appends the field specified by C<$field> to the end of the record. 
 C<@fields> need to be MARC::Field objects.
@@ -274,7 +274,7 @@ sub append_fields {
     return scalar @_;
 }
 
-=head2 insert_fields_before($before_field,@new_fields)
+=head2 C<insert_fields_before( $before_field, @new_fields )>
 
 Inserts the field specified by C<$new_field> before the field C<$before_field>.
 Returns the number of fields inserted, or undef on failures.
@@ -313,10 +313,10 @@ sub insert_fields_before {
 
 }
 
-=head2 insert_fields_after($after_field,@new_fields)
+=head2 C<insert_fields_after( $after_field, @new_fields )>
 
-Identical to C<insert_fields_before()>, but fields are added after 
-C<$after_field>. Remeber, $after_field and any new fields must be 
+Identical to C<insert_fields_before()>, but fields are added after
+C<$after_field>. Remember, C<$after_field> and any new fields must be
 valid MARC::Field objects or else an exception will be thrown.
 
 =cut
@@ -344,10 +344,10 @@ sub insert_fields_after {
     return scalar @new;
 }
 
-=head2 insert_fields_ordered(@new_fields)
+=head2 C<insert_fields_ordered( @new_fields )>
 
 Will insert fields in strictly numerical order. So a 008 will be filed
-after a 001 field. See insert_grouped_field() for an additional ordering.
+after a 001 field. See C<insert_grouped_field()> for an additional ordering.
 
 =cut
 
@@ -376,7 +376,7 @@ sub insert_fields_ordered {
     return( scalar( @new ) );
 }
 
-=head2 insert_grouped_field(field)
+=head2 C<insert_grouped_field( $field )>
 
 Will insert the specified MARC::Field object into the record in grouped
 order and return true (1) on success, and false (undef) on failure.
@@ -384,7 +384,7 @@ order and return true (1) on success, and false (undef) on failure.
     my $field = MARC::Field->new( '510', 'Indexed by Google.' );
     $record->insert_grouped_field( $field );
 
-For example, if a '650' field is inserted with insert_grouped_field()
+For example, if a '650' field is inserted with C<insert_grouped_field()>
 it will be inserted at the end of the 6XX group of tags. After discussion
 most people wanted the ability to add a new field to the end of the 
 hundred group where it belonged. The reason is that according to the MARC
@@ -420,7 +420,7 @@ sub insert_grouped_field {
 }
 
 
-=head2 delete_field($field)
+=head2 C<delete_field( $field )>
 
 Deletes a field from the record.
 
@@ -447,7 +447,7 @@ sub delete_field {
     return $old_count - @$list;
 }
 
-=head2 as_usmarc()
+=head2 C<as_usmarc()>
 
 This is a wrapper around C<MARC::File::USMARC::encode()> for compatibility with
 older versions of MARC::Record.
@@ -462,7 +462,7 @@ sub as_usmarc() {
     return MARC::File::USMARC::encode( $self );
 }
 
-=head2 as_formatted()
+=head2 C<as_formatted()>
 
 Returns a pretty string for printing in a MARC dump.
 
@@ -480,7 +480,7 @@ sub as_formatted() {
 } # as_formatted
 
 
-=head2 leader()
+=head2 C<leader()>
 
 Returns the leader for the record.  Sets the leader if I<text> is defined.
 No error checking is done on the validity of the leader.
@@ -500,7 +500,7 @@ sub leader {
     return $self->{_leader};
 } # leader()
 
-=head2 set_leader_lengths($reclen,$baseaddr)
+=head2 C<set_leader_lengths( $reclen, $baseaddr )>
 
 Internal function for updating the leader's length and base address.
 
@@ -517,7 +517,7 @@ sub set_leader_lengths {
     substr($self->{_leader},20,4) = '4500';
 }
 
-=head2 clone()
+=head2 C<clone()>
 
 The C<clone()> method makes a copy of an existing MARC record and returns
 the new version.  Note that you cannot just say:
@@ -559,7 +559,7 @@ sub clone {
     return $clone;
 }
 
-=head2 warnings()
+=head2 C<warnings()>
 
 Returns the warnings (as a list) that were created when the record was read.
 These are things like "Invalid indicators converted to blanks".
@@ -582,7 +582,7 @@ sub warnings() {
     return @warnings;
 }
 
-=head2 add_fields()
+=head2 C<add_fields()>
 
 C<add_fields()> is now deprecated, and users are encouraged to use 
 C<append_fields()>, C<insert_fields_after()>, and C<insert_fields_before()> 
