@@ -12,7 +12,7 @@ MARC::Lint - Perl extension for checking validity of MARC records
 
 Version 1.00
 
-    $Id: Lint.pm,v 1.12 2002/08/25 21:27:59 petdance Exp $
+    $Id: Lint.pm,v 1.13 2002/08/30 22:14:41 petdance Exp $
 
 =cut
 
@@ -160,12 +160,6 @@ Does all sorts of lint-like checks on the MARC record I<marc>, both on the recor
 and on the individual fields & subfields.
 
 =cut
-
-our %control_character = ( 
-    "\t" => "tab",
-    "\n" => "linefeed",
-    "\r" => "carriage return",
-);
 
 sub check_record {
 	my $self = shift;
