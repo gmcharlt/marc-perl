@@ -19,7 +19,7 @@ use Carp qw(croak);
 
 Version 1.16
 
-    $Id: Record.pm,v 1.43 2003/01/29 16:56:41 petdance Exp $
+    $Id: Record.pm,v 1.44 2003/01/29 17:06:53 petdance Exp $
 
 =cut
 
@@ -115,7 +115,7 @@ sub title() {
 
 =head2 title_proper()
 
-Returns the title proper from the 245 tag, subfield a.
+Returns the title proper from the 245 tag, subfields a, n and p.
 
 =cut
 
