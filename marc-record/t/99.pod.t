@@ -19,16 +19,14 @@ if ($@) {
 
     foreach my $file (@files) {
 	my $checker = Pod::Simple->new;
-	my $dummy;
-
-	$checker->output_string( \$dummy );
+	
+	$checker->output_string( \my $trash ); # Ignore any output
 	$checker->parse_file( $file );
-
 	unless ( ok( !$checker->any_errata_seen, $file ) ) {
 	    my $lines = $checker->{errata};
 	    for my $line ( sort { $a<=>$b } keys %$lines ) {
 		my $errors = $lines->{$line};
-		diag( "Line $line: $_" ) for @$errors;
+		diag( "$file ($line): $_" ) for @$errors;
 	    }
 	}
     }
