@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>MARC::File - Base class for files of MARC records</title>
-<link rev="made" href="mailto:ed@ink.inkdroid.org" />
+<link rev="made" href="mailto:esummers@esummers.flr.follett.com" />
 </head>
 
 <body style="background-color: white">
@@ -13,16 +13,15 @@
 <ul>
 
 	<li><a href="#name">NAME</a></li>
-	<li><a href="#version">VERSION</a></li>
 	<li><a href="#synopsis">SYNOPSIS</a></li>
 	<li><a href="#export">EXPORT</a></li>
 	<li><a href="#methods">METHODS</a></li>
 	<ul>
 
-		<li><a href="#in()"><code>in()</code></a></li>
-		<li><a href="#next()"><code>next()</code></a></li>
-		<li><a href="#skip()"><code>skip()</code></a></li>
-		<li><a href="#warnings()"><code>warnings()</code></a></li>
+		<li><a href="#in__"><code>in()</code></a></li>
+		<li><a href="#next_____filter_func___">next( [\&amp;filter_func] )</a></li>
+		<li><a href="#skip__"><code>skip()</code></a></li>
+		<li><a href="#warnings__"><code>warnings()</code></a></li>
 	</ul>
 
 	<li><a href="#related_modules">RELATED MODULES</a></li>
@@ -37,13 +36,6 @@
 </p>
 <h1><a name="name">NAME</a></h1>
 <p>MARC::File - Base class for files of MARC records</p>
-<p>
-</p>
-<hr />
-<h1><a name="version">VERSION</a></h1>
-<p>Version 1.13</p>
-<pre>
-    $Id: File.html,v 1.1 2002/12/02 21:40:58 edsummers Exp $</pre>
 <p>
 </p>
 <hr />
@@ -69,27 +61,40 @@
 <h1><a name="methods">METHODS</a></h1>
 <p>
 </p>
-<h2><a name="in()"><code>in()</code></a></h2>
-<p>Opens a file for input.</p>
-<p>Returns a MARC::File object, or <code>undef</code> on failure.</p>
+<h2><a name="in__"><code>in()</code></a></h2>
+<p>Opens a file for import. Ordinarily you will use <code>MARC::File::USMARC</code>
+or <code>MARC::File::MicroLIF</code> to do this.</p>
+<pre>
+    my $file = MARC::File::USMARC-&gt;in( 'file.marc' );</pre>
+<p>Returns a <code>MARC::File</code> object, or <code>undef</code> on failure. If you 
+encountered an error the error message will be stored in 
+<code>$MARC::File::ERROR</code>.</p>
+<p>Optionally you can also pass in a filehandle, and <code>MARC::File</code>.
+will ``do the right thing''.</p>
+<pre>
+    my $handle = IO::File-&gt;new( 'gunzip -c file.marc.gz |' );
+    my $file = MARC::File::USMARC-&gt;in( $handle );</pre>
 <p>
 </p>
-<h2><a name="next()"><code>next()</code></a></h2>
+<h2><a name="next_____filter_func___">next( [\&amp;filter_func] )</a></h2>
 <p>Reads the next record from the file handle passed in.</p>
+<p>The <code>$filter_func</code> is a reference to a filtering function.  Currently,
+only USMARC records support this.  See <a href="/MARC/File/USMARC.html">the MARC::File::USMARC manpage</a>'s <code>decode()</code>
+function for details.</p>
 <p>Returns a MARC::Record reference, or <code>undef</code> on error.</p>
 <p>
 </p>
-<h2><a name="skip()"><code>skip()</code></a></h2>
+<h2><a name="skip__"><code>skip()</code></a></h2>
 <p>Skips over the next record in the file.  Same as <code>next()</code>,
 without the overhead of parsing a record you're going to throw away
 anyway.</p>
 <p>Returns 1 or undef.</p>
 <p>
 </p>
-<h2><a name="warnings()"><code>warnings()</code></a></h2>
-<p>Simlilar to MARC::Record and MARC::Batch, <code>warnings()</code> will return any 
-warnings that have accumulated while processing this file; and as a 
-side-effect will clear the warnings buffer.</p>
+<h2><a name="warnings__"><code>warnings()</code></a></h2>
+<p>Simlilar to the methods in <a href="/MARC/Record.html">the MARC::Record manpage</a> and <a href="/MARC/Batch.html">the MARC::Batch manpage</a>,
+<code>warnings()</code> will return any warnings that have accumulated while
+processing this file; and as a side-effect will clear the warnings buffer.</p>
 <p>
 </p>
 <hr />
@@ -115,7 +120,7 @@ employers of the various contributors to the code.</p>
 </p>
 <hr />
 <h1><a name="author">AUTHOR</a></h1>
-<p>Andy Lester, &lt;<a href="mailto:marc@petdance.com">marc@petdance.com</a>&gt; or &lt;<a href="mailto:alester@flr.follett.com">alester@flr.follett.com</a>&gt;</p>
+<p>Andy Lester, <code>&lt;andy@petdance.com&gt;</code></p>
 
 </body>
 

@@ -54,8 +54,6 @@ future development will use it as a foundation.
 
 <h1>Documentation</h1>
 
-<p><b>Note:</b> items in <i>italics</i> are deprecated.</p>
-
 <ul>
 
 <li>MARC::Doc::Tutorial : 
@@ -85,14 +83,11 @@ href="MARC/Record.pdf">pdf</a></li>
 <li>MARC::File::MicroLIF : <a href="MARC/File/MicroLIF.html">html</a> /
 <a href="MARC/File/MicroLIF.pdf">pdf</a></li>
 
+<li>MARC::File::XML : <a href="MARC/File/XML.html">html</a> /
+<a href="MARC/File/XML.pdf">pdf</a></li>
+
 <li>MARC::Charset : <a href="MARC/Charset.html">html</a> /
 <a href="MARC/Charset.pdf">pdf</a></li>
-
-<li><i>MARC.pm : <a href="dep/marcpm/MARC.html">html</a> /
-<a href="dep/marcpm/MARC.pdf">pdf</a></i></li>
-
-<li><i>MARC::XML : <a href="dep/marc::xml/MARC-XML.html">html</a> /
-<a href="dep/marc::xml/MARC-XML.pdf">pdf</a></i></li>
 
 </ul>
 
@@ -111,6 +106,9 @@ download the MARC::Record library and install.</p>
 
 <li><a href="http://www.savory.org/aclibrary/acsearch.html">Adat Chaverim Library</a>: used MARC.pm to create a web-searchable online catalog using freely available USMARC records from the Library of Congress.</li>
 
+<li><a href="http://www.aip.org/">American Institute of Physics</a>: have 
+used MARC.pm to validate bibliographic data uploaded via the web.</li>
+
 <li><a href="http://cddc.uchicago.edu/">Chicago Digital Distribution Center</a>
 : uses MARC::Record, in conjunction with Net::Z3950, to retrieve and harvest
 USMARC records.  The MARC metadata serve as the basis for the online catalog 
@@ -124,9 +122,13 @@ href="http://www.galileo.usg.edu/express?link=getd&password=public">UGA
 Electronic Theses and Dissertations</a> for upload into the GIL Voyager online
 catalog.</li>
 
-<li><a href="http://www.ilo.org">International Labor Office</a>: have used MARC::Record to translate English language subject headings into French and Spanish; and also to create a current awareness service for their library.</li> 
+<li><a href="http://www.isb.edu/lrc/">Indian School of Business</a>: The
+Learning Resource Center at the ISB used MARC::Record to massage their MARC data
+when moving to a new ILS.</li>
 
-<li><a href="http://www.lib.sfu.ca/kiosk/mjordan/jake/">jake2marc</a>: The Jointly Administered Knowledge Environment ( <a href="http://jake.sourceforge.net/">jake</a> ) is an open source project that (among other things) uses MARC.pm to provide a 'save-as-MARC' mechanism for serial titles available in over 190 databases. Jake creates the USMARC data out of publicly available metadata for the electronic/print serials.</li>
+<li><a href="http://www.ilo.org">International Labour Office</a>: have used MARC::Record to translate English language subject headings into French and Spanish; and also to create a current awareness service for their library.</li> 
+
+<li><a href="http://jake.lib.sfu.ca/jake2marc/">jake2marc</a>: The Jointly Administered Knowledge Environment ( <a href="http://jake.sourceforge.net/">jake</a> ) is an open source project that (among other things) uses MARC.pm to provide a 'save-as-MARC' mechanism for serial titles available in over 190 databases. Jake creates the USMARC data out of publicly available metadata for the electronic/print serials.</li>
 
 <li><a href="http://www.koha.org">Koha</a>: An open source library system
 made in New Zealand by the Horowhenua Library Trust and Katipo Communications 
@@ -150,6 +152,10 @@ being distributed under the GNU General Public License.</li>
 is using MARC::Record to extract data from their Ex Libris Aleph ILS in order 
 to populate a MySQL database that powers their web-based current awareness 
 service.  </li>
+
+<li><a href="http://libweb.princeton.edu">Princeton University Library</a>: 
+has used MARC::Record and MARC::File::XML to convert exported MARCXML slim 
+data from Ex Libris' SFX product into the MARC communication format.</li>
 
 <li><a href="http://refdb.sourceforge.net/">RefDB</a>: is a reference
 database and bibliography tool for SGML, XML, and LaTeX/BibTeX documents. It
@@ -179,6 +185,12 @@ up the <a href='http://rocky.uta.edu/doran/preprocess/'>project</a>.</li>
 
 <ul>
 
+<li><a href="http://1010wins.com/topstories/winstopstories_story_314154119.html">Queens Library Offers Services In Cyrillic</a>: MARC::Record used to 
+massage transliterated Russian back into Cyrillic.</li>
+
+<li><a href="http://www.elag2003.ch/pres/pres_davies.pdf">Models for
+multilingual subject access in online library catalogues: the ILO experience</a>, Ron Davies, International Labour Organization.</li>
+
 <li><a href="http://library.smc.edu/btorder/">Automatic generation of Sirsi
 Unicorn order records</a>, Steve Hunt, Santa Monica College Library.</li> 
 
@@ -198,14 +210,16 @@ and Ed Summers.</li>
 </ul>
 
 <h1>Developers</h1>
-<p>Please feel free to suggest improvements to MARC.pm and/or join the
-development team by visiting MARC.pm's SourceForge <a
+<p>Please feel free to suggest improvements to the MARC/Perl and/or join the
+development team by visiting MARC/Perl's SourceForge <a
 href="http://sourceforge.net/project/?group_id=1254">development area</a>.
-The current developers are: </p>
+Here's a list of developers who have contributed to the MARC/Perl project.</p>
 
 <ul>
 <li>Chuck Bearden <a href="mailto:cbearden@rice.edu">cbearden@rice.edu</a></li>
+<li>Colin Campbell <a href="mailto:colinc@sirsi.co.uk">colinc@sirsi.co.uk</a></li>
 <li>Bill Birthisel <a href="mailto:wcbirthisel@alum.mit.edu">wcbirthisel@alum.mit.edu</a></li>
+<li>Morbus Iff <a href="mailto:morbus@disobey.com">morbus@disobey.com</a>
 <li>Derek Lane <a href="mailto:dereklane@pobox.com">dereklane@pobox.com</a></li>
 <li>Andy Lester <a href="mailto:andy@petdance.com">andy@petdance.com</a></li>
 <li>Charles McFadden <a href="mailto:chuck@vims.edu">chuck@vims.edu</a></li>
@@ -213,13 +227,9 @@ The current developers are: </p>
 <li>Ed Summers <a href="mailto:ehs@pobox.com">ehs@pobox.com</a></li>
 </ul>
 
-<h1>Project Statistics</h1>
-
-<img src="http://sourceforge.net/project/stats/stats_graph.png?group_id=1254&report=last_30">
-
 <p>
 <hr>
-Web hosting graciously provided by: <a href="http://sourceforge.net" border="0"><img src="http://sourceforge.net/images/sflogo2-steel.png" align="middle"></a>
+Web hosting graciously provided by: <a href="http://sourceforge.net"><img src="http://sourceforge.net/images/sflogo2-steel.png" border=0 align="middle"></a>
 
 </body>
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>MARC::Charset::Ansel - MARC8/UTF8 mappings for Ansel</title>
+<title>MARC::Charset::EastAsian - MARC8/UTF8 mappings</title>
 <link rev="made" href="mailto:ed@ink.inkdroid.org" />
 </head>
 
@@ -28,28 +28,31 @@
 <p>
 </p>
 <h1><a name="name">NAME</a></h1>
-<p>MARC::Charset::Ansel - MARC8/UTF8 mappings for Ansel</p>
+<p>MARC::Charset::EastAsian - MARC8/UTF8 mappings</p>
 <p>
 </p>
 <hr />
 <h1><a name="synopsis">SYNOPSIS</a></h1>
 <pre>
- use MARC::Charset::Ansel;
- my $cs = MARC::Charset::Ansel-&gt;new();</pre>
+ use MARC::Charset::EastAsian;
+ my $cs = MARC::Charset::EastAsian-&gt;new();</pre>
 <p>
 </p>
 <hr />
 <h1><a name="description">DESCRIPTION</a></h1>
-<p>MARC::Charset::Ansel provides a mapping between the MARC8 Ansel character
-set and Unicode(UTF8). It is typically used by MARC::Charset, so you 
-probably don't need to use this yourself. It inherits from
-MARC::Charset::Generic so you'll have to look at those docs to see all the
-methods that you can call.</p>
+<p>MARC::Charset::EastAsian provides a mapping between the MARC8 EastAsian 
+character set and Unicode(UTF8). It is typically used by MARC::Charset, so 
+you probably don't need to use this yourself.</p>
+<p>Because there are so many EastAsian characters, <code>lookup()</code> uses a tied Berkeley DB
+file so as to conserve memory. This db was built and installed when you
+installed MARC::Charset.</p>
+<p>MARC::Charset::EastAsian inherits from MARC::Charset::Generic, so you'll need
+to look at those docs as well to see all the available methods.</p>
 <p>
 </p>
 <hr />
 <h1><a name="methods">METHODS</a></h1>
-<p>The constructor, which will return you a MARC::Charset::Ansel object.</p>
+<p>The constructor, which will return you a MARC::Charset::EastAsian object.</p>
 <p>
 </p>
 <hr />
@@ -66,9 +69,10 @@ a combining character, and false (undef) if it is not.</p>
 </p>
 <hr />
 <h1><a name="todo">TODO</a></h1>
-<ul>
-<li></li>
-</ul>
+<dl>
+<dt><strong><a name="item_nothing">Nothing</a></strong><br />
+</dt>
+</dl>
 <p>
 </p>
 <hr />

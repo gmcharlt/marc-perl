@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>MARC::Charset::Ansel - MARC8/UTF8 mappings for Ansel</title>
+<title>MARC::Charset::UTF8 - UTF-8 =&gt; MARC-8 mapping</title>
 <link rev="made" href="mailto:ed@ink.inkdroid.org" />
 </head>
 
@@ -16,10 +16,10 @@
 	<li><a href="#synopsis">SYNOPSIS</a></li>
 	<li><a href="#description">DESCRIPTION</a></li>
 	<li><a href="#methods">METHODS</a></li>
+	<li><a href="#new()"><code>new()</code></a></li>
 	<li><a href="#lookup()"><code>lookup()</code></a></li>
 	<li><a href="#combining()"><code>combining()</code></a></li>
 	<li><a href="#todo">TODO</a></li>
-	<li><a href="#see_also">SEE ALSO</a></li>
 	<li><a href="#authors">AUTHORS</a></li>
 </ul>
 <!-- INDEX END -->
@@ -28,34 +28,53 @@
 <p>
 </p>
 <h1><a name="name">NAME</a></h1>
-<p>MARC::Charset::Ansel - MARC8/UTF8 mappings for Ansel</p>
+<p>MARC::Charset::UTF8 - UTF-8 =&gt; MARC-8 mapping</p>
 <p>
 </p>
 <hr />
 <h1><a name="synopsis">SYNOPSIS</a></h1>
 <pre>
- use MARC::Charset::Ansel;
- my $cs = MARC::Charset::Ansel-&gt;new();</pre>
+ use MARC::Charset::UTF8;
+ my $cs = MARC::Charset::UTF8-&gt;new();</pre>
+<pre>
+ ## convert some utf8 to marc8
+ my $marc8 = $cs-&gt;to_marc8( $unicode );</pre>
+<pre>
+ ## see what charsets have been used so far by this charset object
+ my @charsets = $cs-&gt;charsets();</pre>
+<pre>
+ ## what is the current G0 charset
+ my $g0 = $cs-&gt;g0();</pre>
+<pre>
+ ## what is the current G1 charset
+ my $g1 = $cs-&gt;g1();</pre>
 <p>
 </p>
 <hr />
 <h1><a name="description">DESCRIPTION</a></h1>
-<p>MARC::Charset::Ansel provides a mapping between the MARC8 Ansel character
-set and Unicode(UTF8). It is typically used by MARC::Charset, so you 
-probably don't need to use this yourself. It inherits from
-MARC::Charset::Generic so you'll have to look at those docs to see all the
-methods that you can call.</p>
+<p>Unlike all the other MARC::Charset::* classes, MARC::Charset::UTF8 attempts to
+convert a Unicode character into it's MARC-8 equivalent. Obviously this is a
+lossy process since MARC-8 doesn't support anywhere near the wide variety of
+characters that Unicode does...but it does its best.</p>
+<p>When you installed MARC::Charset the other MARC::Charset::* mappings were turned
+on their head to create one Berkeley database to house the mapping. If you are
+curious you should be able to find this Berkeley DB living in the same directory
+which you installed MARC::Charset::UTF8 into.</p>
 <p>
 </p>
 <hr />
 <h1><a name="methods">METHODS</a></h1>
-<p>The constructor, which will return you a MARC::Charset::Ansel object.</p>
+<p>
+</p>
+<hr />
+<h1><a name="new()"><code>new()</code></a></h1>
+<p>The constructor, which will return you a MARC::Charset::UTF8 object.</p>
 <p>
 </p>
 <hr />
 <h1><a name="lookup()"><code>lookup()</code></a></h1>
 <p>The workhorse method that does the lookup. Pass it an a character and you'll
-get back the UTF8 character.</p>
+get back some data identifying a MARC8 character.</p>
 <p>
 </p>
 <hr />
@@ -69,14 +88,6 @@ a combining character, and false (undef) if it is not.</p>
 <ul>
 <li></li>
 </ul>
-<p>
-</p>
-<hr />
-<h1><a name="see_also">SEE ALSO</a></h1>
-<dl>
-<dt><strong><a name="item_marc%3a%3acharset%3a%3ageneric">MARC::Charset::Generic</a></strong><br />
-</dt>
-</dl>
 <p>
 </p>
 <hr />

@@ -11,7 +11,7 @@
 endobj
 2 0 obj
 <<
-/CreationDate (D:20021126161859-0600)
+/CreationDate (D:20031216173558-0600)
 /Producer (pod2pdf)
 /Title (MicroLIF.pm)
 >>
@@ -195,63 +195,68 @@ BT
 /F21 12 Tf
 1 0 0 1 72.0 731.6 Tm
 0.0000 Tw
-(VERSION ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 717.2 Tm
-0.0000 Tw
-(Version 1.13 ) Tj
-/F10 10 Tf
-1 0 0 1 102.0 705.2 Tm
-0.0000 Tw
-(    $Id: MicroLIF.pdf,v 1.1 2002/12/02 21:41:03 edsummers Exp $ ) Tj
-/F21 12 Tf
-1 0 0 1 72.0 687.2 Tm
-0.0000 Tw
 (SYNOPSIS ) Tj
 /F10 10 Tf
-1 0 0 1 102.0 666.8 Tm
+1 0 0 1 102.0 711.2 Tm
 0.0000 Tw
 (    use MARC::File::MicroLIF; ) Tj
-1 0 0 1 102.0 642.8 Tm
+1 0 0 1 102.0 687.2 Tm
 0.0000 Tw
-(    my $file = MARC::File::MicroLIF::in\( $filename \); ) Tj
-1 0 0 1 102.0 618.8 Tm
+(    my $file = MARC::File::MicroLIF->in\( $filename \); ) Tj
+1 0 0 1 102.0 663.2 Tm
 0.0000 Tw
 (    while \( my $marc = $file->next\(\) \) \{ ) Tj
-1 0 0 1 150.0 606.8 Tm
+1 0 0 1 150.0 651.2 Tm
 0.0000 Tw
 (# Do something ) Tj
-1 0 0 1 102.0 594.8 Tm
+1 0 0 1 102.0 639.2 Tm
 0.0000 Tw
 (    \} ) Tj
-1 0 0 1 102.0 582.8 Tm
+1 0 0 1 102.0 627.2 Tm
 0.0000 Tw
 (    $file->close\(\); ) Tj
-1 0 0 1 102.0 570.8 Tm
+1 0 0 1 102.0 615.2 Tm
 0.0000 Tw
 (    undef $file; ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 552.8 Tm
+1 0 0 1 72.0 597.2 Tm
 0.0000 Tw
 (EXPORT ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 538.4 Tm
+1 0 0 1 102.0 582.8 Tm
 0.0000 Tw
 (None.   ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 520.4 Tm
+1 0 0 1 72.0 564.8 Tm
 0.0000 Tw
 (METHODS ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 543.2 Tm
+0.0000 Tw
+(header\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 531.2 Tm
+0.3918 Tw
+(If the MicroLIF file has a file header then the header is returned. If the file has no header or the file has) Tj
+1 0 0 1 102.0 519.2 Tm
+0.0000 Tw
+(not yet been opened then ) Tj
+/F10 10 Tf
+0.0000 Tw
+(undef) Tj
+/F00 10 Tf
+0.0000 Tw
+( is returned. ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 498.8 Tm
+1 0 0 1 72.0 501.2 Tm
 0.0000 Tw
 (TODO ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 477.2 Tm
+1 0 0 1 72.0 479.6 Tm
 0.0000 Tw
 (RELATED MODULES ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 462.8 Tm
+1 0 0 1 102.0 465.2 Tm
 0.0000 Tw
 () Tj
 /F02 10 Tf
@@ -263,31 +268,40 @@ BT
 0.0000 Tw
 ( ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 444.8 Tm
+1 0 0 1 72.0 447.2 Tm
 0.0000 Tw
 (LICENSE ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 430.4 Tm
+1 0 0 1 102.0 432.8 Tm
 0.0000 Tw
 (This code may be distributed under the same terms as Perl itself.  ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 418.4 Tm
+1 0 0 1 102.0 420.8 Tm
 2.4619 Tw
 (Please note that these modules are not products of or supported by the employers of the various) Tj
-1 0 0 1 102.0 406.4 Tm
+1 0 0 1 102.0 408.8 Tm
 0.0000 Tw
 (contributors to the code. ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 388.4 Tm
+1 0 0 1 72.0 390.8 Tm
 0.0000 Tw
 (AUTHOR ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 374.0 Tm
+1 0 0 1 102.0 376.4 Tm
 0.0000 Tw
-(Andy Lester, <marc@petdance.com> or <alester@flr.follett.com> ) Tj
+(Andy Lester, ) Tj
+/F10 10 Tf
+0.0000 Tw
+(< <andy@petdance.com> ) Tj
+/F00 10 Tf
+0.0000 Tw
+() Tj
+/F00 10 Tf
+0.0000 Tw
+( ) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
-(26 November 2002) Tj
+(16 December 2003) Tj
 1 0 0 1 517.44 37 Tm
 (1) Tj
 ET
@@ -297,7 +311,7 @@ S
 endstream
 endobj
 19 0 obj
-2138
+2315
 endobj
 20 0 obj
 <<
@@ -339,8 +353,8 @@ BT
 /F21 10 Tf
 1 0 0 1 72 37 Tm
 (2) Tj
-1 0 0 1 435.18 37 Tm
-(26 November 2002) Tj
+1 0 0 1 435.73 37 Tm
+(16 December 2003) Tj
 ET
 72 50 m
 523 50 l
@@ -403,7 +417,7 @@ f
 Q
 BT
 1 0 0 1 102 671.6 Tm
-(VERSION) Tj
+(SYNOPSIS) Tj
 1 0 0 1 487.44 671.6 Tm
 (1) Tj
 ET
@@ -414,7 +428,7 @@ f
 Q
 BT
 1 0 0 1 102 659.6 Tm
-(SYNOPSIS) Tj
+(EXPORT) Tj
 1 0 0 1 487.44 659.6 Tm
 (1) Tj
 ET
@@ -425,7 +439,7 @@ f
 Q
 BT
 1 0 0 1 102 647.6 Tm
-(EXPORT) Tj
+(METHODS) Tj
 1 0 0 1 487.44 647.6 Tm
 (1) Tj
 ET
@@ -435,8 +449,8 @@ q
 f
 Q
 BT
-1 0 0 1 102 635.6 Tm
-(METHODS) Tj
+1 0 0 1 132 635.6 Tm
+(header\(\)) Tj
 1 0 0 1 487.44 635.6 Tm
 (1) Tj
 ET
@@ -485,7 +499,7 @@ BT
 (1) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
-(26 November 2002) Tj
+(16 December 2003) Tj
 1 0 0 1 520.22 37 Tm
 (i) Tj
 ET
@@ -495,7 +509,7 @@ S
 endstream
 endobj
 27 0 obj
-1175
+1178
 endobj
 28 0 obj
 <<
@@ -535,8 +549,8 @@ BT
 /F21 10 Tf
 1 0 0 1 72 37 Tm
 (ii) Tj
-1 0 0 1 435.18 37 Tm
-(26 November 2002) Tj
+1 0 0 1 435.73 37 Tm
+(16 December 2003) Tj
 ET
 72 50 m
 523 50 l
@@ -638,7 +652,7 @@ BT
 (MicroLIF.pm) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
-(26 November 2002) Tj
+(16 December 2003) Tj
 1 0 0 1 488.54 37 Tm
 (Fly leaf) Tj
 ET
@@ -692,41 +706,42 @@ endobj
 /Dest [21 0 R /FitH 746]
 /Previous 44 0 R
 /Next 46 0 R
-/Title (VERSION)
+/Title (SYNOPSIS)
 >>
 endobj
 46 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 701.6]
+/Dest [21 0 R /FitH 611.6]
 /Previous 45 0 R
 /Next 47 0 R
-/Title (SYNOPSIS)
+/Title (EXPORT)
 >>
 endobj
 47 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 567.2]
+/Dest [21 0 R /FitH 579.2]
 /Previous 46 0 R
-/Next 48 0 R
-/Title (EXPORT)
+/Next 49 0 R
+/First 48 0 R
+/Last 48 0 R
+/Count 1 
+/Title (METHODS)
 >>
 endobj
 48 0 obj
 <<
-/Parent 43 0 R
-/Dest [21 0 R /FitH 534.8]
-/Previous 47 0 R
-/Next 49 0 R
-/Title (METHODS)
+/Parent 47 0 R
+/Dest [21 0 R /FitH 555.2]
+/Title (header\(\))
 >>
 endobj
 49 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 513.2]
-/Previous 48 0 R
+/Dest [21 0 R /FitH 515.6]
+/Previous 47 0 R
 /Next 50 0 R
 /Title (TODO)
 >>
@@ -734,7 +749,7 @@ endobj
 50 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 491.6]
+/Dest [21 0 R /FitH 494]
 /Previous 49 0 R
 /Next 51 0 R
 /Title (RELATED MODULES)
@@ -743,7 +758,7 @@ endobj
 51 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 459.2]
+/Dest [21 0 R /FitH 461.6]
 /Previous 50 0 R
 /Next 52 0 R
 /Title (LICENSE)
@@ -752,7 +767,7 @@ endobj
 52 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 402.8]
+/Dest [21 0 R /FitH 405.2]
 /Previous 51 0 R
 /Title (AUTHOR)
 >>
@@ -786,8 +801,8 @@ xref
 0000000000 65535 f 
 0000000015 00000 n 
 0000000171 00000 n 
-0000010732 00000 n 
-0000010821 00000 n 
+0000010920 00000 n 
+0000011009 00000 n 
 0000000271 00000 n 
 0000002371 00000 n 
 0000002470 00000 n 
@@ -802,40 +817,40 @@ xref
 0000003382 00000 n 
 0000003488 00000 n 
 0000003602 00000 n 
-0000005794 00000 n 
-0000005815 00000 n 
-0000005951 00000 n 
-0000006034 00000 n 
-0000006326 00000 n 
-0000006346 00000 n 
-0000006448 00000 n 
-0000006531 00000 n 
-0000007760 00000 n 
-0000007781 00000 n 
-0000007895 00000 n 
-0000007978 00000 n 
-0000008281 00000 n 
-0000008301 00000 n 
-0000008403 00000 n 
-0000008486 00000 n 
-0000008569 00000 n 
-0000008916 00000 n 
-0000008936 00000 n 
-0000009061 00000 n 
-0000009363 00000 n 
-0000009383 00000 n 
-0000009485 00000 n 
-0000010657 00000 n 
-0000009568 00000 n 
-0000009689 00000 n 
-0000009780 00000 n 
-0000009889 00000 n 
-0000010001 00000 n 
-0000010111 00000 n 
-0000010222 00000 n 
-0000010330 00000 n 
-0000010449 00000 n 
-0000010560 00000 n 
+0000005971 00000 n 
+0000005992 00000 n 
+0000006128 00000 n 
+0000006211 00000 n 
+0000006503 00000 n 
+0000006523 00000 n 
+0000006625 00000 n 
+0000006708 00000 n 
+0000007940 00000 n 
+0000007961 00000 n 
+0000008075 00000 n 
+0000008158 00000 n 
+0000008461 00000 n 
+0000008481 00000 n 
+0000008583 00000 n 
+0000008666 00000 n 
+0000008749 00000 n 
+0000009096 00000 n 
+0000009116 00000 n 
+0000009241 00000 n 
+0000009543 00000 n 
+0000009563 00000 n 
+0000009665 00000 n 
+0000010845 00000 n 
+0000009748 00000 n 
+0000009869 00000 n 
+0000009960 00000 n 
+0000010070 00000 n 
+0000010180 00000 n 
+0000010328 00000 n 
+0000010412 00000 n 
+0000010520 00000 n 
+0000010637 00000 n 
+0000010748 00000 n 
 trailer
 <<
 /Size 53
@@ -843,5 +858,5 @@ trailer
 /Info 2 0 R
 >>
 startxref
-10940
+11128
 %%EOF

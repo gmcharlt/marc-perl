@@ -11,7 +11,7 @@
 endobj
 2 0 obj
 <<
-/CreationDate (D:20021126161843-0600)
+/CreationDate (D:20031216173556-0600)
 /Producer (pod2pdf)
 /Title (Field.pm)
 >>
@@ -195,64 +195,43 @@ BT
 /F21 12 Tf
 1 0 0 1 72.0 731.6 Tm
 0.0000 Tw
-(VERSION ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 717.2 Tm
-0.0000 Tw
-(Version 1.13 ) Tj
-/F10 10 Tf
-1 0 0 1 102.0 705.2 Tm
-0.0000 Tw
-(    $Id: Field.pdf,v 1.1 2002/12/02 21:40:58 edsummers Exp $ ) Tj
-/F21 12 Tf
-1 0 0 1 72.0 687.2 Tm
-0.0000 Tw
 (SYNOPSIS ) Tj
 /F10 10 Tf
-1 0 0 1 102.0 666.8 Tm
+1 0 0 1 102.0 711.2 Tm
 0.0000 Tw
 (  use MARC::Field; ) Tj
-1 0 0 1 102.0 642.8 Tm
+1 0 0 1 102.0 687.2 Tm
 0.0000 Tw
-(  my $field =  ) Tj
-1 0 0 1 102.0 630.8 Tm
+(  my $field = MARC::Field->new\( 245, '1', '0', ) Tj
+1 0 0 1 102.0 675.2 Tm
 0.0000 Tw
-(  ) Tj
-1 0 0 1 150.0 630.8 Tm
+(       'a' => 'Raccoons and ripe corn / ', ) Tj
+1 0 0 1 102.0 663.2 Tm
 0.0000 Tw
-(MARC::Field->new\(  ) Tj
-1 0 0 1 198.0 618.8 Tm
+(       'c' => 'Jim Arnosky.' ) Tj
+1 0 0 1 102.0 651.2 Tm
 0.0000 Tw
-(245, '1', '0', ) Tj
-1 0 0 1 246.0 606.8 Tm
-0.0000 Tw
-('a' => 'Raccoons and ripe corn / ', ) Tj
-1 0 0 1 246.0 594.8 Tm
-0.0000 Tw
-('c' => 'Jim Arnosky.' ) Tj
-1 0 0 1 198.0 582.8 Tm
-0.0000 Tw
-(\); ) Tj
-1 0 0 1 102.0 570.8 Tm
+(  \); ) Tj
+1 0 0 1 102.0 639.2 Tm
 0.0000 Tw
 (  $field->add_subfields\( "a", "1st ed." \); ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 552.8 Tm
+1 0 0 1 72.0 621.2 Tm
 0.0000 Tw
 (DESCRIPTION ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 538.4 Tm
+1 0 0 1 102.0 606.8 Tm
 1.1718 Tw
 (Defines MARC fields for use in the MARC::Record module.  I suppose you could use them on their) Tj
-1 0 0 1 102.0 526.4 Tm
+1 0 0 1 102.0 594.8 Tm
 0.0000 Tw
 (own, but that wouldn`t be very interesting. ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 508.4 Tm
+1 0 0 1 72.0 576.8 Tm
 0.0000 Tw
 (EXPORT ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 494.0 Tm
+1 0 0 1 102.0 562.4 Tm
 2.5145 Tw
 (None by default.  Any errors are stored in ) Tj
 /F10 10 Tf
@@ -265,7 +244,7 @@ BT
 2.5145 Tw
 ($MARC::Record) Tj
 /F00 10 Tf
-1 0 0 1 102.0 482.0 Tm
+1 0 0 1 102.0 550.4 Tm
 0.0000 Tw
 (usually bubbles up to ) Tj
 /F10 10 Tf
@@ -275,115 +254,161 @@ BT
 0.0000 Tw
 (. ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 464.0 Tm
+1 0 0 1 72.0 532.4 Tm
 0.0000 Tw
 (METHODS ) Tj
 /F21 10 Tf
-1 0 0 1 72.0 442.4 Tm
+1 0 0 1 72.0 510.8 Tm
 0.0000 Tw
-(new\(tag,indicator1,indicator2,code,data[,code,data...]\) ) Tj
-/F10 10 Tf
-1 0 0 1 102.0 424.4 Tm
-0.0000 Tw
-(  my $record =  ) Tj
-1 0 0 1 102.0 412.4 Tm
-0.0000 Tw
-(  ) Tj
-1 0 0 1 150.0 412.4 Tm
-0.0000 Tw
-(MARC::Field->new\(  ) Tj
-1 0 0 1 198.0 400.4 Tm
-0.0000 Tw
-(245, '1', '0', ) Tj
-1 0 0 1 246.0 388.4 Tm
-0.0000 Tw
-('a' => 'Raccoons and ripe corn / ', ) Tj
-1 0 0 1 246.0 376.4 Tm
-0.0000 Tw
-('c' => 'Jim Arnosky.' ) Tj
-1 0 0 1 198.0 364.4 Tm
-0.0000 Tw
-(\); ) Tj
+(new\(\) ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 340.4 Tm
+1 0 0 1 102.0 498.8 Tm
+0.9844 Tw
+(The constructor, which will return a MARC::Field object. Typically you will  pass in the tag number,) Tj
+1 0 0 1 102.0 486.8 Tm
 0.0000 Tw
-(Returns a MARC::Field record. ) Tj
+(indicator 1, indicator 2, and then a list of any  subfield/data pairs. For example: ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 474.8 Tm
+0.0000 Tw
+(  my $field = MARC::Field->new\(  ) Tj
+1 0 0 1 102.0 462.8 Tm
+0.0000 Tw
+(       245, '1', '0', ) Tj
+1 0 0 1 102.0 450.8 Tm
+0.0000 Tw
+(       'a' => 'Raccoons and ripe corn / ', ) Tj
+1 0 0 1 102.0 438.8 Tm
+0.0000 Tw
+(       'c' => 'Jim Arnosky.' ) Tj
+1 0 0 1 102.0 426.8 Tm
+0.0000 Tw
+(  \); ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 402.8 Tm
+0.0000 Tw
+(Or if you want to add a field < 010 that does not have indicators.  ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 390.8 Tm
+0.0000 Tw
+(  my $field = MARC::Field->new\( '001', ' 14919759' \); ) Tj
 /F21 10 Tf
-1 0 0 1 72.0 322.4 Tm
+1 0 0 1 72.0 372.8 Tm
 0.0000 Tw
-(clone\(\) ) Tj
+(tag\(\) ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 310.4 Tm
+1 0 0 1 102.0 360.8 Tm
 0.0000 Tw
-(Makes a copy of the field.  Note that this is not just the same as saying ) Tj
-/F10 10 Tf
-1 0 0 1 102.0 298.4 Tm
-0.0000 Tw
-(    my $newfield = $field; ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 274.4 Tm
-0.0000 Tw
-(since that just makes a copy of the reference.  To get a new object, you must ) Tj
-/F10 10 Tf
-1 0 0 1 102.0 262.4 Tm
-0.0000 Tw
-(    my $newfield = $field->clone; ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 238.4 Tm
-0.0000 Tw
-(Returns a MARC::Field record. ) Tj
+(Returns the three digit tag for the field. ) Tj
 /F21 10 Tf
-1 0 0 1 72.0 220.4 Tm
+1 0 0 1 72.0 342.8 Tm
 0.0000 Tw
-(update\(\) ) Tj
+(indicator\(indno\) ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 208.4 Tm
-0.0000 Tw
-(Allows you to change the values of the field. You can update indicators and subfields like this: ) Tj
+1 0 0 1 102.0 330.8 Tm
+0.0607 Tw
+(Returns the specified indicator.  Returns ) Tj
 /F10 10 Tf
-1 0 0 1 102.0 196.4 Tm
-0.0000 Tw
-(  $field->update\( ind2 => '4', a => 'The ballad of Abe Lincoln'\); ) Tj
+0.0607 Tw
+(undef) Tj
 /F00 10 Tf
-1 0 0 1 102.0 172.4 Tm
-1.1700 Tw
-(If you want to update a field that has no indicators or subfields \(000-009\) just call update\(\) with one) Tj
-1 0 0 1 102.0 160.4 Tm
-0.0000 Tw
-(argument, the string that you would like to  set the field to.  ) Tj
+0.0607 Tw
+( and sets  ) Tj
 /F10 10 Tf
-1 0 0 1 102.0 148.4 Tm
-0.0000 Tw
-(  $field = $record->field\( '003' \); ) Tj
-1 0 0 1 102.0 136.4 Tm
-0.0000 Tw
-(  $field->update\('IMchF'\); ) Tj
+0.0607 Tw
+($MARC::Field::ERROR) Tj
 /F00 10 Tf
-1 0 0 1 102.0 112.4 Tm
-0.8694 Tw
-(Note: when doing subfield updates be aware that ) Tj
+0.0607 Tw
+( if the ) Tj
+/F02 10 Tf
+0.0607 Tw
+(indno) Tj
+/F00 10 Tf
+0.0607 Tw
+( is not) Tj
+1 0 0 1 102.0 318.8 Tm
+0.0000 Tw
+(1 or 2, or if  the tag doesn`t have indicators. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 300.8 Tm
+0.0000 Tw
+(subfield\(code\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 288.8 Tm
+0.0000 Tw
+(When called in a scalar context returns the text from the first subfield  matching the subfield code. ) Tj
 /F10 10 Tf
-0.8694 Tw
-(update\(\)) Tj
-/F00 10 Tf
-0.8694 Tw
-( will only  update the first occurrence. If) Tj
-1 0 0 1 102.0 100.4 Tm
+1 0 0 1 102.0 276.8 Tm
 0.0000 Tw
-(you need to do anything more complicated you need to create a new field and use ) Tj
+(    my $subfield = $field->subfield\( 'a' \); ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 252.8 Tm
+0.0000 Tw
+(Or if you think there might be more than one you can get all of them by  calling in a list context: ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 240.8 Tm
+0.0000 Tw
+(    my @subfields = $field->subfield\( 'a' \); ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 216.8 Tm
+1.3126 Tw
+(If no matching subfields are found, ) Tj
+/F10 10 Tf
+1.3126 Tw
+(undef) Tj
+/F00 10 Tf
+1.3126 Tw
+( is returned in a scalar context and an empty list in a list) Tj
+1 0 0 1 102.0 204.8 Tm
+0.0000 Tw
+(context. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 192.8 Tm
+0.0000 Tw
+(If the tag is less than an 010, ) Tj
 /F10 10 Tf
 0.0000 Tw
-(replace_with\(\)) Tj
+(undef) Tj
 /F00 10 Tf
 0.0000 Tw
-(.  ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 88.4 Tm
+( is returned and ) Tj
+/F10 10 Tf
 0.0000 Tw
-(Returns the number of items modified. ) Tj
+($MARC::Field::ERROR) Tj
+/F00 10 Tf
+0.0000 Tw
+( is set. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 174.8 Tm
+0.0000 Tw
+(subfields\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 162.8 Tm
+0.4764 Tw
+(Returns all the subfields in the field.  What`s returned is a list of  lists, where the inner list is a subfield) Tj
+1 0 0 1 102.0 150.8 Tm
+0.0000 Tw
+(code and the subfield data.  ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 138.8 Tm
+0.0000 Tw
+(For example, this might be the subfields from a 245 field: ) Tj
+/F10 10 Tf
+1 0 0 1 150.0 126.8 Tm
+0.0000 Tw
+([ ) Tj
+1 0 0 1 150.0 114.8 Tm
+0.0000 Tw
+(  [ 'a', 'Perl in a nutshell :' ], ) Tj
+1 0 0 1 150.0 102.8 Tm
+0.0000 Tw
+(  [ 'b', 'A desktop quick reference.' ], ) Tj
+1 0 0 1 150.0 90.8 Tm
+0.0000 Tw
+(] ) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
-(26 November 2002) Tj
+(16 December 2003) Tj
 1 0 0 1 517.44 37 Tm
 (1) Tj
 ET
@@ -393,7 +418,7 @@ S
 endstream
 endobj
 19 0 obj
-4347
+4859
 endobj
 20 0 obj
 <<
@@ -402,6 +427,7 @@ endobj
 /Font
 <<
 /F00 6 0 R
+/F02 8 0 R
 /F10 10 0 R
 /F21 15 0 R
 >>
@@ -434,154 +460,25 @@ BT
 /F21 10 Tf
 1 0 0 1 72.0 770.0 Tm
 0.0000 Tw
-(replace_with\(\)  ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 758.0 Tm
-0.2828 Tw
-(Allows you to replace an existing field with a new one. You need to pass  ) Tj
-/F10 10 Tf
-0.2828 Tw
-(replace\(\)) Tj
-/F00 10 Tf
-0.2828 Tw
-( a MARC::Field) Tj
-1 0 0 1 102.0 746.0 Tm
-0.0000 Tw
-(object to replace the existing field with. For  example: ) Tj
-/F10 10 Tf
-1 0 0 1 102.0 734.0 Tm
-0.0000 Tw
-(  $field = $record->field\('245'\); ) Tj
-1 0 0 1 102.0 722.0 Tm
-0.0000 Tw
-(  my $new_field = new MARC::Field\('245','0','4','The ballad of Abe Lincoln.'\); ) Tj
-1 0 0 1 102.0 710.0 Tm
-0.0000 Tw
-(  $field->replace_with\($new_field\); ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 686.0 Tm
-0.0000 Tw
-(Doesn`t return a meaningful or reliable value. ) Tj
-/F21 10 Tf
-1 0 0 1 72.0 668.0 Tm
-0.0000 Tw
-(tag\(\) ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 656.0 Tm
-0.0000 Tw
-(Returns the three digit tag for the field. ) Tj
-/F21 10 Tf
-1 0 0 1 72.0 638.0 Tm
-0.0000 Tw
-(indicator\(indno\) ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 626.0 Tm
-0.0607 Tw
-(Returns the specified indicator.  Returns ) Tj
-/F10 10 Tf
-0.0607 Tw
-(undef) Tj
-/F00 10 Tf
-0.0607 Tw
-( and sets  ) Tj
-/F10 10 Tf
-0.0607 Tw
-($MARC::Field::ERROR) Tj
-/F00 10 Tf
-0.0607 Tw
-( if the ) Tj
-/F02 10 Tf
-0.0607 Tw
-(indno) Tj
-/F00 10 Tf
-0.0607 Tw
-( is not) Tj
-1 0 0 1 102.0 614.0 Tm
-0.0000 Tw
-(1 or 2, or if  the tag doesn`t have indicators. ) Tj
-/F21 10 Tf
-1 0 0 1 72.0 596.0 Tm
-0.0000 Tw
-(subfield\(code\) ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 584.0 Tm
-0.7256 Tw
-(Returns the text from the first subfield matching the subfield code. If no matching subfields are found,) Tj
-1 0 0 1 102.0 572.0 Tm
-0.0000 Tw
-() Tj
-/F10 10 Tf
-0.0000 Tw
-(undef) Tj
-/F00 10 Tf
-0.0000 Tw
-( is returned. ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 560.0 Tm
-0.0000 Tw
-(If the tag is less than an 010, ) Tj
-/F10 10 Tf
-0.0000 Tw
-(undef) Tj
-/F00 10 Tf
-0.0000 Tw
-( is returned and ) Tj
-/F10 10 Tf
-0.0000 Tw
-($MARC::Field::ERROR) Tj
-/F00 10 Tf
-0.0000 Tw
-( is set. ) Tj
-/F10 10 Tf
-1 0 0 1 102.0 548.0 Tm
-0.0000 Tw
-(    my $subA = $field->subfield\('a'\); ) Tj
-/F21 10 Tf
-1 0 0 1 72.0 530.0 Tm
-0.0000 Tw
-(subfields\(\) ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 518.0 Tm
-0.4764 Tw
-(Returns all the subfields in the field.  What`s returned is a list of  lists, where the inner list is a subfield) Tj
-1 0 0 1 102.0 506.0 Tm
-0.0000 Tw
-(code and the subfield data.  ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 494.0 Tm
-0.0000 Tw
-(For example, this might be the subfields from a 245 field: ) Tj
-/F10 10 Tf
-1 0 0 1 150.0 482.0 Tm
-0.0000 Tw
-([ ) Tj
-1 0 0 1 150.0 470.0 Tm
-0.0000 Tw
-(  [ 'a', 'Perl in a nutshell :' ], ) Tj
-1 0 0 1 150.0 458.0 Tm
-0.0000 Tw
-(  [ 'b', 'A desktop quick reference.' ], ) Tj
-1 0 0 1 150.0 446.0 Tm
-0.0000 Tw
-(] ) Tj
-/F21 10 Tf
-1 0 0 1 72.0 428.0 Tm
-0.0000 Tw
 (data\(\) ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 416.0 Tm
+1 0 0 1 102.0 758.0 Tm
 0.0000 Tw
 (Returns the data part of the field, if the tag number is less than 10. ) Tj
 /F21 10 Tf
-1 0 0 1 72.0 398.0 Tm
+1 0 0 1 72.0 740.0 Tm
 0.0000 Tw
 (add_subfields\(code,text[,code,text ...]\) ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 386.0 Tm
+1 0 0 1 102.0 728.0 Tm
 0.0000 Tw
 (Adds subfields to the end of the subfield list. ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 716.0 Tm
+0.0000 Tw
+(    $field->add_subfields\( 'c' => '1985' \); ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 374.0 Tm
+1 0 0 1 102.0 692.0 Tm
 0.0000 Tw
 (Returns the number of subfields added, or ) Tj
 /F10 10 Tf
@@ -591,30 +488,182 @@ BT
 0.0000 Tw
 ( if there was an error. ) Tj
 /F21 10 Tf
-1 0 0 1 72.0 356.0 Tm
+1 0 0 1 72.0 674.0 Tm
 0.0000 Tw
-(as_string\(\) ) Tj
+(update\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 662.0 Tm
+0.0000 Tw
+(Allows you to change the values of the field. You can update indicators and subfields like this: ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 650.0 Tm
+0.0000 Tw
+(  $field->update\( ind2 => '4', a => 'The ballad of Abe Lincoln'\); ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 626.0 Tm
+0.0665 Tw
+(If you attempt to update a subfield which does not currently exist in the field, then a new subfield will be) Tj
+1 0 0 1 102.0 614.0 Tm
+1.2388 Tw
+(appended to the field. If you don`t like this auto-vivification you must check for the existence of the) Tj
+1 0 0 1 102.0 602.0 Tm
+0.0000 Tw
+(subfield prior to update. ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 590.0 Tm
+0.0000 Tw
+(  if \( $field->subfield\( 'a' \) \) \{ ) Tj
+1 0 0 1 102.0 578.0 Tm
+0.0000 Tw
+(    $field->update\( 'a' => 'Cryptonomicon' \); ) Tj
+1 0 0 1 102.0 566.0 Tm
+0.0000 Tw
+(  \} ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 542.0 Tm
+1.1700 Tw
+(If you want to update a field that has no indicators or subfields \(000-009\) just call update\(\) with one) Tj
+1 0 0 1 102.0 530.0 Tm
+0.0000 Tw
+(argument, the string that you would like to  set the field to.  ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 518.0 Tm
+0.0000 Tw
+(  $field = $record->field\( '003' \); ) Tj
+1 0 0 1 102.0 506.0 Tm
+0.0000 Tw
+(  $field->update\('IMchF'\); ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 482.0 Tm
+0.8694 Tw
+(Note: when doing subfield updates be aware that ) Tj
+/F10 10 Tf
+0.8694 Tw
+(update\(\)) Tj
+/F00 10 Tf
+0.8694 Tw
+( will only  update the first occurrence. If) Tj
+1 0 0 1 102.0 470.0 Tm
+2.2688 Tw
+(you need to do anything more complicated you will probably need to create a new field and use) Tj
+1 0 0 1 102.0 458.0 Tm
+0.0000 Tw
+() Tj
+/F10 10 Tf
+0.0000 Tw
+(replace_with\(\)) Tj
+/F00 10 Tf
+0.0000 Tw
+(.  ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 446.0 Tm
+0.0000 Tw
+(Returns the number of items modified. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 428.0 Tm
+0.0000 Tw
+(replace_with\(\)  ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 416.0 Tm
+0.2828 Tw
+(Allows you to replace an existing field with a new one. You need to pass  ) Tj
+/F10 10 Tf
+0.2828 Tw
+(replace\(\)) Tj
+/F00 10 Tf
+0.2828 Tw
+( a MARC::Field) Tj
+1 0 0 1 102.0 404.0 Tm
+0.0000 Tw
+(object to replace the existing field with. For  example: ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 392.0 Tm
+0.0000 Tw
+(  $field = $record->field\('245'\); ) Tj
+1 0 0 1 102.0 380.0 Tm
+0.0000 Tw
+(  my $new_field = new MARC::Field\('245','0','4','The ballad of Abe Lincoln.'\); ) Tj
+1 0 0 1 102.0 368.0 Tm
+0.0000 Tw
+(  $field->replace_with\($new_field\); ) Tj
 /F00 10 Tf
 1 0 0 1 102.0 344.0 Tm
 0.0000 Tw
-(Returns a string of all subfields run together, without the tag number. ) Tj
+(Doesn`t return a meaningful or reliable value. ) Tj
 /F21 10 Tf
 1 0 0 1 72.0 326.0 Tm
 0.0000 Tw
-(as_formatted\(\) ) Tj
+(as_string\( [$subfields] \) ) Tj
 /F00 10 Tf
 1 0 0 1 102.0 314.0 Tm
+0.2760 Tw
+(Returns a string of all subfields run together.  A space is added to the result between each subfield.  The) Tj
+1 0 0 1 102.0 302.0 Tm
+0.0000 Tw
+(tag number and subfield  character are not included. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 290.0 Tm
+0.0000 Tw
+(Subfields appear in the output string in the order in which they occur in the field.  ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 278.0 Tm
+0.0000 Tw
+(If ) Tj
+/F10 10 Tf
+0.0000 Tw
+($subfields) Tj
+/F00 10 Tf
+0.0000 Tw
+( is specified, then only those subfields will be included. ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 266.0 Tm
+0.0000 Tw
+(  my $field = MARC::Field->new\(  ) Tj
+1 0 0 1 198.0 254.0 Tm
+0.0000 Tw
+(245, '1', '0', ) Tj
+1 0 0 1 246.0 242.0 Tm
+0.0000 Tw
+('a' => 'Abraham Lincoln', ) Tj
+1 0 0 1 246.0 230.0 Tm
+0.0000 Tw
+('h' => '[videorecording] :', ) Tj
+1 0 0 1 246.0 218.0 Tm
+0.0000 Tw
+('b' => 'preserving the union /', ) Tj
+1 0 0 1 246.0 206.0 Tm
+0.0000 Tw
+('c' => 'A&E Home Video.' ) Tj
+1 0 0 1 198.0 194.0 Tm
+0.0000 Tw
+(\); ) Tj
+1 0 0 1 102.0 182.0 Tm
+0.0000 Tw
+(  print $field->as_string\( 'abh' \); # Only those three subfields ) Tj
+1 0 0 1 102.0 170.0 Tm
+0.0000 Tw
+(  # prints 'Abraham Lincoln [videorecording] : preserving the union /'. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 146.0 Tm
+0.0000 Tw
+(Note that subfield h comes before subfield b in the output. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 128.0 Tm
+0.0000 Tw
+(as_formatted\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 116.0 Tm
 0.0000 Tw
 (Returns a pretty string for printing in a MARC dump. ) Tj
 /F21 10 Tf
-1 0 0 1 72.0 296.0 Tm
+1 0 0 1 72.0 98.0 Tm
 0.0000 Tw
 (as_usmarc\(\) ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 284.0 Tm
+1 0 0 1 102.0 86.0 Tm
 0 Tw
 (Returns a string for putting into a USMARC file.  It`s really only useful by) Tj
-1 0 0 1 102.0 272.0 Tm
+1 0 0 1 102.0 74.0 Tm
 0.0000 Tw
 () Tj
 /F10 10 Tf
@@ -624,75 +673,10 @@ BT
 0.0000 Tw
 (. ) Tj
 /F21 10 Tf
-1 0 0 1 72.0 254.0 Tm
-0.0000 Tw
-(warnings\(\) ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 242.0 Tm
-2.5053 Tw
-(Returns the warnings that were created when the record was read. These are things like "Invalid) Tj
-1 0 0 1 102.0 230.0 Tm
-0.0000 Tw
-(indicators converted to blanks". ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 218.0 Tm
-1.2300 Tw
-(The warnings are items that you might be interested in, or might not.  It depends on how stringently) Tj
-1 0 0 1 102.0 206.0 Tm
-0.0000 Tw
-(you`re checking data.  If you`re doing some grunt data analysis, you probably don`t care. ) Tj
-/F21 12 Tf
-1 0 0 1 72.0 188.0 Tm
-0.0000 Tw
-(SEE ALSO ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 173.6 Tm
-0.0000 Tw
-(See the "SEE ALSO" section for ) Tj
-/F02 10 Tf
-0 0 0.8 rg
-0.0000 Tw
-(MARC::Record) Tj
-/F00 10 Tf
-0 g
-0.0000 Tw
-(. ) Tj
-/F21 12 Tf
-1 0 0 1 72.0 155.6 Tm
-0.0000 Tw
-(TODO ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 141.2 Tm
-0.0000 Tw
-(See the "TODO" section for ) Tj
-/F02 10 Tf
-0 0 0.8 rg
-0.0000 Tw
-(MARC::Record) Tj
-/F00 10 Tf
-0 g
-0.0000 Tw
-(. ) Tj
-/F21 12 Tf
-1 0 0 1 72.0 123.2 Tm
-0.0000 Tw
-(LICENSE ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 108.8 Tm
-0.0000 Tw
-(This code may be distributed under the same terms as Perl itself.  ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 96.8 Tm
-2.4619 Tw
-(Please note that these modules are not products of or supported by the employers of the various) Tj
-1 0 0 1 102.0 84.8 Tm
-0.0000 Tw
-(contributors to the code. ) Tj
-/F21 10 Tf
 1 0 0 1 72 37 Tm
 (2) Tj
-1 0 0 1 435.18 37 Tm
-(26 November 2002) Tj
+1 0 0 1 435.73 37 Tm
+(16 December 2003) Tj
 ET
 72 50 m
 523 50 l
@@ -700,7 +684,7 @@ S
 endstream
 endobj
 23 0 obj
-5486
+5372
 endobj
 24 0 obj
 <<
@@ -709,7 +693,6 @@ endobj
 /Font
 <<
 /F00 6 0 R
-/F02 8 0 R
 /F10 10 0 R
 /F21 15 0 R
 >>
@@ -739,17 +722,115 @@ BT
 (pod2pdf) Tj
 1 0 0 1 481.88 797 Tm
 (Field.pm) Tj
-/F21 12 Tf
+/F21 10 Tf
 1 0 0 1 72.0 770.0 Tm
+0.0000 Tw
+(clone\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 758.0 Tm
+0.0000 Tw
+(Makes a copy of the field.  Note that this is not just the same as saying ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 746.0 Tm
+0.0000 Tw
+(    my $newfield = $field; ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 722.0 Tm
+0.0000 Tw
+(since that just makes a copy of the reference.  To get a new object, you must ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 710.0 Tm
+0.0000 Tw
+(    my $newfield = $field->clone; ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 686.0 Tm
+0.0000 Tw
+(Returns a MARC::Field record. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 668.0 Tm
+0.0000 Tw
+(warnings\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 656.0 Tm
+2.5053 Tw
+(Returns the warnings that were created when the record was read. These are things like "Invalid) Tj
+1 0 0 1 102.0 644.0 Tm
+0.0000 Tw
+(indicators converted to blanks". ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 632.0 Tm
+1.2300 Tw
+(The warnings are items that you might be interested in, or might not.  It depends on how stringently) Tj
+1 0 0 1 102.0 620.0 Tm
+0.0000 Tw
+(you`re checking data.  If you`re doing some grunt data analysis, you probably don`t care. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 602.0 Tm
+0.0000 Tw
+(SEE ALSO ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 587.6 Tm
+0.0000 Tw
+(See the "SEE ALSO" section for ) Tj
+/F02 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Record) Tj
+/F00 10 Tf
+0 g
+0.0000 Tw
+(. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 569.6 Tm
+0.0000 Tw
+(TODO ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 555.2 Tm
+0.0000 Tw
+(See the "TODO" section for ) Tj
+/F02 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Record) Tj
+/F00 10 Tf
+0 g
+0.0000 Tw
+(. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 537.2 Tm
+0.0000 Tw
+(LICENSE ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 522.8 Tm
+0.0000 Tw
+(This code may be distributed under the same terms as Perl itself.  ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 510.8 Tm
+2.4619 Tw
+(Please note that these modules are not products of or supported by the employers of the various) Tj
+1 0 0 1 102.0 498.8 Tm
+0.0000 Tw
+(contributors to the code. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 480.8 Tm
 0.0000 Tw
 (AUTHOR ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 755.6 Tm
+1 0 0 1 102.0 466.4 Tm
 0.0000 Tw
-(Andy Lester, <marc@petdance.com> or <alester@flr.follett.com> ) Tj
+(Andy Lester, ) Tj
+/F10 10 Tf
+0.0000 Tw
+(< <andy@petdance.com> ) Tj
+/F00 10 Tf
+0.0000 Tw
+() Tj
+/F00 10 Tf
+0.0000 Tw
+( ) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
-(26 November 2002) Tj
+(16 December 2003) Tj
 1 0 0 1 517.44 37 Tm
 (3) Tj
 ET
@@ -759,7 +840,7 @@ S
 endstream
 endobj
 27 0 obj
-403
+2388
 endobj
 28 0 obj
 <<
@@ -768,6 +849,8 @@ endobj
 /Font
 <<
 /F00 6 0 R
+/F02 8 0 R
+/F10 10 0 R
 /F21 15 0 R
 >>
 >>
@@ -799,8 +882,8 @@ BT
 /F21 10 Tf
 1 0 0 1 72 37 Tm
 (4) Tj
-1 0 0 1 435.18 37 Tm
-(26 November 2002) Tj
+1 0 0 1 435.73 37 Tm
+(16 December 2003) Tj
 ET
 72 50 m
 523 50 l
@@ -863,7 +946,7 @@ f
 Q
 BT
 1 0 0 1 102 671.6 Tm
-(VERSION) Tj
+(SYNOPSIS) Tj
 1 0 0 1 487.44 671.6 Tm
 (1) Tj
 ET
@@ -874,7 +957,7 @@ f
 Q
 BT
 1 0 0 1 102 659.6 Tm
-(SYNOPSIS) Tj
+(DESCRIPTION) Tj
 1 0 0 1 487.44 659.6 Tm
 (1) Tj
 ET
@@ -885,7 +968,7 @@ f
 Q
 BT
 1 0 0 1 102 647.6 Tm
-(DESCRIPTION) Tj
+(EXPORT) Tj
 1 0 0 1 487.44 647.6 Tm
 (1) Tj
 ET
@@ -896,7 +979,7 @@ f
 Q
 BT
 1 0 0 1 102 635.6 Tm
-(EXPORT) Tj
+(METHODS) Tj
 1 0 0 1 487.44 635.6 Tm
 (1) Tj
 ET
@@ -906,8 +989,8 @@ q
 f
 Q
 BT
-1 0 0 1 102 623.6 Tm
-(METHODS) Tj
+1 0 0 1 132 623.6 Tm
+(new\(\)) Tj
 1 0 0 1 487.44 623.6 Tm
 (1) Tj
 ET
@@ -918,7 +1001,7 @@ f
 Q
 BT
 1 0 0 1 132 611.6 Tm
-(new\(tag,indicator1,indicator2,code,data[,code,data...]\)) Tj
+(tag\(\)) Tj
 1 0 0 1 487.44 611.6 Tm
 (1) Tj
 ET
@@ -929,7 +1012,7 @@ f
 Q
 BT
 1 0 0 1 132 599.6 Tm
-(clone\(\)) Tj
+(indicator\(indno\)) Tj
 1 0 0 1 487.44 599.6 Tm
 (1) Tj
 ET
@@ -940,7 +1023,7 @@ f
 Q
 BT
 1 0 0 1 132 587.6 Tm
-(update\(\)) Tj
+(subfield\(code\)) Tj
 1 0 0 1 487.44 587.6 Tm
 (1) Tj
 ET
@@ -951,9 +1034,9 @@ f
 Q
 BT
 1 0 0 1 132 575.6 Tm
-(replace_with\(\) ) Tj
+(subfields\(\)) Tj
 1 0 0 1 487.44 575.6 Tm
-(2) Tj
+(1) Tj
 ET
 q
 0.95 g
@@ -962,7 +1045,7 @@ f
 Q
 BT
 1 0 0 1 132 563.6 Tm
-(tag\(\)) Tj
+(data\(\)) Tj
 1 0 0 1 487.44 563.6 Tm
 (2) Tj
 ET
@@ -973,7 +1056,7 @@ f
 Q
 BT
 1 0 0 1 132 551.6 Tm
-(indicator\(indno\)) Tj
+(add_subfields\(code,text[,code,text ...]\)) Tj
 1 0 0 1 487.44 551.6 Tm
 (2) Tj
 ET
@@ -984,7 +1067,7 @@ f
 Q
 BT
 1 0 0 1 132 539.6 Tm
-(subfield\(code\)) Tj
+(update\(\)) Tj
 1 0 0 1 487.44 539.6 Tm
 (2) Tj
 ET
@@ -995,7 +1078,7 @@ f
 Q
 BT
 1 0 0 1 132 527.6 Tm
-(subfields\(\)) Tj
+(replace_with\(\) ) Tj
 1 0 0 1 487.44 527.6 Tm
 (2) Tj
 ET
@@ -1006,7 +1089,7 @@ f
 Q
 BT
 1 0 0 1 132 515.6 Tm
-(data\(\)) Tj
+(as_string\( [$subfields] \)) Tj
 1 0 0 1 487.44 515.6 Tm
 (2) Tj
 ET
@@ -1017,7 +1100,7 @@ f
 Q
 BT
 1 0 0 1 132 503.6 Tm
-(add_subfields\(code,text[,code,text ...]\)) Tj
+(as_formatted\(\)) Tj
 1 0 0 1 487.44 503.6 Tm
 (2) Tj
 ET
@@ -1028,7 +1111,7 @@ f
 Q
 BT
 1 0 0 1 132 491.6 Tm
-(as_string\(\)) Tj
+(as_usmarc\(\)) Tj
 1 0 0 1 487.44 491.6 Tm
 (2) Tj
 ET
@@ -1039,9 +1122,9 @@ f
 Q
 BT
 1 0 0 1 132 479.6 Tm
-(as_formatted\(\)) Tj
+(clone\(\)) Tj
 1 0 0 1 487.44 479.6 Tm
-(2) Tj
+(3) Tj
 ET
 q
 0.95 g
@@ -1050,9 +1133,9 @@ f
 Q
 BT
 1 0 0 1 132 467.6 Tm
-(as_usmarc\(\)) Tj
+(warnings\(\)) Tj
 1 0 0 1 487.44 467.6 Tm
-(2) Tj
+(3) Tj
 ET
 q
 1 g
@@ -1060,10 +1143,10 @@ q
 f
 Q
 BT
-1 0 0 1 132 455.6 Tm
-(warnings\(\)) Tj
+1 0 0 1 102 455.6 Tm
+(SEE ALSO) Tj
 1 0 0 1 487.44 455.6 Tm
-(2) Tj
+(3) Tj
 ET
 q
 0.95 g
@@ -1072,9 +1155,9 @@ f
 Q
 BT
 1 0 0 1 102 443.6 Tm
-(SEE ALSO) Tj
+(TODO) Tj
 1 0 0 1 487.44 443.6 Tm
-(2) Tj
+(3) Tj
 ET
 q
 1 g
@@ -1083,9 +1166,9 @@ f
 Q
 BT
 1 0 0 1 102 431.6 Tm
-(TODO) Tj
+(LICENSE) Tj
 1 0 0 1 487.44 431.6 Tm
-(2) Tj
+(3) Tj
 ET
 q
 0.95 g
@@ -1094,23 +1177,12 @@ f
 Q
 BT
 1 0 0 1 102 419.6 Tm
-(LICENSE) Tj
-1 0 0 1 487.44 419.6 Tm
-(2) Tj
-ET
-q
-1 g
-72 404.6 451 12 re
-f
-Q
-BT
-1 0 0 1 102 407.6 Tm
 (AUTHOR) Tj
-1 0 0 1 487.44 407.6 Tm
+1 0 0 1 487.44 419.6 Tm
 (3) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
-(26 November 2002) Tj
+(16 December 2003) Tj
 1 0 0 1 520.22 37 Tm
 (i) Tj
 ET
@@ -1120,7 +1192,7 @@ S
 endstream
 endobj
 35 0 obj
-2843
+2707
 endobj
 36 0 obj
 <<
@@ -1160,8 +1232,8 @@ BT
 /F21 10 Tf
 1 0 0 1 72 37 Tm
 (ii) Tj
-1 0 0 1 435.18 37 Tm
-(26 November 2002) Tj
+1 0 0 1 435.73 37 Tm
+(16 December 2003) Tj
 ET
 72 50 m
 523 50 l
@@ -1263,7 +1335,7 @@ BT
 (Field.pm) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
-(26 November 2002) Tj
+(16 December 2003) Tj
 1 0 0 1 488.54 37 Tm
 (Fly leaf) Tj
 ET
@@ -1298,8 +1370,8 @@ endobj
 /Parent 50 0 R
 /Dest [37 0 R /Fit]
 /First 52 0 R
-/Last 75 0 R
-/Count 24 
+/Last 74 0 R
+/Count 23 
 /Title (Table of Contents)
 >>
 endobj
@@ -1317,213 +1389,204 @@ endobj
 /Dest [21 0 R /FitH 746]
 /Previous 52 0 R
 /Next 54 0 R
-/Title (VERSION)
+/Title (SYNOPSIS)
 >>
 endobj
 54 0 obj
 <<
 /Parent 51 0 R
-/Dest [21 0 R /FitH 701.6]
+/Dest [21 0 R /FitH 635.6]
 /Previous 53 0 R
 /Next 55 0 R
-/Title (SYNOPSIS)
+/Title (DESCRIPTION)
 >>
 endobj
 55 0 obj
 <<
 /Parent 51 0 R
-/Dest [21 0 R /FitH 567.2]
+/Dest [21 0 R /FitH 591.2]
 /Previous 54 0 R
 /Next 56 0 R
-/Title (DESCRIPTION)
+/Title (EXPORT)
 >>
 endobj
 56 0 obj
 <<
 /Parent 51 0 R
-/Dest [21 0 R /FitH 522.8]
+/Dest [21 0 R /FitH 546.8]
 /Previous 55 0 R
-/Next 57 0 R
-/Title (EXPORT)
->>
-endobj
-57 0 obj
-<<
-/Parent 51 0 R
-/Dest [21 0 R /FitH 478.4]
-/Previous 56 0 R
-/Next 72 0 R
-/First 58 0 R
-/Last 71 0 R
+/Next 71 0 R
+/First 57 0 R
+/Last 70 0 R
 /Count 14 
 /Title (METHODS)
 >>
 endobj
+57 0 obj
+<<
+/Parent 56 0 R
+/Dest [21 0 R /FitH 522.8]
+/Next 58 0 R
+/Title (new\(\))
+>>
+endobj
 58 0 obj
 <<
-/Parent 57 0 R
-/Dest [21 0 R /FitH 454.4]
+/Parent 56 0 R
+/Dest [21 0 R /FitH 384.8]
+/Previous 57 0 R
 /Next 59 0 R
-/Title (new\(tag,indicator1,indicator2,code,data[,code,data...]\))
+/Title (tag\(\))
 >>
 endobj
 59 0 obj
 <<
-/Parent 57 0 R
-/Dest [21 0 R /FitH 334.4]
+/Parent 56 0 R
+/Dest [21 0 R /FitH 354.8]
 /Previous 58 0 R
 /Next 60 0 R
-/Title (clone\(\))
+/Title (indicator\(indno\))
 >>
 endobj
 60 0 obj
 <<
-/Parent 57 0 R
-/Dest [21 0 R /FitH 232.4]
+/Parent 56 0 R
+/Dest [21 0 R /FitH 312.8]
 /Previous 59 0 R
 /Next 61 0 R
-/Title (update\(\))
+/Title (subfield\(code\))
 >>
 endobj
 61 0 obj
 <<
-/Parent 57 0 R
-/Dest [25 0 R /FitH 782]
+/Parent 56 0 R
+/Dest [21 0 R /FitH 186.8]
 /Previous 60 0 R
 /Next 62 0 R
-/Title (replace_with\(\) )
+/Title (subfields\(\))
 >>
 endobj
 62 0 obj
 <<
-/Parent 57 0 R
-/Dest [25 0 R /FitH 680]
+/Parent 56 0 R
+/Dest [25 0 R /FitH 782]
 /Previous 61 0 R
 /Next 63 0 R
-/Title (tag\(\))
+/Title (data\(\))
 >>
 endobj
 63 0 obj
 <<
-/Parent 57 0 R
-/Dest [25 0 R /FitH 650]
+/Parent 56 0 R
+/Dest [25 0 R /FitH 752]
 /Previous 62 0 R
 /Next 64 0 R
-/Title (indicator\(indno\))
+/Title (add_subfields\(code,text[,code,text ...]\))
 >>
 endobj
 64 0 obj
 <<
-/Parent 57 0 R
-/Dest [25 0 R /FitH 608]
+/Parent 56 0 R
+/Dest [25 0 R /FitH 686]
 /Previous 63 0 R
 /Next 65 0 R
-/Title (subfield\(code\))
+/Title (update\(\))
 >>
 endobj
 65 0 obj
 <<
-/Parent 57 0 R
-/Dest [25 0 R /FitH 542]
+/Parent 56 0 R
+/Dest [25 0 R /FitH 440]
 /Previous 64 0 R
 /Next 66 0 R
-/Title (subfields\(\))
+/Title (replace_with\(\) )
 >>
 endobj
 66 0 obj
 <<
-/Parent 57 0 R
-/Dest [25 0 R /FitH 440]
+/Parent 56 0 R
+/Dest [25 0 R /FitH 338]
 /Previous 65 0 R
 /Next 67 0 R
-/Title (data\(\))
+/Title (as_string\( [$subfields] \))
 >>
 endobj
 67 0 obj
 <<
-/Parent 57 0 R
-/Dest [25 0 R /FitH 410]
+/Parent 56 0 R
+/Dest [25 0 R /FitH 140]
 /Previous 66 0 R
 /Next 68 0 R
-/Title (add_subfields\(code,text[,code,text ...]\))
+/Title (as_formatted\(\))
 >>
 endobj
 68 0 obj
 <<
-/Parent 57 0 R
-/Dest [25 0 R /FitH 368]
+/Parent 56 0 R
+/Dest [25 0 R /FitH 110]
 /Previous 67 0 R
 /Next 69 0 R
-/Title (as_string\(\))
+/Title (as_usmarc\(\))
 >>
 endobj
 69 0 obj
 <<
-/Parent 57 0 R
-/Dest [25 0 R /FitH 338]
+/Parent 56 0 R
+/Dest [29 0 R /FitH 782]
 /Previous 68 0 R
 /Next 70 0 R
-/Title (as_formatted\(\))
+/Title (clone\(\))
 >>
 endobj
 70 0 obj
 <<
-/Parent 57 0 R
-/Dest [25 0 R /FitH 308]
+/Parent 56 0 R
+/Dest [29 0 R /FitH 680]
 /Previous 69 0 R
-/Next 71 0 R
-/Title (as_usmarc\(\))
+/Title (warnings\(\))
 >>
 endobj
 71 0 obj
 <<
-/Parent 57 0 R
-/Dest [25 0 R /FitH 266]
-/Previous 70 0 R
-/Title (warnings\(\))
+/Parent 51 0 R
+/Dest [29 0 R /FitH 616.4]
+/Previous 56 0 R
+/Next 72 0 R
+/Title (SEE ALSO)
 >>
 endobj
 72 0 obj
 <<
 /Parent 51 0 R
-/Dest [25 0 R /FitH 202.4]
-/Previous 57 0 R
+/Dest [29 0 R /FitH 584]
+/Previous 71 0 R
 /Next 73 0 R
-/Title (SEE ALSO)
+/Title (TODO)
 >>
 endobj
 73 0 obj
 <<
 /Parent 51 0 R
-/Dest [25 0 R /FitH 170]
+/Dest [29 0 R /FitH 551.6]
 /Previous 72 0 R
 /Next 74 0 R
-/Title (TODO)
+/Title (LICENSE)
 >>
 endobj
 74 0 obj
 <<
 /Parent 51 0 R
-/Dest [25 0 R /FitH 137.6]
+/Dest [29 0 R /FitH 495.2]
 /Previous 73 0 R
-/Next 75 0 R
-/Title (LICENSE)
->>
-endobj
-75 0 obj
-<<
-/Parent 51 0 R
-/Dest [29 0 R /FitH 784.4]
-/Previous 74 0 R
 /Title (AUTHOR)
 >>
 endobj
 50 0 obj
 <<
 /Type /Outlines
-/Count 25
+/Count 24
 /First 51 0 R
-/Last 75 0 R
+/Last 74 0 R
 >>
 endobj
 3 0 obj
@@ -1543,12 +1606,12 @@ endobj
 >>
 endobj
 xref
-0 76
+0 75
 0000000000 65535 f 
 0000000015 00000 n 
 0000000171 00000 n 
-0000022836 00000 n 
-0000022925 00000 n 
+0000024964 00000 n 
+0000025053 00000 n 
 0000000268 00000 n 
 0000002368 00000 n 
 0000002467 00000 n 
@@ -1563,69 +1626,68 @@ xref
 0000003379 00000 n 
 0000003485 00000 n 
 0000003599 00000 n 
-0000008000 00000 n 
-0000008021 00000 n 
-0000008146 00000 n 
-0000008229 00000 n 
-0000013769 00000 n 
-0000013790 00000 n 
-0000013926 00000 n 
-0000014009 00000 n 
-0000014466 00000 n 
-0000014486 00000 n 
-0000014599 00000 n 
-0000014682 00000 n 
-0000014971 00000 n 
-0000014991 00000 n 
-0000015093 00000 n 
-0000015176 00000 n 
-0000018073 00000 n 
-0000018094 00000 n 
-0000018208 00000 n 
-0000018291 00000 n 
-0000018591 00000 n 
-0000018611 00000 n 
-0000018713 00000 n 
-0000018796 00000 n 
-0000018879 00000 n 
-0000019223 00000 n 
-0000019243 00000 n 
-0000019368 00000 n 
-0000019667 00000 n 
-0000019687 00000 n 
-0000019789 00000 n 
-0000022761 00000 n 
-0000019872 00000 n 
-0000019994 00000 n 
-0000020085 00000 n 
-0000020194 00000 n 
-0000020306 00000 n 
-0000020421 00000 n 
-0000020531 00000 n 
-0000020680 00000 n 
-0000020824 00000 n 
-0000020937 00000 n 
-0000021051 00000 n 
-0000021170 00000 n 
-0000021279 00000 n 
-0000021399 00000 n 
-0000021517 00000 n 
-0000021632 00000 n 
-0000021742 00000 n 
-0000021886 00000 n 
-0000022001 00000 n 
-0000022119 00000 n 
-0000022234 00000 n 
-0000022335 00000 n 
-0000022447 00000 n 
-0000022553 00000 n 
-0000022664 00000 n 
+0000008512 00000 n 
+0000008533 00000 n 
+0000008669 00000 n 
+0000008752 00000 n 
+0000014178 00000 n 
+0000014199 00000 n 
+0000014324 00000 n 
+0000014407 00000 n 
+0000016849 00000 n 
+0000016870 00000 n 
+0000017006 00000 n 
+0000017089 00000 n 
+0000017378 00000 n 
+0000017398 00000 n 
+0000017500 00000 n 
+0000017583 00000 n 
+0000020344 00000 n 
+0000020365 00000 n 
+0000020479 00000 n 
+0000020562 00000 n 
+0000020862 00000 n 
+0000020882 00000 n 
+0000020984 00000 n 
+0000021067 00000 n 
+0000021150 00000 n 
+0000021494 00000 n 
+0000021514 00000 n 
+0000021639 00000 n 
+0000021938 00000 n 
+0000021958 00000 n 
+0000022060 00000 n 
+0000024889 00000 n 
+0000022143 00000 n 
+0000022265 00000 n 
+0000022356 00000 n 
+0000022466 00000 n 
+0000022581 00000 n 
+0000022691 00000 n 
+0000022840 00000 n 
+0000022934 00000 n 
+0000023045 00000 n 
+0000023167 00000 n 
+0000023287 00000 n 
+0000023404 00000 n 
+0000023514 00000 n 
+0000023658 00000 n 
+0000023770 00000 n 
+0000023889 00000 n 
+0000024018 00000 n 
+0000024136 00000 n 
+0000024251 00000 n 
+0000024362 00000 n 
+0000024463 00000 n 
+0000024575 00000 n 
+0000024681 00000 n 
+0000024792 00000 n 
 trailer
 <<
-/Size 76
+/Size 75
 /Root 3 0 R
 /Info 2 0 R
 >>
 startxref
-23058
+25186
 %%EOF

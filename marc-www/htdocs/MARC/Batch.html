@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>MARC::Batch - Perl module for handling files of MARC::Record objects</title>
-<link rev="made" href="mailto:ed@ink.inkdroid.org" />
+<link rev="made" href="mailto:esummers@esummers.flr.follett.com" />
 </head>
 
 <body style="background-color: white">
@@ -13,20 +13,19 @@
 <ul>
 
 	<li><a href="#name">NAME</a></li>
-	<li><a href="#version">VERSION</a></li>
 	<li><a href="#synopsis">SYNOPSIS</a></li>
 	<li><a href="#export">EXPORT</a></li>
 	<li><a href="#methods">METHODS</a></li>
 	<ul>
 
-		<li><a href="#new(_$type,_@files_)">new( $type, @files )</a></li>
-		<li><a href="#next()"><code>next()</code></a></li>
-		<li><a href="#strict_off()"><code>strict_off()</code></a></li>
-		<li><a href="#strict_on()"><code>strict_on()</code></a></li>
-		<li><a href="#warnings()"><code>warnings()</code></a></li>
-		<li><a href="#warnings_off()"><code>warnings_off()</code></a></li>
-		<li><a href="#warnings_on()"><code>warnings_on()</code></a></li>
-		<li><a href="#filename()"><code>filename()</code></a></li>
+		<li><a href="#new___type___files__">new( $type, @files )</a></li>
+		<li><a href="#next__"><code>next()</code></a></li>
+		<li><a href="#strict_off__"><code>strict_off()</code></a></li>
+		<li><a href="#strict_on__"><code>strict_on()</code></a></li>
+		<li><a href="#warnings__"><code>warnings()</code></a></li>
+		<li><a href="#warnings_off__"><code>warnings_off()</code></a></li>
+		<li><a href="#warnings_on__"><code>warnings_on()</code></a></li>
+		<li><a href="#filename__"><code>filename()</code></a></li>
 	</ul>
 
 	<li><a href="#related_modules">RELATED MODULES</a></li>
@@ -41,13 +40,6 @@
 </p>
 <h1><a name="name">NAME</a></h1>
 <p>MARC::Batch - Perl module for handling files of MARC::Record objects</p>
-<p>
-</p>
-<hr />
-<h1><a name="version">VERSION</a></h1>
-<p>Version 1.13</p>
-<pre>
-    $Id: Batch.html,v 1.1 2002/12/02 21:40:58 edsummers Exp $</pre>
 <p>
 </p>
 <hr />
@@ -73,40 +65,57 @@ multiple-file aspects.</p>
 <h1><a name="methods">METHODS</a></h1>
 <p>
 </p>
-<h2><a name="new(_$type,_@files_)">new( $type, @files )</a></h2>
+<h2><a name="new___type___files__">new( $type, @files )</a></h2>
 <p>Create a <code>MARC::Batch</code> object that will process <code>@files</code>.</p>
 <p><code>$type</code> must be either ``USMARC'' or ``MicroLIF''.  If you want to specify 
 ``MARC::File::USMARC'' or ``MARC::File::MicroLIF'', that's OK, too. <code>new()</code> returns a
 new MARC::Batch object.</p>
+<p><code>@files</code> can be a list of filenames:</p>
+<pre>
+    my $batch = MARC::Batch-&gt;new( 'USMARC', 'file1.marc', 'file2.marc' );</pre>
+<p>Your <code>@files</code> may also contain filehandles. So if you've got a large
+file that's gzipped you can open a pipe to <em>gzip</em> and pass it in:</p>
+<pre>
+    my $fh = IO::File-&gt;new( 'gunzip -c marc.dat.gz |' );
+    my $batch = MARC::Batch-&gt;new( 'USMARC', $fh );</pre>
+<p>And you can mix and match if you really want to:</p>
+<pre>
+    my $batch = MARC::Batch-&gt;new( 'USMARC', $fh, 'file1.marc' );</pre>
 <p>
 </p>
-<h2><a name="next()"><code>next()</code></a></h2>
-<p>Read the next record from that batch, and return it as a MARC::Record object.  
-If the current file is at EOF, close it and open the next one. <code>next()</code> will 
-return <code>undef</code> when there is no more data to be read from any batch files.</p>
-<p>By default, <code>next()</code> also will return <code>undef</code> if an error is encountered while
-reading from the batch. If not checked for this can cause your iteration to
-terminate prematurely. To alter this behavior see strict_off(). You can 
-retrieve warning messages using the <code>warnings()</code> method.</p>
+<h2><a name="next__"><code>next()</code></a></h2>
+<p>Read the next record from that batch, and return it as a MARC::Record
+object.  If the current file is at EOF, close it and open the next
+one. <code>next()</code> will return <code>undef</code> when there is no more data to be
+read from any batch files.</p>
+<p>By default, <code>next()</code> also will return <code>undef</code> if an error is
+encountered while reading from the batch. If not checked for this can
+cause your iteration to terminate prematurely. To alter this behavior,
+see <code>strict_off()</code>. You can retrieve warning messages using the
+<code>warnings()</code> method.</p>
+<p>Optionally you can pass in a filter function as a subroutine reference
+if you are only interested in particular fields from the record. This
+can boost performance.</p>
 <p>
 </p>
-<h2><a name="strict_off()"><code>strict_off()</code></a></h2>
-<p>If you would like MARC::Batch to continue after it has encountered what 
+<h2><a name="strict_off__"><code>strict_off()</code></a></h2>
+<p>If you would like <code>MARC::Batch</code> to continue after it has encountered what 
 it believes to be bad MARC data then use this method to turn strict <strong>OFF</strong>.
 A call to <code>strict_off()</code> always returns true (1).</p>
-<p><code>strict_off()</code> can be handy when you don't care about the quality of your MARC
-data, and just want to plow through it. For safety MARC::Batch strict is <strong>ON</strong> 
-by default.</p>
+<p><code>strict_off()</code> can be handy when you don't care about the quality of your
+MARC data, and just want to plow through it. For safety, <code>MARC::Batch</code>
+strict is <strong>ON</strong> by default.</p>
 <p>
 </p>
-<h2><a name="strict_on()"><code>strict_on()</code></a></h2>
-<p>The opposite of strict_off(), and the default state. You shouldn't have to use
-this method unless you've previously used strict_off(), and want it back on
-again.  When strict is <strong>ON</strong> calls to <code>next()</code> will return undef when an error is
-encountered while reading MARC data. <code>strict_on()</code> always returns true (1).</p>
+<h2><a name="strict_on__"><code>strict_on()</code></a></h2>
+<p>The opposite of <code>strict_off()</code>, and the default state. You shouldn't
+have to use this method unless you've previously used <code>strict_off()</code>, and
+want it back on again.  When strict is <strong>ON</strong> calls to <code>next()</code> will return
+undef when an error is encountered while reading MARC data. <code>strict_on()</code>
+always returns true (1).</p>
 <p>
 </p>
-<h2><a name="warnings()"><code>warnings()</code></a></h2>
+<h2><a name="warnings__"><code>warnings()</code></a></h2>
 <p>Returns a list of warnings that have accumulated while processing a particular 
 batch file. As a side effect the warning buffer will be cleared.</p>
 <pre>
@@ -116,21 +125,21 @@ want to be passing in anything as this will set warnings on your batch object.</
 <p><code>warnings()</code> will return the empty list when there are no warnings.</p>
 <p>
 </p>
-<h2><a name="warnings_off()"><code>warnings_off()</code></a></h2>
+<h2><a name="warnings_off__"><code>warnings_off()</code></a></h2>
 <p>Turns off the default behavior of printing warnings to STDERR. However, even
 with warnings off the messages can still be retrieved using the <code>warnings()</code> 
 method if you wish to check for them.</p>
 <p><code>warnings_off()</code> always returns true (1).</p>
 <p>
 </p>
-<h2><a name="warnings_on()"><code>warnings_on()</code></a></h2>
+<h2><a name="warnings_on__"><code>warnings_on()</code></a></h2>
 <p>Turns on warnings so that diagnostic information is printed to STDERR. This 
 is on by default so you shouldn't have to use it unless you've previously
 turned off warnings using warnings_off().</p>
 <p><code>warnings_on()</code> always returns true (1).</p>
 <p>
 </p>
-<h2><a name="filename()"><code>filename()</code></a></h2>
+<h2><a name="filename__"><code>filename()</code></a></h2>
 <p>Returns the currently open filename or <code>undef</code> if there is not currently a file
 open on this batch object.</p>
 <p>
@@ -154,7 +163,7 @@ employers of the various contributors to the code.</p>
 </p>
 <hr />
 <h1><a name="author">AUTHOR</a></h1>
-<p>Andy Lester, &lt;<a href="mailto:marc@petdance.com">marc@petdance.com</a>&gt; or &lt;<a href="mailto:alester@flr.follett.com">alester@flr.follett.com</a>&gt;</p>
+<p>Andy Lester, <code>&lt;andy@petdance.com&gt;</code></p>
 
 </body>
 

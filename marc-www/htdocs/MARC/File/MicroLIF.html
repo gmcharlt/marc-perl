@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>MARC::File::MicroLIF - MicroLIF-specific file handling</title>
-<link rev="made" href="mailto:ed@ink.inkdroid.org" />
+<link rev="made" href="mailto:esummers@esummers.flr.follett.com" />
 </head>
 
 <body style="background-color: white">
@@ -13,10 +13,14 @@
 <ul>
 
 	<li><a href="#name">NAME</a></li>
-	<li><a href="#version">VERSION</a></li>
 	<li><a href="#synopsis">SYNOPSIS</a></li>
 	<li><a href="#export">EXPORT</a></li>
 	<li><a href="#methods">METHODS</a></li>
+	<ul>
+
+		<li><a href="#header__"><code>header()</code></a></li>
+	</ul>
+
 	<li><a href="#todo">TODO</a></li>
 	<li><a href="#related_modules">RELATED MODULES</a></li>
 	<li><a href="#license">LICENSE</a></li>
@@ -32,18 +36,11 @@
 <p>
 </p>
 <hr />
-<h1><a name="version">VERSION</a></h1>
-<p>Version 1.13</p>
-<pre>
-    $Id: MicroLIF.html,v 1.1 2002/12/02 21:41:04 edsummers Exp $</pre>
-<p>
-</p>
-<hr />
 <h1><a name="synopsis">SYNOPSIS</a></h1>
 <pre>
     use MARC::File::MicroLIF;</pre>
 <pre>
-    my $file = MARC::File::MicroLIF::in( $filename );
+    my $file = MARC::File::MicroLIF-&gt;in( $filename );
     
     while ( my $marc = $file-&gt;next() ) {
         # Do something
@@ -59,6 +56,17 @@
 </p>
 <hr />
 <h1><a name="methods">METHODS</a></h1>
+<p>Gets the next chunk of data.  If <code>$want_line</code> is true then you get
+the next chunk ending with any combination of \r and \n of any length.
+If it is false or not passed then you get the next chunk ending with
+\x60 followed by any combination of \r and \n of any length.</p>
+<p>All trailing \r and \n are stripped.</p>
+<p>
+</p>
+<h2><a name="header__"><code>header()</code></a></h2>
+<p>If the MicroLIF file has a file header then the header is returned.
+If the file has no header or the file has not yet been opened then
+<code>undef</code> is returned.</p>
 <p>
 </p>
 <hr />
@@ -79,7 +87,7 @@ employers of the various contributors to the code.</p>
 </p>
 <hr />
 <h1><a name="author">AUTHOR</a></h1>
-<p>Andy Lester, &lt;<a href="mailto:marc@petdance.com">marc@petdance.com</a>&gt; or &lt;<a href="mailto:alester@flr.follett.com">alester@flr.follett.com</a>&gt;</p>
+<p>Andy Lester, <code>&lt;andy@petdance.com&gt;</code></p>
 
 </body>
 

@@ -11,7 +11,7 @@
 endobj
 2 0 obj
 <<
-/CreationDate (D:20021126161902-0600)
+/CreationDate (D:20031216173558-0600)
 /Producer (pod2pdf)
 /Title (USMARC.pm)
 >>
@@ -195,72 +195,54 @@ BT
 /F21 12 Tf
 1 0 0 1 72.0 731.6 Tm
 0.0000 Tw
-(VERSION ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 717.2 Tm
-0.0000 Tw
-(Version 1.13 ) Tj
-/F10 10 Tf
-1 0 0 1 102.0 705.2 Tm
-0.0000 Tw
-(    $Id: USMARC.pdf,v 1.1 2002/12/02 21:41:04 edsummers Exp $ ) Tj
-/F21 12 Tf
-1 0 0 1 72.0 687.2 Tm
-0.0000 Tw
 (SYNOPSIS ) Tj
 /F10 10 Tf
-1 0 0 1 102.0 666.8 Tm
+1 0 0 1 102.0 711.2 Tm
 0.0000 Tw
 (    use MARC::File::USMARC; ) Tj
-1 0 0 1 102.0 642.8 Tm
+1 0 0 1 102.0 687.2 Tm
 0.0000 Tw
-(    my $file = MARC::File::USMARC::in\( $filename \); ) Tj
-1 0 0 1 102.0 618.8 Tm
+(    my $file = MARC::File::USMARC->in\( $filename \); ) Tj
+1 0 0 1 102.0 663.2 Tm
 0.0000 Tw
 (    while \( my $marc = $file->next\(\) \) \{ ) Tj
-1 0 0 1 150.0 606.8 Tm
+1 0 0 1 150.0 651.2 Tm
 0.0000 Tw
 (# Do something ) Tj
-1 0 0 1 102.0 594.8 Tm
+1 0 0 1 102.0 639.2 Tm
 0.0000 Tw
 (    \} ) Tj
-1 0 0 1 102.0 582.8 Tm
+1 0 0 1 102.0 627.2 Tm
 0.0000 Tw
 (    $file->close\(\); ) Tj
-1 0 0 1 102.0 570.8 Tm
+1 0 0 1 102.0 615.2 Tm
 0.0000 Tw
 (    undef $file; ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 552.8 Tm
+1 0 0 1 72.0 597.2 Tm
 0.0000 Tw
 (EXPORT ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 538.4 Tm
+1 0 0 1 102.0 582.8 Tm
 0.0000 Tw
 (None.   ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 520.4 Tm
+1 0 0 1 72.0 564.8 Tm
 0.0000 Tw
 (METHODS ) Tj
-/F00 10 Tf
-0.8 0 0 rg
-1 0 0 1 102.0 506.0 Tm
-0.0000 Tw
-(Internal function to get the next raw record out of a file. ) Tj
 /F21 10 Tf
-0 g
-1 0 0 1 72.0 488.0 Tm
+1 0 0 1 72.0 543.2 Tm
 0.0000 Tw
-(decode\(\) ) Tj
+(decode\( $string [, \\&filter_func ] \) ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 476.0 Tm
+1 0 0 1 102.0 531.2 Tm
 0.9078 Tw
 (Constructor for handling data from a USMARC file.  This function takes care of  all the tag directory) Tj
-1 0 0 1 102.0 464.0 Tm
+1 0 0 1 102.0 519.2 Tm
 0.0000 Tw
 (parsing & mangling. ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 452.0 Tm
+1 0 0 1 102.0 507.2 Tm
 0.0000 Tw
 (Any warnings or coercions can be checked in the ) Tj
 /F10 10 Tf
@@ -269,58 +251,114 @@ BT
 /F00 10 Tf
 0.0000 Tw
 ( function. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 495.2 Tm
+3.2400 Tw
+(The ) Tj
+/F10 10 Tf
+3.2400 Tw
+($filter_func) Tj
+/F00 10 Tf
+3.2400 Tw
+( is an optional reference to a user-supplied function that determines on a) Tj
+1 0 0 1 102.0 483.2 Tm
+0.2348 Tw
+(tag-by-tag basis if you want the tag passed to it to be put into the MARC record.  The function is passed) Tj
+1 0 0 1 102.0 471.2 Tm
+2.0265 Tw
+(the tag number and the raw tag data, and must return a boolean.  The return of a true value tells) Tj
+1 0 0 1 102.0 459.2 Tm
+0.0000 Tw
+(MARC::File::USMARC::decode that the tag should get put into the resulting MARC record. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 447.2 Tm
+0.0000 Tw
+(For example, if you only want title and subject tags in your MARC record, try this: ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 435.2 Tm
+0.0000 Tw
+(    sub filter \{ ) Tj
+1 0 0 1 150.0 423.2 Tm
+0.0000 Tw
+(my \($tagno,$tagdata\) = @_; ) Tj
+1 0 0 1 150.0 399.2 Tm
+0.0000 Tw
+(return \($tagno == 245\) || \($tagno >= 600 && $tagno <= 699\); ) Tj
+1 0 0 1 102.0 387.2 Tm
+0.0000 Tw
+(    \} ) Tj
+1 0 0 1 102.0 363.2 Tm
+0.0000 Tw
+(    my $marc = MARC::File::USMARC->decode\( $string, \\&filter \); ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 339.2 Tm
+0.7839 Tw
+(Why would you want to do such a thing?  The big reason is that creating fields is processor-intensive,) Tj
+1 0 0 1 102.0 327.2 Tm
+0.8753 Tw
+(and if your program is doing read-only data analysis and needs to be as fast as possible, you can save) Tj
+1 0 0 1 102.0 315.2 Tm
+0.0000 Tw
+(time by not creating fields that you`ll be ignoring anyway. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 303.2 Tm
+0.9124 Tw
+(Another possible use is if you`re only interested in printing certain tags from the record, then you can) Tj
+1 0 0 1 102.0 291.2 Tm
+0.0000 Tw
+(filter them when you read from disc and not have to delete unwanted tags yourself. ) Tj
 /F21 10 Tf
-1 0 0 1 72.0 434.0 Tm
+1 0 0 1 72.0 273.2 Tm
 0.0000 Tw
 (update_leader\(\) ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 422.0 Tm
+1 0 0 1 102.0 261.2 Tm
 0.3870 Tw
 (If any changes get made to the MARC record, the first 5 bytes of the leader \(the length\) will be invalid.) Tj
-1 0 0 1 102.0 410.0 Tm
+1 0 0 1 102.0 249.2 Tm
 0.6462 Tw
 (This function updates the  leader with the correct length of the record as it would be if written out to a) Tj
-1 0 0 1 102.0 398.0 Tm
+1 0 0 1 102.0 237.2 Tm
 0.0000 Tw
 (file. ) Tj
 /F21 10 Tf
-1 0 0 1 72.0 380.0 Tm
+1 0 0 1 72.0 219.2 Tm
 0.0000 Tw
 (_build_tag_directory\(\) ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 368.0 Tm
+1 0 0 1 102.0 207.2 Tm
 1.3258 Tw
 (Function for internal use only: Builds the tag directory that gets put in front of the data in a MARC) Tj
-1 0 0 1 102.0 356.0 Tm
+1 0 0 1 102.0 195.2 Tm
 0.0000 Tw
 (record. ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 344.0 Tm
+1 0 0 1 102.0 183.2 Tm
 1.4060 Tw
 (Returns two array references, and two lengths: The tag directory, and the data fields themselves, the) Tj
-1 0 0 1 102.0 332.0 Tm
+1 0 0 1 102.0 171.2 Tm
 0.2635 Tw
 (length of all data \(including the Leader that we expect will be added\), and the size of the Leader and tag) Tj
-1 0 0 1 102.0 320.0 Tm
+1 0 0 1 102.0 159.2 Tm
 0.0000 Tw
 (directory. ) Tj
 /F21 10 Tf
-1 0 0 1 72.0 302.0 Tm
+1 0 0 1 72.0 141.2 Tm
 0.0000 Tw
 (encode\(\) ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 290.0 Tm
+1 0 0 1 102.0 129.2 Tm
 0.3787 Tw
 (Returns a string of characters suitable for writing out to a USMARC file, including the leader, directory) Tj
-1 0 0 1 102.0 278.0 Tm
+1 0 0 1 102.0 117.2 Tm
 0.0000 Tw
 (and all the fields. ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 260.0 Tm
+1 0 0 1 72.0 99.2 Tm
 0.0000 Tw
 (RELATED MODULES ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 245.6 Tm
+1 0 0 1 102.0 84.8 Tm
 0.0000 Tw
 () Tj
 /F02 10 Tf
@@ -331,43 +369,9 @@ BT
 0 g
 0.0000 Tw
 ( ) Tj
-/F21 12 Tf
-1 0 0 1 72.0 227.6 Tm
-0.0000 Tw
-(TODO ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 213.2 Tm
-0.0680 Tw
-(Make some sort of autodispatch so that you don`t have to explicitly specify the MARC::File::X subclass,) Tj
-1 0 0 1 102.0 201.2 Tm
-0.0000 Tw
-(sort of like how DBI knows to use DBD::Oracle or DBD::Mysql. ) Tj
-/F21 12 Tf
-1 0 0 1 72.0 183.2 Tm
-0.0000 Tw
-(LICENSE ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 168.8 Tm
-0.0000 Tw
-(This code may be distributed under the same terms as Perl itself.  ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 156.8 Tm
-2.4619 Tw
-(Please note that these modules are not products of or supported by the employers of the various) Tj
-1 0 0 1 102.0 144.8 Tm
-0.0000 Tw
-(contributors to the code. ) Tj
-/F21 12 Tf
-1 0 0 1 72.0 126.8 Tm
-0.0000 Tw
-(AUTHOR ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 112.4 Tm
-0.0000 Tw
-(Andy Lester, <marc@petdance.com> or <alester@flr.follett.com> ) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
-(26 November 2002) Tj
+(16 December 2003) Tj
 1 0 0 1 517.44 37 Tm
 (1) Tj
 ET
@@ -377,7 +381,7 @@ S
 endstream
 endobj
 19 0 obj
-4259
+4863
 endobj
 20 0 obj
 <<
@@ -416,11 +420,64 @@ BT
 (USMARC.pm) Tj
 1 0 0 1 483.56 797 Tm
 (pod2pdf) Tj
+/F21 12 Tf
+1 0 0 1 72.0 770.0 Tm
+0.0000 Tw
+(TODO ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 755.6 Tm
+0.0680 Tw
+(Make some sort of autodispatch so that you don`t have to explicitly specify the MARC::File::X subclass,) Tj
+1 0 0 1 102.0 743.6 Tm
+0.0000 Tw
+(sort of like how DBI knows to use DBD::Oracle or DBD::Mysql. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 731.6 Tm
+1.5671 Tw
+(Create a toggle-able option to check inside the field data for end of field characters.  Presumably it) Tj
+1 0 0 1 102.0 719.6 Tm
+0.7254 Tw
+(would be good to have it turned on all the time, but it`s nice to be able to opt out if you don`t want to) Tj
+1 0 0 1 102.0 707.6 Tm
+0.0000 Tw
+(take the performance hit. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 689.6 Tm
+0.0000 Tw
+(LICENSE ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 675.2 Tm
+0.0000 Tw
+(This code may be distributed under the same terms as Perl itself.  ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 663.2 Tm
+2.4619 Tw
+(Please note that these modules are not products of or supported by the employers of the various) Tj
+1 0 0 1 102.0 651.2 Tm
+0.0000 Tw
+(contributors to the code. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 633.2 Tm
+0.0000 Tw
+(AUTHOR ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 618.8 Tm
+0.0000 Tw
+(Andy Lester, ) Tj
+/F10 10 Tf
+0.0000 Tw
+(< <andy@petdance.com> ) Tj
+/F00 10 Tf
+0.0000 Tw
+() Tj
+/F00 10 Tf
+0.0000 Tw
+( ) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
 (2) Tj
-1 0 0 1 435.18 37 Tm
-(26 November 2002) Tj
+1 0 0 1 435.73 37 Tm
+(16 December 2003) Tj
 ET
 72 50 m
 523 50 l
@@ -428,7 +485,7 @@ S
 endstream
 endobj
 23 0 obj
-236
+1511
 endobj
 24 0 obj
 <<
@@ -436,6 +493,8 @@ endobj
 /ColorSpace <</DefaultRGB 1 0 R>>
 /Font
 <<
+/F00 6 0 R
+/F10 10 0 R
 /F21 15 0 R
 >>
 >>
@@ -483,7 +542,7 @@ f
 Q
 BT
 1 0 0 1 102 671.6 Tm
-(VERSION) Tj
+(SYNOPSIS) Tj
 1 0 0 1 487.44 671.6 Tm
 (1) Tj
 ET
@@ -494,7 +553,7 @@ f
 Q
 BT
 1 0 0 1 102 659.6 Tm
-(SYNOPSIS) Tj
+(EXPORT) Tj
 1 0 0 1 487.44 659.6 Tm
 (1) Tj
 ET
@@ -505,7 +564,7 @@ f
 Q
 BT
 1 0 0 1 102 647.6 Tm
-(EXPORT) Tj
+(METHODS) Tj
 1 0 0 1 487.44 647.6 Tm
 (1) Tj
 ET
@@ -515,8 +574,8 @@ q
 f
 Q
 BT
-1 0 0 1 102 635.6 Tm
-(METHODS) Tj
+1 0 0 1 132 635.6 Tm
+(decode\( $string [, \\&filter_func ] \)) Tj
 1 0 0 1 487.44 635.6 Tm
 (1) Tj
 ET
@@ -527,7 +586,7 @@ f
 Q
 BT
 1 0 0 1 132 623.6 Tm
-(decode\(\)) Tj
+(update_leader\(\)) Tj
 1 0 0 1 487.44 623.6 Tm
 (1) Tj
 ET
@@ -538,7 +597,7 @@ f
 Q
 BT
 1 0 0 1 132 611.6 Tm
-(update_leader\(\)) Tj
+(_build_tag_directory\(\)) Tj
 1 0 0 1 487.44 611.6 Tm
 (1) Tj
 ET
@@ -549,7 +608,7 @@ f
 Q
 BT
 1 0 0 1 132 599.6 Tm
-(_build_tag_directory\(\)) Tj
+(encode\(\)) Tj
 1 0 0 1 487.44 599.6 Tm
 (1) Tj
 ET
@@ -559,8 +618,8 @@ q
 f
 Q
 BT
-1 0 0 1 132 587.6 Tm
-(encode\(\)) Tj
+1 0 0 1 102 587.6 Tm
+(RELATED MODULES) Tj
 1 0 0 1 487.44 587.6 Tm
 (1) Tj
 ET
@@ -571,9 +630,9 @@ f
 Q
 BT
 1 0 0 1 102 575.6 Tm
-(RELATED MODULES) Tj
+(TODO) Tj
 1 0 0 1 487.44 575.6 Tm
-(1) Tj
+(2) Tj
 ET
 q
 0.95 g
@@ -582,9 +641,9 @@ f
 Q
 BT
 1 0 0 1 102 563.6 Tm
-(TODO) Tj
+(LICENSE) Tj
 1 0 0 1 487.44 563.6 Tm
-(1) Tj
+(2) Tj
 ET
 q
 1 g
@@ -593,23 +652,12 @@ f
 Q
 BT
 1 0 0 1 102 551.6 Tm
-(LICENSE) Tj
-1 0 0 1 487.44 551.6 Tm
-(1) Tj
-ET
-q
-0.95 g
-72 536.6 451 12 re
-f
-Q
-BT
-1 0 0 1 102 539.6 Tm
 (AUTHOR) Tj
-1 0 0 1 487.44 539.6 Tm
-(1) Tj
+1 0 0 1 487.44 551.6 Tm
+(2) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
-(26 November 2002) Tj
+(16 December 2003) Tj
 1 0 0 1 520.22 37 Tm
 (i) Tj
 ET
@@ -619,7 +667,7 @@ S
 endstream
 endobj
 27 0 obj
-1610
+1536
 endobj
 28 0 obj
 <<
@@ -659,8 +707,8 @@ BT
 /F21 10 Tf
 1 0 0 1 72 37 Tm
 (ii) Tj
-1 0 0 1 435.18 37 Tm
-(26 November 2002) Tj
+1 0 0 1 435.73 37 Tm
+(16 December 2003) Tj
 ET
 72 50 m
 523 50 l
@@ -762,7 +810,7 @@ BT
 (USMARC.pm) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
-(26 November 2002) Tj
+(16 December 2003) Tj
 1 0 0 1 488.54 37 Tm
 (Fly leaf) Tj
 ET
@@ -797,8 +845,8 @@ endobj
 /Parent 42 0 R
 /Dest [29 0 R /Fit]
 /First 44 0 R
-/Last 56 0 R
-/Count 13 
+/Last 55 0 R
+/Count 12 
 /Title (Table of Contents)
 >>
 endobj
@@ -816,114 +864,105 @@ endobj
 /Dest [21 0 R /FitH 746]
 /Previous 44 0 R
 /Next 46 0 R
-/Title (VERSION)
+/Title (SYNOPSIS)
 >>
 endobj
 46 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 701.6]
+/Dest [21 0 R /FitH 611.6]
 /Previous 45 0 R
 /Next 47 0 R
-/Title (SYNOPSIS)
+/Title (EXPORT)
 >>
 endobj
 47 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 567.2]
+/Dest [21 0 R /FitH 579.2]
 /Previous 46 0 R
-/Next 48 0 R
-/Title (EXPORT)
->>
-endobj
-48 0 obj
-<<
-/Parent 43 0 R
-/Dest [21 0 R /FitH 534.8]
-/Previous 47 0 R
-/Next 53 0 R
-/First 49 0 R
-/Last 52 0 R
+/Next 52 0 R
+/First 48 0 R
+/Last 51 0 R
 /Count 4 
 /Title (METHODS)
 >>
 endobj
+48 0 obj
+<<
+/Parent 47 0 R
+/Dest [21 0 R /FitH 555.2]
+/Next 49 0 R
+/Title (decode\( $string [, \\&filter_func ] \))
+>>
+endobj
 49 0 obj
 <<
-/Parent 48 0 R
-/Dest [21 0 R /FitH 500]
+/Parent 47 0 R
+/Dest [21 0 R /FitH 285.2]
+/Previous 48 0 R
 /Next 50 0 R
-/Title (decode\(\))
+/Title (update_leader\(\))
 >>
 endobj
 50 0 obj
 <<
-/Parent 48 0 R
-/Dest [21 0 R /FitH 446]
+/Parent 47 0 R
+/Dest [21 0 R /FitH 231.2]
 /Previous 49 0 R
 /Next 51 0 R
-/Title (update_leader\(\))
+/Title (_build_tag_directory\(\))
 >>
 endobj
 51 0 obj
 <<
-/Parent 48 0 R
-/Dest [21 0 R /FitH 392]
+/Parent 47 0 R
+/Dest [21 0 R /FitH 153.2]
 /Previous 50 0 R
-/Next 52 0 R
-/Title (_build_tag_directory\(\))
+/Title (encode\(\))
 >>
 endobj
 52 0 obj
 <<
-/Parent 48 0 R
-/Dest [21 0 R /FitH 314]
-/Previous 51 0 R
-/Title (encode\(\))
+/Parent 43 0 R
+/Dest [21 0 R /FitH 113.6]
+/Previous 47 0 R
+/Next 53 0 R
+/Title (RELATED MODULES)
 >>
 endobj
 53 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 274.4]
-/Previous 48 0 R
+/Dest [25 0 R /FitH 784.4]
+/Previous 52 0 R
 /Next 54 0 R
-/Title (RELATED MODULES)
+/Title (TODO)
 >>
 endobj
 54 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 242]
+/Dest [25 0 R /FitH 704]
 /Previous 53 0 R
 /Next 55 0 R
-/Title (TODO)
+/Title (LICENSE)
 >>
 endobj
 55 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 197.6]
+/Dest [25 0 R /FitH 647.6]
 /Previous 54 0 R
-/Next 56 0 R
-/Title (LICENSE)
->>
-endobj
-56 0 obj
-<<
-/Parent 43 0 R
-/Dest [21 0 R /FitH 141.2]
-/Previous 55 0 R
 /Title (AUTHOR)
 >>
 endobj
 42 0 obj
 <<
 /Type /Outlines
-/Count 14
+/Count 13
 /First 43 0 R
-/Last 56 0 R
+/Last 55 0 R
 >>
 endobj
 3 0 obj
@@ -943,12 +982,12 @@ endobj
 >>
 endobj
 xref
-0 57
+0 56
 0000000000 65535 f 
 0000000015 00000 n 
 0000000171 00000 n 
-0000013754 00000 n 
-0000013843 00000 n 
+0000015509 00000 n 
+0000015598 00000 n 
 0000000269 00000 n 
 0000002369 00000 n 
 0000002468 00000 n 
@@ -963,50 +1002,49 @@ xref
 0000003380 00000 n 
 0000003486 00000 n 
 0000003600 00000 n 
-0000007913 00000 n 
-0000007934 00000 n 
-0000008070 00000 n 
-0000008153 00000 n 
-0000008443 00000 n 
-0000008463 00000 n 
-0000008565 00000 n 
-0000008648 00000 n 
-0000010312 00000 n 
-0000010333 00000 n 
-0000010447 00000 n 
-0000010530 00000 n 
-0000010831 00000 n 
-0000010851 00000 n 
-0000010953 00000 n 
-0000011036 00000 n 
-0000011119 00000 n 
-0000011465 00000 n 
-0000011485 00000 n 
-0000011610 00000 n 
-0000011910 00000 n 
-0000011930 00000 n 
-0000012032 00000 n 
-0000013679 00000 n 
-0000012115 00000 n 
-0000012237 00000 n 
-0000012328 00000 n 
-0000012437 00000 n 
-0000012549 00000 n 
-0000012659 00000 n 
-0000012807 00000 n 
-0000012902 00000 n 
-0000013021 00000 n 
-0000013147 00000 n 
-0000013246 00000 n 
-0000013365 00000 n 
-0000013471 00000 n 
-0000013582 00000 n 
+0000008517 00000 n 
+0000008538 00000 n 
+0000008674 00000 n 
+0000008757 00000 n 
+0000010322 00000 n 
+0000010343 00000 n 
+0000010468 00000 n 
+0000010551 00000 n 
+0000012141 00000 n 
+0000012162 00000 n 
+0000012276 00000 n 
+0000012359 00000 n 
+0000012660 00000 n 
+0000012680 00000 n 
+0000012782 00000 n 
+0000012865 00000 n 
+0000012948 00000 n 
+0000013294 00000 n 
+0000013314 00000 n 
+0000013439 00000 n 
+0000013739 00000 n 
+0000013759 00000 n 
+0000013861 00000 n 
+0000015434 00000 n 
+0000013944 00000 n 
+0000014066 00000 n 
+0000014157 00000 n 
+0000014267 00000 n 
+0000014377 00000 n 
+0000014525 00000 n 
+0000014651 00000 n 
+0000014772 00000 n 
+0000014900 00000 n 
+0000015001 00000 n 
+0000015120 00000 n 
+0000015228 00000 n 
+0000015337 00000 n 
 trailer
 <<
-/Size 57
+/Size 56
 /Root 3 0 R
 /Info 2 0 R
 >>
 startxref
-13962
+15717
 %%EOF

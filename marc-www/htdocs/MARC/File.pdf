@@ -11,7 +11,7 @@
 endobj
 2 0 obj
 <<
-/CreationDate (D:20021126161847-0600)
+/CreationDate (D:20031216173556-0600)
 /Producer (pod2pdf)
 /Title (File.pm)
 >>
@@ -195,81 +195,153 @@ BT
 /F21 12 Tf
 1 0 0 1 72.0 731.6 Tm
 0.0000 Tw
-(VERSION ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 717.2 Tm
-0.0000 Tw
-(Version 1.13 ) Tj
-/F10 10 Tf
-1 0 0 1 102.0 705.2 Tm
-0.0000 Tw
-(    $Id: File.pdf,v 1.1 2002/12/02 21:40:58 edsummers Exp $ ) Tj
-/F21 12 Tf
-1 0 0 1 72.0 687.2 Tm
-0.0000 Tw
 (SYNOPSIS ) Tj
 /F10 10 Tf
-1 0 0 1 102.0 666.8 Tm
+1 0 0 1 102.0 711.2 Tm
 0.0000 Tw
 (    use MARC::File::USMARC; ) Tj
-1 0 0 1 102.0 642.8 Tm
+1 0 0 1 102.0 687.2 Tm
 0.0000 Tw
 (    my $file = MARC::File::USMARC->in\( $filename \); ) Tj
-1 0 0 1 102.0 618.8 Tm
+1 0 0 1 102.0 663.2 Tm
 0.0000 Tw
 (    while \( my $marc = $file->next\(\) \) \{ ) Tj
-1 0 0 1 150.0 606.8 Tm
+1 0 0 1 150.0 651.2 Tm
 0.0000 Tw
 (# Do something ) Tj
-1 0 0 1 102.0 594.8 Tm
+1 0 0 1 102.0 639.2 Tm
 0.0000 Tw
 (    \} ) Tj
-1 0 0 1 102.0 582.8 Tm
+1 0 0 1 102.0 627.2 Tm
 0.0000 Tw
 (    $file->close\(\); ) Tj
-1 0 0 1 102.0 570.8 Tm
+1 0 0 1 102.0 615.2 Tm
 0.0000 Tw
 (    undef $file; ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 552.8 Tm
+1 0 0 1 72.0 597.2 Tm
 0.0000 Tw
 (EXPORT ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 538.4 Tm
+1 0 0 1 102.0 582.8 Tm
 0.0000 Tw
 (None.   ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 520.4 Tm
+1 0 0 1 72.0 564.8 Tm
 0.0000 Tw
 (METHODS ) Tj
 /F21 10 Tf
-1 0 0 1 72.0 498.8 Tm
+1 0 0 1 72.0 543.2 Tm
 0.0000 Tw
-(in\(\) ) Tj
+() Tj
+/F11 10 Tf
+0.0000 Tw
+(in\(\)) Tj
+/F21 10 Tf
+0.0000 Tw
+( ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 486.8 Tm
-0.0000 Tw
-(Opens a file for input. ) Tj
+1 0 0 1 102.0 531.2 Tm
+0 Tw
+(Opens a file for import. Ordinarily you will use ) Tj
+/F10 10 Tf
+0 Tw
+(MARC::File::USMARC) Tj
 /F00 10 Tf
-1 0 0 1 102.0 474.8 Tm
+0 Tw
+( or) Tj
+1 0 0 1 102.0 519.2 Tm
 0.0000 Tw
-(Returns a MARC::File object, or ) Tj
+() Tj
 /F10 10 Tf
 0.0000 Tw
+(MARC::File::MicroLIF) Tj
+/F00 10 Tf
+0.0000 Tw
+( to do this. ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 507.2 Tm
+0.0000 Tw
+(    my $file = MARC::File::USMARC->in\( 'file.marc' \); ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 483.2 Tm
+1.0406 Tw
+(Returns a ) Tj
+/F10 10 Tf
+1.0406 Tw
+(MARC::File) Tj
+/F00 10 Tf
+1.0406 Tw
+( object, or ) Tj
+/F10 10 Tf
+1.0406 Tw
 (undef) Tj
 /F00 10 Tf
+1.0406 Tw
+( on failure. If you  encountered an error the error message) Tj
+1 0 0 1 102.0 471.2 Tm
 0.0000 Tw
-( on failure. ) Tj
-/F21 10 Tf
-1 0 0 1 72.0 456.8 Tm
+(will be stored in  ) Tj
+/F10 10 Tf
 0.0000 Tw
-(next\(\) ) Tj
+($MARC::File::ERROR) Tj
 /F00 10 Tf
-1 0 0 1 102.0 444.8 Tm
+0.0000 Tw
+(. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 459.2 Tm
+0.0000 Tw
+(Optionally you can also pass in a filehandle, and ) Tj
+/F10 10 Tf
+0.0000 Tw
+(MARC::File) Tj
+/F00 10 Tf
+0.0000 Tw
+(. will "do the right thing". ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 447.2 Tm
+0.0000 Tw
+(    my $handle = IO::File->new\( 'gunzip -c file.marc.gz |' \); ) Tj
+1 0 0 1 102.0 435.2 Tm
+0.0000 Tw
+(    my $file = MARC::File::USMARC->in\( $handle \); ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 417.2 Tm
+0.0000 Tw
+(next\( [\\&filter_func] \) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 405.2 Tm
 0.0000 Tw
 (Reads the next record from the file handle passed in. ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 432.8 Tm
+1 0 0 1 102.0 393.2 Tm
+0.6864 Tw
+(The ) Tj
+/F10 10 Tf
+0.6864 Tw
+($filter_func) Tj
+/F00 10 Tf
+0.6864 Tw
+( is a reference to a filtering function.  Currently, only USMARC records support) Tj
+1 0 0 1 102.0 381.2 Tm
+0.0000 Tw
+(this.  See ) Tj
+/F02 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::File::USMARC) Tj
+/F00 10 Tf
+0 g
+0.0000 Tw
+(`s ) Tj
+/F10 10 Tf
+0.0000 Tw
+(decode\(\)) Tj
+/F00 10 Tf
+0.0000 Tw
+( function for details. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 369.2 Tm
 0.0000 Tw
 (Returns a MARC::Record reference, or ) Tj
 /F10 10 Tf
@@ -279,11 +351,11 @@ BT
 0.0000 Tw
 ( on error. ) Tj
 /F21 10 Tf
-1 0 0 1 72.0 414.8 Tm
+1 0 0 1 72.0 351.2 Tm
 0.0000 Tw
 (skip\(\) ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 402.8 Tm
+1 0 0 1 102.0 339.2 Tm
 0.0189 Tw
 (Skips over the next record in the file.  Same as ) Tj
 /F10 10 Tf
@@ -292,30 +364,58 @@ BT
 /F00 10 Tf
 0.0189 Tw
 (, without the overhead of parsing a record you`re) Tj
-1 0 0 1 102.0 390.8 Tm
+1 0 0 1 102.0 327.2 Tm
 0.0000 Tw
 (going to throw away anyway. ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 378.8 Tm
+1 0 0 1 102.0 315.2 Tm
 0.0000 Tw
 (Returns 1 or undef. ) Tj
 /F21 10 Tf
-1 0 0 1 72.0 360.8 Tm
+1 0 0 1 72.0 297.2 Tm
 0.0000 Tw
-(warnings\(\) ) Tj
+() Tj
+/F11 10 Tf
+0.0000 Tw
+(warnings\(\)) Tj
+/F21 10 Tf
+0.0000 Tw
+( ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 348.8 Tm
-3.6733 Tw
-(Simlilar to MARC::Record and MARC::Batch, warnings\(\) will return any  warnings that have) Tj
-1 0 0 1 102.0 336.8 Tm
+1 0 0 1 102.0 285.2 Tm
+0.8042 Tw
+(Simlilar to the methods in ) Tj
+/F02 10 Tf
+0 0 0.8 rg
+0.8042 Tw
+(MARC::Record) Tj
+/F00 10 Tf
+0 g
+0.8042 Tw
+( and ) Tj
+/F02 10 Tf
+0 0 0.8 rg
+0.8042 Tw
+(MARC::Batch) Tj
+/F00 10 Tf
+0 g
+0.8042 Tw
+(, ) Tj
+/F10 10 Tf
+0.8042 Tw
+(warnings\(\)) Tj
+/F00 10 Tf
+0.8042 Tw
+( will return any warnings) Tj
+1 0 0 1 102.0 273.2 Tm
 0.0000 Tw
-(accumulated while processing this file; and as a  side-effect will clear the warnings buffer. ) Tj
+(that have accumulated while processing this file; and as a side-effect will clear the warnings buffer. ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 318.8 Tm
+1 0 0 1 72.0 255.2 Tm
 0.0000 Tw
 (RELATED MODULES ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 304.4 Tm
+1 0 0 1 102.0 240.8 Tm
 0.0000 Tw
 () Tj
 /F02 10 Tf
@@ -327,20 +427,20 @@ BT
 0.0000 Tw
 ( ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 286.4 Tm
+1 0 0 1 72.0 222.8 Tm
 0.0000 Tw
 (TODO ) Tj
 /F20 10 Tf
-1 0 0 1 102.0 269.1 Tm
+1 0 0 1 102.0 205.5 Tm
 0.0000 Tw
 () Tj
 ET
 q
-102 270.12 4 4 re
+102 206.52 4 4 re
 f
 Q
 BT
-1 0 0 1 110 269.12 Tm
+1 0 0 1 110 205.52 Tm
 /F20 10 Tf
 0.0000 Tw
 () Tj
@@ -351,35 +451,44 @@ BT
 0.0000 Tw
 ( method ) Tj
 /F00 10 Tf
-1 0 0 1 126.0 257.1 Tm
+1 0 0 1 126.0 193.5 Tm
 0.0000 Tw
 (We only handle files for input right now. ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 227.1 Tm
+1 0 0 1 72.0 163.5 Tm
 0.0000 Tw
 (LICENSE ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 212.7 Tm
+1 0 0 1 102.0 149.1 Tm
 0.0000 Tw
 (This code may be distributed under the same terms as Perl itself.  ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 200.7 Tm
+1 0 0 1 102.0 137.1 Tm
 2.4619 Tw
 (Please note that these modules are not products of or supported by the employers of the various) Tj
-1 0 0 1 102.0 188.7 Tm
+1 0 0 1 102.0 125.1 Tm
 0.0000 Tw
 (contributors to the code. ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 170.7 Tm
+1 0 0 1 72.0 107.1 Tm
 0.0000 Tw
 (AUTHOR ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 156.3 Tm
+1 0 0 1 102.0 92.7 Tm
 0.0000 Tw
-(Andy Lester, <marc@petdance.com> or <alester@flr.follett.com> ) Tj
+(Andy Lester, ) Tj
+/F10 10 Tf
+0.0000 Tw
+(< <andy@petdance.com> ) Tj
+/F00 10 Tf
+0.0000 Tw
+() Tj
+/F00 10 Tf
+0.0000 Tw
+( ) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
-(26 November 2002) Tj
+(16 December 2003) Tj
 1 0 0 1 517.44 37 Tm
 (1) Tj
 ET
@@ -389,7 +498,7 @@ S
 endstream
 endobj
 19 0 obj
-3755
+5285
 endobj
 20 0 obj
 <<
@@ -400,6 +509,7 @@ endobj
 /F00 6 0 R
 /F02 8 0 R
 /F10 10 0 R
+/F11 11 0 R
 /F20 14 0 R
 /F21 15 0 R
 >>
@@ -432,8 +542,8 @@ BT
 /F21 10 Tf
 1 0 0 1 72 37 Tm
 (2) Tj
-1 0 0 1 435.18 37 Tm
-(26 November 2002) Tj
+1 0 0 1 435.73 37 Tm
+(16 December 2003) Tj
 ET
 72 50 m
 523 50 l
@@ -496,7 +606,7 @@ f
 Q
 BT
 1 0 0 1 102 671.6 Tm
-(VERSION) Tj
+(SYNOPSIS) Tj
 1 0 0 1 487.44 671.6 Tm
 (1) Tj
 ET
@@ -507,7 +617,7 @@ f
 Q
 BT
 1 0 0 1 102 659.6 Tm
-(SYNOPSIS) Tj
+(EXPORT) Tj
 1 0 0 1 487.44 659.6 Tm
 (1) Tj
 ET
@@ -518,7 +628,7 @@ f
 Q
 BT
 1 0 0 1 102 647.6 Tm
-(EXPORT) Tj
+(METHODS) Tj
 1 0 0 1 487.44 647.6 Tm
 (1) Tj
 ET
@@ -528,8 +638,8 @@ q
 f
 Q
 BT
-1 0 0 1 102 635.6 Tm
-(METHODS) Tj
+1 0 0 1 132 635.6 Tm
+(in\(\)) Tj
 1 0 0 1 487.44 635.6 Tm
 (1) Tj
 ET
@@ -540,7 +650,7 @@ f
 Q
 BT
 1 0 0 1 132 623.6 Tm
-(in\(\)) Tj
+(next\( [\\&filter_func] \)) Tj
 1 0 0 1 487.44 623.6 Tm
 (1) Tj
 ET
@@ -551,7 +661,7 @@ f
 Q
 BT
 1 0 0 1 132 611.6 Tm
-(next\(\)) Tj
+(skip\(\)) Tj
 1 0 0 1 487.44 611.6 Tm
 (1) Tj
 ET
@@ -562,7 +672,7 @@ f
 Q
 BT
 1 0 0 1 132 599.6 Tm
-(skip\(\)) Tj
+(warnings\(\)) Tj
 1 0 0 1 487.44 599.6 Tm
 (1) Tj
 ET
@@ -572,8 +682,8 @@ q
 f
 Q
 BT
-1 0 0 1 132 587.6 Tm
-(warnings\(\)) Tj
+1 0 0 1 102 587.6 Tm
+(RELATED MODULES) Tj
 1 0 0 1 487.44 587.6 Tm
 (1) Tj
 ET
@@ -584,7 +694,7 @@ f
 Q
 BT
 1 0 0 1 102 575.6 Tm
-(RELATED MODULES) Tj
+(TODO) Tj
 1 0 0 1 487.44 575.6 Tm
 (1) Tj
 ET
@@ -594,8 +704,8 @@ q
 f
 Q
 BT
-1 0 0 1 102 563.6 Tm
-(TODO) Tj
+1 0 0 1 132 563.6 Tm
+(out\(\) method) Tj
 1 0 0 1 487.44 563.6 Tm
 (1) Tj
 ET
@@ -605,8 +715,8 @@ q
 f
 Q
 BT
-1 0 0 1 132 551.6 Tm
-(out\(\) method) Tj
+1 0 0 1 102 551.6 Tm
+(LICENSE) Tj
 1 0 0 1 487.44 551.6 Tm
 (1) Tj
 ET
@@ -617,23 +727,12 @@ f
 Q
 BT
 1 0 0 1 102 539.6 Tm
-(LICENSE) Tj
-1 0 0 1 487.44 539.6 Tm
-(1) Tj
-ET
-q
-1 g
-72 524.6 451 12 re
-f
-Q
-BT
-1 0 0 1 102 527.6 Tm
 (AUTHOR) Tj
-1 0 0 1 487.44 527.6 Tm
+1 0 0 1 487.44 539.6 Tm
 (1) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
-(26 November 2002) Tj
+(16 December 2003) Tj
 1 0 0 1 520.22 37 Tm
 (i) Tj
 ET
@@ -643,7 +742,7 @@ S
 endstream
 endobj
 27 0 obj
-1690
+1608
 endobj
 28 0 obj
 <<
@@ -683,8 +782,8 @@ BT
 /F21 10 Tf
 1 0 0 1 72 37 Tm
 (ii) Tj
-1 0 0 1 435.18 37 Tm
-(26 November 2002) Tj
+1 0 0 1 435.73 37 Tm
+(16 December 2003) Tj
 ET
 72 50 m
 523 50 l
@@ -786,7 +885,7 @@ BT
 (File.pm) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
-(26 November 2002) Tj
+(16 December 2003) Tj
 1 0 0 1 488.54 37 Tm
 (Fly leaf) Tj
 ET
@@ -821,8 +920,8 @@ endobj
 /Parent 42 0 R
 /Dest [29 0 R /Fit]
 /First 44 0 R
-/Last 57 0 R
-/Count 14 
+/Last 56 0 R
+/Count 13 
 /Title (Table of Contents)
 >>
 endobj
@@ -840,124 +939,115 @@ endobj
 /Dest [21 0 R /FitH 746]
 /Previous 44 0 R
 /Next 46 0 R
-/Title (VERSION)
+/Title (SYNOPSIS)
 >>
 endobj
 46 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 701.6]
+/Dest [21 0 R /FitH 611.6]
 /Previous 45 0 R
 /Next 47 0 R
-/Title (SYNOPSIS)
+/Title (EXPORT)
 >>
 endobj
 47 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 567.2]
+/Dest [21 0 R /FitH 579.2]
 /Previous 46 0 R
-/Next 48 0 R
-/Title (EXPORT)
->>
-endobj
-48 0 obj
-<<
-/Parent 43 0 R
-/Dest [21 0 R /FitH 534.8]
-/Previous 47 0 R
-/Next 53 0 R
-/First 49 0 R
-/Last 52 0 R
+/Next 52 0 R
+/First 48 0 R
+/Last 51 0 R
 /Count 4 
 /Title (METHODS)
 >>
 endobj
+48 0 obj
+<<
+/Parent 47 0 R
+/Dest [21 0 R /FitH 555.2]
+/Next 49 0 R
+/Title (in\(\))
+>>
+endobj
 49 0 obj
 <<
-/Parent 48 0 R
-/Dest [21 0 R /FitH 510.8]
+/Parent 47 0 R
+/Dest [21 0 R /FitH 429.2]
+/Previous 48 0 R
 /Next 50 0 R
-/Title (in\(\))
+/Title (next\( [\\&filter_func] \))
 >>
 endobj
 50 0 obj
 <<
-/Parent 48 0 R
-/Dest [21 0 R /FitH 468.8]
+/Parent 47 0 R
+/Dest [21 0 R /FitH 363.2]
 /Previous 49 0 R
 /Next 51 0 R
-/Title (next\(\))
+/Title (skip\(\))
 >>
 endobj
 51 0 obj
 <<
-/Parent 48 0 R
-/Dest [21 0 R /FitH 426.8]
+/Parent 47 0 R
+/Dest [21 0 R /FitH 309.2]
 /Previous 50 0 R
-/Next 52 0 R
-/Title (skip\(\))
+/Title (warnings\(\))
 >>
 endobj
 52 0 obj
 <<
-/Parent 48 0 R
-/Dest [21 0 R /FitH 372.8]
-/Previous 51 0 R
-/Title (warnings\(\))
+/Parent 43 0 R
+/Dest [21 0 R /FitH 269.6]
+/Previous 47 0 R
+/Next 53 0 R
+/Title (RELATED MODULES)
 >>
 endobj
 53 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 333.2]
-/Previous 48 0 R
-/Next 54 0 R
-/Title (RELATED MODULES)
->>
-endobj
-54 0 obj
-<<
-/Parent 43 0 R
-/Dest [21 0 R /FitH 300.8]
-/Previous 53 0 R
-/Next 56 0 R
-/First 55 0 R
-/Last 55 0 R
+/Dest [21 0 R /FitH 237.2]
+/Previous 52 0 R
+/Next 55 0 R
+/First 54 0 R
+/Last 54 0 R
 /Count 1 
 /Title (TODO)
 >>
 endobj
+54 0 obj
+<<
+/Parent 53 0 R
+/Dest [21 0 R /FitH 217.52]
+/Title (out\(\) method)
+>>
+endobj
 55 0 obj
 <<
-/Parent 54 0 R
-/Dest [21 0 R /FitH 281.12]
-/Title (out\(\) method)
+/Parent 43 0 R
+/Dest [21 0 R /FitH 177.92]
+/Previous 53 0 R
+/Next 56 0 R
+/Title (LICENSE)
 >>
 endobj
 56 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 241.52]
-/Previous 54 0 R
-/Next 57 0 R
-/Title (LICENSE)
->>
-endobj
-57 0 obj
-<<
-/Parent 43 0 R
-/Dest [21 0 R /FitH 185.12]
-/Previous 56 0 R
+/Dest [21 0 R /FitH 121.52]
+/Previous 55 0 R
 /Title (AUTHOR)
 >>
 endobj
 42 0 obj
 <<
 /Type /Outlines
-/Count 15
+/Count 14
 /First 43 0 R
-/Last 57 0 R
+/Last 56 0 R
 >>
 endobj
 3 0 obj
@@ -977,12 +1067,12 @@ endobj
 >>
 endobj
 xref
-0 58
+0 57
 0000000000 65535 f 
 0000000015 00000 n 
 0000000171 00000 n 
-0000013442 00000 n 
-0000013531 00000 n 
+0000014809 00000 n 
+0000014898 00000 n 
 0000000267 00000 n 
 0000002367 00000 n 
 0000002466 00000 n 
@@ -997,51 +1087,50 @@ xref
 0000003378 00000 n 
 0000003484 00000 n 
 0000003598 00000 n 
-0000007407 00000 n 
-0000007428 00000 n 
-0000007576 00000 n 
-0000007659 00000 n 
-0000007947 00000 n 
-0000007967 00000 n 
-0000008069 00000 n 
-0000008152 00000 n 
-0000009896 00000 n 
-0000009917 00000 n 
-0000010031 00000 n 
-0000010114 00000 n 
-0000010413 00000 n 
-0000010433 00000 n 
-0000010535 00000 n 
-0000010618 00000 n 
-0000010701 00000 n 
-0000011044 00000 n 
-0000011064 00000 n 
-0000011189 00000 n 
-0000011487 00000 n 
-0000011507 00000 n 
-0000011609 00000 n 
-0000013367 00000 n 
-0000011692 00000 n 
-0000011814 00000 n 
-0000011905 00000 n 
-0000012014 00000 n 
-0000012126 00000 n 
-0000012236 00000 n 
-0000012384 00000 n 
-0000012477 00000 n 
-0000012589 00000 n 
-0000012701 00000 n 
-0000012804 00000 n 
-0000012923 00000 n 
-0000013068 00000 n 
-0000013157 00000 n 
-0000013269 00000 n 
+0000008937 00000 n 
+0000008958 00000 n 
+0000009118 00000 n 
+0000009201 00000 n 
+0000009489 00000 n 
+0000009509 00000 n 
+0000009611 00000 n 
+0000009694 00000 n 
+0000011356 00000 n 
+0000011377 00000 n 
+0000011491 00000 n 
+0000011574 00000 n 
+0000011873 00000 n 
+0000011893 00000 n 
+0000011995 00000 n 
+0000012078 00000 n 
+0000012161 00000 n 
+0000012504 00000 n 
+0000012524 00000 n 
+0000012649 00000 n 
+0000012947 00000 n 
+0000012967 00000 n 
+0000013069 00000 n 
+0000014734 00000 n 
+0000013152 00000 n 
+0000013274 00000 n 
+0000013365 00000 n 
+0000013475 00000 n 
+0000013585 00000 n 
+0000013733 00000 n 
+0000013826 00000 n 
+0000013956 00000 n 
+0000014068 00000 n 
+0000014171 00000 n 
+0000014290 00000 n 
+0000014435 00000 n 
+0000014524 00000 n 
+0000014636 00000 n 
 trailer
 <<
-/Size 58
+/Size 57
 /Root 3 0 R
 /Info 2 0 R
 >>
 startxref
-13650
+15017
 %%EOF

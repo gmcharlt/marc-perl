@@ -11,7 +11,7 @@
 endobj
 2 0 obj
 <<
-/CreationDate (D:20020912113051-0500)
+/CreationDate (D:20030411085747-0500)
 /Producer (pod2pdf)
 /Title (ASCII.pm)
 >>
@@ -215,87 +215,82 @@ BT
 2.4940 Tw
 (Unicode\(UTF8\). It is typically used by MARC::Charset, so you  probably don`t need to use this) Tj
 1 0 0 1 102.0 642.8 Tm
+1.0741 Tw
+(yourself. It inherits from MARC::Charset::Generic so you`ll have to look at those docs to see  all the) Tj
+1 0 0 1 102.0 630.8 Tm
 0.0000 Tw
-(yourself.  ) Tj
+(methods you can call. ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 624.8 Tm
+1 0 0 1 72.0 612.8 Tm
 0.0000 Tw
 (METHODS ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 603.2 Tm
+1 0 0 1 72.0 591.2 Tm
 0.0000 Tw
-(new\(\) ) Tj
+( ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 588.8 Tm
+1 0 0 1 102.0 576.8 Tm
 0.0000 Tw
 (The constructor, which will return you a MARC::Charset::ASCII object. ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 570.8 Tm
-0.0000 Tw
-(name\(\) ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 556.4 Tm
-0.0000 Tw
-(Returns the name of the character set. ) Tj
-/F21 12 Tf
-1 0 0 1 72.0 538.4 Tm
+1 0 0 1 72.0 558.8 Tm
 0.0000 Tw
 (lookup\(\) ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 524.0 Tm
+1 0 0 1 102.0 544.4 Tm
 2.0888 Tw
 (The workhorse method that does the lookup. Pass it an a character and you`ll get back the UTF8) Tj
-1 0 0 1 102.0 512.0 Tm
+1 0 0 1 102.0 532.4 Tm
 0.0000 Tw
 (character. ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 494.0 Tm
+1 0 0 1 72.0 514.4 Tm
 0.0000 Tw
 (combining\(\) ) Tj
 /F00 10 Tf
-1 0 0 1 102.0 479.6 Tm
+1 0 0 1 102.0 500.0 Tm
 0.0010 Tw
 (Pass it a character and you`ll get back a true value \(1\) if the character is  a combining character, and false) Tj
-1 0 0 1 102.0 467.6 Tm
+1 0 0 1 102.0 488.0 Tm
 0.0000 Tw
 (\(undef\) if it is not. ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 449.6 Tm
-0.0000 Tw
-(getCharSize\(\) ) Tj
-/F00 10 Tf
-1 0 0 1 102.0 435.2 Tm
-0.0000 Tw
-(Returns the number of bytes in each character of this character set. ) Tj
-/F21 12 Tf
-1 0 0 1 72.0 417.2 Tm
+1 0 0 1 72.0 470.0 Tm
 0.0000 Tw
 (TODO ) Tj
 /F20 10 Tf
-1 0 0 1 102.0 399.9 Tm
+1 0 0 1 102.0 452.7 Tm
 0.0000 Tw
 () Tj
 ET
 q
-102 400.92 4 4 re
+102 453.72 4 4 re
 f
 Q
 BT
-1 0 0 1 110 399.92 Tm
+1 0 0 1 110 452.72 Tm
 /F20 10 Tf
 0.0000 Tw
 ( ) Tj
 /F21 12 Tf
-1 0 0 1 72.0 393.9 Tm
+1 0 0 1 72.0 446.7 Tm
+0.0000 Tw
+(SEE ALSO ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 429.4 Tm
+0.0000 Tw
+(MARC::Charset::Generic ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 411.4 Tm
 0.0000 Tw
 (AUTHORS ) Tj
 /F20 10 Tf
-1 0 0 1 102.0 376.6 Tm
+1 0 0 1 102.0 394.2 Tm
 0.0000 Tw
 (Ed Summers <ehs@pobox.com> ) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
-(12 September 2002) Tj
+(11 April 2003) Tj
 1 0 0 1 517.44 37 Tm
 (1) Tj
 ET
@@ -305,7 +300,7 @@ S
 endstream
 endobj
 19 0 obj
-2403
+2344
 endobj
 20 0 obj
 <<
@@ -347,8 +342,8 @@ BT
 /F21 10 Tf
 1 0 0 1 72 37 Tm
 (2) Tj
-1 0 0 1 432.4 37 Tm
-(12 September 2002) Tj
+1 0 0 1 461.3 37 Tm
+(11 April 2003) Tj
 ET
 72 50 m
 523 50 l
@@ -356,7 +351,7 @@ S
 endstream
 endobj
 23 0 obj
-235
+231
 endobj
 24 0 obj
 <<
@@ -444,7 +439,7 @@ f
 Q
 BT
 1 0 0 1 102 635.6 Tm
-(new\(\)) Tj
+(lookup\(\)) Tj
 1 0 0 1 487.44 635.6 Tm
 (1) Tj
 ET
@@ -455,7 +450,7 @@ f
 Q
 BT
 1 0 0 1 102 623.6 Tm
-(name\(\)) Tj
+(combining\(\)) Tj
 1 0 0 1 487.44 623.6 Tm
 (1) Tj
 ET
@@ -466,7 +461,7 @@ f
 Q
 BT
 1 0 0 1 102 611.6 Tm
-(lookup\(\)) Tj
+(TODO) Tj
 1 0 0 1 487.44 611.6 Tm
 (1) Tj
 ET
@@ -477,7 +472,7 @@ f
 Q
 BT
 1 0 0 1 102 599.6 Tm
-(combining\(\)) Tj
+(SEE ALSO) Tj
 1 0 0 1 487.44 599.6 Tm
 (1) Tj
 ET
@@ -487,8 +482,8 @@ q
 f
 Q
 BT
-1 0 0 1 102 587.6 Tm
-(getCharSize\(\)) Tj
+1 0 0 1 132 587.6 Tm
+(MARC::Charset::Generic) Tj
 1 0 0 1 487.44 587.6 Tm
 (1) Tj
 ET
@@ -499,7 +494,7 @@ f
 Q
 BT
 1 0 0 1 102 575.6 Tm
-(TODO) Tj
+(AUTHORS) Tj
 1 0 0 1 487.44 575.6 Tm
 (1) Tj
 ET
@@ -509,24 +504,13 @@ q
 f
 Q
 BT
-1 0 0 1 102 563.6 Tm
-(AUTHORS) Tj
-1 0 0 1 487.44 563.6 Tm
-(1) Tj
-ET
-q
-1 g
-72 548.6 451 12 re
-f
-Q
-BT
-1 0 0 1 132 551.6 Tm
+1 0 0 1 132 563.6 Tm
 (Ed Summers <ehs@pobox.com>) Tj
-1 0 0 1 487.44 551.6 Tm
+1 0 0 1 487.44 563.6 Tm
 (1) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
-(12 September 2002) Tj
+(11 April 2003) Tj
 1 0 0 1 520.22 37 Tm
 (i) Tj
 ET
@@ -536,7 +520,7 @@ S
 endstream
 endobj
 27 0 obj
-1511
+1414
 endobj
 28 0 obj
 <<
@@ -576,8 +560,8 @@ BT
 /F21 10 Tf
 1 0 0 1 72 37 Tm
 (ii) Tj
-1 0 0 1 432.4 37 Tm
-(12 September 2002) Tj
+1 0 0 1 461.3 37 Tm
+(11 April 2003) Tj
 ET
 72 50 m
 523 50 l
@@ -585,7 +569,7 @@ S
 endstream
 endobj
 31 0 obj
-246
+242
 endobj
 32 0 obj
 <<
@@ -679,7 +663,7 @@ BT
 (ASCII.pm) Tj
 /F21 10 Tf
 1 0 0 1 72 37 Tm
-(12 September 2002) Tj
+(11 April 2003) Tj
 1 0 0 1 488.54 37 Tm
 (Fly leaf) Tj
 ET
@@ -689,7 +673,7 @@ S
 endstream
 endobj
 39 0 obj
-246
+242
 endobj
 40 0 obj
 <<
@@ -714,8 +698,8 @@ endobj
 /Parent 42 0 R
 /Dest [29 0 R /Fit]
 /First 44 0 R
-/Last 54 0 R
-/Count 12 
+/Last 53 0 R
+/Count 11 
 /Title (Table of Contents)
 >>
 endobj
@@ -748,7 +732,7 @@ endobj
 47 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 639.2]
+/Dest [21 0 R /FitH 627.2]
 /Previous 46 0 R
 /Next 48 0 R
 /Title (METHODS)
@@ -757,81 +741,73 @@ endobj
 48 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 617.6]
+/Dest [21 0 R /FitH 573.2]
 /Previous 47 0 R
 /Next 49 0 R
-/Title (new\(\))
+/Title (lookup\(\))
 >>
 endobj
 49 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 585.2]
+/Dest [21 0 R /FitH 528.8]
 /Previous 48 0 R
 /Next 50 0 R
-/Title (name\(\))
+/Title (combining\(\))
 >>
 endobj
 50 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 552.8]
+/Dest [21 0 R /FitH 484.4]
 /Previous 49 0 R
 /Next 51 0 R
-/Title (lookup\(\))
+/Title (TODO)
 >>
 endobj
 51 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 508.4]
+/Dest [21 0 R /FitH 461.12]
 /Previous 50 0 R
-/Next 52 0 R
-/Title (combining\(\))
+/Next 53 0 R
+/First 52 0 R
+/Last 52 0 R
+/Count 1 
+/Title (SEE ALSO)
 >>
 endobj
 52 0 obj
 <<
-/Parent 43 0 R
-/Dest [21 0 R /FitH 464]
-/Previous 51 0 R
-/Next 53 0 R
-/Title (getCharSize\(\))
+/Parent 51 0 R
+/Dest [21 0 R /FitH 441.44]
+/Title (MARC::Charset::Generic)
 >>
 endobj
 53 0 obj
 <<
 /Parent 43 0 R
-/Dest [21 0 R /FitH 431.6]
-/Previous 52 0 R
-/Next 54 0 R
-/Title (TODO)
->>
-endobj
-54 0 obj
-<<
-/Parent 43 0 R
-/Dest [21 0 R /FitH 408.32]
-/Previous 53 0 R
-/First 55 0 R
-/Last 55 0 R
+/Dest [21 0 R /FitH 425.84]
+/Previous 51 0 R
+/First 54 0 R
+/Last 54 0 R
 /Count 1 
 /Title (AUTHORS)
 >>
 endobj
-55 0 obj
+54 0 obj
 <<
-/Parent 54 0 R
-/Dest [21 0 R /FitH 388.64]
+/Parent 53 0 R
+/Dest [21 0 R /FitH 406.16]
 /Title (Ed Summers <ehs@pobox.com>)
 >>
 endobj
 42 0 obj
 <<
 /Type /Outlines
-/Count 13
+/Count 12
 /First 43 0 R
-/Last 55 0 R
+/Last 54 0 R
 >>
 endobj
 3 0 obj
@@ -851,12 +827,12 @@ endobj
 >>
 endobj
 xref
-0 56
+0 55
 0000000000 65535 f 
 0000000015 00000 n 
 0000000171 00000 n 
-0000011697 00000 n 
-0000011786 00000 n 
+0000011436 00000 n 
+0000011525 00000 n 
 0000000268 00000 n 
 0000002368 00000 n 
 0000002467 00000 n 
@@ -871,49 +847,48 @@ xref
 0000003379 00000 n 
 0000003485 00000 n 
 0000003599 00000 n 
-0000006056 00000 n 
-0000006077 00000 n 
-0000006214 00000 n 
-0000006297 00000 n 
-0000006586 00000 n 
-0000006606 00000 n 
-0000006708 00000 n 
-0000006791 00000 n 
-0000008356 00000 n 
-0000008377 00000 n 
-0000008491 00000 n 
-0000008574 00000 n 
-0000008874 00000 n 
-0000008894 00000 n 
-0000008996 00000 n 
-0000009079 00000 n 
-0000009162 00000 n 
-0000009507 00000 n 
-0000009527 00000 n 
-0000009652 00000 n 
-0000009952 00000 n 
-0000009972 00000 n 
-0000010074 00000 n 
-0000011622 00000 n 
-0000010157 00000 n 
-0000010279 00000 n 
-0000010370 00000 n 
-0000010480 00000 n 
-0000010595 00000 n 
-0000010706 00000 n 
-0000010817 00000 n 
-0000010929 00000 n 
-0000011043 00000 n 
-0000011160 00000 n 
-0000011277 00000 n 
-0000011385 00000 n 
-0000011521 00000 n 
+0000005997 00000 n 
+0000006018 00000 n 
+0000006155 00000 n 
+0000006238 00000 n 
+0000006523 00000 n 
+0000006543 00000 n 
+0000006645 00000 n 
+0000006728 00000 n 
+0000008196 00000 n 
+0000008217 00000 n 
+0000008331 00000 n 
+0000008414 00000 n 
+0000008710 00000 n 
+0000008730 00000 n 
+0000008832 00000 n 
+0000008915 00000 n 
+0000008998 00000 n 
+0000009343 00000 n 
+0000009363 00000 n 
+0000009488 00000 n 
+0000009784 00000 n 
+0000009804 00000 n 
+0000009906 00000 n 
+0000011361 00000 n 
+0000009989 00000 n 
+0000010111 00000 n 
+0000010202 00000 n 
+0000010312 00000 n 
+0000010427 00000 n 
+0000010538 00000 n 
+0000010652 00000 n 
+0000010769 00000 n 
+0000010877 00000 n 
+0000011027 00000 n 
+0000011124 00000 n 
+0000011260 00000 n 
 trailer
 <<
-/Size 56
+/Size 55
 /Root 3 0 R
 /Info 2 0 R
 >>
 startxref
-11905
+11644
 %%EOF

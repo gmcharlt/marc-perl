@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MARC::Charset::Generic - Superclass for Charset Classes</title>
+<link rev="made" href="mailto:ed@ink.inkdroid.org" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#exports">EXPORTS</a></li>
+	<li><a href="#methods">METHODS</a></li>
+	<ul>
+
+		<li><a href="#name()"><code>name()</code></a></li>
+		<li><a href="#getcharsetcode()"><code>getCharsetCode()</code></a></li>
+		<li><a href="#getcharsize()"><code>getCharSize()</code></a></li>
+	</ul>
+
+	<li><a href="#todo">TODO</a></li>
+	<li><a href="#authors">AUTHORS</a></li>
+</ul>
+<!-- INDEX END -->
+
+<hr />
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>MARC::Charset::Generic - Superclass for Charset Classes</p>
+<p>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<pre>
+    There is no need to use this class directly.</pre>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p>All of the MARC::Charset::* classes inherit from MARC::Charset::Generic, 
+so that they all implement some core methods. There is no constructor 
+method for MARC::Charset::Generic since it is only meant to be subclassed,
+not instantiated.</p>
+<p>
+</p>
+<hr />
+<h1><a name="exports">EXPORTS</a></h1>
+<p>These constants can be exported with the :all tag. They are constants defined
+by the Library of Congress for indentifying and switching to alternate 
+character sets.</p>
+<pre>
+    use MARC::Charset::Generic qw( :all );</pre>
+<p>
+</p>
+<hr />
+<h1><a name="methods">METHODS</a></h1>
+<p>
+</p>
+<h2><a name="name()"><code>name()</code></a></h2>
+<p>Returns the name of the character set.</p>
+<p>
+</p>
+<h2><a name="getcharsetcode()"><code>getCharsetCode()</code></a></h2>
+<p>Returns the character set code for this character set, as defined by the 
+Library of Congress.</p>
+<p>
+</p>
+<h2><a name="getcharsize()"><code>getCharSize()</code></a></h2>
+<p>Returns the number of bytes in each character of this character set.</p>
+<p>
+</p>
+<hr />
+<h1><a name="todo">TODO</a></h1>
+<ul>
+<li><strong><a name="item_nothing">Nothing</a></strong><br />
+</li>
+</ul>
+<p>
+</p>
+<hr />
+<h1><a name="authors">AUTHORS</a></h1>
+<dl>
+<dt><strong><a name="item_ed_summers_%3cehs%40pobox%2ecom%3e">Ed Summers &lt;<a href="mailto:ehs@pobox.com">ehs@pobox.com</a>&gt;</a></strong><br />
+</dt>
+</dl>
+
+</body>
+
+</html>

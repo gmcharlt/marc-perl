@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MARC::File::XML - Work with MARC data encoded as XML</title>
+<link rev="made" href="mailto:ed@ink.inkdroid.org" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#methods">METHODS</a></li>
+	<ul>
+
+		<li><a href="#decode()"><code>decode()</code></a></li>
+	</ul>
+
+	<li><a href="#todo">TODO</a></li>
+	<li><a href="#see_also">SEE ALSO</a></li>
+	<li><a href="#authors">AUTHORS</a></li>
+</ul>
+<!-- INDEX END -->
+
+<hr />
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>MARC::File::XML - Work with MARC data encoded as XML</p>
+<p>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<pre>
+    my $batch = MARC::Batch-&gt;new( 'XML', $filename );
+    my $record = $batch-&gt;next();</pre>
+<pre>
+    my $file = MARC::File::XML::in( $filename );
+    my $record = $file-&gt;next();</pre>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p>The MARC-XML distribution is an extension to the MARC-Record distribution for 
+working with MARC21 data that is encoded as XML. The XML encoding used is the
+MARC21slim schema supplied by the Library of Congress. More information may 
+be obtained here: <a href="http://www.loc.gov/standards/marcxml/">http://www.loc.gov/standards/marcxml/</a></p>
+<p>You must have MARC::Record installed to use MARC::File::XML. In fact 
+once you install the MARC-XML distribution you will most likely not use it 
+directly, but will have an additional file format available to you when you
+use MARC::Batch.</p>
+<p>This version of MARC-XML supersedes an the versions ending with 0.25 which 
+were used with the MARC.pm framework. MARC-XML now uses MARC::Record 
+exclusively.</p>
+<p>If you have any questions or would like to contribute to this module please
+sign on to the perl4lib list. More information about perl4lib is available
+at <a href="http://perl4lib.perl.org">http://perl4lib.perl.org</a>.</p>
+<p>
+</p>
+<hr />
+<h1><a name="methods">METHODS</a></h1>
+<p>
+</p>
+<h2><a name="decode()"><a href="#item_decode"><code>decode()</code></a></a></h2>
+<p>You probably don't ever want to call this method directly. If you do 
+you should pass in a MARC::Record as the first argument, and a chunk of XML 
+text as the second.</p>
+<p>It is normally invoked by a call to next(), see <a href="/MARC/Batch.html">the MARC::Batch manpage</a> or <a href="/MARC/File.html">the MARC::File manpage</a>.</p>
+<p>
+</p>
+<hr />
+<h1><a name="todo">TODO</a></h1>
+<ul>
+<li><strong><a name="item_encode">Implement MARC::File::XML::encode() for encoding as XML.</a></strong><br />
+</li>
+<li><strong><a name="item_support_for_character_translation_using_marc%3a%3a">Support for character translation using MARC::Charset.</a></strong><br />
+</li>
+<li><strong><a name="item_decode">Support for callback filters in decode().</a></strong><br />
+</li>
+<li><strong><a name="item_command_line_utilities_marc2xml%2c_etc%2e">Command line utilities marc2xml, etc.</a></strong><br />
+</li>
+</ul>
+<p>
+</p>
+<hr />
+<h1><a name="see_also">SEE ALSO</a></h1>
+<dl>
+<dt><strong><a name="item_http%3a%2f%2fwww%2eloc%2egov%2fstandards%2fmarcxml"><a href="http://www.loc.gov/standards/marcxml/">http://www.loc.gov/standards/marcxml/</a></a></strong><br />
+</dt>
+<dt><strong><a name="item_marc%3a%3afile%3a%3ausmarc"><a href="/MARC/File/USMARC.html">the MARC::File::USMARC manpage</a></a></strong><br />
+</dt>
+<dt><strong><a name="item_marc%3a%3abatch"><a href="/MARC/Batch.html">the MARC::Batch manpage</a></a></strong><br />
+</dt>
+<dt><strong><a name="item_marc%3a%3arecord"><a href="/MARC/Record.html">the MARC::Record manpage</a></a></strong><br />
+</dt>
+</dl>
+<p>
+</p>
+<hr />
+<h1><a name="authors">AUTHORS</a></h1>
+<ul>
+<li><strong><a name="item_ed_summers_%3cehs%40pobox%2ecom%3e">Ed Summers &lt;<a href="mailto:ehs@pobox.com">ehs@pobox.com</a>&gt;</a></strong><br />
+</li>
+</ul>
+
+</body>
+
+</html>

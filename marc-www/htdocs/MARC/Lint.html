@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>MARC::Lint - Perl extension for checking validity of MARC records</title>
-<link rev="made" href="mailto:ed@ink.inkdroid.org" />
+<link rev="made" href="mailto:esummers@esummers.flr.follett.com" />
 </head>
 
 <body style="background-color: white">
@@ -13,19 +13,18 @@
 <ul>
 
 	<li><a href="#name">NAME</a></li>
-	<li><a href="#version">VERSION</a></li>
 	<li><a href="#synopsis">SYNOPSIS</a></li>
 	<li><a href="#description">DESCRIPTION</a></li>
 	<li><a href="#export">EXPORT</a></li>
 	<li><a href="#methods">METHODS</a></li>
 	<ul>
 
-		<li><a href="#new()"><code>new()</code></a></li>
-		<li><a href="#warnings()"><code>warnings()</code></a></li>
-		<li><a href="#clear_warnings()"><code>clear_warnings()</code></a></li>
-		<li><a href="#warn(str[,str...])"><code>warn(str[,str...])</code></a></li>
-		<li><a href="#check_record(marc)"><code>check_record(marc)</code></a></li>
-		<li><a href="#check_xxx(field)"><code>check_xxx(field)</code></a></li>
+		<li><a href="#new__"><code>new()</code></a></li>
+		<li><a href="#warnings__"><code>warnings()</code></a></li>
+		<li><a href="#clear_warnings__"><code>clear_warnings()</code></a></li>
+		<li><a href="#warn_str__str_____"><code>warn(str[,str...])</code></a></li>
+		<li><a href="#check_record_marc_"><code>check_record(marc)</code></a></li>
+		<li><a href="#check_xxx_field_"><code>check_xxx(field)</code></a></li>
 	</ul>
 
 	<li><a href="#see_also">SEE ALSO</a></li>
@@ -43,37 +42,24 @@
 <p>
 </p>
 <hr />
-<h1><a name="version">VERSION</a></h1>
-<p>Version 1.13</p>
-<pre>
-    $Id: Lint.html,v 1.1 2002/12/02 21:40:58 edsummers Exp $</pre>
-<p>
-</p>
-<hr />
 <h1><a name="synopsis">SYNOPSIS</a></h1>
 <pre>
-  use MARC::Record;
-  use MARC::Lint;</pre>
+    use MARC::File::USMARC;
+    use MARC::Lint;</pre>
 <pre>
-  my $linter = new MARC::Lint;
-  my $filename = shift;</pre>
+    my $lint = new MARC::Lint;
+    my $filename = shift;</pre>
 <pre>
-  open( IN, &quot;&lt;&quot;, $filename ) or die &quot;Couldn't open $filename: $!\n&quot;;
-  binmode( IN ); # for the Windows folks
-  while ( !eof(IN) ) {
-        my $marc = MARC::Record::next_from_file( *IN );
-        die $MARC::Record::ERROR unless $marc;</pre>
-<pre>
-        $linter-&gt;check_record( $marc );</pre>
+    my $file = MARC::File::USMARC-&gt;in( $filename );
+    while ( my $marc = $file-&gt;next() ) {
+        $lint-&gt;check_record( $marc );</pre>
 <pre>
         # Print the title tag
-        print $marc-&gt;subfield(245,&quot;a&quot;), &quot;\n&quot;;</pre>
+        print $marc-&gt;title, &quot;\n&quot;;</pre>
 <pre>
         # Print the errors that were found
-        print join( &quot;\n&quot;, $linter-&gt;warnings ), &quot;\n&quot;;
-  } # while</pre>
-<pre>
-  close IN or die &quot;Error closing $filename: $!\n&quot;;</pre>
+        print join( &quot;\n&quot;, $lint-&gt;warnings ), &quot;\n&quot;;
+    } # while</pre>
 <p>Given the following MARC record:</p>
 <pre>
         LDR 00000nam  22002538a 4500
@@ -97,8 +83,6 @@
         245: Subfield _a is not repeatable.
         250: Field is not repeatable.
         260: Subfield _r is not valid.
-        260: Must have a subfield _c.
-        590: Indicator 1 must be blank
         856: Indicator 2 must be blank, 0, 1, 2 or 8</pre>
 <p>
 </p>
@@ -121,32 +105,32 @@ checks for that, and still get all the benefits of the MARC::Lint framework.</p>
 <h1><a name="methods">METHODS</a></h1>
 <p>
 </p>
-<h2><a name="new()"><code>new()</code></a></h2>
+<h2><a name="new__"><code>new()</code></a></h2>
 <p>No parms needed.  The <code>MARC::Lint</code> object is little more than a list of warnings 
 and a bunch of rules.</p>
 <p>
 </p>
-<h2><a name="warnings()"><code>warnings()</code></a></h2>
+<h2><a name="warnings__"><code>warnings()</code></a></h2>
 <p>Returns a list of warnings found by <code>check_record()</code> and its brethren.</p>
 <p>
 </p>
-<h2><a name="clear_warnings()"><code>clear_warnings()</code></a></h2>
+<h2><a name="clear_warnings__"><code>clear_warnings()</code></a></h2>
 <p>Clear the list of warnings for this linter object.  It's automatically called
 when you call <code>check_record()</code>.</p>
 <p>
 </p>
-<h2><a name="warn(str[,str...])"><code>warn(str[,str...])</code></a></h2>
+<h2><a name="warn_str__str_____"><code>warn(str[,str...])</code></a></h2>
 <p>Create a warning message, built from strings passed, like a <code>print</code> statement.</p>
 <p>Typically, you'll leave this to <code>check_record()</code>, but industrious programmers
 may want to do their own checking as well.</p>
 <p>
 </p>
-<h2><a name="check_record(marc)"><code>check_record(marc)</code></a></h2>
+<h2><a name="check_record_marc_"><code>check_record(marc)</code></a></h2>
 <p>Does all sorts of lint-like checks on the MARC record <em>marc</em>, both on the record as a whole,
 and on the individual fields &amp; subfields.</p>
 <p>
 </p>
-<h2><a name="check_xxx(field)"><code>check_xxx(field)</code></a></h2>
+<h2><a name="check_xxx_field_"><code>check_xxx(field)</code></a></h2>
 <p>Various functions to check the different fields.  If the function doesn't exist, 
 then it doesn't get checked.</p>
 <p>
@@ -175,7 +159,7 @@ employers of the various contributors to the code.</p>
 </p>
 <hr />
 <h1><a name="author">AUTHOR</a></h1>
-<p>Andy Lester, &lt;<a href="mailto:marc@petdance.com">marc@petdance.com</a>&gt; or &lt;<a href="mailto:alester@flr.follett.com">alester@flr.follett.com</a>&gt;</p>
+<p>Andy Lester, <code>&lt;andy@petdance.com&gt;</code></p>
 
 </body>
 
