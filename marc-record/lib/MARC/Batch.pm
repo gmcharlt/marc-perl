@@ -10,23 +10,15 @@ use 5.6.0;
 use strict;
 use integer;
 
-use MARC::File;
-
 =head1 VERSION
 
 Version 0.90
 
-    $Id: Batch.pm,v 1.2 2002/04/01 20:34:24 petdance Exp $
+    $Id: Batch.pm,v 1.3 2002/04/02 04:20:39 petdance Exp $
 
 =cut
 
 our $VERSION = '0.90';
-
-1;
-
-# EVerything below is in flux until I figure out the file handling stuff
-
-__DATA__
 
 =head1 SYNOPSIS
 
@@ -36,7 +28,7 @@ multiple-file aspects.
 
     use MARC::Batch;
 
-    my $batch = new MARC::Batch( @files );
+    my $batch = new MARC::Batch( 'USMARC', @files );
     while ( my $marc = $batch->next ) {
 	print $marc->subfield(245,"a"), "\n";
     }
@@ -47,20 +39,31 @@ None.  Everything is a class method.
 
 =head1 METHODS
 
-=head2 new( [@files] )
+=head2 new( $type, [@files] )
 
 Create a C<MARC::Batch> object that will process C<@files>.
+
+C<$type> must be either "USMARC" or "MicroLIF".  If you want to specify 
+"MARC::File::USMARC" or "MARC::File::MicroLIF", that's OK, too.
 
 =cut
 
 sub new {
     my $class = shift;
+    my $type = shift;
+
+    my $marcclass = ($type =~ /^MARC::File/) ? $type : "MARC::File::$type";
+
+    eval "require $marcclass";
+    die $@ if $@;
+
     my @files = @_;
 
     my $self = {
-	files =>	[@files],
+	filelist =>	[@files],
 	filestack =>	[@files],
-	currfile =>	undef
+	filename =>	undef,
+	marcclass =>	$marcclass,
 	file =>		undef,
     };
 
@@ -68,6 +71,7 @@ sub new {
 
     return $self;
 } # new()
+
 
 =head2 next()
 
@@ -79,30 +83,34 @@ it and open the next one.
 sub next {
     my $self = shift;
 
-    my $file = $self->_file or return undef;
+    # If we have an open file, just use it and go.
+    if ( $self->{file} ) {
+	my $rec = $self->{file}->next();
+	return $rec if $rec;
+    }
+
+    $self->{file} = undef;
+
+    # Get the next file off the stack, if there is one
+    $self->{filename} = shift @{$self->{filestack}} or return undef;
+
+    # Instantiate a filename for it
+    my $marcclass = $self->{marcclass};
+    $self->{file} = $marcclass->in( $self->{filename} ) or return undef;
 
     return $self->{file}->next();
 }
 
-=for internal
+=head2 filename()
 
-Opens the next file if necessary 
+Returns the currently open filename
 
 =cut
 
-sub _fh {
+sub filename {
     my $self = shift;
 
-    my $fh = $self->{fh};
-
-    if ( !$fh || eof($fh) ) {
-	close $fh if $fh;
-
-	my $nextfile = $self->{currfile} = shift @{$self->{filestack}} or return undef;
-	open( $fh, "<", $nextfile ) or die "Can't open $nextfile: $!";
-    }
-
-    return ($self->{fh} = $fh);
+    return $self->{filename};
 }
 
 1;
