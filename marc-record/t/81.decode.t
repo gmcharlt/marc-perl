@@ -24,7 +24,7 @@ BEGIN {
 ## these tests make sure we don't break any of them
 
 ## slurp up some microlif
-my $lifname = File::Spec->catfile( File::Spec->updir(), 't', 'sample1.lif' );
+my $lifname = File::Spec->catfile( 't', 'sample1.lif' );
 open(IN, $lifname );
 my $str = join( '', <IN> );
 close IN;
@@ -44,7 +44,7 @@ DECODE_MICROLIF_FUNCTION: {
 }
 
 ## slurp up some usmarc
-my $marcname = File::Spec->catfile( File::Spec->updir(), 't', 'sample1.usmarc' );
+my $marcname = File::Spec->catfile( 't', 'sample1.usmarc' );
 open(IN, $marcname );
 $str = join( '', <IN> );
 close IN;

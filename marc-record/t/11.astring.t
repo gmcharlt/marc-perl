@@ -9,7 +9,7 @@ BEGIN {
     use_ok( 'MARC::Batch' );
 }
 
-my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'camel.usmarc' );
+my $filename = File::Spec->catfile( 't', 'camel.usmarc' );
 my $b = MARC::Batch->new( 'USMARC', $filename );
 isa_ok( $b, 'MARC::Batch' );
 

@@ -35,7 +35,7 @@ SKIP: {
 
         ## write record to disk, telling perl (as we should) that we
         ## will be writing utf8 unicode
-        my $outfile = File::Spec->catfile( File::Spec->updir(), 't', 'utf8.marc' );
+        my $outfile = File::Spec->catfile( 't', 'utf8.marc' );
         open( OUT, ">$outfile" );
         binmode( OUT, ':utf8' );
         print OUT $r->as_usmarc();
@@ -46,7 +46,7 @@ SKIP: {
     ## is there
 
     REREAD_FILE: {
-        my $rereadfile = File::Spec->catfile( File::Spec->updir(), 't', 'utf8.marc' );
+        my $rereadfile = File::Spec->catfile( 't', 'utf8.marc' );
         my $f = MARC::File::USMARC->in( $rereadfile );
         isa_ok( $f, 'MARC::File::USMARC' );
 

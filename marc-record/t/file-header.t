@@ -12,7 +12,7 @@ BEGIN {
 
 
 MISSINGHEADER: {
-    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'sample1.lif' );
+    my $filename = File::Spec->catfile( 't', 'sample1.lif' );
     my $file = MARC::File::MicroLIF->in( $filename );
     isa_ok( $file, 'MARC::File::MicroLIF', 'got a MicroLIF file' );
     ok( !$file->header(), 'file contains no header' );
@@ -20,7 +20,7 @@ MISSINGHEADER: {
 }
 
 MISSINGHEADER: {
-    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'sample20.lif' );
+    my $filename = File::Spec->catfile( 't', 'sample20.lif' );
     my $file = MARC::File::MicroLIF->in( $filename );
     isa_ok( $file, 'MARC::File::MicroLIF', 'got a MicroLIF file' );
     is( 

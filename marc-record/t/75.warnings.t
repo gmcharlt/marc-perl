@@ -13,7 +13,7 @@ BEGIN {
 
 STRICT_ON: {
 
-    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'badldr.usmarc' );
+    my $filename = File::Spec->catfile( 't', 'badldr.usmarc' );
     my $batch = MARC::Batch->new( 'USMARC', $filename );
     isa_ok( $batch, 'MARC::Batch' );
 
@@ -36,7 +36,7 @@ STRICT_ON: {
 
 STRICT_OFF: {
 
-    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'badldr.usmarc' );
+    my $filename = File::Spec->catfile( 't', 'badldr.usmarc' );
     my $batch = MARC::Batch->new( 'USMARC', $filename );
     isa_ok( $batch, 'MARC::Batch' );
 
@@ -57,7 +57,7 @@ STRICT_OFF: {
 
 WARNINGS_BUFFER_RESET: {
 
-    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'badind.usmarc' );
+    my $filename = File::Spec->catfile( 't', 'badind.usmarc' );
     my $batch = MARC::Batch->new( 'USMARC', $filename );
     $batch->warnings_off();
     $batch->strict_off();

@@ -101,7 +101,7 @@ TEST4: {
 is( $marc->subfield( 100, "a" ), "Wall, Larry.", 'Field/subfield lookup' );
 
 # Test 6: Reading from disk
-my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'camel.usmarc' );
+my $filename = File::Spec->catfile( 't', 'camel.usmarc' );
 my $file = MARC::File::USMARC->in( $filename );
 isa_ok( $file, 'MARC::File', "Opened input file" );
 

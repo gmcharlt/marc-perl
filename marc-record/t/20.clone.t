@@ -10,7 +10,7 @@ BEGIN {
     use_ok( 'MARC::File::USMARC' );
 }
 
-my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'camel.usmarc' );
+my $filename = File::Spec->catfile( 't', 'camel.usmarc' );
 my $file = MARC::File::USMARC->in( $filename );
 isa_ok( $file, 'MARC::File::USMARC', 'USMARC input file object' );
 my $marc = $file->next();

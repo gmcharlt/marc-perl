@@ -1,6 +1,6 @@
 #!perl -Tw
 
-# $Id: title_proper.t,v 1.5 2004/12/31 03:34:11 eijabb Exp $
+# $Id: title_proper.t,v 1.6 2005/01/05 04:30:24 eijabb Exp $
 
 use strict;
 use integer;
@@ -19,7 +19,7 @@ my @titles = (
     'America and the British Labour Party :',
 );
 
-my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'title_proper.usmarc' );
+my $filename = File::Spec->catfile( 't', 'title_proper.usmarc' );
 my $file = MARC::File::USMARC->in( $filename );
 isa_ok( $file, 'MARC::File::USMARC', 'USMARC file' );
 

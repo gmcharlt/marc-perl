@@ -29,7 +29,7 @@ is ($r->field(111)->indicator(2), ' ', 'invalid indicator squashed to space' );
 
 use_ok( 'MARC::Batch' );
 
-my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'badind.usmarc' );
+my $filename = File::Spec->catfile( 't', 'badind.usmarc' );
 my $batch = MARC::Batch->new( 'USMARC', $filename );
 $batch->strict_off();
 $batch->warnings_off();

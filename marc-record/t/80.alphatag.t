@@ -99,7 +99,7 @@ unlink( $filename );
 
 my $micro = $record->as_formatted();
 
-my $lifname = File::Spec->catfile( File::Spec->updir(), 't', 'alphatag.lif' );
+my $lifname = File::Spec->catfile( 't', 'alphatag.lif' );
 $file = MARC::File::MicroLIF->in( $lifname );
 isa_ok( $file, 'MARC::File::MicroLIF' );
 $newRec = $file->next();

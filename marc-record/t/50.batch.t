@@ -13,7 +13,7 @@ BEGIN: {
 # Test the USMARC stuff
 USMARC: {
 
-    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'camel.usmarc' );
+    my $filename = File::Spec->catfile( 't', 'camel.usmarc' );
     my $batch = new MARC::Batch( 'USMARC', $filename );
     isa_ok( $batch, 'MARC::Batch', 'MARC batch' );
 
@@ -32,9 +32,9 @@ USMARC: {
 
 MicroLIF: {
 
-    my $filepath = File::Spec->catdir( File::Spec->updir(), 't' );
+    my $filepath = File::Spec->catdir( 't' );
     opendir(TESTDIR, $filepath) || die "can't opendir $filepath: $!";
-    my @files = grep { /sample.*\.lif/ && -f $filepath.$_ } readdir(TESTDIR);
+    my @files = map {$filepath.$_} (grep { /sample.*\.lif/ && -f $filepath.$_ } readdir(TESTDIR));
     closedir TESTDIR;
     is( scalar @files, 3, 'Only have 3 sample*.lif files' );
 

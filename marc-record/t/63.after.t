@@ -11,7 +11,7 @@ BEGIN {
     use_ok( 'MARC::Field' );
 }
 
-my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'camel.usmarc' );
+my $filename = File::Spec->catfile( 't', 'camel.usmarc' );
 my $batch = new MARC::Batch( 'MARC::File::USMARC', $filename );
 isa_ok( $batch, 'MARC::Batch', 'Batch object creation' );
 
