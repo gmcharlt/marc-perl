@@ -19,7 +19,7 @@ use Carp qw(croak);
 
 Version 1.15
 
-    $Id: Record.pm,v 1.40 2002/12/18 20:13:18 edsummers Exp $
+    $Id: Record.pm,v 1.41 2003/01/28 21:14:32 petdance Exp $
 
 =cut
 
@@ -49,7 +49,7 @@ None.
 Any errors generated are stored in C<$MARC::Record::ERROR>. 
 Warnings are kept with the record and accessible in the C<warnings()> method. 
 
-=head1 METHODS
+=head1 CONSTRUCTORS
 
 =head2 new()
 
@@ -85,6 +85,87 @@ sub new_from_usmarc {
 
     return MARC::File::USMARC::decode( $blob );
 }
+
+=head1 COMMON FIELD RETRIEVAL METHODS
+
+Following are a number of convenience methods for commonly-retrieved
+data fields.  Please note that they each return strings, not MARC::Field
+objects.  They return empty strings if the appropriate field or subfield
+is not found.  This is as opposed to the field()/subfield() methods
+which return C<undef> if something's not found.  My assumption is that
+these methods are used for quick & dirty reports and you don't want to
+mess around with noting if something is undef.
+
+Also note that no punctuation cleanup is done.  If the 245a is
+"Programming Perl / ", then that's what you'll get back, rather than
+"Programming Perl".
+
+=head2 title()
+
+Returns the title from the 245 tag.
+
+=cut
+
+sub title() {
+    my $self = shift;
+
+    my $field = $self->field(245);
+    return $field ? $field->as_string : "";
+}
+
+=head2 title_proper()
+
+Returns the title proper from the 245 tag, subfield a.
+
+=cut
+
+sub title_proper() {
+    my $self = shift;
+
+    my $str = $self->subfield(245,'a');
+    return defined $str ? $str : "";
+}
+
+=head2 author()
+
+Returns the author from the 100, 110 or 111 tag.
+
+=cut
+
+sub author() {
+    my $self = shift;
+
+    my $field = $self->field('100|110|111');
+    return $field ? $field->as_string() : "";
+}
+
+=head2 edition()
+
+Returns the edition from the 250 tag, subfield a.
+
+=cut
+
+sub edition() {
+    my $self = shift;
+
+    my $str = $self->subfield(250,'a');
+    return defined $str ? $str : "";
+}
+
+=head2 publication_date()
+
+Returns the publication date from the 260 tag, subfield c.
+
+=cut
+
+sub publication_date() {
+    my $self = shift;
+
+    my $str = $self->subfield(260,'c');
+    return defined $str ? $str : "";
+}
+
+=head1 FIELD & SUBFIELD ACCESS METHODS
 
 =head2 fields()
 
@@ -353,38 +434,6 @@ sub as_formatted() {
     return join( "\n", @lines );
 } # as_formatted
 
-=head2 title()
-
-Returns the title from the 245 tag.
-Note that it is a string, not a MARC::Field record.
-
-=cut
-
-sub title() {
-    my $self = shift;
-
-    my $field = $self->field(245) or return "<no 245 tag found>";
-
-    return $field->as_string;
-}
-
-=head2 author()
-
-Returns the author from the 100, 110 or 111 tag.
-Note that it is a string, not a MARC::Field record.
-
-=cut
-
-sub author() {
-    my $self = shift;
-
-    for my $tag ( qw( 100 110 111 ) ) {
-	my $field = $self->field($tag);
-	return $field->as_string() if $field;
-    }
-
-    return "<No author tag found>";
-}
 
 =head2 leader()
 

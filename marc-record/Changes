@@ -1,6 +1,13 @@
 Revision history for Perl extension MARC::Record.
 
 1.16	XXXX XX, 2003
+	[ENHANCEMENTS]
+	- title() and author() now return empty strings, rather than
+	  "<No XXX found>"
+	- Added title_proper(), edition() and publication_date()
+	  convenience methods to MARC::Record.
+	- Added more unit tests.
+
 	[FIXES]
 	- marcdump utility will not output LDR when running under --field 
 	  option, unless the LDR is specifically asked for.
