@@ -1143,8 +1143,6 @@ Which will generate results like this:
 
 =head2 Excel
 
-=head2 Databases
-
 =head2 Z39.50
 
 Chris Biemesderfer was kind enough to contribute a short example of how
@@ -1211,6 +1209,125 @@ example showing what is possible.
   46  
   47   }
 
+=head2 Databases
+
+Here's a script that will do a Z39.50 query (using Chris Biemesderfer's zm.pl 
+as a model), get a MARC record back, and store it as a binary blob in a MySQL
+table of this structure:
+
++---------------+---------------+------+-----+---------+----------------+
+| Field         | Type          | Null | Key | Default | Extra          |
++---------------+---------------+------+-----+---------+----------------+   
+| TitleID       | int(7)        |      | PRI | NULL    | auto_increment |
+| RecLastMod    | timestamp(14) | YES  |     | NULL    |                |
+| ISSN          | text          | YES  |     | NULL    |                |
+| RawMARCRecord | blob          | YES  |     | NULL    |                |
++---------------+---------------+------+-----+---------+----------------+
+
+   1 #!/usr/bin/perl -w
+   2 
+   3 # Script that reads in a file of ISSNs, queries a Z39.50 server,
+   4 # and stores resulting records in a database. Limitations: Only
+   5 # stores 1 records per ISSN.
+   6 # Last updated 2004-09-08 Mark Jordan, mjordan@sfu.ca
+   7 
+   8 use strict;
+   9 use Carp;
+  10 use Net::Z3950;
+  11 use MARC::Record;
+  12 use DBI;
+  13 
+  14 # DB connection settings
+  15 my $host = "somehost";
+  16 my $user = "someuser";
+  17 my $password = "somepass";
+  18 my $database = "somedb";
+  19 
+  20 # Input file (one ISSS/line)
+  21 my $InputFile = $ARGV[0];
+  22 
+  23 # Prepare list of ISSNs to search
+  24 my @ISSNs;
+  25 open (INPUT, "< $InputFile") or die "Can't find input file\n";
+  26 while (<INPUT>) { chomp $_; push (@ISSNs, $_); }
+  27 close INPUT;
+  28 
+  29 
+  30 # Set up connection management structures, connect to the server,
+  31 # and submit the Z39.50 query.
+  32 my $mgr = Net::Z3950::Manager->new( databaseName => 'voyager' );
+  33 $mgr->option( elementSetName => "f" );
+  34 $mgr->option( preferredRecordSyntax => Net::Z3950::RecordSyntax::USMARC );
+  35 my $conn = $mgr->connect('z3950.loc.gov', '7090');
+  36 croak "Unable to connect to server" if !defined($conn);
+  37 
+  38 
+  39 my $handle = DBI->connect("DBI:mysql:$database:$host","$user","$password")
+  40         or die $DBI::errstr;
+  41 
+  42 foreach my $ISSN (@ISSNs) {
+  43         my $zq = "\@attr 1=8 ". $ISSN;
+  44         my $rs = $conn->search($zq);
+  45         my $numrec = $rs->size();
+  46         if ($numrec == 0) {
+  47             print "Record for ISSN $ISSN not found, moving to next ISSN...\n";
+  48             next;
+  49         } else {
+  50            # Extract MARC record from the result set, and invoke MARC::Record
+  51            my $zrec = $rs->record(1);
+  52            my $mrec = MARC::Record->new_from_usmarc($zrec->rawdata());
+  53            my $rawdata = $zrec->rawdata();
+  54            $rawdata = $handle->quote ($rawdata);
+  55            # Add to db
+  56            my $SQL = "insert into Titles values (NULL,NULL,'$ISSN',$rawdata)";
+  57            my $cursor = $handle->prepare($SQL);
+  58            $cursor->execute;
+  59            print "Record for ISSN $ISSN added to database...\n";
+  60            $cursor->finish;
+  61         }
+  62 }
+  63 $handle->disconnect;
+  64 
+  65 __END__
+
+If you want to pull records out of the same database and do something with them, 
+here's a template script:
+
+   1 #!/usr/bin/perl -w
+   2 
+   3 # Script that gets MARC records (in blobs) from a database.
+   4 # Last updated 2004-09-08 Mark Jordan, mjordan@sfu.ca
+   5 
+   6 use strict;
+   7 use MARC::Record;
+   8 use DBI;
+   9 
+  10 # DB connection settings
+  11 my $mysql_host = "somehost";
+  12 my $mysql_user = "someuser";
+  13 my $mysql_password = "somepass*";
+  14 my $mysql_database = "somedb";
+  15 
+  16 
+  17 my $handle = DBI->connect("DBI:mysql:$mysql_database:$mysql_host",
+  18         "$mysql_user","$mysql_password") or die $DBI::errstr;
+  19 
+  20 my $SQL = "select * from Titles";
+  21 my $cursor = $handle->prepare($SQL);
+  22 $cursor->execute;
+  23 
+  24 while (my @Records = $cursor->fetchrow_array) {
+  25         my $RawMARC = $Records[3];
+  26         my $mrec = MARC::Record->new_from_usmarc($RawMARC);
+  27         # Print out the title
+  28         print $mrec->title , "\n";
+  29 }
+  30 
+  31 $cursor->finish;
+  32 $handle->disconnect;
+  33 
+  34 __END__
+
 =head2 Procite/Endnote
 
 =head1 CONTRIBUTORS
@@ -1226,6 +1343,10 @@ Chris Biemesderfer <chris@seagoat.com>
 =item * 
 
 Morbus Iff <morbus@disobey.com>
+
+=item * 
+
+Mark Jordan <mjordan@sfu.ca>
 
 =item * 
 
