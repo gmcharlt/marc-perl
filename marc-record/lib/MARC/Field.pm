@@ -88,41 +88,136 @@ sub new($) {
 	return $self;
 } # new()
 
-=head2 clone()
 
-Makes a copy of the field.  Note that this is not just the same as saying
+=head2 tag()
 
-    my $newfield = $field;
-
-since that just makes a copy of the reference.  To get a new object, you must
-
-    my $newfield = $field->clone;
-
-Returns a MARC::Field record.
+Returns the three digit tag for the field.
 
 =cut
 
-sub clone {
-    my $self = shift;
-
-    my $tagno = $self->{_tag};
-
-    my $clone = 
-	bless {
-	    _tag => $tagno,
-	    _warnings => [],
-	}, ref($self);
-
-    if ( $self->is_control_tag() ) {
-	$clone->{_data} = $self->{_data};
-    } else {
-	$clone->{_ind1} = $self->{_ind1};
-	$clone->{_ind2} = $self->{_ind2};
-	$clone->{_subfields} = [@{$self->{_subfields}}]; 
-    }
-
-    return $clone;
+sub tag {
+	my $self = shift;
+	return $self->{_tag};
 }
+
+=head2 indicator(indno)
+
+Returns the specified indicator.  Returns C<undef> and sets 
+C<$MARC::Field::ERROR> if the I<indno> is not 1 or 2, or if 
+the tag doesn't have indicators.
+
+=cut
+
+sub indicator($) {
+	my $self = shift;
+	my $indno = shift;
+
+	croak( "Fields below 010 do not have indicators" )
+	    if $self->is_control_tag(); 
+
+	if ( $indno == 1 ) {
+		return $self->{_ind1};
+	} elsif ( $indno == 2 ) {
+		return $self->{_ind2};
+	} else {
+		croak( "Indicator number must be 1 or 2" );
+	}
+}
+
+=head2 subfield(code)
+
+Returns the text from the first subfield matching the subfield code.
+If no matching subfields are found, C<undef> is returned.
+
+If the tag is less than an 010, C<undef> is returned and
+C<$MARC::Field::ERROR> is set.
+
+    my $subA = $field->subfield('a');
+
+=cut
+
+sub subfield {
+	my $self = shift;
+	my $code_wanted = shift;
+
+	croak( "Fields below 010 do not have subfields" )
+	    if $self->is_control_tag();
+
+	my @data = @{$self->{_subfields}};
+	while ( defined( my $code = shift @data ) ) {
+		return shift @data if ( $code eq $code_wanted );
+		shift @data;
+	}
+
+	return;
+}
+
+=head2 subfields()
+
+Returns all the subfields in the field.  What's returned is a list of 
+lists, where the inner list is a subfield code and the subfield data. 
+
+For example, this might be the subfields from a 245 field:
+
+	[
+	  [ 'a', 'Perl in a nutshell :' ],
+	  [ 'b', 'A desktop quick reference.' ],
+	]
+
+=cut
+
+sub subfields {
+	my $self = shift;
+
+	croak( "Fields below 010 do not have subfields" )
+	    if $self->is_control_tag();
+
+	my @list;
+	my @data = @{$self->{_subfields}};
+	while ( defined( my $code = shift @data ) ) {
+		push( @list, [$code, shift @data] );
+	}
+	return @list;
+}
+
+=head2 data()
+
+Returns the data part of the field, if the tag number is less than 10.
+
+=cut
+
+sub data($) {
+	my $self = shift;
+
+	croak( "data() is only for tags less than 010" )
+	    unless $self->is_control_tag();
+		
+	$self->{_data} = $_[0] if @_;
+
+	return $self->{_data};
+}
+
+=head2 add_subfields(code,text[,code,text ...])
+
+Adds subfields to the end of the subfield list.
+
+    $field->add_subfields( 'c' => '1985' );
+
+Returns the number of subfields added, or C<undef> if there was an error.
+
+=cut
+
+sub add_subfields(@) {
+	my $self = shift;
+
+	croak( "Subfields are only for tags >= 10" )
+	    if $self->is_control_tag();
+
+	push( @{$self->{_subfields}}, @_ );
+	return @_/2;
+}
+
+
 
 =head2 update()
 
@@ -232,142 +327,6 @@ sub replace_with {
 }
 
 
-=head2 tag()
-
-Returns the three digit tag for the field.
-
-=cut
-
-sub tag {
-	my $self = shift;
-	return $self->{_tag};
-}
-
-=head2 indicator(indno)
-
-Returns the specified indicator.  Returns C<undef> and sets 
-C<$MARC::Field::ERROR> if the I<indno> is not 1 or 2, or if 
-the tag doesn't have indicators.
-
-=cut
-
-sub indicator($) {
-	my $self = shift;
-	my $indno = shift;
-
-	croak( "Fields below 010 do not have indicators" )
-	    if $self->is_control_tag(); 
-
-	if ( $indno == 1 ) {
-		return $self->{_ind1};
-	} elsif ( $indno == 2 ) {
-		return $self->{_ind2};
-	} else {
-		croak( "Indicator number must be 1 or 2" );
-	}
-}
-
-
-
-=head2 subfield(code)
-
-Returns the text from the first subfield matching the subfield code.
-If no matching subfields are found, C<undef> is returned.
-
-If the tag is less than an 010, C<undef> is returned and
-C<$MARC::Field::ERROR> is set.
-
-    my $subA = $field->subfield('a');
-
-=cut
-
-sub subfield {
-	my $self = shift;
-	my $code_wanted = shift;
-
-	croak( "Fields below 010 do not have subfields" )
-	    if $self->is_control_tag();
-
-	my @data = @{$self->{_subfields}};
-	while ( defined( my $code = shift @data ) ) {
-		return shift @data if ( $code eq $code_wanted );
-		shift @data;
-	}
-
-	return;
-}
-
-=head2 subfields()
-
-Returns all the subfields in the field.  What's returned is a list of 
-lists, where the inner list is a subfield code and the subfield data. 
-
-For example, this might be the subfields from a 245 field:
-
-	[
-	  [ 'a', 'Perl in a nutshell :' ],
-	  [ 'b', 'A desktop quick reference.' ],
-	]
-
-=cut
-
-sub subfields {
-	my $self = shift;
-
-	croak( "Fields below 010 do not have subfields" )
-	    if $self->is_control_tag();
-
-	my @list;
-	my @data = @{$self->{_subfields}};
-	while ( defined( my $code = shift @data ) ) {
-		push( @list, [$code, shift @data] );
-	}
-	return @list;
-}
-
-sub _gripe(@) {
-	$ERROR = join( "", @_ );
-
-	warn $ERROR;
-
-	return;
-}
-
-=head2 data()
-
-Returns the data part of the field, if the tag number is less than 10.
-
-=cut
-
-sub data($) {
-	my $self = shift;
-
-	croak( "data() is only for tags less than 010" )
-	    unless $self->is_control_tag();
-		
-	$self->{_data} = $_[0] if @_;
-
-	return $self->{_data};
-}
-
-=head2 add_subfields(code,text[,code,text ...])
-
-Adds subfields to the end of the subfield list.
-
-Returns the number of subfields added, or C<undef> if there was an error.
-
-=cut
-
-sub add_subfields(@) {
-	my $self = shift;
-
-	croak( "Subfields are only for tags >= 10" )
-	    if $self->is_control_tag();
-
-	push( @{$self->{_subfields}}, @_ );
-	return @_/2;
-}
-
 =head2 as_string( [$subfields] )
 
 Returns a string of all subfields run together.  A space is added to
@@ -472,6 +431,41 @@ sub as_usmarc() {
 	}
 }
 
+=head2 clone()
+
+Makes a copy of the field.  Note that this is not just the same as saying
+
+    my $newfield = $field;
+
+since that just makes a copy of the reference.  To get a new object, you must
+
+    my $newfield = $field->clone;
+
+Returns a MARC::Field record.
+
+=cut
+
+sub clone {
+    my $self = shift;
+
+    my $tagno = $self->{_tag};
+
+    my $clone = 
+	bless {
+	    _tag => $tagno,
+	    _warnings => [],
+	}, ref($self);
+
+    if ( $self->is_control_tag() ) {
+	$clone->{_data} = $self->{_data};
+    } else {
+	$clone->{_ind1} = $self->{_ind1};
+	$clone->{_ind2} = $self->{_ind2};
+	$clone->{_subfields} = [@{$self->{_subfields}}]; 
+    }
+
+    return $clone;
+}
 =head2 warnings()
 
 Returns the warnings that were created when the record was read.
@@ -500,6 +494,15 @@ sub is_control_tag {
     my $self = shift;
     return ($self->{_tag} =~ /^\d+$/) && ($self->{_tag} < 10);
 }
+
+sub _gripe(@) {
+	$ERROR = join( "", @_ );
+
+	warn $ERROR;
+
+	return;
+}
+
 
 1;
 
