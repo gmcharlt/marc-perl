@@ -1,11 +1,9 @@
-use Test::More tests => 20;
+use Test::More tests => 22;
 
 use strict;
 use MARC::Record;
 use MARC::File::MicroLIF;
 use MARC::File::USMARC;
-
-my ( $str, $rec );
 
 ## decode can be called in a variety of ways
 ##
@@ -21,11 +19,11 @@ my ( $str, $rec );
 
 ## slurp up some microlif
 open(IN, 't/sample1.lif' );
-$str = join( '', <IN> );
+my $str = join( '', <IN> );
 
 ## attempt to use decode() on it
 
-$rec = MARC::File::MicroLIF->decode( $str );
+my $rec = MARC::File::MicroLIF->decode( $str );
 isa_ok( $rec, 'MARC::Record' );
 like( $rec->title(), qr/all about whales/i, 'retrieved title' );
 
@@ -80,20 +78,18 @@ my @w = $rec->warnings();
 is( scalar @w, 0, 'should be no warnings' );
 is( $rec->field('245')->as_usmarc(), "10\x1f" . "aTitle.\x1e", 'gap after field data should not be returned' );
 my $the260 = $rec->field('260');
+isa_ok( $the260, "MARC::Field" );
 is( $the260->indicator(1), '3', 'indicators in tag after gap should be OK' );
 is( $the260->subfield('a'), "Place : ", 'subfield a in tag after gap should be OK' );
 is( $the260->subfield('b'), "Publisher, ", 'subfield b in tag after gap should be OK' );
 is( $the260->subfield('c'), "Year.", 'subfield c in tag after gap should be OK' );
 
 # rearrange the directory for next test
-my $temp;
-$temp = $fragments[ 1 ];
-$fragments[ 1 ] = $fragments[ 6 ];
-$fragments[ 6 ] = $temp;
-$temp = $fragments[ 2 ];
-$fragments[ 2 ] = $fragments[ 5 ];
-$fragments[ 5 ] = $temp;
+@fragments[1,6] = @fragments[6,1];
+@fragments[2,5] = @fragments[5,2];
+
 $rec = MARC::File::USMARC->decode( join('', @fragments) );
+isa_ok( $rec, "MARC::Record" );
 is( $rec->field('001')->as_string(), 'control number', '001 field correct' );
 is( $rec->field('010')->as_string(), 'LCCN', '010 field correct' );
 is( $rec->field('100')->as_string(), 'Name, Inverted.', '100 field correct' );
