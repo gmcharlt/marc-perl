@@ -19,7 +19,7 @@ use Carp qw(croak);
 
 Version 1.11
 
-    $Id: Record.pm,v 1.36 2002/10/10 02:36:09 edsummers Exp $
+    $Id: Record.pm,v 1.37 2002/10/10 16:21:09 petdance Exp $
 
 =cut
 
@@ -683,6 +683,18 @@ Imagine something like this:
 
 =back
 
+=head1 BUGS, WISHES AND CORRESPONDENCE
+
+Please feel free to email me at andy@petdance.com.  I'm glad to help as
+best I can, and I'm always interested in bugs, suggestions and patches.
+
+The MARC::Record development team uses the RT bug tracking system at
+L<http://rt.cpan.org>.  If your email is about a bug or suggestion,
+please report it through the RT system.  This is a huge help for
+the team, and you'll be notified of progress as things get fixed or
+updated.  If you prefer not to use the website, you can send your bug
+to bug-MARC-Record@rt.cpan.org.
+
 =head1 IDEAS
 
 Ideas are things that have been considered, but nobody's actually asked for.
@@ -704,7 +716,7 @@ employers of the various contributors to the code.
 
 =head1 AUTHOR
 
-Andy Lester, E<lt>marc@petdance.comE<gt> or E<lt>alester@flr.follett.comE<gt>
+Andy Lester, E<lt>marc@petdance.comE<gt>
 
 =cut
 
