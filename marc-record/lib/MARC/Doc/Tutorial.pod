@@ -26,7 +26,7 @@ MARC data, written in the 'cookbook' style. Inside you will find recipes on
 how to read, write, update and convert MARC data using the MARC::Record CPAN 
 package. As with any cookbook you should feel free to dip in at any section
 and use the recipe you find interesting. If you are new to Perl you may 
-want to read from the 
+want to read from the beginning.
 
 The document you are reading is distributed with the MARC::Record package, 
 however in case you are reading it somewhere else you can find the latest 
@@ -34,7 +34,7 @@ version at CPAN http://www.cpan.org/modules/by-module/MARC/.
 
 You'll notice that some sections aren't filled in yet, which is a result
 of this document being a work in progress. If you have ideas for new sections
-please let the make a suggestion on perl4lib http://www.rice.edu/perl4lib.
+please let the make a suggestion on perl4lib http://www.rice.edu/perl4lib/
 
 =head2 History of MARC on CPAN
 
