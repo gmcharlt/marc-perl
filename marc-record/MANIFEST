@@ -2,6 +2,7 @@
 Changes
 MANIFEST
 Makefile.PL
+META.yml
 README
 bin/marcdump
 bin/marclint
@@ -36,7 +37,6 @@ t/75.warnings.t
 t/80.alphatag.t
 t/81.decode.t
 t/82.baddir.t
-t/99.pod.t
 t/alphatag.lif
 t/baddir.usmarc
 t/badldr.usmarc
@@ -47,15 +47,15 @@ t/decode-filter.t
 t/file-filter.t
 t/file-header.t
 t/lineendings-0a.lif
-t/lineendings-0d.lif
 t/lineendings-0d0a.lif
+t/lineendings-0d.lif
 t/lineendings.t
 t/lint.t
+t/pod.t
+t/sample100.lif
 t/sample1.lif
 t/sample1.usmarc
-t/sample100.lif
 t/sample20.lif
 t/title_proper.t
 t/title_proper.usmarc
 t/utf8.t
-META.yml
