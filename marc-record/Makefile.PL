@@ -21,7 +21,7 @@ sub filecheck {
 	PREREQ_PM	=> {
 			    'Test::More' => 0,
 			    },
-	EXE_FILES	=> [ qw( pl/marcdump pl/marclint pl/lif2marc ) ],
+	EXE_FILES	=> [ qw( pl/marcdump pl/marclint ) ],
 	dist 		=> {
 			    COMPRESS => 'gzip -9f', 
 			    SUFFIX => 'gz',
