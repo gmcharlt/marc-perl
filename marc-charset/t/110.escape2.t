@@ -7,7 +7,7 @@ use Test::More tests=>1;
 use MARC::Charset qw(:all); 
 my $cs = MARC::Charset->new();
 
-## test some greek 
+## test some ASCII & Greek mixed together
 
 $test = 
     'this is greek' .			    ## regular ASCII
@@ -20,7 +20,7 @@ $expected = 'this is greek' . chr(0x0396) . 'this is not';
 
 is ( $cs->to_utf8($test), $expected, 'escape type 2 to Greek' );
 
-## test some arabic
+## test some arabic, which never returns to ASCII
 
 $test = 
     ESCAPE . SINGLE_G0_A . BASIC_ARABIC .   ## set G0 to ArabicBasic
@@ -31,3 +31,17 @@ $test =
 $expected = chr(0x062D) . chr(0x068E);
 
 is ( $cs->to_utf8($test), $expected, 'escape type 2 to Basic+Ext Arabic' );
+
+## test some Hebrew and Arabic mixed together
+
+$test = 
+    ESCAPE . SINGLE_G0_A . BASIC_ARABIC .   ## set G0 to ArabicBasic
+    ESCAPE . SINGLE_G1_A . EXTENDED_ARABIC. ## set G1 to ArabicExtended
+    chr(0x6E) .				    ## FATHA (ArabicBasic)
+    ESCAPE . SINGLE_G0_A . BASIC_HEBREW .   ## replace ArabicBasic with Hebrew
+    chr(0x71) .				    ## SAMEKH (Hebrew)
+    chr(0xE9); 				    ## RNOON (ArabicExtended)
+
+$expected = chr(0x064E) . chr(0x05E1) . chr(0x06BB);
+
+is ( $cs->to_utf8($test), $expected, 'escape type 2 Arabic + Hebrew mixed' );
