@@ -5,9 +5,13 @@ Revision history for Perl extension MARC::Record.
 	- MARC::Field::update() by default will append any subfields which do
 	  not exist in the record to the end of the field. Added tests to test
 	  the new functionality to 60.update.t
+
 	[FIXES]
-	- updated MARC::Lint to use the latest field/subfield designations from
-	  the Library of Congress...thanks to Colin Campbell from Sirsi.
+	- Updated MARC::Lint to use the latest field/subfield designations from
+	  the Library of Congress.  The data for MARC::Lint is now
+	  automatically generated from the LC webpage.	Thanks to Colin
+	  Campbell of Sirsi for the program that does the translation.
+	  
 	- removed MARC::Lint check_260() since a subfield c is not 
 	  mandatory (see RT #1565).
 
