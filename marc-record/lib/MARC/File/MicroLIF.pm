@@ -10,8 +10,6 @@ use strict;
 use integer;
 use bytes;
 
-##MAKEFILE.PL_MACRO ($>=5.008) : use bytes;
-
 use vars qw( $ERROR );
 
 use MARC::File;
