@@ -19,7 +19,7 @@ use Carp qw(croak);
 
 Version 1.16
 
-    $Id: Record.pm,v 1.42 2003/01/28 21:41:37 petdance Exp $
+    $Id: Record.pm,v 1.43 2003/01/29 16:56:41 petdance Exp $
 
 =cut
 
@@ -122,8 +122,14 @@ Returns the title proper from the 245 tag, subfield a.
 sub title_proper() {
     my $self = shift;
 
-    my $str = $self->subfield(245,'a');
-    return defined $str ? $str : "";
+    my $field = $self->field(245);
+
+    if ( $field ) {
+	my @subs = map { $_->[0] =~ /^[anp]$/ ? $_->[1] : "" } $field->subfields;
+	return join( "", @subs );
+    } else {
+	return "";
+    }
 }
 
 =head2 author()
