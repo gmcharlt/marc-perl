@@ -1,6 +1,6 @@
 #!perl -Tw
 
-use Test::More tests => 32;
+use Test::More tests => 40;
 
 use strict;
 use File::Spec;
@@ -23,30 +23,34 @@ BEGIN {
 ##
 ## these tests make sure we don't break any of them
 
-## slurp up some microlif
-my $lifname = File::Spec->catfile( 't', 'sample1.lif' );
-open(IN, $lifname );
-my $str = join( '', <IN> );
-close IN;
+## slurp up some microlif (one file of each type of line endings)
+my @lifnames = ( 'lineendings-0a.lif', 'lineendings-0d.lif', 'lineendings-0d0a.lif' );
 
-## attempt to use decode() on it
+foreach my $lifname (@lifnames) {
+    my $liffile = File::Spec->catfile( 't', $lifname );
+    open(IN, $liffile );
+    my $str = join( '', <IN> );
+    close IN;
+
+    ## attempt to use decode() on it
 
 DECODE_MICROLIF_METHOD: {
     my $rec = MARC::File::MicroLIF->decode( $str );
     isa_ok( $rec, 'MARC::Record' );
-    like( $rec->title(), qr/all about whales/i, 'retrieved title' );
+    like( $rec->title(), qr/all about whales/i, "retrieved title from file $lifname" );
 }
 
 DECODE_MICROLIF_FUNCTION: {
     my $rec = MARC::File::MicroLIF::decode( $str );
     isa_ok( $rec, 'MARC::Record' );
-    like( $rec->title(), qr/all about whales/i, 'retrieved title' );
+    like( $rec->title(), qr/all about whales/i, "retrieved title from file $lifname" );
 }
+} #foreach lif file
 
 ## slurp up some usmarc
 my $marcname = File::Spec->catfile( 't', 'sample1.usmarc' );
 open(IN, $marcname );
-$str = join( '', <IN> );
+my $str = join( '', <IN> );
 close IN;
 
 ## attempt to use decode on it
