@@ -441,6 +441,7 @@ sub _escape($$$$) {
 
     if ($newCharset) {
 	$self->_g( $setNumber, $newCharset );
+	return($newLeft);
     } else {
 	_warning( "invalid character escape at position $left" );
 	return($left);
@@ -487,7 +488,7 @@ sub _getCharset {
 	return( MARC::Charset::CyrillicExtended->new() );
     } elsif ( $code eq BASIC_GREEK ) {
 	eval { use MARC::Charset::Greek };
-	return( MARC::Charset::GreekBasic->new() );
+	return( MARC::Charset::Greek->new() );
     } elsif ( $code eq BASIC_HEBREW ) {
 	eval { use MARC::Charset::Hebrew };
 	return( MARC::Charset::Hebrew->new() );
