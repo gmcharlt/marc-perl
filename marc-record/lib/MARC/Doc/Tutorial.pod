@@ -2,6 +2,8 @@
 
 MARC::Doc::Tutorial - A documention-only module for new users of MARC::Record
 
+=head1 SYNOPSIS
+
 =head1 INTRODUCTION
 
 =head2 What is MARC?
@@ -12,14 +14,12 @@ MARC::Doc::Tutorial - A documention-only module for new users of MARC::Record
 
 =head2 Overview of MARC classes
 
-
 =head1 READING
 
 =head2 Reading a record from a file
 
 Let's say you have a USMARC record in a file called 'file.dat' and you would 
 like to read in the record and print out it's title.
-
 
    1   ## Example 1.1 
    2   
@@ -44,7 +44,6 @@ It is a good idea to get in the habit of checking for errors. MARC::* has
 been designed to help you do this. Here is example B<1.1> rewritten to use 
 the C<$MARC::File::ERROR> and C<$MARC::Record::ERROR> variables. To save space
 many of the examples in the cookbook will not do this error checking.
-
 
    1   ## Example 1.2 
    2   
