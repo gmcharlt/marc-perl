@@ -42,8 +42,10 @@ t/badind.usmarc
 t/badldr.usmarc
 t/batch-filter.t
 t/camel.usmarc
+t/cameleof.usmarc
 t/convenience.t
 t/decode-filter.t
+t/dosEOF.t
 t/file-filter.t
 t/file-header.t
 t/lineendings-0a.lif
@@ -55,6 +57,7 @@ t/pod-coverage.t
 t/sample100.lif
 t/sample1.lif
 t/sample1.usmarc
+t/sample1eof.usmarc
 t/sample20.lif
 t/title_proper.t
 t/title_proper.usmarc
