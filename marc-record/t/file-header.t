@@ -4,6 +4,7 @@ use strict;
 use integer;
 
 use Test::More tests=>5;
+use File::Spec;
 
 BEGIN {
     use_ok( 'MARC::File::MicroLIF' );
@@ -11,14 +12,16 @@ BEGIN {
 
 
 MISSINGHEADER: {
-    my $file = MARC::File::MicroLIF->in( 't/sample1.lif' );
+    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'sample1.lif' );
+    my $file = MARC::File::MicroLIF->in( $filename );
     isa_ok( $file, 'MARC::File::MicroLIF', 'got a MicroLIF file' );
     ok( !$file->header(), 'file contains no header' );
     $file->close();
 }
 
 MISSINGHEADER: {
-    my $file = MARC::File::MicroLIF->in( 't/sample20.lif' );
+    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'sample20.lif' );
+    my $file = MARC::File::MicroLIF->in( $filename );
     isa_ok( $file, 'MARC::File::MicroLIF', 'got a MicroLIF file' );
     is( 
 	$file->header(), 

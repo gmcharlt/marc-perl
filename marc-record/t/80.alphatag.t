@@ -3,6 +3,7 @@
 use Test::More tests => 29;
 
 use strict;
+use File::Spec;
 
 BEGIN {
     use_ok( 'MARC::Record' );
@@ -98,7 +99,8 @@ unlink( $filename );
 
 my $micro = $record->as_formatted();
 
-$file = MARC::File::MicroLIF->in( 't/alphatag.lif' );
+my $lifname = File::Spec->catfile( File::Spec->updir(), 't', 'alphatag.lif' );
+$file = MARC::File::MicroLIF->in( $lifname );
 isa_ok( $file, 'MARC::File::MicroLIF' );
 $newRec = $file->next();
 isa_ok( $newRec, 'MARC::Record' );

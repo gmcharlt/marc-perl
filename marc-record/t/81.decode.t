@@ -3,6 +3,7 @@
 use Test::More tests => 32;
 
 use strict;
+use File::Spec;
 
 BEGIN {
     use_ok( 'MARC::Record' );
@@ -23,7 +24,8 @@ BEGIN {
 ## these tests make sure we don't break any of them
 
 ## slurp up some microlif
-open(IN, 't/sample1.lif' );
+my $lifname = File::Spec->catfile( File::Spec->updir(), 't', 'sample1.lif' );
+open(IN, $lifname );
 my $str = join( '', <IN> );
 close IN;
 
@@ -42,7 +44,8 @@ DECODE_MICROLIF_FUNCTION: {
 }
 
 ## slurp up some usmarc
-open(IN, 't/sample1.usmarc' );
+my $marcname = File::Spec->catfile( File::Spec->updir(), 't', 'sample1.usmarc' );
+open(IN, $marcname );
 $str = join( '', <IN> );
 close IN;
 

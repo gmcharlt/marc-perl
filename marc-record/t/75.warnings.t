@@ -3,6 +3,8 @@
 use Test::More tests=>21;
 use strict;
 
+use File::Spec;
+
 BEGIN {
     use_ok( 'MARC::Batch' );
 }
@@ -10,7 +12,9 @@ BEGIN {
 ## when strict is on, errors cause next() to return undef
 
 STRICT_ON: {
-    my $batch = MARC::Batch->new( 'USMARC', 't/badldr.usmarc' );
+
+    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'badldr.usmarc' );
+    my $batch = MARC::Batch->new( 'USMARC', $filename );
     isa_ok( $batch, 'MARC::Batch' );
 
     $batch->warnings_off(); # avoid clutter on STDERR
@@ -31,7 +35,9 @@ STRICT_ON: {
 ## when strict is off you can keep on reading past errors
 
 STRICT_OFF: {
-    my $batch = MARC::Batch->new( 'USMARC', 't/badldr.usmarc' );
+
+    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'badldr.usmarc' );
+    my $batch = MARC::Batch->new( 'USMARC', $filename );
     isa_ok( $batch, 'MARC::Batch' );
 
     $batch->warnings_off(); # avoid clutter on STDERR
@@ -50,7 +56,9 @@ STRICT_OFF: {
 }
 
 WARNINGS_BUFFER_RESET: {
-    my $batch = MARC::Batch->new( 'USMARC', 't/badind.usmarc' );
+
+    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'badind.usmarc' );
+    my $batch = MARC::Batch->new( 'USMARC', $filename );
     $batch->warnings_off();
     $batch->strict_off();
     my $r = $batch->next();

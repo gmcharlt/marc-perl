@@ -2,6 +2,7 @@
 
 use strict;
 use integer;
+use File::Spec;
 
 use Test::More tests=>268;
 
@@ -11,7 +12,9 @@ BEGIN: {
 
 # Test the USMARC stuff
 USMARC: {
-    my $batch = new MARC::Batch( 'USMARC', 't/camel.usmarc' );
+
+    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'camel.usmarc' );
+    my $batch = new MARC::Batch( 'USMARC', $filename );
     isa_ok( $batch, 'MARC::Batch', 'MARC batch' );
 
     my $n = 0;
@@ -28,7 +31,11 @@ USMARC: {
 # Test MicroLIF batch
 
 MicroLIF: {
-    my @files = <t/sample*.lif>;
+
+    my $filepath = File::Spec->catdir( File::Spec->updir(), 't' );
+    opendir(TESTDIR, $filepath) || die "can't opendir $filepath: $!";
+    my @files = grep { /sample.*\.lif/ && -f $filepath.$_ } readdir(TESTDIR);
+    closedir TESTDIR;
     is( scalar @files, 3, 'Only have 3 sample*.lif files' );
 
     my $batch = new MARC::Batch( 'MicroLIF', @files );

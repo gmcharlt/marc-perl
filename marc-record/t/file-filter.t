@@ -6,12 +6,14 @@ use integer;
 use constant CAMEL_SKIPS => 8;
 
 use Test::More tests=>(CAMEL_SKIPS * 2) + 7;
+use File::Spec;
 
 BEGIN {
     use_ok( 'MARC::File::USMARC' );
 }
 
-my $file = MARC::File::USMARC->in( 't/camel.usmarc' );
+my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'camel.usmarc' );
+my $file = MARC::File::USMARC->in( $filename );
 isa_ok( $file, 'MARC::File::USMARC', 'USMARC file' );
 
 my $marc;

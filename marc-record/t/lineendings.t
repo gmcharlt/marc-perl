@@ -4,6 +4,7 @@ use strict;
 
 use Test::More;
 use vars qw( @endings );
+use File::Spec;
 
 BEGIN {
     @endings = qw( 0a 0d 0d0a );
@@ -14,7 +15,7 @@ BEGIN {
 
 
 foreach my $ending ( @endings ) {
-    my $filename = "t/lineendings-$ending.lif";
+    my $filename = File::Spec->catfile( File::Spec->updir(), 't', "lineendings-$ending.lif" );
     my $file = MARC::File::MicroLIF->in( $filename );
     isa_ok( $file, 'MARC::File::MicroLIF' );
     is( scalar $file->warnings(), 0, 'no file warnings for $filename' );

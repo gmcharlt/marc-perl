@@ -1,4 +1,4 @@
-#!perl -w
+#!perl -Tw
 
 use Test::More tests => 8;
 
@@ -6,7 +6,7 @@ use strict;
 use MARC::Record;
 use MARC::File::USMARC;
 use Encode;
-
+use File::Spec;
 ## test that utf8 safe Perls are able to write and read back UTF8 
 ## character data. The offsets in a record directory are byte offsets
 ## (not character offsets), so they need to be calculated and used using
@@ -35,8 +35,8 @@ SKIP: {
 
         ## write record to disk, telling perl (as we should) that we
         ## will be writing utf8 unicode
-
-        open( OUT, ">t/utf8.marc" );
+        my $outfile = File::Spec->catfile( File::Spec->updir(), 't', 'utf8.marc' );
+        open( OUT, ">$outfile" );
         binmode( OUT, ':utf8' );
         print OUT $r->as_usmarc();
         close( OUT );
@@ -46,7 +46,8 @@ SKIP: {
     ## is there
 
     REREAD_FILE: {
-        my $f = MARC::File::USMARC->in( 't/utf8.marc' );
+        my $rereadfile = File::Spec->catfile( File::Spec->updir(), 't', 'utf8.marc' );
+        my $f = MARC::File::USMARC->in( $rereadfile );
         isa_ok( $f, 'MARC::File::USMARC' );
 
         my $r = $f->next();
@@ -59,7 +60,7 @@ SKIP: {
         ok( Encode::is_utf8( $a ), 'got utf8' );
         is( $a, $aleph, 'got aleph' );
 
-        unlink( 't/utf8.marc' );
+        unlink( $rereadfile );
     }
 } # SKIP
 

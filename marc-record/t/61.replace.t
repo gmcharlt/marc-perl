@@ -4,13 +4,15 @@ use strict;
 use integer;
 
 use Test::More tests=>8;
+use File::Spec;
 
 BEGIN {
     use_ok( 'MARC::File::USMARC' );
     use_ok( 'MARC::Field' );
 }
 
-my $file = MARC::File::USMARC->in( 't/camel.usmarc' );
+my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'camel.usmarc' );
+my $file = MARC::File::USMARC->in( $filename );
 isa_ok( $file, 'MARC::File', 'MARC input file' ) or die;
 my $marc = $file->next();
 isa_ok( $marc, 'MARC::Record', 'Read from file' );

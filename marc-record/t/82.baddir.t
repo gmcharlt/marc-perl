@@ -3,8 +3,10 @@
 use strict;
 use Test::More tests => 4;
 use MARC::File::USMARC;
+use File::Spec;
 
-my $file = MARC::File::USMARC->in( 't/baddir.usmarc' );
+my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'baddir.usmarc' );
+my $file = MARC::File::USMARC->in( $filename );
 isa_ok( $file, 'MARC::File::USMARC' );
 
 my $r = $file->next(); 

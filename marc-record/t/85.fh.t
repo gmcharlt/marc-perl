@@ -5,6 +5,7 @@
 use Test::More tests => 206;
 use strict;
 use IO::File;
+use File::Spec;
 
 use_ok( 'MARC::File::USMARC' );
 use_ok( 'MARC::File::MicroLIF' );
@@ -14,7 +15,8 @@ use_ok( 'MARC::Batch' );
 
 USMARC_FILE_GLOB: { 
 
-    open( MARCDATA, 't/camel.usmarc' );
+    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'camel.usmarc' );
+    open( MARCDATA, $filename );
     my $fh = *MARCDATA;
     my $file = MARC::File::USMARC->in( $fh );
     isa_ok( $file, "MARC::File::USMARC" );
@@ -33,7 +35,8 @@ USMARC_FILE_GLOB: {
 
 USMARC_IO_FILE: {
 
-    my $fh = IO::File->new( 't/camel.usmarc' );
+    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'camel.usmarc' );
+    my $fh = IO::File->new( $filename );
     isa_ok( $fh, "IO::File" );
     my $file = MARC::File::USMARC->in( $fh );
     isa_ok( $file, "MARC::File::USMARC" );
@@ -51,7 +54,8 @@ USMARC_IO_FILE: {
 
 MICROLIF_FILE_GLOB: {
 
-    open( LIFDATA, 't/sample20.lif' );
+    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'sample20.lif' );
+    open( LIFDATA, $filename );
     my $fh = *LIFDATA;
     my $file = MARC::File::MicroLIF->in( $fh );
     isa_ok( $file, "MARC::File::MicroLIF" );
@@ -69,7 +73,8 @@ MICROLIF_FILE_GLOB: {
 
 MICROLIF_IO_FILE: {
 
-    my $fh = IO::File->new( 't/sample20.lif' );
+    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'sample20.lif' );
+    my $fh = IO::File->new( $filename );
     isa_ok( $fh, "IO::File" );
     my $file = MARC::File::MicroLIF->in( $fh );
     isa_ok( $file, "MARC::File::MicroLIF" );
@@ -87,7 +92,8 @@ MICROLIF_IO_FILE: {
 
 MARC_BATCH_FILEHANDLE: {
 
-    my $fh = IO::File->new( 't/camel.usmarc' );
+    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'camel.usmarc' );
+    my $fh = IO::File->new( $filename );
     isa_ok( $fh, "IO::File" );
     my $batch = MARC::Batch->new( 'USMARC', $fh );
     isa_ok( $batch, "MARC::Batch" );
@@ -105,9 +111,10 @@ MARC_BATCH_FILEHANDLE: {
 
 MARC_BATCH_FILEHANDLES: {
 
-    my $fh1 = IO::File->new( 't/camel.usmarc' );
+    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'camel.usmarc' );
+    my $fh1 = IO::File->new( $filename );
     isa_ok( $fh1, "IO::File" );
-    my $fh2 = IO::File->new( 't/camel.usmarc' );
+    my $fh2 = IO::File->new( $filename );
     isa_ok( $fh2, "IO::File" );
     my $batch = MARC::Batch->new( 'USMARC', $fh1, $fh2 );
     isa_ok( $batch, "MARC::Batch" );
@@ -125,11 +132,12 @@ MARC_BATCH_FILEHANDLES: {
 
 MARC_BATCH_MIX: {
 
-    open( MARCDATA, 't/camel.usmarc' );
+    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'camel.usmarc' );
+    open( MARCDATA, $filename );
     my $fh1 = *MARCDATA;
-    my $fh2 = IO::File->new( 't/camel.usmarc' );
+    my $fh2 = IO::File->new( $filename );
     isa_ok( $fh2, "IO::File" );
-    my $batch = MARC::Batch->new( 'USMARC', $fh1, $fh2, 't/camel.usmarc' );
+    my $batch = MARC::Batch->new( 'USMARC', $fh1, $fh2, $filename );
     isa_ok( $batch, "MARC::Batch" );
 
     my $count = 0;
@@ -143,11 +151,12 @@ MARC_BATCH_MIX: {
 
 MICROLIF_BATCH_MIX: {
 
-    open( LIFDATA, 't/sample20.lif' );
+    my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'sample20.lif' );
+    open( LIFDATA, $filename );
     my $fh1 = *LIFDATA;
-    my $fh2 = IO::File->new( 't/sample20.lif' );
+    my $fh2 = IO::File->new( $filename );
     isa_ok( $fh2, "IO::File" );
-    my $batch = MARC::Batch->new( 'MicroLIF', $fh1, $fh2, 't/sample20.lif' );
+    my $batch = MARC::Batch->new( 'MicroLIF', $fh1, $fh2, $filename );
     isa_ok( $batch, "MARC::Batch" );
 
     my $count = 0;

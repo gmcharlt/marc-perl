@@ -8,6 +8,8 @@ use constant PERLCONF_SKIPS => 6;
 use constant CAMEL_SKIPS => 2;
 use constant XPLATFORM_SKIPS => 2;
 
+use File::Spec;
+
 # the 10 is for the EMPTY: block of tests
 use Test::More tests=>( 2 + EMPTY_TESTS + (5*3) + CAMEL_SKIPS + PERLCONF_SKIPS + XPLATFORM_SKIPS );
 
@@ -28,7 +30,8 @@ EMPTY: { my $marc = MARC::Record->new();
     is( $marc->publication_date(), '', 'if data not present, publication_date() is empty string' );
 }
 
-my $file = MARC::File::USMARC->in( 't/camel.usmarc' );
+my $filename = File::Spec->catfile( File::Spec->updir(), 't', 'camel.usmarc' );
+my $file = MARC::File::USMARC->in( $filename );
 isa_ok( $file, 'MARC::File::USMARC', 'USMARC file' );
 
 my $marc;
