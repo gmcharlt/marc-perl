@@ -24,7 +24,7 @@ sub filecheck {
 			    'File::Find' => 0,
 			    'Carp' => 0,
 			    },
-	EXE_FILES	=> [ qw( pl/marcdump pl/marclint ) ],
+	EXE_FILES	=> [ qw( bin/marcdump bin/marclint ) ],
 	dist 		=> {
 			    COMPRESS => 'gzip -9f', 
 			    SUFFIX => 'gz',
