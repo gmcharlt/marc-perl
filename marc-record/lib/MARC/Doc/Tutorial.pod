@@ -60,6 +60,11 @@ MARC::Record rather than extending MARC.pm further. Soon afterwards,
 MARC::Batch was added, which allows you to read in a large data file
 without having to worry about memory consumption.
 
+In Dec., 2004, the MARC::Lint module, an extension to check the validity of MARC
+records, was removed from the MARC::Record distribution, to become a separately
+distributed package. This tutorial contains examples for using MARC::Lint.
+
+
 =head2 Brief Overview of MARC Classes
 
 The MARC::Record package is made up of several separate packages. This
@@ -80,10 +85,6 @@ A convenience class for accessing MARC data contained in an external file.
 =item MARC::Field
 
 An object for representing the indicators and subfields of a single MARC field.
-
-=item MARC::Lint
-
-An extension to check the validity of MARC records.
 
 =item MARC::Record
 
@@ -930,9 +931,9 @@ some  fancy footwork this can be done relatively easily.
 
 =head1 VALIDATING
 
-The MARC::Record package has some extra goodies to allow you to validate
-records: MARC::Lint. MARC::Lint provides an extensive battery of tests,
-and it also provides a framework for adding more.
+MARC::Lint, available on CPAN and in cvs on SourceForge, has some extra goodies
+to allow you to validate records. MARC::Lint provides an extensive battery of
+tests, and it also provides a framework for adding more.
 
 =head2 Using MARC::Lint
 
@@ -970,7 +971,8 @@ present in a batch of records in a file named 'file.dat':
 
 MARC::Lint is quite thorough, and will check the following when validating:
 presence of a 245 field, repeatability of fields and subfields, valid use of
-subfield within particular fields, presence of indicators and their values.
+subfield within particular fields, presence of indicators and their values. All
+checks are based on MARC21 bibliographic format.
 
 =head2 Customizing MARC::Lint
 
@@ -1331,6 +1333,10 @@ here's a template script:
 Many thanks to all the contributors who have made this document possible.
 
 =over 4
+
+=item *
+
+Bryan Baldus <eijabb@cpan.org>
 
 =item *
 
