@@ -55,6 +55,7 @@ t/lineendings-0d.lif
 t/lineendings.t
 t/lint.t
 t/pod.t
+t/pod-coverage.t
 t/sample100.lif
 t/sample1.lif
 t/sample1.usmarc
