@@ -204,9 +204,16 @@ sub _gripe(@) {
     return;
 }
 
+=head2 utf8_safe()
+
+Tells whether the version of Perl we're using is UFT8-safe.
+
+=cut
+
 sub utf8_safe {
-    return( 1 ) if $] >= 5.008001;
-    return( 0 );
+    return 1 if $] >= 5.008001;
+
+    return;
 }
 
 1;
