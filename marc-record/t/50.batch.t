@@ -1,4 +1,4 @@
-# $Id: 50.batch.t,v 1.9 2003/02/25 20:41:59 petdance Exp $
+# $Id: 50.batch.t,v 1.10 2003/04/23 03:10:50 petdance Exp $
 
 use strict;
 use integer;
@@ -18,9 +18,10 @@ USMARC: {
 
     my $n = 0;
     while ( my $marc = $batch->next() ) {
+	isa_ok( $marc, 'MARC::Record' );
+
 	my $f245 = $marc->field( '245' );
 	isa_ok( $f245, 'MARC::Field' );
-	isa_ok( $marc, 'MARC::Record' );
 	++$n;
     }
     is( $n, 10, 'Got 10 USMARC records' );
@@ -37,9 +38,10 @@ MicroLIF: {
 
     my $n = 0;
     while ( my $marc = $batch->next() ) {
+	isa_ok( $marc, 'MARC::Record' );
+
 	my $f245 = $marc->field( '245' );
 	isa_ok( $f245, 'MARC::Field' );
-	isa_ok( $marc, 'MARC::Record' );
 	++$n;
     }
     is( $n, 121, 'Got 120 LIF records' );
