@@ -18,7 +18,7 @@ use Carp qw(croak);
 
 Version 1.39_01
 
-    $Id: Record.pm,v 1.86 2004/08/17 22:40:23 moregan Exp $
+    $Id: Record.pm,v 1.87 2004/08/24 19:13:28 moregan Exp $
 
 =cut
 
@@ -556,7 +556,7 @@ sub clone {
 
     for my $field ( $self->fields() ) {
         if ( !$filtered || (grep {$field eq $_} @$filtered ) ) {
-            $clone->add_fields( $field->clone );
+            $clone->append_fields( $field->clone );
         }
     }
 
