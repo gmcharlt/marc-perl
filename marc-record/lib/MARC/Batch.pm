@@ -4,17 +4,6 @@ package MARC::Batch;
 
 MARC::Batch - Perl module for handling files of MARC::Record objects
 
-=cut
-
-use strict;
-use integer;
-use Carp qw( croak );
-
-use constant STRICT_ON		=> 1;
-use constant STRICT_OFF		=> 2;
-use constant WARNINGS_ON	=> 1;
-use constant WARNINGS_OFF	=> 2;
-
 =head1 SYNOPSIS
 
 MARC::Batch hides all the file handling of files of C<MARC::Record>s.
@@ -31,6 +20,12 @@ multiple-file aspects.
 =head1 EXPORT
 
 None.  Everything is a class method.
+
+=cut
+
+use strict;
+use integer;
+use Carp qw( croak );
 
 =head1 METHODS
 
@@ -75,8 +70,8 @@ sub new {
 	marcclass   =>	$marcclass,
 	file	    =>  undef,
 	warnings    =>  [],
-	warn	    =>  WARNINGS_ON,
-	strict	    =>  STRICT_ON,
+	'warn'	    =>  1,
+	strict	    =>  1,
     };
 
     bless $self, $class;
@@ -119,7 +114,7 @@ sub next {
 	my @warnings = $self->{file}->warnings();
 	if ( @warnings ) {
 	    $self->warnings( @warnings );
-	    return if $self->{ strict } == STRICT_ON; 
+	    return if $self->{ strict };
 	}
 
 	if ($rec) {
@@ -129,7 +124,7 @@ sub next {
 
 	    if (@warnings) {
 		$self->warnings( @warnings );
-		return if $self->{ strict } == STRICT_ON;
+		return if $self->{ strict };
 	    }
 
 	    # return the MARC::Record object
@@ -165,7 +160,7 @@ strict is B<ON> by default.
 
 sub strict_off {
     my $self = shift;
-    $self->{ strict } = STRICT_OFF;
+    $self->{ strict } = 0;
     return(1);
 }
 
@@ -181,7 +176,7 @@ always returns true (1).
 
 sub strict_on {
     my $self = shift;
-    $self->{ strict } = STRICT_ON;
+    $self->{ strict } = 1;
     return(1);
 }
 
@@ -203,7 +198,7 @@ sub warnings {
     my ($self,@new) = @_;
     if ( @new ) {
 	push( @{ $self->{warnings} }, @new );
-	print STDERR join( "\n", @new ) if $self->{ 'warn' } == WARNINGS_ON;
+	print STDERR join( "\n", @new ) if $self->{'warn'};
     } else {
 	my @old = @{ $self->{warnings} };
 	$self->{warnings} = [];
@@ -224,7 +219,9 @@ C<warnings_off()> always returns true (1).
 
 sub warnings_off {
     my $self = shift;
-    $self->{ 'warn' } = WARNINGS_OFF;
+    $self->{ 'warn' } = 0;
+
+    return 1;
 }
 
 =head2 warnings_on()
@@ -239,7 +236,7 @@ warnings_on() always returns true (1).
 
 sub warnings_on {
     my $self = shift;
-    $self->{ 'warn' } = WARNINGS_ON;
+    $self->{ 'warn' } = 1;
 }
 
 =head2 filename()

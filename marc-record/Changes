@@ -23,6 +23,7 @@ Revision history for Perl extension MARC::Record.
 	  but leaves that up to MARC::Field (instead of having the check
 	  twice).
 	- In MARC::Batch, the 'warn' elements weren't quoted.
+	- warnings_on and strict_on should now be respected.
 
 1.33    November 24th, 2003
 	MARC::Record should now run on Perls back to 5.00503!
