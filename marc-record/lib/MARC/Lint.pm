@@ -2719,6 +2719,16 @@ v	NR
 6	NR
 8	R
 
+841	NR
+
+842	NR
+
+843	R
+
+844	NR
+
+845	R
+
 850	R
 ind1	blank
 ind2	blank
@@ -2752,6 +2762,12 @@ z	R
 6	NR
 8	NR
 
+853	R
+
+854	R
+
+855	R
+
 856	R
 ind1	b012347
 ind2	b0128
@@ -2784,10 +2800,35 @@ z	R
 6	NR
 8	R
 
+863	R
+
+864	R
+
+865	R
+
+866	R
+
+867	R
+
+868	R
+
+876	R
+
+877	R
+
+878	R
+
 880	R
 ind1	
 ind2	
 6	NR
+
+886	R
+ind1	012
+ind2	blank
+a	NR
+b	NR
+2	NR
 
 887	R
 ind1	blank
