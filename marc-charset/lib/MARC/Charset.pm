@@ -263,6 +263,35 @@ any East Asian MARC data please email it to me!!
 
 =back
 
+=head1 SEE ALSO
+
+=over 4
+
+=item L<MARC::Charset::ASCII>
+
+=item L<MARC::Charset::Ansel>
+
+=item L<MARC::Charset::ArabicBasic>
+
+=item L<MARC::Charset::ArabicExtended>
+
+=item L<MARC::Charset::Controls>
+
+=item L<MARC::Charset::CyrillicBasic>
+
+=item L<MARC::Charset::CyrillicExtended>
+
+=item L<MARC::Charset::Greek>
+
+=item L<MARC::Charset::GreekSymbols>
+
+=item L<MARC::Charset::Hebrew>
+
+=item L<MARC::Charset::Subscripts>
+
+=item L<MARC::Charset::Superscripts>
+
+=back
 
 =head1 VERSION HISTORY
 
