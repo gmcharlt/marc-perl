@@ -3,7 +3,7 @@
 use strict;
 use integer;
 
-use Test::More tests=>9;
+use Test::More tests=>12;
 
 BEGIN {
     use_ok( 'MARC::Batch' );
@@ -22,9 +22,12 @@ ok( defined $f650, 'Field retrieval');
 my $new = MARC::Field->new('650','','0','a','World Wide Web.');
 ok( defined $new, 'Field creation');
 
-## test append_field()
+my $newagain = MARC::Field->new('650','','0','a','Hockey etiquette.');
+ok( defined $newagain, 'Field creation');
 
-$record->append_field($new);
+## test append_fields()
+
+$record->append_fields($new);
 
 my $expected = 
 <<MARC_DATA;
@@ -62,12 +65,13 @@ LDR 00755cam  22002414a 4500
 MARC_DATA
 chomp($expected);
 
-is($record->as_formatted, $expected, "append_field");
+is($record->as_formatted, $expected, "append_fields");
 $record->delete_field($new);
 
-## test insert_field_after
+## test insert_fields_after
 
-$record->insert_field_after($f650,$new);
+my $nadds = $record->insert_fields_after($f650,$new,$newagain);
+is( $nadds, 2, 'Added 2 fields' );
 
 $expected = 
 <<MARC_DATA;
@@ -100,18 +104,21 @@ LDR 00755cam  22002414a 4500
 500    _a"Wiley Computer Publishing."
 650  0 _aPerl (Computer program language)
 650  0 _aWorld Wide Web.
+650  0 _aHockey etiquette.
 630 00 _aActive server pages.
 630 00 _aActiveX.
 MARC_DATA
 chomp($expected);
 
-is($record->as_formatted,$expected,'insert_field_after');
+is($record->as_formatted,$expected,'insert_fields_after');
 $record->delete_field($new);
+$record->delete_field($newagain);
 
 
 ## test insert_record_before
 
-$record->insert_field_before($f650,$new);
+$nadds = $record->insert_fields_before($f650, MARC::Field->new('650','4','3','a','House painting.'), $new );
+is( $nadds, 2, 'Added 2 more fields' );
 
 $expected = 
 <<MARC_DATA;
@@ -142,6 +149,7 @@ LDR 00755cam  22002414a 4500
        _c23 cm. +
        _e1 computer  laser disc (4 3/4 in.)
 500    _a"Wiley Computer Publishing."
+650 43 _aHouse painting.
 650  0 _aWorld Wide Web.
 650  0 _aPerl (Computer program language)
 630 00 _aActive server pages.
@@ -149,6 +157,6 @@ LDR 00755cam  22002414a 4500
 MARC_DATA
 chomp($expected);
 
-is($record->as_formatted,$expected,'insert_field_before');
+is($record->as_formatted,$expected,'insert_fields_before');
 
 
