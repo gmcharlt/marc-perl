@@ -6,4 +6,6 @@ lib/MARC/File/XML.pm
 lib/MARC/File/SAX.pm
 t/batch.t
 t/batch.xml
+t/namespace.t
+t/namespace.xml
 META.yml
