@@ -1,6 +1,12 @@
 Revision history for Perl extension MARC::Record.
 
-0.90	March 31, 2002
+0.91	April 2, 2002
+	- Fixed a bad build: MARC::Batch wasn't included in the tarball.
+
+	- marcdump now takes a --lif parm to be able to dump MicroLIF
+	records.
+
+0.90	April 1, 2002
 	- Alpha version of what will become MARC::Record 1.00.
 
 	- MAJOR infrastructure changes.  Scripts WILL break.

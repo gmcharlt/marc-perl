@@ -8,6 +8,7 @@ lib/MARC/Lint.pm
 lib/MARC/File.pm
 lib/MARC/File/USMARC.pm
 lib/MARC/File/MicroLIF.pm
+lib/MARC/File/Batch.pm
 pl/marcdump
 pl/marclint
 t/00.load.t
