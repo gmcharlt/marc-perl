@@ -10,5 +10,6 @@ WriteMakefile(
 			    'XML::SAX'		=> 0.12,
 			    'MARC::Record'	=> 1.36,
 			    },
+    'EXE_FILES'         => [ qw( bin/marc2xml bin/xml2marc ) ]
 );
 
