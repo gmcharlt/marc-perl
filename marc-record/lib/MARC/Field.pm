@@ -183,14 +183,14 @@ sub subfield {
 =head2 subfields()
 
 Returns all the subfields in the field.  What's returned is a list of
-lists, where the inner list is a subfield code and the subfield data.
+list refs, where the inner list is a subfield code and the subfield data.
 
 For example, this might be the subfields from a 245 field:
 
-        [
+        (
           [ 'a', 'Perl in a nutshell :' ],
           [ 'b', 'A desktop quick reference.' ],
-        ]
+        )
 
 =cut
 

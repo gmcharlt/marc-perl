@@ -10,6 +10,9 @@ Revision history for Perl extension MARC::Record.
           call in a scalar context was going to get 0, which if used as
           a MARC::Field would bomb.  We therefore don't expect the change
           to affect anything that wasn't already blowing up.
+        - Fixed the doc and example for MARC::Field::subfields() so that
+          they match the behavior of the function, namely returning a list
+          rather than a list ref.
 
         [ENHANCEMENTS]
         - added MARC::Field::delete_subfields() and tests to t/67.subfield.t
