@@ -10,7 +10,6 @@ B<marcdump> [options] file(s)
 
 =cut
 
-use warnings;
 use strict;
 use integer;
 

@@ -28,7 +28,6 @@ Print a statistical summary by file at the end.  (Default: on)
 
 =cut
 
-use warnings;
 use strict;
 use integer;
 
