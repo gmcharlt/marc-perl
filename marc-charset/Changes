@@ -1,5 +1,13 @@
 Revision history for MARC::Charset
 
+0.6  Thu Feb 26 10:26:22 2004
+    - fixed MARC::Charset::EastAsian to not hexify results of character lookup
+      since we are now storing hex values in the BerkeleyDB.
+    - also fixed the method for looking up the location of the BerkeleyDB
+      so that the testing version takes precedence over one that is 
+      installed. This is why the above error was not detected during 
+      testing.
+
 0.5  Fri Apr 11 06:47:00 2003
     - all Charset classes inherit from MARC::Charset::Generic
     - added MARC::Charset::UTF8

@@ -37,8 +37,8 @@ use constant CHAR_SIZE	    => 3;
 ## trickery to locate where we can find EastAsian.db when we are 
 ## testing and after install.
 
-my $db .= $Config{ 'sitelib' } . '/MARC/Charset/EastAsian.db';
-if ( ! -f $db ) { $db = 'blib/lib/MARC/Charset/EastAsian.db'; }
+my $db = 'blib/lib/MARC/Charset/EastAsian.db';
+if ( ! -f $db ) { $db .= $Config{ 'sitelib' } . '/MARC/Charset/EastAsian.db'; }
 if ( ! -f $db ) { die "couldn't located EastAsian.db" };
 tie( my %marc2unicode, 'DB_File', $db, O_RDONLY )
     || die "unable to locate EastAsian.db at $db!";
@@ -71,7 +71,7 @@ get back the UTF8 character.
 sub lookup {
     my ($self,$char) = @_; 
     my $hex = $marc2unicode{$char};
-    return( chr(hex($hex) ) ) if $hex;
+    return( chr($hex) ) if $hex;
     return(undef);
 }
 

@@ -47,8 +47,8 @@ use Config;
 ## trickery to locate where we can find UTF8/db when we are 
 ## testing and after install.
 
-my $db .= $Config{ 'sitelib' } . '/MARC/Charset/UTF8.db';
-if ( ! -f $db ) { $db = 'blib/lib/MARC/Charset/UTF8.db'; }
+my $db = 'blib/lib/MARC/Charset/UTF8.db'; 
+if ( ! -f $db ) { $db = $Config{ 'sitelib' } . '/MARC/Charset/UTF8.db'; }
 if ( ! -f $db ) { die "couldn't locate UTF8.db" };
 tie( my %unicode2marc, 'DB_File', $db, O_RDONLY );
 if ( !%unicode2marc ) { die "unable to locate UTF8.db at $db!"; }
