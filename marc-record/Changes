@@ -1,7 +1,12 @@
 Revision history for Perl extension MARC::Record.
 
-1.14	November 27, 2002
+1.15	????, 2002
+	[FIXES]
+	- Ignores and warns about any completely empty subfields (i.e. not
+	  even any indicators)
 
+1.14	November 27, 2002
+	[FIXES]
 	- Fixed bug in MARC::File::USMARC that was set off by failure of 
 	  t/75.warnings.t under ActivePerl and CygWin.
 
@@ -25,6 +30,7 @@ Revision history for Perl extension MARC::Record.
 	  returned from each function.
 
 1.12	October 9, 2002 
+	[ENHANCEMENTS]
 	- Makefile.PL will now generate PDF and HTML documentation for 
 	  Sourceforge when asked to.
 	- Added a test for insert_field_grouped()

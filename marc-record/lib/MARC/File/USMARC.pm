@@ -17,7 +17,7 @@ use vars qw( $ERROR );
 
 Version 1.14
 
-    $Id: USMARC.pm,v 1.31 2002/11/27 20:12:03 petdance Exp $
+    $Id: USMARC.pm,v 1.32 2002/12/06 22:00:13 petdance Exp $
 
 =cut
 
@@ -170,7 +170,15 @@ sub decode {
 	    }
 
 	    # Split the subfield data into subfield name and data pairs
-	    my @subfield_data = map { (substr($_,0,1),substr($_,1)) } @subfields;
+	    my @subfield_data;
+	    for ( @subfields ) {
+		if ( length > 0 ) {
+		    push( @subfield_data, substr($_,0,1),substr($_,1) );
+		} else {
+		    $marc->_warn( "Entirely empty subfield found in tag $tagno" );
+		}
+	    }
+
 	    if ( !@subfield_data ) {
 		$marc->_warn( "no subfield data found $location for tag $tagno" );
 		next;
