@@ -358,16 +358,16 @@ sub _ind_regex($) {
 
 __DATA__
 010	NR	LIBRARY OF CONGRESS CONTROL NUMBER
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	LC control number
 b	R	NUCMC control number
 z	R	Canceled/invalid LC control number
 8	R	Field link and sequence number
 
 013	R	PATENT CONTROL INFORMATION
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Number
 b	NR	Country
 c	NR	Type of number
@@ -378,24 +378,24 @@ f	R	Party to document
 8	R	Field link and sequence number
 
 015	R	NATIONAL BIBLIOGRAPHY NUMBER
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	National bibliography number
 2	NR	Source
 6	NR	Linkage
 8	R	Field link and sequence number
 
 016	R	NATIONAL BIBLIOGRAPHIC AGENCY CONTROL NUMBER
-ind1	b7
-ind2	blank
+ind1	b7	National bibliographic agency
+ind2	blank	Undefined
 a	NR	Record control number
 z	R	Canceled or invalid record control number
 2	NR	Source
 8	R	Field link and sequence number
 
 017	R	COPYRIGHT OR LEGAL DEPOSIT NUMBER
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Copyright registration number
 b	NR	Assigning agency
 2	NR	Source
@@ -403,15 +403,15 @@ b	NR	Assigning agency
 8	R	Field link and sequence number
 
 018	NR	COPYRIGHT ARTICLE-FEE CODE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Copyright article-fee code
 6	NR	Linkage
 8	R	Field link and sequence number
 
 020	R	INTERNATIONAL STANDARD BOOK NUMBER
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	International Standard Book Number
 c	NR	Terms of availability
 z	R	Canceled/invalid ISBN
@@ -419,8 +419,8 @@ z	R	Canceled/invalid ISBN
 8	R	Field link and sequence number
 
 022	R	INTERNATIONAL STANDARD SERIAL NUMBER
-ind1	b01
-ind2	blank
+ind1	b01	Level of international interest
+ind2	blank	Undefined
 a	NR	International Standard Serial Number
 y	R	Incorrect ISSN
 z	R	Canceled ISSN
@@ -428,8 +428,8 @@ z	R	Canceled ISSN
 8	R	Field link and sequence number
 
 024	R	OTHER STANDARD IDENTIFIER
-ind1	0123478
-ind2	b01
+ind1	0123478	Type of standard number or code
+ind2	b01	Difference indicator
 a	NR	Standard number or code
 c	NR	Terms of availability
 d	NR	Additional codes following the standard number or code
@@ -439,14 +439,14 @@ z	R	Canceled/invalid standard number or code
 8	R	Field link and sequence number
 
 025	R	OVERSEAS ACQUISITION NUMBER
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Overseas acquisition number
 8	R	Field link and sequence number
 
 026	R	FINGERPRINT IDENTIFIER
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	First and second groups of characters
 b	R	Third and fourth groups of characters
 c	NR	Date
@@ -458,40 +458,40 @@ e	NR	Unparsed fingerprint
 8	R	Field link and sequence number
 
 027	R	STANDARD TECHNICAL REPORT NUMBER
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Standard technical report number
 z	R	Canceled/invalid number
 6	NR	Linkage
 8	R	Field link and sequence number
 
 028	R	PUBLISHER NUMBER
-ind1	012345
-ind2	0123
+ind1	012345	Type of publisher number
+ind2	0123	Note/added entry controller
 a	NR	Publisher number
 b	NR	Source
 6	NR	Linkage
 8	R	Field link and sequence number
 
 030	R	CODEN DESIGNATION
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	CODEN
 z	R	Canceled/invalid CODEN
 6	NR	Linkage
 8	R	Field link and sequence number
 
 032	R	POSTAL REGISTRATION NUMBER
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Postal registration number
 b	NR	Source (agency assigning number)
 6	NR	Linkage
 8	R	Field link and sequence number
 
 033	R	DATE/TIME AND PLACE OF AN EVENT
-ind1	b012
-ind2	b012
+ind1	b012	Type of date in subfield $a
+ind2	b012	Type of event
 a	R	Formatted date/time
 b	R	Geographic classification area code
 c	R	Geographic classification subarea code
@@ -500,8 +500,8 @@ c	R	Geographic classification subarea code
 8	R	Field link and sequence number
 
 034	R	CODED CARTOGRAPHIC MATHEMATICAL DATA
-ind1	013
-ind2	b01
+ind1	013	Type of scale
+ind2	b01	Type of ring
 a	NR	Category of scale
 b	R	Constant ratio linear horizontal scale
 c	R	Constant ratio linear vertical scale
@@ -521,24 +521,24 @@ t	R	G-ring longitude
 8	R	Field link and sequence number
 
 035	R	SYSTEM CONTROL NUMBER
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	System control number
 z	R	Canceled/invalid control number
 6	NR	Linkage
 8	R	Field link and sequence number
 
 036	NR	ORIGINAL STUDY NUMBER FOR COMPUTER DATA FILES
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Original study number
 b	NR	Source (agency assigning number)
 6	NR	Linkage
 8	R	Field link and sequence number
 
 037	R	SOURCE OF ACQUISITION
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Stock number
 b	NR	Source of stock number/acquisition
 c	R	Terms of availability
@@ -549,15 +549,15 @@ n	R	Note
 8	R	Field link and sequence number
 
 038	NR	RECORD CONTENT LICENSOR
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Record content licensor
 6	NR	Linkage
 8	R	Field link and sequence number
 
 040	NR	CATALOGING SOURCE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Original cataloging agency
 b	NR	Language of cataloging
 c	NR	Transcribing agency
@@ -567,8 +567,8 @@ e	NR	Description conventions
 8	R	Field link and sequence number
 
 041	R	LANGUAGE CODE
-ind1	01
-ind2	b7
+ind1	01	Translation indication
+ind2	b7	Source of code
 a	R	Language code of text/sound track or separate title
 b	R	Language code of summary or abstract/overprinted title or subtitle
 d	R	Language code of sung or spoken text
@@ -581,13 +581,13 @@ h	R	Language code of original and/or intermediate translations of text
 8	R	Field link and sequence number
 
 042	NR	AUTHENTICATION CODE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Authentication code
 
 043	NR	GEOGRAPHIC AREA CODE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Geographic area code
 b	R	Local GAC code
 c	R	ISO code
@@ -596,8 +596,8 @@ c	R	ISO code
 8	R	Field link and sequence number
 
 044	NR	COUNTRY OF PUBLISHING/PRODUCING ENTITY CODE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Country of publishing/producing entity code
 b	R	Local subentity code
 c	R	ISO code
@@ -606,8 +606,8 @@ c	R	ISO code
 8	R	Field link and sequence number
 
 045	NR	TIME PERIOD OF CONTENT
-ind1	b012
-ind2	blank
+ind1	b012	Type of time period in subfield $b or $c
+ind2	blank	Undefined
 a	R	Time period code
 b	R	Formatted 9999 B.C. through C.E. time period
 c	R	Formatted pre-9999 B.C. time period
@@ -615,8 +615,8 @@ c	R	Formatted pre-9999 B.C. time period
 8	R	Field link and sequence number
 
 046	R	SPECIAL CODED DATES
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Type of date code
 b	NR	Date 1 (B.C. date)
 c	NR	Date 1 (C.E. date)
@@ -632,20 +632,20 @@ n	NR	End of date valid
 8	R	Field link and sequence number
 
 047	NR	FORM OF MUSICAL COMPOSITION CODE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Form of musical composition code
 8	R	Field link and sequence number
 
 048	R	NUMBER OF MUSICAL INSTRUMENTS OR VOICES CODE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Performer or ensemble
 b	R	Soloist
 
 050	R	LIBRARY OF CONGRESS CALL NUMBER
-ind1	b01
-ind2	040123
+ind1	b01	Existence in LC collection
+ind2	040123	Source of call number
 a	R	Classification number
 b	NR	Item number
 3	NR	Materials specified
@@ -653,16 +653,16 @@ b	NR	Item number
 8	R	Field link and sequence number
 
 051	R	LIBRARY OF CONGRESS COPY, ISSUE, OFFPRINT STATEMENT
-ind1	blank
-ind2	b0123
+ind1	blank	Undefined
+ind2	b0123	Undefined
 a	NR	Classification number
 b	NR	Item number
 c	NR	Copy information
 8	R	Field link and sequence number
 
 052	R	GEOGRAPHIC CLASSIFICATION
-ind1	b17
-ind2	blank
+ind1	b17	Code source
+ind2	blank	Undefined
 a	NR	Geographic classification area code
 b	R	Geographic classification subarea code
 d	R	Populated place name
@@ -671,53 +671,53 @@ d	R	Populated place name
 8	R	Field link and sequence number
 
 055	R	CLASSIFICATION NUMBERS ASSIGNED IN CANADA
-ind1	b01
-ind2	0123456789
+ind1	b01	Existence in NLC collection
+ind2	0123456789	Type, completeness, source of class/call number
 a	NR	Classification number
 b	NR	Item number
 2	NR	Source of call/class number
 8	R	Field link and sequence number
 
 060	R	NATIONAL LIBRARY OF MEDICINE CALL NUMBER
-ind1	b01
-ind2	040123
+ind1	b01	Existence in NLM collection
+ind2	040123	Source of call number
 a	R	Classification number
 b	NR	Item number
 8	R	Field link and sequence number
 
 061	R	NATIONAL LIBRARY OF MEDICINE COPY STATEMENT
-ind1	blank
-ind2	b0123
+ind1	blank	Undefined
+ind2	b0123	Undefined
 a	R	Classification number
 b	NR	Item number
 c	NR	Copy information
 8	R	Field link and sequence number
 
 066	NR	CHARACTER SETS PRESENT
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Primary G0 character set
 b	NR	Primary G1 character set
 c	R	Alternate G0 or G1 character set
 
 070	R	NATIONAL AGRICULTURAL LIBRARY CALL NUMBER
-ind1	01
-ind2	b0123
+ind1	01	Existence in NAL collection
+ind2	b0123	Undefined
 a	R	Classification number
 b	NR	Item number
 8	R	Field link and sequence number
 
 071	R	NATIONAL AGRICULTURAL LIBRARY COPY STATEMENT
-ind1	blank
-ind2	b0123
+ind1	blank	Undefined
+ind2	b0123	Undefined
 a	R	Classification number
 b	NR	Item number
 c	NR	Copy information
 8	R	Field link and sequence number
 
 072	R	SUBJECT CATEGORY CODE
-ind1	blank
-ind2	07
+ind1	blank	Undefined
+ind2	07	Code source
 a	NR	Subject category code
 x	R	Subject category code subdivision
 2	NR	Code source
@@ -725,15 +725,15 @@ x	R	Subject category code subdivision
 8	R	Field link and sequence number
 
 074	R	GPO ITEM NUMBER
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	GPO item number
 z	R	Canceled/invalid GPO item number
 8	R	Field link and sequence number
 
 080	R	UNIVERSAL DECIMAL CLASSIFICATION NUMBER
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Universal Decimal Classification number
 b	NR	Item number
 x	R	Common auxiliary subdivision
@@ -742,8 +742,8 @@ x	R	Common auxiliary subdivision
 8	R	Field link and sequence number
 
 082	R	DEWEY DECIMAL CLASSIFICATION NUMBER
-ind1	01
-ind2	b04
+ind1	01	Type of edition
+ind2	b04	Source of classification number
 a	R	Classification number
 b	NR	Item number
 2	NR	Edition number
@@ -751,8 +751,8 @@ b	NR	Item number
 8	R	Field link and sequence number
 
 084	R	OTHER CLASSIFICATION NUMBER
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Classification number
 b	NR	Item number
 2	NR	Source of number
@@ -760,8 +760,8 @@ b	NR	Item number
 8	R	Field link and sequence number
 
 086	R	GOVERNMENT DOCUMENT CLASSIFICATION NUMBER
-ind1	b01
-ind2	blank
+ind1	b01	Number source
+ind2	blank	Undefined
 a	NR	Classification number
 z	R	Canceled/invalid classification number
 2	NR	Number source
@@ -769,16 +769,16 @@ z	R	Canceled/invalid classification number
 8	R	Field link and sequence number
 
 088	R	REPORT NUMBER
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Report number
 z	R	Canceled/invalid report number
 6	NR	Linkage
 8	R	Field link and sequence number
 
 100	NR	MAIN ENTRY--PERSONAL NAME
-ind1	013
-ind2	blank
+ind1	013	Type of personal name entry element
+ind2	blank	Undefined
 a	NR	Personal name
 b	NR	Numeration
 c	R	Titles and other words associated with a name
@@ -799,8 +799,8 @@ u	NR	Affiliation
 8	R	Field link and sequence number
 
 110	NR	MAIN ENTRY--CORPORATE NAME
-ind1	012
-ind2	blank
+ind1	012	Type of corporate name entry element
+ind2	blank	Undefined
 a	NR	Corporate name or jurisdiction name as entry element
 b	R	Subordinate unit
 c	NR	Location of meeting
@@ -819,8 +819,8 @@ u	NR	Affiliation
 8	R	Field link and sequence number
 
 111	NR	MAIN ENTRY--MEETING NAME
-ind1	012
-ind2	blank
+ind1	012	Type of meeting name entry element
+ind2	blank	Undefined
 a	NR	Meeting name or jurisdiction name as entry element
 c	NR	Location of meeting
 d	NR	Date of meeting
@@ -839,8 +839,8 @@ u	NR	Affiliation
 8	R	Field link and sequence number
 
 130	NR	MAIN ENTRY--UNIFORM TITLE
-ind1	0-9
-ind2	blank
+ind1	0-9	Nonfiling characters
+ind2	blank	Undefined
 a	NR	Uniform title
 d	R	Date of treaty signing
 f	NR	Date of a work
@@ -859,8 +859,8 @@ t	NR	Title of a work
 8	R	Field link and sequence number
 
 210	R	ABBREVIATED TITLE
-ind1	01
-ind2	b0
+ind1	01	Title added entry
+ind2	b0	Type
 a	NR	Abbreviated title
 b	NR	Qualifying information
 2	R	Source
@@ -868,16 +868,16 @@ b	NR	Qualifying information
 8	R	Field link and sequence number
 
 222	R	KEY TITLE
-ind1	b0123
-ind2	0-9
+ind1	b0123	Specifies whether variant title and/or added entry is required
+ind2	0-9	Nonfiling characters
 a	NR	Key title
 b	NR	Qualifying information
 6	NR	Linkage
 8	R	Field link and sequence number
 
 240	NR	UNIFORM TITLE
-ind1	01
-ind2	0-9
+ind1	01	Uniform title printed or displayed
+ind2	0-9	Nonfiling characters
 a	NR	Uniform title
 d	R	Date of treaty signing
 f	NR	Date of a work
@@ -895,8 +895,8 @@ s	NR	Version
 8	R	Field link and sequence number
 
 242	R	TRANSLATION OF TITLE BY CATALOGING AGENCY
-ind1	01
-ind2	0-9
+ind1	01	Title added entry
+ind2	0-9	Nonfiling characters
 a	NR	Title
 b	NR	Remainder of title
 c	NR	Statement of responsibility, etc.
@@ -908,8 +908,8 @@ y	NR	Language code of translated title
 8	R	Field link and sequence number
 
 243	NR	COLLECTIVE UNIFORM TITLE
-ind1	01
-ind2	0-9
+ind1	01	Uniform title printed or displayed
+ind2	0-9	Nonfiling characters
 a	NR	Uniform title
 d	R	Date of treaty signing
 f	NR	Date of a work
@@ -927,8 +927,8 @@ s	NR	Version
 8	R	Field link and sequence number
 
 245	NR	TITLE STATEMENT
-ind1	01
-ind2	0-9
+ind1	01	Title added entry
+ind2	0-9	Nonfiling characters
 a	NR	Title
 b	NR	Remainder of title
 c	NR	Statement of responsibility, etc.
@@ -943,8 +943,8 @@ s	NR	Version
 8	R	Field link and sequence number
 
 246	R	VARYING FORM OF TITLE
-ind1	0123
-ind2	b012345678
+ind1	0123	Note/added entry controller
+ind2	b012345678	Type of title
 a	NR	Title proper/short title
 b	NR	Remainder of title
 f	NR	Date or sequential designation
@@ -958,8 +958,8 @@ p	R	Name of part/section of a work
 8	R	Field link and sequence number
 
 247	R	FORMER TITLE
-ind1	01
-ind2	01
+ind1	01	Title added entry
+ind2	01	Note controller
 a	NR	Title
 b	NR	Remainder of title
 f	NR	Date or sequential designation
@@ -972,22 +972,22 @@ x	NR	International Standard Serial Number
 8	R	Field link and sequence number
 
 250	NR	EDITION STATEMENT
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Edition statement
 6	NR	Linkage
 8	R	Field link and sequence number
 
 254	NR	MUSICAL PRESENTATION STATEMENT
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Musical presentation statement
 6	NR	Linkage
 8	R	Field link and sequence number
 
 255	R	CARTOGRAPHIC MATHEMATICAL DATA
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Statement of scale
 b	NR	Statement of projection
 c	NR	Statement of coordinates
@@ -999,22 +999,22 @@ g	NR	Exclusion G-ring coordinate pairs
 8	R	Field link and sequence number
 
 256	NR	COMPUTER FILE CHARACTERISTICS
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Computer file characteristics
 6	NR	Linkage
 8	R	Field link and sequence number
 
 257	NR	COUNTRY OF PRODUCING ENTITY FOR ARCHIVAL FILMS
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Country of producing entity
 6	NR	Linkage
 8	R	Field link and sequence number
 
 260	R	PUBLICATION, DISTRIBUTION, ETC. (IMPRINT)
-ind1	b23
-ind2	b0101
+ind1	b23	Sequence of publishing statements
+ind2	b0101	Undefined
 a	R	Place of publication, distribution, etc.
 b	R	Name of publisher, distributor, etc.
 c	R	Date of publication, distribution, etc.
@@ -1027,8 +1027,8 @@ g	NR	Date of manufacture
 8	R	Field link and sequence number
 
 261	NR	IMPRINT STATEMENT FOR FILMS (Pre-AACR 1 Revised)
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Producing company
 b	R	Releasing company (primary distributor)
 d	R	Date of production, release, etc.
@@ -1038,8 +1038,8 @@ f	R	Place of production, release, etc.
 8	R	Field link and sequence number
 
 262	NR	IMPRINT STATEMENT FOR SOUND RECORDINGS (Pre-AACR 2)
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Place of production, release, etc.
 b	NR	Publisher or trade name
 c	NR	Date of production, release, etc.
@@ -1049,15 +1049,15 @@ l	NR	Matrix and/or take number
 8	R	Field link and sequence number
 
 263	NR	PROJECTED PUBLICATION DATE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Projected publication date
 6	NR	Linkage
 8	R	Field link and sequence number
 
 270	R	ADDRESS
-ind1	b12
-ind2	b07
+ind1	b12	Level
+ind2	b07	Type of address
 a	R	Address
 b	NR	City
 c	NR	State or province
@@ -1081,8 +1081,8 @@ z	R	Public note
 8	R	Field link and sequence number
 
 300	R	PHYSICAL DESCRIPTION
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Extent
 b	NR	Other physical details
 c	R	Dimensions
@@ -1094,39 +1094,39 @@ g	R	Size of unit
 8	R	Field link and sequence number
 
 306	NR	PLAYING TIME
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Playing time
 6	NR	Linkage
 8	R	Field link and sequence number
 
 307	R	HOURS, ETC.
-ind1	b8
-ind2	blank
+ind1	b8	Display constant controller
+ind2	blank	Undefined
 a	NR	Hours
 b	NR	Additional information
 6	NR	Linkage
 8	R	Field link and sequence number
 
 310	NR	CURRENT PUBLICATION FREQUENCY
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Current publication frequency
 b	NR	Date of current publication frequency
 6	NR	Linkage
 8	R	Field link and sequence number
 
 321	R	FORMER PUBLICATION FREQUENCY
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Former publication frequency
 b	NR	Dates of former publication frequency
 6	NR	Linkage
 8	R	Field link and sequence number
 
 340	R	PHYSICAL MEDIUM
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Material base and configuration
 b	R	Dimensions
 c	R	Materials applied to surface
@@ -1140,8 +1140,8 @@ i	R	Technical specifications of medium
 8	R	Field link and sequence number
 
 342	R	GEOSPATIAL REFERENCE DATA
-ind1	01
-ind2	012345678
+ind1	01	Geospatial reference dimension
+ind2	012345678	Geospatial reference method
 a	NR	Name
 b	NR	Coordinate or distance units
 c	NR	Latitude resolution
@@ -1169,8 +1169,8 @@ w	NR	Local planar or local georeference information
 8	R	Field link and sequence number
 
 343	R	PLANAR COORDINATE DATA
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Planar coordinate encoding method
 b	NR	Planar distance units
 c	NR	Abscissa resolution
@@ -1184,8 +1184,8 @@ i	NR	Bearing reference meridian
 8	R	Field link and sequence number
 
 351	R	ORGANIZATION AND ARRANGEMENT OF MATERIALS
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Organization
 b	R	Arrangement
 c	NR	Hierarchical level
@@ -1194,8 +1194,8 @@ c	NR	Hierarchical level
 8	R	Field link and sequence number
 
 352	R	DIGITAL GRAPHIC REPRESENTATION
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Direct reference method
 b	R	Object type
 c	R	Object count
@@ -1208,8 +1208,8 @@ i	NR	Indirect reference description
 8	R	Field link and sequence number
 
 355	R	SECURITY CLASSIFICATION CONTROL
-ind1	0123458
-ind2	blank
+ind1	0123458	Controlled element
+ind2	blank	Undefined
 a	NR	Security classification
 b	R	Handling instructions
 c	R	External dissemination information
@@ -1223,8 +1223,8 @@ j	R	Authorization
 8	R	Field link and sequence number
 
 357	NR	ORIGINATOR DISSEMINATION CONTROL
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Originator control term
 b	R	Originating agency
 c	R	Authorized recipients of material
@@ -1233,16 +1233,16 @@ g	R	Other restrictions
 8	R	Field link and sequence number
 
 362	R	DATES OF PUBLICATION AND/OR SEQUENTIAL DESIGNATION
-ind1	01
-ind2	blank
+ind1	01	Format of date
+ind2	blank	Undefined
 a	NR	Dates of publication and/or sequential designation
 z	NR	Source of information
 6	NR	Linkage
 8	R	Field link and sequence number
 
 400	R	SERIES STATEMENT/ADDED ENTRY--PERSONAL NAME 
-ind1	013
-ind2	01
+ind1	013	Type of personal name entry element
+ind2	01	Pronoun represents main entry
 a	NR	Personal name
 b	NR	Numeration
 c	R	Titles and other words associated with a name
@@ -1263,8 +1263,8 @@ x	NR	International Standard Serial Number
 8	R	Field link and sequence number 
 
 410	R	SERIES STATEMENT/ADDED ENTRY--CORPORATE NAME
-ind1	012
-ind2	01
+ind1	012	Type of corporate name entry element
+ind2	01	Pronoun represents main entry
 a	NR	Corporate name or jurisdiction name as entry element
 b	R	Subordinate unit
 c	NR	Location of meeting
@@ -1285,8 +1285,8 @@ x	NR	International Standard Serial Number
 8	R	Field link and sequence number
 
 411	R	SERIES STATEMENT/ADDED ENTRY--MEETING NAME
-ind1	012
-ind2	01
+ind1	012	Type of meeting name entry element
+ind2	01	Pronoun represents main entry
 a	NR	Meeting name or jurisdiction name as entry element
 c	NR	Location of meeting
 d	NR	Date of meeting
@@ -1307,8 +1307,8 @@ x	NR	International Standard Serial Number
 8	R	Field link and sequence number
 
 440	R	SERIES STATEMENT/ADDED ENTRY--TITLE
-ind1	blank
-ind2	0-9
+ind1	blank	Undefined
+ind2	0-9	Nonfiling characters
 a	NR	Title
 n	R	Number of part/section of a work
 p	R	Name of part/section of a work
@@ -1318,8 +1318,8 @@ x	NR	International Standard Serial Number
 8	R	Field link and sequence number
 
 490	R	SERIES STATEMENT
-ind1	01
-ind2	blank
+ind1	01	Specifies whether series is traced
+ind2	blank	Undefined
 a	R	Series statement
 l	NR	Library of Congress call number
 v	R	Volume number/sequential designation 
@@ -1328,8 +1328,8 @@ x	NR	International Standard Serial Number
 8	R	Field link and sequence number
 
 500	R	GENERAL NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	General note
 3	NR	Materials specified
 5	NR	Institution to which field applies
@@ -1337,31 +1337,31 @@ a	NR	General note
 8	R	Field link and sequence number
 
 501	R	WITH NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	With note
 5	NR	Institution to which field applies
 6	NR	Linkage
 8	R	Field link and sequence number
 
 502	R	DISSERTATION NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Dissertation note
 6	NR	Linkage
 8	R	Field link and sequence number
 
 504	R	BIBLIOGRAPHY, ETC. NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Bibliography, etc. note
 b	NR	Number of references
 6	NR	Linkage
 8	R	Field link and sequence number
 
 505	R	FORMATTED CONTENTS NOTE
-ind1	0128
-ind2	b0
+ind1	0128	Display constant controller
+ind2	b0	Level of content designation
 a	NR	Formatted contents note
 g	R	Miscellaneous information
 r	R	Statement of responsibility
@@ -1371,8 +1371,8 @@ u	R	Uniform Resource Identifier
 8	R	Field link and sequence number
 
 506	R	RESTRICTIONS ON ACCESS NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Terms governing access
 b	R	Jurisdiction
 c	R	Physical access provisions
@@ -1385,23 +1385,23 @@ u	R	Uniform Resource Identifier
 8	R	Field link and sequence number
 
 507	NR	SCALE NOTE FOR GRAPHIC MATERIAL
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Representative fraction of scale note
 b	NR	Remainder of scale note
 6	NR	Linkage
 8	R	Field link and sequence number
 
 508	R	CREATION/PRODUCTION CREDITS NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Creation/production credits note
 6	NR	Linkage
 8	R	Field link and sequence number
 
 510	R	CITATION/REFERENCES NOTE
-ind1	01234
-ind2	blank
+ind1	01234	Coverage/location in source
+ind2	blank	Undefined
 a	NR	Name of source
 b	NR	Coverage of source
 c	NR	Location within source
@@ -1411,23 +1411,23 @@ x	NR	International Standard Serial Number
 8	R	Field link and sequence number
 
 511	R	PARTICIPANT OR PERFORMER NOTE
-ind1	01
-ind2	blank
+ind1	01	Display constant controller
+ind2	blank	Undefined
 a	NR	Participant or performer note
 6	NR	Linkage
 8	R	Field link and sequence number
 
 513	R	TYPE OF REPORT AND PERIOD COVERED NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Type of report
 b	NR	Period covered
 6	NR	Linkage
 8	R	Field link and sequence number
 
 514	NR	DATA QUALITY NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Attribute accuracy report
 b	R	Attribute accuracy value
 c	R	Attribute accuracy explanation
@@ -1446,30 +1446,30 @@ z	R	Display note
 8	R	Field link and sequence number
 
 515	R	NUMBERING PECULIARITIES NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Numbering peculiarities note
 6	NR	Linkage
 8	R	Field link and sequence number
 
 516	R	TYPE OF COMPUTER FILE OR DATA NOTE
-ind1	b8
-ind2	blank
+ind1	b8	Display constant controller
+ind2	blank	Undefined
 a	NR	Type of computer file or data note
 6	NR	Linkage
 8	R	Field link and sequence number
 
 518	R	DATE/TIME AND PLACE OF AN EVENT NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Date/time and place of an event note
 3	NR	Materials specified
 6	NR	Linkage
 8	R	Field link and sequence number
 
 520	R	SUMMARY, ETC.
-ind1	b01238
-ind2	blank
+ind1	b01238	Display constant controller
+ind2	blank	Undefined
 a	NR	Summary, etc. note
 b	NR	Expansion of summary note
 u	R	Uniform Resource Identifier
@@ -1478,8 +1478,8 @@ u	R	Uniform Resource Identifier
 8	R	Field link and sequence number
 
 521	R	TARGET AUDIENCE NOTE
-ind1	b012348
-ind2	blank
+ind1	b012348	Display constant controller
+ind2	blank	Undefined
 a	R	Target audience note
 b	NR	Source
 3	NR	Materials specified
@@ -1487,15 +1487,15 @@ b	NR	Source
 8	R	Field link and sequence number
 
 522	R	GEOGRAPHIC COVERAGE NOTE
-ind1	b8
-ind2	blank
+ind1	b8	Display constant controller
+ind2	blank	Undefined
 a	NR	Geographic coverage note
 6	NR	Linkage
 8	R	Field link and sequence number
 
 524	R	PREFERRED CITATION OF DESCRIBED MATERIALS NOTE
-ind1	b8
-ind2	blank
+ind1	b8	Display constant controller
+ind2	blank	Undefined
 a	NR	Preferred citation of described materials note
 2	NR	Source of schema used
 3	NR	Materials specified
@@ -1503,15 +1503,15 @@ a	NR	Preferred citation of described materials note
 8	R	Field link and sequence number
 
 525	R	SUPPLEMENT NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Supplement note
 6	NR	Linkage
 8	R	Field link and sequence number
 
 526	R	STUDY PROGRAM INFORMATION NOTE
-ind1	08
-ind2	blank
+ind1	08	Display constant controller
+ind2	blank	Undefined
 a	NR	Program name
 b	NR	Interest level
 c	NR	Reading level
@@ -1524,8 +1524,8 @@ z	R	Public note
 8	R	Field link and sequence number
 
 530	R	ADDITIONAL PHYSICAL FORM AVAILABLE NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Additional physical form available note
 b	NR	Availability source
 c	NR	Availability conditions
@@ -1536,8 +1536,8 @@ u	R	Uniform Resource Identifier
 8	R	Field link and sequence number
 
 533	R	REPRODUCTION NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Type of reproduction
 b	R	Place of reproduction
 c	R	Agency responsible for reproduction
@@ -1552,8 +1552,8 @@ n	R	Note about reproduction
 8	R	Field link and sequence number
 
 534	R	ORIGINAL VERSION NOTE
-ind1	blank
-ind2	b01
+ind1	blank	Undefined
+ind2	b01	Undefined
 a	NR	Main entry of original
 b	NR	Edition statement of original
 c	NR	Publication, distribution, etc. of original
@@ -1571,8 +1571,8 @@ z	R	International Standard Book Number
 8	R	Field link and sequence number
 
 535	R	LOCATION OF ORIGINALS/DUPLICATES NOTE
-ind1	12
-ind2	blank
+ind1	12	Additional information about custodian
+ind2	blank	Undefined
 a	NR	Custodian
 b	R	Postal address
 c	R	Country
@@ -1583,8 +1583,8 @@ g	NR	Repository location code
 8	R	Field link and sequence number
 
 536	R	FUNDING INFORMATION NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Text of note
 b	R	Contract number
 c	R	Grant number
@@ -1597,15 +1597,15 @@ h	R	Work unit number
 8	R	Field link and sequence number
 
 538	R	SYSTEM DETAILS NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	System details note
 6	NR	Linkage
 8	R	Field link and sequence number
 
 540	R	TERMS GOVERNING USE AND REPRODUCTION NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Terms governing use and reproduction
 b	NR	Jurisdiction
 c	NR	Authorization
@@ -1617,8 +1617,8 @@ u	R	Uniform Resource Identifier
 8	R	Field link and sequence number
 
 541	R	IMMEDIATE SOURCE OF ACQUISITION NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Source of acquisition
 b	NR	Address
 c	NR	Method of acquisition
@@ -1634,8 +1634,8 @@ o	R	Type of unit
 8	R	Field link and sequence number
 
 544	R	LOCATION OF OTHER ARCHIVAL MATERIALS NOTE
-ind1	b01
-ind2	blank
+ind1	b01	Relationship
+ind2	blank	Undefined
 a	R	Custodian
 b	R	Address
 c	R	Country
@@ -1647,8 +1647,8 @@ n	R	Note
 8	R	Field link and sequence number
 
 545	R	BIOGRAPHICAL OR HISTORICAL DATA
-ind1	b01
-ind2	blank
+ind1	b01	Type of data
+ind2	blank	Undefined
 a	NR	Biographical or historical note
 b	NR	Expansion
 u	R	Uniform Resource Identifier
@@ -1656,8 +1656,8 @@ u	R	Uniform Resource Identifier
 8	R	Field link and sequence number
 
 546	R	LANGUAGE NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Language note
 b	R	Information code or alphabet
 3	NR	Materials specified
@@ -1665,22 +1665,22 @@ b	R	Information code or alphabet
 8	R	Field link and sequence number
 
 547	R	FORMER TITLE COMPLEXITY NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Former title complexity note
 6	NR	Linkage
 8	R	Field link and sequence number
 
 550	R	ISSUING BODY NOTE
-ind1	blank
-ind2	b01
+ind1	blank	Undefined
+ind2	b01	Undefined
 a	NR	Issuing body note
 6	NR	Linkage
 8	R	Field link and sequence number
 
 552	R	ENTITY AND ATTRIBUTE INFORMATION NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Entity type label
 b	NR	Entity type definition and source
 c	NR	Attribute label
@@ -1703,8 +1703,8 @@ z	R	Display note
 8	R	Field link and sequence number
 
 555	R	CUMULATIVE INDEX/FINDING AIDS NOTE
-ind1	b08
-ind2	blank
+ind1	b08	Display constant controller
+ind2	blank	Undefined
 a	NR	Cumulative index/finding aids note
 b	R	Availability source
 c	NR	Degree of control
@@ -1715,16 +1715,16 @@ u	R	Uniform Resource Identifier
 8	R	Field link and sequence number
 
 556	R	INFORMATION ABOUT DOCUMENTATION NOTE
-ind1	b8
-ind2	blank
+ind1	b8	Display constant controller
+ind2	blank	Undefined
 a	NR	Information about documentation note
 z	R	International Standard Book Number
 6	NR	Linkage
 8	R	Field link and sequence number
 
 561	R	OWNERSHIP AND CUSTODIAL HISTORY
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	History
 3	NR	Materials specified
 5	NR	Institution to which field applies
@@ -1732,8 +1732,8 @@ a	NR	History
 8	R	Field link and sequence number
 
 562	R	COPY AND VERSION IDENTIFICATION NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Identifying markings
 b	R	Copy identification
 c	R	Version identification
@@ -1745,8 +1745,8 @@ e	R	Number of copies
 8	R	Field link and sequence number
 
 563	R	BINDING INFORMATION
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Binding note
 u	R	Uniform Resource Identifier
 3	NR	Materials specified
@@ -1755,8 +1755,8 @@ u	R	Uniform Resource Identifier
 8	R	Field link and sequence number
 
 565	R	CASE FILE CHARACTERISTICS NOTE
-ind1	b08
-ind2	blank
+ind1	b08	Display constant controller
+ind2	blank	Undefined
 a	NR	Number of cases/variables
 b	R	Name of variable
 c	R	Unit of analysis
@@ -1767,22 +1767,22 @@ e	R	Filing scheme or code
 8	R	Field link and sequence number
 
 567	R	METHODOLOGY NOTE
-ind1	b8
-ind2	blank
+ind1	b8	Display constant controller
+ind2	blank	Undefined
 a	NR	Methodology note
 6	NR	Linkage
 8	R	Field link and sequence number
 
 580	R	LINKING ENTRY COMPLEXITY NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Linking entry complexity note
 6	NR	Linkage
 8	R	Field link and sequence number
 
 581	R	PUBLICATIONS ABOUT DESCRIBED MATERIALS NOTE
-ind1	b8
-ind2	blank
+ind1	b8	Display constant controller
+ind2	blank	Undefined
 a	NR	Publications about described materials note
 z	R	International Standard Book Number
 3	NR	Materials specified
@@ -1790,8 +1790,8 @@ z	R	International Standard Book Number
 8	R	Field link and sequence number
 
 583	R	ACTION NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Action
 b	R	Action identification
 c	R	Time/date of action
@@ -1815,8 +1815,8 @@ z	R	Public note
 8	R	Field link and sequence number
 
 584	R	ACCUMULATION AND FREQUENCY OF USE NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Accumulation
 b	R	Frequency of use
 3	NR	Materials specified
@@ -1825,8 +1825,8 @@ b	R	Frequency of use
 8	R	Field link and sequence number
 
 585	R	EXHIBITIONS NOTE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Exhibitions note
 3	NR	Materials specified
 5	NR	Institution to which field applies
@@ -1834,16 +1834,16 @@ a	NR	Exhibitions note
 8	R	Field link and sequence number
 
 586	R	AWARDS NOTE
-ind1	b8
-ind2	blank
+ind1	b8	Display constant controller
+ind2	blank	Undefined
 a	NR	Awards note
 3	NR	Materials specified
 6	NR	Linkage
 8	R	Field link and sequence number
 
 600	R	SUBJECT ADDED ENTRY--PERSONAL NAME
-ind1	013
-ind2	01234567
+ind1	013	Type of personal name entry element
+ind2	01234567	Thesaurus
 a	NR	Personal name
 b	NR	Numeration
 c	R	Titles and other words associated with a name
@@ -1875,8 +1875,8 @@ z	R	Geographic subdivision
 8	R	Field link and sequence number
 
 610	R	SUBJECT ADDED ENTRY--CORPORATE NAME
-ind1	012
-ind2	01234567
+ind1	012	Type of corporate name entry element
+ind2	01234567	Thesaurus
 a	NR	Corporate name or jurisdiction name as entry element
 b	R	Subordinate unit
 c	NR	Location of meeting
@@ -1906,8 +1906,8 @@ z	R	Geographic subdivision
 8	R	Field link and sequence number
 
 611	R	SUBJECT ADDED ENTRY--MEETING NAME
-ind1	012
-ind2	01234567
+ind1	012	Type of meeting name entry element
+ind2	01234567	Thesaurus
 a	NR	Meeting name or jurisdiction name as entry element
 c	NR	Location of meeting
 d	NR	Date of meeting
@@ -1934,8 +1934,8 @@ z	R	Geographic subdivision
 8	R	Field link and sequence number
 
 630	R	SUBJECT ADDED ENTRY--UNIFORM TITLE
-ind1	0-9
-ind2	01234567
+ind1	0-9	Nonfiling characters
+ind2	01234567	Thesaurus
 a	NR	Uniform title
 d	R	Date of treaty signing
 f	NR	Date of a work
@@ -1960,8 +1960,8 @@ z	R	Geographic subdivision
 8	R	Field link and sequence number
 
 648	R	SUBJECT ADDED ENTRY--CHRONOLOGICAL TERM
-ind1	blank
-ind2	01234567
+ind1	blank	Undefined
+ind2	01234567	Thesaurus
 a	NR	Chronological term
 v	R	Form subdivision
 x	R	General subdivision
@@ -1973,8 +1973,8 @@ z	R	Geographic subdivision
 8	R	Field link and sequence number
 
 650	R	SUBJECT ADDED ENTRY--TOPICAL TERM
-ind1	b012
-ind2	01234567
+ind1	b012	Level of subject
+ind2	01234567	Thesaurus
 a	NR	Topical term or geographic name as entry element
 b	NR	Topical term following geographic name as entry element
 c	NR	Location of event
@@ -1990,8 +1990,8 @@ z	R	Geographic subdivision
 8	R	Field link and sequence number
 
 651	R	SUBJECT ADDED ENTRY--GEOGRAPHIC NAME
-ind1	blank
-ind2	01234567
+ind1	blank	Undefined
+ind2	01234567	Thesaurus
 a	NR	Geographic name
 v	R	Form subdivision
 x	R	General subdivision
@@ -2003,15 +2003,15 @@ z	R	Geographic subdivision
 8	R	Field link and sequence number
 
 653	R	INDEX TERM--UNCONTROLLED
-ind1	b012
-ind2	blank
+ind1	b012	Level of index term
+ind2	blank	Undefined
 a	R	Uncontrolled term
 6	NR	Linkage
 8	R	Field link and sequence number
 
 654	R	SUBJECT ADDED ENTRY--FACETED TOPICAL TERMS
-ind1	b012
-ind2	blank
+ind1	b012	Level of subject
+ind2	blank	Undefined
 a	NR	Focus term
 b	R	Non-focus term
 c	R	Facet/hierarchy designation
@@ -2024,8 +2024,8 @@ z	R	Geographic subdivision
 8	R	Field link and sequence number
 
 655	R	INDEX TERM--GENRE/FORM
-ind1	b0
-ind2	01234567
+ind1	b0	Type of heading
+ind2	01234567	Thesaurus
 a	NR	Genre/form data or focus term
 b	R	Non-focus term
 c	R	Facet/hierarchy designation
@@ -2040,8 +2040,8 @@ z	R	Geographic subdivision
 8	R	Field link and sequence number
 
 656	R	INDEX TERM--OCCUPATION
-ind1	blank
-ind2	7
+ind1	blank	Undefined
+ind2	7	Source of term
 a	NR	Occupation
 k	NR	Form
 v	R	Form subdivision
@@ -2054,8 +2054,8 @@ z	R	Geographic subdivision
 8	R	Field link and sequence number
 
 657	R	INDEX TERM--FUNCTION
-ind1	blank
-ind2	7
+ind1	blank	Undefined
+ind2	7	Source of term
 a	NR	Function
 v	R	Form subdivision
 x	R	General subdivision
@@ -2067,8 +2067,8 @@ z	R	Geographic subdivision
 8	R	Field link and sequence number
 
 658	R	INDEX TERM--CURRICULUM OBJECTIVE
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Main curriculum objective
 b	R	Subordinate curriculum objective
 c	NR	Curriculum code
@@ -2078,8 +2078,8 @@ d	NR	Correlation factor
 8	R	Field link and sequence number
 
 700	R	ADDED ENTRY--PERSONAL NAME
-ind1	013
-ind2	b2
+ind1	013	Type of personal name entry element
+ind2	b2	Type of added entry
 a	NR	Personal name
 b	NR	Numeration
 c	R	Titles and other words associated with a name
@@ -2108,8 +2108,8 @@ x	NR	International Standard Serial Number
 8	R	Field link and sequence number
 
 710	R	ADDED ENTRY--CORPORATE NAME
-ind1	012
-ind2	b2
+ind1	012	Type of corporate name entry element
+ind2	b2	Type of added entry
 a	NR	Corporate name or jurisdiction name as entry element
 b	R	Subordinate unit
 c	NR	Location of meeting
@@ -2136,8 +2136,8 @@ x	NR	International Standard Serial Number
 8	R	Field link and sequence number
 
 711	R	ADDED ENTRY--MEETING NAME
-ind1	012
-ind2	b2
+ind1	012	Type of meeting name entry element
+ind2	b2	Type of added entry
 a	NR	Meeting name or jurisdiction name as entry element
 c	NR	Location of meeting
 d	NR	Date of meeting
@@ -2161,8 +2161,8 @@ x	NR	International Standard Serial Number
 8	R	Field link and sequence number
 
 720	R	ADDED ENTRY--UNCONTROLLED NAME
-ind1	b12
-ind2	blank
+ind1	b12	Type of name
+ind2	blank	Undefined
 a	NR	Name
 e	R	Relator term
 4	R	Relator code
@@ -2170,8 +2170,8 @@ e	R	Relator term
 8	R	Field link and sequence number
 
 730	R	ADDED ENTRY--UNIFORM TITLE
-ind1	0-9
-ind2	b2
+ind1	0-9	Nonfiling characters
+ind2	b2	Type of added entry
 a	NR	Uniform title
 d	R	Date of treaty signing
 f	NR	Date of a work
@@ -2193,8 +2193,8 @@ x	NR	International Standard Serial Number
 8	R	Field link and sequence number
 
 740	R	ADDED ENTRY--UNCONTROLLED RELATED/ANALYTICAL TITLE
-ind1	0-9
-ind2	b2
+ind1	0-9	Nonfiling characters
+ind2	b2	Type of added entry
 a	NR	Uncontrolled related/analytical title
 h	NR	Medium
 n	R	Number of part/section of a work
@@ -2204,8 +2204,8 @@ p	R	Name of part/section of a work
 8	R	Field link and sequence number
 
 752	R	ADDED ENTRY--HIERARCHICAL PLACE NAME
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Country
 b	NR	State, province, territory
 c	NR	County, region, islands area
@@ -2214,8 +2214,8 @@ d	NR	City
 8	R	Field link and sequence number
 
 753	R	SYSTEM DETAILS ACCESS TO COMPUTER FILES
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Make and model of machine
 b	NR	Programming language
 c	NR	Operating system
@@ -2223,8 +2223,8 @@ c	NR	Operating system
 8	R	Field link and sequence number
 
 754	R	ADDED ENTRY--TAXONOMIC IDENTIFICATION
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Taxonomic name
 c	R	Taxonomic category
 d	R	Common or alternative name
@@ -2235,8 +2235,8 @@ z	R	Public note
 8	R	Field link and sequence number
 
 760	R	MAIN SERIES ENTRY
-ind1	01
-ind2	b8
+ind1	01	Note controller
+ind2	b8	Display constant controller
 a	NR	Main entry heading
 b	NR	Edition
 c	NR	Qualifying information
@@ -2257,8 +2257,8 @@ y	NR	CODEN designation
 8	R	Field link and sequence number
 
 762	R	SUBSERIES ENTRY
-ind1	01
-ind2	b8
+ind1	01	Note controller
+ind2	b8	Display constant controller
 a	NR	Main entry heading
 b	NR	Edition
 c	NR	Qualifying information
@@ -2279,8 +2279,8 @@ y	NR	CODEN designation
 8	R	Field link and sequence number
 
 765	R	ORIGINAL LANGUAGE ENTRY
-ind1	01
-ind2	b8
+ind1	01	Note controller
+ind2	b8	Display constant controller
 a	NR	Main entry heading
 b	NR	Edition
 c	NR	Qualifying information
@@ -2305,8 +2305,8 @@ z	R	International Standard Book Number
 8	R	Field link and sequence number
 
 767	R	TRANSLATION ENTRY
-ind1	01
-ind2	b8
+ind1	01	Note controller
+ind2	b8	Display constant controller
 a	NR	Main entry heading
 b	NR	Edition
 c	NR	Qualifying information
@@ -2331,8 +2331,8 @@ z	R	International Standard Book Number
 8	R	Field link and sequence number
 
 770	R	SUPPLEMENT/SPECIAL ISSUE ENTRY
-ind1	01
-ind2	b8
+ind1	01	Note controller
+ind2	b8	Display constant controller
 a	NR	Main entry heading
 b	NR	Edition
 c	NR	Qualifying information
@@ -2357,8 +2357,8 @@ z	R	International Standard Book Number
 8	R	Field link and sequence number
 
 772	R	SUPPLEMENT PARENT ENTRY
-ind1	01
-ind2	b08
+ind1	01	Note controller
+ind2	b08	Display constant controller
 a	NR	Main entry heading
 b	NR	Edition
 c	NR	Qualifying information
@@ -2383,8 +2383,8 @@ z	R	International Stan dard Book Number
 8	R	Field link and sequence number
 
 773	R	HOST ITEM ENTRY
-ind1	01
-ind2	b8
+ind1	01	Note controller
+ind2	b8	Display constant controller
 a	NR	Main entry heading
 b	NR	Edition
 d	NR	Place, publisher, and date of publication
@@ -2410,8 +2410,8 @@ z	R	International Standard Book Number
 8	R	Field link and sequence number
 
 774	R	CONSTITUENT UNIT ENTRY
-ind1	01
-ind2	b8
+ind1	01	Note controller
+ind2	b8	Display constant controller
 a	NR	Main entry heading
 b	NR	Edition
 c	NR	Qualifying information
@@ -2436,8 +2436,8 @@ z	R	International Standard Book Number
 8	R	Field link and sequence number
 
 775	R	OTHER EDITION ENTRY
-ind1	01
-ind2	b8012
+ind1	01	Note controller
+ind2	b8012	Display constant controller
 a	NR	Main entry heading
 b	NR	Edition
 c	NR	Qualifying information
@@ -2464,8 +2464,8 @@ z	R	International Standard Book Number
 8	R	Field link and sequence number
 
 776	R	ADDITIONAL PHYSICAL FORM ENTRY
-ind1	01
-ind2	b8
+ind1	01	Note controller
+ind2	b8	Display constant controller
 a	NR	Main entry heading
 b	NR	Edition
 c	NR	Qualifying information
@@ -2490,8 +2490,8 @@ z	R	International Standard Book Number
 8	R	Field link and sequence number
 
 777	R	ISSUED WITH ENTRY
-ind1	01
-ind2	b8
+ind1	01	Note controller
+ind2	b8	Display constant controller
 a	NR	Main entry heading
 b	NR	Edition
 c	NR	Qualifying information
@@ -2513,8 +2513,8 @@ y	NR	CODEN designation
 8	R	Field link and sequence number
 
 780	R	PRECEDING ENTRY
-ind1	01
-ind2	01234567
+ind1	01	Note controller
+ind2	01234567	Type of relationship
 a	NR	Main entry heading
 b	NR	Edition
 c	NR	Qualifying information
@@ -2539,8 +2539,8 @@ z	R	International Standard Book Number
 8	R	Field link and sequence number
 
 785	R	SUCCEEDING ENTRY
-ind1	01
-ind2	012345678
+ind1	01	Note controller
+ind2	012345678	Type of relationship
 a	NR	Main entry heading
 b	NR	Edition
 c	NR	Qualifying information
@@ -2565,8 +2565,8 @@ z	R	International Standard Book Number
 8	R	Field link and sequence number
 
 786	R	DATA SOURCE ENTRY
-ind1	01
-ind2	b8
+ind1	01	Note controller
+ind2	b8	Display constant controller
 a	NR	Main entry heading
 b	NR	Edition
 c	NR	Qualifying information
@@ -2594,8 +2594,8 @@ z	R	International Standard Book Number
 8	R	Field link and sequence number
 
 787	R	NONSPECIFIC RELATIONSHIP ENTRY
-ind1	01
-ind2	b8
+ind1	01	Note controller
+ind2	b8	Display constant controller
 a	NR	Main entry heading
 b	NR	Edition
 c	NR	Qualifying information
@@ -2620,8 +2620,8 @@ z	R	International Standard Book Number
 8	R	Field link and sequence number
 
 800	R	SERIES ADDED ENTRY--PERSONAL NAME
-ind1	013
-ind2	blank
+ind1	013	Type of personal name entry element
+ind2	blank	Undefined
 a	NR	Personal name
 b	NR	Numeration
 c	R	Titles and other words associated with a name
@@ -2648,8 +2648,8 @@ v	NR	Volume/sequential designation
 8	R	Field link and sequence number
 
 810	R	SERIES ADDED ENTRY--CORPORATE NAME
-ind1	012
-ind2	blank
+ind1	012	Type of corporate name entry element
+ind2	blank	Undefined
 a	NR	Corporate name or jurisdiction name as entry element
 b	R	Subordinate unit
 c	NR	Location of meeting
@@ -2674,8 +2674,8 @@ v	NR	Volume/sequential designation
 8	R	Field link and sequence number
 
 811	R	SERIES ADDED ENTRY--MEETING NAME
-ind1	012
-ind2	blank
+ind1	012	Type of meeting name entry element
+ind2	blank	Undefined
 a	NR	Meeting name or jurisdiction name as entry element
 c	NR	Location of meeting
 d	NR	Date of meeting
@@ -2697,8 +2697,8 @@ v	NR	Volume/sequential designation
 8	R	Field link and sequence number
 
 830	R	SERIES ADDED ENTRY--UNIFORM TITLE
-ind1	blank
-ind2	0-9
+ind1	blank	Undefined
+ind2	0-9	Nonfiling characters
 a	NR	Uniform title
 d	R	Date of treaty signing
 f	NR	Date of a work
@@ -2728,14 +2728,14 @@ v	NR	Volume/sequential designation
 845	R	TERMS GOVERNING USE AND REPRODUCTION NOTE
 
 850	R	HOLDING INSTITUTION
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	R	Holding institution
 8	R	Field link and sequence number
 
 852	R	LOCATION
-ind1	b012345678
-ind2	b012
+ind1	b012345678	Shelving scheme
+ind2	b012	Shelving order
 a	NR	Location
 b	R	Sublocation or collection
 c	R	Shelving location
@@ -2767,8 +2767,8 @@ z	R	Public note
 855	R	CAPTIONS AND PATTERN--INDEXES
 
 856	R	ELECTRONIC LOCATION AND ACCESS
-ind1	b012347
-ind2	b0128
+ind1	b012347	Access method
+ind2	b0128	Relationship
 a	R	Host name
 b	R	Access number
 c	R	Compression information
@@ -2817,19 +2817,19 @@ z	R	Public note
 878	R	ITEM INFORMATION--INDEXES
 
 880	R	ALTERNATE GRAPHIC REPRESENTATION
-ind1	
-ind2	
+ind1		Same as associated field
+ind2		Same as associated field
 6	NR	Linkage
 
 886	R	FOREIGN MARC INFORMATION FIELD
-ind1	012
-ind2	blank
+ind1	012	Type of field
+ind2	blank	Undefined
 a	NR	Tag of the foreign MARC field
 b	NR	Content of the foreign MARC field
 2	NR	Source of data
 
 887	R	NON-MARC INFORMATION FIELD
-ind1	blank
-ind2	blank
+ind1	blank	Undefined
+ind2	blank	Undefined
 a	NR	Content of non-MARC field
 2	NR	Source of data

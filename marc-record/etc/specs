@@ -37,6 +37,8 @@ my $i1;
 my $i2;
 my $curr_indicator;
 my $ntags;
+my $desc1;
+my $desc2;
 
 my $started = 0;
 for ( @lines ) {
@@ -69,13 +71,17 @@ for ( @lines ) {
     next unless $in_tag;
     next if /OBSOLETE/;
     
-    if (/^First/) {
+    if (/^First - (.+)/) {
 	$curr_indicator = 1;
-    } elsif (/^Second/) {
-	print_indicator( 1, $i1 );
+	$desc1 = $1;
+    } elsif (/^Second - (.+)/) {
+	print_indicator( 1, $i1, $desc1 );
+	undef $desc1;
 	$curr_indicator = 2;
+	$desc2 = $1;
     } elsif (/^Subfield/) {
-	print_indicator( 2, $i2 );
+	print_indicator( 2, $i2, $desc2 );
+	undef $desc2;
 	$curr_indicator = 0;
     } else {
 	if ($curr_indicator) {
@@ -104,8 +110,9 @@ for ( @lines ) {
 sub print_indicator {
     my $n = shift;
     my $val = shift;
+    my $desc = shift;
 
     $val = "blank" if $val eq "b";
 
-    print "ind$n\t$val\n";
+    print "ind$n\t$val\t$desc\n";
 }
