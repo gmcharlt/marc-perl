@@ -233,7 +233,7 @@ sub record {
     push( @xml, "  <leader>" . escape($record->leader()) . "</leader>" );
     foreach my $field ( $record->fields() ) {
         my $tag = $field->tag();
-        if ( $field->is_control_tag() ) { 
+        if ( $field->is_control_field() ) { 
             my $data = $field->data();
             push( @xml, qq(  <controlfield tag="$tag">) .
                 escape($data). qq(</controlfield>) );

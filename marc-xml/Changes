@@ -1,5 +1,9 @@
 Revision history for Perl extension MARC-XML
 
+0.61  Mon May 09 10:32:55 2004 <Summers>
+    - need to require MARC::Record v1.36 since it renames is_control_tag()
+    to is_control_field().
+
 0.6   Sat May 08 02:23:04 2004 <Summers>
     - rudimentary XML encoding (thanks to Peter Robertson for inquiring about
       it)
