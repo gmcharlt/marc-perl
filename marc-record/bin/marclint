@@ -56,7 +56,7 @@ my $rc = GetOptions(
 	"stats!" => \$stats,
 	"quiet!" => \$quiet,
 	"help"   => \$help,
-	"version" => sub { print "marcdump v$MARC::Record::VERSION\n"; exit 1; },
+	"version"   => sub { print "$0, using MARC::Record v$MARC::Record::VERSION\n"; exit 1; },
 	);
 
 my @files = @ARGV;
