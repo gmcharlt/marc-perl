@@ -1,15 +1,16 @@
 Revision history for Perl extension MARC::Record.
 
-1.31	[FIXES]
-	- set_leader_lengths() will now also set other MARC21 leader defaults.
-	Postitions 10-11, 20-23. For details on the defaults see:
-	http://www.loc.gov/marc/bibliographic/ecbdldrd.html 
-	- MARC::Batch::next() now accepts a filter function.
-
-1.30
+1.31	
 	[FIXES]
+	- set_leader_lengths() will now also set other MARC21 leader defaults.
+	  Postitions 10-11, 20-23. For details on the defaults see:
+	  http://www.loc.gov/marc/bibliographic/ecbdldrd.html 
+	- MARC::Batch::next() now accepts a filter function.
 	- Fixed an incorrect instruction in MARC::File::MicroLIF.
-	- Added sample usage for insert_grouped_fields().
+	- marclint actually counts the number of records now.
+
+	[DOCUMENTATION]
+	- Added sample usage for insert_grouped_fields()
 	- Added example about subfield v to x conversion to tutorial.
 	- Documentation fix for MARC::Field::new().
 	- Fixed useage of MARC::Record::append_fields() in example 17
