@@ -19,7 +19,7 @@ use Carp qw(croak);
 
 Version 1.17
 
-    $Id: Record.pm,v 1.46 2003/01/29 18:16:08 petdance Exp $
+    $Id: Record.pm,v 1.47 2003/01/29 23:52:24 petdance Exp $
 
 =cut
 
@@ -128,7 +128,7 @@ sub title_proper() {
 
     if ( $field ) {
 	my @subs = map { $_->[0] =~ /^[anp]$/ ? $_->[1] : "" } $field->subfields;
-	return join( "", @subs );
+	return join( " ", @subs );
     } else {
 	return "";
     }
