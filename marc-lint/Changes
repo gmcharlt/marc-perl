@@ -1,5 +1,6 @@
 1.41    unreleased
         - updated lint.t to use File::Spec for path to camel.usmarc
+        - reomved updir usage so 'make test' works properly
         
 1.40    Mon Dec 20 14:01:53 CST 2004
         - added DATA for tags 001-008
