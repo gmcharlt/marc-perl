@@ -68,8 +68,12 @@ FROM_TEXT: {
         [856, "4","3",
             u => "http://www.perl.com/",
             ],
+        [886, "0", "",
+            4 => "Some foreign thing",
+            q => "Another foreign thing",
+            ],
     );
-    is( $nfields, 8, "All the fields added OK" );
+    is( $nfields, 9, "All the fields added OK" );
 
     my @expected = (
         q{1XX: Only one 1XX tag is allowed, but I found 2 of them.},
