@@ -1,27 +1,83 @@
 package MARC::Charset::CyrillicBasic;
 
+=head1 NAME
+
+MARC::Charset::CyrillicBasic - MARC8/UTF8 encodings for Basic Cyrillic.
+
+
+=head1 SYNOPSIS
+
+ use MARC::Charset::CyrillicBasic;
+ my $cs = MARC::Charset::CyrillicBasic->new();
+
+=head1 DESCRIPTION
+
+MARC::Charset::ASCII provides a mapping between the MARC8 basic Cyrillic 
+character set and Unicode(UTF8). It is typically used by MARC::Charset, so 
+you probably don't need to use this yourself. 
+
+=head1 METHODS
+
+=cut 
+
 use strict;
 use utf8;
 use constant CHAR_SIZE	    => 1;
 my %marc2unicode;
+
+=head1 
+
+The constructor, which will return you a MARC::Charset::CyrillicBasic object.
+
+=cut
 
 sub new {
     my $class = shift;
     return bless {}, ref($class) || $class;
 }
 
+=head1 name()
+
+Returns the name of the character set.
+
+=cut
+
+
 sub name {
     return('Cyrillic-Basic');
 }
+
+=head1 lookup()
+
+The workhorse method that does the lookup. Pass it an a character and you'll
+get back the UTF8 character.
+
+=cut
+
 
 sub lookup {
     my ($self,$char) = @_; 
     return($marc2unicode{$char});
 }
 
+=head1 combining()
+
+Pass it a character and you'll get back a true value (1) if the character is 
+a combining character, and false (undef) if it is not.
+
+=cut
+
+
 sub combining {
     return(undef); ## aren't any
 }
+
+=head1 getCharSize()
+
+Returns the number of bytes in each character of this character set.
+
+=cut
+
 
 sub getCharSize {
     return(CHAR_SIZE);
@@ -125,5 +181,25 @@ chr(0x7D)=>chr(0x0429), #CYRILLIC CAPITAL LETTER SHCHA
 chr(0x7E)=>chr(0x0427), #CYRILLIC CAPITAL LETTER CHE
 
 );
+
+=head1 TODO
+
+=over 4 
+
+=item *
+
+=back
+
+=head1 AUTHORS
+
+=over 4
+
+=item Ed Summers <ehs@pobox.com>
+
+=back
+
+=cut
+
+
 
 1;

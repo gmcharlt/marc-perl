@@ -1,29 +1,94 @@
 package MARC::Charset::Ansel;
 
+=head1 NAME
+
+MARC::Charset::Ansel - MARC8/UTF8 mappings for Ansel
+
+=cut 
+
+
+=head1 SYNOPSIS
+
+=cut
+
+ use MARC::Charset::Ansel;
+ my $cs = MARC::Charset::Ansel->new();
+
+=head1 DESCRIPTION
+
+MARC::Charset::Ansel provides a mapping between the MARC8 Ansel character
+set and Unicode(UTF8). It is typically used by MARC::Charset, so you 
+probably don't need to use this yourself. 
+
+
+=cut
+
+
+=head1 METHODS
+
+=cut 
+
+
 use strict;
 use utf8;
 use constant CHAR_SIZE	    => 1;
 our %marc2unicode;
 our %combining;
 
+=head1 
+
+The constructor, which will return you a MARC::Charset::Ansel object.
+
+=cut
+
+
 sub new {
     my $class = shift;
     return bless {}, ref($class) || $class;
 }
 
+=head1 name()
+
+Returns the name of the character set.
+
+=cut
+
 sub name {
     return('Ansel');
 }
+
+=head1 lookup()
+
+The workhorse method that does the lookup. Pass it an a character and you'll
+get back the UTF8 character.
+
+=cut
+
 
 sub lookup {
     my ($self,$char) = @_; 
     return($marc2unicode{$char});
 }
 
+=head1 combining()
+
+Pass it a character and you'll get back a true value (1) if the character is 
+a combining character, and false (undef) if it is not.
+
+=cut
+
+
 sub combining {
     my ($self,$char) = @_;
     return($combining{$char});
 }
+
+=head1 getCharSize()
+
+Returns the number of bytes in each character of this character set.
+
+=cut
+
 
 sub getCharSize {
     return(CHAR_SIZE);
@@ -130,5 +195,24 @@ chr(0xFB) => 1, # DOUBLE TILDE, SECOND HALF / COMB DBLE TILDE RIGHT HALF
 chr(0xFE) => 1, # HIGH COMMA, CENTERED / COMBINING COMMA ABOVE (Psili)
 
 );
+
+=head1 TODO
+
+=over 4 
+
+=item *
+
+=back
+
+=head1 AUTHORS
+
+=over 4
+
+=item Ed Summers <ehs@pobox.com>
+
+=back
+
+=cut
+
 
 1;

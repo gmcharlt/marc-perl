@@ -1,50 +1,87 @@
 package MARC::Charset::GreekSymbols;
 
+=head1 NAME
+
+MARC::Charset::GreekSymbols - MARC8/UTF8 character encodings for Greek Symbols
+
+=head1 SYNOPSIS
+
+ use MARC::Charset::GreekSymbols;
+ my $cs = MARC::Charset::GreekSymbols->new();
+
+=head1 DESCRIPTION
+
+MARC::Charset::GreekSymbols provides a mapping between the MARC8 Greek Symbol 
+character set and Unicode(UTF8). It is typically used by MARC::Charset, so you 
+probably don't need to use this yourself. 
+
+=head1 METHODS
+
+=cut 
+
 use strict;
 use utf8;
 use constant CHAR_SIZE	    => 1;
 my %marc2unicode;
+
+=head1 
+
+The constructor, which will return you a MARC::Charset::GreekSymbols object.
+
+=cut
+
 
 sub new {
     my $class = shift;
     return bless {}, ref($class) || $class;
 }
 
+=head1 name()
+
+Returns the name of the character set.
+
+=cut
+
+
 sub name {
     return('Greek-Symbols');
 }
+
+=head1 lookup()
+
+The workhorse method that does the lookup. Pass it an a character and you'll
+get back the UTF8 character.
+
+=cut
+
 
 sub lookup {
     my ($self,$char) = @_; 
     return($marc2unicode{$char});
 }
 
+=head1 combining()
+
+Pass it a character and you'll get back a true value (1) if the character is 
+a combining character, and false (undef) if it is not.
+
+=cut
+
+
 sub combining {
     return(undef); ## aren't any
 }
 
+=head1 getCharSize()
+
+Returns the number of bytes in each character of this character set.
+
+=cut
+
+
 sub getCharSize {
     return(CHAR_SIZE);
 }
-
-#                 MARC 21 Specifications for Record Structure,
-#                      Character Sets, and Exchange Media
-#                            CHARACTER SETS: Part 3
-# 
-#                          Code Table 2: GREEK SYMBOLS
-# 
-#                                 January 2000
-#   ------------------------------------------------------------------------
-#   ------------------------------------------------------------------------
-# 
-# The first column in each table contains the MARC 8-bit code (in hex), the
-# second column the UCS/Unicode 16-bit code (in hex), and the third column
-# contains the character names: MARC name / UCS name. If the MARC name is the
-# same as or very similar to the UCS name, only the UCS name is given.
-# 
-#   ------------------------------------------------------------------------
-# 
-# GREEK SYMBOLS
 
 %marc2unicode = (
 
@@ -53,5 +90,25 @@ chr(0x62)=>chr(0x03B2),  #GREEK SMALL LETTER BETA
 chr(0x63)=>chr(0x03B3),  #GREEK SMALL LETTER GAMMA
 
 );
+
+=head1 TODO
+
+=over 4 
+
+=item *
+
+=back
+
+=head1 AUTHORS
+
+=over 4
+
+=item Ed Summers <ehs@pobox.com>
+
+=back
+
+=cut
+
+
 
 1;
