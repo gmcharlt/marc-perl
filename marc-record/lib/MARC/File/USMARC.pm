@@ -8,7 +8,7 @@ MARC::File::USMARC - USMARC-specific file handling
 
 use strict;
 use integer;
-use bytes; 
+eval 'use bytes'    if $] >= 5.006;
 eval 'use warnings' if $] >= 5.006;
 
 use vars qw( $ERROR );
@@ -17,7 +17,7 @@ use vars qw( $ERROR );
 
 Version 1.00
 
-    $Id: USMARC.pm,v 1.19 2002/08/26 14:58:37 petdance Exp $
+    $Id: USMARC.pm,v 1.20 2002/08/30 22:14:19 petdance Exp $
 
 =cut
 
