@@ -8,5 +8,7 @@ lib/MARC/Lint.pm
 pl/marcdump
 pl/marclint
 pl/lif2marc
-t/camel.t
+t/00.load.t
+t/10.camel.t
+t/20.clone.t
 t/camel.usmarc
