@@ -3,7 +3,7 @@
 use strict;
 use integer;
 
-use Test::More tests=>8;
+use Test::More tests=>10;
 
 BEGIN {
     use_ok( 'MARC::Batch' );
@@ -23,7 +23,7 @@ my $new = MARC::Field->new('650','','0','a','World Wide Web.');
 isa_ok( $new, 'MARC::Field', 'Field creation');
 
 my $nadds = $record->insert_fields_before($f650,$new);
-is( $nadds, 1 );
+is( $nadds, 1, "inserted exactly one field" );
 
 my $expected = 
 <<MARC_DATA;
@@ -62,3 +62,11 @@ MARC_DATA
 chomp($expected);
 
 is($record->as_formatted,$expected,'insert_fields_before');
+
+
+# make sure we get undef if the insert-before field isn't there
+my $not_in_record = MARC::Field->new('655','','0','a','World Wide Web','y','Stories.');
+$record->warnings();  # get rid of any warnings lying around
+my $hopefully_undef = $record->insert_fields_before( $not_in_record, $new );
+ok( !defined $hopefully_undef, "must return undef if can't find field to insert before" );
+is( scalar($record->warnings), 1, "got warning about not being able to insert" );

@@ -39,6 +39,8 @@ Revision history for Perl extension MARC::Record.
           if called as a setter with data that isn't the right length.
         - Added explicit tests for convenience function behavior (title(),
           edition(), etc.) when there's no data.
+        - Added test to verify insert_fields_before() behavior when the
+          field to insert before isn't in the record.
 
         [ENHANCEMENTS]
         - added MARC::Field::delete_subfields() and tests to t/67.subfield.t
