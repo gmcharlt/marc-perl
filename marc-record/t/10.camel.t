@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 30;
+use Test::More tests => 32;
 
 BEGIN {
     use_ok( 'MARC::Record' );
@@ -113,6 +113,16 @@ if ( $diskmarc ) {
 	is( $diskmarc->subfield(245,"c"), $marc->subfield(245,"c"), "Disk MARC matches built MARC" );
 }
 $file->close;
+
+
+# Test 7: return from field() when nothing matches
+TEST7: {
+    my @fields = $marc->field( '999' );  # doesn't exist in the record
+    is( scalar @fields, 0, "nothing returned for tag 999--array context" );
+    my $field = $marc->field( '999' );   # doesn't exist in the record
+    ok( !defined $field, "nothing returned for tag 999-scalar context" );
+}
+
 
 __END__
 LDR 00397nam  22001458a 4500

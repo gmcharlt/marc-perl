@@ -18,7 +18,7 @@ use Carp qw(croak);
 
 Version 1.39_01
 
-    $Id: Record.pm,v 1.84 2004/08/17 18:22:27 edsummers Exp $
+    $Id: Record.pm,v 1.85 2004/08/17 18:39:13 moregan Exp $
 
 =cut
 
@@ -188,8 +188,9 @@ sub fields() {
 
 =head2 field( I<tagspec(s)> )
 
-Returns a list of tags that match the field specifier, or in scalar
-context, just the first matching tag.
+Returns a list of tags that match the field specifier, or an empty
+list if nothing matched.  In scalar context, returns the first
+matching tag, or undef if nothing matched.
 
 The field specifier can be a simple number (i.e. "245"), or use the "."
 notation of wildcarding (i.e. subject tags are "6..").
@@ -221,6 +222,7 @@ sub field {
         } # for $maybe
     } # for $tag
 
+    return unless wantarray;
     return @list;
 }
 
