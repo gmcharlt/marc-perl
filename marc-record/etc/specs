@@ -99,10 +99,10 @@ for ( @lines ) {
 	    }
 
 	} else {
-	    if ( /^\$(.) - (.+) \((N?R)\)/ ) {
+	    if ( /^\$(.) - (.+)\s*\((N?R)\)/ ) {
 		my ($sub,$desc,$nr) = ($1,$2,$3);
 		print "$sub\t$nr\t$desc\n";
-	    }
+	    } 
 	}
     }
 } # main while
