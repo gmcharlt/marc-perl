@@ -5,17 +5,18 @@
 use strict;
 use integer;
 
-use MARC::Record;
-use Test::More tests=>5;
+use Test::More tests=>6;
 
-pass( 'Loaded modules' );
+BEGIN {
+    use_ok( 'MARC::File::USMARC' );
+}
 
 # Test 1: Testing as_usmarc()
-my $filename = 't/camel.usmarc';
-open( my $fh, $filename ) or die "Can't open $filename: $!";
-my $marc = MARC::Record::next_from_file( $fh );
-ok( defined $marc,		'Read from file' );
-close $fh;
+my $file = MARC::File::USMARC->in( 't/camel.usmarc' );
+ok( defined $file,  'Created $file object' );
+my $marc = $file->next();
+ok( defined $marc,  'Read from file' );
+$file->close;
 
 my $clone = $marc->clone;
 ok( defined $clone,		'Cloned record' );

@@ -5,8 +5,12 @@
 use strict;
 use integer;
 
-use MARC::Record;
 use Test::More 'no_plan';
+
+BEGIN {
+    use_ok( 'MARC::Record' );
+    use_ok( 'MARC::File::USMARC' );
+}
 
 pass( 'Loaded modules' );
 
@@ -80,20 +84,19 @@ is( $marc->subfield( 100, "a" ), "Wall, Larry.", 'Field/subfield lookup' );
 
 # Test 6: Reading from disk
 
-my $filename = "t/camel.usmarc";
-open( my $fh, $filename );
-ok( $fh, 'Reading $filename from disk' );
+my $file = MARC::File::USMARC->in( "t/camel.usmarc" );
+ok( defined $file, "Opened input file" );
 
 my $diskmarc;
 for my $n ( 1..8 ) {
-	$diskmarc = MARC::Record::next_from_file( $fh );
+	$diskmarc = $file->next();
 	ok( defined $diskmarc, "  Record #$n" );
 }
 	
 if ( $diskmarc ) {
 	is( $diskmarc->subfield(245,"c"), $marc->subfield(245,"c"), "Disk MARC matches built MARC" );
 }
-close $fh;
+$file->close;
 
 __END__
 LDR 00397nam  22001458a 4500
