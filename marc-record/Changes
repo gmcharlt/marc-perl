@@ -1,6 +1,6 @@
 Revision history for Perl extension MARC::Record.
 
-1.40
+1.39_01 Mon Jul 26 11:48:33 PDT 2004
 
         [ENHANCEMENTS]
         - Support for UTF8 in Perls >= 5.8.1. When using a utf8 friendly Perl

@@ -14,14 +14,16 @@ use vars qw( $ERROR );
 use MARC::Field;
 use Carp qw(croak);
 
-=head1 VERSION 1.4
+=head1 VERSION
 
-    $Id: Record.pm,v 1.82 2004/05/21 01:39:00 edsummers Exp $
+Version 1.39_01
+
+    $Id: Record.pm,v 1.83 2004/07/26 18:58:22 petdance Exp $
 
 =cut
 
 use vars qw( $VERSION );
-$VERSION = '1.4';
+$VERSION = '1.39_01';
 
 use Exporter;
 use vars qw( @ISA @EXPORTS @EXPORT_OK );

@@ -18,7 +18,6 @@ lib/MARC/File/Utils.pm
 lib/MARC/Lint.pm
 lib/MARC/Record.pm
 t/00.load.t
-t/01.version.t
 t/10.camel.t
 t/11.astring.t
 t/12.ldr.t
