@@ -17,7 +17,7 @@ use vars qw( $ERROR );
 
 Version 1.17
 
-    $Id: USMARC.pm,v 1.37 2003/01/29 18:16:09 petdance Exp $
+    $Id: USMARC.pm,v 1.38 2003/02/03 22:50:21 moregan Exp $
 
 =cut
 
@@ -148,51 +148,68 @@ sub decode {
     ($reclen == length($text))
 	or return $marc->_warn( "Invalid record length $location: Leader says $reclen bytes, but it's actually ", length( $text ) );
 
+    (substr($text, -1, 1) eq END_OF_RECORD)
+    	or return $marc->_warn( "Invalid record terminator $location" );  # XXX should this problem really be fatal?
+
+
     $marc->leader( substr( $text, 0, LEADER_LEN ) );
-    my @fields = split( END_OF_FIELD, substr( $text, LEADER_LEN ) );
-    my $dir = shift @fields or return $marc->_warn( "No directory found $location" );
 
-    (length($dir) % 12 == 0)
+    # bytes 12 - 16 of leader give offset to the body of the record
+    my $data_start = 0 + substr( $text, 12, 5 );
+
+
+    # immediately after the leader comes the directory (no separator)
+    my $dir = substr( $text, LEADER_LEN, $data_start - LEADER_LEN - 1 );  # -1 to allow for \x1e at end of directory
+
+    # character after the directory must be \x1e
+    (substr($text, $data_start-1, 1) eq END_OF_FIELD) 
+	or return $marc->_warn( "No directory found $location" );
+
+    # all directory entries 12 bytes long, so length % 12 must be 0
+    (length($dir) % DIRECTORY_ENTRY_LEN == 0)
 	or return $marc->_warn( "Invalid directory length $location" );
-    my $nfields = length($dir)/12;
 
-    my $finalfield = pop @fields;
-    # Check for the record terminator, and ignore it
-    ($finalfield eq END_OF_RECORD)
-    	or return $marc->_warn( "Invalid record terminator $location" );
 
-    # Walk thru the directories, and shift off the fields while we're at it
-    # Shouldn't be any non-digits anywhere in any directory entry
-    my @directory = unpack( "A3 A4 A5" x $nfields, $dir );
-
-    my $databytesused = 0;
-    while ( @directory ) {
-	my $tagno = shift @directory;
-	my $len = shift @directory;
-	my $offset = shift @directory;
-	my $tagdata = shift @fields;
-	warn "Specs: ", join( "|", $tagno, $len, $offset, $tagdata ), "\n" if $MARC::Record::DEBUG;
+    # go through all the fields
+    my $nfields = length($dir)/DIRECTORY_ENTRY_LEN;
+    for ( my $n = 0; $n < $nfields; $n++ ) {
+	my ( $tagno, $len, $offset ) = unpack( "A3 A4 A5", substr($dir, $n*DIRECTORY_ENTRY_LEN, DIRECTORY_ENTRY_LEN) );
 
 	# Check directory validity
 	($tagno =~ /^[0-9A-Za-z]{3}$/)
 	    or $marc->_warn( "Invalid tag in directory $location: \"$tagno\"" );
 
-	($len == length($tagdata) + 1)
-	    or $marc->_warn( "Invalid length in directory $location for tag $tagno $location" );
+	($len =~ /^\d{4}$/)
+	    or $marc->_warn( "Invalid length in directory $location tag $tagno: \"$len\"" );
 
-	($offset == $databytesused)
-	    or $marc->_warn( "Directory offsets $location are out of whack for tag $tagno" );
-	$databytesused += $len;
+	($offset =~ /^\d{5}$/)
+	    or $marc->_warn( "Invalid offset in directory $location tag $tagno: \"$offset\"" );
+
+	($offset + $len <= $reclen)
+	    or $marc->_warn( "Directory entry $location runs off the end of the record tag $tagno" );
+
+	my $tagdata = substr( $text, $data_start + $offset, $len );
+
+	($len == length($tagdata))
+	    or $marc->_warn( "Invalid length in directory for tag $tagno $location" );
+
+	if ( substr($tagdata, -1, 1) eq END_OF_FIELD ) {
+	    # get rid of the end-of-tag character
+	    chop $tagdata;
+	    --$len;
+	} else {
+	    $marc->_warn( "field does not end in end of field character in tag $tagno $location" );
+	}
+
+	warn "Specs: ", join( "|", $tagno, $len, $offset, $tagdata ), "\n" if $MARC::Record::DEBUG;
+
 
 	if ( $filter_func ) {
 	    next unless $filter_func->( $tagno, $tagdata );
 	}
 
+
 	if ( ($tagno =~ /^\d+$/) && ($tagno < 10) ) {
-	    if ( ! defined( $tagdata ) ) {
-		$marc->_warn( "Did not find tag data $location for tag $tagno" );
-		next;
-	    }
 	    $marc->append_fields( MARC::Field->new( $tagno, $tagdata ) );
 	} else {
 	    my @subfields = split( SUBFIELD_INDICATOR, $tagdata );
@@ -223,11 +240,8 @@ sub decode {
 	    $marc->append_fields( MARC::Field->new($tagno, $ind1, $ind2, 
 		@subfield_data ) );
 	}
-    } # while
+    } # looping through all the fields
 
-    # Once we're done, there shouldn't be any fields left over: They should all have shifted off.
-    (@fields == 0)
-    	or $marc->_warn( "I've got leftover fields that weren't in the directory $location" );
 
     return $marc;
 }
@@ -329,6 +343,11 @@ L<MARC::Record>
 Make some sort of autodispatch so that you don't have to explicitly
 specify the MARC::File::X subclass, sort of like how DBI knows to
 use DBD::Oracle or DBD::Mysql.
+
+Create a toggle-able option to check inside the field data for
+end of field characters.  Presumably it would be good to have
+it turned on all the time, but it's nice to be able to opt out
+if you don't want to take the performance hit.
 
 =head1 LICENSE
 

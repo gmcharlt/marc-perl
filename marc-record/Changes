@@ -1,5 +1,10 @@
 Revision history for Perl extension MARC::Record.
 
+	- Changes to MARC::File::USMARC->decode() to fix the
+	  rt.cpan.org bug #2017, "MARC::File::USMARC assumes 
+	  that fields apper in directory order".
+	- Stricter checking on MARC directory entries.
+
 1.17	January 29, 2003
 	[ENHANCEMENTS]
 	- Added optional subfield string to MARC::Field::as_string().
