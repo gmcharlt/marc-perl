@@ -19,7 +19,7 @@ MARC::Field - Perl extension for handling MARC fields
 
 Version 1.13
 
-    $Id: Field.pm,v 1.24 2002/10/25 22:17:37 edsummers Exp $
+    $Id: Field.pm,v 1.25 2002/11/26 21:41:24 petdance Exp $
 
 =cut
 
@@ -57,6 +57,8 @@ C<$MARC::Record> usually bubbles up to C<$MARC::Record::ERROR>.
 			'a' => 'Raccoons and ripe corn / ',
 			'c' => 'Jim Arnosky.'
 		);
+
+Returns a MARC::Field record.
 
 =cut
 
@@ -108,6 +110,8 @@ since that just makes a copy of the reference.  To get a new object, you must
 
     my $newfield = $field->clone;
 
+Returns a MARC::Field record.
+
 =cut
 
 sub clone {
@@ -139,9 +143,6 @@ and subfields like this:
 
   $field->update( ind2 => '4', a => 'The ballad of Abe Lincoln');
 
-The amount of items modified will be returned to you as a result of the
-method call.
-
 If you want to update a field that has no indicators or subfields (000-009)
 just call update() with one argument, the string that you would like to 
 set the field to. 
@@ -152,6 +153,8 @@ set the field to.
 Note: when doing subfield updates be aware that C<update()> will only 
 update the first occurrence. If you need to do anything more complicated
 you need to create a new field and use C<replace_with()>. 
+
+Returns the number of items modified.
 
 =cut
 
@@ -207,6 +210,8 @@ example:
   $field = $record->field('245');
   my $new_field = new MARC::Field('245','0','4','The ballad of Abe Lincoln.');
   $field->replace_with($new_field);
+
+Doesn't return a meaningful or reliable value.
 
 =cut 
 
