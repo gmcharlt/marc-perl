@@ -54,7 +54,8 @@ sub in {
     my ( $filename, $fh );
 
     ## if a valid filehandle was passed in
-    if ( defined( fileno( $arg ) ) ) { 
+    my $ishandle = do { no strict; defined fileno($arg); };
+    if ( $ishandle ) {
 	$filename = scalar( $arg );
 	$fh = $arg;
     }
