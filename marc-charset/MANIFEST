@@ -33,3 +33,4 @@ t/095.eastasian.t
 t/100.escape1.t
 t/110.escape2.t
 t/115.utf8.t
+META.yml 
