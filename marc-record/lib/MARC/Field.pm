@@ -19,7 +19,7 @@ MARC::Field - Perl extension for handling MARC fields
 
 Version 1.16
 
-    $Id: Field.pm,v 1.29 2003/01/29 15:20:58 petdance Exp $
+    $Id: Field.pm,v 1.30 2003/01/29 16:05:41 petdance Exp $
 
 =cut
 
@@ -78,7 +78,7 @@ sub new($) {
 		_warnings => [],
 		}, $class;
 	
-	if ( _isnum($tagno) and $tagno < 10 ) { 
+	if ( $self->is_control_tag() ) {
 		$self->{_data} = shift;
 	} else {
 		for my $indcode ( qw( _ind1 _ind2 ) ) {
@@ -125,7 +125,7 @@ sub clone {
 	    _warnings => [],
 	}, ref($self);
 
-    if ( _isnum($tagno) and $tagno < 10 ) {
+    if ( $self->is_control_tag() ) {
 	$clone->{_data} = $self->{_data};
     } else {
 	$clone->{_ind1} = $self->{_ind1};
@@ -163,7 +163,7 @@ sub update {
   my $self = shift;
 
   ## tags 000 - 009 don't have indicators or subfields
-  if ( _isnum($self->{_tag}) and ($self->{_tag} < 10) ) {
+  if ( $self->is_control_tag() ) {
     $self->{_data} = shift;
     return(1);
   }
@@ -249,8 +249,8 @@ sub indicator($) {
 	my $self = shift;
 	my $indno = shift;
 
-	( !_isnum($self->{_tag}) or ($self->{_tag} >= 10) )
-		or croak( "Fields below 010 do not have indicators" );
+	croak( "Fields below 010 do not have indicators" )
+	    if $self->is_control_tag(); 
 
 	if ( $indno == 1 ) {
 		return $self->{_ind1};
@@ -279,8 +279,8 @@ sub subfield {
 	my $self = shift;
 	my $code_wanted = shift;
 
-	( !_isnum($self->{_tag}) or $self->{_tag} >= 10)
-		or croak( "Fields below 010 do not have subfields" );
+	croak( "Fields below 010 do not have subfields" )
+	    if $self->is_control_tag();
 
 	my @data = @{$self->{_subfields}};
 	while ( defined( my $code = shift @data ) ) {
@@ -308,8 +308,8 @@ For example, this might be the subfields from a 245 field:
 sub subfields {
 	my $self = shift;
 
-	( !_isnum($self->{_tag}) or $self->{_tag} >= 10)
-		or croak( "Fields below 010 do not have subfields" );
+	croak( "Fields below 010 do not have subfields" )
+	    if $self->is_control_tag();
 
 	my @list;
 	my @data = @{$self->{_subfields}};
@@ -336,11 +336,10 @@ Returns the data part of the field, if the tag number is less than 10.
 sub data($) {
 	my $self = shift;
 
-	( _isnum($self->{_tag}) and $self->{_tag} < 10)
-		or croak( "data() is only for tags less than 010" );
+	croak( "data() is only for tags less than 010" )
+	    unless $self->is_control_tag();
 		
-	my $data = shift;
-	$self->{_data} = $data if defined( $data );
+	$self->{_data} = $_[0] if @_;
 
 	return $self->{_data};
 }
@@ -356,8 +355,8 @@ Returns the number of subfields added, or C<undef> if there was an error.
 sub add_subfields(@) {
 	my $self = shift;
 
-	( !_isnum($self->{_tag}) or $self->{_tag} >= 10)
-		or croak( "Subfields are only for tags >= 10" );
+	croak( "Subfields are only for tags >= 10" )
+	    if $self->is_control_tag();
 
 	push( @{$self->{_subfields}}, @_ );
 	return @_/2;
@@ -372,7 +371,7 @@ Returns a string of all subfields run together, without the tag number.
 sub as_string() {
 	my $self = shift;
 
-	if ( _isnum($self->{_tag}) and ($self->{_tag} < 10) ) {
+	if ( $self->is_control_tag() ) {
 	    return $self->{_data};
 	}
 
@@ -400,7 +399,7 @@ sub as_formatted() {
 
 	my @lines;
 
-	if ( _isnum($self->{_tag}) and ($self->{_tag} < 10) ) {
+	if ( $self->is_control_tag() ) {
 		push( @lines, sprintf( "%03s     %s", $self->{_tag}, $self->{_data} ) );
 	} else {
 		my $hanger = sprintf( "%03s %1.1s%1.1s", $self->{_tag}, $self->{_ind1}, $self->{_ind2} );
@@ -429,7 +428,7 @@ sub as_usmarc() {
 	my $self = shift;
 
 	# Tags < 010 are pretty easy
-	if ( _isnum($self->{_tag}) and $self->{_tag} < 10 ) {
+	if ( $self->is_control_tag() ) {
 		return $self->data . END_OF_FIELD;
 	} else {
 		my @subs;
@@ -471,7 +470,10 @@ sub _warn($) {
 	push( @{$self->{_warnings}}, join( "", @_ ) );
 }
 
-sub _isnum { return $_[0] =~ /^\d+$/ }
+sub is_control_tag {
+    my $self = shift;
+    return ($self->{_tag} =~ /^\d+$/) && ($self->{_tag} < 10);
+}
 
 1;
 
