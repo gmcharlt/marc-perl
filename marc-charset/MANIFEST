@@ -16,3 +16,14 @@ lib/MARC/Charset/Superscripts.pm
 lib/MARC/Charset/Controls.pm
 README
 t/000.load.t
+t/010.default.t
+t/020.extra.t
+t/030.controls.t
+t/040.ascii.t
+t/050.ansel.t
+t/060.arabic.t
+t/070.cyrillic.t
+t/080.hebrew.t
+t/090.greek.t
+t/100.escape1.t
+t/110.escape2.t
