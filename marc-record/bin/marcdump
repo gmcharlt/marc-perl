@@ -27,7 +27,7 @@ my $opt_version = 0;
 
 my $rc =
     GetOptions(
-	"version"   => \$opt_version,
+	"version"   => sub { print "marcdump v$MARC::Record::VERSION\n"; exit 1; },
 	"print!"    => \$opt_print,
 	"lif!"	    => \$opt_lif,
 	"quiet"	    => \$opt_quiet,
@@ -40,11 +40,6 @@ my $rc =
 my @files = @ARGV;
 if ( $opt_help || !@files || !$rc ) {
     print <DATA>;
-    exit 1;
-}
-
-if ( $opt_version ) {
-    print "marcdump v$MARC::Record::VERSION\n";
     exit 1;
 }
 
