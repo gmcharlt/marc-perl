@@ -17,7 +17,7 @@ use MARC::Field;
 
 Version 0.90
 
-    $Id: Record.pm,v 1.10 2002/04/01 22:16:19 petdance Exp $
+    $Id: Record.pm,v 1.11 2002/04/02 03:47:06 petdance Exp $
 
 =cut
 
@@ -372,6 +372,14 @@ sub author() {
 	return "<No author tag found>";
 }
 
+
+sub as_usmarc {
+    my $self = shift;
+
+    require MARC::File::USMARC;
+
+    return MARC::File::USMARC::encode( $self );
+}
 
 
 =head2 warnings()
