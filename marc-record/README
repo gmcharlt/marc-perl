@@ -1,40 +1,25 @@
-MARC::Record version 0.08
-=========================
+MARC::Record and its family
+===========================
 
 SYNOPSIS
 
-The MARC::Record and MARC::Field modules allow a simple, object-based
-interface to MARC records.  For example, the following program reads
-through a USMARC file and prints the title, followed by any/all
-subject tags.
+The MARC::* series of modules create a simple object-oriented 
+abstraction of MARC record handling.  The files are:
 
-  #!/usr/bin/perl -w
+MARC::Record
+MARC::Field
+    The basic MARC record that is the core of everything.
 
-  use strict;
-  use MARC::Record;
+MARC::File
+    Base class for the MARC file
 
-  use MARC::Record;
+MARC::File::USMARC
+MARC::File::MicroLIF
+    Subclasses of MARC::File specific to the USMARC and MicroLIF formats
 
-
-  open( IN, "<", $filename ) or die "Couldn't open $filename: $!\n";
-  binmode( IN ); # for the Windows folks
-  while ( !eof(IN) ) {
-      my $marc = MARC::Record::next_from_file( *IN );
-      die $MARC::Record::ERROR unless $marc;
-
-
-      # Print the title tag
-      print $marc->subfield(245,"a"), "\n";
-
-
-      # Find any subject tags and print their _a subfields
-      for my $subject ( $marc->field( "6XX" ) ) {
-          print "\t", $subject->tag, ": ", $subject->subfield("a"), "\n";
-      } # for subject
-  } # while
-
-  close IN or die "Error closing $filename: $!\n";
-
+MARC::Lint
+    Extension to check MARC records for validity.
+    
 
 INSTALLATION
 
@@ -44,10 +29,11 @@ To install this module type the following:
    make
    make test
    make install
-   
+
+
 DEPENDENCIES
 
-MARC::Record and Marc::Field require nothing more than Perl 5.6.0.
+MARC::* require Perl 5.6.0.
 
 
 COPYRIGHT AND LICENCE
