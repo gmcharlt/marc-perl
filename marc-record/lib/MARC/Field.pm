@@ -17,7 +17,7 @@ MARC::Field - Perl extension for handling MARC fields
 
 Version 1.10
 
-    $Id: Field.pm,v 1.17 2002/08/30 22:43:10 petdance Exp $
+    $Id: Field.pm,v 1.18 2002/09/03 18:48:55 edsummers Exp $
 
 =cut
 
@@ -260,6 +260,8 @@ If no matching subfields are found, C<undef> is returned.
 
 If the tag is less than an 010, C<undef> is returned and
 C<$MARC::Field::ERROR> is set.
+
+    my $subA = $field->subfield('a');
 
 =cut
 
