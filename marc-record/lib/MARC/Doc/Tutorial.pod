@@ -21,7 +21,7 @@ visit the Library of Congress at http://www.loc.gov/marc/
 
 =head2 What is this Tutorial?
 
-The document you are reading is a beginners guide to use Perl to processing
+The document you are reading is a beginners guide to using Perl to processing
 MARC data, written in the 'cookbook' style. Inside you will find recipes on 
 how to read, write, update and convert MARC data using the MARC::Record CPAN 
 package. 
@@ -454,8 +454,6 @@ to read and create it becomes important to know how to write the USMARC data
 to disk in order to save your work. In this example we will create 
 a new record and save it to a file called 'record.dat'. 
 
-=head2 
-
 =head2 Writing records to a file
 
 
@@ -777,7 +775,7 @@ a computer file.
   18   print OUT $record->as_usmarc();
 
 
-=head2 Modifying tags without indicators
+=head2 Modifying fields without indicators
 
 MARC::Record and MARC::Field are smart and know that you don't have field
 indicators with tags less than 010. Here's an example of updating/adding
@@ -812,6 +810,80 @@ Perl's localtime() to generate the data we need for this field.
   26     print OUT $record->as_usmarc();
   27   
   28   }
+
+
+=head2 Reordering subfields
+
+You may find yourself in the situtation where you would like to
+programatically reorder, and possibly modify subfields in a particular
+field. For example, imagine that you have a batch of records that have
+856 fields which contain subfields z, u, and possibly subfield 3...
+in any order! Now imagine that you'd like to standardize the subfield z, 
+and reorder them so that subfield 3 precedes subfield z, which precedes 
+subfield u. This is tricky but can be done in the following manner:
+
+=over 4
+
+=item 1
+
+Read in a record
+
+=item 2
+
+Extract the existing 856 field. 
+
+=item 3 
+
+Build a new 856 field based on the existing field.
+
+=item 4
+
+Replace the existing 856 field with the new one.
+
+=item 5 
+
+Save our modified record.
+
+=back
+
+Here is the example in detail:
+
+   1   ## Example 19
+   2   
+   3   use MARC::Batch;
+   4   my $batch = MARC::Batch->new('USMARC','856.dat');
+   5   open(OUT,'>856_new.dat');
+   6   
+   7   while (my $record = $batch->next()) {
+   8   
+   9     my $existing = $record->field('856');
+  10   
+  11     ## if the record doesn't contain an 856 field we can skip it 
+  12     next if !$existing; 
+  13   
+  14     ## now we're going to build a list of our new subfields (in order)
+  15     my @subfields = ();
+  16   
+  17     ## if the 856 field has a subfield 3 add it
+  18     if (defined($existing->subfield('3'))) {
+  19       push(@subfields,'3',$existing->subfield('3'));
+  20     }
+  21   
+  22     ## now add subfields z and u
+  23     push(@subfields,'z','Access restricted','u',$existing->subfield('u'));
+  24   
+  25     ## create a new 856 field using the new reordered subfields
+  26     my $new = MARC::Field->new( 
+  27       '856', $existing->indicator(1), $existing->indicator(2), @subfields
+  28       );
+  29   
+  30     ## replace the existing subfield with our new one
+  31     $existing->replace_with($new);
+  32   
+  33     ## write out the new record
+  34     print OUT $record->as_usmarc();
+  35   
+  36   }
 
 
 =head1 SEARCHING & FILTERING
