@@ -9,6 +9,8 @@ Revision history for Perl extension MARC::Record.
         - Added MARC::File::Utils which contains utf8 safe functions.
         - marcdump now sets STDOUT to utf8 if it is able to.
         - t/utf8.t is no longer skipped.
+        - removed redundant record length check in MARC::File::USMARC::_next()
+          and adjusted tests in t/75.warnings.t
 
 1.38	March 16th, 2004
 
