@@ -370,7 +370,7 @@ For example:
   13       a => 'Logan, Robert K.',
   14       d => '1939-'
   15     );
-  16   $record->append_field($author);
+  16   $record->append_fields($author);
   17   
   18   ## create a title field
   19   my $title = MARC::Field->new(
@@ -378,13 +378,13 @@ For example:
   21       a => 'The alphabet effect /',
   22       c => 'Robert K. Logan.'
   23     );
-  24   $record->append_field($title);
+  24   $record->append_fields($title);
 
 
 The key to creating records from scratch is to use the append_fields()
 method, which adds a field to the end of the record. Since each
 field gets added at the end it's up to you to order the fields the 
-way you want. insert_field_before() and insert_field_after() are similar
+way you want. insert_fields_before() and insert_fields_after() are similar
 methods that allow you to define where the field gets added. These methods
 are covered in more detail below.
 
@@ -421,7 +421,7 @@ a new record and save it to a file called 'record.dat'.
   10   my $title = MARC::Field->new('245','1','4', 
   11      a=>'The alphabet effect /', c=>'Robert K. Logan.'
   12      );
-  13   $record->append_field($author,$title);
+  13   $record->append_fields($author,$title);
   14   
   15   ## open a filehandle to write to 'file.dat'
   16   open(OUTPUT, '> record.dat');
@@ -470,7 +470,7 @@ like to pretty-print use the as_formatted() method.
 Unlike example 9 this code will pretty print the contents of the 
 newly created record to the screen. Notice on lines to how you can add
 a list of new fields by creating MARC::Field objects within a call to 
-append_field().
+append_fields().
 
 
 =head2 Debugging with marcdump()
@@ -538,7 +538,7 @@ it as 'file_2.dat'.
   11   while ( my $record = $batch->next() ) {
   12   
   13       ## add a 590 field
-  14       $record->append_field(
+  14       $record->append_fields(
   15          MARC::Field->new('590','','',a=>'Access provided by Enron.')
   16       );
   17     
@@ -554,9 +554,9 @@ provides a uniform interface to the different MARC::File modules.
 
 =head2 Preserving field order
 
-As its name suggests append_field() will add the 590 field to the end of
+As its name suggests append_fields() will add the 590 field to the end of
 the record. If you want to preserve a particular order you can use the 
-insert_field_before() and insert_field_after(). In order to use these you 
+insert_fields_before() and insert_fields_after(). In order to use these you 
 need to locate the field you want to insert before or after. Here is an 
 example:
 
@@ -581,13 +581,13 @@ example:
   19   	       MARC::Field->new('590','','',a=>'Access provided by Enron.');
   20   
   21       ## insert our 590 field 
-  22       $record->insert_field_before($before,$new);
+  22       $record->insert_fields_before($before,$new);
   23   
   24       print OUT $record->as_usmarc();
   25   
   26   }
 
-insert_field_after() works in a simliar fashion to insert_field_before()
+insert_fields_after() works in a simliar fashion to insert_fields_before()
 but with the expected change of behavior.
 
 
@@ -800,7 +800,7 @@ Perl's localtime() to generate the data we need for this field.
   20       $year,$mon,$mday,$hour,$min,$sec); 
   21     
   22     ## create a new 005 field using our new datetime
-  23     $record->append_field('005',$datetime);
+  23     $record->append_fields('005',$datetime);
   24   
   25     ## save record to a file
   26     print OUT $record->as_usmarc();
