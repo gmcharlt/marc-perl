@@ -15,7 +15,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 0.90
 
-    $Id: File.pm,v 1.3 2002/04/01 21:34:43 petdance Exp $
+    $Id: File.pm,v 1.4 2002/04/01 22:15:40 petdance Exp $
 
 =cut
 
@@ -67,6 +67,38 @@ sub out {
     die "Not yet written";
 }
 
+=head2 next()
+
+Reads the next record from the file handle passed in.
+
+=cut
+
+sub next {
+    my $self = shift;
+
+    my $rec = $self->_next();
+
+    return $rec ? $self->decode($rec) : undef;
+}
+
+=head2 skip
+
+Skips over the next record in the file.  Same as C<next()>,
+without the overhead of parsing a record you're going to throw away
+anyway.
+
+Returns 1 or undef.
+
+=cut
+
+sub skip {
+    my $self = shift;
+
+    my $rec = $self->_next();
+
+    return $rec ? 1 : undef;
+}
+
 sub close {
     my $self = shift;
 
@@ -83,8 +115,6 @@ sub _unimplemented() {
     warn "Method $method must be overridden";
 }
 
-sub next    { $_[0]->_unimplemented("next"); }
-sub skip    { $_[0]->_unimplemented("skip"); }
 sub write   { $_[0]->_unimplemented("write"); }
 sub decode  { $_[0]->_unimplemented("decode"); }
 
@@ -108,9 +138,21 @@ L<MARC::Record>
 
 =head1 TODO
 
+=over 4
+
+=item * C<out()> method
+
+We only handle files for input right now.
+
+=item * autodispatch
+
 Make some sort of autodispatch so that you don't have to explicitly
 specify the MARC::File::X subclass, sort of like how DBI knows to
 use DBD::Oracle or DBD::Mysql.
+
+=back
+
+=cut
 
 =head1 LICENSE
 
