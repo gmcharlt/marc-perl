@@ -111,6 +111,9 @@ sub next {
         my $rec = $self->{file}->next( $filter );
 
         # collect warnings from MARC::File::* object
+        # we use the warnings() method here since MARC::Batch
+        # hides access to MARC::File objects, and we don't
+        # need to preserve the warnings buffer.
         my @warnings = $self->{file}->warnings();
         if ( @warnings ) {
             $self->warnings( @warnings );
@@ -120,7 +123,12 @@ sub next {
         if ($rec) {
 
             # collect warnings from the MARC::Record object
-            my @warnings = $rec->warnings();
+            # IMPORTANT: here we don't use warnings() but dig
+            # into the the object to get at the warnings without
+            # erasing the buffer. This is so a user can call 
+            # warnings() on the MARC::Record object and get back
+            # warnings for that specific record.
+            my @warnings = @{ $rec->{_warnings} };
 
             if (@warnings) {
                 $self->warnings( @warnings );

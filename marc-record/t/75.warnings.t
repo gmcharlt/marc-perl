@@ -1,6 +1,6 @@
 #!perl -Tw
 
-use Test::More tests=>17;
+use Test::More tests=>21;
 use strict;
 
 BEGIN {
@@ -43,8 +43,27 @@ STRICT_OFF: {
 	$count++;
     }
 
+
     my @warnings = $batch->warnings();
     is( scalar(@warnings), 2, "warnings() w/ strict off" );
     is( $count, 8, "next() w/ strict off" );
+}
 
+WARNINGS_BUFFER_RESET: {
+    my $batch = MARC::Batch->new( 'USMARC', 't/badind.usmarc' );
+    $batch->warnings_off();
+    $batch->strict_off();
+    my $r = $batch->next();
+
+    ## check the warnings on the batch
+    my @warnings = $batch->warnings();
+    is( @warnings, 1, 'got expected amt of warnings off the batch' );
+    like( $warnings[0], qr/^Invalid indicator/, 
+        'got expected err msg off the batch' );
+
+    ## same exact warning should be available on the record 
+    @warnings = $r->warnings();
+    is( @warnings, 1, 'got expected amt of warnings off the record' );
+    like( $warnings[0], qr/^Invalid indicator/, 
+        'got expected err msg off the record' );
 }
