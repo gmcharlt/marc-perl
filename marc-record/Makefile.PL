@@ -31,5 +31,6 @@ sub filecheck {
 	depend		=> { 
 			    Makefile => '$(VERSION_FROM)'
 			    },
+	clean		=> { FILES => 'MARC-Record-*' },
 	
 );
