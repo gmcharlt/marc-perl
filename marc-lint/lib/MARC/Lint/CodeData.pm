@@ -1,6 +1,7 @@
-#!perl
-
 package MARC::Lint::CodeData;
+
+use strict;
+use warnings; 
 
 #declare the necessary variables
 use vars qw($VERSION @EXPORT_OK %GeogAreaCodes %ObsoleteGeogAreaCodes %LanguageCodes %ObsoleteLanguageCodes %CountryCodes %ObsoleteCountryCodes %Sources600_651 %ObsoleteSources600_651 %Sources655 %ObsoleteSources655);
