@@ -2,10 +2,10 @@ Revision history for Perl extension MARC::Record.
 
 1.20	February 26, 2003
 	[FIXES]
-	- Fixed a $VERSION problem in MARC::Record that prevented CPAN
-	  from indexing the module correctly.
 	- Removed $VERSION from all modules except for MARC::Record
 	  itself.
+	- Fixed a $VERSION problem in MARC::Record that prevented CPAN
+	  from indexing the module correctly.
 	- Added more tests to the .t files.
 
 1.18	February 16, 2003

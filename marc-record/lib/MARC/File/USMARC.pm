@@ -13,16 +13,6 @@ eval 'use warnings' if $] >= 5.006;
 
 use vars qw( $ERROR );
 
-=head1 VERSION
-
-Version 1.18
-
-    $Id: USMARC.pm,v 1.40 2003/02/25 22:02:33 petdance Exp $
-
-=cut
-
-use vars '$VERSION'; $VERSION = '1.18';
-
 use MARC::File;
 use vars qw( @ISA ); @ISA = qw( MARC::File );
 

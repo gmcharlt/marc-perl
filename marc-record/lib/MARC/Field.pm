@@ -15,16 +15,6 @@ use vars qw( $ERROR );
 
 MARC::Field - Perl extension for handling MARC fields
 
-=head1 VERSION
-
-Version 1.18
-
-    $Id: Field.pm,v 1.34 2003/02/25 22:02:30 petdance Exp $
-
-=cut
-
-use vars '$VERSION'; $VERSION = '1.18';
-
 =head1 SYNOPSIS
 
   use MARC::Field;

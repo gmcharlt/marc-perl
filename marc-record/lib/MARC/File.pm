@@ -12,16 +12,6 @@ eval 'use warnings' if $] >= 5.006;
 
 use vars qw( $ERROR );
 
-=head1 VERSION
-
-Version 1.18
-
-    $Id: File.pm,v 1.30 2003/02/25 22:02:31 petdance Exp $
-
-=cut
-
-use vars '$VERSION'; $VERSION = '1.18';
-
 =head1 SYNOPSIS
 
     use MARC::File::USMARC;

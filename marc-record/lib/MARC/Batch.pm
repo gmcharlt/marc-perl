@@ -14,17 +14,6 @@ use constant STRICT_OFF		=> 2;
 use constant WARNINGS_ON	=> 1;
 use constant WARNINGS_OFF	=> 2;
 
-=head1 VERSION
-
-Version 1.18
-
-    $Id: Batch.pm,v 1.27 2003/02/26 05:32:49 petdance Exp $
-
-=cut
-
-use vars '$VERSION';
-$VERSION='1.18'; # Must be on its own line
-
 =head1 SYNOPSIS
 
 MARC::Batch hides all the file handling of files of C<MARC::Record>s.
