@@ -14,21 +14,21 @@ my $lint = new MARC::Lint;
 isa_ok( $lint, 'MARC::Lint' );
 
 my @fields = ( 
-	['041', "0","", 
-		a => 'end', #invalid
-		a => 'span', #too long
-		h => 'far', #opsolete
-	],
-	['041', "1","", 
-		a => 'endorviwo', #invalid
-		a => 'spanowpalasba', #too long and invalid
-	],
-	['043', "","",
-		a => 'n-----', #6 chars vs. 7
-		a => 'n-us----', #8 chars vs. 7
-		a => 'n-ma-us', #invalid code
-		a => 'e-ur-ai', #obsolete code
-	],
+    ['041', "0","", 
+        a => 'end', #invalid
+        a => 'span', #too long
+        h => 'far', #opsolete
+    ],
+    ['041', "1","", 
+        a => 'endorviwo', #invalid
+        a => 'spanowpalasba', #too long and invalid
+    ],
+    ['043', "","",
+        a => 'n-----', #6 chars vs. 7
+        a => 'n-us----', #8 chars vs. 7
+        a => 'n-ma-us', #invalid code
+        a => 'e-ur-ai', #obsolete code
+    ],
 
 );
 
@@ -51,10 +51,10 @@ foreach my $field (@fields) {
     my $field_object = MARC::Field->new( @$field );
     isa_ok( $field_object, 'MARC::Field', 'MARC field' );
 
-	my $check_tag = "check_".$field_object->tag();
+    my $check_tag = "check_".$field_object->tag();
     $lint->$check_tag( $field_object );
     my @warnings = $lint->warnings;
-	$lint->clear_warnings();
+    $lint->clear_warnings();
     while ( @warnings ) {
         my $expected = shift @expected;
         my $actual = shift @warnings;

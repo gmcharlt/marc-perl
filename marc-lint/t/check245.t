@@ -78,7 +78,7 @@ foreach my $field (@fields) {
 
     $lint->check_245( $field_object );
     my @warnings = $lint->warnings;
-	$lint->clear_warnings();
+    $lint->clear_warnings();
     while ( @warnings ) {
         my $expected = shift @expected;
         my $actual = shift @warnings;
