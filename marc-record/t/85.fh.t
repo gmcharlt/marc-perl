@@ -1,6 +1,6 @@
 # test that we can pass filehandles to MARC::File::USMARC and MARC::Batch
 
-use Test::More tests => 11;
+use Test::More tests => 19;
 use strict;
 use IO::File;
 
@@ -15,6 +15,8 @@ USMARC_FILE_GLOB: {
     open( MARCDATA, 't/camel.usmarc' );
     my $fh = *MARCDATA;
     my $file = MARC::File::USMARC->in( $fh );
+    isa_ok( $file, "MARC::File::USMARC" );
+
     my $count = 0;
     $count++ while ( my $r = $file->next() );
     is( $count, 10, 'MARC::File::USMARC avec globbed file handle works' );
@@ -28,6 +30,8 @@ USMARC_IO_FILE: {
 
     my $fh = IO::File->new( 't/camel.usmarc' );
     my $file = MARC::File::USMARC->in( $fh );
+    isa_ok( $file, "MARC::File::USMARC" );
+
     my $count = 0;
     $count++ while ( my $r = $file->next() );
     is( $count, 10, 'MARC::File::USMARC avec IO::File object works' );
@@ -41,6 +45,8 @@ MICROLIF_FILE_GLOB: {
     open( LIFDATA, 't/sample20.lif' );
     my $fh = *LIFDATA;
     my $file = MARC::File::MicroLIF->in( $fh );
+    isa_ok( $file, "MARC::File::MicroLIF" );
+
     my $count = 0;
     $count++ while ( my $r = $file->next() );
     is( $count, 20, 'MARC::File::MicroLIF avec globbed file handle works' );
@@ -53,6 +59,8 @@ MICROLIF_IO_FILE: {
 
     my $fh = IO::File->new( 't/sample20.lif' );
     my $file = MARC::File::MicroLIF->in( $fh );
+    isa_ok( $file, "MARC::File::MicroLIF" );
+
     my $count = 0;
     $count++ while ( my $r = $file->next() );
     is( $count, 20, 'MARC::File::MicroLIF avec IO::File object works' );
@@ -65,6 +73,8 @@ MARC_BATCH_FILEHANDLE: {
 
     my $fh = IO::File->new( 't/camel.usmarc' );
     my $batch = MARC::Batch->new( 'USMARC', $fh );
+    isa_ok( $batch, "MARC::Batch" );
+
     my $count = 0;
     $count++ while ( my $r = $batch->next() );
     is( $count, 10, 'MARC::Batch avec IO::File object and USMARC' );
@@ -78,6 +88,8 @@ MARC_BATCH_FILEHANDLES: {
     my $fh1 = IO::File->new( 't/camel.usmarc' );
     my $fh2 = IO::File->new( 't/camel.usmarc' );
     my $batch = MARC::Batch->new( 'USMARC', $fh1, $fh2 );
+    isa_ok( $batch, "MARC::Batch" );
+
     my $count = 0;
     $count++ while ( my $r = $batch->next() );
     is( $count, 20, 'MARC::Batch avec IO::File objects and USMARC' );
@@ -92,6 +104,8 @@ MARC_BATCH_MIX: {
     my $fh1 = *MARCDATA;
     my $fh2 = IO::File->new( 't/camel.usmarc' );
     my $batch = MARC::Batch->new( 'USMARC', $fh1, $fh2, 't/camel.usmarc' );
+    isa_ok( $batch, "MARC::Batch" );
+
     my $count = 0;
     $count++ while ( my $r = $batch->next() );
     is( $count, 30, 'MARC::Batch avec mixture of handles and names and Lif');
@@ -104,10 +118,10 @@ MICROLIF_BATCH_MIX: {
     my $fh1 = *LIFDATA;
     my $fh2 = IO::File->new( 't/sample20.lif' );
     my $batch = MARC::Batch->new( 'MicroLIF', $fh1, $fh2, 't/sample20.lif' );
+    isa_ok( $batch, "MARC::Batch" );
+
     my $count = 0;
     $count++ while ( my $r = $batch->next() );
     is( $count, 60, 'MARC::Batch avec mixture of handles and names and Lif' );
 
 }
-
-
