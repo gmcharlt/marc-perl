@@ -1,5 +1,9 @@
 Revision history for Perl extension MARC::Record.
 
+0.95??	???
+	- Tests use the isa_ok() function to be more stringent in checking
+	  return values from functions.
+
 0.94	June 10, 2002
 	- Added $MARC::Record::DEBUG
 	- Added --debug flag to marcdump to enable $MARC::Record::DEBUG
