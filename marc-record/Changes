@@ -2,6 +2,7 @@ Revision history for Perl extension MARC::Record.
 
 1.17	Jan???
 	[ENHANCEMENTS]
+	- Added optional subfield string to MARC::Field::as_string().
 	- Added tag-based filtering on the USMARC constructors and 
 	  passthru support for this in MARC::File::next().  Now you can 
 	  select which tags get put into your MARC record, and not have

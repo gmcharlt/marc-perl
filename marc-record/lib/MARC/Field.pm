@@ -19,7 +19,7 @@ MARC::Field - Perl extension for handling MARC fields
 
 Version 1.17
 
-    $Id: Field.pm,v 1.31 2003/01/29 18:16:07 petdance Exp $
+    $Id: Field.pm,v 1.32 2003/01/30 03:24:36 petdance Exp $
 
 =cut
 
@@ -362,14 +362,20 @@ sub add_subfields(@) {
 	return @_/2;
 }
 
-=head2 as_string()
+=head2 as_string( [$subfields] )
 
 Returns a string of all subfields run together, without the tag number.
+
+If C<$subfields> is specified, then only those subfields will be included.
+
+    my $field = $marc->field( '245' );
+    print $field->as_string( 'anp' ); # Only those three subfields
 
 =cut
 
 sub as_string() {
 	my $self = shift;
+	my $subfields = shift;
 
 	if ( $self->is_control_tag() ) {
 	    return $self->{_data};
@@ -381,7 +387,7 @@ sub as_string() {
 	while ( @subdata ) {
 		my $code = shift @subdata;
 		my $text = shift @subdata;
-		push( @subs, $text );
+		push( @subs, $text ) if !$subfields || $code =~ /^[$subfields]$/;
 	} # for
 
 	return join( " ", @subs );
