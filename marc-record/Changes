@@ -2,6 +2,28 @@ Revision history for Perl extension MARC::Record.
 
 1.40    unreleased
 
+        [THINGS THAT MAY BREAK YOUR CODE]
+        - Removed the ability to call new from an instance of MARC::Record
+          or MARC::Field.  Any place where you might have code like:
+
+              my $rec = MARC::Record->new();
+              ...
+              my $another = $rec->new();
+
+          will have to be changed to:
+
+              my $rec = MARC::Record->new();
+              ...
+              my $class = ref( $rec );
+              my $another = $class->new();
+
+          or:
+
+              my $rec = MARC::Record->new();
+              ...
+              my $another = MARC::Record->new();
+
+
         [FIXES]
         - Clarified docs on the interface to field(), and fixed problem
           whereby in scalar context if no match was found we were

@@ -18,7 +18,7 @@ use Carp qw(croak);
 
 Version 1.39_01
 
-    $Id: Record.pm,v 1.85 2004/08/17 18:39:13 moregan Exp $
+    $Id: Record.pm,v 1.86 2004/08/17 22:40:23 moregan Exp $
 
 =cut
 
@@ -61,7 +61,6 @@ the MARC::File::* modules to read from a file.
 
 sub new {
     my $class = shift;
-    $class = ref($class) || $class; # Handle cloning
     my $self = {
         _leader => ' ' x 24,
         _fields => [],
@@ -547,7 +546,10 @@ sub clone {
     my $self = shift;
     my @keeper_tags = @_;
 
-    my $clone = $self->new();
+    # create a new object of whatever type we happen to be
+    my $class = ref( $self );
+    my $clone = $class->new();
+
     $clone->{_leader} = $self->{_leader};
 
     my $filtered = @keeper_tags ? [$self->field( @keeper_tags )] : undef;

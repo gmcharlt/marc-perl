@@ -55,7 +55,7 @@ Or if you want to add a field < 010 that does not have indicators.
 
 sub new {
     my $class = shift;
-    $class = ref($class) || $class;
+    $class = $class;
 
     ## MARC spec indicates that tags can have alphabetical
     ## characters in them! If they do appear we assume that
