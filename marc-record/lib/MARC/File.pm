@@ -102,7 +102,8 @@ sub next {
     my $self = shift;
     $self->{recnum}++;
     my $rec = $self->_next();
-    return $rec ? $self->decode($rec, @_) : undef;
+    return unless $rec;
+    return $self->decode($rec, @_);
 }
 
 =head2 skip()
