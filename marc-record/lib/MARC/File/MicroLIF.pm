@@ -15,7 +15,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 0.90
 
-    $Id: MicroLIF.pm,v 1.3 2002/04/01 22:19:05 petdance Exp $
+    $Id: MicroLIF.pm,v 1.4 2002/04/01 22:39:09 petdance Exp $
 
 =cut
 
@@ -24,7 +24,7 @@ our $VERSION = '0.90';
 use MARC::File;
 our @ISA = qw( MARC::File );
 
-use MARC::Record;
+use MARC::Record qw( LEADER_LEN );
 
 =head1 SYNOPSIS
 
@@ -44,96 +44,69 @@ None.
 
 =head1 METHODS
 
+=cut
 
 sub _next {
     my $self = shift;
 
     my $fh = $self->{fh};
 
-    my $reclen;
+    local $/ = "`\n";
+    
+    my $lifrec = <$fh>;
 
-    read( $fh, $reclen, 5 )
-	or return $self->_gripe( "Error reading record length: $!" );
-
-    $reclen =~ /^\d{5}$/
-	or return $self->_gripe( "Invalid record length \"$reclen\"" );
-    my $usmarc = $reclen;
-    read( $fh, substr($usmarc,5), $reclen-5 )
-	or return $self->_gripe( "Error reading $reclen byte record: $!" );
-
-    return $usmarc;
+    return $lifrec;
 }
 
-=head2 skip
+sub decode {
+    my $text = shift;
+    $text = shift if (ref($text)||$text) =~ /^MARC::File/; # Handle being called as a method
 
-Skips over the next record in the file.  Same as C<next()>,
-without the overhead of parsing a record you're going to throw away
-anyway.
+    my $marc = MARC::Record->new();
 
-Returns 1 or undef.
+    my @lines = split( /\n/, $text );
+    for my $line ( @lines ) {
+	# Ignore the file header if the calling program hasn't already dealt with it
+	next if $line =~ /^HDR/;
 
-=cut
+	($line =~ s/^(\d\d\d|LDR)//) or
+	return $marc->_gripe( "Invalid tag number: ", substr( $line, 0, 3 ) );
+	my $tagno = $1;
 
-sub skip {
-    my $fh = shift;
+	($line =~ s/\^$//) or $marc->_warn( "Tag $tagno is missing a trailing caret." );
 
-    my $usmarc = $self->_next();
+	if ( $tagno eq "LDR" ) {
+	    $marc->leader( substr( $line, 0, LEADER_LEN ) );
+	} elsif ( $tagno < 10 ) {
+	    $marc->add_fields( $tagno, $line );
+	} else {
+	    $line =~ s/^(.)(.)//;
+	    my ($ind1,$ind2) = ($1,$2);
+	    my @subfields;
+	    my @subfield_data_pairs = split( /_(?=[a-z0-9])/, $line );
+	    shift @subfield_data_pairs; # Leading _ makes an empty pair
+	    for my $pair ( @subfield_data_pairs ) {
+		my ($subfield,$data) = (substr( $pair, 0, 1 ), substr( $pair, 1 ));
+		push( @subfields, $subfield, $data );
+	    }
+	    $marc->add_fields( $tagno, $ind1, $ind2, @subfields );
+	}
+    } # for
 
-    return $usmarc ? 1 : undef;
-}
-
-=head2 new_from_microlif()
-
-Constructor for handling data from a microlif file.  This function takes care of all
-the directory parsing & mangling.
-
-Any warnings or coercions can be checked in the C<warnings()> function.
-
-Note that we are NOT expecting to get the trailing "`" mark at the end of the last line.
-
-=cut
-
-sub new_from_microlif($) {
-	my $class = shift;
-	my $text = shift;
-	my $self = new($class);
-
-	my @lines = split( /\n/, $text );
-	for my $line ( @lines ) {
-		# Ignore the file header if the calling program hasn't already dealt with it
-		next if $line =~ /^HDR/;
-
-		($line =~ s/^(\d\d\d|LDR)//) or
-			return _gripe( "Invalid tag number: ", substr( $line, 0, 3 ) );
-		my $tagno = $1;
-
-		($line =~ s/\^$//) or
-			$self->_warn( "Tag $tagno is missing a trailing caret." );
-
-		if ( $tagno eq "LDR" ) {
-			$self->leader( substr( $line, 0, LEADER_LEN ) );
-		} elsif ( $tagno < 10 ) {
-			$self->add_fields( $tagno, $line );
-		} else {
-			$line =~ s/^(.)(.)//;
-			my ($ind1,$ind2) = ($1,$2);
-			my @subfields;
-			my @subfield_data_pairs = split( /_(?=[a-z0-9])/, $line );
-			shift @subfield_data_pairs; # Leading _ makes an empty pair
-			for my $pair ( @subfield_data_pairs ) {
-				my ($subfield,$data) = (substr( $pair, 0, 1 ), substr( $pair, 1 ));
-				push( @subfields, $subfield, $data );
-			}
-			$self->add_fields( $tagno, $ind1, $ind2, @subfields );
-		}
-	} # for
-
-	return $self;
+    return $marc;
 }
 
 1;
 
 __END__
+
+=head1 TODO
+
+=over 4
+
+=item * Squawks about the final field missing a caret
+
+=back
 
 =head1 RELATED MODULES
 
