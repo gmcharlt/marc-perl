@@ -2,6 +2,8 @@ Revision history for Perl extension MARC::Record.
 
 1.00	July 3, 2002
         - _gripe() fires off warnings instead of dying silently.
+	- MARC::File::USMARC no longer creates an error if it's and the
+	  end of a file when it tries to next().
 	- Tests use the isa_ok() function to be more stringent in checking
 	  return values from functions.
 

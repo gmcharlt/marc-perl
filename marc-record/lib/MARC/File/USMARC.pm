@@ -15,7 +15,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 1.00
 
-    $Id: USMARC.pm,v 1.13 2002/07/03 20:17:14 petdance Exp $
+    $Id: USMARC.pm,v 1.14 2002/07/03 21:53:54 petdance Exp $
 
 =cut
 
@@ -61,6 +61,7 @@ sub _next {
 
     my $reclen;
 
+    return undef if eof($fh);
     read( $fh, $reclen, 5 )
 	or return $self->_gripe( "Error reading record length: $!" );
 
