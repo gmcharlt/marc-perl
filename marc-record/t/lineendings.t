@@ -1,4 +1,4 @@
-# $Id: lineendings.t,v 1.2 2003/05/08 03:01:52 petdance Exp $
+# $Id: lineendings.t,v 1.3 2003/11/25 04:01:48 petdance Exp $
 # Test creating a MARC record for the Camel book
 #
 # Bugs, comments, suggestions welcome: marc@petdance.com
@@ -6,7 +6,7 @@
 use strict;
 
 use Test::More;
-our @endings;
+use vars qw( @endings );
 
 BEGIN {
     @endings = qw( 0a 0d 0d0a );

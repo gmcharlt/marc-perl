@@ -1,7 +1,6 @@
-use Test::More tests => 4;
+use Test::More tests => 5;
 
 use strict;
-use warnings;
 
 ## make sure that MARC::Field::subfield() is aware of the context 
 ## in which it is called. In list context it returns *all* subfields
@@ -10,6 +9,7 @@ use warnings;
 use_ok( 'MARC::Field' );
 my $field = MARC::Field->new( '245', '', '', a => 'foo', b => 'bar', 
     a => 'baz' );
+isa_ok( $field, 'MARC::Field' );
 
 my $subfieldA = $field->subfield( 'a' );
 is( $subfieldA, 'foo', 'subfield() in scalar context' );

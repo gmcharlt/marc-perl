@@ -3,7 +3,6 @@
 # test to make sure leader is being populated properly
 
 use strict;
-use warnings;
 use Test::More tests => 7;
 
 use_ok( 'MARC::Record' );

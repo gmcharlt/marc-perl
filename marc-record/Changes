@@ -1,6 +1,8 @@
 Revision history for Perl extension MARC::Record.
 
-1.33    XXXX XX, XXXX
+1.33    November 24th, 2003
+	MARC::Record should now run on Perls back to 5.00503!
+
 	[FIXES]
 	- fixed behavior in MARC::File::USMARC which was causing 
 	  MARC::File::next() to return a partial record when the record

@@ -1,3 +1,10 @@
+BEGIN {
+    if ( $] < 5.008 ) { 
+	print "1..0 # Skip Need perl5.8 or greater to test unicode\n";
+	exit;
+    }
+}
+
 use Test::More tests => 2;
 
 use strict;
@@ -17,9 +24,6 @@ TODO: {
 
 	## only do these tests with the first stable release of perl 
 	## that can do unicode.
-	if ( $] < 5.008 ) { 
-	    skip( 'need perl5.8 or greater to test unicode', 2 );
-	}
 
 	local $TODO = 'utf8 handling';
 

@@ -1,12 +1,13 @@
 use strict;
-use warnings;
-use Test::More tests => 3;
+use Test::More tests => 4;
 use MARC::File::USMARC;
 
 my $file = MARC::File::USMARC->in( 't/baddir.usmarc' );
 isa_ok( $file, 'MARC::File::USMARC' );
 
 my $r = $file->next(); 
+isa_ok( $r, 'MARC::Record' );
+
 my @warnings = $r->warnings();
 
 is( $warnings[0], 'No directory found in record 1', 
