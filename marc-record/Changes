@@ -1,6 +1,6 @@
 Revision history for Perl extension MARC::Record.
 
-X.XX    XXXX XX, XXXX
+1.33    XXXX XX, XXXX
 	[FIXES]
 	- fixed behavior in MARC::File::USMARC which was causing 
 	  MARC::File::next() to return a partial record when the record
