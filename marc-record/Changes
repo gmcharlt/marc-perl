@@ -24,7 +24,8 @@ Revision history for Perl extension MARC::Record.
               my $another = MARC::Record->new();
         - Removed MARC::Lint and the marclint utility to a separate
           package on CPAN.
-        - Fixed t/50.batch.t to use File::Spec in the MARCLint section
+        - Fixed t/50.batch.t to use File::Spec in the MicroLIF section
+        - Other tests in t/ also use File::Spec to specify paths
 
         [FIXES]
         - Clarified docs on the interface to field(), and fixed problem
