@@ -1,0 +1,384 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MARC::Record - Perl extension for handling MARC records</title>
+<link rev="made" href="mailto:ed@ink.inkdroid.org" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#version">VERSION</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#export">EXPORT</a></li>
+	<li><a href="#error_handling">ERROR HANDLING</a></li>
+	<li><a href="#methods">METHODS</a></li>
+	<ul>
+
+		<li><a href="#new()"><code>new()</code></a></li>
+		<li><a href="#new_from_usmarc(_$marcblob_)">new_from_usmarc( $marcblob )</a></li>
+		<li><a href="#fields()"><code>fields()</code></a></li>
+		<li><a href="#field(tagspec(s))"><code>field(tagspec(s))</code></a></li>
+		<li><a href="#subfield(tag,subfield)"><code>subfield(tag,subfield)</code></a></li>
+		<li><a href="#insert_grouped_field(field)"><code>insert_grouped_field(field)</code></a></li>
+		<li><a href="#append_fields(@fields)"><code>append_fields(@fields)</code></a></li>
+		<li><a href="#insert_fields_before($before_field,@new_fields)"><code>insert_fields_before($before_field,@new_fields)</code></a></li>
+		<li><a href="#insert_fields_after($after_field,@new_fields)"><code>insert_fields_after($after_field,@new_fields)</code></a></li>
+		<li><a href="#delete_field($field)"><code>delete_field($field)</code></a></li>
+		<li><a href="#as_usmarc()"><code>as_usmarc()</code></a></li>
+		<li><a href="#as_formatted()"><code>as_formatted()</code></a></li>
+		<li><a href="#title()"><code>title()</code></a></li>
+		<li><a href="#author()"><code>author()</code></a></li>
+		<li><a href="#leader()"><code>leader()</code></a></li>
+		<li><a href="#set_leader_lengths(_$reclen,_$baseaddr_)">set_leader_lengths( $reclen, $baseaddr )</a></li>
+		<li><a href="#clone()"><code>clone()</code></a></li>
+		<li><a href="#warnings()"><code>warnings()</code></a></li>
+		<li><a href="#add_fields()"><code>add_fields()</code></a></li>
+	</ul>
+
+	<li><a href="#design_notes">DESIGN NOTES</a></li>
+	<li><a href="#related_modules">RELATED MODULES</a></li>
+	<li><a href="#see_also">SEE ALSO</a></li>
+	<li><a href="#todo">TODO</a></li>
+	<li><a href="#bugs,_wishes_and_correspondence">BUGS, WISHES AND CORRESPONDENCE</a></li>
+	<li><a href="#ideas">IDEAS</a></li>
+	<li><a href="#license">LICENSE</a></li>
+	<li><a href="#author">AUTHOR</a></li>
+</ul>
+<!-- INDEX END -->
+
+<hr />
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>MARC::Record - Perl extension for handling MARC records</p>
+<p>
+</p>
+<hr />
+<h1><a name="version">VERSION</a></h1>
+<p>Version 1.13</p>
+<pre>
+    $Id: Record.html,v 1.1 2002/12/02 21:40:57 edsummers Exp $</pre>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p>Module for handling MARC records as objects.  The file-handling stuff is
+in MARC::File::*.</p>
+<p>
+</p>
+<hr />
+<h1><a name="export">EXPORT</a></h1>
+<p>None.</p>
+<p>
+</p>
+<hr />
+<h1><a name="error_handling">ERROR HANDLING</a></h1>
+<p>Any errors generated are stored in <code>$MARC::Record::ERROR</code>. 
+Warnings are kept with the record and accessible in the <code>warnings()</code> method.</p>
+<p>
+</p>
+<hr />
+<h1><a name="methods">METHODS</a></h1>
+<p>
+</p>
+<h2><a name="new()"><code>new()</code></a></h2>
+<p>Base constructor for the class.  It just returns a completely empty record.
+To get real data, you'll need to populate it with fields, or use one of
+the MARC::File::* modules to read from a file.</p>
+<p>
+</p>
+<h2><a name="new_from_usmarc(_$marcblob_)">new_from_usmarc( $marcblob )</a></h2>
+<p>This is a wrapper around <code>MARC::File::USMARC::decode()</code> for compatibility with
+older versions of MARC::Record.</p>
+<p>
+</p>
+<h2><a name="fields()"><code>fields()</code></a></h2>
+<p>Returns a list of all the fields in the record. The list contains 
+a MARC::Field object for each field in the record.</p>
+<p>
+</p>
+<h2><a name="field(tagspec(s))"><code>field(tagspec(s))</code></a></h2>
+<p>Returns a list of tags that match the field specifier, or in scalar
+context, just the first matching tag.</p>
+<p>The field specifier can be a simple number (i.e. ``245''), or use the ``.'' 
+notation of wildcarding (i.e. subject tags are ``6..'').</p>
+<p>
+</p>
+<h2><a name="subfield(tag,subfield)"><code>subfield(tag,subfield)</code></a></h2>
+<p>Shortcut method for getting just a subfield for a tag.  These are equivalent:</p>
+<pre>
+  my $title = $marc-&gt;field('245')-&gt;subfield(&quot;a&quot;);
+  my $title = $marc-&gt;subfield('245',&quot;a&quot;);</pre>
+<p>If either the field or subfield can't be found, <code>undef</code> is returned.</p>
+<p>
+</p>
+<h2><a name="insert_grouped_field(field)"><code>insert_grouped_field(field)</code></a></h2>
+<p>Will insert the specified MARC::Field object into the record in 'grouped
+order' and return true (1) on success, and false (undef) on failure.
+For example, if a '650' field is inserted with <code>insert_grouped_field()</code>
+it will be inserted at the end of the 6XX group of tags. After some discussion
+on the perl4lib list it was descided that this is ordinarily what you will 
+want. If you would like to insert at a specific point in the record you can use 
+<code>insert_fields_after()</code> and <code>insert_fields_before()</code> methods which are described 
+below.</p>
+<p>
+</p>
+<h2><a name="append_fields(@fields)"><code>append_fields(@fields)</code></a></h2>
+<p>Appends the field specified by <code>$field</code> to the end of the record. 
+<code>@fields</code> need to be MARC::Field objects.</p>
+<pre>
+    my $field = MARC::Field-&gt;new('590','','','a' =&gt; 'My local note.');
+    $record-&gt;append_fields($field);</pre>
+<p>Returns the number of fields appended.</p>
+<p>
+</p>
+<h2><a name="insert_fields_before($before_field,@new_fields)"><code>insert_fields_before($before_field,@new_fields)</code></a></h2>
+<p>Inserts the field specified by <code>$new_field</code> before the field <code>$before_field</code>.
+Returns the number of fields inserted, or undef on failures.
+Both <code>$before_field</code> and all <code>@new_fields</code> need to be MARC::Field objects.</p>
+<pre>
+    my $before_field = $record-&gt;field('260');
+    my $new_field = MARC::Field-&gt;new('250','','','a' =&gt; '2nd ed.');
+    $record-&gt;insert_fields_before($before_field,$new_field);</pre>
+<p>
+</p>
+<h2><a name="insert_fields_after($after_field,@new_fields)"><code>insert_fields_after($after_field,@new_fields)</code></a></h2>
+<p>Identical to <code>insert_fields_before()</code>, but fields are added after 
+<code>$after_field</code>.</p>
+<p>
+</p>
+<h2><a name="delete_field($field)"><code>delete_field($field)</code></a></h2>
+<p>Deletes a field from the record.</p>
+<p>The field must have been retrieved from the record using the 
+<code>field()</code> method.  For example, to delete a 526 tag if it exists:</p>
+<pre>
+    my $tag526 = $marc-&gt;field( &quot;526&quot; );
+    if ( $tag526 ) {
+        $marc-&gt;delete_field( $tag526 );
+    }</pre>
+<p><code>delete_field()</code> returns the number of fields that were deleted.
+This shouldn't be 0 unless you didn't get the tag properly.</p>
+<p>
+</p>
+<h2><a name="as_usmarc()"><code>as_usmarc()</code></a></h2>
+<p>This is a wrapper around <code>MARC::File::USMARC::encode()</code> for compatibility with
+older versions of MARC::Record.</p>
+<p>
+</p>
+<h2><a name="as_formatted()"><code>as_formatted()</code></a></h2>
+<p>Returns a pretty string for printing in a MARC dump.</p>
+<p>
+</p>
+<h2><a name="title()"><code>title()</code></a></h2>
+<p>Returns the title from the 245 tag.
+Note that it is a string, not a MARC::Field record.</p>
+<p>
+</p>
+<h2><a name="author()"><code>author()</code></a></h2>
+<p>Returns the author from the 100, 110 or 111 tag.
+Note that it is a string, not a MARC::Field record.</p>
+<p>
+</p>
+<h2><a name="leader()"><code>leader()</code></a></h2>
+<p>Returns the leader for the record.  Sets the leader if <em>text</em> is defined.
+No error checking is done on the validity of the leader.</p>
+<p>
+</p>
+<h2><a name="set_leader_lengths(_$reclen,_$baseaddr_)">set_leader_lengths( $reclen, $baseaddr )</a></h2>
+<p>Internal function for updating the leader's length and base address.</p>
+<p>
+</p>
+<h2><a name="clone()"><code>clone()</code></a></h2>
+<p>The <code>clone()</code> method makes a copy of an existing MARC record and returns
+the new version.  Note that you cannot just say:</p>
+<pre>
+    my $newmarc = $oldmarc;</pre>
+<p>This just makes a copy of the reference, not a new object.  You must use
+the <code>clone()</code> method like so:</p>
+<pre>
+    my $newmarc = $oldmarc-&gt;clone;</pre>
+<p>You can also specify field specs to filter down only a 
+certain subset of fields.  For instance, if you only wanted the
+title and ISBN tags from a record, you could do this:</p>
+<pre>
+    my $small_marc = $marc-&gt;clone( 245, '020' );</pre>
+<p>The order of the fields is preserved as it was in the original record.</p>
+<p>
+</p>
+<h2><a name="warnings()"><code>warnings()</code></a></h2>
+<p>Returns the warnings that were created when the record was read.
+These are things like ``Invalid indicators converted to blanks''.</p>
+<p>The warnings are items that you might be interested in, or might
+not.  It depends on how stringently you're checking data.  If
+you're doing some grunt data analysis, you probably don't care.</p>
+<p>A side effect of calling <code>warnings()</code> is that the warning buffer will
+be cleared.</p>
+<p>
+</p>
+<h2><a name="add_fields()"><a href="#item_add_fields"><code>add_fields()</code></a></a></h2>
+<p><a href="#item_add_fields"><code>add_fields()</code></a> is now deprecated, and users are encouraged to use 
+<code>append_fields()</code>, <code>insert_fields_after()</code>, and <code>insert_fields_before()</code> 
+since they do what you want probably. It is still here though, for backwards 
+compatability.</p>
+<p><a href="#item_add_fields"><code>add_fields()</code></a> adds MARC::Field objects to the end of the list.  Returns the 
+number of fields added, or <code>undef</code> if there was an error.</p>
+<p>There are three ways of calling <a href="#item_add_fields"><code>add_fields()</code></a> to add data to the record.</p>
+<ol>
+<li><strong><a name="item_create_a_marc%3a%3afield_object_and_add_it">Create a MARC::Field object and add it</a></strong><br />
+</li>
+<pre>
+  my $author = MARC::Field-&gt;new(
+                100, &quot;1&quot;, &quot; &quot;, a =&gt; &quot;Arnosky, Jim.&quot;
+                );
+  $marc-&gt;add_fields( $author );</pre>
+<li><strong><a name="item_add_fields">Add the data fields directly, and let <code>add_fields()</code> take care of the objectifying.</a></strong><br />
+</li>
+<pre>
+  $marc-&gt;add_fields(
+        245, &quot;1&quot;, &quot;0&quot;,
+                a =&gt; &quot;Raccoons and ripe corn /&quot;,
+                c =&gt; &quot;Jim Arnosky.&quot;,
+                );</pre>
+<li><strong><a name="item_same_as_%232_above%2c_but_pass_multiple_fields_of_">Same as #2 above, but pass multiple fields of data in anonymous lists</a></strong><br />
+</li>
+<pre>
+  $marc-&gt;add_fields(
+        [ 250, &quot; &quot;, &quot; &quot;, a =&gt; &quot;1st ed.&quot; ],
+        [ 650, &quot;1&quot;, &quot; &quot;, a =&gt; &quot;Raccoons.&quot; ],
+        );</pre>
+</ol>
+<p>
+</p>
+<hr />
+<h1><a name="design_notes">DESIGN NOTES</a></h1>
+<p>A brief discussion of why MARC::Record is done the way it is:</p>
+<ul>
+<li><strong><a name="item_it%27s_built_for_quick_prototyping">It's built for quick prototyping</a></strong><br />
+</li>
+One of the areas Perl excels is in allowing the programmer to 
+create easy solutions quickly.  MARC::Record is designed along
+those same lines.  You want a program to dump all the 6XX
+tags in a file?  MARC::Record is your friend.
+<p></p>
+<li><strong><a name="item_it%27s_built_for_extensibility">It's built for extensibility</a></strong><br />
+</li>
+Currently, I'm using MARC::Record for analyzing bibliographic
+data, but who knows what might happen in the future?  MARC::Record
+needs to be just as adept at authority data, too.
+<p></p>
+<li><strong><a name="item_it%27s_designed_around_accessor_methods">It's designed around accessor methods</a></strong><br />
+</li>
+I use method calls everywhere, and I expect calling programs to do
+the same, rather than accessing internal data directly.  If you
+access an object's hash fields on your own, future releases may
+break your code.
+<p></p>
+<li><strong><a name="item_it%27s_not_built_for_speed">It's not built for speed</a></strong><br />
+</li>
+One of the tradeoffs in using accessor methods is some overhead
+in the method calls.  Is this slow?  I don't know, I haven't measured.
+I would suggest that if you're a cycle junkie that you use
+Benchmark.pm to check to see where your bottlenecks are, and then
+decide if MARC::Record is for you.
+<p></p></ul>
+<p>
+</p>
+<hr />
+<h1><a name="related_modules">RELATED MODULES</a></h1>
+<p><a href="/MARC/Record.html">the MARC::Record manpage</a>, <a href="/MARC/Lint.html">the MARC::Lint manpage</a></p>
+<p>
+</p>
+<hr />
+<h1><a name="see_also">SEE ALSO</a></h1>
+<ul>
+<li><strong><a name="item_perl4lib">perl4lib (<a href="http://www.rice.edu/perl4lib/">http://www.rice.edu/perl4lib/</a>)</a></strong><br />
+</li>
+A mailing list devoted to the use of Perl in libraries.
+<p></p>
+<li><strong><a name="item_pages">Library Of Congress MARC pages (<a href="http://www.loc.gov/marc/">http://www.loc.gov/marc/</a>)</a></strong><br />
+</li>
+The definitive source for all things MARC.
+<p></p>
+<li><strong><a name="item_bibliographic"><em>Understanding MARC Bibliographic</em> (<a href="http://lcweb.loc.gov/marc/umb/">http://lcweb.loc.gov/marc/umb/</a>)</a></strong><br />
+</li>
+Online version of the free booklet.  An excellent overview of the MARC format.  Essential.
+<p></p>
+<li><strong><a name="item_month">Tag Of The Month (<a href="http://www.tagofthemonth.com/">http://www.tagofthemonth.com/</a>)</a></strong><br />
+</li>
+Follett Software Company's
+(<a href="http://www.fsc.follett.com/">http://www.fsc.follett.com/</a>) monthly discussion of various MARC tags.
+<p></p></ul>
+<p>
+</p>
+<hr />
+<h1><a name="todo">TODO</a></h1>
+<ul>
+<li><strong><a name="item_incorporate_marc%2epm_in_the_distribution%2e">Incorporate MARC.pm in the distribution.</a></strong><br />
+</li>
+Combine MARC.pm and MARC::* into one distribution.
+<p></p>
+<li><strong><a name="item_podify_marc%2epm">Podify MARC.pm</a></strong><br />
+</li>
+<li><strong><a name="item_allow_regexes_across_the_entire_tag">Allow regexes across the entire tag</a></strong><br />
+</li>
+Imagine something like this:
+<pre>
+  my @sears_headings = $marc-&gt;tag_grep( /Sears/ );</pre>
+<p>(from Mike O'Regan)</p>
+<p></p>
+<li><strong><a name="item_insert_a_field_in_an_arbitrary_place_in_the_record">Insert a field in an arbitrary place in the record</a></strong><br />
+</li>
+<li><strong><a name="item_allow_deleting_a_field">Allow deleting a field</a></strong><br />
+</li>
+<pre>
+  for my $field ( $record-&gt;field( &quot;856&quot; ) ) {
+        $record-&gt;delete_field( $field ) unless useful($field);
+        } # for</pre>
+<p>(from Anne Highsmith <a href="mailto:hismith@tamu.edu)">hismith@tamu.edu)</a></p>
+<li><strong><a name="item_modifying_an_existing_field">Modifying an existing field</a></strong><br />
+</li>
+</ul>
+<p>
+</p>
+<hr />
+<h1><a name="bugs,_wishes_and_correspondence">BUGS, WISHES AND CORRESPONDENCE</a></h1>
+<p>Please feel free to email me at <a href="mailto:andy@petdance.com.">andy@petdance.com.</a>  I'm glad to help as
+best I can, and I'm always interested in bugs, suggestions and patches.</p>
+<p>The MARC::Record development team uses the RT bug tracking system at
+<a href="http://rt.cpan.org">http://rt.cpan.org</a>.  If your email is about a bug or suggestion,
+please report it through the RT system.  This is a huge help for
+the team, and you'll be notified of progress as things get fixed or
+updated.  If you prefer not to use the website, you can send your bug
+to <a href="mailto:bug-MARC-Record@rt.cpan.org.">bug-MARC-Record@rt.cpan.org.</a></p>
+<p>
+</p>
+<hr />
+<h1><a name="ideas">IDEAS</a></h1>
+<p>Ideas are things that have been considered, but nobody's actually asked for.</p>
+<ul>
+<li><strong><a name="item_create_multiple_output_formats%2e">Create multiple output formats.</a></strong><br />
+</li>
+These could be ASCII, XML, or MarcMaker.
+<p></p></ul>
+<p>
+</p>
+<hr />
+<h1><a name="license">LICENSE</a></h1>
+<p>This code may be distributed under the same terms as Perl itself.</p>
+<p>Please note that these modules are not products of or supported by the
+employers of the various contributors to the code.</p>
+<p>
+</p>
+<hr />
+<h1><a name="author">AUTHOR</a></h1>
+<p>Andy Lester, &lt;<a href="mailto:marc@petdance.com">marc@petdance.com</a>&gt;</p>
+
+</body>
+
+</html>

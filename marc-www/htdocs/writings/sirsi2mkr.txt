@@ -1,0 +1,189 @@
+#!/usr/local/bin/perl
+
+# This script was designed to help create MARC 
+# records for individual titles in the 
+# Chadwyck-Healey databases that are made 
+# available to VIVA insitutions by the 
+# University of Virginia:
+#
+# - African American Poetry (1760-1900)
+# - American Poetry Database
+# - English Poetry Full-Text Database
+# - English Verse Drama
+#
+# This script will take UVa's records and convert them 
+# into the format that is understood by the freely available
+# Perl module MARC.pm
+#
+# http://marcpm.sourceforge.net
+#
+# First you run this script on a system that supports perl 
+# to convert the UVa file into MARMAKR format. And then 
+# you use MARC.pm to create a properly formatted 
+# USMARC record, which you should be able to load into your 
+# system. If you don't want to use MARC.pm you can also used the
+# Library of Congress MARCMaker tool.
+#
+# Let me know if you can't get it to work, or if you would 
+# like help in customizing it. You can add fields that you 
+# would like to be inserted into the MARC record by adding 
+# them in the section beginning with line 136, and begins 
+# with the words "put in 000 field..."
+#
+# Ed Summers
+# ed@cheetahmail.com
+
+($in,$out) = @ARGV;
+
+unless ($in && $out) {
+  print "input file : ";
+  $in=<STDIN>;
+  print "output file : ";
+  $out=<STDIN>;
+}
+
+open (IN,"$in");
+open (OUT,">$out");
+
+$count=0;
+READ: while (<IN>) {
+   
+   #count how many lines read in
+   $count++;
+      
+   #change .245. to =245
+   $_=~s/\.(\d{3})\./=$1/;
+   
+   #if there are no indicators then convert
+   #ie. replace "=500  |" with "=500  \\|"
+   $_=~s/(=\d{3}) +\|/$1  \\\\\|/;
+   
+   #if there are indicators then convert
+   #ie. replace "=245 10|" with "=245  10|"
+   $_=~s/(=\d{3}) ([\d ]{2})\|/$1  $2\|/;
+   
+   #convert missing first indicator to \
+   #ie. replace "=245   1|" with "=245  \1|"
+   $_=~s/   (\d)\}/  \\$1\|/;
+   
+   #convert missing second indicators to \
+   #ie. replace "=245  1 |" with "=245  1\|"
+   $_=~s/  (\d) \|/  $1\\\|/;
+   
+   #convert | diacritic to $ diacritic
+   $_=~s/\|/\$/g;
+   
+   #add space to end of line
+   $_=~s/\n$/ \n/;
+   
+   #remove all of the "[SGML-encoded machine-readable 
+   #transcript]" GMD's and replace with "[computer file]" 
+   #you can comment this section out if you would 
+   #like to leave the GMD the way it is
+   if (/\$h.*SGML.*/) {
+      #if GMD is on one line
+      if (/\$h.*transcript/) {
+         $_=~s/\$h.*transcript(\.)?\]?/\$h\[computer file\]\1/;
+         }
+      #else if the GMD spans more than one line
+      else {
+         chop;
+         $_.=<IN>;
+         redo READ;
+         }
+      }
+   
+   #replace UVA's hotlink text to ODU's you can change this
+   #by changing "Connect to this resource \(Authorized users 
+   #only\)" to what you want. You will probably need to put 
+   #a \ before any non-letter or number characters
+   #$_=~s/Available only to UVa and VIVA users/Connect to this resource \(Authorized users only\)/;
+   
+   #if it the line contains a url then remove any pesky spaces
+   #if ($_=~/http:\/\//) {
+   #   $_=~s/ //g;
+   #   }
+   
+   #remove indicator spaces and |a from OO6, 007 and 008
+   if ($_=~/=00[678]/) {
+      $_=~s/\\\\\$a//;
+      }
+   
+   #remove information from 008 concerning computer file
+   #since these records should use the book format (mostly
+   #textual. you may want to comment this section out if you 
+   #would like to keep your 008 field the way it is
+   if ($_=~/=008/) {
+      substr($_,25,16)="                ";
+      }
+      
+   #if it is the first document boundary then don't print a newline
+   if ($count == "1" and $_=~/DOCUMENT BOUNDARY/) {
+      $record="1";
+      next;
+      }
+   
+   #if it is a new record increment the record counter and 
+   #print out a newline to signal a new record
+   elsif ($count != "1" and $_=~/DOCUMENT BOUNDARY/) {
+      $record++;
+      print OUT "\n";
+      next;
+      }
+   
+   #remove 001 field
+   #elsif ($_=~/=001/) {
+   #   next;
+   #   }
+   
+   #put in 000 field that the marcmakr program understands
+   #you can also use this area to add any marc fields you like..
+   #they should be put in order when your record is processed
+   elsif ($_=~/=000/) {
+      print OUT "=LDR  00000nam\\\\2200000\\a\\4500\n";
+      print OUT "=006  m        d\n";
+      print OUT "=007  cr un \n";
+      print OUT "=590  \\\\\$aElectronic access sponsored by VIVA, the Virtual Library of Virginia.\n";
+      }
+         
+   #do not print out FORM=MRDF or FORM=MARC which isn't understood by the marcmakr program
+   elsif ($_=~/FORM=MRDF/ or $_=~/FORM=MARC/) {
+      next;
+      }
+      
+   #do not print out hotlink to chadwyck healey
+   #this section is commented out, but you can uncomment it
+   #by removing the pound signs from the beginning of 
+   #the next three lines
+   #elsif ($_=~/=856  0\\\$achadwyck/) {
+   #   $linkflag="1";
+   #   next;
+   #   }
+      
+   #do not print out hotlink about non-viva, non-odu users
+   #this section is also commented out, but you can uncomment
+   #it by removing the pound signs from the beginning of the 
+   #next three lines.
+   #elsif ($_=~/Non-UVa,non-VIVAusers/) {
+   #   $linkflag="1";
+   #   next;
+   #   }
+   
+   #if the line is a carry over from one of the links that should
+   #be ignored then do not print out
+   elsif (not($_=~/^=/) and $linkflag=="1") {
+      $linkflag="0";
+      next;
+      }
+   
+   #if the line is the 596 then ignore it
+   elsif ($_=~/=596/) {
+      next;
+      }
+   
+   #print out the line!
+   else {
+      print OUT "$_"; }
+   }
+
+print "\n$record records processed\n";

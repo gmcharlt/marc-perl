@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MARC::File - Base class for files of MARC records</title>
+<link rev="made" href="mailto:ed@ink.inkdroid.org" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#version">VERSION</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#export">EXPORT</a></li>
+	<li><a href="#methods">METHODS</a></li>
+	<ul>
+
+		<li><a href="#in()"><code>in()</code></a></li>
+		<li><a href="#next()"><code>next()</code></a></li>
+		<li><a href="#skip()"><code>skip()</code></a></li>
+		<li><a href="#warnings()"><code>warnings()</code></a></li>
+	</ul>
+
+	<li><a href="#related_modules">RELATED MODULES</a></li>
+	<li><a href="#todo">TODO</a></li>
+	<li><a href="#license">LICENSE</a></li>
+	<li><a href="#author">AUTHOR</a></li>
+</ul>
+<!-- INDEX END -->
+
+<hr />
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>MARC::File - Base class for files of MARC records</p>
+<p>
+</p>
+<hr />
+<h1><a name="version">VERSION</a></h1>
+<p>Version 1.13</p>
+<pre>
+    $Id: File.html,v 1.1 2002/12/02 21:40:58 edsummers Exp $</pre>
+<p>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<pre>
+    use MARC::File::USMARC;</pre>
+<pre>
+    my $file = MARC::File::USMARC-&gt;in( $filename );</pre>
+<pre>
+    while ( my $marc = $file-&gt;next() ) {
+        # Do something
+    }
+    $file-&gt;close();
+    undef $file;</pre>
+<p>
+</p>
+<hr />
+<h1><a name="export">EXPORT</a></h1>
+<p>None.</p>
+<p>
+</p>
+<hr />
+<h1><a name="methods">METHODS</a></h1>
+<p>
+</p>
+<h2><a name="in()"><code>in()</code></a></h2>
+<p>Opens a file for input.</p>
+<p>Returns a MARC::File object, or <code>undef</code> on failure.</p>
+<p>
+</p>
+<h2><a name="next()"><code>next()</code></a></h2>
+<p>Reads the next record from the file handle passed in.</p>
+<p>Returns a MARC::Record reference, or <code>undef</code> on error.</p>
+<p>
+</p>
+<h2><a name="skip()"><code>skip()</code></a></h2>
+<p>Skips over the next record in the file.  Same as <code>next()</code>,
+without the overhead of parsing a record you're going to throw away
+anyway.</p>
+<p>Returns 1 or undef.</p>
+<p>
+</p>
+<h2><a name="warnings()"><code>warnings()</code></a></h2>
+<p>Simlilar to MARC::Record and MARC::Batch, <code>warnings()</code> will return any 
+warnings that have accumulated while processing this file; and as a 
+side-effect will clear the warnings buffer.</p>
+<p>
+</p>
+<hr />
+<h1><a name="related_modules">RELATED MODULES</a></h1>
+<p><a href="/MARC/Record.html">the MARC::Record manpage</a></p>
+<p>
+</p>
+<hr />
+<h1><a name="todo">TODO</a></h1>
+<ul>
+<li><strong><a name="item_out"><code>out()</code> method</a></strong><br />
+</li>
+We only handle files for input right now.
+<p></p></ul>
+<p>
+</p>
+<hr />
+<h1><a name="license">LICENSE</a></h1>
+<p>This code may be distributed under the same terms as Perl itself.</p>
+<p>Please note that these modules are not products of or supported by the
+employers of the various contributors to the code.</p>
+<p>
+</p>
+<hr />
+<h1><a name="author">AUTHOR</a></h1>
+<p>Andy Lester, &lt;<a href="mailto:marc@petdance.com">marc@petdance.com</a>&gt; or &lt;<a href="mailto:alester@flr.follett.com">alester@flr.follett.com</a>&gt;</p>
+
+</body>
+
+</html>

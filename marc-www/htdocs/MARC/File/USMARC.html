@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MARC::File::USMARC - USMARC-specific file handling</title>
+<link rev="made" href="mailto:ed@ink.inkdroid.org" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#version">VERSION</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#export">EXPORT</a></li>
+	<li><a href="#methods">METHODS</a></li>
+	<ul>
+
+		<li><a href="#decode()"><code>decode()</code></a></li>
+		<li><a href="#update_leader()"><code>update_leader()</code></a></li>
+		<li><a href="#_build_tag_directory()"><code>_build_tag_directory()</code></a></li>
+		<li><a href="#encode()"><code>encode()</code></a></li>
+	</ul>
+
+	<li><a href="#related_modules">RELATED MODULES</a></li>
+	<li><a href="#todo">TODO</a></li>
+	<li><a href="#license">LICENSE</a></li>
+	<li><a href="#author">AUTHOR</a></li>
+</ul>
+<!-- INDEX END -->
+
+<hr />
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>MARC::File::USMARC - USMARC-specific file handling</p>
+<p>
+</p>
+<hr />
+<h1><a name="version">VERSION</a></h1>
+<p>Version 1.13</p>
+<pre>
+    $Id: USMARC.html,v 1.1 2002/12/02 21:41:04 edsummers Exp $</pre>
+<p>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<pre>
+    use MARC::File::USMARC;</pre>
+<pre>
+    my $file = MARC::File::USMARC::in( $filename );
+    
+    while ( my $marc = $file-&gt;next() ) {
+        # Do something
+    }
+    $file-&gt;close();
+    undef $file;</pre>
+<p>
+</p>
+<hr />
+<h1><a name="export">EXPORT</a></h1>
+<p>None.</p>
+<p>
+</p>
+<hr />
+<h1><a name="methods">METHODS</a></h1>
+<p>Internal function to get the next raw record out of a file.</p>
+<p>
+</p>
+<h2><a name="decode()"><code>decode()</code></a></h2>
+<p>Constructor for handling data from a USMARC file.  This function takes care of 
+all the tag directory parsing &amp; mangling.</p>
+<p>Any warnings or coercions can be checked in the <code>warnings()</code> function.</p>
+<p>
+</p>
+<h2><a name="update_leader()"><code>update_leader()</code></a></h2>
+<p>If any changes get made to the MARC record, the first 5 bytes of the
+leader (the length) will be invalid.  This function updates the 
+leader with the correct length of the record as it would be if
+written out to a file.</p>
+<p>
+</p>
+<h2><a name="_build_tag_directory()"><code>_build_tag_directory()</code></a></h2>
+<p>Function for internal use only: Builds the tag directory that gets
+put in front of the data in a MARC record.</p>
+<p>Returns two array references, and two lengths: The tag directory, and the data fields themselves,
+the length of all data (including the Leader that we expect will be added),
+and the size of the Leader and tag directory.</p>
+<p>
+</p>
+<h2><a name="encode()"><code>encode()</code></a></h2>
+<p>Returns a string of characters suitable for writing out to a USMARC file,
+including the leader, directory and all the fields.</p>
+<p>
+</p>
+<hr />
+<h1><a name="related_modules">RELATED MODULES</a></h1>
+<p><a href="/MARC/Record.html">the MARC::Record manpage</a></p>
+<p>
+</p>
+<hr />
+<h1><a name="todo">TODO</a></h1>
+<p>Make some sort of autodispatch so that you don't have to explicitly
+specify the MARC::File::X subclass, sort of like how DBI knows to
+use DBD::Oracle or DBD::Mysql.</p>
+<p>
+</p>
+<hr />
+<h1><a name="license">LICENSE</a></h1>
+<p>This code may be distributed under the same terms as Perl itself.</p>
+<p>Please note that these modules are not products of or supported by the
+employers of the various contributors to the code.</p>
+<p>
+</p>
+<hr />
+<h1><a name="author">AUTHOR</a></h1>
+<p>Andy Lester, &lt;<a href="mailto:marc@petdance.com">marc@petdance.com</a>&gt; or &lt;<a href="mailto:alester@flr.follett.com">alester@flr.follett.com</a>&gt;</p>
+
+</body>
+
+</html>

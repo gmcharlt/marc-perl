@@ -1,0 +1,7 @@
+
+       1. Delete all matching occurrences of 650$x
+       2. Delete the first $x in every 650
+       3. Delete the last $x in each 650 with more than one
+       4. Preserve the first $x in every 650 (and delete all others)
+       5. Return to Review menu
+http://www.marcofquality.com/mg_man.html#Modify a field or subfield

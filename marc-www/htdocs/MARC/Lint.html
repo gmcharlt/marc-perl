@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MARC::Lint - Perl extension for checking validity of MARC records</title>
+<link rev="made" href="mailto:ed@ink.inkdroid.org" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#version">VERSION</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#export">EXPORT</a></li>
+	<li><a href="#methods">METHODS</a></li>
+	<ul>
+
+		<li><a href="#new()"><code>new()</code></a></li>
+		<li><a href="#warnings()"><code>warnings()</code></a></li>
+		<li><a href="#clear_warnings()"><code>clear_warnings()</code></a></li>
+		<li><a href="#warn(str[,str...])"><code>warn(str[,str...])</code></a></li>
+		<li><a href="#check_record(marc)"><code>check_record(marc)</code></a></li>
+		<li><a href="#check_xxx(field)"><code>check_xxx(field)</code></a></li>
+	</ul>
+
+	<li><a href="#see_also">SEE ALSO</a></li>
+	<li><a href="#todo">TODO</a></li>
+	<li><a href="#license">LICENSE</a></li>
+	<li><a href="#author">AUTHOR</a></li>
+</ul>
+<!-- INDEX END -->
+
+<hr />
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>MARC::Lint - Perl extension for checking validity of MARC records</p>
+<p>
+</p>
+<hr />
+<h1><a name="version">VERSION</a></h1>
+<p>Version 1.13</p>
+<pre>
+    $Id: Lint.html,v 1.1 2002/12/02 21:40:58 edsummers Exp $</pre>
+<p>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<pre>
+  use MARC::Record;
+  use MARC::Lint;</pre>
+<pre>
+  my $linter = new MARC::Lint;
+  my $filename = shift;</pre>
+<pre>
+  open( IN, &quot;&lt;&quot;, $filename ) or die &quot;Couldn't open $filename: $!\n&quot;;
+  binmode( IN ); # for the Windows folks
+  while ( !eof(IN) ) {
+        my $marc = MARC::Record::next_from_file( *IN );
+        die $MARC::Record::ERROR unless $marc;</pre>
+<pre>
+        $linter-&gt;check_record( $marc );</pre>
+<pre>
+        # Print the title tag
+        print $marc-&gt;subfield(245,&quot;a&quot;), &quot;\n&quot;;</pre>
+<pre>
+        # Print the errors that were found
+        print join( &quot;\n&quot;, $linter-&gt;warnings ), &quot;\n&quot;;
+  } # while</pre>
+<pre>
+  close IN or die &quot;Error closing $filename: $!\n&quot;;</pre>
+<p>Given the following MARC record:</p>
+<pre>
+        LDR 00000nam  22002538a 4500
+        100 14 _aWall, Larry.
+        110 1  _aO'Reilly &amp; Associates.
+        245 90 _aProgramming Perl /
+               _aBig Book of Perl /
+               _cLarry Wall, Tom Christiansen &amp; Jon Orwant.
+        250    _a3rd ed.
+        250    _a3rd ed.
+        260    _aCambridge, Mass. :
+               _bO'Reilly,
+               _r2000.
+        590 4  _aPersonally signed by Larry.
+        856 43 _uhttp://www.perl.com/</pre>
+<p>the following errors are generated:</p>
+<pre>
+        1XX: Only one 1XX tag is allowed, but I found 2 of them.
+        100: Indicator 2 must be blank
+        245: Indicator 1 must be 0 or 1
+        245: Subfield _a is not repeatable.
+        250: Field is not repeatable.
+        260: Subfield _r is not valid.
+        260: Must have a subfield _c.
+        590: Indicator 1 must be blank
+        856: Indicator 2 must be blank, 0, 1, 2 or 8</pre>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p>Module for checking validity of MARC records.  99% of the users will want to do 
+something like is shown in the synopsis.  The other intrepid 1% will overload the
+<code>MARC::Lint</code> module's methods and provide their own special field-level checking.</p>
+<p>What this means is that if you have certain requirements, such as making sure that
+all 952 tags have a certain call number in them, you can write a function that 
+checks for that, and still get all the benefits of the MARC::Lint framework.</p>
+<p>
+</p>
+<hr />
+<h1><a name="export">EXPORT</a></h1>
+<p>None.  Everything is done through objects.</p>
+<p>
+</p>
+<hr />
+<h1><a name="methods">METHODS</a></h1>
+<p>
+</p>
+<h2><a name="new()"><code>new()</code></a></h2>
+<p>No parms needed.  The <code>MARC::Lint</code> object is little more than a list of warnings 
+and a bunch of rules.</p>
+<p>
+</p>
+<h2><a name="warnings()"><code>warnings()</code></a></h2>
+<p>Returns a list of warnings found by <code>check_record()</code> and its brethren.</p>
+<p>
+</p>
+<h2><a name="clear_warnings()"><code>clear_warnings()</code></a></h2>
+<p>Clear the list of warnings for this linter object.  It's automatically called
+when you call <code>check_record()</code>.</p>
+<p>
+</p>
+<h2><a name="warn(str[,str...])"><code>warn(str[,str...])</code></a></h2>
+<p>Create a warning message, built from strings passed, like a <code>print</code> statement.</p>
+<p>Typically, you'll leave this to <code>check_record()</code>, but industrious programmers
+may want to do their own checking as well.</p>
+<p>
+</p>
+<h2><a name="check_record(marc)"><code>check_record(marc)</code></a></h2>
+<p>Does all sorts of lint-like checks on the MARC record <em>marc</em>, both on the record as a whole,
+and on the individual fields &amp; subfields.</p>
+<p>
+</p>
+<h2><a name="check_xxx(field)"><code>check_xxx(field)</code></a></h2>
+<p>Various functions to check the different fields.  If the function doesn't exist, 
+then it doesn't get checked.</p>
+<p>
+</p>
+<hr />
+<h1><a name="see_also">SEE ALSO</a></h1>
+<p>Check the docs for <a href="/MARC/Record.html">the MARC::Record manpage</a>.  All software links are there.</p>
+<p>
+</p>
+<hr />
+<h1><a name="todo">TODO</a></h1>
+<ul>
+<li><strong><a name="item_isbn_and_issn_checking">ISBN and ISSN checking</a></strong><br />
+</li>
+We can check the 020 and 022 fields with the <code>Business::ISBN</code> and 
+<code>Business::ISSN</code> modules, respectively.
+<p></p></ul>
+<p>
+</p>
+<hr />
+<h1><a name="license">LICENSE</a></h1>
+<p>This code may be distributed under the same terms as Perl itself.</p>
+<p>Please note that these modules are not products of or supported by the
+employers of the various contributors to the code.</p>
+<p>
+</p>
+<hr />
+<h1><a name="author">AUTHOR</a></h1>
+<p>Andy Lester, &lt;<a href="mailto:marc@petdance.com">marc@petdance.com</a>&gt; or &lt;<a href="mailto:alester@flr.follett.com">alester@flr.follett.com</a>&gt;</p>
+
+</body>
+
+</html>

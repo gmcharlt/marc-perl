@@ -1,0 +1,224 @@
+#!/usr/bin/perl
+
+# Created by Charles McFadden (Virginia Institute for Marine Science / 
+# chuck@vims.edu) and Ed Summers (Old Dominion University / esummers@odu.edu)
+# this CGI script uses the MARC.pm Perl Module. Please contact the authors
+# for more information. Feel free to redistribute this code as needed.
+# ehs 12/1/1999
+
+use lib "../lib";
+use CGI;
+use MARC;
+use MARC::XML;
+
+#create the CGI object
+$q=new CGI;
+
+#get name value pairs from the web form
+$self=$q->script_name();
+$filename=$q->param('file');
+$tmpfilename=$q->tmpFileName($filename);
+$type=$q->param('type');
+$remotehost=$q->remote_host();
+
+#print access to LOG
+open(LOG,">>access.log");
+print LOG $remotehost.": ".localtime(time).":$tmpfilename\n";
+
+#if the person has just come to the web page then give them the form
+if (not($filename)) {
+
+		print 
+		$q->header,
+		$q->start_html(
+			-title=>'Web Interface to MARC.pm',
+			-style=>{-src=>'http://marcpm.sourceforge.net/style.css'}
+			),
+		$q->h1({-align=>"center"}, "Web Interface to MARC.pm"),
+		$q->hr(),
+
+		qq(
+
+		<p>This form provides an interface to <b>MARC.pm</b> which is a Perl utility 
+		for performing conversions on bibliographic records that are in the 
+		<a href="http://lcweb.loc.gov/marc">MARC</a> format. 
+
+		For more information on MARC.pm please go to the module's 
+		<a href="http://marcpm.sourceforge.net">homepage</a>.
+
+		</p>
+
+		<p>
+		This interface to MARC.pm <i>should</i> accept either single records or 
+		batches of limited size (depending upon network conditions of course).
+		</p>
+
+		<p>
+		After you submit your request the MARC.pm on this server will process your 
+		file, and then send the converted records back to you. You should be 
+		prompted to choose a location to save the records on your PC after you 
+		click on the submit button. Or, if you convert to HTML or EXTRACTURLS your 
+		results will be displayed in your browser.
+		</p>
+
+		<p>
+		<b>NOTE</b>: Unfortunately not all browsers implement the upload file 
+		feature in the same way. Please let us know if you encounter problems. 
+		Also, if you recieve a server error the format you are submitting may be 
+		invalid. Again, please let us know if you run into any difficulties since 
+		MARC.pm is still a <i>work in progress</i>
+		</p>
+
+		<p>
+		<b>ANOTHER NOTE</b>: The MARC->DC is entirely experimental. Let us know if 
+		you'd like it enhanced.
+		</p>
+
+		),
+
+		$q->start_multipart_form('post',$self),
+		#$q->start_multipart_form(),
+
+		"Select the type of conversion you would like to perform",
+		$q->br,
+		$q->radio_group(-name=>'type',
+				-values			=> [
+						'MARC->ASCII',
+						'MARC->MARCMakr',
+						'MARCMakr->MARC',
+						'MARC->HTML (100,245,600,610,650,700,710,856 fields)',
+						'MARC->XML',
+						'MARC->EXTRACTURLS',
+						'MARC->ISBD',
+						'MARC->DC'
+						],
+				-linebreak	=> 'true'
+		), 
+
+		$q->p,
+		qq(Use the Browse button to locate the input file on your computer),
+		$q->filefield(-name=>'file',-size=>'40'),
+		$q->p,
+		qq(Click on the submit button to submit your file.),
+		$q->br,
+		$q->submit(),
+		$q->endform,
+		$q->p(),
+		$q->hr(),
+		q(
+		<a href="mailto:esummers\@panix.com">Ed Summers</a><br>
+		<a href="mailto:chuck\@vims.edu">Chas McFadden</a>
+		),
+		$q->br,
+		$q->i('last updated: 8/10/1999'),
+		$q->end_html();
+}
+
+#if the person has submitted a MARC file for translating then translate it!
+elsif ($type eq "MARC->ASCII") {
+		print
+		"content-type: text/plain\n\n";
+		$x=MARC->new($tmpfilename);
+		print $x->output({format=>"ascii"});
+}
+
+#if the person has submitted a MARC file for translating then translate it!
+elsif ($type eq "MARC->MARCMakr") {
+		print
+		"content-type: application/marc\n\n";
+		$x=MARC->new($tmpfilename);
+		print $x->output({format=>"marcmaker"});
+}
+
+#if the person has submitted a MARCMakr file for translating then translate it!
+elsif ($type eq "MARCMakr->MARC") {
+		print "content-type: application/marc\n\n";
+		$x=MARC->new($tmpfilename,"marcmaker");
+		print $x->output({format=>"marc"});
+}
+
+# if the person has submitted a MARC file for translating to XML then 
+# translate it!
+elsif ($type eq "MARC->XML") {
+		print "content-type: application/xml\n\n";
+		$x=MARC::XML->new($tmpfilename,"usmarc");
+		print $x->output({format=>"xml"});
+}
+
+#if the person wants to convert to HTML then display on screen
+elsif ($type eq "MARC->HTML (100,245,600,610,650,700,710,856 fields)") {
+		print "content-type: text/html\n\n";
+		$x=MARC->new($tmpfilename) || die "couldn't open file";
+		print $x->output({
+						format	=> "html",
+						100			=> "Author: ",
+						245			=> "Title: ",
+						260			=> "Imprint: ",
+						600			=> "Personal Name: ",
+						610			=> "Corporate Name: ", 
+						650			=> "Subject: ", 
+						700			=> "Other Author: ",
+						710			=> "Other Author: ", 
+						856			=> "URL: "
+		});
+}
+
+#if the person wants to extract urls then display on screen
+elsif ($type eq "MARC->EXTRACTURLS") {
+		print "content-type: text/html\n\n";
+		$x=MARC->new($tmpfilename);
+		print $x->output({format=>"urls"});
+}
+
+#if the person wants to output in ISBD format
+elsif ($type eq "MARC->ISBD") {
+		print "content-type: text/plain\n\n";
+		$x=MARC->new($tmpfilename);
+		print $x->output({format=>"isbd"});
+}
+
+elsif ($type eq "MARC->DC") {
+		print "content-type: text/plain\n\n";
+
+		eval { 
+
+		$x = MARC->new();
+		$x->openmarc({ file => $tmpfilename });
+		
+		while ($x->nextmarc(1)) {
+
+				my ($title_a) = $x->getvalue({
+								record			=> 1,
+								field				=> '245',
+								subfield		=> 'a'
+				});
+
+				my ($title_b) = $x->getvalue({
+								record			=> 1,
+								field				=> '245',
+								subfield		=> 'b'
+				});
+
+				$title_b = " $title_b" if $title_b;
+
+				my $title = $title_a.$title_b;
+
+				print qq(<META DC.TITLE="title" CONTENT="$title">\r\n);
+
+				$x->deletemarc({ record => 1 });
+
+		}
+
+		};
+
+		print $@ if $@;
+
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,1711 @@
+%PDF-1.2
+%‚„œ”
+1 0 obj
+[/CalRGB
+<<
+/WhitePoint [0.9505 1 1.089]
+/Gamma [1.8 1.8 1.8]
+/Matrix [0.4497 0.2446 0.02518 0.3613 0.672 0.1412 0.1845 0.08334 0.9227]
+>>
+]
+endobj
+2 0 obj
+<<
+/CreationDate (D:20020912113050-0500)
+/Producer (pod2pdf)
+/Title (Charset.pm)
+>>
+endobj
+5 0 obj
+<<
+/Type /Encoding
+/Differences [ 0 /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /space /exclam
+/quotedbl /numbersign /dollar /percent /ampersand
+/quoteright /parenleft /parenright /asterisk /plus /comma
+/hyphen /period /slash /zero /one /two /three /four /five
+/six /seven /eight /nine /colon /semicolon /less /equal
+/greater /question /at /A /B /C /D /E /F /G /H /I /J /K /L
+/M /N /O /P /Q /R /S /T /U /V /W /X /Y /Z /bracketleft
+/backslash /bracketright /asciicircum /underscore
+/quoteleft /a /b /c /d /e /f /g /h /i /j /k /l /m /n /o /p
+/q /r /s /t /u /v /w /x /y /z /braceleft /bar /braceright
+/asciitilde /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /emdash
+/dotlessi /grave /acute /circumflex /tilde /macron /breve
+/dotaccent /dieresis /.notdef /ring /cedilla /.notdef
+/hungarumlaut /ogonek /caron /space /exclamdown /cent
+/sterling /currency /yen /brokenbar /section /dieresis
+/copyright /ordfeminine /guillemotleft /logicalnot /hyphen
+/registered /macron /degree /plusminus /twosuperior
+/threesuperior /acute /mu /paragraph /periodcentered
+/cedilla /onesuperior /ordmasculine /guillemotright
+/onequarter /onehalf /threequarters /questiondown /Agrave
+/Aacute /Acircumflex /Atilde /Adieresis /Aring /AE
+/Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave
+/Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve
+/Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash
+/Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn
+/germandbls /agrave /aacute /acircumflex /atilde /adieresis
+/aring /ae /ccedilla /egrave /eacute /ecircumflex
+/edieresis /igrave /iacute /icircumflex /idieresis /eth
+/ntilde /ograve /oacute /ocircumflex /otilde /odieresis
+/divide /oslash /ugrave /uacute /ucircumflex /udieresis
+/yacute /thorn /ydieresis ]
+>>
+endobj
+6 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F00
+/Encoding 5 0 R
+/BaseFont /Times-Roman
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F01
+/Encoding 5 0 R
+/BaseFont /Times-Bold
+>>
+endobj
+8 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F02
+/Encoding 5 0 R
+/BaseFont /Times-Italic
+>>
+endobj
+9 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F03
+/Encoding 5 0 R
+/BaseFont /Times-BoldItalic
+>>
+endobj
+10 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F10
+/Encoding 5 0 R
+/BaseFont /Courier
+>>
+endobj
+11 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F11
+/Encoding 5 0 R
+/BaseFont /Courier-Bold
+>>
+endobj
+12 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F12
+/Encoding 5 0 R
+/BaseFont /Courier-Oblique
+>>
+endobj
+13 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F13
+/Encoding 5 0 R
+/BaseFont /Courier-BoldOblique
+>>
+endobj
+14 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F20
+/Encoding 5 0 R
+/BaseFont /Helvetica
+>>
+endobj
+15 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F21
+/Encoding 5 0 R
+/BaseFont /Helvetica-Bold
+>>
+endobj
+16 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F22
+/Encoding 5 0 R
+/BaseFont /Helvetica-Oblique
+>>
+endobj
+17 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F23
+/Encoding 5 0 R
+/BaseFont /Helvetica-BoldOblique
+>>
+endobj
+0 g
+18 0 obj
+<<
+/Length 19 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(pod2pdf) Tj
+1 0 0 1 467.99 797 Tm
+(Charset.pm) Tj
+/F21 12 Tf
+1 0 0 1 72.0 764.0 Tm
+0.0000 Tw
+(NAME ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 749.6 Tm
+0.0000 Tw
+(MARC::Charset - A module for doing MARC-8/UTF8 translation ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 731.6 Tm
+0.0000 Tw
+(SYNOPSIS ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 711.2 Tm
+0.0000 Tw
+( use MARC::Charset; ) Tj
+1 0 0 1 102.0 687.2 Tm
+0.0000 Tw
+( ## create a MARC::Charset object ) Tj
+1 0 0 1 102.0 675.2 Tm
+0.0000 Tw
+( my $charset = MARC::Charset->new\(\); ) Tj
+1 0 0 1 102.0 651.2 Tm
+0.0000 Tw
+( ## a string containing the Ansel value for a copyright symbol  ) Tj
+1 0 0 1 102.0 639.2 Tm
+0.0000 Tw
+( my $ansel = chr\(0xC3\) . ' copyright 1969'. ) Tj
+1 0 0 1 102.0 615.2 Tm
+0.0000 Tw
+( ## the same string, but now encoded in UTF8! ) Tj
+1 0 0 1 102.0 603.2 Tm
+0.0000 Tw
+( my $utf8 = $charset->to_utf8\($extLatin\); ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 585.2 Tm
+0.0000 Tw
+(DESCRIPTION ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 570.8 Tm
+3.2231 Tw
+(MARC::Charset is a package that allows you to easily convert between the MARC-8 character) Tj
+1 0 0 1 102.0 558.8 Tm
+0.1750 Tw
+(encodings and Unicode \(UTF-8\). The Library of Congress  maintains some essential mapping tables and) Tj
+1 0 0 1 102.0 546.8 Tm
+0.0000 Tw
+(information about the MARC-8 and  Unicode environments at: ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 534.8 Tm
+0.0000 Tw
+( http://www.loc.gov/marc/specifications/spechome.html ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 510.8 Tm
+0.2533 Tw
+(MARC::Charset is essentially a Perl implementation of the specifications  found at LC, and supports the) Tj
+1 0 0 1 102.0 498.8 Tm
+0.0000 Tw
+(following character sets: ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 472.4 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 473.4 4 4 re
+f
+Q
+BT
+1 0 0 1 110 472.4 Tm
+/F20 10 Tf
+0.0000 Tw
+(Latin \(Basic/Extended + Greek Symbols, Subscripts and Superscripts\) ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 458.0 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 459 4 4 re
+f
+Q
+BT
+1 0 0 1 110 458 Tm
+/F20 10 Tf
+0.0000 Tw
+(Hebrew ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 443.6 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 444.6 4 4 re
+f
+Q
+BT
+1 0 0 1 110 443.6 Tm
+/F20 10 Tf
+0.0000 Tw
+(Cyrillic \(Basic + Extended\) ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 429.2 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 430.2 4 4 re
+f
+Q
+BT
+1 0 0 1 110 429.2 Tm
+/F20 10 Tf
+0.0000 Tw
+(Arabic \(Basic + Extended\) ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 414.8 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 415.8 4 4 re
+f
+Q
+BT
+1 0 0 1 110 414.8 Tm
+/F20 10 Tf
+0.0000 Tw
+(Greek ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 402.8 Tm
+0.4589 Tw
+(Since the East Asian character set is 32 bit, there isn`t support just yet in MARC::Charset for them. It`s) Tj
+1 0 0 1 102.0 390.8 Tm
+1.6347 Tw
+(been built with an eye for the future, and so  when more is understood about how 32 bit graphical) Tj
+1 0 0 1 102.0 378.8 Tm
+0.0000 Tw
+(character sets are designated as working G0 and G1 sets, then more will be done. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 360.8 Tm
+0.0000 Tw
+(METHODS ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 339.2 Tm
+0.0000 Tw
+(new\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 327.2 Tm
+0.9072 Tw
+(The constructor which will return  MARC::Charset object. If you like  you can pass in the default G0) Tj
+1 0 0 1 102.0 315.2 Tm
+0.0000 Tw
+(and G1 charsets \(using the g0 and g1 parameters, but if you don`t ASCII/Ansel will be assumed. ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 303.2 Tm
+0.0000 Tw
+( ## for standard characters sets: ASCII and Ansel ) Tj
+1 0 0 1 102.0 291.2 Tm
+0.0000 Tw
+( my $cs = MARC::Charset->new\(\);  ) Tj
+1 0 0 1 102.0 267.2 Tm
+0.0000 Tw
+( ## or if you want to specify Arabic Basic + Extended as the G0/G1 character ) Tj
+1 0 0 1 102.0 255.2 Tm
+0.0000 Tw
+( ## sets.  ) Tj
+1 0 0 1 102.0 243.2 Tm
+0.0000 Tw
+( my $cs = MARC::Charset->new\(  ) Tj
+1 0 0 1 102.0 231.2 Tm
+0.0000 Tw
+(    g0 => MARC::Charset::ArabicBasic->new\(\), ) Tj
+1 0 0 1 102.0 219.2 Tm
+0.0000 Tw
+(    g1 => MARC::Charset::ArabicExtended->new\(\) ) Tj
+1 0 0 1 102.0 207.2 Tm
+0.0000 Tw
+( \); ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 183.2 Tm
+0.3916 Tw
+(If you would like diagnostics turned on pass in the DIAGNOSTICS  parameter and set it to a value that) Tj
+1 0 0 1 102.0 171.2 Tm
+0.0000 Tw
+(will evaluate to true \(eg. 1\). ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 159.2 Tm
+0.0000 Tw
+( my $cs = MARC::Charset->new\( diagnostics => 1 \); ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 141.2 Tm
+0.0000 Tw
+(to_utf8\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 129.2 Tm
+0.0163 Tw
+(Pass to_utf8\(\) a string of MARC8 encoded characters and get back a string of UTF8 characters. to_utf8\(\)) Tj
+1 0 0 1 102.0 117.2 Tm
+0.1038 Tw
+(will handle escape sequences within the string  that change the working character sets to Greek, Hebrew,) Tj
+1 0 0 1 102.0 105.2 Tm
+0.0000 Tw
+(Arabic \(Basic +  Extended\), Cyrillic \(Basic + Extended\)...but not 32 bit East Asian \(see TODO\). ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 87.2 Tm
+0.0000 Tw
+(g0\(\)  ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 75.2 Tm
+0.2006 Tw
+(Returns an object representing the character set that is being used as  the first graphic character set \(G0\).) Tj
+1 0 0 1 102.0 63.2 Tm
+0.6505 Tw
+(If you pass in a MARC::Charset::*  object you will set the G0 character set, and as a side effect you`ll) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(12 September 2002) Tj
+1 0 0 1 517.44 37 Tm
+(1) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+19 0 obj
+5193
+endobj
+20 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F00 6 0 R
+/F10 10 0 R
+/F20 14 0 R
+/F21 15 0 R
+>>
+>>
+endobj
+21 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 20 0 R
+/Contents 18 0 R
+>>
+endobj
+22 0 obj
+<<
+/Length 23 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(Charset.pm) Tj
+1 0 0 1 483.56 797 Tm
+(pod2pdf) Tj
+/F00 10 Tf
+1 0 0 1 102.0 770.0 Tm
+0.2350 Tw
+(get the  previous G0 value returned to you. You probably don`t ever need to call this  since character set) Tj
+1 0 0 1 102.0 758.0 Tm
+0.0000 Tw
+(changes are handled when you call to_utf8\(\), but it`s here  if you want it. ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 746.0 Tm
+0.0000 Tw
+( ## set the G0 character set to Greek ) Tj
+1 0 0 1 102.0 734.0 Tm
+0.0000 Tw
+( my $charset = MARC::Charset->new\(\); ) Tj
+1 0 0 1 102.0 722.0 Tm
+0.0000 Tw
+( $charset->g0\( MARC::Charset::Greek->new\(\) \); ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 704.0 Tm
+0.0000 Tw
+(g1\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 692.0 Tm
+0.0000 Tw
+(Same as g0\(\) above, but operates on the second graphic set that is available. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 674.0 Tm
+0.0000 Tw
+(TODO ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 656.7 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 657.72 4 4 re
+f
+Q
+BT
+1 0 0 1 110 656.72 Tm
+/F20 10 Tf
+0.0000 Tw
+(to_marc8\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 644.7 Tm
+0.0000 Tw
+(A function for going from Unicode to MARC-8 character encodings. ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 630.3 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 631.32 4 4 re
+f
+Q
+BT
+1 0 0 1 110 630.32 Tm
+/F20 10 Tf
+0.0000 Tw
+(Support for 32bit MARC-8 characters:  ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 618.3 Tm
+0.8662 Tw
+(This concerns the East Asian character sets: Han, Hiragana, Katakana, Hangul  and Punctuation.) Tj
+1 0 0 1 126.0 606.3 Tm
+0.3194 Tw
+(I`m a bit confused about whether 7/8 bit character sets can  interoperate with 32 bit character sets.) Tj
+1 0 0 1 126.0 594.3 Tm
+1.9518 Tw
+(For example if ASCII is designated as  the working G0 character set, and East Asian as the) Tj
+1 0 0 1 126.0 582.3 Tm
+0.6688 Tw
+(working G1 character set.  While I`ve tried to program towards supporting 32 bit character sets I) Tj
+1 0 0 1 126.0 570.3 Tm
+1.2200 Tw
+(need to  know exactly how they are implemented in the `real world'. So if you have  any East) Tj
+1 0 0 1 126.0 558.3 Tm
+0.0000 Tw
+(Asian MARC data please email it to me!! ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 528.3 Tm
+0.0000 Tw
+(SEE ALSO ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 511.0 Tm
+0.0000 Tw
+() Tj
+/F22 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Charset::ASCII) Tj
+/F20 10 Tf
+0 g
+0.0000 Tw
+( ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 496.6 Tm
+0.0000 Tw
+() Tj
+/F22 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Charset::Ansel) Tj
+/F20 10 Tf
+0 g
+0.0000 Tw
+( ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 482.2 Tm
+0.0000 Tw
+() Tj
+/F22 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Charset::ArabicBasic) Tj
+/F20 10 Tf
+0 g
+0.0000 Tw
+( ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 467.8 Tm
+0.0000 Tw
+() Tj
+/F22 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Charset::ArabicExtended) Tj
+/F20 10 Tf
+0 g
+0.0000 Tw
+( ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 453.4 Tm
+0.0000 Tw
+() Tj
+/F22 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Charset::Controls) Tj
+/F20 10 Tf
+0 g
+0.0000 Tw
+( ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 439.0 Tm
+0.0000 Tw
+() Tj
+/F22 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Charset::CyrillicBasic) Tj
+/F20 10 Tf
+0 g
+0.0000 Tw
+( ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 424.6 Tm
+0.0000 Tw
+() Tj
+/F22 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Charset::CyrillicExtended) Tj
+/F20 10 Tf
+0 g
+0.0000 Tw
+( ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 410.2 Tm
+0.0000 Tw
+() Tj
+/F22 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Charset::Greek) Tj
+/F20 10 Tf
+0 g
+0.0000 Tw
+( ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 395.8 Tm
+0.0000 Tw
+() Tj
+/F22 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Charset::GreekSymbols) Tj
+/F20 10 Tf
+0 g
+0.0000 Tw
+( ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 381.4 Tm
+0.0000 Tw
+() Tj
+/F22 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Charset::Hebrew) Tj
+/F20 10 Tf
+0 g
+0.0000 Tw
+( ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 367.0 Tm
+0.0000 Tw
+() Tj
+/F22 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Charset::Subscripts) Tj
+/F20 10 Tf
+0 g
+0.0000 Tw
+( ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 352.6 Tm
+0.0000 Tw
+() Tj
+/F22 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Charset::Superscripts) Tj
+/F20 10 Tf
+0 g
+0.0000 Tw
+( ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 334.6 Tm
+0.0000 Tw
+(VERSION HISTORY ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 317.4 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 318.36 4 4 re
+f
+Q
+BT
+1 0 0 1 110 317.36 Tm
+/F20 10 Tf
+0.0000 Tw
+( ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 317.4 Tm
+0.0000 Tw
+(v.01 - 2002.07.17 \(ehs\) ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 287.4 Tm
+0.0000 Tw
+(AUTHORS ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 270.1 Tm
+0.0000 Tw
+(Ed Summers <ehs@pobox.com> ) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(2) Tj
+1 0 0 1 432.4 37 Tm
+(12 September 2002) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+23 0 obj
+4388
+endobj
+24 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F00 6 0 R
+/F10 10 0 R
+/F20 14 0 R
+/F21 15 0 R
+/F22 16 0 R
+>>
+>>
+endobj
+25 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 24 0 R
+/Contents 22 0 R
+>>
+endobj
+26 0 obj
+<<
+/Length 27 0 R
+>>
+stream
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+/F20 24 Tf
+1 0 0 1 202.784 770 Tm
+(Table of Contents) Tj
+1 0 0 1 235.484 741.2 Tm
+(Charset.pm) Tj
+/F20 10 Tf
+ET
+q
+0.95 g
+72 680.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 683.6 Tm
+(NAME) Tj
+1 0 0 1 487.44 683.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 668.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 671.6 Tm
+(SYNOPSIS) Tj
+1 0 0 1 487.44 671.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 656.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 659.6 Tm
+(DESCRIPTION) Tj
+1 0 0 1 487.44 659.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 644.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 647.6 Tm
+(Latin \(Basic/Extended + Greek Symbols, Subscripts and Superscripts\)) Tj
+1 0 0 1 487.44 647.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 632.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 635.6 Tm
+(Hebrew) Tj
+1 0 0 1 487.44 635.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 620.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 623.6 Tm
+(Cyrillic \(Basic + Extended\)) Tj
+1 0 0 1 487.44 623.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 608.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 611.6 Tm
+(Arabic \(Basic + Extended\)) Tj
+1 0 0 1 487.44 611.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 596.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 599.6 Tm
+(Greek) Tj
+1 0 0 1 487.44 599.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 584.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 587.6 Tm
+(METHODS) Tj
+1 0 0 1 487.44 587.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 572.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 575.6 Tm
+(new\(\)) Tj
+1 0 0 1 487.44 575.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 560.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 563.6 Tm
+(to_utf8\(\)) Tj
+1 0 0 1 487.44 563.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 548.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 551.6 Tm
+(g0\(\) ) Tj
+1 0 0 1 487.44 551.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 536.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 539.6 Tm
+(g1\(\)) Tj
+1 0 0 1 487.44 539.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 524.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 527.6 Tm
+(TODO) Tj
+1 0 0 1 487.44 527.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 512.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 515.6 Tm
+(to_marc8\(\)) Tj
+1 0 0 1 487.44 515.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 500.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 503.6 Tm
+(Support for 32bit MARC-8 characters: ) Tj
+1 0 0 1 487.44 503.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 488.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 491.6 Tm
+(SEE ALSO) Tj
+1 0 0 1 487.44 491.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 476.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 479.6 Tm
+(MARC::Charset::ASCII) Tj
+1 0 0 1 487.44 479.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 464.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 467.6 Tm
+(MARC::Charset::Ansel) Tj
+1 0 0 1 487.44 467.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 452.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 455.6 Tm
+(MARC::Charset::ArabicBasic) Tj
+1 0 0 1 487.44 455.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 440.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 443.6 Tm
+(MARC::Charset::ArabicExtended) Tj
+1 0 0 1 487.44 443.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 428.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 431.6 Tm
+(MARC::Charset::Controls) Tj
+1 0 0 1 487.44 431.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 416.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 419.6 Tm
+(MARC::Charset::CyrillicBasic) Tj
+1 0 0 1 487.44 419.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 404.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 407.6 Tm
+(MARC::Charset::CyrillicExtended) Tj
+1 0 0 1 487.44 407.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 392.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 395.6 Tm
+(MARC::Charset::Greek) Tj
+1 0 0 1 487.44 395.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 380.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 383.6 Tm
+(MARC::Charset::GreekSymbols) Tj
+1 0 0 1 487.44 383.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 368.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 371.6 Tm
+(MARC::Charset::Hebrew) Tj
+1 0 0 1 487.44 371.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 356.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 359.6 Tm
+(MARC::Charset::Subscripts) Tj
+1 0 0 1 487.44 359.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 344.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 347.6 Tm
+(MARC::Charset::Superscripts) Tj
+1 0 0 1 487.44 347.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 332.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 335.6 Tm
+(VERSION HISTORY) Tj
+1 0 0 1 487.44 335.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 320.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 323.6 Tm
+(AUTHORS) Tj
+1 0 0 1 487.44 323.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 308.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 311.6 Tm
+(Ed Summers <ehs@pobox.com>) Tj
+1 0 0 1 487.44 311.6 Tm
+(2) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(12 September 2002) Tj
+1 0 0 1 520.22 37 Tm
+(i) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+27 0 obj
+3886
+endobj
+28 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F20 14 0 R
+/F21 15 0 R
+>>
+>>
+endobj
+29 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 28 0 R
+/Contents 26 0 R
+>>
+endobj
+30 0 obj
+<<
+/Length 31 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(Charset.pm) Tj
+1 0 0 1 438.55 797 Tm
+(Table of Contents) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(ii) Tj
+1 0 0 1 432.4 37 Tm
+(12 September 2002) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+31 0 obj
+248
+endobj
+32 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F21 15 0 R
+>>
+>>
+endobj
+33 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 32 0 R
+/Contents 30 0 R
+>>
+endobj
+34 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 37 0 R
+/Contents 35 0 R
+>>
+endobj
+35 0 obj
+<<
+/Length 36 0 R
+>>
+stream
+q
+1 0 0 rg
+180 626 8 130 re
+F
+Q
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+210 626 m
+523 626 l
+s
+BT
+/F21 30 Tf
+1 0 0 1 210 706 Tm
+0 -30 TD
+(POD Translation) Tj
+T* (by ) Tj
+0 0 0.8 rg
+/F22 30 Tf
+(pod2pdf) Tj
+/F21 9 Tf
+T* (ajf@afco.demon.co.uk) Tj
+/F03 48 Tf
+0 g
+1 0 0 1 183.476 371 Tm
+(Charset.pm) Tj
+ET
+endstream
+endobj
+36 0 obj
+293
+endobj
+37 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F03 9 0 R
+/F21 15 0 R
+/F22 16 0 R
+>>
+>>
+endobj
+38 0 obj
+<<
+/Length 39 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(Title Page) Tj
+1 0 0 1 467.99 797 Tm
+(Charset.pm) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(12 September 2002) Tj
+1 0 0 1 488.54 37 Tm
+(Fly leaf) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+39 0 obj
+248
+endobj
+40 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F21 15 0 R
+>>
+>>
+endobj
+41 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 40 0 R
+/Contents 38 0 R
+>>
+endobj
+43 0 obj
+<<
+/Parent 42 0 R
+/Dest [29 0 R /Fit]
+/First 44 0 R
+/Last 74 0 R
+/Count 32 
+/Title (Table of Contents)
+>>
+endobj
+44 0 obj
+<<
+/Parent 43 0 R
+/Dest [21 0 R /FitH 778.4]
+/Next 45 0 R
+/Title (NAME)
+>>
+endobj
+45 0 obj
+<<
+/Parent 43 0 R
+/Dest [21 0 R /FitH 746]
+/Previous 44 0 R
+/Next 46 0 R
+/Title (SYNOPSIS)
+>>
+endobj
+46 0 obj
+<<
+/Parent 43 0 R
+/Dest [21 0 R /FitH 599.6]
+/Previous 45 0 R
+/Next 52 0 R
+/First 47 0 R
+/Last 51 0 R
+/Count 5 
+/Title (DESCRIPTION)
+>>
+endobj
+47 0 obj
+<<
+/Parent 46 0 R
+/Dest [21 0 R /FitH 484.4]
+/Next 48 0 R
+/Title (Latin \(Basic/Extended + Greek Symbols, Subscripts and Superscripts\))
+>>
+endobj
+48 0 obj
+<<
+/Parent 46 0 R
+/Dest [21 0 R /FitH 470]
+/Previous 47 0 R
+/Next 49 0 R
+/Title (Hebrew)
+>>
+endobj
+49 0 obj
+<<
+/Parent 46 0 R
+/Dest [21 0 R /FitH 455.6]
+/Previous 48 0 R
+/Next 50 0 R
+/Title (Cyrillic \(Basic + Extended\))
+>>
+endobj
+50 0 obj
+<<
+/Parent 46 0 R
+/Dest [21 0 R /FitH 441.2]
+/Previous 49 0 R
+/Next 51 0 R
+/Title (Arabic \(Basic + Extended\))
+>>
+endobj
+51 0 obj
+<<
+/Parent 46 0 R
+/Dest [21 0 R /FitH 426.8]
+/Previous 50 0 R
+/Title (Greek)
+>>
+endobj
+52 0 obj
+<<
+/Parent 43 0 R
+/Dest [21 0 R /FitH 375.2]
+/Previous 46 0 R
+/Next 57 0 R
+/First 53 0 R
+/Last 56 0 R
+/Count 4 
+/Title (METHODS)
+>>
+endobj
+53 0 obj
+<<
+/Parent 52 0 R
+/Dest [21 0 R /FitH 351.2]
+/Next 54 0 R
+/Title (new\(\))
+>>
+endobj
+54 0 obj
+<<
+/Parent 52 0 R
+/Dest [21 0 R /FitH 153.2]
+/Previous 53 0 R
+/Next 55 0 R
+/Title (to_utf8\(\))
+>>
+endobj
+55 0 obj
+<<
+/Parent 52 0 R
+/Dest [21 0 R /FitH 99.2000000000002]
+/Previous 54 0 R
+/Next 56 0 R
+/Title (g0\(\) )
+>>
+endobj
+56 0 obj
+<<
+/Parent 52 0 R
+/Dest [25 0 R /FitH 716]
+/Previous 55 0 R
+/Title (g1\(\))
+>>
+endobj
+57 0 obj
+<<
+/Parent 43 0 R
+/Dest [25 0 R /FitH 688.4]
+/Previous 52 0 R
+/Next 60 0 R
+/First 58 0 R
+/Last 59 0 R
+/Count 2 
+/Title (TODO)
+>>
+endobj
+58 0 obj
+<<
+/Parent 57 0 R
+/Dest [25 0 R /FitH 668.72]
+/Next 59 0 R
+/Title (to_marc8\(\))
+>>
+endobj
+59 0 obj
+<<
+/Parent 57 0 R
+/Dest [25 0 R /FitH 642.32]
+/Previous 58 0 R
+/Title (Support for 32bit MARC-8 characters: )
+>>
+endobj
+60 0 obj
+<<
+/Parent 43 0 R
+/Dest [25 0 R /FitH 542.72]
+/Previous 57 0 R
+/Next 73 0 R
+/First 61 0 R
+/Last 72 0 R
+/Count 12 
+/Title (SEE ALSO)
+>>
+endobj
+61 0 obj
+<<
+/Parent 60 0 R
+/Dest [25 0 R /FitH 523.04]
+/Next 62 0 R
+/Title (MARC::Charset::ASCII)
+>>
+endobj
+62 0 obj
+<<
+/Parent 60 0 R
+/Dest [25 0 R /FitH 508.64]
+/Previous 61 0 R
+/Next 63 0 R
+/Title (MARC::Charset::Ansel)
+>>
+endobj
+63 0 obj
+<<
+/Parent 60 0 R
+/Dest [25 0 R /FitH 494.24]
+/Previous 62 0 R
+/Next 64 0 R
+/Title (MARC::Charset::ArabicBasic)
+>>
+endobj
+64 0 obj
+<<
+/Parent 60 0 R
+/Dest [25 0 R /FitH 479.84]
+/Previous 63 0 R
+/Next 65 0 R
+/Title (MARC::Charset::ArabicExtended)
+>>
+endobj
+65 0 obj
+<<
+/Parent 60 0 R
+/Dest [25 0 R /FitH 465.44]
+/Previous 64 0 R
+/Next 66 0 R
+/Title (MARC::Charset::Controls)
+>>
+endobj
+66 0 obj
+<<
+/Parent 60 0 R
+/Dest [25 0 R /FitH 451.04]
+/Previous 65 0 R
+/Next 67 0 R
+/Title (MARC::Charset::CyrillicBasic)
+>>
+endobj
+67 0 obj
+<<
+/Parent 60 0 R
+/Dest [25 0 R /FitH 436.64]
+/Previous 66 0 R
+/Next 68 0 R
+/Title (MARC::Charset::CyrillicExtended)
+>>
+endobj
+68 0 obj
+<<
+/Parent 60 0 R
+/Dest [25 0 R /FitH 422.24]
+/Previous 67 0 R
+/Next 69 0 R
+/Title (MARC::Charset::Greek)
+>>
+endobj
+69 0 obj
+<<
+/Parent 60 0 R
+/Dest [25 0 R /FitH 407.84]
+/Previous 68 0 R
+/Next 70 0 R
+/Title (MARC::Charset::GreekSymbols)
+>>
+endobj
+70 0 obj
+<<
+/Parent 60 0 R
+/Dest [25 0 R /FitH 393.44]
+/Previous 69 0 R
+/Next 71 0 R
+/Title (MARC::Charset::Hebrew)
+>>
+endobj
+71 0 obj
+<<
+/Parent 60 0 R
+/Dest [25 0 R /FitH 379.04]
+/Previous 70 0 R
+/Next 72 0 R
+/Title (MARC::Charset::Subscripts)
+>>
+endobj
+72 0 obj
+<<
+/Parent 60 0 R
+/Dest [25 0 R /FitH 364.64]
+/Previous 71 0 R
+/Title (MARC::Charset::Superscripts)
+>>
+endobj
+73 0 obj
+<<
+/Parent 43 0 R
+/Dest [25 0 R /FitH 349.04]
+/Previous 60 0 R
+/Next 74 0 R
+/Title (VERSION HISTORY)
+>>
+endobj
+74 0 obj
+<<
+/Parent 43 0 R
+/Dest [25 0 R /FitH 301.76]
+/Previous 73 0 R
+/First 75 0 R
+/Last 75 0 R
+/Count 1 
+/Title (AUTHORS)
+>>
+endobj
+75 0 obj
+<<
+/Parent 74 0 R
+/Dest [25 0 R /FitH 282.08]
+/Title (Ed Summers <ehs@pobox.com>)
+>>
+endobj
+42 0 obj
+<<
+/Type /Outlines
+/Count 33
+/First 43 0 R
+/Last 75 0 R
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 4 0 R
+/PageMode /UseOutlines
+/Outlines 42 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Pages
+/Kids [ 34 0 R 41 0 R 29 0 R 33 0 R 21 0 R 25 0 R ]
+/Count 6
+/MediaBox [0 0 595 842]
+>>
+endobj
+xref
+0 76
+0000000000 65535 f 
+0000000015 00000 n 
+0000000171 00000 n 
+0000023688 00000 n 
+0000023777 00000 n 
+0000000270 00000 n 
+0000002370 00000 n 
+0000002469 00000 n 
+0000002567 00000 n 
+0000002667 00000 n 
+0000002771 00000 n 
+0000002867 00000 n 
+0000002968 00000 n 
+0000003072 00000 n 
+0000003180 00000 n 
+0000003278 00000 n 
+0000003381 00000 n 
+0000003487 00000 n 
+0000003601 00000 n 
+0000008848 00000 n 
+0000008869 00000 n 
+0000009006 00000 n 
+0000009089 00000 n 
+0000013531 00000 n 
+0000013552 00000 n 
+0000013701 00000 n 
+0000013784 00000 n 
+0000017724 00000 n 
+0000017745 00000 n 
+0000017859 00000 n 
+0000017942 00000 n 
+0000018244 00000 n 
+0000018264 00000 n 
+0000018366 00000 n 
+0000018449 00000 n 
+0000018532 00000 n 
+0000018879 00000 n 
+0000018899 00000 n 
+0000019024 00000 n 
+0000019326 00000 n 
+0000019346 00000 n 
+0000019448 00000 n 
+0000023613 00000 n 
+0000019531 00000 n 
+0000019653 00000 n 
+0000019744 00000 n 
+0000019854 00000 n 
+0000020006 00000 n 
+0000020162 00000 n 
+0000020270 00000 n 
+0000020403 00000 n 
+0000020534 00000 n 
+0000020630 00000 n 
+0000020778 00000 n 
+0000020872 00000 n 
+0000020987 00000 n 
+0000021109 00000 n 
+0000021204 00000 n 
+0000021349 00000 n 
+0000021449 00000 n 
+0000021578 00000 n 
+0000021729 00000 n 
+0000021837 00000 n 
+0000021962 00000 n 
+0000022093 00000 n 
+0000022227 00000 n 
+0000022355 00000 n 
+0000022488 00000 n 
+0000022624 00000 n 
+0000022749 00000 n 
+0000022881 00000 n 
+0000023007 00000 n 
+0000023137 00000 n 
+0000023256 00000 n 
+0000023376 00000 n 
+0000023512 00000 n 
+trailer
+<<
+/Size 76
+/Root 3 0 R
+/Info 2 0 R
+>>
+startxref
+23896
+%%EOF

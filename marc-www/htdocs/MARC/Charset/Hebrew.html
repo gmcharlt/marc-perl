@@ -1,0 +1,85 @@
+<HTML>
+<HEAD>
+<TITLE>MARC::Charset::Hebrew - MARC8/UTF8 mappings for Hebrew</TITLE>
+<LINK REV="made" HREF="mailto:gp@familiehaase.de">
+</HEAD>
+
+<BODY>
+
+<A NAME="__index__"></A>
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#name">NAME</A></LI>
+	<LI><A HREF="#synopsis">SYNOPSIS</A></LI>
+	<LI><A HREF="#description">DESCRIPTION</A></LI>
+	<LI><A HREF="#methods">METHODS</A></LI>
+	<LI><A HREF="#new()"><CODE>new()</CODE></A></LI>
+	<LI><A HREF="#name()"><CODE>name()</CODE></A></LI>
+	<LI><A HREF="#lookup()"><CODE>lookup()</CODE></A></LI>
+	<LI><A HREF="#combining()"><CODE>combining()</CODE></A></LI>
+	<LI><A HREF="#getcharsize()"><CODE>getCharSize()</CODE></A></LI>
+	<LI><A HREF="#todo">TODO</A></LI>
+	<LI><A HREF="#authors">AUTHORS</A></LI>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="name">NAME</A></H1>
+<P>MARC::Charset::Hebrew - MARC8/UTF8 mappings for Hebrew</P>
+<P>
+<HR>
+<H1><A NAME="synopsis">SYNOPSIS</A></H1>
+<PRE>
+ use MARC::Charset::Hebrew;
+ my $cs = MARC::Charset::Hebrew-&gt;new();</PRE>
+<P>
+<HR>
+<H1><A NAME="description">DESCRIPTION</A></H1>
+<P>MARC::Charset::Hebrew provides a mapping between the MARC8 Hebrew character
+set and Unicode(UTF8). It is typically used by MARC::Charset, so you 
+probably don't need to use this yourself.</P>
+<P>
+<HR>
+<H1><A NAME="methods">METHODS</A></H1>
+<P>
+<HR>
+<H1><A NAME="new()"><CODE>new()</CODE></A></H1>
+<P>The constructor, which will return you a MARC::Charset::Hebrew object.</P>
+<P>
+<HR>
+<H1><A NAME="name()"><CODE>name()</CODE></A></H1>
+<P>Returns the name of the character set.</P>
+<P>
+<HR>
+<H1><A NAME="lookup()"><CODE>lookup()</CODE></A></H1>
+<P>The workhorse method that does the lookup. Pass it an a character and you'll
+get back the UTF8 character.</P>
+<P>
+<HR>
+<H1><A NAME="combining()"><CODE>combining()</CODE></A></H1>
+<P>Pass it a character and you'll get back a true value (1) if the character is 
+a combining character, and false (undef) if it is not.</P>
+<P>
+<HR>
+<H1><A NAME="getcharsize()"><CODE>getCharSize()</CODE></A></H1>
+<P>Returns the number of bytes in each character of this character set.</P>
+<P>
+<HR>
+<H1><A NAME="todo">TODO</A></H1>
+<UL>
+<LI>
+</UL>
+<P>
+<HR>
+<H1><A NAME="authors">AUTHORS</A></H1>
+<DL>
+<DT><STRONG><A NAME="item_Ed_Summers_%3Cehs%40pobox%2Ecom%3E">Ed Summers &lt;<A HREF="mailto:ehs@pobox.com">ehs@pobox.com</A>&gt;</A></STRONG><BR>
+<DD>
+</DL>
+
+</BODY>
+
+</HTML>

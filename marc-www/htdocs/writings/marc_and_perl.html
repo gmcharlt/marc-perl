@@ -1,0 +1,738 @@
+<html>
+<head>
+<title>MARC.pm : Machine Readable Cataloging Perl Module</title>
+<link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+<div align="center">
+
+<h1>MARC and Perl</h1>
+
+<hr>
+
+</div>
+
+<h2>General considerations</h2>
+
+<p>MARC and Perl are a natural pair. Perl
+has strong text-processing capabilities: the 
+canonical Marc standard format mostly encodes 
+text. Not surprisingly, many individuals and groups have 
+used Perl to manipulate MARC records. Some have published
+their scripts or modules for others to use.
+</p>
+<p>
+Here we concentrate on five implementations
+defined at the library level. 
+We will comment on the implied structure of the modules, their
+robustness, installation difficulty, level of detail, current support
+and capability for data conversion.
+
+<p>
+In rough chronological order, we have:
+</p>
+
+<p>
+<ul>
+<li>LOC's sgml-marc effort.
+<li>Knight's MARC::Metadata
+<li>Steve's Marc::Base
+<li>BBLMS's MARC.pm and Summer's MARC::XML
+<li>Andy's MARC::Record,::Lint,::Field
+</ul>
+</p>
+
+<p>
+The Perl modules we consider are freely available and
+modifiable. They are all likely to work correctly on
+most inputs and generate correct outputs in most cases.
+</p>
+
+<p>
+Knights, Steves and BBLMS' have an essentially one-file
+install using standard perl techniques. BBLMS provides extra support
+for Windows: it handles the common case where nmake is
+not installed.
+
+Sgml-marc requires freely available third-party utilities and 
+currently some sophistication to use. 
+</p>
+
+<p>
+We will define some terms for clarity:
+<ul>
+<li>
+"MARC" records are in the binary file format defined for
+transmission of bibliographic information. Many MARC records are typically
+concatenated in a file, typically separated by
+a unique binary separator.
+</li>
+
+<li>
+"MARC-like" records like mkrbrkr and the various
+XML versions are commonly used for internal 
+purposes. They are numerous and pervasive in the 
+library world, as are MARC records.
+</li>
+
+<li>
+Control fields are ones with tags in the range
+001-009, with subfields often positionally defined.
+</li>
+
+<li>
+Leaders are the fixed-length preamble of MARC
+records defining structural information (position and
+length of fields, etc) and some information of bibliographic
+interest (enough to define format in the sense of BOOKS vs SERIALS).
+</li>
+
+</ul>
+</p>
+
+<p>
+BBLMS supports data conversion between MARC-like records
+extensively, and Knight's for a small set.
+
+Other modules have suitable data structures defined
+that can form the basis of conversion. LOC's requires
+a little work to uncover, and Steve's is obvious.
+Andy does not want to expose his data representation,
+but the current version can support MARC-Like records.
+</p>
+<p>
+Steve's module is the only one to trade off
+readability against the (very rare) possibility of corruption
+from unexpected data in subfields. All others 
+leave subfield separators in native binary form (they are
+illegal characters in any other position) or parse subfields
+into Perl data structures.
+</p>
+<p>
+Parsing of leaders is done by all except
+Steve's and Andy's modules. LOC parses all control fields, and 
+BBLMS the 008 field. Andy, Knight and Steve leave control fields
+as is.
+</p>
+
+<h2>The Library of Congress's approach to SGML</h2>
+
+<p>
+
+LOC launched a typically thorough effort
+to provide for <a href="http://lcweb.loc.gov/marc/marcsgml.html">
+SGML-MARC conversion</a>.
+
+Only institutions of the scale of 
+LOC can hope to quickly change the de-facto
+importance of various features supported by the MARC
+format. 
+
+LOC gathered together
+many MARC and SGML authorities, who declared that the order
+of tags in a MARC record was not important. 
+This declaration goes against current practice in at least one 
+institution. It has a fighting chance 
+of becoming a new de-facto desideratum
+for MARC-processing techniques. In fact
+only Andy's, Steve's and BBLMS' implementations 
+support order preservation. (BBLMS actually
+defaults to ignoring order of fields during editing;
+you have to look around a bit to find the methods that preserve
+order during editing).
+
+LOC's implementation honours
+positional semantics for the traditional
+control fields, without specifying a 
+canonical name for the positionally 
+defined subfields. 
+
+</p>
+
+<p>
+
+sgml-marc uses some tables in sgml (nearly xml)
+format that define character-entity maps, parsing
+of positionally defined fields, and basic marc format.
+
+sgml-marc defines two perl utilities, mrc2sgm and
+sgm2mrc that convert back and forth between standard
+MARC records and a LOC-defined sgml equivalent.
+
+mrc2sgm handles large files record-by-record,
+which is necessary when the files have
+32,000 records. It carefully checks many features
+of the records as it processes, and is driven by
+externally defined tables that have been mechanically
+derived from MARC specifications. mrc2sgm knows
+about every positionally defined control field,
+and MARC's leader information. The output is
+probably xml-compliant, and hence has access to
+the many implementations of XML standards (XPath,
+XSLT,XHTML). 
+
+The clear intent for LOC's effort is that 
+standard MARC records are mapped to an adequate
+(X/SG)ML file, which is then handled by (X/SG)ML
+technologies, which are available for all major
+languages and environments. LOC's software does not deal with 
+MARC-like records natively but adding this
+capability is possible.
+
+</p>
+
+<p>
+
+LOC uses Perl data structures implicitly during its
+transformations. The best data structures to use
+for creating/reading MARC-like records look like:
+
+<pre>
+
+Leader:00901cam  2200241Ia 45e0
+$VAR1 = {
+    100 =&gt; ['1 aTwain, Mark,d1835-1910.'],
+    '001' =&gt; ['ocm01047729 '],
+    300 =&gt; ['  axvi, 438 p., [1] leaf of plates :bill. ;c20 cm.'],
+    '003' =&gt; ['OCoLC'],
+    '040' =&gt; ['  aKSUcKSUdGZM'],
+    500 =&gt; [
+             '  aFirst English ed.',
+             '  aState B; gatherings saddle-stitched with wire staples.',
+             '  hAdvertisements on p. [1]-32 at end.',
+             '  aBound in red S cloth; stamped in black and gold.'
+           ],
+    '005' =&gt; ['19990808143752.0'],
+    994 =&gt; ['  aE0bVOD'],
+    510 =&gt; ['4 aBALc3414.'],
+    '008' =&gt; ['741021s1884    enkaf         000 1 eng d'],
+....
+}
+
+</pre>
+
+i.e the unparsed leader and a separate data structure
+providing for a list of fields (represented as strings with
+including unparsed indicators) per tag.
+
+The file-oriented output is LOC's intended core
+structure and looks like:
+
+<pre>
+
+&lt;mrcb format-type="bd"&gt;
+&lt;mrcbldr-bd&gt;
+&lt;mrcbldr-bd-05 value="c"&gt;
+&lt;mrcbldr-bd-06 value="a"&gt;
+&lt;mrcbldr-bd-07 value="m"&gt;
+&lt;mrcbldr-bd-08 value="blank"&gt;
+&lt;mrcbldr-bd-09 value="blank"&gt;
+&lt;mrcbldr-bd-17 value="I"&gt;
+&lt;mrcbldr-bd-18 value="a"&gt;
+&lt;mrcbldr-bd-19 value="blank"&gt;
+&lt;/mrcbldr-bd&gt;
+&lt;mrcb-control-fields&gt;
+&lt;mrcb001&gt;ocm01047729 &lt;/mrcb001&gt;
+&lt;mrcb003&gt;OCoLC&lt;/mrcb003&gt;
+&lt;mrcb005&gt;19990808143752.0&lt;/mrcb005&gt;
+&lt;mrcb008-bk&gt;
+&lt;mrcb008-bk-00-05 value="741021"&gt;
+&lt;mrcb008-bk-06 value="s"&gt;
+&lt;mrcb008-bk-07-10 value="1884"&gt;
+&lt;mrcb008-bk-11-14 value="blank"&gt;
+&lt;mrcb008-bk-15-17 value="enk"&gt;
+&lt;mrcb008-bk-18-21 value="af  "&gt;
+&lt;mrcb008-bk-22 value="blank"&gt;
+&lt;mrcb008-bk-23 value="blank"&gt;
+&lt;mrcb008-bk-24-27 value="blank"&gt;
+&lt;mrcb008-bk-28 value="blank"&gt;
+&lt;mrcb008-bk-29 value="0"&gt;
+&lt;mrcb008-bk-30 value="0"&gt;
+&lt;mrcb008-bk-31 value="0"&gt;
+&lt;mrcb008-bk-32 value="blank"&gt;
+&lt;mrcb008-bk-33 value="1"&gt;
+&lt;mrcb008-bk-34 value="blank"&gt;
+&lt;mrcb008-bk-35-37 value="eng"&gt;
+&lt;mrcb008-bk-38 value="blank"&gt;
+&lt;mrcb008-bk-39 value="d"&gt;
+&lt;/mrcb008-bk&gt;
+&lt;/mrcb-control-fields&gt;
+&lt;mrcb-numbers-and-codes&gt;
+&lt;mrcb040 i1="i1-blank" i2="i2-blank"&gt;
+&lt;mrcb040-a&gt;KSU&lt;/mrcb040-a&gt;
+&lt;mrcb040-c&gt;KSU&lt;/mrcb040-c&gt;
+&lt;mrcb040-d&gt;GZM&lt;/mrcb040-d&gt;
+&lt;/mrcb040&gt;
+&lt;mrcb049 i1="i1-blank" i2="i2-blank"&gt;
+&lt;mrcb049-a&gt;VODN&lt;/mrcb049-a&gt;
+&lt;/mrcb049&gt;
+&lt;mrcb090 i1="i1-blank" i2="i2-blank"&gt;
+&lt;mrcb090-a&gt;PS1305&lt;/mrcb090-a&gt;
+&lt;mrcb090-b&gt;.A1 1884&lt;/mrcb090-b&gt;
+&lt;/mrcb090&gt;
+&lt;/mrcb-numbers-and-codes&gt;
+&lt;mrcb-main-entry&gt;
+&lt;mrcb100 i1="i1-1" i2="i2-blank"&gt;
+&lt;mrcb100-a&gt;Twain, Mark,&lt;/mrcb100-a&gt;
+&lt;mrcb100-d&gt;1835-1910.&lt;/mrcb100-d&gt;
+&lt;/mrcb100&gt;
+&lt;/mrcb-main-entry&gt;
+....
+&lt;/mrcb&gt;
+
+</pre>
+
+<p>
+
+sgm2mrc requires external utilities to handle
+SGML (as is typical in all XML/SGML scenarios).
+These utilities are not heavily supported in 
+the Perl community (unlike XML::Parser/Expat
+which is installed by default in ActiveState's
+Windows version and is the common substrate for
+essentially all XML modules in Perl).
+
+I needed to change some file name cases to make sgm2mrc
+work under Linux and spent quite a bit of time 
+getting the sgml utilities working. The output of
+sgm2mrc shows some extra return characters under
+Linux: there appears to be some DOS assumptions in 
+the package. 
+
+mrc2sgm encodes essentially all items of independent interest
+in a marc record. It takes care of format dependencies but
+does not attempt to do more. The associated DTD's provide
+validation for a very large subset of traditional MARC
+requirements.
+
+LOC's ftp site has dates 1996, 1998 and Nov 26 2000, but its latest
+distribution required some attention to compile under
+*nix at the time of writing (October 2001).
+
+</p>
+
+<h2>Jon Knight's Metadata::Marc</h2>
+
+<p>
+Jon Knight's <a href="ftp://ftp.roads.lut.ac.uk/pub/ROADS/contrib/">
+Metadata::Marc</a> can read and write USMARC, UNIMARC, and a local 
+variant, BCLMPMARC.  It is 
+documented in two articles:
+
+<ul>
+<li><a href="http://www.ariadne.ac.uk/issue7/marc/">Handling MARC with Perl</a>
+<li><a href="http://www.ariadne.ac.uk/issue8/marc/">Making MARC with Dublin Core</a>
+</ul>
+</p>
+
+<P>
+
+A Metadata file reader includes code like this:
+
+<PRE>
+open F, $ARGV[0] or die "Could not open $ARGV[0] for read:$!\n";
+ReadMarcRecord(*F);
+print Dumper($MarcRecord);
+# At this stage, you have read the first record
+ 
+print Dumper($MarcRecord)
+
+$VAR1 = {
+  'level' => {
+    '001' => ['0'],
+    100 => ['0'],
+    '003' => ['0'],
+    300 => ['0'],
+    '040' => ['0'],
+    '005' => ['0'],
+    500 => [0,0,0,0],
+    510 => ['0'],
+....
+  },
+  'data' => {
+    '001' => ['ocm01047729 '],
+    100 => ['1 aTwain, Mark,d1835-1910.'],
+    '003' => ['OCoLC'],
+    300 => ['  axvi, 438 p., [1] leaf of plates :bill. ;c20 cm.'],
+....
+    500 => [
+      '  aFirst English ed.',
+      '  aState B; gatherings saddle-stitched with wire staples.',
+      '  hAdvertisements on p. [1]-32 at end.',
+      '  aBound in red S cloth; stamped in black and gold.'
+    ],
+....
+    245 => [ '14aThe adventures of Huckleberry Finn :b(Tom Sawyer\'s comrade)
+: scene, the Mississippi Valley : time, forty to fifty years ago /hby Mark
+Twain (Samuel Clemens) ; with 174 illustrations.'
+    ],
+  },
+  'type' => 'a',
+  'typecntl' => ' ',
+  'linked_rec_require' => ' ',
+  'descriptive_cat_form' => 'a',
+  'status' => 'c',
+  'marc_type' => 'USMARC',
+  'encoding_level' => 'I'
+};
+
+</PRE>
+
+</P>
+
+<P>
+
+This will also handle marc_type of UNIMARC (a global standard) as well
+as USMARC and a local BCLMPMARC which uses the 'level' key. (Each
+field in BCLMPMARC has a tag used to describe field-level status.)
+
+I had to change $BaseAddress to 'local' from 'my' to compile the
+module.
+My copy of Metadata::Marc has some changes in subroutine signatures
+also, although they are not strictly necessary.
+
+The latest version is dated Aug 11 1999 at the time of writing.
+
+Note that the data structure leaves subfield separators alone,
+parses leader information, and does not keep track of tag order.
+In fact, the WriteMarc method writes them out in numeric tag order.
+
+You find out that you are at the end of a marc file by noticing
+$MarcRecord->{marc_type} eq 'Invalid'.
+
+</P>
+
+<H2>Stephen Thomas's Modules</H2>
+
+<P>
+
+Stephen Thomas 
+<a href='http://www.library.adelaide.edu.au/~sthomas/scripts/'>has modules</a>
+that understand (US)MARC records.
+</P>
+
+<p>
+
+A typical extract from a file reader is:
+</p>
+<PRE>
+
+local $/ = $REC_SEP;
+open F, $ARGV[0] or die "Could not open $ARGV[0] for read:$!\n";
+my $marcrecord = <F>;
+my @marc_array = &marc2array ($marcrecord);
+print Dumper(\@marc_array);
+</PRE>
+And the dump of the first record looks like
+<PRE>
+          'LDR 00901cam  2200241Ia 45e0',
+          '001 ocm01047729 ',
+          '003 OCoLC',
+          '005 19990808143752.0',
+          '008 741021s1884    enkaf         000 1 eng d',
+          '040   |aKSU|cKSU|dGZM',
+          '090   |aPS1305|b.A1 1884',
+          '049   |aVODN',
+          '100 1 |aTwain, Mark,|d1835-1910.',
+          '245 14|aThe adventures of Huckleberry Finn :|b(Tom Sawyer\'s
+comrade) : scene, the Mississippi Valley : time, forty to fifty years ago /|hby
+Mark Twain (Samuel Clemens) ; with 174 illustrations.',
+          '260   |aLondon :|bChatto & Windus,|c1884.',
+          '300   |axvi, 438 p., [1] leaf of plates :|bill. ;|c20 cm.',
+          '500   |aFirst English ed.',
+          '500   |aState B; gatherings saddle-stitched with wire staples.',
+          '500   |hAdvertisements on p. [1]-32 at end.',
+          '500   |aBound in red S cloth; stamped in black and gold.',
+          '510 4 |aBAL|c3414.',
+          '740 01|aHuckleberry Finn.',
+          '994   |aE0|bVOD'
+
+</PRE>
+
+<P>
+
+The data structure changes subfield separators to an unusual
+human-readable form, leaves leader information unchanged, and keeps
+track of tag order. 
+</p>
+<p>
+End of file appears to be signalled by a @marc_arry with the single element:
+'LDR '.
+</p>
+Incremental reading is available by native Perl methods; the
+core function takes a single marc record and returns a 
+parsed version.
+<p>
+I was able to use MARC::Base essentially out of the box.
+The latest version of MARC::Base appears to be Mar 1999.
+
+</P>
+
+<H2>MARC.pm</H2>
+
+<P>
+
+Bearden,Birthisel,Lane,McFadden and Summers' <A HREF="http://marcpm.sourceforge.net">MARC.pm</A>has grown many features over time. We concentrate
+on a few capabilities.
+</p>
+<p>
+MARC.pm a basic "data+index" structure, overlaying an emphasis on 
+groups of MARC records.
+</p>
+<p>
+Consider an in-memory version of a usmarc file of marc records, $x. We
+will examine it in perl's debugger.
+<p>
+$x is a reference to an array.
+The zeroth element of the array is
+used for housekeeping for the entire array.
+
+<PRE>
+
+DB<7> x keys %{$x->[0]}
+0..4  'format' 'strict' 'handle' 'proto_rec' 'increment'
+</PRE>
+<ul>
+<li>$x->[0]{format} is a string like 'usmarc' and controls
+what kind of marc record is expected on input.
+<li>
+$x->[0]{handle} is the file-handle, used for incremental
+access to potentially large files of MARC records.
+<li>
+$x->[0]{increment} tells MARC how many records to attempt
+to read in at a time.
+<li>
+'strict' is related to level of error handling; 'proto_rec'
+used to bridge between the file-of-record and record-oriented
+views.
+</ul>
+
+
+The first and all later elements of the array are 
+instances of MARC::Rec, in which resides all record-specific
+behaviour.
+
+<PRE>
+
+  DB<6> x keys %{$x->[1]}
+0..18  000 100 001 300 003 040 500 005 994 510 008 260 'format' 090 740 245
+'handle' 049 'array'
+
+</PRE>
+
+You can see format and handle keys; these are inherited from the MARC
+object (or can be set directly).
+
+The primary data structure of a MARC::Rec is keyed off 'array'
+
+<PRE>
+
+  DB<8> x $x->[1]{array}
+0  ARRAY(0x83cf020)
+   0  ARRAY(0x83ccdfc)
+      0..1  000 '00901cam  2200241Ia 45e0'
+   1  ARRAY(0x8243430)
+      0..1  001 'ocm01047729 '
+   2  ARRAY(0x83cefc0)
+      0..1  003 'OCoLC'
+   3  ARRAY(0x83cef90)
+      0..1  005 19990808143752.0
+   4  ARRAY(0x83cf0d4)
+      0..1  008 '741021s1884    enkaf         000 1 eng d'
+   5  ARRAY(0x83cf140)
+      0..8  040 ' ' ' ' 'a' 'KSU' 'c' 'KSU' 'd' 'GZM'
+   6  ARRAY(0x83d2878)
+      0..6  090 ' ' ' ' 'a' 'PS1305' 'b' '.A1 1884'
+   7  ARRAY(0x83d28cc)
+      0..4  049 ' ' ' ' 'a' 'VODN'
+   8  ARRAY(0x83d2a70)
+      0..6  100 1 ' ' 'a' 'Twain, Mark,' 'd' '1835-1910.'
+....
+   12  ARRAY(0x83d50f0)
+      0..4  500 ' ' ' ' 'a' 'First English ed.'
+   13  ARRAY(0x83d5120)
+      0..4  500 ' ' ' ' 'a' 'State B; gatherings saddle-stitched with wire
+staples.'
+   14  ARRAY(0x83d5d54)
+      0..4  500 ' ' ' ' 'h' 'Advertisements on p. [1]-32 at end.'
+   15  ARRAY(0x83d5de4)
+      0..4  500 ' ' ' ' 'a' 'Bound in red S cloth; stamped in black and gold.'
+...
+
+</PRE>
+
+The array can support fields out of numeric order, (notice the 090 field
+<b>before</b> the
+049 field). Notice that indicators are treated differently from subfields,
+and that fields are pre-parsed.
+
+There are a variety of indexes into this structure.
+
+<PRE>
+  DB<10> x $x->[1]{500}
+0  HASH(0x83d5c40)
+   'a' => ARRAY(0x83d5c58)
+      0  SCALAR(0x83d5114)
+         -> 'First English ed.'
+      1  SCALAR(0x83d5c28)
+         -> 'State B; gatherings saddle-stitched with wire staples.'
+      2  SCALAR(0x83d5e20)
+         -> 'Bound in red S cloth; stamped in black and gold.'
+   'field' => ARRAY(0x83d5d30)
+      0  ARRAY(0x83d50f0)
+         0..4  500 ' ' ' ' 'a' 'First English ed.'
+      1  ARRAY(0x83d5120)
+         0..4  500 ' ' ' ' 'a' 'State B; gatherings saddle-stitched with wire
+staples.'
+      2  ARRAY(0x83d5d54)
+         0..4  500 ' ' ' ' 'h' 'Advertisements on p. [1]-32 at end.'
+      3  ARRAY(0x83d5de4)
+         0..4  500 ' ' ' ' 'a' 'Bound in red S cloth; stamped in black and
+gold.'
+   'h' => ARRAY(0x83d5e38)
+      0  SCALAR(0x83d5d90)
+         -> 'Advertisements on p. [1]-32 at end.'
+   'i1' => HASH(0x83d5c70)
+      ' ' => ARRAY(0x83d5c94)
+         0  ARRAY(0x83d50f0)
+            -> REUSED_ADDRESS
+         1  ARRAY(0x83d5120)
+            -> REUSED_ADDRESS
+         2  ARRAY(0x83d5d54)
+            -> REUSED_ADDRESS
+         3  ARRAY(0x83d5de4)
+            -> REUSED_ADDRESS
+   'i12' => HASH(0x83d5cf4)
+      '  ' => ARRAY(0x83d5d0c)
+         0  ARRAY(0x83d50f0)
+            -> REUSED_ADDRESS
+         1  ARRAY(0x83d5120)
+            -> REUSED_ADDRESS
+         2  ARRAY(0x83d5d54)
+            -> REUSED_ADDRESS
+         3  ARRAY(0x83d5de4)
+            -> REUSED_ADDRESS
+   'i2' => HASH(0x83d5cb8)
+      ' ' => ARRAY(0x83d5cd0)
+         0  ARRAY(0x83d50f0)
+            -> REUSED_ADDRESS
+         1  ARRAY(0x83d5120)
+            -> REUSED_ADDRESS
+         2  ARRAY(0x83d5d54)
+            -> REUSED_ADDRESS
+         3  ARRAY(0x83d5de4)
+            -> REUSED_ADDRESS
+
+</PRE>
+
+These can easily be used to answer interesting read-only information
+on MARC records using native Perl idioms e.g.
+
+<dl>
+
+<dt>How many 500 fields are there?</dt>
+<dd>scalar @{$x->[1]{500}{fields}}</dd>
+<dt>
+How many subfield a's exist in 500 fields?</dt>
+<dd> scalar @{$x->[1]{500}{a}}</dd>
+</dl>
+
+etc.
+
+</PRE>
+
+</P>
+
+<P>
+
+Because these indexes use Perl references pervasively, it
+is possible to update some subfields from the index, which
+is a neat trick, but dangerous.  
+</P>
+<p>
+It is possible to entirely avoid use of the index structure.
+Native perl idioms applied to the
+'array' fields are enough, with some MARC::Rec methods, to
+do everything that I have ever needed MARC.pm for.
+</P>
+<p>
+MARC.pm provides methods to change leader and 008 fields back and forth
+between hashes and the basic fixed field format. The
+hash version of the 008 field is keyed by unp_008:
+
+<PRE>
+
+  DB<11> $x->[1]->unpack_008
+  DB<13> x $x->[1]{unp_008}
+0  HASH(0x82ef670)
+   'Audn' => ' ', 'Biog' => ' ', 'Conf' => 0, 'Cont' => '    ',
+   'Ctry' => 'enk', 'Date1' => 1884, 'Date2' => '    ', 'DtSt' => 's',
+   'Entered' => 741021, 'Fest' => 0, 'Fict' => 1, 'Form' => ' ',
+   'GPub' => ' ', 'Ills' => 'af  ', 'Indx' => 0, 'Lang' => 'eng',
+   'MRec' => ' ', 'Srce' => 'd', 'Undef1' => ' '
+
+</PRE>
+
+And there are similar methods for the leader.  You can regard this as
+a halfway-house to LOC's full parsing and third party validation of
+006,007, and 008 fields.
+</P>
+
+<P>
+
+Finally, at present, MARC.pm handles bibliographic versions of
+a variety of MARC formats. What needs to be done with authorities
+and other defined kinds is not clear.
+</P>
+<p>
+The latest version is dated Mar 2001.
+</p>
+<P>
+MARC::XML illustrates an apparent difficulty related to MARC-Like
+conversions. MARC.pm supports many MARC-Like formats natively,
+but re-using these inside MARC::XML required some care. 
+MARC::XML needed to define a different version of LOC's SGML
+format because it chose to support out-of-order
+tags. 
+
+</P>
+
+<H2>MARC::Record</H2>
+
+<P>
+
+Andy Lester has three linked CPAN modules: <A HREF="http://www.cpan.org/modules/by-module/MARC/PETDANCE/">MARC::Record, MARC::Field and MARC::Lint.</A>
+<p>
+Andy de-emphasizes an explicit internal data structure in favor
+of methods and an extra MARC::Field class. His methods for access
+to fields and subfields of a MARC record are sufficiently detailed
+to support MARC-Like records.
+<p>
+A related MARC::Lint class defines a useful format for 
+checking indicators and repeatability for fields and subfields.
+<p>
+MARC::Record's desire to avoid explicit data structures
+requires adding explicit support for editing MARC records
+in memory. Defining an appropriate set of low-level
+methods to support MARC record editing appears to be
+difficult. MARC.pm probably has a superset of these methods,
+but it unclear whether this is the right set.
+<p>
+MARC::Record does not currently parse leader and 008 information.
+<p>
+Installation worked out-of-the-box at time of writing.
+
+The latest version is dated Sept 2001.
+
+<P>
+
+<HR>
+
+<I>Derek Lane, October, 2001.</I>
+
+</BODY>
+</HTML>
+
+
+

@@ -1,0 +1,185 @@
+<HTML>
+<HEAD>
+<TITLE>MARC::Charset - A module for doing MARC-8/UTF8 translation</TITLE>
+<LINK REV="made" HREF="mailto:gp@familiehaase.de">
+</HEAD>
+
+<BODY>
+
+<A NAME="__index__"></A>
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#name">NAME</A></LI>
+	<LI><A HREF="#synopsis">SYNOPSIS</A></LI>
+	<LI><A HREF="#description">DESCRIPTION</A></LI>
+	<LI><A HREF="#methods">METHODS</A></LI>
+	<UL>
+
+		<LI><A HREF="#new()"><CODE>new()</CODE></A></LI>
+		<LI><A HREF="#to_utf8()"><CODE>to_utf8()</CODE></A></LI>
+		<LI><A HREF="#g0()"><CODE>g0()</CODE></A></LI>
+		<LI><A HREF="#g1()"><CODE>g1()</CODE></A></LI>
+	</UL>
+
+	<LI><A HREF="#todo">TODO</A></LI>
+	<LI><A HREF="#see also">SEE ALSO</A></LI>
+	<LI><A HREF="#version history">VERSION HISTORY</A></LI>
+	<LI><A HREF="#authors">AUTHORS</A></LI>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="name">NAME</A></H1>
+<P>MARC::Charset - A module for doing MARC-8/UTF8 translation</P>
+<P>
+<HR>
+<H1><A NAME="synopsis">SYNOPSIS</A></H1>
+<PRE>
+ use MARC::Charset;</PRE>
+<PRE>
+ ## create a MARC::Charset object
+ my $charset = MARC::Charset-&gt;new();</PRE>
+<PRE>
+ ## a string containing the Ansel value for a copyright symbol 
+ my $ansel = chr(0xC3) . ' copyright 1969'.</PRE>
+<PRE>
+ ## the same string, but now encoded in UTF8!
+ my $utf8 = $charset-&gt;to_utf8($extLatin);</PRE>
+<P>
+<HR>
+<H1><A NAME="description">DESCRIPTION</A></H1>
+<P>MARC::Charset is a package that allows you to easily convert between
+the MARC-8 character encodings and Unicode (UTF-8). The Library of Congress 
+maintains some essential mapping tables and information about the MARC-8 and 
+Unicode environments at:</P>
+<PRE>
+ <A HREF="http://www.loc.gov/marc/specifications/spechome.html">http://www.loc.gov/marc/specifications/spechome.html</A></PRE>
+<P>MARC::Charset is essentially a Perl implementation of the specifications 
+found at LC, and supports the following character sets:</P>
+<UL>
+<LI><STRONG><A NAME="item_Latin">Latin (Basic/Extended + Greek Symbols, Subscripts and Superscripts)</A></STRONG><BR>
+
+<LI><STRONG><A NAME="item_Hebrew">Hebrew</A></STRONG><BR>
+
+<LI><STRONG><A NAME="item_Cyrillic">Cyrillic (Basic + Extended)</A></STRONG><BR>
+
+<LI><STRONG><A NAME="item_Arabic">Arabic (Basic + Extended)</A></STRONG><BR>
+
+<LI><STRONG><A NAME="item_Greek">Greek</A></STRONG><BR>
+
+</UL>
+<P>Since the East Asian character set is 32 bit, there isn't support just yet
+in MARC::Charset for them. It's been built with an eye for the future, and so 
+when more is understood about how 32 bit graphical character sets are
+designated as working G0 and G1 sets, then more will be done.</P>
+<P>
+<HR>
+<H1><A NAME="methods">METHODS</A></H1>
+<P>
+<H2><A NAME="new()"><CODE>new()</CODE></A></H2>
+<P>The constructor which will return  MARC::Charset object. If you like 
+you can pass in the default G0 and G1 charsets (using the g0 and g1
+parameters, but if you don't ASCII/Ansel will be assumed.</P>
+<PRE>
+ ## for standard characters sets: ASCII and Ansel
+ my $cs = MARC::Charset-&gt;new();</PRE>
+<PRE>
+ ## or if you want to specify Arabic Basic + Extended as the G0/G1 character
+ ## sets. 
+ my $cs = MARC::Charset-&gt;new( 
+    g0 =&gt; MARC::Charset::ArabicBasic-&gt;new(),
+    g1 =&gt; MARC::Charset::ArabicExtended-&gt;new()
+ );</PRE>
+<P>If you would like diagnostics turned on pass in the DIAGNOSTICS 
+parameter and set it to a value that will evaluate to true (eg. 1).</P>
+<PRE>
+ my $cs = MARC::Charset-&gt;new( diagnostics =&gt; 1 );</PRE>
+<P>
+<H2><A NAME="to_utf8()"><CODE>to_utf8()</CODE></A></H2>
+<P>Pass <CODE>to_utf8()</CODE> a string of MARC8 encoded characters and get back a string
+of UTF8 characters. <CODE>to_utf8()</CODE> will handle escape sequences within the string 
+that change the working character sets to Greek, Hebrew, Arabic (Basic + 
+Extended), Cyrillic (Basic + Extended)...but not 32 bit East Asian (see TODO).</P>
+<P>
+<H2><A NAME="g0()"><CODE>g0()</CODE></A></H2>
+<P>Returns an object representing the character set that is being used as 
+the first graphic character set (G0). If you pass in a MARC::Charset::* 
+object you will set the G0 character set, and as a side effect you'll get the 
+previous G0 value returned to you. You probably don't ever need to call this 
+since character set changes are handled when you call to_utf8(), but it's here 
+if you want it.</P>
+<PRE>
+ ## set the G0 character set to Greek
+ my $charset = MARC::Charset-&gt;new();
+ $charset-&gt;g0( MARC::Charset::Greek-&gt;new() );</PRE>
+<P>
+<H2><A NAME="g1()"><CODE>g1()</CODE></A></H2>
+<P>Same as <CODE>g0()</CODE> above, but operates on the second graphic set that is available.</P>
+<P>
+<HR>
+<H1><A NAME="todo">TODO</A></H1>
+<UL>
+<LI><STRONG><A NAME="item_to_marc8"><CODE>to_marc8()</CODE></A></STRONG><BR>
+
+A function for going from Unicode to MARC-8 character encodings.
+<P></P>
+<LI><STRONG><A NAME="item_Support_for_32bit_MARC%2D8_characters%3A">Support for 32bit MARC-8 characters:</A></STRONG><BR>
+
+This concerns the East Asian character sets: Han, Hiragana, Katakana, Hangul 
+and Punctuation. I'm a bit confused about whether 7/8 bit character sets can 
+interoperate with 32 bit character sets. For example if ASCII is designated as 
+the working G0 character set, and East Asian as the working G1 character set. 
+While I've tried to program towards supporting 32 bit character sets I need to 
+know exactly how they are implemented in the 'real world'. So if you have 
+any East Asian MARC data please email it to me!!
+<P></P></UL>
+<P>
+<HR>
+<H1><A NAME="see also">SEE ALSO</A></H1>
+<DL>
+<DT><STRONG><A NAME="item_MARC%3A%3ACharset%3A%3AASCII"><A HREF="/MARC/Charset/ASCII.html">the MARC::Charset::ASCII manpage</A></A></STRONG><BR>
+<DD>
+<DT><STRONG><A NAME="item_MARC%3A%3ACharset%3A%3AAnsel"><A HREF="/MARC/Charset/Ansel.html">the MARC::Charset::Ansel manpage</A></A></STRONG><BR>
+<DD>
+<DT><STRONG><A NAME="item_MARC%3A%3ACharset%3A%3AArabicBasic"><A HREF="/MARC/Charset/ArabicBasic.html">the MARC::Charset::ArabicBasic manpage</A></A></STRONG><BR>
+<DD>
+<DT><STRONG><A NAME="item_MARC%3A%3ACharset%3A%3AArabicExtended"><A HREF="/MARC/Charset/ArabicExtended.html">the MARC::Charset::ArabicExtended manpage</A></A></STRONG><BR>
+<DD>
+<DT><STRONG><A NAME="item_MARC%3A%3ACharset%3A%3AControls"><A HREF="/MARC/Charset/Controls.html">the MARC::Charset::Controls manpage</A></A></STRONG><BR>
+<DD>
+<DT><STRONG><A NAME="item_MARC%3A%3ACharset%3A%3ACyrillicBasic"><A HREF="/MARC/Charset/CyrillicBasic.html">the MARC::Charset::CyrillicBasic manpage</A></A></STRONG><BR>
+<DD>
+<DT><STRONG><A NAME="item_MARC%3A%3ACharset%3A%3ACyrillicExtended"><A HREF="/MARC/Charset/CyrillicExtended.html">the MARC::Charset::CyrillicExtended manpage</A></A></STRONG><BR>
+<DD>
+<DT><STRONG><A NAME="item_MARC%3A%3ACharset%3A%3AGreek"><A HREF="/MARC/Charset/Greek.html">the MARC::Charset::Greek manpage</A></A></STRONG><BR>
+<DD>
+<DT><STRONG><A NAME="item_MARC%3A%3ACharset%3A%3AGreekSymbols"><A HREF="/MARC/Charset/GreekSymbols.html">the MARC::Charset::GreekSymbols manpage</A></A></STRONG><BR>
+<DD>
+<DT><STRONG><A NAME="item_MARC%3A%3ACharset%3A%3AHebrew"><A HREF="/MARC/Charset/Hebrew.html">the MARC::Charset::Hebrew manpage</A></A></STRONG><BR>
+<DD>
+<DT><STRONG><A NAME="item_MARC%3A%3ACharset%3A%3ASubscripts"><A HREF="/MARC/Charset/Subscripts.html">the MARC::Charset::Subscripts manpage</A></A></STRONG><BR>
+<DD>
+<DT><STRONG><A NAME="item_MARC%3A%3ACharset%3A%3ASuperscripts"><A HREF="/MARC/Charset/Superscripts.html">the MARC::Charset::Superscripts manpage</A></A></STRONG><BR>
+<DD>
+</DL>
+<P>
+<HR>
+<H1><A NAME="version history">VERSION HISTORY</A></H1>
+<UL>
+<LI>
+v.01 - 2002.07.17 (ehs)
+<P></P></UL>
+<P>
+<HR>
+<H1><A NAME="authors">AUTHORS</A></H1>
+<DL>
+<DT><STRONG><A NAME="item_Ed_Summers_%3Cehs%40pobox%2Ecom%3E">Ed Summers &lt;<A HREF="mailto:ehs@pobox.com">ehs@pobox.com</A>&gt;</A></STRONG><BR>
+<DD>
+</DL>
+
+</BODY>
+
+</HTML>

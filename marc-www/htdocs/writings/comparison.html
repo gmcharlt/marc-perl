@@ -1,0 +1,160 @@
+<html>
+<head>
+<title>MARC.pm & MARC::Record -- What's the difference</title>
+<link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+
+<div align="center">
+
+<H1>MARC.pm and MARC::Record -- Where's the Diff?</H1>
+
+<table><tr><td>
+
+<pre>
+
+Date: Wed, 6 Mar 2002 02:02:07 -0800 
+From: derek lane <derekglane@YAHOO.COM>
+Subject: Re: [PERL4LIB] The future of MARC.pm/comparisons
+To: PERL4LIB@listserv.rice.edu
+
+> Perhaps we need to write up a summary of the differences between the two,
+> so that prospective users can tell which to use and when.
+
+Here's a first cut (from memory, etc) on differences.
+
+MARC.pm is not being heavily developed.
+Most future effort is likely to be devoted to
+MARC::Record and friends.
+
+MARC::Record, ::Field are somewhat comparable to
+MARC.pm in functionality. MARC::Lint is a useful
+and elegant module with no MARC.pm equivalent.
+
+There is a fair amount of documentation for MARC.pm
+both in POD and in the archives of perl4lib.
+As yet, MARC::Record and friends have not accreted
+a similar quantity of docs. On the other hand, MARC::Record
+has fewer opportunities to be confusing, so will
+probably need less docs.
+
+MARC.pm has a large (disorganized) regression test
+suite. MARC::Record has not yet accreted an equally
+large suite.
+
+
+MARC.pm is oriented to files of MARC records. Its
+core data structure is an array with first element
+administrative information and then MARC::Recs, which
+encode the details of each MARC record. It has methods
+to stream parsing and output of MARC records, but
+is oriented to parsing and generating entire files
+full of MARC records.
+
+MARC::Record is oriented to individual MARC records.
+
+MARC.pm supports several common on-disk formats for
+MARC records (marcbreaker, binary MARC transmission format,
+simple string-oriented encoding..).
+
+MARC::Record currently supports (I can only remember
+binary MARC transmission, what is the real story Andy??)
+fewer formats.
+
+MARC.pm has methods to pack and unpack leader and 008
+information in a bib-format sensitive manner (books vs
+serials, e.g.).
+
+MARC.pm has core support for a tie module (not yet
+distributed: mea culpa) that allows for additions/deletions
+to the first instance of, e.g. 245 subfield b references.
+
+MARC.pm has two entire suites of methods for deleting
+and inserting fields and subfields; one oriented
+to maintaining existing field order and the other not.
+
+MARC.pm has an integrated index into a MARC record
+that reflects it quite well into Perl data structures
+(good mostly for read-only uses, but can be sometimes
+used for updates). So for example if $m is a
+MARC instance and $r=$m->[1] is a MARC::Rec
+then $r->{'245'}{'a'}[0] would refer to the title
+string.
+
+MARC.pm uses 'templates' {field=>245, subfield=>a}
+pervasively; it is worthwhile to see how they are used
+to take full advantage of it.
+
+MARC::Record (and ::Field) uses methods consistently.
+
+MARC.pm has a bunch of methods that make sense only
+for files of records (searching, deleting, etc).
+
+MARC::Record can easily be used for files of records;
+equivalents for MARC.pm's file-oriented methods
+can easily (and in my opinion more flexibly) be created
+out of Perl's core array support.
+
+MARC.pm does not mind you understanding and using its
+internal structures. (Although updating its index
+using anything other than its internal method is er
+likely to yield suprises.)
+
+MARC::Record is oriented to the classic method-only
+access.
+
+MARC.pm is a one-file install. In consequence
+(and in consequence of its file orientation)
+subclassing MARC.pm is less likely to be successful
+than subclassing MARC::Record. But you don't have to
+keep track of a potentially exploding set of classes
+in many cases.
+
+&lt;rant&gt;
+Personal opinion only.
+MARC::Record (or some subclass) should probably grow
+support for header/008/(007?) packing and unpacking.
+
+The current MARC.pm support for binary formats should
+be transplanted into a MARC::Record (or a subclass,
+or use Perl's multiple inheritance to make a mixin).
+
+MARC.pm's index should *not* make it into MARC::Record,
+or at least be implemented in a subclass and advertised
+as a read-only optional convenience.
+
+MARC.pm's templates are iffy. It is not clear that
+they are clearer than methods with parameters. They
+may muddy the waters.
+
+MARC.pm's support for file oriented processing
+should be *not* be transported to MARC::Record.
+Common Perl idioms applied to a MARC::Records are
+more understandable, more flexible and easier to
+explain than MARC's custom methods.
+
+There is a bunch of administrative information
+in MARC.pm that should at least be considered
+for MARC::Record.
+
+Core support for ties to hashes could be added to
+a MARC::Record subclass. The port should be
+pretty straight-forward. This is a good way to
+see whether the MARC::Record abstractions are
+robust enough to support serious editing.
+
+I disagree with LOC. Field order *does* belong
+in any MARC-oriented software library. MARC::Record
+should advertise and support methods that maintain
+it on edits where possible.
+&lt;/rant&gt;
+
+--Derek
+
+</td></tr></table>
+
+
+</body>
+</html>
+

@@ -1,0 +1,255 @@
+<html>
+
+<head>
+<title>Using MARC.pm with batches of MARC records : the VIVA Experience</title>
+<link rel="stylesheet" href="/style.css" type="text/css">
+</head>
+
+<body>
+
+<center>
+<h1>Using MARC.pm with batches of MARC records:</h1>
+<h2>the VIVA experience</h2>
+</center>
+
+<hr>
+
+<ul>
+<li><a href="#background">Background</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#programs">How to use MARC.pm</a></li>
+<li><a href="#lessons">Lessons Learned</a></li>
+<li><a href="#questions">Questions</a></li>
+<li><a href="#A">Appendix A</a></li>
+</ul>
+
+<a name = "background">
+<h3>Background</h3>
+
+<p>Over a period of several years (1998-2000) the <a href="http://www.viva.lib.va.us/viva/tech/cat/">Cataloging and Intellectual Access Task Force</a> of the <a href="http://www.viva.lib.va.us/">Virtual Library of Virginia (VIVA)</a> worked closely with the <a href="http://www.lib.virginia.edu">University Virginia Library</a> to create USMARC records for over 8000 electronic texts that were created at UVa's <a href="http://etext.lib.virginia.edu">Electronic Text Center</a>. The electronic texts were first converted from SGML to MARC for UVa's local catalog. Then later, the VIVA consortium began a project to adapt UVa's Sirsi records so that they could be used by all the libraries in the consortium.</p>
+
+<a name = "overview">
+<h3>Overview</h3>
+
+<p>The conversion from the Sirsi interpreted MARC format to valid USMARC was achieved in two stages. First the Sirsi interpreted MARC records were converted in to the Library of Congress' MARCMaker format using a custom built <a href="sirsi2mkr.txt">Perl program</a>. Once in the MARCMaker format, MARC.pm was then used to convert the files into USMARC transmission format.</p>
+
+<p>Here are a few sample Sirsi interpreted records:</p>
+
+<div class="code">
+<pre>
+*** DOCUMENT BOUNDARY ***
+FORM=MRDF
+.000. |ama   n
+.001. |achd016a
+.008. |a960816r19941900vaun       m        eng d
+.099. |aClick|aon|aURL
+.100. 1 |aCorrothers, James David, |d 1869-1917.
+.245. 12|aA Dixie Thanksgivin'.|h[SGML-encoded machine-readable
+transcript.]
+.256.   |aComputer data and programs.
+.260.   |aAlexandria, VA :|bChadwyck-Healey Inc.,|c1994.
+.500.   |aOnly poem by Corrothers included.
+.534.   |pTranscribed from :|t[A Dixie Thanksgivin', in] The Century : Illustrat
+.773. 0 |tAfrican-American Poetry Full-Text Database.|dAlexandria, VA : Chadwyck-Healey Inc., 1994.
+.856. 7 |zAvailable only to UVa and VIVA users |uhttp://etext.lib.virginia.edu/aapd/aapd.browse.html/#Corrothers|2http
+.856. 7 |zNon-UVa, non-VIVA users, please contact vendor|uhttp://www.chadwyck.co
+.856. 0 |achadwyck.com|mChadwyck-Healey, Inc., 1101 King Street, Alexandria, VA 22314, Toll free: (800) 752-0515|umailto:sales@chadwyck.com
+*** DOCUMENT BOUNDARY ***
+FORM=MRDF
+.000. |ama   n
+.001. |achd016b
+.008. |a960816r19941905vaun       m        eng d
+.099. |aClick|aon|aURL
+.100. 1 |aCorrothers, James David, |d 1869-1917.
+.245. 12|aA Face.|h[SGML-encoded machine-readable transcript.]
+.256.   |aComputer data and programs.
+.260.   |aAlexandria, VA :|bChadwyck-Healey Inc.,|c1994.
+.500.   |aOnly poem by Corrothers included.
+.534.   |pTranscribed from :|t[A Face, in] The Voice of the Negro : Vol II. No.
+.773. 0 |tAfrican-American Poetry Full-Text Database.|dAlexandria, VA : Chadwyck-Healey Inc., 1994.
+.856. 7 |zAvailable only to UVa and VIVA users |uhttp://etext.lib.virginia.edu/aapd/aapd.browse.html/#Corrothers|2http
+.856. 7 |zNon-UVa, non-VIVA users, please contact vendor|uhttp://www.chadwyck.com2http
+.856. 0 |achadwyck.com|mChadwyck-Healey, Inc., 1101 King Street, Alexandria, VA 22314, Toll free: (800) 752-0515|umailto:sales@chadwyck.com
+</pre>
+</div>
+
+<p>...and here are the same records after they have been converted to MARCMaker format:</p>
+
+<div class="code">
+<pre>
+=LDR  00000nam\\2200000\a\4500
+=006  m        d
+=007  cr un 
+=590  \\$aElectronic access sponsored by VIVA, the Virtual Library of Virginia.
+=001  \\$achd016a 
+=008  960816r19941900vaun                eng d 
+=099  \\$aClick$aon$aURL 
+=100  1\$aCorrothers, James David, $d 1869-1917. 
+=245  12$aA Dixie Thanksgivin'.$h[computer file]. 
+=256  \\$aComputer data and programs. 
+=260  \\$aAlexandria, VA :$bChadwyck-Healey Inc.,$c1994. 
+=500  \\$aOnly poem by Corrothers included. 
+=534  \\$pTranscribed from :$t[A Dixie Thanksgivin', in] The Century : Illustratrated Monthly Magazine : Vol. LIX. New Series, Vol. XXXVII. November, 1899, to April, 1900.cNew York : The Century Co. ;cLondon : Macmillan & Co., 1900.ep. 160
+=773  0\$tAfrican-American Poetry Full-Text Database.$dAlexandria, VA : Chadwyck-Healey Inc., 1994.
+=856  7\$zAvailable only to UVa and VIVA users $uhttp://etext.lib.virginia.edu/aapd/aapd.browse.html/#Corrothers$2http 
+=856  7\$zNon-UVa, non-VIVA users, please contact vendor$uhttp://www.chadwyck.com$2http
+=856  0\$achadwyck.com$mChadwyck-Healey, Inc., 1101 King Street, Alexandria, VA 22314, Toll free: (800) 752-0515$umailto:sales@chadwyck.com 
+
+=LDR  00000nam\\2200000\a\4500
+=006  m        d
+=007  cr un 
+=590  \\$aElectronic access sponsored by VIVA, the Virtual Library of Virginia.
+=001  \\$achd016b 
+=008  960816r19941905vaun                eng d 
+=099  \\$aClick$aon$aURL 
+=100  1\$aCorrothers, James David, $d 1869-1917. 
+=245  12$aA Face.$h[computer file]. 
+=256  \\$aComputer data and programs. 
+=260  \\$aAlexandria, VA :$bChadwyck-Healey Inc.,$c1994. 
+=500  \\$aOnly poem by Corrothers included. 
+=534  \\$pTranscribed from :$t[A Face, in] The Voice of the Negro : Vol II. No. 
+=773  0\$tAfrican-American Poetry Full-Text Database.$dAlexandria, VA : Chadwyck-Healey Inc., 1994.
+=856  7\$zAvailable only to UVa and VIVA users $uhttp://etext.lib.virginia.edu/aapd/aapd.browse.html/#Corrothers$2http 
+=856  7\$zNon-UVa, non-VIVA users, please contact vendor$uhttp://www.chadwyck.com2http
+=856  0\$achadwyck.com$mChadwyck-Healey, Inc., 1101 King Street, Alexandria, VA 22314, Toll free: (800) 752-0515$umailto:sales@chadwyck.com
+</pre>
+</div>
+
+<p>As you can see the Sirsi and MARCMaker formats are very similar except for some conventions for indicating the fields and indicators. You may notice that there are some addditional fields in the MARCMaker records, this is because VIVA decided to add a few fields to the base UVa records.</p>
+
+<p>Once the MARCMaker records were created, MARC.pm was used to convert the records into USMARC transmission format so they could be shared with other library systems.</p>
+
+<p>The USMARC looks like this:</p>
+
+<div class="code">
+<pre>01289nam  2200229 a 450000500170000000600110001700700070002859000740003500100130010900800420012209900200016410000440018424500450022825600330027326000520030650000390035853402350039777300950063285601140072785600830084185601350092420000610173659.0m        dcr un   aElectronic access sponsored by VIVA, the Virtual Library of Virginia.  $achd016a 960816r19941900vaun                eng d   aClickaonaURL 1 aCorrothers, James David, d 1869-1917. 12aA Dixie Thanksgivin'.h[computer file].   aComputer data and programs.   aAlexandria, VA :bChadwyck-Healey Inc.,c1994.   aOnly poem by Corrothers included.   pTranscribed from :t[A Dixie Thanksgivin', in] The Century : Illustrated Monthly Magazine : Vol. LIX. New Series, Vol. XXXVII. November, 1899, to April, 1900.cNew York : The Century Co. ;cLondon : Macmillan & Co., 1900.ep. 160 0 tAfrican-American Poetry Full-Text Database.dAlexandria, VA : Chadwyck-Healey Inc., 1994. 7 zAvailable only to UVa and VIVA users uhttp://etext.lib.virginia.edu/aapd/aapd.browse.html/#Corrothers2http 7 zNon-UVa, non-VIVA users, please contact vendoruhttp://www.chadwyck.com2http 0 achadwyck.commChadwyck-Healey, Inc., 1101 King Street, Alexandria, VA 22314, Toll free: (800) 752-0515umailto:sales@chadwyck.com 01148nam  2200229 a 450000500170000000600110001700700070002859000740003500100130010900800420012209900200016410000440018424500310022825600330025926000520029250000390034453401080038377300950049185601140058685600830070085601350078320000610173659.0m        dcr un   aElectronic access sponsored by VIVA, the Virtual Library of Virginia.  $achd016b 960816r19941905vaun                eng d   aClickaonaURL 1 aCorrothers, James David, d 1869-1917. 12aA Face.h[computer file].   aComputer data and programs.   aAlexandria, VA :bChadwyck-Healey Inc.,c1994.   aOnly poem by Corrothers included.   pTranscribed from :t[A Face, in] The Voice of the Negro : Vol II. No. III. March 1905. c1905.ep. 186 0 tAfrican-American Poetry Full-Text Database.dAlexandria, VA : Chadwyck-Healey Inc., 1994. 7 zAvailable only to UVa and VIVA users uhttp://etext.lib.virginia.edu/aapd/aapd.browse.html/#Corrothers2http 7 zNon-UVa, non-VIVA users, please contact vendoruhttp://www.chadwyck.com2http 0 achadwyck.commChadwyck-Healey, Inc., 1101 King Street, Alexandria, VA 22314, Toll free: (800) 752-0515umailto:sales@chadwyck.com 01167nam</pre>
+</div>
+
+<p>...which requires a lot of scrolling, and is very tough to read (for humans). The USMARC transmission format wasn't really designed for humans to read, but for computers to read. That's why the MARCMaker format is so nice to use as an interim format since it isn't that hard for you to read, and you can update it easily with something like search/replace--or Perl!</p>
+
+<a name="programs">
+<h3>How to use MARC.pm</h3>
+
+<p>The Perl program used to convert from the human-readable MARCMaker format to USMARC is suprisingly short since it <i>use</i>s MARC.pm to take care of the details.</p>
+
+<h3>maker2marc.pl</h3>
+
+<div class="code">
+<pre>
+1   #!/usr/bin/perl -w
+2   use strict;
+3 
+4   use MARC;
+5   my $x = new MARC;
+6   my %inc = %{$x->usmarc_default()};
+7
+8   my ($infile,$outfile) = @ARGV;
+9   if (-f $outfile) { unlink($outfile); }
+10
+11  $x->openmarc({
+12  file=>$infile, 
+13  format=>'marcmaker', 
+14  charset=>\%inc, 
+15  lineterm=>"\n"
+16  });
+17
+18  while ($x->nextmarc(1)) {
+19    $x->output({
+20    file=>">>$outfile",
+21    format=>'usmarc'
+22    });
+23  $x->deletemarc();
+24  }
+</pre>
+</div>
+
+<p>So, what is going on here? Well...</p>
+
+<ul>
+<li>Lines 1-2 are standard Perl: we have warnings turned on with the <i>-w</i> and we are using strict like the good Perl programmers we are. 
+<li>Line 5 lets Perl know we are going to be using the MARC.pm perl module (if you haven't installed it you will get an error on this line). 
+<li>Line 5 actually creates the MARC object called $x which will be used to store our data and to activate various functions (or methods if you prefer).
+<li>Line 6 is an optional line to get the default character mappings that are often used with MARCMaker records. The mapping is stored in the hash %inc and is used later on on line 14 when we are letting MARC.pm know how to interpret odd diacritics like &Aacute; and &uumlaut;. For more about the character encodings used in the MARCMaker format see the MARCMaker <a href="http://lcweb.loc.gov/marc/marcutil.html">documentation</a>.
+<li>Line 8 gets the command line options that were passed to our program. The first is going to be the source file (the MARCMaker) and the second will be the filename for the USMARC file that is going to be created.
+<li>Line 9 is an optional courtesty which deletes the output file if it already exists. This is somewhat important since as you will see in line 20 we will be appending to this file, and we don't want to just tack on our new stuff to some old stuff.
+<li>Lines 11-16 actually open the MARCMaker file for reading. The lines could 
+be compressed to one line, but they are separated out for readability. On line 12 we tell MARC.pm the location of the file we are reading in; line 13 alerts MARC.pm that the file is in the MARCMaker format; line 14 is optional and passes in the character mapping that is going to be used for those pesky diacritics; and line 15 is another optional line which tells MARC.pm that we are working in a Unix environment where lines end in \n instead of the \r\n of the Windows environment. In fact the default for MARCMaker records is \r\n (since MARCMaker was originally conceived of for the Windows environment, so it is important to set it to \n if you are in Unix).
+<li>Line 18 starts up a loop to go through each record in the file using the <i>nextmarc()</i> method. The <i>1</i> that is passed to <i>nextmarc()</i> lets MARC.pm know that you want the next <i>one</i> record. If there are no records left <nextmarc()> will return 0 which evaluates to FALSE, and so the while loop end.
+<li>Lines 19-22 output the MARCMaker record we read in as USMARC. The filename is indicated on line 20 (not the double greater than signs since we will be adding each record one by one to this file as we read them in. And on line 21 we tell MARC.pm that we want to output our record in USMARC format.
+<li>Line 23 is curious, and very important. We are basically emptying out the $x MARC object before we go back to line 18 to read another record in. If we didn't delete the record on line 23 we would just add another record to our object, and we would get duplication in our output later.
+</ul>
+
+<p>Whew, you made it! If you've looked at the MARC.pm documentation for the <i>openmarc()</i> method before you might be wondering why we read the records in incrementally rather than all at once, by replacing lines 11-16 with this:</p>
+
+<div class='code'>
+<pre>
+1   $x->openmarc({
+2     file=>$infile,
+3     format=>'marcmaker',
+4     charset=>\%inc,
+5     lineterm=>'\n',
+6     increment=>'-1'
+7    });
+</pre>
+</div>
+
+<p>The reason for not using the incremement parameter here is that some of the files that VIVA was converting were very large (5000 records or more), and since MARC objects are quite complicated they occupy a significant amount of working memory. This is why we read in a record at a time, convert to USMARC, delete the record from memory and then read in a new one. If you are working with large data sets you will probably want to do the same (unless you are blessed with a gig of working memory of course and don't have to worry about such things :-)</p>
+
+<a name="lessons">
+<h3>Lessons Learned</h3>
+
+<p><b>Avoid proprietary formats :</b> Alot of our trouble in editing UVa's Sirsii records, and converting them to USMARC lay in the fact that we were using the unique Sirsi interpreted MARC format as our base format. This required us to write a custom program to convert the Sirsi format into MARCMaker, and then convert that back to USMARC. It would have been a lot easier if instead we exported USMARC from the Sirsi system, used MARC.pm to convert it to MARCMaker, did our editing on the MARCMaker, and then when finished used MARC.pm to convert back to USMARC. In fact, once you are familiar with the <i>addfield()</i>, <i>deletemarc()</i> and <i>updaterecord()</i> MARC.pm methods it is possible to simply read in the USMARC, manipulate it, and then output the USMARC again. But for someone not completely familiar with MARC.pm, converting to MARCMaker is a viable alternative. A variation on the <i>maker2marc.pl</i> program above is included as <a href="#A">Appendix A</a> which will read in USMARC records and output them as MARCMaker records.</p>
+
+<p><b>Be careful with memory</b>: it is very easy to get an 'out of memory' error when working with really large MARC files. So learning how to use <i>nextmarc()</i> and <i>deletemarc()</i> is really important.</p>
+
+<a name="questions">
+<h3>Questions</h3>
+<p>If you have any questions or would like to make any suggestions please contact the current chair of the <a href="http://www.viva.lib.va.us/viva/tech/cat/">VIVA Cataloging and Intellectual Access Taskforce</a></p>
+
+<a name="A">
+<h3>Appendix A: Using MARC.pm to Generate MARCMaker</h3>
+<p>
+
+<p>Below is a short program that is almost identical to the <i>maker2marc.pl</i> above--except (as its name implies) it will read in USMARC records and output MARCMaker records. You would execute it from the command line with:</p>
+
+<p><b>>marc2maker.pl &nbsp;in.marc &nbsp;out.maker</b></p>
+
+<h3>marc2maker.pl</h3>
+
+<div class="code">
+<pre>
+1   #!/usr/bin/perl -w
+2   use strict;
+3 
+4   use MARC;
+5   my $x = new MARC;
+6   my %inc = %{$x->ustext_default()}; ## optional for delmiter conversions
+7
+8   my ($infile,$outfile) = @ARGV;
+9   if (-f $outfile) { unlink($outfile); }
+10
+11  $x->openmarc({
+12  file=>$infile, 
+13  format=>'usmarc', 
+14  });
+15
+16  while ($x->nextmarc(1)) {
+17    $x->output({
+18    file=>">>$outfile",
+19    format=>'marcmaker',
+20    charset=>\%inc, ## if you defined %inc on line 6
+21    lineterm=>'\n'
+22    });
+23  $x->deletemarc();
+24  }
+</pre>
+</div>
+
+<p>
+
+<hr>
+<i>ehs: 06/18/2000</i><br>
+
+</body>
+
+</html>

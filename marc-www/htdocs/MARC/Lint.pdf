@@ -1,0 +1,1328 @@
+%PDF-1.2
+%‚„œ”
+1 0 obj
+[/CalRGB
+<<
+/WhitePoint [0.9505 1 1.089]
+/Gamma [1.8 1.8 1.8]
+/Matrix [0.4497 0.2446 0.02518 0.3613 0.672 0.1412 0.1845 0.08334 0.9227]
+>>
+]
+endobj
+2 0 obj
+<<
+/CreationDate (D:20021126161850-0600)
+/Producer (pod2pdf)
+/Title (Lint.pm)
+>>
+endobj
+5 0 obj
+<<
+/Type /Encoding
+/Differences [ 0 /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /space /exclam
+/quotedbl /numbersign /dollar /percent /ampersand
+/quoteright /parenleft /parenright /asterisk /plus /comma
+/hyphen /period /slash /zero /one /two /three /four /five
+/six /seven /eight /nine /colon /semicolon /less /equal
+/greater /question /at /A /B /C /D /E /F /G /H /I /J /K /L
+/M /N /O /P /Q /R /S /T /U /V /W /X /Y /Z /bracketleft
+/backslash /bracketright /asciicircum /underscore
+/quoteleft /a /b /c /d /e /f /g /h /i /j /k /l /m /n /o /p
+/q /r /s /t /u /v /w /x /y /z /braceleft /bar /braceright
+/asciitilde /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /emdash
+/dotlessi /grave /acute /circumflex /tilde /macron /breve
+/dotaccent /dieresis /.notdef /ring /cedilla /.notdef
+/hungarumlaut /ogonek /caron /space /exclamdown /cent
+/sterling /currency /yen /brokenbar /section /dieresis
+/copyright /ordfeminine /guillemotleft /logicalnot /hyphen
+/registered /macron /degree /plusminus /twosuperior
+/threesuperior /acute /mu /paragraph /periodcentered
+/cedilla /onesuperior /ordmasculine /guillemotright
+/onequarter /onehalf /threequarters /questiondown /Agrave
+/Aacute /Acircumflex /Atilde /Adieresis /Aring /AE
+/Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave
+/Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve
+/Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash
+/Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn
+/germandbls /agrave /aacute /acircumflex /atilde /adieresis
+/aring /ae /ccedilla /egrave /eacute /ecircumflex
+/edieresis /igrave /iacute /icircumflex /idieresis /eth
+/ntilde /ograve /oacute /ocircumflex /otilde /odieresis
+/divide /oslash /ugrave /uacute /ucircumflex /udieresis
+/yacute /thorn /ydieresis ]
+>>
+endobj
+6 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F00
+/Encoding 5 0 R
+/BaseFont /Times-Roman
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F01
+/Encoding 5 0 R
+/BaseFont /Times-Bold
+>>
+endobj
+8 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F02
+/Encoding 5 0 R
+/BaseFont /Times-Italic
+>>
+endobj
+9 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F03
+/Encoding 5 0 R
+/BaseFont /Times-BoldItalic
+>>
+endobj
+10 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F10
+/Encoding 5 0 R
+/BaseFont /Courier
+>>
+endobj
+11 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F11
+/Encoding 5 0 R
+/BaseFont /Courier-Bold
+>>
+endobj
+12 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F12
+/Encoding 5 0 R
+/BaseFont /Courier-Oblique
+>>
+endobj
+13 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F13
+/Encoding 5 0 R
+/BaseFont /Courier-BoldOblique
+>>
+endobj
+14 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F20
+/Encoding 5 0 R
+/BaseFont /Helvetica
+>>
+endobj
+15 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F21
+/Encoding 5 0 R
+/BaseFont /Helvetica-Bold
+>>
+endobj
+16 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F22
+/Encoding 5 0 R
+/BaseFont /Helvetica-Oblique
+>>
+endobj
+17 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F23
+/Encoding 5 0 R
+/BaseFont /Helvetica-BoldOblique
+>>
+endobj
+0 g
+18 0 obj
+<<
+/Length 19 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(pod2pdf) Tj
+1 0 0 1 486.89 797 Tm
+(Lint.pm) Tj
+/F21 12 Tf
+1 0 0 1 72.0 764.0 Tm
+0.0000 Tw
+(NAME ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 749.6 Tm
+0.0000 Tw
+(MARC::Lint - Perl extension for checking validity of MARC records ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 731.6 Tm
+0.0000 Tw
+(VERSION ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 717.2 Tm
+0.0000 Tw
+(Version 1.13 ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 705.2 Tm
+0.0000 Tw
+(    $Id: Lint.pdf,v 1.1 2002/12/02 21:40:58 edsummers Exp $ ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 687.2 Tm
+0.0000 Tw
+(SYNOPSIS ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 666.8 Tm
+0.0000 Tw
+(  use MARC::Record; ) Tj
+1 0 0 1 102.0 654.8 Tm
+0.0000 Tw
+(  use MARC::Lint; ) Tj
+1 0 0 1 102.0 630.8 Tm
+0.0000 Tw
+(  my $linter = new MARC::Lint; ) Tj
+1 0 0 1 102.0 618.8 Tm
+0.0000 Tw
+(  my $filename = shift; ) Tj
+1 0 0 1 102.0 594.8 Tm
+0.0000 Tw
+(  open\( IN, "<", $filename \) or die "Couldn't open $filename: $!\\n"; ) Tj
+1 0 0 1 102.0 582.8 Tm
+0.0000 Tw
+(  binmode\( IN \); # for the Windows folks ) Tj
+1 0 0 1 102.0 570.8 Tm
+0.0000 Tw
+(  while \( !eof\(IN\) \) \{ ) Tj
+1 0 0 1 102.0 558.8 Tm
+0.0000 Tw
+(  ) Tj
+1 0 0 1 150.0 558.8 Tm
+0.0000 Tw
+(my $marc = MARC::Record::next_from_file\( *IN \); ) Tj
+1 0 0 1 150.0 546.8 Tm
+0.0000 Tw
+(die $MARC::Record::ERROR unless $marc; ) Tj
+1 0 0 1 150.0 522.8 Tm
+0.0000 Tw
+($linter->check_record\( $marc \); ) Tj
+1 0 0 1 150.0 498.8 Tm
+0.0000 Tw
+(# Print the title tag ) Tj
+1 0 0 1 150.0 486.8 Tm
+0.0000 Tw
+(print $marc->subfield\(245,"a"\), "\\n"; ) Tj
+1 0 0 1 150.0 462.8 Tm
+0.0000 Tw
+(# Print the errors that were found ) Tj
+1 0 0 1 150.0 450.8 Tm
+0.0000 Tw
+(print join\( "\\n", $linter->warnings \), "\\n"; ) Tj
+1 0 0 1 102.0 438.8 Tm
+0.0000 Tw
+(  \} # while ) Tj
+1 0 0 1 102.0 414.8 Tm
+0.0000 Tw
+(  close IN or die "Error closing $filename: $!\\n"; ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 390.8 Tm
+0.0000 Tw
+(Given the following MARC record: ) Tj
+/F10 10 Tf
+1 0 0 1 150.0 378.8 Tm
+0.0000 Tw
+(LDR 00000nam  22002538a 4500 ) Tj
+1 0 0 1 150.0 366.8 Tm
+0.0000 Tw
+(100 14 _aWall, Larry. ) Tj
+1 0 0 1 150.0 354.8 Tm
+0.0000 Tw
+(110 1  _aO'Reilly & Associates. ) Tj
+1 0 0 1 150.0 342.8 Tm
+0.0000 Tw
+(245 90 _aProgramming Perl / ) Tj
+1 0 0 1 102.0 330.8 Tm
+0.0000 Tw
+(               _aBig Book of Perl / ) Tj
+1 0 0 1 102.0 318.8 Tm
+0.0000 Tw
+(               _cLarry Wall, Tom Christiansen & Jon Orwant. ) Tj
+1 0 0 1 150.0 306.8 Tm
+0.0000 Tw
+(250    _a3rd ed. ) Tj
+1 0 0 1 150.0 294.8 Tm
+0.0000 Tw
+(250    _a3rd ed. ) Tj
+1 0 0 1 150.0 282.8 Tm
+0.0000 Tw
+(260    _aCambridge, Mass. : ) Tj
+1 0 0 1 150.0 270.8 Tm
+0.0000 Tw
+(       _bO'Reilly, ) Tj
+1 0 0 1 150.0 258.8 Tm
+0.0000 Tw
+(       _r2000. ) Tj
+1 0 0 1 150.0 246.8 Tm
+0.0000 Tw
+(590 4  _aPersonally signed by Larry. ) Tj
+1 0 0 1 150.0 234.8 Tm
+0.0000 Tw
+(856 43 _uhttp://www.perl.com/ ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 210.8 Tm
+0.0000 Tw
+(the following errors are generated: ) Tj
+/F10 10 Tf
+1 0 0 1 150.0 198.8 Tm
+0.0000 Tw
+(1XX: Only one 1XX tag is allowed, but I found 2 of them. ) Tj
+1 0 0 1 150.0 186.8 Tm
+0.0000 Tw
+(100: Indicator 2 must be blank ) Tj
+1 0 0 1 150.0 174.8 Tm
+0.0000 Tw
+(245: Indicator 1 must be 0 or 1 ) Tj
+1 0 0 1 150.0 162.8 Tm
+0.0000 Tw
+(245: Subfield _a is not repeatable. ) Tj
+1 0 0 1 150.0 150.8 Tm
+0.0000 Tw
+(250: Field is not repeatable. ) Tj
+1 0 0 1 150.0 138.8 Tm
+0.0000 Tw
+(260: Subfield _r is not valid. ) Tj
+1 0 0 1 150.0 126.8 Tm
+0.0000 Tw
+(260: Must have a subfield _c. ) Tj
+1 0 0 1 150.0 114.8 Tm
+0.0000 Tw
+(590: Indicator 1 must be blank ) Tj
+1 0 0 1 150.0 102.8 Tm
+0.0000 Tw
+(856: Indicator 2 must be blank, 0, 1, 2 or 8 ) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(26 November 2002) Tj
+1 0 0 1 517.44 37 Tm
+(1) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+19 0 obj
+3681
+endobj
+20 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F00 6 0 R
+/F10 10 0 R
+/F21 15 0 R
+>>
+>>
+endobj
+21 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 20 0 R
+/Contents 18 0 R
+>>
+endobj
+22 0 obj
+<<
+/Length 23 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(Lint.pm) Tj
+1 0 0 1 483.56 797 Tm
+(pod2pdf) Tj
+/F21 12 Tf
+1 0 0 1 72.0 770.0 Tm
+0.0000 Tw
+(DESCRIPTION ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 755.6 Tm
+0.9900 Tw
+(Module for checking validity of MARC records.  99% of the users will want to do  something like is) Tj
+1 0 0 1 102.0 743.6 Tm
+0.7720 Tw
+(shown in the synopsis.  The other intrepid 1% will overload the ) Tj
+/F10 10 Tf
+0.7720 Tw
+(MARC::Lint) Tj
+/F00 10 Tf
+0.7720 Tw
+( module`s methods and) Tj
+1 0 0 1 102.0 731.6 Tm
+0.0000 Tw
+(provide their own special field-level checking. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 719.6 Tm
+0.8163 Tw
+(What this means is that if you have certain requirements, such as making sure that all 952 tags have a) Tj
+1 0 0 1 102.0 707.6 Tm
+0.1700 Tw
+(certain call number in them, you can write a function that  checks for that, and still get all the benefits of) Tj
+1 0 0 1 102.0 695.6 Tm
+0.0000 Tw
+(the MARC::Lint framework. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 677.6 Tm
+0.0000 Tw
+(EXPORT ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 663.2 Tm
+0.0000 Tw
+(None.  Everything is done through objects. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 645.2 Tm
+0.0000 Tw
+(METHODS ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 623.6 Tm
+0.0000 Tw
+() Tj
+/F11 10 Tf
+0.0000 Tw
+(new\(\)) Tj
+/F21 10 Tf
+0.0000 Tw
+( ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 611.6 Tm
+0.0000 Tw
+(No parms needed.  The ) Tj
+/F10 10 Tf
+0.0000 Tw
+(MARC::Lint) Tj
+/F00 10 Tf
+0.0000 Tw
+( object is little more than a list of warnings  and a bunch of rules. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 593.6 Tm
+0.0000 Tw
+() Tj
+/F11 10 Tf
+0.0000 Tw
+(warnings\(\)) Tj
+/F21 10 Tf
+0.0000 Tw
+( ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 581.6 Tm
+0.0000 Tw
+(Returns a list of warnings found by ) Tj
+/F10 10 Tf
+0.0000 Tw
+(check_record\(\)) Tj
+/F00 10 Tf
+0.0000 Tw
+( and its brethren. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 563.6 Tm
+0.0000 Tw
+() Tj
+/F11 10 Tf
+0.0000 Tw
+(clear_warnings\(\)) Tj
+/F21 10 Tf
+0.0000 Tw
+( ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 551.6 Tm
+0 Tw
+(Clear the list of warnings for this linter object.  It`s automatically called when you call) Tj
+1 0 0 1 102.0 539.6 Tm
+0.0000 Tw
+() Tj
+/F10 10 Tf
+0.0000 Tw
+(check_record\(\)) Tj
+/F00 10 Tf
+0.0000 Tw
+(. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 521.6 Tm
+0.0000 Tw
+() Tj
+/F11 10 Tf
+0.0000 Tw
+(warn\(str[,str...]\)) Tj
+/F21 10 Tf
+0.0000 Tw
+( ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 509.6 Tm
+0.0000 Tw
+(Create a warning message, built from strings passed, like a ) Tj
+/F10 10 Tf
+0.0000 Tw
+(print) Tj
+/F00 10 Tf
+0.0000 Tw
+( statement. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 497.6 Tm
+0.8177 Tw
+(Typically, you`ll leave this to ) Tj
+/F10 10 Tf
+0.8177 Tw
+(check_record\(\)) Tj
+/F00 10 Tf
+0.8177 Tw
+(, but industrious programmers may want to do their) Tj
+1 0 0 1 102.0 485.6 Tm
+0.0000 Tw
+(own checking as well. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 467.6 Tm
+0.0000 Tw
+() Tj
+/F11 10 Tf
+0.0000 Tw
+(check_record\(marc\)) Tj
+/F21 10 Tf
+0.0000 Tw
+( ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 455.6 Tm
+0.6090 Tw
+(Does all sorts of lint-like checks on the MARC record ) Tj
+/F02 10 Tf
+0.6090 Tw
+(marc) Tj
+/F00 10 Tf
+0.6090 Tw
+(, both on the record as a whole, and on the) Tj
+1 0 0 1 102.0 443.6 Tm
+0.0000 Tw
+(individual fields & subfields. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 425.6 Tm
+0.0000 Tw
+() Tj
+/F11 10 Tf
+0.0000 Tw
+(check_) Tj
+/F12 10 Tf
+0.0000 Tw
+(xxx) Tj
+/F11 10 Tf
+0.0000 Tw
+(\(field\)) Tj
+/F21 10 Tf
+0.0000 Tw
+( ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 413.6 Tm
+0.1061 Tw
+(Various functions to check the different fields.  If the function doesn`t exist,  then it doesn`t get checked.) Tj
+/F21 12 Tf
+1 0 0 1 72.0 383.6 Tm
+0.0000 Tw
+(SEE ALSO ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 369.2 Tm
+0.0000 Tw
+(Check the docs for ) Tj
+/F02 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Record) Tj
+/F00 10 Tf
+0 g
+0.0000 Tw
+(.  All software links are there. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 351.2 Tm
+0.0000 Tw
+(TODO ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 333.9 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 334.92 4 4 re
+f
+Q
+BT
+1 0 0 1 110 333.92 Tm
+/F20 10 Tf
+0.0000 Tw
+(ISBN and ISSN checking ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 321.9 Tm
+1.7000 Tw
+(We can check the 020 and 022 fields with the ) Tj
+/F10 10 Tf
+1.7000 Tw
+(Business::ISBN) Tj
+/F00 10 Tf
+1.7000 Tw
+( and  ) Tj
+/F10 10 Tf
+1.7000 Tw
+(Business::ISSN) Tj
+/F00 10 Tf
+1 0 0 1 126.0 309.9 Tm
+0.0000 Tw
+(modules, respectively. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 279.9 Tm
+0.0000 Tw
+(LICENSE ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 265.5 Tm
+0.0000 Tw
+(This code may be distributed under the same terms as Perl itself.  ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 253.5 Tm
+2.4619 Tw
+(Please note that these modules are not products of or supported by the employers of the various) Tj
+1 0 0 1 102.0 241.5 Tm
+0.0000 Tw
+(contributors to the code. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 223.5 Tm
+0.0000 Tw
+(AUTHOR ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 209.1 Tm
+0.0000 Tw
+(Andy Lester, <marc@petdance.com> or <alester@flr.follett.com> ) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(2) Tj
+1 0 0 1 435.18 37 Tm
+(26 November 2002) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+23 0 obj
+4852
+endobj
+24 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F00 6 0 R
+/F02 8 0 R
+/F10 10 0 R
+/F11 11 0 R
+/F12 12 0 R
+/F20 14 0 R
+/F21 15 0 R
+>>
+>>
+endobj
+25 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 24 0 R
+/Contents 22 0 R
+>>
+endobj
+26 0 obj
+<<
+/Length 27 0 R
+>>
+stream
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+/F20 24 Tf
+1 0 0 1 202.784 770 Tm
+(Table of Contents) Tj
+1 0 0 1 258.152 741.2 Tm
+(Lint.pm) Tj
+/F20 10 Tf
+ET
+q
+0.95 g
+72 680.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 683.6 Tm
+(NAME) Tj
+1 0 0 1 487.44 683.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 668.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 671.6 Tm
+(VERSION) Tj
+1 0 0 1 487.44 671.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 656.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 659.6 Tm
+(SYNOPSIS) Tj
+1 0 0 1 487.44 659.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 644.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 647.6 Tm
+(DESCRIPTION) Tj
+1 0 0 1 487.44 647.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 632.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 635.6 Tm
+(EXPORT) Tj
+1 0 0 1 487.44 635.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 620.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 623.6 Tm
+(METHODS) Tj
+1 0 0 1 487.44 623.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 608.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 611.6 Tm
+(new\(\)) Tj
+1 0 0 1 487.44 611.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 596.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 599.6 Tm
+(warnings\(\)) Tj
+1 0 0 1 487.44 599.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 584.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 587.6 Tm
+(clear_warnings\(\)) Tj
+1 0 0 1 487.44 587.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 572.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 575.6 Tm
+(warn\(str[,str...]\)) Tj
+1 0 0 1 487.44 575.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 560.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 563.6 Tm
+(check_record\(marc\)) Tj
+1 0 0 1 487.44 563.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 548.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 551.6 Tm
+(check_xxx\(field\)) Tj
+1 0 0 1 487.44 551.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 536.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 539.6 Tm
+(SEE ALSO) Tj
+1 0 0 1 487.44 539.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 524.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 527.6 Tm
+(TODO) Tj
+1 0 0 1 487.44 527.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 512.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 515.6 Tm
+(ISBN and ISSN checking) Tj
+1 0 0 1 487.44 515.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 500.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 503.6 Tm
+(LICENSE) Tj
+1 0 0 1 487.44 503.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 488.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 491.6 Tm
+(AUTHOR) Tj
+1 0 0 1 487.44 491.6 Tm
+(2) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(26 November 2002) Tj
+1 0 0 1 520.22 37 Tm
+(i) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+27 0 obj
+2048
+endobj
+28 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F20 14 0 R
+/F21 15 0 R
+>>
+>>
+endobj
+29 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 28 0 R
+/Contents 26 0 R
+>>
+endobj
+30 0 obj
+<<
+/Length 31 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(Lint.pm) Tj
+1 0 0 1 438.55 797 Tm
+(Table of Contents) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(ii) Tj
+1 0 0 1 435.18 37 Tm
+(26 November 2002) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+31 0 obj
+245
+endobj
+32 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F21 15 0 R
+>>
+>>
+endobj
+33 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 32 0 R
+/Contents 30 0 R
+>>
+endobj
+34 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 37 0 R
+/Contents 35 0 R
+>>
+endobj
+35 0 obj
+<<
+/Length 36 0 R
+>>
+stream
+q
+1 0 0 rg
+180 626 8 130 re
+F
+Q
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+210 626 m
+523 626 l
+s
+BT
+/F21 30 Tf
+1 0 0 1 210 706 Tm
+0 -30 TD
+(POD Translation) Tj
+T* (by ) Tj
+0 0 0.8 rg
+/F22 30 Tf
+(pod2pdf) Tj
+/F21 9 Tf
+T* (ajf@afco.demon.co.uk) Tj
+/F03 48 Tf
+0 g
+1 0 0 1 219.476 371 Tm
+(Lint.pm) Tj
+ET
+endstream
+endobj
+36 0 obj
+290
+endobj
+37 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F03 9 0 R
+/F21 15 0 R
+/F22 16 0 R
+>>
+>>
+endobj
+38 0 obj
+<<
+/Length 39 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(Title Page) Tj
+1 0 0 1 486.89 797 Tm
+(Lint.pm) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(26 November 2002) Tj
+1 0 0 1 488.54 37 Tm
+(Fly leaf) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+39 0 obj
+244
+endobj
+40 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F21 15 0 R
+>>
+>>
+endobj
+41 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 40 0 R
+/Contents 38 0 R
+>>
+endobj
+43 0 obj
+<<
+/Parent 42 0 R
+/Dest [29 0 R /Fit]
+/First 44 0 R
+/Last 60 0 R
+/Count 17 
+/Title (Table of Contents)
+>>
+endobj
+44 0 obj
+<<
+/Parent 43 0 R
+/Dest [21 0 R /FitH 778.4]
+/Next 45 0 R
+/Title (NAME)
+>>
+endobj
+45 0 obj
+<<
+/Parent 43 0 R
+/Dest [21 0 R /FitH 746]
+/Previous 44 0 R
+/Next 46 0 R
+/Title (VERSION)
+>>
+endobj
+46 0 obj
+<<
+/Parent 43 0 R
+/Dest [21 0 R /FitH 701.6]
+/Previous 45 0 R
+/Next 47 0 R
+/Title (SYNOPSIS)
+>>
+endobj
+47 0 obj
+<<
+/Parent 43 0 R
+/Dest [25 0 R /FitH 784.4]
+/Previous 46 0 R
+/Next 48 0 R
+/Title (DESCRIPTION)
+>>
+endobj
+48 0 obj
+<<
+/Parent 43 0 R
+/Dest [25 0 R /FitH 692]
+/Previous 47 0 R
+/Next 49 0 R
+/Title (EXPORT)
+>>
+endobj
+49 0 obj
+<<
+/Parent 43 0 R
+/Dest [25 0 R /FitH 659.6]
+/Previous 48 0 R
+/Next 56 0 R
+/First 50 0 R
+/Last 55 0 R
+/Count 6 
+/Title (METHODS)
+>>
+endobj
+50 0 obj
+<<
+/Parent 49 0 R
+/Dest [25 0 R /FitH 635.6]
+/Next 51 0 R
+/Title (new\(\))
+>>
+endobj
+51 0 obj
+<<
+/Parent 49 0 R
+/Dest [25 0 R /FitH 605.6]
+/Previous 50 0 R
+/Next 52 0 R
+/Title (warnings\(\))
+>>
+endobj
+52 0 obj
+<<
+/Parent 49 0 R
+/Dest [25 0 R /FitH 575.6]
+/Previous 51 0 R
+/Next 53 0 R
+/Title (clear_warnings\(\))
+>>
+endobj
+53 0 obj
+<<
+/Parent 49 0 R
+/Dest [25 0 R /FitH 533.6]
+/Previous 52 0 R
+/Next 54 0 R
+/Title (warn\(str[,str...]\))
+>>
+endobj
+54 0 obj
+<<
+/Parent 49 0 R
+/Dest [25 0 R /FitH 479.6]
+/Previous 53 0 R
+/Next 55 0 R
+/Title (check_record\(marc\))
+>>
+endobj
+55 0 obj
+<<
+/Parent 49 0 R
+/Dest [25 0 R /FitH 437.6]
+/Previous 54 0 R
+/Title (check_xxx\(field\))
+>>
+endobj
+56 0 obj
+<<
+/Parent 43 0 R
+/Dest [25 0 R /FitH 398]
+/Previous 49 0 R
+/Next 57 0 R
+/Title (SEE ALSO)
+>>
+endobj
+57 0 obj
+<<
+/Parent 43 0 R
+/Dest [25 0 R /FitH 365.6]
+/Previous 56 0 R
+/Next 59 0 R
+/First 58 0 R
+/Last 58 0 R
+/Count 1 
+/Title (TODO)
+>>
+endobj
+58 0 obj
+<<
+/Parent 57 0 R
+/Dest [25 0 R /FitH 345.92]
+/Title (ISBN and ISSN checking)
+>>
+endobj
+59 0 obj
+<<
+/Parent 43 0 R
+/Dest [25 0 R /FitH 294.32]
+/Previous 57 0 R
+/Next 60 0 R
+/Title (LICENSE)
+>>
+endobj
+60 0 obj
+<<
+/Parent 43 0 R
+/Dest [25 0 R /FitH 237.92]
+/Previous 59 0 R
+/Title (AUTHOR)
+>>
+endobj
+42 0 obj
+<<
+/Type /Outlines
+/Count 18
+/First 43 0 R
+/Last 60 0 R
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 4 0 R
+/PageMode /UseOutlines
+/Outlines 42 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Pages
+/Kids [ 34 0 R 41 0 R 29 0 R 33 0 R 21 0 R 25 0 R ]
+/Count 6
+/MediaBox [0 0 595 842]
+>>
+endobj
+xref
+0 61
+0000000000 65535 f 
+0000000015 00000 n 
+0000000171 00000 n 
+0000018774 00000 n 
+0000018863 00000 n 
+0000000267 00000 n 
+0000002367 00000 n 
+0000002466 00000 n 
+0000002564 00000 n 
+0000002664 00000 n 
+0000002768 00000 n 
+0000002864 00000 n 
+0000002965 00000 n 
+0000003069 00000 n 
+0000003177 00000 n 
+0000003275 00000 n 
+0000003378 00000 n 
+0000003484 00000 n 
+0000003598 00000 n 
+0000007333 00000 n 
+0000007354 00000 n 
+0000007479 00000 n 
+0000007562 00000 n 
+0000012468 00000 n 
+0000012489 00000 n 
+0000012661 00000 n 
+0000012744 00000 n 
+0000014846 00000 n 
+0000014867 00000 n 
+0000014981 00000 n 
+0000015064 00000 n 
+0000015363 00000 n 
+0000015383 00000 n 
+0000015485 00000 n 
+0000015568 00000 n 
+0000015651 00000 n 
+0000015995 00000 n 
+0000016015 00000 n 
+0000016140 00000 n 
+0000016438 00000 n 
+0000016458 00000 n 
+0000016560 00000 n 
+0000018699 00000 n 
+0000016643 00000 n 
+0000016765 00000 n 
+0000016856 00000 n 
+0000016965 00000 n 
+0000017077 00000 n 
+0000017192 00000 n 
+0000017300 00000 n 
+0000017448 00000 n 
+0000017542 00000 n 
+0000017658 00000 n 
+0000017780 00000 n 
+0000017904 00000 n 
+0000018028 00000 n 
+0000018137 00000 n 
+0000018247 00000 n 
+0000018392 00000 n 
+0000018489 00000 n 
+0000018601 00000 n 
+trailer
+<<
+/Size 61
+/Root 3 0 R
+/Info 2 0 R
+>>
+startxref
+18982
+%%EOF

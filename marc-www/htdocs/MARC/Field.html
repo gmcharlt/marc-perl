@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MARC::Field - Perl extension for handling MARC fields</title>
+<link rev="made" href="mailto:ed@ink.inkdroid.org" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#version">VERSION</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#export">EXPORT</a></li>
+	<li><a href="#methods">METHODS</a></li>
+	<ul>
+
+		<li><a href="#new(tag,indicator1,indicator2,code,data[,code,data...])"><code>new(tag,indicator1,indicator2,code,data[,code,data...])</code></a></li>
+		<li><a href="#clone()"><code>clone()</code></a></li>
+		<li><a href="#update()"><code>update()</code></a></li>
+		<li><a href="#replace_with()"><code>replace_with()</code></a></li>
+		<li><a href="#tag()"><code>tag()</code></a></li>
+		<li><a href="#indicator(indno)"><code>indicator(indno)</code></a></li>
+		<li><a href="#subfield(code)"><code>subfield(code)</code></a></li>
+		<li><a href="#subfields()"><code>subfields()</code></a></li>
+		<li><a href="#data()"><code>data()</code></a></li>
+		<li><a href="#add_subfields(code,text[,code,text_...])">add_subfields(code,text[,code,text ...])</a></li>
+		<li><a href="#as_string()"><code>as_string()</code></a></li>
+		<li><a href="#as_formatted()"><code>as_formatted()</code></a></li>
+		<li><a href="#as_usmarc()"><code>as_usmarc()</code></a></li>
+		<li><a href="#warnings()"><code>warnings()</code></a></li>
+	</ul>
+
+	<li><a href="#see_also">SEE ALSO</a></li>
+	<li><a href="#todo">TODO</a></li>
+	<li><a href="#license">LICENSE</a></li>
+	<li><a href="#author">AUTHOR</a></li>
+</ul>
+<!-- INDEX END -->
+
+<hr />
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>MARC::Field - Perl extension for handling MARC fields</p>
+<p>
+</p>
+<hr />
+<h1><a name="version">VERSION</a></h1>
+<p>Version 1.13</p>
+<pre>
+    $Id: Field.html,v 1.1 2002/12/02 21:40:57 edsummers Exp $</pre>
+<p>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<pre>
+  use MARC::Field;</pre>
+<pre>
+  my $field = 
+        MARC::Field-&gt;new( 
+                245, '1', '0',
+                        'a' =&gt; 'Raccoons and ripe corn / ',
+                        'c' =&gt; 'Jim Arnosky.'
+                );
+  $field-&gt;add_subfields( &quot;a&quot;, &quot;1st ed.&quot; );</pre>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p>Defines MARC fields for use in the MARC::Record module.  I suppose
+you could use them on their own, but that wouldn't be very interesting.</p>
+<p>
+</p>
+<hr />
+<h1><a name="export">EXPORT</a></h1>
+<p>None by default.  Any errors are stored in <code>$MARC::Field::ERROR</code>, which
+<code>$MARC::Record</code> usually bubbles up to <code>$MARC::Record::ERROR</code>.</p>
+<p>
+</p>
+<hr />
+<h1><a name="methods">METHODS</a></h1>
+<p>
+</p>
+<h2><a name="new(tag,indicator1,indicator2,code,data[,code,data...])"><code>new(tag,indicator1,indicator2,code,data[,code,data...])</code></a></h2>
+<pre>
+  my $record = 
+        MARC::Field-&gt;new( 
+                245, '1', '0',
+                        'a' =&gt; 'Raccoons and ripe corn / ',
+                        'c' =&gt; 'Jim Arnosky.'
+                );</pre>
+<p>Returns a MARC::Field record.</p>
+<p>
+</p>
+<h2><a name="clone()"><code>clone()</code></a></h2>
+<p>Makes a copy of the field.  Note that this is not just the same as saying</p>
+<pre>
+    my $newfield = $field;</pre>
+<p>since that just makes a copy of the reference.  To get a new object, you must</p>
+<pre>
+    my $newfield = $field-&gt;clone;</pre>
+<p>Returns a MARC::Field record.</p>
+<p>
+</p>
+<h2><a name="update()"><code>update()</code></a></h2>
+<p>Allows you to change the values of the field. You can update indicators
+and subfields like this:</p>
+<pre>
+  $field-&gt;update( ind2 =&gt; '4', a =&gt; 'The ballad of Abe Lincoln');</pre>
+<p>If you want to update a field that has no indicators or subfields (000-009)
+just call <code>update()</code> with one argument, the string that you would like to 
+set the field to.</p>
+<pre>
+  $field = $record-&gt;field( '003' );
+  $field-&gt;update('IMchF');</pre>
+<p>Note: when doing subfield updates be aware that <code>update()</code> will only 
+update the first occurrence. If you need to do anything more complicated
+you need to create a new field and use <code>replace_with()</code>.</p>
+<p>Returns the number of items modified.</p>
+<p>
+</p>
+<h2><a name="replace_with()"><code>replace_with()</code></a></h2>
+<p>Allows you to replace an existing field with a new one. You need to pass 
+<code>replace()</code> a MARC::Field object to replace the existing field with. For 
+example:</p>
+<pre>
+  $field = $record-&gt;field('245');
+  my $new_field = new MARC::Field('245','0','4','The ballad of Abe Lincoln.');
+  $field-&gt;replace_with($new_field);</pre>
+<p>Doesn't return a meaningful or reliable value.</p>
+<p>
+</p>
+<h2><a name="tag()"><code>tag()</code></a></h2>
+<p>Returns the three digit tag for the field.</p>
+<p>
+</p>
+<h2><a name="indicator(indno)"><code>indicator(indno)</code></a></h2>
+<p>Returns the specified indicator.  Returns <code>undef</code> and sets 
+<code>$MARC::Field::ERROR</code> if the <em>indno</em> is not 1 or 2, or if 
+the tag doesn't have indicators.</p>
+<p>
+</p>
+<h2><a name="subfield(code)"><code>subfield(code)</code></a></h2>
+<p>Returns the text from the first subfield matching the subfield code.
+If no matching subfields are found, <code>undef</code> is returned.</p>
+<p>If the tag is less than an 010, <code>undef</code> is returned and
+<code>$MARC::Field::ERROR</code> is set.</p>
+<pre>
+    my $subA = $field-&gt;subfield('a');</pre>
+<p>
+</p>
+<h2><a name="subfields()"><code>subfields()</code></a></h2>
+<p>Returns all the subfields in the field.  What's returned is a list of 
+lists, where the inner list is a subfield code and the subfield data.</p>
+<p>For example, this might be the subfields from a 245 field:</p>
+<pre>
+        [
+          [ 'a', 'Perl in a nutshell :' ],
+          [ 'b', 'A desktop quick reference.' ],
+        ]</pre>
+<p>
+</p>
+<h2><a name="data()"><code>data()</code></a></h2>
+<p>Returns the data part of the field, if the tag number is less than 10.</p>
+<p>
+</p>
+<h2><a name="add_subfields(code,text[,code,text_...])">add_subfields(code,text[,code,text ...])</a></h2>
+<p>Adds subfields to the end of the subfield list.</p>
+<p>Returns the number of subfields added, or <code>undef</code> if there was an error.</p>
+<p>
+</p>
+<h2><a name="as_string()"><code>as_string()</code></a></h2>
+<p>Returns a string of all subfields run together, without the tag number.</p>
+<p>
+</p>
+<h2><a name="as_formatted()"><code>as_formatted()</code></a></h2>
+<p>Returns a pretty string for printing in a MARC dump.</p>
+<p>
+</p>
+<h2><a name="as_usmarc()"><code>as_usmarc()</code></a></h2>
+<p>Returns a string for putting into a USMARC file.  It's really only
+useful by <code>MARC::Record::as_usmarc()</code>.</p>
+<p>
+</p>
+<h2><a name="warnings()"><code>warnings()</code></a></h2>
+<p>Returns the warnings that were created when the record was read.
+These are things like ``Invalid indicators converted to blanks''.</p>
+<p>The warnings are items that you might be interested in, or might
+not.  It depends on how stringently you're checking data.  If
+you're doing some grunt data analysis, you probably don't care.</p>
+<p>
+</p>
+<hr />
+<h1><a name="see_also">SEE ALSO</a></h1>
+<p>See the ``SEE ALSO'' section for <a href="/MARC/Record.html">the MARC::Record manpage</a>.</p>
+<p>
+</p>
+<hr />
+<h1><a name="todo">TODO</a></h1>
+<p>See the ``TODO'' section for <a href="/MARC/Record.html">the MARC::Record manpage</a>.</p>
+<p>
+</p>
+<hr />
+<h1><a name="license">LICENSE</a></h1>
+<p>This code may be distributed under the same terms as Perl itself.</p>
+<p>Please note that these modules are not products of or supported by the
+employers of the various contributors to the code.</p>
+<p>
+</p>
+<hr />
+<h1><a name="author">AUTHOR</a></h1>
+<p>Andy Lester, &lt;<a href="mailto:marc@petdance.com">marc@petdance.com</a>&gt; or &lt;<a href="mailto:alester@flr.follett.com">alester@flr.follett.com</a>&gt;</p>
+
+</body>
+
+</html>

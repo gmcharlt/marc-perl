@@ -1,0 +1,22 @@
+body 
+	{
+	background-color:	white;
+	color:						black;
+	margin-top:				1%;
+	margin-bottom:		5%;
+	margin-left:			10%;
+	margin-right:			10%;
+	font-family:			arial;
+	font-size:				12pt;
+	}
+
+a {
+	text-decoration:	none;
+	}
+
+.code 
+	{
+	color:						#333399;
+	font-size:				10pt;
+	}
+

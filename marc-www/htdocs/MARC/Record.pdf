@@ -1,0 +1,2905 @@
+%PDF-1.2
+%‚„œ”
+1 0 obj
+[/CalRGB
+<<
+/WhitePoint [0.9505 1 1.089]
+/Gamma [1.8 1.8 1.8]
+/Matrix [0.4497 0.2446 0.02518 0.3613 0.672 0.1412 0.1845 0.08334 0.9227]
+>>
+]
+endobj
+2 0 obj
+<<
+/CreationDate (D:20021126161854-0600)
+/Producer (pod2pdf)
+/Title (Record.pm)
+>>
+endobj
+5 0 obj
+<<
+/Type /Encoding
+/Differences [ 0 /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /space /exclam
+/quotedbl /numbersign /dollar /percent /ampersand
+/quoteright /parenleft /parenright /asterisk /plus /comma
+/hyphen /period /slash /zero /one /two /three /four /five
+/six /seven /eight /nine /colon /semicolon /less /equal
+/greater /question /at /A /B /C /D /E /F /G /H /I /J /K /L
+/M /N /O /P /Q /R /S /T /U /V /W /X /Y /Z /bracketleft
+/backslash /bracketright /asciicircum /underscore
+/quoteleft /a /b /c /d /e /f /g /h /i /j /k /l /m /n /o /p
+/q /r /s /t /u /v /w /x /y /z /braceleft /bar /braceright
+/asciitilde /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /emdash
+/dotlessi /grave /acute /circumflex /tilde /macron /breve
+/dotaccent /dieresis /.notdef /ring /cedilla /.notdef
+/hungarumlaut /ogonek /caron /space /exclamdown /cent
+/sterling /currency /yen /brokenbar /section /dieresis
+/copyright /ordfeminine /guillemotleft /logicalnot /hyphen
+/registered /macron /degree /plusminus /twosuperior
+/threesuperior /acute /mu /paragraph /periodcentered
+/cedilla /onesuperior /ordmasculine /guillemotright
+/onequarter /onehalf /threequarters /questiondown /Agrave
+/Aacute /Acircumflex /Atilde /Adieresis /Aring /AE
+/Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave
+/Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve
+/Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash
+/Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn
+/germandbls /agrave /aacute /acircumflex /atilde /adieresis
+/aring /ae /ccedilla /egrave /eacute /ecircumflex
+/edieresis /igrave /iacute /icircumflex /idieresis /eth
+/ntilde /ograve /oacute /ocircumflex /otilde /odieresis
+/divide /oslash /ugrave /uacute /ucircumflex /udieresis
+/yacute /thorn /ydieresis ]
+>>
+endobj
+6 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F00
+/Encoding 5 0 R
+/BaseFont /Times-Roman
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F01
+/Encoding 5 0 R
+/BaseFont /Times-Bold
+>>
+endobj
+8 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F02
+/Encoding 5 0 R
+/BaseFont /Times-Italic
+>>
+endobj
+9 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F03
+/Encoding 5 0 R
+/BaseFont /Times-BoldItalic
+>>
+endobj
+10 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F10
+/Encoding 5 0 R
+/BaseFont /Courier
+>>
+endobj
+11 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F11
+/Encoding 5 0 R
+/BaseFont /Courier-Bold
+>>
+endobj
+12 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F12
+/Encoding 5 0 R
+/BaseFont /Courier-Oblique
+>>
+endobj
+13 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F13
+/Encoding 5 0 R
+/BaseFont /Courier-BoldOblique
+>>
+endobj
+14 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F20
+/Encoding 5 0 R
+/BaseFont /Helvetica
+>>
+endobj
+15 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F21
+/Encoding 5 0 R
+/BaseFont /Helvetica-Bold
+>>
+endobj
+16 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F22
+/Encoding 5 0 R
+/BaseFont /Helvetica-Oblique
+>>
+endobj
+17 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F23
+/Encoding 5 0 R
+/BaseFont /Helvetica-BoldOblique
+>>
+endobj
+0 g
+18 0 obj
+<<
+/Length 19 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(pod2pdf) Tj
+1 0 0 1 470.77 797 Tm
+(Record.pm) Tj
+/F21 12 Tf
+1 0 0 1 72.0 764.0 Tm
+0.0000 Tw
+(NAME ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 749.6 Tm
+0.0000 Tw
+(MARC::Record - Perl extension for handling MARC records ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 731.6 Tm
+0.0000 Tw
+(VERSION ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 717.2 Tm
+0.0000 Tw
+(Version 1.13 ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 705.2 Tm
+0.0000 Tw
+(    $Id: Record.pdf,v 1.1 2002/12/02 21:40:57 edsummers Exp $ ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 687.2 Tm
+0.0000 Tw
+(DESCRIPTION ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 672.8 Tm
+0.0000 Tw
+(Module for handling MARC records as objects.  The file-handling stuff is in MARC::File::*. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 654.8 Tm
+0.0000 Tw
+(EXPORT ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 640.4 Tm
+0.0000 Tw
+(None.   ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 622.4 Tm
+0.0000 Tw
+(ERROR HANDLING ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 608.0 Tm
+0.0979 Tw
+(Any errors generated are stored in ) Tj
+/F10 10 Tf
+0.0979 Tw
+($MARC::Record::ERROR) Tj
+/F00 10 Tf
+0.0979 Tw
+(.  Warnings are kept with the record and) Tj
+1 0 0 1 102.0 596.0 Tm
+0.0000 Tw
+(accessible in the ) Tj
+/F10 10 Tf
+0.0000 Tw
+(warnings\(\)) Tj
+/F00 10 Tf
+0.0000 Tw
+( method.  ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 578.0 Tm
+0.0000 Tw
+(METHODS ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 556.4 Tm
+0.0000 Tw
+(new\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 544.4 Tm
+0.2616 Tw
+(Base constructor for the class.  It just returns a completely empty record. To get real data, you`ll need to) Tj
+1 0 0 1 102.0 532.4 Tm
+0.0000 Tw
+(populate it with fields, or use one of the MARC::File::* modules to read from a file. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 514.4 Tm
+0.0000 Tw
+(new_from_usmarc\( $marcblob \) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 502.4 Tm
+0.1920 Tw
+(This is a wrapper around ) Tj
+/F10 10 Tf
+0.1920 Tw
+(MARC::File::USMARC::decode\(\)) Tj
+/F00 10 Tf
+0.1920 Tw
+( for compatibility with older versions) Tj
+1 0 0 1 102.0 490.4 Tm
+0.0000 Tw
+(of MARC::Record. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 472.4 Tm
+0.0000 Tw
+(fields\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 460.4 Tm
+0.2876 Tw
+(Returns a list of all the fields in the record. The list contains  a MARC::Field object for each field in the) Tj
+1 0 0 1 102.0 448.4 Tm
+0.0000 Tw
+(record. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 430.4 Tm
+0.0000 Tw
+(field\(tagspec\(s\)\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 418.4 Tm
+0.0000 Tw
+(Returns a list of tags that match the field specifier, or in scalar context, just the first matching tag. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 406.4 Tm
+1.6222 Tw
+(The field specifier can be a simple number \(i.e. "245"\), or use the "."  notation of wildcarding \(i.e.) Tj
+1 0 0 1 102.0 394.4 Tm
+0.0000 Tw
+(subject tags are "6.."\). ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 376.4 Tm
+0.0000 Tw
+(subfield\(tag,subfield\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 364.4 Tm
+0.0000 Tw
+(Shortcut method for getting just a subfield for a tag.  These are equivalent: ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 352.4 Tm
+0.0000 Tw
+(  my $title = $marc->field\('245'\)->subfield\("a"\); ) Tj
+1 0 0 1 102.0 340.4 Tm
+0.0000 Tw
+(  my $title = $marc->subfield\('245',"a"\); ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 316.4 Tm
+0.0000 Tw
+(If either the field or subfield can`t be found, ) Tj
+/F10 10 Tf
+0.0000 Tw
+(undef) Tj
+/F00 10 Tf
+0.0000 Tw
+( is returned. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 298.4 Tm
+0.0000 Tw
+(insert_grouped_field\(field\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 286.4 Tm
+0.9694 Tw
+(Will insert the specified MARC::Field object into the record in `grouped order' and return true \(1\) on) Tj
+1 0 0 1 102.0 274.4 Tm
+0.1840 Tw
+(success, and false \(undef\) on failure. For example, if a `650' field is inserted with insert_grouped_field\(\)) Tj
+1 0 0 1 102.0 262.4 Tm
+0.5519 Tw
+(it will be inserted at the end of the 6XX group of tags. After some discussion on the perl4lib list it was) Tj
+1 0 0 1 102.0 250.4 Tm
+0.5252 Tw
+(descided that this is ordinarily what you will  want. If you would like to insert at a specific point in the) Tj
+1 0 0 1 102.0 238.4 Tm
+0.3423 Tw
+(record you can use  insert_fields_after\(\) and insert_fields_before\(\) methods which are described  below.) Tj
+/F21 10 Tf
+1 0 0 1 72.0 208.4 Tm
+0.0000 Tw
+(append_fields\(@fields\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 196.4 Tm
+0.8000 Tw
+(Appends the field specified by ) Tj
+/F10 10 Tf
+0.8000 Tw
+($field) Tj
+/F00 10 Tf
+0.8000 Tw
+( to the end of the record.  ) Tj
+/F10 10 Tf
+0.8000 Tw
+(@fields) Tj
+/F00 10 Tf
+0.8000 Tw
+( need to be MARC::Field) Tj
+1 0 0 1 102.0 184.4 Tm
+0.0000 Tw
+(objects. ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 172.4 Tm
+0.0000 Tw
+(    my $field = MARC::Field->new\('590','','','a' => 'My local note.'\); ) Tj
+1 0 0 1 102.0 160.4 Tm
+0.0000 Tw
+(    $record->append_fields\($field\); ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 136.4 Tm
+0.0000 Tw
+(Returns the number of fields appended. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 118.4 Tm
+0.0000 Tw
+(insert_fields_before\($before_field,@new_fields\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 106.4 Tm
+0.4915 Tw
+(Inserts the field specified by ) Tj
+/F10 10 Tf
+0.4915 Tw
+($new_field) Tj
+/F00 10 Tf
+0.4915 Tw
+( before the field ) Tj
+/F10 10 Tf
+0.4915 Tw
+($before_field) Tj
+/F00 10 Tf
+0.4915 Tw
+(. Returns the number of) Tj
+1 0 0 1 102.0 94.4 Tm
+2.6569 Tw
+(fields inserted, or undef on failures. Both ) Tj
+/F10 10 Tf
+2.6569 Tw
+($before_field) Tj
+/F00 10 Tf
+2.6569 Tw
+( and all ) Tj
+/F10 10 Tf
+2.6569 Tw
+(@new_fields) Tj
+/F00 10 Tf
+2.6569 Tw
+( need to be) Tj
+1 0 0 1 102.0 82.4 Tm
+0.0000 Tw
+(MARC::Field objects. ) Tj
+/F10 10 Tf
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(26 November 2002) Tj
+1 0 0 1 517.44 37 Tm
+(1) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+19 0 obj
+5486
+endobj
+20 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F00 6 0 R
+/F10 10 0 R
+/F21 15 0 R
+>>
+>>
+endobj
+21 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 20 0 R
+/Contents 18 0 R
+>>
+endobj
+22 0 obj
+<<
+/Length 23 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(Record.pm) Tj
+1 0 0 1 483.56 797 Tm
+(pod2pdf) Tj
+/F00 10 Tf
+1 0 0 1 102.0 770.0 Tm
+0.0000 Tw
+(    my $before_field = $record->field\('260'\); ) Tj
+1 0 0 1 102.0 758.0 Tm
+0.0000 Tw
+(    my $new_field = MARC::Field->new\('250','','','a' => '2nd ed.'\); ) Tj
+1 0 0 1 102.0 746.0 Tm
+0.0000 Tw
+(    $record->insert_fields_before\($before_field,$new_field\); ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 728.0 Tm
+0.0000 Tw
+(insert_fields_after\($after_field,@new_fields\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 716.0 Tm
+0.0000 Tw
+(Identical to ) Tj
+/F10 10 Tf
+0.0000 Tw
+(insert_fields_before\(\)) Tj
+/F00 10 Tf
+0.0000 Tw
+(, but fields are added after  ) Tj
+/F10 10 Tf
+0.0000 Tw
+($after_field) Tj
+/F00 10 Tf
+0.0000 Tw
+(. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 698.0 Tm
+0.0000 Tw
+(delete_field\($field\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 686.0 Tm
+0.0000 Tw
+(Deletes a field from the record. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 674.0 Tm
+0.1028 Tw
+(The field must have been retrieved from the record using the  ) Tj
+/F10 10 Tf
+0.1028 Tw
+(field\(\)) Tj
+/F00 10 Tf
+0.1028 Tw
+( method.  For example, to delete) Tj
+1 0 0 1 102.0 662.0 Tm
+0.0000 Tw
+(a 526 tag if it exists: ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 650.0 Tm
+0.0000 Tw
+(    my $tag526 = $marc->field\( "526" \); ) Tj
+1 0 0 1 102.0 638.0 Tm
+0.0000 Tw
+(    if \( $tag526 \) \{ ) Tj
+1 0 0 1 150.0 626.0 Tm
+0.0000 Tw
+($marc->delete_field\( $tag526 \); ) Tj
+1 0 0 1 102.0 614.0 Tm
+0.0000 Tw
+(    \} ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 590.0 Tm
+1.7929 Tw
+() Tj
+/F10 10 Tf
+1.7929 Tw
+(delete_field\(\)) Tj
+/F00 10 Tf
+1.7929 Tw
+( returns the number of fields that were deleted. This shouldn`t be 0 unless you) Tj
+1 0 0 1 102.0 578.0 Tm
+0.0000 Tw
+(didn`t get the tag properly. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 560.0 Tm
+0.0000 Tw
+(as_usmarc\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 548.0 Tm
+0.1920 Tw
+(This is a wrapper around ) Tj
+/F10 10 Tf
+0.1920 Tw
+(MARC::File::USMARC::encode\(\)) Tj
+/F00 10 Tf
+0.1920 Tw
+( for compatibility with older versions) Tj
+1 0 0 1 102.0 536.0 Tm
+0.0000 Tw
+(of MARC::Record. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 518.0 Tm
+0.0000 Tw
+(as_formatted\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 506.0 Tm
+0.0000 Tw
+(Returns a pretty string for printing in a MARC dump. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 488.0 Tm
+0.0000 Tw
+(title\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 476.0 Tm
+0.0000 Tw
+(Returns the title from the 245 tag. Note that it is a string, not a MARC::Field record. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 458.0 Tm
+0.0000 Tw
+(author\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 446.0 Tm
+0.0000 Tw
+(Returns the author from the 100, 110 or 111 tag. Note that it is a string, not a MARC::Field record. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 428.0 Tm
+0.0000 Tw
+(leader\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 416.0 Tm
+1.1105 Tw
+(Returns the leader for the record.  Sets the leader if ) Tj
+/F02 10 Tf
+1.1105 Tw
+(text) Tj
+/F00 10 Tf
+1.1105 Tw
+( is defined. No error checking is done on the) Tj
+1 0 0 1 102.0 404.0 Tm
+0.0000 Tw
+(validity of the leader. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 386.0 Tm
+0.0000 Tw
+(set_leader_lengths\( $reclen, $baseaddr \) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 374.0 Tm
+0.0000 Tw
+(Internal function for updating the leader`s length and base address. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 356.0 Tm
+0.0000 Tw
+(clone\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 344.0 Tm
+0.8600 Tw
+(The ) Tj
+/F10 10 Tf
+0.8600 Tw
+(clone\(\)) Tj
+/F00 10 Tf
+0.8600 Tw
+( method makes a copy of an existing MARC record and returns the new version.  Note) Tj
+1 0 0 1 102.0 332.0 Tm
+0.0000 Tw
+(that you cannot just say: ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 320.0 Tm
+0.0000 Tw
+(    my $newmarc = $oldmarc; ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 296.0 Tm
+0.0000 Tw
+(This just makes a copy of the reference, not a new object.  You must use the ) Tj
+/F10 10 Tf
+0.0000 Tw
+(clone\(\)) Tj
+/F00 10 Tf
+0.0000 Tw
+( method like so: ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 284.0 Tm
+0.0000 Tw
+(    my $newmarc = $oldmarc->clone; ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 260.0 Tm
+0.3548 Tw
+(You can also specify field specs to filter down only a  certain subset of fields.  For instance, if you only) Tj
+1 0 0 1 102.0 248.0 Tm
+0.0000 Tw
+(wanted the title and ISBN tags from a record, you could do this: ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 236.0 Tm
+0.0000 Tw
+(    my $small_marc = $marc->clone\( 245, '020' \); ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 212.0 Tm
+0.0000 Tw
+(The order of the fields is preserved as it was in the original record. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 194.0 Tm
+0.0000 Tw
+(warnings\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 182.0 Tm
+2.5053 Tw
+(Returns the warnings that were created when the record was read. These are things like "Invalid) Tj
+1 0 0 1 102.0 170.0 Tm
+0.0000 Tw
+(indicators converted to blanks". ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 158.0 Tm
+1.2300 Tw
+(The warnings are items that you might be interested in, or might not.  It depends on how stringently) Tj
+1 0 0 1 102.0 146.0 Tm
+0.0000 Tw
+(you`re checking data.  If you`re doing some grunt data analysis, you probably don`t care. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 134.0 Tm
+0.0000 Tw
+(A side effect of calling warnings\(\) is that the warning buffer will be cleared. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 116.0 Tm
+0.0000 Tw
+(add_fields\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 104.0 Tm
+4.0818 Tw
+() Tj
+/F10 10 Tf
+4.0818 Tw
+(add_fields\(\)) Tj
+/F00 10 Tf
+4.0818 Tw
+( is now deprecated, and users are encouraged to use  ) Tj
+/F10 10 Tf
+4.0818 Tw
+(append_fields\(\)) Tj
+/F00 10 Tf
+4.0818 Tw
+(,) Tj
+1 0 0 1 102.0 92.0 Tm
+2.4344 Tw
+() Tj
+/F10 10 Tf
+2.4344 Tw
+(insert_fields_after\(\)) Tj
+/F00 10 Tf
+2.4344 Tw
+(, and ) Tj
+/F10 10 Tf
+2.4344 Tw
+(insert_fields_before\(\)) Tj
+/F00 10 Tf
+2.4344 Tw
+(  since they do what you want) Tj
+1 0 0 1 102.0 80.0 Tm
+0.0000 Tw
+(probably. It is still here though, for backwards  compatability. ) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(2) Tj
+1 0 0 1 435.18 37 Tm
+(26 November 2002) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+23 0 obj
+5787
+endobj
+24 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F00 6 0 R
+/F02 8 0 R
+/F10 10 0 R
+/F21 15 0 R
+>>
+>>
+endobj
+25 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 24 0 R
+/Contents 22 0 R
+>>
+endobj
+26 0 obj
+<<
+/Length 27 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(pod2pdf) Tj
+1 0 0 1 470.77 797 Tm
+(Record.pm) Tj
+/F00 10 Tf
+1 0 0 1 102.0 770.0 Tm
+0.2200 Tw
+() Tj
+/F10 10 Tf
+0.2200 Tw
+(add_fields\(\)) Tj
+/F00 10 Tf
+0.2200 Tw
+( adds MARC::Field objects to the end of the list.  Returns the  number of fields added,) Tj
+1 0 0 1 102.0 758.0 Tm
+0.0000 Tw
+(or ) Tj
+/F10 10 Tf
+0.0000 Tw
+(undef) Tj
+/F00 10 Tf
+0.0000 Tw
+( if there was an error. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 746.0 Tm
+0.0000 Tw
+(There are three ways of calling ) Tj
+/F10 10 Tf
+0.0000 Tw
+(add_fields\(\)) Tj
+/F00 10 Tf
+0.0000 Tw
+( to add data to the record. ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 719.6 Tm
+0.0000 Tw
+(1 Create a MARC::Field object and add it ) Tj
+/F10 10 Tf
+1 0 0 1 126.0 701.6 Tm
+0.0000 Tw
+(  my $author = MARC::Field->new\( ) Tj
+1 0 0 1 174.0 689.6 Tm
+0.0000 Tw
+(        100, "1", " ", a => "Arnosky, Jim." ) Tj
+1 0 0 1 174.0 677.6 Tm
+0.0000 Tw
+(        \); ) Tj
+1 0 0 1 126.0 665.6 Tm
+0.0000 Tw
+(  $marc->add_fields\( $author \); ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 645.2 Tm
+0.0000 Tw
+(2 Add the data fields directly, and let ) Tj
+/F10 10 Tf
+0.0000 Tw
+(add_fields\(\)) Tj
+/F20 10 Tf
+0.0000 Tw
+( take care of the objectifying. ) Tj
+/F10 10 Tf
+1 0 0 1 126.0 627.2 Tm
+0.0000 Tw
+(  $marc->add_fields\( ) Tj
+1 0 0 1 126.0 615.2 Tm
+0.0000 Tw
+(        245, "1", "0", ) Tj
+1 0 0 1 126.0 603.2 Tm
+0.0000 Tw
+(                a => "Raccoons and ripe corn /", ) Tj
+1 0 0 1 126.0 591.2 Tm
+0.0000 Tw
+(                c => "Jim Arnosky.", ) Tj
+1 0 0 1 126.0 579.2 Tm
+0.0000 Tw
+(        ) Tj
+1 0 0 1 222.0 579.2 Tm
+0.0000 Tw
+(\); ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 558.8 Tm
+0.0000 Tw
+(3 Same as #2 above, but pass multiple fields of data in anonymous lists ) Tj
+/F10 10 Tf
+1 0 0 1 126.0 540.8 Tm
+0.0000 Tw
+(  $marc->add_fields\( ) Tj
+1 0 0 1 174.0 528.8 Tm
+0.0000 Tw
+([ 250, " ", " ", a => "1st ed." ], ) Tj
+1 0 0 1 174.0 516.8 Tm
+0.0000 Tw
+([ 650, "1", " ", a => "Raccoons." ], ) Tj
+1 0 0 1 174.0 504.8 Tm
+0.0000 Tw
+(\); ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 486.8 Tm
+0.0000 Tw
+(DESIGN NOTES ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 472.4 Tm
+0.0000 Tw
+(A brief discussion of why MARC::Record is done the way it is: ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 446.0 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 447 4 4 re
+f
+Q
+BT
+1 0 0 1 110 446 Tm
+/F20 10 Tf
+0.0000 Tw
+(It`s built for quick prototyping ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 434.0 Tm
+1.8131 Tw
+(One of the areas Perl excels is in allowing the programmer to  create easy solutions quickly.) Tj
+1 0 0 1 126.0 422.0 Tm
+1.1512 Tw
+(MARC::Record is designed along those same lines.  You want a program to dump all the 6XX) Tj
+1 0 0 1 126.0 410.0 Tm
+0.0000 Tw
+(tags in a file?  MARC::Record is your friend. ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 395.6 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 396.6 4 4 re
+f
+Q
+BT
+1 0 0 1 110 395.6 Tm
+/F20 10 Tf
+0.0000 Tw
+(It`s built for extensibility ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 383.6 Tm
+0.3542 Tw
+(Currently, I`m using MARC::Record for analyzing bibliographic data, but who knows what might) Tj
+1 0 0 1 126.0 371.6 Tm
+0.0000 Tw
+(happen in the future?  MARC::Record needs to be just as adept at authority data, too. ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 357.2 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 358.2 4 4 re
+f
+Q
+BT
+1 0 0 1 110 357.2 Tm
+/F20 10 Tf
+0.0000 Tw
+(It`s designed around accessor methods ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 345.2 Tm
+0.1312 Tw
+(I use method calls everywhere, and I expect calling programs to do the same, rather than accessing) Tj
+1 0 0 1 126.0 333.2 Tm
+0.1400 Tw
+(internal data directly.  If you access an object`s hash fields on your own, future releases may break) Tj
+1 0 0 1 126.0 321.2 Tm
+0.0000 Tw
+(your code. ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 306.8 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 307.8 4 4 re
+f
+Q
+BT
+1 0 0 1 110 306.8 Tm
+/F20 10 Tf
+0.0000 Tw
+(It`s not built for speed ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 294.8 Tm
+0.0989 Tw
+(One of the tradeoffs in using accessor methods is some overhead in the method calls.  Is this slow?) Tj
+1 0 0 1 126.0 282.8 Tm
+1.6272 Tw
+( I don`t know, I haven`t measured. I would suggest that if you`re a cycle junkie that you use) Tj
+1 0 0 1 126.0 270.8 Tm
+0.8229 Tw
+(Benchmark.pm to check to see where your bottlenecks are, and then decide if MARC::Record is) Tj
+1 0 0 1 126.0 258.8 Tm
+0.0000 Tw
+(for you. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 228.8 Tm
+0.0000 Tw
+(RELATED MODULES ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 214.4 Tm
+0.0000 Tw
+() Tj
+/F02 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Record) Tj
+/F00 10 Tf
+0 g
+0.0000 Tw
+(, ) Tj
+/F02 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(MARC::Lint) Tj
+/F00 10 Tf
+0 g
+0.0000 Tw
+( ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 196.4 Tm
+0.0000 Tw
+(SEE ALSO ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 179.1 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 180.12 4 4 re
+f
+Q
+BT
+1 0 0 1 110 179.12 Tm
+/F20 10 Tf
+0.0000 Tw
+(perl4lib \() Tj
+/F22 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(http://www.rice.edu/perl4lib/) Tj
+/F20 10 Tf
+0 g
+0.0000 Tw
+(\) ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 167.1 Tm
+0.0000 Tw
+(A mailing list devoted to the use of Perl in libraries. ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 152.7 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 153.72 4 4 re
+f
+Q
+BT
+1 0 0 1 110 152.72 Tm
+/F20 10 Tf
+0.0000 Tw
+(Library Of Congress MARC pages \() Tj
+/F22 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(http://www.loc.gov/marc/) Tj
+/F20 10 Tf
+0 g
+0.0000 Tw
+(\) ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 140.7 Tm
+0.0000 Tw
+(The definitive source for all things MARC. ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 114.3 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 115.32 4 4 re
+f
+Q
+BT
+1 0 0 1 110 114.32 Tm
+/F20 10 Tf
+0.0000 Tw
+() Tj
+/F22 10 Tf
+0.0000 Tw
+(Understanding MARC Bibliographic) Tj
+/F20 10 Tf
+0.0000 Tw
+( \() Tj
+/F22 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(http://lcweb.loc.gov/marc/umb/) Tj
+/F20 10 Tf
+0 g
+0.0000 Tw
+(\) ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 102.3 Tm
+0.0000 Tw
+(Online version of the free booklet.  An excellent overview of the MARC format.  Essential. ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 75.9 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 76.9200000000002 4 4 re
+f
+Q
+BT
+1 0 0 1 110 75.9200000000002 Tm
+/F20 10 Tf
+0.0000 Tw
+(Tag Of The Month \() Tj
+/F22 10 Tf
+0 0 0.8 rg
+0.0000 Tw
+(http://www.tagofthemonth.com/) Tj
+/F20 10 Tf
+0 g
+0.0000 Tw
+(\) ) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(26 November 2002) Tj
+1 0 0 1 517.44 37 Tm
+(3) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+27 0 obj
+6076
+endobj
+28 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F00 6 0 R
+/F02 8 0 R
+/F10 10 0 R
+/F20 14 0 R
+/F21 15 0 R
+/F22 16 0 R
+>>
+>>
+endobj
+29 0 obj
+<<
+/Type /Annot
+/Subtype /Link
+/Rect [136.0 176.1 264.2 186.7]
+/Border [0 0 1]
+/C [1 1 0]
+/A 30 0 R
+/H /I
+>>
+endobj
+30 0 obj
+<<
+/S /URI
+/URI (http://www.rice.edu/perl4lib/)
+>>
+endobj
+31 0 obj
+<<
+/Type /Annot
+/Subtype /Link
+/Rect [255.5 149.7 369.8 160.3]
+/Border [0 0 1]
+/C [1 1 0]
+/A 32 0 R
+/H /I
+>>
+endobj
+32 0 obj
+<<
+/S /URI
+/URI (http://www.loc.gov/marc/)
+>>
+endobj
+33 0 obj
+<<
+/Type /Annot
+/Subtype /Link
+/Rect [261.1 111.3 401.5 121.9]
+/Border [0 0 1]
+/C [1 1 0]
+/A 34 0 R
+/H /I
+>>
+endobj
+34 0 obj
+<<
+/S /URI
+/URI (http://lcweb.loc.gov/marc/umb/)
+>>
+endobj
+35 0 obj
+<<
+/Type /Annot
+/Subtype /Link
+/Rect [184.9 72.9 328.1 83.5]
+/Border [0 0 1]
+/C [1 1 0]
+/A 36 0 R
+/H /I
+>>
+endobj
+36 0 obj
+<<
+/S /URI
+/URI (http://www.tagofthemonth.com/)
+>>
+endobj
+37 0 obj
+[ 29 0 R 31 0 R 33 0 R 35 0 R  ]
+endobj
+38 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 28 0 R
+/Contents 26 0 R
+/Annots 37 0 R
+>>
+endobj
+39 0 obj
+<<
+/Length 40 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(Record.pm) Tj
+1 0 0 1 483.56 797 Tm
+(pod2pdf) Tj
+/F00 10 Tf
+1 0 0 1 126.0 770.0 Tm
+1.7413 Tw
+(Follett Software Company`s \() Tj
+/F02 10 Tf
+0 0 0.8 rg
+1.7413 Tw
+(http://www.fsc.follett.com/) Tj
+/F00 10 Tf
+0 g
+1.7413 Tw
+(\) monthly discussion of various MARC) Tj
+1 0 0 1 126.0 758.0 Tm
+0.0000 Tw
+(tags. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 728.0 Tm
+0.0000 Tw
+(TODO ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 710.7 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 711.72 4 4 re
+f
+Q
+BT
+1 0 0 1 110 710.72 Tm
+/F20 10 Tf
+0.0000 Tw
+(Incorporate MARC.pm in the distribution. ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 698.7 Tm
+0.0000 Tw
+(Combine MARC.pm and MARC::* into one distribution. ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 684.3 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 685.32 4 4 re
+f
+Q
+BT
+1 0 0 1 110 684.32 Tm
+/F20 10 Tf
+0.0000 Tw
+(Podify MARC.pm ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 669.9 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 670.92 4 4 re
+f
+Q
+BT
+1 0 0 1 110 669.92 Tm
+/F20 10 Tf
+0.0000 Tw
+(Allow regexes across the entire tag ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 657.9 Tm
+0.0000 Tw
+(Imagine something like this: ) Tj
+/F10 10 Tf
+1 0 0 1 126.0 645.9 Tm
+0.0000 Tw
+(  my @sears_headings = $marc->tag_grep\( /Sears/ \); ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 621.9 Tm
+0.0000 Tw
+(\(from Mike O`Regan\) ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 607.5 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 608.52 4 4 re
+f
+Q
+BT
+1 0 0 1 110 607.52 Tm
+/F20 10 Tf
+0.0000 Tw
+(Insert a field in an arbitrary place in the record ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 593.1 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 594.12 4 4 re
+f
+Q
+BT
+1 0 0 1 110 593.12 Tm
+/F20 10 Tf
+0.0000 Tw
+(Allow deleting a field ) Tj
+/F10 10 Tf
+1 0 0 1 126.0 575.1 Tm
+0.0000 Tw
+(  for my $field \( $record->field\( "856" \) \) \{ ) Tj
+1 0 0 1 174.0 563.1 Tm
+0.0000 Tw
+($record->delete_field\( $field \) unless useful\($field\); ) Tj
+1 0 0 1 174.0 551.1 Tm
+0.0000 Tw
+(\} # for ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 527.1 Tm
+0.0000 Tw
+(\(from Anne Highsmith hismith@tamu.edu\) ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 500.7 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 501.72 4 4 re
+f
+Q
+BT
+1 0 0 1 110 500.72 Tm
+/F20 10 Tf
+0.0000 Tw
+(Modifying an existing field ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 482.7 Tm
+0.0000 Tw
+(BUGS, WISHES AND CORRESPONDENCE ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 468.3 Tm
+1.2689 Tw
+(Please feel free to email me at andy@petdance.com.  I`m glad to help as best I can, and I`m always) Tj
+1 0 0 1 102.0 456.3 Tm
+0.0000 Tw
+(interested in bugs, suggestions and patches. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 444.3 Tm
+0.9664 Tw
+(The MARC::Record development team uses the RT bug tracking system at ) Tj
+/F02 10 Tf
+0 0 0.8 rg
+0.9664 Tw
+(http://rt.cpan.org) Tj
+/F00 10 Tf
+0 g
+0.9664 Tw
+(.  If your) Tj
+1 0 0 1 102.0 432.3 Tm
+0.6710 Tw
+(email is about a bug or suggestion, please report it through the RT system.  This is a huge help for the) Tj
+1 0 0 1 102.0 420.3 Tm
+1.4145 Tw
+(team, and you`ll be notified of progress as things get fixed or updated.  If you prefer not to use the) Tj
+1 0 0 1 102.0 408.3 Tm
+0.0000 Tw
+(website, you can send your bug to bug-MARC-Record@rt.cpan.org. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 390.3 Tm
+0.0000 Tw
+(IDEAS ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 375.9 Tm
+0.0000 Tw
+(Ideas are things that have been considered, but nobody`s actually asked for. ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 349.5 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 350.52 4 4 re
+f
+Q
+BT
+1 0 0 1 110 349.52 Tm
+/F20 10 Tf
+0.0000 Tw
+(Create multiple output formats. ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 337.5 Tm
+0.0000 Tw
+(These could be ASCII, XML, or MarcMaker. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 307.5 Tm
+0.0000 Tw
+(LICENSE ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 293.1 Tm
+0.0000 Tw
+(This code may be distributed under the same terms as Perl itself.  ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 281.1 Tm
+2.4619 Tw
+(Please note that these modules are not products of or supported by the employers of the various) Tj
+1 0 0 1 102.0 269.1 Tm
+0.0000 Tw
+(contributors to the code. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 251.1 Tm
+0.0000 Tw
+(AUTHOR ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 236.7 Tm
+0.0000 Tw
+(Andy Lester, <marc@petdance.com> ) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(4) Tj
+1 0 0 1 435.18 37 Tm
+(26 November 2002) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+40 0 obj
+4080
+endobj
+41 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F00 6 0 R
+/F02 8 0 R
+/F10 10 0 R
+/F20 14 0 R
+/F21 15 0 R
+>>
+>>
+endobj
+42 0 obj
+<<
+/Type /Annot
+/Subtype /Link
+/Rect [246.1 767.0 357.3 777.6]
+/Border [0 0 1]
+/C [1 1 0]
+/A 43 0 R
+/H /I
+>>
+endobj
+43 0 obj
+<<
+/S /URI
+/URI (http://www.fsc.follett.com/)
+>>
+endobj
+44 0 obj
+<<
+/Type /Annot
+/Subtype /Link
+/Rect [414.7 441.3 486.1 451.9]
+/Border [0 0 1]
+/C [1 1 0]
+/A 45 0 R
+/H /I
+>>
+endobj
+45 0 obj
+<<
+/S /URI
+/URI (http://rt.cpan.org)
+>>
+endobj
+46 0 obj
+[ 42 0 R 44 0 R  ]
+endobj
+47 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 41 0 R
+/Contents 39 0 R
+/Annots 46 0 R
+>>
+endobj
+48 0 obj
+<<
+/Length 49 0 R
+>>
+stream
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+/F20 24 Tf
+1 0 0 1 202.784 770 Tm
+(Table of Contents) Tj
+1 0 0 1 238.82 741.2 Tm
+(Record.pm) Tj
+/F20 10 Tf
+ET
+q
+0.95 g
+72 680.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 683.6 Tm
+(NAME) Tj
+1 0 0 1 487.44 683.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 668.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 671.6 Tm
+(VERSION) Tj
+1 0 0 1 487.44 671.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 656.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 659.6 Tm
+(DESCRIPTION) Tj
+1 0 0 1 487.44 659.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 644.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 647.6 Tm
+(EXPORT) Tj
+1 0 0 1 487.44 647.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 632.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 635.6 Tm
+(ERROR HANDLING) Tj
+1 0 0 1 487.44 635.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 620.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 623.6 Tm
+(METHODS) Tj
+1 0 0 1 487.44 623.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 608.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 611.6 Tm
+(new\(\)) Tj
+1 0 0 1 487.44 611.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 596.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 599.6 Tm
+(new_from_usmarc\( $marcblob \)) Tj
+1 0 0 1 487.44 599.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 584.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 587.6 Tm
+(fields\(\)) Tj
+1 0 0 1 487.44 587.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 572.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 575.6 Tm
+(field\(tagspec\(s\)\)) Tj
+1 0 0 1 487.44 575.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 560.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 563.6 Tm
+(subfield\(tag,subfield\)) Tj
+1 0 0 1 487.44 563.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 548.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 551.6 Tm
+(insert_grouped_field\(field\)) Tj
+1 0 0 1 487.44 551.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 536.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 539.6 Tm
+(append_fields\(@fields\)) Tj
+1 0 0 1 487.44 539.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 524.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 527.6 Tm
+(insert_fields_before\($before_field,@new_fields\)) Tj
+1 0 0 1 487.44 527.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 512.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 515.6 Tm
+(insert_fields_after\($after_field,@new_fields\)) Tj
+1 0 0 1 487.44 515.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 500.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 503.6 Tm
+(delete_field\($field\)) Tj
+1 0 0 1 487.44 503.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 488.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 491.6 Tm
+(as_usmarc\(\)) Tj
+1 0 0 1 487.44 491.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 476.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 479.6 Tm
+(as_formatted\(\)) Tj
+1 0 0 1 487.44 479.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 464.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 467.6 Tm
+(title\(\)) Tj
+1 0 0 1 487.44 467.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 452.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 455.6 Tm
+(author\(\)) Tj
+1 0 0 1 487.44 455.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 440.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 443.6 Tm
+(leader\(\)) Tj
+1 0 0 1 487.44 443.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 428.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 431.6 Tm
+(set_leader_lengths\( $reclen, $baseaddr \)) Tj
+1 0 0 1 487.44 431.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 416.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 419.6 Tm
+(clone\(\)) Tj
+1 0 0 1 487.44 419.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 404.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 407.6 Tm
+(warnings\(\)) Tj
+1 0 0 1 487.44 407.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 392.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 395.6 Tm
+(add_fields\(\)) Tj
+1 0 0 1 487.44 395.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 380.6 451 12 re
+f
+Q
+BT
+1 0 0 1 162 383.6 Tm
+(1 Create a MARC::Field object and add it) Tj
+1 0 0 1 487.44 383.6 Tm
+(3) Tj
+ET
+q
+0.95 g
+72 368.6 451 12 re
+f
+Q
+BT
+1 0 0 1 162 371.6 Tm
+(2 Add the data fields directly, and let add_fields\(\) take care of...) Tj
+1 0 0 1 487.44 371.6 Tm
+(3) Tj
+ET
+q
+1 g
+72 356.6 451 12 re
+f
+Q
+BT
+1 0 0 1 162 359.6 Tm
+(3 Same as #2 above, but pass multiple fields of data in...) Tj
+1 0 0 1 487.44 359.6 Tm
+(3) Tj
+ET
+q
+0.95 g
+72 344.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 347.6 Tm
+(DESIGN NOTES) Tj
+1 0 0 1 487.44 347.6 Tm
+(3) Tj
+ET
+q
+1 g
+72 332.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 335.6 Tm
+(It`s built for quick prototyping) Tj
+1 0 0 1 487.44 335.6 Tm
+(3) Tj
+ET
+q
+0.95 g
+72 320.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 323.6 Tm
+(It`s built for extensibility) Tj
+1 0 0 1 487.44 323.6 Tm
+(3) Tj
+ET
+q
+1 g
+72 308.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 311.6 Tm
+(It`s designed around accessor methods) Tj
+1 0 0 1 487.44 311.6 Tm
+(3) Tj
+ET
+q
+0.95 g
+72 296.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 299.6 Tm
+(It`s not built for speed) Tj
+1 0 0 1 487.44 299.6 Tm
+(3) Tj
+ET
+q
+1 g
+72 284.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 287.6 Tm
+(RELATED MODULES) Tj
+1 0 0 1 487.44 287.6 Tm
+(3) Tj
+ET
+q
+0.95 g
+72 272.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 275.6 Tm
+(SEE ALSO) Tj
+1 0 0 1 487.44 275.6 Tm
+(3) Tj
+ET
+q
+1 g
+72 260.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 263.6 Tm
+(perl4lib \(http://www.rice.edu/perl4lib/\)) Tj
+1 0 0 1 487.44 263.6 Tm
+(3) Tj
+ET
+q
+0.95 g
+72 248.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 251.6 Tm
+(Library Of Congress MARC pages \(http://www.loc.gov/marc/\)) Tj
+1 0 0 1 487.44 251.6 Tm
+(3) Tj
+ET
+q
+1 g
+72 236.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 239.6 Tm
+(Understanding MARC Bibliographic \(http://lcweb.loc.gov/marc/umb/\)) Tj
+1 0 0 1 487.44 239.6 Tm
+(3) Tj
+ET
+q
+0.95 g
+72 224.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 227.6 Tm
+(Tag Of The Month \(http://www.tagofthemonth.com/\)) Tj
+1 0 0 1 487.44 227.6 Tm
+(3) Tj
+ET
+q
+1 g
+72 212.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 215.6 Tm
+(TODO) Tj
+1 0 0 1 487.44 215.6 Tm
+(4) Tj
+ET
+q
+0.95 g
+72 200.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 203.6 Tm
+(Incorporate MARC.pm in the distribution.) Tj
+1 0 0 1 487.44 203.6 Tm
+(4) Tj
+ET
+q
+1 g
+72 188.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 191.6 Tm
+(Podify MARC.pm) Tj
+1 0 0 1 487.44 191.6 Tm
+(4) Tj
+ET
+q
+0.95 g
+72 176.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 179.6 Tm
+(Allow regexes across the entire tag) Tj
+1 0 0 1 487.44 179.6 Tm
+(4) Tj
+ET
+q
+1 g
+72 164.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 167.6 Tm
+(Insert a field in an arbitrary place in the record) Tj
+1 0 0 1 487.44 167.6 Tm
+(4) Tj
+ET
+q
+0.95 g
+72 152.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 155.6 Tm
+(Allow deleting a field) Tj
+1 0 0 1 487.44 155.6 Tm
+(4) Tj
+ET
+q
+1 g
+72 140.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 143.6 Tm
+(Modifying an existing field) Tj
+1 0 0 1 487.44 143.6 Tm
+(4) Tj
+ET
+q
+0.95 g
+72 128.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 131.6 Tm
+(BUGS, WISHES AND CORRESPONDENCE) Tj
+1 0 0 1 487.44 131.6 Tm
+(4) Tj
+ET
+q
+1 g
+72 116.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 119.6 Tm
+(IDEAS) Tj
+1 0 0 1 487.44 119.6 Tm
+(4) Tj
+ET
+q
+0.95 g
+72 104.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 107.6 Tm
+(Create multiple output formats.) Tj
+1 0 0 1 487.44 107.6 Tm
+(4) Tj
+ET
+q
+1 g
+72 92.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 95.6 Tm
+(LICENSE) Tj
+1 0 0 1 487.44 95.6 Tm
+(4) Tj
+ET
+q
+0.95 g
+72 80.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 83.6 Tm
+(AUTHOR) Tj
+1 0 0 1 487.44 83.6 Tm
+(4) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(26 November 2002) Tj
+1 0 0 1 520.22 37 Tm
+(i) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+49 0 obj
+6332
+endobj
+50 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F20 14 0 R
+/F21 15 0 R
+>>
+>>
+endobj
+51 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 50 0 R
+/Contents 48 0 R
+>>
+endobj
+52 0 obj
+<<
+/Length 53 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(Record.pm) Tj
+1 0 0 1 438.55 797 Tm
+(Table of Contents) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(ii) Tj
+1 0 0 1 435.18 37 Tm
+(26 November 2002) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+53 0 obj
+247
+endobj
+54 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F21 15 0 R
+>>
+>>
+endobj
+55 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 54 0 R
+/Contents 52 0 R
+>>
+endobj
+56 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 59 0 R
+/Contents 57 0 R
+>>
+endobj
+57 0 obj
+<<
+/Length 58 0 R
+>>
+stream
+q
+1 0 0 rg
+180 626 8 130 re
+F
+Q
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+210 626 m
+523 626 l
+s
+BT
+/F21 30 Tf
+1 0 0 1 210 706 Tm
+0 -30 TD
+(POD Translation) Tj
+T* (by ) Tj
+0 0 0.8 rg
+/F22 30 Tf
+(pod2pdf) Tj
+/F21 9 Tf
+T* (ajf@afco.demon.co.uk) Tj
+/F03 48 Tf
+0 g
+1 0 0 1 190.172 371 Tm
+(Record.pm) Tj
+ET
+endstream
+endobj
+58 0 obj
+292
+endobj
+59 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F03 9 0 R
+/F21 15 0 R
+/F22 16 0 R
+>>
+>>
+endobj
+60 0 obj
+<<
+/Length 61 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(Title Page) Tj
+1 0 0 1 470.77 797 Tm
+(Record.pm) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(26 November 2002) Tj
+1 0 0 1 488.54 37 Tm
+(Fly leaf) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+61 0 obj
+246
+endobj
+62 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F21 15 0 R
+>>
+>>
+endobj
+63 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 62 0 R
+/Contents 60 0 R
+>>
+endobj
+65 0 obj
+<<
+/Parent 64 0 R
+/Dest [51 0 R /Fit]
+/First 66 0 R
+/Last 116 0 R
+/Count 51 
+/Title (Table of Contents)
+>>
+endobj
+66 0 obj
+<<
+/Parent 65 0 R
+/Dest [21 0 R /FitH 778.4]
+/Next 67 0 R
+/Title (NAME)
+>>
+endobj
+67 0 obj
+<<
+/Parent 65 0 R
+/Dest [21 0 R /FitH 746]
+/Previous 66 0 R
+/Next 68 0 R
+/Title (VERSION)
+>>
+endobj
+68 0 obj
+<<
+/Parent 65 0 R
+/Dest [21 0 R /FitH 701.6]
+/Previous 67 0 R
+/Next 69 0 R
+/Title (DESCRIPTION)
+>>
+endobj
+69 0 obj
+<<
+/Parent 65 0 R
+/Dest [21 0 R /FitH 669.2]
+/Previous 68 0 R
+/Next 70 0 R
+/Title (EXPORT)
+>>
+endobj
+70 0 obj
+<<
+/Parent 65 0 R
+/Dest [21 0 R /FitH 636.8]
+/Previous 69 0 R
+/Next 71 0 R
+/Title (ERROR HANDLING)
+>>
+endobj
+71 0 obj
+<<
+/Parent 65 0 R
+/Dest [21 0 R /FitH 592.4]
+/Previous 70 0 R
+/Next 94 0 R
+/First 72 0 R
+/Last 90 0 R
+/Count 22 
+/Title (METHODS)
+>>
+endobj
+72 0 obj
+<<
+/Parent 71 0 R
+/Dest [21 0 R /FitH 568.4]
+/Next 73 0 R
+/Title (new\(\))
+>>
+endobj
+73 0 obj
+<<
+/Parent 71 0 R
+/Dest [21 0 R /FitH 526.4]
+/Previous 72 0 R
+/Next 74 0 R
+/Title (new_from_usmarc\( $marcblob \))
+>>
+endobj
+74 0 obj
+<<
+/Parent 71 0 R
+/Dest [21 0 R /FitH 484.4]
+/Previous 73 0 R
+/Next 75 0 R
+/Title (fields\(\))
+>>
+endobj
+75 0 obj
+<<
+/Parent 71 0 R
+/Dest [21 0 R /FitH 442.4]
+/Previous 74 0 R
+/Next 76 0 R
+/Title (field\(tagspec\(s\)\))
+>>
+endobj
+76 0 obj
+<<
+/Parent 71 0 R
+/Dest [21 0 R /FitH 388.4]
+/Previous 75 0 R
+/Next 77 0 R
+/Title (subfield\(tag,subfield\))
+>>
+endobj
+77 0 obj
+<<
+/Parent 71 0 R
+/Dest [21 0 R /FitH 310.4]
+/Previous 76 0 R
+/Next 78 0 R
+/Title (insert_grouped_field\(field\))
+>>
+endobj
+78 0 obj
+<<
+/Parent 71 0 R
+/Dest [21 0 R /FitH 220.4]
+/Previous 77 0 R
+/Next 79 0 R
+/Title (append_fields\(@fields\))
+>>
+endobj
+79 0 obj
+<<
+/Parent 71 0 R
+/Dest [21 0 R /FitH 130.4]
+/Previous 78 0 R
+/Next 80 0 R
+/Title (insert_fields_before\($before_field,@new_fields\))
+>>
+endobj
+80 0 obj
+<<
+/Parent 71 0 R
+/Dest [25 0 R /FitH 740]
+/Previous 79 0 R
+/Next 81 0 R
+/Title (insert_fields_after\($after_field,@new_fields\))
+>>
+endobj
+81 0 obj
+<<
+/Parent 71 0 R
+/Dest [25 0 R /FitH 710]
+/Previous 80 0 R
+/Next 82 0 R
+/Title (delete_field\($field\))
+>>
+endobj
+82 0 obj
+<<
+/Parent 71 0 R
+/Dest [25 0 R /FitH 572]
+/Previous 81 0 R
+/Next 83 0 R
+/Title (as_usmarc\(\))
+>>
+endobj
+83 0 obj
+<<
+/Parent 71 0 R
+/Dest [25 0 R /FitH 530]
+/Previous 82 0 R
+/Next 84 0 R
+/Title (as_formatted\(\))
+>>
+endobj
+84 0 obj
+<<
+/Parent 71 0 R
+/Dest [25 0 R /FitH 500]
+/Previous 83 0 R
+/Next 85 0 R
+/Title (title\(\))
+>>
+endobj
+85 0 obj
+<<
+/Parent 71 0 R
+/Dest [25 0 R /FitH 470]
+/Previous 84 0 R
+/Next 86 0 R
+/Title (author\(\))
+>>
+endobj
+86 0 obj
+<<
+/Parent 71 0 R
+/Dest [25 0 R /FitH 440]
+/Previous 85 0 R
+/Next 87 0 R
+/Title (leader\(\))
+>>
+endobj
+87 0 obj
+<<
+/Parent 71 0 R
+/Dest [25 0 R /FitH 398]
+/Previous 86 0 R
+/Next 88 0 R
+/Title (set_leader_lengths\( $reclen, $baseaddr \))
+>>
+endobj
+88 0 obj
+<<
+/Parent 71 0 R
+/Dest [25 0 R /FitH 368]
+/Previous 87 0 R
+/Next 89 0 R
+/Title (clone\(\))
+>>
+endobj
+89 0 obj
+<<
+/Parent 71 0 R
+/Dest [25 0 R /FitH 206]
+/Previous 88 0 R
+/Next 90 0 R
+/Title (warnings\(\))
+>>
+endobj
+90 0 obj
+<<
+/Parent 71 0 R
+/Dest [25 0 R /FitH 128]
+/Previous 89 0 R
+/First 91 0 R
+/Last 93 0 R
+/Count 3 
+/Title (add_fields\(\))
+>>
+endobj
+91 0 obj
+<<
+/Parent 90 0 R
+/Dest [38 0 R /FitH 731.6]
+/Next 92 0 R
+/Title (1 Create a MARC::Field object and add it)
+>>
+endobj
+92 0 obj
+<<
+/Parent 90 0 R
+/Dest [38 0 R /FitH 657.2]
+/Previous 91 0 R
+/Next 93 0 R
+/Title (2 Add the data fields directly, and let add_fields\(\) take care of the objectifying.)
+>>
+endobj
+93 0 obj
+<<
+/Parent 90 0 R
+/Dest [38 0 R /FitH 570.8]
+/Previous 92 0 R
+/Title (3 Same as #2 above, but pass multiple fields of data in anonymous lists)
+>>
+endobj
+94 0 obj
+<<
+/Parent 65 0 R
+/Dest [38 0 R /FitH 501.2]
+/Previous 71 0 R
+/Next 99 0 R
+/First 95 0 R
+/Last 98 0 R
+/Count 4 
+/Title (DESIGN NOTES)
+>>
+endobj
+95 0 obj
+<<
+/Parent 94 0 R
+/Dest [38 0 R /FitH 458]
+/Next 96 0 R
+/Title (It`s built for quick prototyping)
+>>
+endobj
+96 0 obj
+<<
+/Parent 94 0 R
+/Dest [38 0 R /FitH 407.6]
+/Previous 95 0 R
+/Next 97 0 R
+/Title (It`s built for extensibility)
+>>
+endobj
+97 0 obj
+<<
+/Parent 94 0 R
+/Dest [38 0 R /FitH 369.2]
+/Previous 96 0 R
+/Next 98 0 R
+/Title (It`s designed around accessor methods)
+>>
+endobj
+98 0 obj
+<<
+/Parent 94 0 R
+/Dest [38 0 R /FitH 318.8]
+/Previous 97 0 R
+/Title (It`s not built for speed)
+>>
+endobj
+99 0 obj
+<<
+/Parent 65 0 R
+/Dest [38 0 R /FitH 243.2]
+/Previous 94 0 R
+/Next 100 0 R
+/Title (RELATED MODULES)
+>>
+endobj
+100 0 obj
+<<
+/Parent 65 0 R
+/Dest [38 0 R /FitH 210.8]
+/Previous 99 0 R
+/Next 105 0 R
+/First 101 0 R
+/Last 104 0 R
+/Count 4 
+/Title (SEE ALSO)
+>>
+endobj
+101 0 obj
+<<
+/Parent 100 0 R
+/Dest [38 0 R /FitH 191.12]
+/Next 102 0 R
+/Title (perl4lib \(http://www.rice.edu/perl4lib/\))
+>>
+endobj
+102 0 obj
+<<
+/Parent 100 0 R
+/Dest [38 0 R /FitH 164.72]
+/Previous 101 0 R
+/Next 103 0 R
+/Title (Library Of Congress MARC pages \(http://www.loc.gov/marc/\))
+>>
+endobj
+103 0 obj
+<<
+/Parent 100 0 R
+/Dest [38 0 R /FitH 126.32]
+/Previous 102 0 R
+/Next 104 0 R
+/Title (Understanding MARC Bibliographic \(http://lcweb.loc.gov/marc/umb/\))
+>>
+endobj
+104 0 obj
+<<
+/Parent 100 0 R
+/Dest [38 0 R /FitH 87.9200000000002]
+/Previous 103 0 R
+/Title (Tag Of The Month \(http://www.tagofthemonth.com/\))
+>>
+endobj
+105 0 obj
+<<
+/Parent 65 0 R
+/Dest [47 0 R /FitH 742.4]
+/Previous 100 0 R
+/Next 112 0 R
+/First 106 0 R
+/Last 111 0 R
+/Count 6 
+/Title (TODO)
+>>
+endobj
+106 0 obj
+<<
+/Parent 105 0 R
+/Dest [47 0 R /FitH 722.72]
+/Next 107 0 R
+/Title (Incorporate MARC.pm in the distribution.)
+>>
+endobj
+107 0 obj
+<<
+/Parent 105 0 R
+/Dest [47 0 R /FitH 696.32]
+/Previous 106 0 R
+/Next 108 0 R
+/Title (Podify MARC.pm)
+>>
+endobj
+108 0 obj
+<<
+/Parent 105 0 R
+/Dest [47 0 R /FitH 681.92]
+/Previous 107 0 R
+/Next 109 0 R
+/Title (Allow regexes across the entire tag)
+>>
+endobj
+109 0 obj
+<<
+/Parent 105 0 R
+/Dest [47 0 R /FitH 619.52]
+/Previous 108 0 R
+/Next 110 0 R
+/Title (Insert a field in an arbitrary place in the record)
+>>
+endobj
+110 0 obj
+<<
+/Parent 105 0 R
+/Dest [47 0 R /FitH 605.12]
+/Previous 109 0 R
+/Next 111 0 R
+/Title (Allow deleting a field)
+>>
+endobj
+111 0 obj
+<<
+/Parent 105 0 R
+/Dest [47 0 R /FitH 512.72]
+/Previous 110 0 R
+/Title (Modifying an existing field)
+>>
+endobj
+112 0 obj
+<<
+/Parent 65 0 R
+/Dest [47 0 R /FitH 497.12]
+/Previous 105 0 R
+/Next 113 0 R
+/Title (BUGS, WISHES AND CORRESPONDENCE)
+>>
+endobj
+113 0 obj
+<<
+/Parent 65 0 R
+/Dest [47 0 R /FitH 404.72]
+/Previous 112 0 R
+/Next 115 0 R
+/First 114 0 R
+/Last 114 0 R
+/Count 1 
+/Title (IDEAS)
+>>
+endobj
+114 0 obj
+<<
+/Parent 113 0 R
+/Dest [47 0 R /FitH 361.52]
+/Title (Create multiple output formats.)
+>>
+endobj
+115 0 obj
+<<
+/Parent 65 0 R
+/Dest [47 0 R /FitH 321.92]
+/Previous 113 0 R
+/Next 116 0 R
+/Title (LICENSE)
+>>
+endobj
+116 0 obj
+<<
+/Parent 65 0 R
+/Dest [47 0 R /FitH 265.52]
+/Previous 115 0 R
+/Title (AUTHOR)
+>>
+endobj
+64 0 obj
+<<
+/Type /Outlines
+/Count 52
+/First 65 0 R
+/Last 116 0 R
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 4 0 R
+/PageMode /UseOutlines
+/Outlines 64 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Pages
+/Kids [ 56 0 R 63 0 R 51 0 R 55 0 R 21 0 R 25 0 R 38 0 R 47 0 R ]
+/Count 8
+/MediaBox [0 0 595 842]
+>>
+endobj
+xref
+0 117
+0000000000 65535 f 
+0000000015 00000 n 
+0000000171 00000 n 
+0000042531 00000 n 
+0000042620 00000 n 
+0000000269 00000 n 
+0000002369 00000 n 
+0000002468 00000 n 
+0000002566 00000 n 
+0000002666 00000 n 
+0000002770 00000 n 
+0000002866 00000 n 
+0000002967 00000 n 
+0000003071 00000 n 
+0000003179 00000 n 
+0000003277 00000 n 
+0000003380 00000 n 
+0000003486 00000 n 
+0000003600 00000 n 
+0000009140 00000 n 
+0000009161 00000 n 
+0000009286 00000 n 
+0000009369 00000 n 
+0000015210 00000 n 
+0000015231 00000 n 
+0000015367 00000 n 
+0000015450 00000 n 
+0000021580 00000 n 
+0000021601 00000 n 
+0000021761 00000 n 
+0000021886 00000 n 
+0000021953 00000 n 
+0000022078 00000 n 
+0000022140 00000 n 
+0000022265 00000 n 
+0000022333 00000 n 
+0000022456 00000 n 
+0000022523 00000 n 
+0000022572 00000 n 
+0000022670 00000 n 
+0000026804 00000 n 
+0000026825 00000 n 
+0000026973 00000 n 
+0000027098 00000 n 
+0000027163 00000 n 
+0000027288 00000 n 
+0000027344 00000 n 
+0000027379 00000 n 
+0000027477 00000 n 
+0000033863 00000 n 
+0000033884 00000 n 
+0000033998 00000 n 
+0000034081 00000 n 
+0000034382 00000 n 
+0000034402 00000 n 
+0000034504 00000 n 
+0000034587 00000 n 
+0000034670 00000 n 
+0000035016 00000 n 
+0000035036 00000 n 
+0000035161 00000 n 
+0000035461 00000 n 
+0000035481 00000 n 
+0000035583 00000 n 
+0000042455 00000 n 
+0000035666 00000 n 
+0000035789 00000 n 
+0000035880 00000 n 
+0000035989 00000 n 
+0000036104 00000 n 
+0000036214 00000 n 
+0000036332 00000 n 
+0000036481 00000 n 
+0000036575 00000 n 
+0000036709 00000 n 
+0000036823 00000 n 
+0000036948 00000 n 
+0000037076 00000 n 
+0000037209 00000 n 
+0000037337 00000 n 
+0000037490 00000 n 
+0000037639 00000 n 
+0000037763 00000 n 
+0000037878 00000 n 
+0000037996 00000 n 
+0000038107 00000 n 
+0000038219 00000 n 
+0000038331 00000 n 
+0000038475 00000 n 
+0000038586 00000 n 
+0000038700 00000 n 
+0000038840 00000 n 
+0000038967 00000 n 
+0000039156 00000 n 
+0000039318 00000 n 
+0000039471 00000 n 
+0000039588 00000 n 
+0000039720 00000 n 
+0000039861 00000 n 
+0000039976 00000 n 
+0000040096 00000 n 
+0000040249 00000 n 
+0000040382 00000 n 
+0000040550 00000 n 
+0000040726 00000 n 
+0000040881 00000 n 
+0000041031 00000 n 
+0000041162 00000 n 
+0000041285 00000 n 
+0000041429 00000 n 
+0000041588 00000 n 
+0000041719 00000 n 
+0000041841 00000 n 
+0000041980 00000 n 
+0000042132 00000 n 
+0000042240 00000 n 
+0000042355 00000 n 
+trailer
+<<
+/Size 117
+/Root 3 0 R
+/Info 2 0 R
+>>
+startxref
+42753
+%%EOF

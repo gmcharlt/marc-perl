@@ -1,0 +1,1935 @@
+%PDF-1.2
+%‚„œ”
+1 0 obj
+[/CalRGB
+<<
+/WhitePoint [0.9505 1 1.089]
+/Gamma [1.8 1.8 1.8]
+/Matrix [0.4497 0.2446 0.02518 0.3613 0.672 0.1412 0.1845 0.08334 0.9227]
+>>
+]
+endobj
+2 0 obj
+<<
+/CreationDate (D:20000828064545-0700)
+/Producer (pod2pdf)
+/Title (MARC::XML.pm)
+>>
+endobj
+5 0 obj
+<<
+/Type /Encoding
+/Differences [ 0 /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /space /exclam
+/quotedbl /numbersign /dollar /percent /ampersand
+/quoteright /parenleft /parenright /asterisk /plus /comma
+/hyphen /period /slash /zero /one /two /three /four /five
+/six /seven /eight /nine /colon /semicolon /less /equal
+/greater /question /at /A /B /C /D /E /F /G /H /I /J /K /L
+/M /N /O /P /Q /R /S /T /U /V /W /X /Y /Z /bracketleft
+/backslash /bracketright /asciicircum /underscore
+/quoteleft /a /b /c /d /e /f /g /h /i /j /k /l /m /n /o /p
+/q /r /s /t /u /v /w /x /y /z /braceleft /bar /braceright
+/asciitilde /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /emdash
+/dotlessi /grave /acute /circumflex /tilde /macron /breve
+/dotaccent /dieresis /.notdef /ring /cedilla /.notdef
+/hungarumlaut /ogonek /caron /space /exclamdown /cent
+/sterling /currency /yen /brokenbar /section /dieresis
+/copyright /ordfeminine /guillemotleft /logicalnot /hyphen
+/registered /macron /degree /plusminus /twosuperior
+/threesuperior /acute /mu /paragraph /periodcentered
+/cedilla /onesuperior /ordmasculine /guillemotright
+/onequarter /onehalf /threequarters /questiondown /Agrave
+/Aacute /Acircumflex /Atilde /Adieresis /Aring /AE
+/Ccedilla /Egrave /Eacute /Ecircumflex /Edieresis /Igrave
+/Iacute /Icircumflex /Idieresis /Eth /Ntilde /Ograve
+/Oacute /Ocircumflex /Otilde /Odieresis /multiply /Oslash
+/Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn
+/germandbls /agrave /aacute /acircumflex /atilde /adieresis
+/aring /ae /ccedilla /egrave /eacute /ecircumflex
+/edieresis /igrave /iacute /icircumflex /idieresis /eth
+/ntilde /ograve /oacute /ocircumflex /otilde /odieresis
+/divide /oslash /ugrave /uacute /ucircumflex /udieresis
+/yacute /thorn /ydieresis ]
+>>
+endobj
+6 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F00
+/Encoding 5 0 R
+/BaseFont /Times-Roman
+>>
+endobj
+7 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F01
+/Encoding 5 0 R
+/BaseFont /Times-Bold
+>>
+endobj
+8 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F02
+/Encoding 5 0 R
+/BaseFont /Times-Italic
+>>
+endobj
+9 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F03
+/Encoding 5 0 R
+/BaseFont /Times-BoldItalic
+>>
+endobj
+10 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F10
+/Encoding 5 0 R
+/BaseFont /Courier
+>>
+endobj
+11 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F11
+/Encoding 5 0 R
+/BaseFont /Courier-Bold
+>>
+endobj
+12 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F12
+/Encoding 5 0 R
+/BaseFont /Courier-Oblique
+>>
+endobj
+13 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F13
+/Encoding 5 0 R
+/BaseFont /Courier-BoldOblique
+>>
+endobj
+14 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F20
+/Encoding 5 0 R
+/BaseFont /Helvetica
+>>
+endobj
+15 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F21
+/Encoding 5 0 R
+/BaseFont /Helvetica-Bold
+>>
+endobj
+16 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F22
+/Encoding 5 0 R
+/BaseFont /Helvetica-Oblique
+>>
+endobj
+17 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F23
+/Encoding 5 0 R
+/BaseFont /Helvetica-BoldOblique
+>>
+endobj
+0 g
+18 0 obj
+<<
+/Length 19 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(pod2pdf) Tj
+1 0 0 1 447.46 797 Tm
+(MARC::XML.pm) Tj
+/F21 12 Tf
+1 0 0 1 72.0 752.0 Tm
+0.0000 Tw
+(NAME ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 737.6 Tm
+0.0000 Tw
+(MARC::XML - A subclass of MARC.pm to provide XML support. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 719.6 Tm
+0.0000 Tw
+(SYNOPSIS ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 699.2 Tm
+0.0000 Tw
+(    use MARC::XML; ) Tj
+1 0 0 1 102.0 675.2 Tm
+0.0000 Tw
+(    #read in some MARC and output some XML ) Tj
+1 0 0 1 102.0 663.2 Tm
+0.0000 Tw
+(    $myobject = MARC::XML->new\("marc.mrc","usmarc"\); ) Tj
+1 0 0 1 102.0 651.2 Tm
+0.0000 Tw
+(    $myobject->output\(\{file=>">marc.xml",format=>"xml"\}\); ) Tj
+1 0 0 1 102.0 627.2 Tm
+0.0000 Tw
+(    #read in some XML and output some MARC ) Tj
+1 0 0 1 102.0 615.2 Tm
+0.0000 Tw
+(    $myobject = MARC::XML->new\("marc.xml","xml"\); ) Tj
+1 0 0 1 102.0 603.2 Tm
+0.0000 Tw
+(    $myobject->output\(\{file=>">marc.mrc","usmarc"\); ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 585.2 Tm
+0.0000 Tw
+(DESCRIPTION ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 570.8 Tm
+0.8500 Tw
+(MARC::XML is a subclass of MARC.pm which provides methods for round-trip conversions between) Tj
+1 0 0 1 102.0 558.8 Tm
+4.3433 Tw
+(MARC and XML. MARC::XML requires that you have the CPAN modules MARC.pm and) Tj
+1 0 0 1 102.0 546.8 Tm
+0.7900 Tw
+(XML::Parser installed in your Perl library. As a subclass of MARC.pm a MARC::XML object will by) Tj
+1 0 0 1 102.0 534.8 Tm
+0.0000 Tw
+(default have the full functionality of a MARC.pm object. See the MARC.pm documentation for details. ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 522.8 Tm
+1.3529 Tw
+(The XML file that is read and generated by MARC::XML is not associated with a  Document Type) Tj
+1 0 0 1 102.0 510.8 Tm
+1.3331 Tw
+(Definition \(DTD\). This means that your files need to be well-formed, but they will not be validated.) Tj
+1 0 0 1 102.0 498.8 Tm
+0.3107 Tw
+(When performing XML-) Tj
+/F00 10 Tf
+0.3107 Tw
+(MARC conversion it is important that the XML file is structured in a particular) Tj
+1 0 0 1 102.0 486.8 Tm
+1.8100 Tw
+(way. Fortunately, this is the same format that is generated by the MARC-) Tj
+/F00 10 Tf
+1.8100 Tw
+(XML conversion, so you) Tj
+1 0 0 1 102.0 474.8 Tm
+0.0000 Tw
+(should be able to be able to move your data easily between the two formats. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 456.8 Tm
+0.0000 Tw
+(Downloading and Intalling ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 442.4 Tm
+0.0000 Tw
+(Download ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 430.4 Tm
+0.9492 Tw
+(First make sure that you have ) Tj
+/F01 10 Tf
+0.9492 Tw
+(MARC.pm) Tj
+/F00 10 Tf
+0.9492 Tw
+( and ) Tj
+/F01 10 Tf
+0.9492 Tw
+(XML::Parser) Tj
+/F00 10 Tf
+0.9492 Tw
+( installed. Both Perl extensions are) Tj
+1 0 0 1 126.0 418.4 Tm
+0.5090 Tw
+(available from the CPAN http://www.cpan.org/modules/by-module, and they must be available in) Tj
+1 0 0 1 126.0 406.4 Tm
+0.0000 Tw
+(your Perl library for MARC::XML to work properly. ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 394.4 Tm
+0.0058 Tw
+(MARC::XML is provided in standard CPAN distribution format. Download the latest version from) Tj
+1 0 0 1 126.0 382.4 Tm
+0 Tw
+(http://www.cpan.org/modules/by-module/MARC/XML. It will extract into a directory) Tj
+1 0 0 1 126.0 370.4 Tm
+2.1260 Tw
+(MARC-XML-version with any necessary subdirectories. Once you have extracted the archive) Tj
+1 0 0 1 126.0 358.4 Tm
+1.4667 Tw
+(Change into the MARC-XML top directory and execute the following command depending on) Tj
+1 0 0 1 126.0 346.4 Tm
+0.0000 Tw
+(your platform. ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 332.0 Tm
+0.0000 Tw
+(Unix ) Tj
+/F10 10 Tf
+1 0 0 1 126.0 314.0 Tm
+0.0000 Tw
+(    perl Makefile.PL ) Tj
+1 0 0 1 126.0 302.0 Tm
+0.0000 Tw
+(    make ) Tj
+1 0 0 1 126.0 290.0 Tm
+0.0000 Tw
+(    make test ) Tj
+1 0 0 1 126.0 278.0 Tm
+0.0000 Tw
+(    make install ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 257.6 Tm
+0.0000 Tw
+(Win9x/WinNT/Win2000 ) Tj
+/F10 10 Tf
+1 0 0 1 126.0 239.6 Tm
+0.0000 Tw
+(    perl Makefile.PL ) Tj
+1 0 0 1 126.0 227.6 Tm
+0.0000 Tw
+(    perl test.pl ) Tj
+1 0 0 1 126.0 215.6 Tm
+0.0000 Tw
+(    perl install.pl ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 195.2 Tm
+0.0000 Tw
+(Test ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 183.2 Tm
+1.1841 Tw
+(Once you have installed, you can check if Perl can find it. Change to some other directory and) Tj
+1 0 0 1 126.0 171.2 Tm
+0.0000 Tw
+(execute from the command line: ) Tj
+/F10 10 Tf
+1 0 0 1 126.0 159.2 Tm
+0.0000 Tw
+(    perl -e "use MARC::XML" ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 135.2 Tm
+0.4742 Tw
+(If you ) Tj
+/F01 10 Tf
+0.4742 Tw
+(do not) Tj
+/F00 10 Tf
+0.4742 Tw
+( get any response that means everything is OK! If you get an error like ) Tj
+/F02 10 Tf
+0.4742 Tw
+(Can`t locate) Tj
+1 0 0 1 126.0 123.2 Tm
+0.0238 Tw
+(method "use" via package MARC::XML) Tj
+/F00 10 Tf
+0.0238 Tw
+(. then Perl is not able to find MARC::XML\217double check) Tj
+1 0 0 1 126.0 111.2 Tm
+0.0000 Tw
+(that the file copied it into the right place during the install. ) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(28 August 2000) Tj
+1 0 0 1 517.44 37 Tm
+(1) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+19 0 obj
+4919
+endobj
+20 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F00 6 0 R
+/F01 7 0 R
+/F02 8 0 R
+/F10 10 0 R
+/F20 14 0 R
+/F21 15 0 R
+>>
+>>
+endobj
+21 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 20 0 R
+/Contents 18 0 R
+>>
+endobj
+22 0 obj
+<<
+/Length 23 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(MARC::XML.pm) Tj
+1 0 0 1 483.56 797 Tm
+(pod2pdf) Tj
+/F21 10 Tf
+1 0 0 1 72.0 770.0 Tm
+0.0000 Tw
+(Todo ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 755.6 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 756.6 4 4 re
+f
+Q
+BT
+1 0 0 1 110 755.6 Tm
+/F20 10 Tf
+0.0000 Tw
+( ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 755.6 Tm
+0.9178 Tw
+(Checking for field and record lengths to make sure that data read in from an XML file does not) Tj
+1 0 0 1 126.0 743.6 Tm
+0.0000 Tw
+(exceed the limited space available in a MARC record. ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 729.2 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 730.2 4 4 re
+f
+Q
+BT
+1 0 0 1 110 729.2 Tm
+/F20 10 Tf
+0.0000 Tw
+( ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 729.2 Tm
+0.0000 Tw
+(Support for MARC <-> Unicode character conversions. ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 714.8 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 715.8 4 4 re
+f
+Q
+BT
+1 0 0 1 110 714.8 Tm
+/F20 10 Tf
+0.0000 Tw
+( ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 714.8 Tm
+0.0000 Tw
+(MARC <-> EAD \(Encoded Archival Description\) conversion? ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 700.4 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 701.4 4 4 re
+f
+Q
+BT
+1 0 0 1 110 700.4 Tm
+/F20 10 Tf
+0.0000 Tw
+( ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 700.4 Tm
+1.5450 Tw
+(Support for MARC <-> DC/RDF \(Dublin Core Metadata encoded in the Resource Description) Tj
+1 0 0 1 126.0 688.4 Tm
+0.0000 Tw
+(Framework\)? ) Tj
+/F20 10 Tf
+1 0 0 1 102.0 674.0 Tm
+0.0000 Tw
+() Tj
+ET
+q
+102 675 4 4 re
+f
+Q
+BT
+1 0 0 1 110 674 Tm
+/F20 10 Tf
+0.0000 Tw
+( ) Tj
+/F00 10 Tf
+1 0 0 1 126.0 674.0 Tm
+0.0000 Tw
+(Support for MARC <-> FGDC Metadata \(Federal Geographic Data Committee\) conversion? ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 644.0 Tm
+0.0000 Tw
+(Web Interface ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 632.0 Tm
+0 Tw
+(A web interface to MARC.pm and MARC::XML is available at) Tj
+1 0 0 1 102.0 620.0 Tm
+2.4680 Tw
+(http://libstaff.lib.odu.edu/cgi-bin/marc.cgi where you can upload records and observe the results. If) Tj
+1 0 0 1 102.0 608.0 Tm
+0 Tw
+(you`d like to check out the cgi script take a look at) Tj
+1 0 0 1 102.0 596.0 Tm
+0 Tw
+(http://libstaff.lib.odu.edu/depts/systems/iii/scripts/MARCpm/marc-cgi.txt However, to get the full) Tj
+1 0 0 1 102.0 584.0 Tm
+0.0000 Tw
+(functionality you will want to install MARC.pm and MARC::XML on your server or PC. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 566.0 Tm
+0.0000 Tw
+(Sample XML file ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 554.0 Tm
+1.0765 Tw
+(Below is an example of the flavor of XML that MARC::XML will generate and read. There are only) Tj
+1 0 0 1 102.0 542.0 Tm
+0.4122 Tw
+(four elements: the ) Tj
+/F02 10 Tf
+0.4122 Tw
+(<marc>) Tj
+/F00 10 Tf
+0.4122 Tw
+( pair that serves as the root for the file; the ) Tj
+/F02 10 Tf
+0.4122 Tw
+(<record>) Tj
+/F00 10 Tf
+0.4122 Tw
+( pair that encloses each) Tj
+1 0 0 1 102.0 530.0 Tm
+2.6329 Tw
+(record; the ) Tj
+/F02 10 Tf
+2.6329 Tw
+(<field>) Tj
+/F00 10 Tf
+2.6329 Tw
+( pair which encloses each field; and the ) Tj
+/F02 10 Tf
+2.6329 Tw
+(<subfield>) Tj
+/F00 10 Tf
+2.6329 Tw
+( pair which encloses each) Tj
+1 0 0 1 102.0 518.0 Tm
+0.6657 Tw
+(subfield. In addition the ) Tj
+/F02 10 Tf
+0.6657 Tw
+(<field>) Tj
+/F00 10 Tf
+0.6657 Tw
+( and ) Tj
+/F02 10 Tf
+0.6657 Tw
+(<subfield>) Tj
+/F00 10 Tf
+0.6657 Tw
+( tags have three possible attributes: ) Tj
+/F02 10 Tf
+0.6657 Tw
+(type) Tj
+/F00 10 Tf
+0.6657 Tw
+( which defines) Tj
+1 0 0 1 102.0 506.0 Tm
+0.5933 Tw
+(the specific tag or subfield ; as well as ) Tj
+/F02 10 Tf
+0.5933 Tw
+(i1) Tj
+/F00 10 Tf
+0.5933 Tw
+( and ) Tj
+/F02 10 Tf
+0.5933 Tw
+(i2) Tj
+/F00 10 Tf
+0.5933 Tw
+( which allow you to define the indicators for a specific) Tj
+1 0 0 1 102.0 494.0 Tm
+0.0000 Tw
+(tag. ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 482.0 Tm
+0.0000 Tw
+(   <?xml version="1.0" encoding="UTF-8" standalone="yes"?> ) Tj
+1 0 0 1 102.0 458.0 Tm
+0.0000 Tw
+(   <marc> ) Tj
+1 0 0 1 102.0 434.0 Tm
+0.0000 Tw
+(   <record> ) Tj
+1 0 0 1 102.0 422.0 Tm
+0.0000 Tw
+(   <field type="000">00901cam  2200241Ia 45e0</field> ) Tj
+1 0 0 1 102.0 410.0 Tm
+0.0000 Tw
+(   <field type="001">ocm01047729 </field> ) Tj
+1 0 0 1 102.0 398.0 Tm
+0.0000 Tw
+(   <field type="003">OCoLC</field> ) Tj
+1 0 0 1 102.0 386.0 Tm
+0.0000 Tw
+(   <field type="005">19990808143752.0</field> ) Tj
+1 0 0 1 102.0 374.0 Tm
+0.0000 Tw
+(   <field type="008">741021s1884    enkaf         000 1 eng d</field> ) Tj
+1 0 0 1 102.0 362.0 Tm
+0.0000 Tw
+(   <field type="040" i1=" " i2=" "> ) Tj
+1 0 0 1 102.0 350.0 Tm
+0.0000 Tw
+(      <subfield type="a">KSU</subfield> ) Tj
+1 0 0 1 102.0 338.0 Tm
+0.0000 Tw
+(      <subfield type="c">KSU</subfield> ) Tj
+1 0 0 1 102.0 326.0 Tm
+0.0000 Tw
+(      <subfield type="d">GZM</subfield> ) Tj
+1 0 0 1 102.0 314.0 Tm
+0.0000 Tw
+(   </field> ) Tj
+1 0 0 1 102.0 302.0 Tm
+0.0000 Tw
+(   <field type="090" i1=" " i2=" "> ) Tj
+1 0 0 1 102.0 290.0 Tm
+0.0000 Tw
+(      <subfield type="a">PS1305</subfield> ) Tj
+1 0 0 1 102.0 278.0 Tm
+0.0000 Tw
+(      <subfield type="b">.A1 1884</subfield> ) Tj
+1 0 0 1 102.0 266.0 Tm
+0.0000 Tw
+(   </field> ) Tj
+1 0 0 1 102.0 254.0 Tm
+0.0000 Tw
+(   <field type="049" i1=" " i2=" "> ) Tj
+1 0 0 1 102.0 242.0 Tm
+0.0000 Tw
+(      <subfield type="a">VODN</subfield> ) Tj
+1 0 0 1 102.0 230.0 Tm
+0.0000 Tw
+(   </field> ) Tj
+1 0 0 1 102.0 218.0 Tm
+0.0000 Tw
+(   <field type="100" i1="1" i2=" "> ) Tj
+1 0 0 1 102.0 206.0 Tm
+0.0000 Tw
+(      <subfield type="a">Twain, Mark,</subfield> ) Tj
+1 0 0 1 102.0 194.0 Tm
+0.0000 Tw
+(      <subfield type="d">1835-1910.</subfield> ) Tj
+1 0 0 1 102.0 182.0 Tm
+0.0000 Tw
+(   </field> ) Tj
+1 0 0 1 102.0 170.0 Tm
+0.0000 Tw
+(   <field type="245" i1="1" i2="4"> ) Tj
+1 0 0 1 102.0 158.0 Tm
+0.0000 Tw
+(      <subfield type="a">The adventures of Huckleberry Finn :</subfield> ) Tj
+1 0 0 1 102.0 146.0 Tm
+0.0000 Tw
+(      <subfield type="b">\(Tom Sawyer's comrade\) : scene, the Mississippi Valley : time, forty to fifty years ago /</subfield> ) Tj
+1 0 0 1 102.0 134.0 Tm
+0.0000 Tw
+(      <subfield type="c">by Mark Twain \(Samuel Clemens\) ; with 174 illustrations.</subfield> ) Tj
+1 0 0 1 102.0 122.0 Tm
+0.0000 Tw
+(   </field> ) Tj
+1 0 0 1 102.0 110.0 Tm
+0.0000 Tw
+(   <field type="260" i1=" " i2=" "> ) Tj
+1 0 0 1 102.0 98.0 Tm
+0.0000 Tw
+(      <subfield type="a">London :</subfield> ) Tj
+1 0 0 1 102.0 86.0 Tm
+0.0000 Tw
+(      <subfield type="b">Chatto &amp; Windus,</subfield> ) Tj
+1 0 0 1 102.0 74.0 Tm
+0.0000 Tw
+(      <subfield type="c">1884.</subfield> ) Tj
+1 0 0 1 102.0 62.0 Tm
+0.0000 Tw
+(   </field> ) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(2) Tj
+1 0 0 1 449.64 37 Tm
+(28 August 2000) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+23 0 obj
+6381
+endobj
+24 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F00 6 0 R
+/F02 8 0 R
+/F10 10 0 R
+/F20 14 0 R
+/F21 15 0 R
+>>
+>>
+endobj
+25 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 24 0 R
+/Contents 22 0 R
+>>
+endobj
+26 0 obj
+<<
+/Length 27 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(pod2pdf) Tj
+1 0 0 1 447.46 797 Tm
+(MARC::XML.pm) Tj
+/F10 10 Tf
+1 0 0 1 102.0 758.0 Tm
+0.0000 Tw
+(   <field type="300" i1=" " i2=" "> ) Tj
+1 0 0 1 102.0 746.0 Tm
+0.0000 Tw
+(      <subfield type="a">xvi, 438 p., [1] leaf of plates :</subfield> ) Tj
+1 0 0 1 102.0 734.0 Tm
+0.0000 Tw
+(      <subfield type="b">ill. ;</subfield> ) Tj
+1 0 0 1 102.0 722.0 Tm
+0.0000 Tw
+(      <subfield type="c">20 cm.</subfield> ) Tj
+1 0 0 1 102.0 710.0 Tm
+0.0000 Tw
+(   </field> ) Tj
+1 0 0 1 102.0 698.0 Tm
+0.0000 Tw
+(   <field type="500" i1=" " i2=" "> ) Tj
+1 0 0 1 102.0 686.0 Tm
+0.0000 Tw
+(      <subfield type="a">First English ed.</subfield> ) Tj
+1 0 0 1 102.0 674.0 Tm
+0.0000 Tw
+(   </field> ) Tj
+1 0 0 1 102.0 662.0 Tm
+0.0000 Tw
+(   <field type="500" i1=" " i2=" "> ) Tj
+1 0 0 1 102.0 650.0 Tm
+0.0000 Tw
+(      <subfield type="a">State B; gatherings saddle-stitched with wire staples.</subfield> ) Tj
+1 0 0 1 102.0 638.0 Tm
+0.0000 Tw
+(   </field> ) Tj
+1 0 0 1 102.0 626.0 Tm
+0.0000 Tw
+(   <field type="500" i1=" " i2=" "> ) Tj
+1 0 0 1 102.0 614.0 Tm
+0.0000 Tw
+(      <subfield type="a">Advertisements on p. [1]-32 at end.</subfield> ) Tj
+1 0 0 1 102.0 602.0 Tm
+0.0000 Tw
+(   </field> ) Tj
+1 0 0 1 102.0 590.0 Tm
+0.0000 Tw
+(   <field type="500" i1=" " i2=" "> ) Tj
+1 0 0 1 102.0 578.0 Tm
+0.0000 Tw
+(      <subfield type="a">Bound in red S cloth; stamped in black and gold.</subfield> ) Tj
+1 0 0 1 102.0 566.0 Tm
+0.0000 Tw
+(   </field> ) Tj
+1 0 0 1 102.0 554.0 Tm
+0.0000 Tw
+(   <field type="510" i1="4" i2=" "> ) Tj
+1 0 0 1 102.0 542.0 Tm
+0.0000 Tw
+(      <subfield type="a">BAL</subfield> ) Tj
+1 0 0 1 102.0 530.0 Tm
+0.0000 Tw
+(      <subfield type="c">3414.</subfield> ) Tj
+1 0 0 1 102.0 518.0 Tm
+0.0000 Tw
+(   </field> ) Tj
+1 0 0 1 102.0 506.0 Tm
+0.0000 Tw
+(   <field type="740" i1="0" i2="1"> ) Tj
+1 0 0 1 102.0 494.0 Tm
+0.0000 Tw
+(      <subfield type="a">Huckleberry Finn.</subfield> ) Tj
+1 0 0 1 102.0 482.0 Tm
+0.0000 Tw
+(   </field> ) Tj
+1 0 0 1 102.0 470.0 Tm
+0.0000 Tw
+(   <field type="994" i1=" " i2=" "> ) Tj
+1 0 0 1 102.0 458.0 Tm
+0.0000 Tw
+(      <subfield type="a">E0</subfield> ) Tj
+1 0 0 1 102.0 446.0 Tm
+0.0000 Tw
+(      <subfield type="b">VOD</subfield> ) Tj
+1 0 0 1 102.0 434.0 Tm
+0.0000 Tw
+(   </field> ) Tj
+1 0 0 1 102.0 422.0 Tm
+0.0000 Tw
+(   </record> ) Tj
+1 0 0 1 102.0 398.0 Tm
+0.0000 Tw
+(   </marc> ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 380.0 Tm
+0.0000 Tw
+(METHODS ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 365.6 Tm
+0.0000 Tw
+(Here is a list of methods available to you in MARC::XML. ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 347.6 Tm
+0.0000 Tw
+(new\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 335.6 Tm
+3.0942 Tw
+(MARC::XML overides MARC.pm`s new\(\) method to create a MARC::XML object.  Similar to) Tj
+1 0 0 1 102.0 323.6 Tm
+2.0153 Tw
+(MARC.pm`s new\(\) it can take two arguments: a file name, and  the format of the file to read in.) Tj
+1 0 0 1 102.0 311.6 Tm
+0.9353 Tw
+(However MARC::XML`s new\(\) gives you an  extra format choice "XML" \(which is also the default\).) Tj
+1 0 0 1 102.0 299.6 Tm
+0.4169 Tw
+(Internally, the XML source is converted to a series of ) Tj
+/F01 10 Tf
+0.4169 Tw
+(addfield\(\)) Tj
+/F00 10 Tf
+0.4169 Tw
+( and ) Tj
+/F01 10 Tf
+0.4169 Tw
+(createrecord\(\)) Tj
+/F00 10 Tf
+0.4169 Tw
+( calls. The order of) Tj
+1 0 0 1 102.0 287.6 Tm
+0.1075 Tw
+(MARC tags is preserved by default. But if an optional third argument is passed to new\(\), it is used as the) Tj
+1 0 0 1 102.0 275.6 Tm
+0.3661 Tw
+() Tj
+/F02 10 Tf
+0.3661 Tw
+(ordered) Tj
+/F00 10 Tf
+0.3661 Tw
+( option for the ) Tj
+/F01 10 Tf
+0.3661 Tw
+(addfield\(\)) Tj
+/F00 10 Tf
+0.3661 Tw
+( calls. Due to the nature of XML::Parser, it is not possible to read only) Tj
+1 0 0 1 102.0 263.6 Tm
+0.0000 Tw
+(part of an XML input file. Some examples: ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 251.6 Tm
+0.0000 Tw
+(      #read in an XML file called myxmlfile.xml ) Tj
+1 0 0 1 102.0 239.6 Tm
+0.0000 Tw
+(   use MARC::XML; ) Tj
+1 0 0 1 102.0 227.6 Tm
+0.0000 Tw
+(   $x = MARC::XML->new\("myxmlfile.xml","xml"\); ) Tj
+1 0 0 1 102.0 215.6 Tm
+0.0000 Tw
+(   $x = MARC::XML->new\("needsort.xml","xml","y"\); ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 191.6 Tm
+1.1072 Tw
+(Since the full funtionality of MARC.pm is also available you can read in other types of files as well.) Tj
+1 0 0 1 102.0 179.6 Tm
+1.4027 Tw
+(Although new\(\) with no arguments will create an object with no records, just like MARC.pm, XML) Tj
+1 0 0 1 102.0 167.6 Tm
+0.2237 Tw
+(format not supported by openmarc\(\) and nextmarc\(\) for input. But you can output XML from a different) Tj
+1 0 0 1 102.0 155.6 Tm
+0.0000 Tw
+(format source. ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 143.6 Tm
+0.0000 Tw
+(      #read in a MARC file called mymarcfile.mrc ) Tj
+1 0 0 1 102.0 131.6 Tm
+0.0000 Tw
+(   use MARC::XML; ) Tj
+1 0 0 1 102.0 119.6 Tm
+0.0000 Tw
+(   $x = MARC::XML->new\("mymarcfile.mrc","usmarc"\);  ) Tj
+1 0 0 1 102.0 107.6 Tm
+0.0000 Tw
+(   $x = MARC::XML->new\(\);  ) Tj
+/F21 10 Tf
+1 0 0 1 72.0 89.6 Tm
+0.0000 Tw
+(output\(\) ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 77.6 Tm
+0.9144 Tw
+(MARC::XML`s output\(\) method allows you to output the MARC object as an XML file. It takes four) Tj
+1 0 0 1 102.0 65.6 Tm
+0.0000 Tw
+(arguments: ) Tj
+/F02 10 Tf
+0.0000 Tw
+(file) Tj
+/F00 10 Tf
+0.0000 Tw
+(, ) Tj
+/F02 10 Tf
+0.0000 Tw
+(format) Tj
+/F00 10 Tf
+0.0000 Tw
+(, ) Tj
+/F02 10 Tf
+0.0000 Tw
+(lineterm) Tj
+/F00 10 Tf
+0.0000 Tw
+(, and ) Tj
+/F02 10 Tf
+0.0000 Tw
+(records) Tj
+/F00 10 Tf
+0.0000 Tw
+(.  ) Tj
+/F10 10 Tf
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(28 August 2000) Tj
+1 0 0 1 517.44 37 Tm
+(3) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+27 0 obj
+5519
+endobj
+28 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F00 6 0 R
+/F01 7 0 R
+/F02 8 0 R
+/F10 10 0 R
+/F21 15 0 R
+>>
+>>
+endobj
+29 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 28 0 R
+/Contents 26 0 R
+>>
+endobj
+30 0 obj
+<<
+/Length 31 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(MARC::XML.pm) Tj
+1 0 0 1 483.56 797 Tm
+(pod2pdf) Tj
+/F00 10 Tf
+1 0 0 1 102.0 770.0 Tm
+0.0000 Tw
+(   use MARC::XML; ) Tj
+1 0 0 1 102.0 758.0 Tm
+0.0000 Tw
+(   $x = MARC::XML->new\("mymarcfile.mrc","usmarc"\); ) Tj
+1 0 0 1 102.0 746.0 Tm
+0.0000 Tw
+(   $x->output\(\{file=>">myxmlfile.xml",format=>"xml"\}\); ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 722.0 Tm
+0.0000 Tw
+(Or if you only want to output the first record: ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 710.0 Tm
+0.0000 Tw
+(   $x->output\(\{file=>">myxmlfile.xml",format=>"xml",records=>[1]\}\); ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 686.0 Tm
+2.3476 Tw
+(If you like you can also output portions of the XML file using the ) Tj
+/F02 10 Tf
+2.3476 Tw
+(format) Tj
+/F00 10 Tf
+2.3476 Tw
+(  options: ) Tj
+/F02 10 Tf
+2.3476 Tw
+(xml_header) Tj
+/F00 10 Tf
+2.3476 Tw
+(,) Tj
+1 0 0 1 102.0 674.0 Tm
+0.6044 Tw
+() Tj
+/F02 10 Tf
+0.6044 Tw
+(xml_body) Tj
+/F00 10 Tf
+0.6044 Tw
+(, and ) Tj
+/F02 10 Tf
+0.6044 Tw
+(xml_footer) Tj
+/F00 10 Tf
+0.6044 Tw
+(. Remember to prefix your file name with a ) Tj
+/F00 10 Tf
+0.6044 Tw
+() Tj
+/F00 10 Tf
+0.6044 Tw
+( to append though. This example) Tj
+1 0 0 1 102.0 662.0 Tm
+0.0000 Tw
+(will output record 1 twice. ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 650.0 Tm
+0.0000 Tw
+(   use MARC::XML; ) Tj
+1 0 0 1 102.0 638.0 Tm
+0.0000 Tw
+(   $x = MARC::XML->new\("mymarcfile.mrc","usmarc"\); ) Tj
+1 0 0 1 102.0 626.0 Tm
+0.0000 Tw
+(   $x->output\(\{file=>">myxmlfile.xml",format=>"xml_header"\}\); ) Tj
+1 0 0 1 102.0 614.0 Tm
+0.0000 Tw
+(   $x->output\(\{file=>">>myxmlfile.xml",format=>"xml_body",records=>[1]\}\); ) Tj
+1 0 0 1 102.0 602.0 Tm
+0.0000 Tw
+(   $x->output\(\{file=>">>myxmlfile.xml",format=>"xml_body",records=>[1]\}\); ) Tj
+1 0 0 1 102.0 590.0 Tm
+0.0000 Tw
+(   $x->output\(\{file=>">>myxmlfile.xml",foramt=>"xml_footer"\}\); ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 566.0 Tm
+0.0000 Tw
+(Instead of outputting to a file, you can also capture the output in a variable if you wish. ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 554.0 Tm
+0.0000 Tw
+(   use MARC::XML; ) Tj
+1 0 0 1 102.0 542.0 Tm
+0.0000 Tw
+(   $x = MARC::XML->new\("mymarcfile.mrc","usmarc"\); ) Tj
+1 0 0 1 102.0 530.0 Tm
+0.0000 Tw
+(   $myxml = $x->output\(\{format=>"xml"\}\); ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 506.0 Tm
+0.9924 Tw
+(As with new\(\) the full functionality of MARC.pm`s output\(\) method are available to you as well.  So) Tj
+1 0 0 1 102.0 494.0 Tm
+0.0000 Tw
+(you could read in an XML file and then output it as ascii text: ) Tj
+/F10 10 Tf
+1 0 0 1 102.0 482.0 Tm
+0.0000 Tw
+(   use MARC::XML; ) Tj
+1 0 0 1 102.0 470.0 Tm
+0.0000 Tw
+(   $x = MARC::XML->new\("myxmlfile.xml","xml"\); ) Tj
+1 0 0 1 102.0 458.0 Tm
+0.0000 Tw
+(   $x->output\(\{file=>">mytextfile.txt","ascii"\); ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 440.0 Tm
+0.0000 Tw
+(EXAMPLES ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 425.6 Tm
+0.0000 Tw
+(The ) Tj
+/F01 10 Tf
+0.0000 Tw
+(eg) Tj
+/F00 10 Tf
+0.0000 Tw
+( subdirectory contains a few complete examples to get you started. ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 407.6 Tm
+0.0000 Tw
+(AUTHORS ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 393.2 Tm
+0.0000 Tw
+(Chuck Bearden cbearden@rice.edu ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 381.2 Tm
+0.0000 Tw
+(Bill Birthisel wcbirthisel@alum.mit.edu ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 369.2 Tm
+0.0000 Tw
+(Derek Lane dereklane@pobox.com ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 357.2 Tm
+0.0000 Tw
+(Charles McFadden chuck@vims.edu ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 345.2 Tm
+0.0000 Tw
+(Ed Summers esummers@odu.edu ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 327.2 Tm
+0.0000 Tw
+(SEE ALSO ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 312.8 Tm
+0.0000 Tw
+(perl\(1\), MARC.pm, MARC http://lcweb.loc.gov/marc , XML http://www.w3.org/xml . ) Tj
+/F21 12 Tf
+1 0 0 1 72.0 294.8 Tm
+0.0000 Tw
+(COPYRIGHT ) Tj
+/F00 10 Tf
+1 0 0 1 102.0 280.4 Tm
+2.4708 Tw
+(Copyright \(C\) 1999, Bearden, Birthisel, Lane, McFadden, and Summers. All rights reserved. This) Tj
+1 0 0 1 102.0 268.4 Tm
+0.6606 Tw
+(module is free software; you can redistribute it and/or modify it under the same terms as Perl itself. 23) Tj
+1 0 0 1 102.0 256.4 Tm
+0.0000 Tw
+(November 1999. Portions Copyright \(C\) 1999, Duke University, Lane. ) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(4) Tj
+1 0 0 1 449.64 37 Tm
+(28 August 2000) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+31 0 obj
+4179
+endobj
+32 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F00 6 0 R
+/F01 7 0 R
+/F02 8 0 R
+/F10 10 0 R
+/F21 15 0 R
+>>
+>>
+endobj
+33 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 32 0 R
+/Contents 30 0 R
+>>
+endobj
+34 0 obj
+<<
+/Length 35 0 R
+>>
+stream
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+/F20 24 Tf
+1 0 0 1 202.784 770 Tm
+(Table of Contents) Tj
+1 0 0 1 210.824 741.2 Tm
+(MARC::XML.pm) Tj
+/F20 10 Tf
+ET
+q
+0.95 g
+72 680.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 683.6 Tm
+(NAME) Tj
+1 0 0 1 487.44 683.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 668.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 671.6 Tm
+(SYNOPSIS) Tj
+1 0 0 1 487.44 671.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 656.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 659.6 Tm
+(DESCRIPTION) Tj
+1 0 0 1 487.44 659.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 644.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 647.6 Tm
+(Downloading and Intalling) Tj
+1 0 0 1 487.44 647.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 632.6 451 12 re
+f
+Q
+BT
+1 0 0 1 162 635.6 Tm
+(Download) Tj
+1 0 0 1 487.44 635.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 620.6 451 12 re
+f
+Q
+BT
+1 0 0 1 162 623.6 Tm
+(Unix) Tj
+1 0 0 1 487.44 623.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 608.6 451 12 re
+f
+Q
+BT
+1 0 0 1 162 611.6 Tm
+(Win9x/WinNT/Win2000) Tj
+1 0 0 1 487.44 611.6 Tm
+(1) Tj
+ET
+q
+1 g
+72 596.6 451 12 re
+f
+Q
+BT
+1 0 0 1 162 599.6 Tm
+(Test) Tj
+1 0 0 1 487.44 599.6 Tm
+(1) Tj
+ET
+q
+0.95 g
+72 584.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 587.6 Tm
+(Todo) Tj
+1 0 0 1 487.44 587.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 572.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 575.6 Tm
+(Web Interface) Tj
+1 0 0 1 487.44 575.6 Tm
+(2) Tj
+ET
+q
+0.95 g
+72 560.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 563.6 Tm
+(Sample XML file) Tj
+1 0 0 1 487.44 563.6 Tm
+(2) Tj
+ET
+q
+1 g
+72 548.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 551.6 Tm
+(METHODS) Tj
+1 0 0 1 487.44 551.6 Tm
+(3) Tj
+ET
+q
+0.95 g
+72 536.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 539.6 Tm
+(new\(\)) Tj
+1 0 0 1 487.44 539.6 Tm
+(3) Tj
+ET
+q
+1 g
+72 524.6 451 12 re
+f
+Q
+BT
+1 0 0 1 132 527.6 Tm
+(output\(\)) Tj
+1 0 0 1 487.44 527.6 Tm
+(3) Tj
+ET
+q
+0.95 g
+72 512.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 515.6 Tm
+(EXAMPLES) Tj
+1 0 0 1 487.44 515.6 Tm
+(4) Tj
+ET
+q
+1 g
+72 500.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 503.6 Tm
+(AUTHORS) Tj
+1 0 0 1 487.44 503.6 Tm
+(4) Tj
+ET
+q
+0.95 g
+72 488.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 491.6 Tm
+(SEE ALSO) Tj
+1 0 0 1 487.44 491.6 Tm
+(4) Tj
+ET
+q
+1 g
+72 476.6 451 12 re
+f
+Q
+BT
+1 0 0 1 102 479.6 Tm
+(COPYRIGHT) Tj
+1 0 0 1 487.44 479.6 Tm
+(4) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(28 August 2000) Tj
+1 0 0 1 520.22 37 Tm
+(i) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+35 0 obj
+2130
+endobj
+36 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F20 14 0 R
+/F21 15 0 R
+>>
+>>
+endobj
+37 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 36 0 R
+/Contents 34 0 R
+>>
+endobj
+38 0 obj
+<<
+/Length 39 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(MARC::XML.pm) Tj
+1 0 0 1 438.55 797 Tm
+(Table of Contents) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(ii) Tj
+1 0 0 1 449.64 37 Tm
+(28 August 2000) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+39 0 obj
+248
+endobj
+40 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F21 15 0 R
+>>
+>>
+endobj
+41 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 40 0 R
+/Contents 38 0 R
+>>
+endobj
+42 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 45 0 R
+/Contents 43 0 R
+>>
+endobj
+43 0 obj
+<<
+/Length 44 0 R
+>>
+stream
+q
+1 0 0 rg
+180 626 8 130 re
+F
+Q
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+210 626 m
+523 626 l
+s
+BT
+/F21 30 Tf
+1 0 0 1 210 706 Tm
+0 -30 TD
+(POD Translation) Tj
+T* (by ) Tj
+0 0 0.8 rg
+/F22 30 Tf
+(pod2pdf) Tj
+/F21 9 Tf
+T* (ajf@afco.demon.co.uk) Tj
+/F03 48 Tf
+0 g
+1 0 0 1 123.476 371 Tm
+(MARC::XML.pm) Tj
+ET
+endstream
+endobj
+44 0 obj
+295
+endobj
+45 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F03 9 0 R
+/F21 15 0 R
+/F22 16 0 R
+>>
+>>
+endobj
+46 0 obj
+<<
+/Length 47 0 R
+>>
+stream
+72 792 m
+523 792 l
+S
+BT
+0 G
+1 i 0 J 0 j 0.1 w 10 M []0 d
+/F21 10 Tf
+1 0 0 1 72 797 Tm
+(Title Page) Tj
+1 0 0 1 447.46 797 Tm
+(MARC::XML.pm) Tj
+/F21 10 Tf
+1 0 0 1 72 37 Tm
+(28 August 2000) Tj
+1 0 0 1 488.54 37 Tm
+(Fly leaf) Tj
+ET
+72 50 m
+523 50 l
+S
+endstream
+endobj
+47 0 obj
+247
+endobj
+48 0 obj
+<<
+/ProcSet [/PDF /Text]
+/ColorSpace <</DefaultRGB 1 0 R>>
+/Font
+<<
+/F21 15 0 R
+>>
+>>
+endobj
+49 0 obj
+<<
+/Type /Page
+/Parent 4 0 R
+/Resources 48 0 R
+/Contents 46 0 R
+>>
+endobj
+51 0 obj
+<<
+/Parent 50 0 R
+/Dest [37 0 R /Fit]
+/First 52 0 R
+/Last 69 0 R
+/Count 18 
+/Title (Table of Contents)
+>>
+endobj
+52 0 obj
+<<
+/Parent 51 0 R
+/Dest [21 0 R /FitH 766.4]
+/Next 53 0 R
+/Title (NAME)
+>>
+endobj
+53 0 obj
+<<
+/Parent 51 0 R
+/Dest [21 0 R /FitH 734]
+/Previous 52 0 R
+/Next 54 0 R
+/Title (SYNOPSIS)
+>>
+endobj
+54 0 obj
+<<
+/Parent 51 0 R
+/Dest [21 0 R /FitH 599.6]
+/Previous 53 0 R
+/Next 63 0 R
+/First 55 0 R
+/Last 62 0 R
+/Count 8 
+/Title (DESCRIPTION)
+>>
+endobj
+55 0 obj
+<<
+/Parent 54 0 R
+/Dest [21 0 R /FitH 468.8]
+/Next 60 0 R
+/First 56 0 R
+/Last 59 0 R
+/Count 4 
+/Title (Downloading and Intalling)
+>>
+endobj
+56 0 obj
+<<
+/Parent 55 0 R
+/Dest [21 0 R /FitH 454.4]
+/Next 57 0 R
+/Title (Download)
+>>
+endobj
+57 0 obj
+<<
+/Parent 55 0 R
+/Dest [21 0 R /FitH 344]
+/Previous 56 0 R
+/Next 58 0 R
+/Title (Unix)
+>>
+endobj
+58 0 obj
+<<
+/Parent 55 0 R
+/Dest [21 0 R /FitH 269.6]
+/Previous 57 0 R
+/Next 59 0 R
+/Title (Win9x/WinNT/Win2000)
+>>
+endobj
+59 0 obj
+<<
+/Parent 55 0 R
+/Dest [21 0 R /FitH 207.2]
+/Previous 58 0 R
+/Title (Test)
+>>
+endobj
+60 0 obj
+<<
+/Parent 54 0 R
+/Dest [25 0 R /FitH 782]
+/Previous 55 0 R
+/Next 61 0 R
+/Title (Todo)
+>>
+endobj
+61 0 obj
+<<
+/Parent 54 0 R
+/Dest [25 0 R /FitH 656]
+/Previous 60 0 R
+/Next 62 0 R
+/Title (Web Interface)
+>>
+endobj
+62 0 obj
+<<
+/Parent 54 0 R
+/Dest [25 0 R /FitH 578]
+/Previous 61 0 R
+/Title (Sample XML file)
+>>
+endobj
+63 0 obj
+<<
+/Parent 51 0 R
+/Dest [29 0 R /FitH 394.4]
+/Previous 54 0 R
+/Next 66 0 R
+/First 64 0 R
+/Last 65 0 R
+/Count 2 
+/Title (METHODS)
+>>
+endobj
+64 0 obj
+<<
+/Parent 63 0 R
+/Dest [29 0 R /FitH 359.6]
+/Next 65 0 R
+/Title (new\(\))
+>>
+endobj
+65 0 obj
+<<
+/Parent 63 0 R
+/Dest [29 0 R /FitH 101.6]
+/Previous 64 0 R
+/Title (output\(\))
+>>
+endobj
+66 0 obj
+<<
+/Parent 51 0 R
+/Dest [33 0 R /FitH 454.4]
+/Previous 63 0 R
+/Next 67 0 R
+/Title (EXAMPLES)
+>>
+endobj
+67 0 obj
+<<
+/Parent 51 0 R
+/Dest [33 0 R /FitH 422]
+/Previous 66 0 R
+/Next 68 0 R
+/Title (AUTHORS)
+>>
+endobj
+68 0 obj
+<<
+/Parent 51 0 R
+/Dest [33 0 R /FitH 341.6]
+/Previous 67 0 R
+/Next 69 0 R
+/Title (SEE ALSO)
+>>
+endobj
+69 0 obj
+<<
+/Parent 51 0 R
+/Dest [33 0 R /FitH 309.2]
+/Previous 68 0 R
+/Title (COPYRIGHT)
+>>
+endobj
+50 0 obj
+<<
+/Type /Outlines
+/Count 19
+/First 51 0 R
+/Last 69 0 R
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 4 0 R
+/PageMode /UseOutlines
+/Outlines 50 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Pages
+/Kids [ 42 0 R 49 0 R 37 0 R 41 0 R 21 0 R 25 0 R 29 0 R 33 0 R ]
+/Count 8
+/MediaBox [0 0 595 842]
+>>
+endobj
+xref
+0 70
+0000000000 65535 f 
+0000000015 00000 n 
+0000000171 00000 n 
+0000032045 00000 n 
+0000032134 00000 n 
+0000000272 00000 n 
+0000002372 00000 n 
+0000002471 00000 n 
+0000002569 00000 n 
+0000002669 00000 n 
+0000002773 00000 n 
+0000002869 00000 n 
+0000002970 00000 n 
+0000003074 00000 n 
+0000003182 00000 n 
+0000003280 00000 n 
+0000003383 00000 n 
+0000003489 00000 n 
+0000003603 00000 n 
+0000008576 00000 n 
+0000008597 00000 n 
+0000008756 00000 n 
+0000008839 00000 n 
+0000015274 00000 n 
+0000015295 00000 n 
+0000015443 00000 n 
+0000015526 00000 n 
+0000021099 00000 n 
+0000021120 00000 n 
+0000021267 00000 n 
+0000021350 00000 n 
+0000025583 00000 n 
+0000025604 00000 n 
+0000025751 00000 n 
+0000025834 00000 n 
+0000028018 00000 n 
+0000028039 00000 n 
+0000028153 00000 n 
+0000028236 00000 n 
+0000028538 00000 n 
+0000028558 00000 n 
+0000028660 00000 n 
+0000028743 00000 n 
+0000028826 00000 n 
+0000029175 00000 n 
+0000029195 00000 n 
+0000029320 00000 n 
+0000029621 00000 n 
+0000029641 00000 n 
+0000029743 00000 n 
+0000031970 00000 n 
+0000029826 00000 n 
+0000029948 00000 n 
+0000030039 00000 n 
+0000030149 00000 n 
+0000030301 00000 n 
+0000030450 00000 n 
+0000030545 00000 n 
+0000030651 00000 n 
+0000030774 00000 n 
+0000030869 00000 n 
+0000030975 00000 n 
+0000031090 00000 n 
+0000031194 00000 n 
+0000031342 00000 n 
+0000031436 00000 n 
+0000031537 00000 n 
+0000031649 00000 n 
+0000031758 00000 n 
+0000031870 00000 n 
+trailer
+<<
+/Size 70
+/Root 3 0 R
+/Info 2 0 R
+>>
+startxref
+32267
+%%EOF
