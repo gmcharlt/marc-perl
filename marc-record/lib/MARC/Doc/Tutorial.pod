@@ -143,15 +143,12 @@ to C<next()>.
    4   use MARC::Batch;
    5   my $batch = MARC::Batch->new('USMARC','file.dat');
    6   
-   7   while (my $record = $file->next()) {
+   7   while (my $record = $batch->next()) {
    8   
    9     ## print the title contained in the record
   10     print $record->title(),"\n";
   11   
   12   }
-  13   
-  14   ## we're done so close the file
-  15   $file->close();
 
 The call to the next() method at line 7 returns the next record from the 
 file. next() returns C<undef> when there are no more records left in the file,
