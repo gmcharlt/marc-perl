@@ -884,6 +884,77 @@ Here is the example in detail:
   38   
   39   }
 
+=head2 Updating subject subfield x to subfield v
+
+As a somewhat more complicated example you may find yourself wanting to update
+the last subfield x in a 650 field to be a subfield v instead. With the 
+MARC::Field::subfields() and MARC::Field::replace_with() methods and some 
+fancy footwork this can be done relatively easily.
+
+   1  ## Example 19
+   2
+   3  use MARC::Batch;
+   4  use Data::Dumper;
+   5
+   6  my $file = shift;
+   7
+   8  my $batch = MARC::Batch->new( 'USMARC', $file );
+   9  while ( my $record = $batch->next() ) {
+  10
+  11    # go through all 6XX fields in the record
+  12    foreach my $subject ( $record->field( '6..' ) ) {
+  13  
+  14      # extract subfields as an array of array refs
+  15      my @subfields = $subject->subfields();
+  16  
+  17      # setup an array to store our new field
+  18      my @newSubfields = ();
+  19  
+  20      # a flag to indicate that we found an subfield x
+  21      my $foundX = 0;
+  22     
+  23      # use pop() to read the subfields backwards
+  24      while ( my $subfield = pop( @subfields ) ) {
+  25  
+  26        # for convenience pull out the subfield code and data from 
+  27        # the array ref
+  28        my ($code,$data) = @$subfield;
+  29  
+  30        # if the subfield code is 'x' and we haven't already found one 
+  31        if ( $code eq 'x' and ! $foundX ) { 
+  32  
+  33          # change the x to a v
+  34          $code = 'v';
+  35  
+  36          # set flag so we know not to translate any more subfield x
+  37          $foundX = 1;
+  38  
+  39        } 
+  40  
+  41        # add our (potentially changed) subfield data to our new
+  42        # subfield data array
+  43        unshift( @newSubfields, $code, $data );
+  44  
+  45      }
+  46  
+  47      # if we did find a subfield x then create a new field using our new
+  48      # subfield data, and replace the old one with the new one
+  49      if ( $foundX ) {
+  50        my $newSubject = MARC::Field->new( 
+  51          $subject->tag(),
+  52          $subject->indicator(1),
+  53          $subject->indicator(2),
+  54          @newSubfields
+  55        );
+  56        $subject->replace_with( $newSubject );
+  57      }
+  58  
+  59    }
+  60  
+  61    # output the potentially changed record as MARC
+  62    print $record->as_usmarc();
+  63
+  64  }
 
 =head1 VALIDATING
 
@@ -896,7 +967,7 @@ and it also provides a framework for adding more.
 Here is an example of using MARC::Lint to generate a list of errors
 present in a batch of records in a file named 'file.dat'.
 
-   1   ## Example 19 
+   1   ## Example 20 
    2   
    3   use MARC::Batch;
    4   use MARC::Lint;
@@ -968,7 +1039,7 @@ the object oriented programming technique of inheritance. In short you
 can create your own subclass of MARC::Lint, and then use it to validate your
 records. Here's an example:
 
-   1   ## Example 20
+   1   ## Example 21
    2   
    3   ## first, create our own subclass of MARC::Lint
    4   ## should be saved in a file called MyLint.pm
