@@ -1,4 +1,4 @@
-# $Id: title_proper.t,v 1.3 2003/02/25 20:42:10 petdance Exp $
+# $Id: title_proper.t,v 1.4 2003/05/08 14:45:46 petdance Exp $
 
 use strict;
 use integer;
@@ -26,7 +26,7 @@ while ( my $marc = $file->next() ) {
     my $title = shift @titles;
     is( $marc->title_proper, $title );
 }
-ok( !$MARC::File::Error, "Should have no error" );
+ok( !$MARC::File::ERROR, "Should have no error" );
 is( scalar @titles, 0, "no titles left to check" );
 
 $file->close;
