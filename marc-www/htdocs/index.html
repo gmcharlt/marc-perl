@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>MARC.pm : Machine Readable Cataloging Perl Module</title>
+<title>MARC/Perl : Machine Readable Cataloging + Perl</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
@@ -128,7 +128,7 @@ catalog.</li>
 
 <li><a href="http://www.lib.sfu.ca/kiosk/mjordan/jake/">jake2marc</a>: The Jointly Administered Knowledge Environment ( <a href="http://jake.sourceforge.net/">jake</a> ) is an open source project that (among other things) uses MARC.pm to provide a 'save-as-MARC' mechanism for serial titles available in over 190 databases. Jake creates the USMARC data out of publicly available metadata for the electronic/print serials.</li>
 
-<li><a href="http://www.koha.org">KOHA</a>: An open source library system
+<li><a href="http://www.koha.org">Koha</a>: An open source library system
 made in New Zealand by the Horowhenua Library Trust and Katipo Communications 
 Ltd. KOAH implements a full catalogue, OPAC, circulation, and acquisition 
 system...and it uses MARC::Record.</a></li>
@@ -140,12 +140,20 @@ being distributed under the GNU General Public License.</li>
 
 <li><a href="http://milton.mse.jhu.edu/">Milton S. Eisenhower Library (Johns Hopkins University)</a>: used MARC.pm to remove 049 fields from MARC records.</li>
 
+<li><a href="http://www.nald.ca/">National Adult Literacy Database</a>: using MARC::Record to import MARC data into a relational database as well as perform A MARC to Dublin Core metadata crosswalk.</li>
+
 <li><a href="http://www.library.nuigalway.ie/">National University of Ireland, Galway</a>: have used MARC.pm as an error checking tool as they migrate from Dynix to Aleph.</li>
+
+<li><a href="http://search.cpan.org/author/MIRK/Net-Z3950-0.34/Z3950.pm">Net::Z3950</a>: Net::Z3950 is a CPAN module for creating clients and servers that query and return metadata records using the Z39.50 protocol. It is actually a Perl wrapper around the <a href="http://www.indexdata.dk/yaz/">yaz</a> C library. Net::Z3950 uses MARC.pm to render raw MARC data, and has plans to move support over to MARC::Record.</li> 
 
 <li><a href="http://www.nd.edu/libraries/">Notre Dame University Library</a>: 
 is using MARC::Record to extract data from their Ex Libris Aleph ILS in order 
 to populate a MySQL database that powers their web-based current awareness 
 service.  </li>
+
+<li><a href="http://refdb.sourceforge.net/">RefDB</a>: is a reference
+database and bibliography tool for SGML, XML, and LaTeX/BibTeX documents. It
+allows users to share databases over a network.</li>
 
 <li><a href="http://library.smc.edu/">Santa Monica College Library</a>: have used MARC.pm to manipulate netLibrary and EbscoHost bibliographic records prior to loading into their Sirsi database. Steve Hunt of SMC has also used MARC.pm to take MARC records from <a href="http://www.btebis.com">Baker & Taylor Title Source II</a> and used them to create <a href="http://library.smc.edu/btorder">Sirsi format order records.</a></li> 
 
@@ -204,6 +212,10 @@ The current developers are: </p>
 <li>Mike O'Regan <a href="mailto:moregan@flr.follett.com">moregan@flr.follett.com</a></li>
 <li>Ed Summers <a href="mailto:ehs@pobox.com">ehs@pobox.com</a></li>
 </ul>
+
+<h1>Project Statistics</h1>
+
+<img src="http://sourceforge.net/project/stats/stats_graph.png?group_id=1254&report=last_30">
 
 <p>
 <hr>
