@@ -1,4 +1,4 @@
-# $Id: 10.camel.t,v 1.11 2002/08/25 21:27:59 petdance Exp $
+# $Id: 10.camel.t,v 1.12 2003/02/18 14:30:21 edsummers Exp $
 # Test creating a MARC record for the Camel book
 #
 # Bugs, comments, suggestions welcome: marc@petdance.com
@@ -80,7 +80,7 @@ is( $field[1]->subfield("a"), 'Orwant, Jon.', '  Jon Orwant' );
 
 
 # Test 4: multiple fields by the "XX" notation
-@field = $marc->field("700");
+@field = $marc->field("7..");
 is( scalar @field, 2,	'Multiple 700 tags via 7XX' );
 is( $field[0]->subfield("a"), 'Christiansen, Tom.', '  Tom Christiansen' );
 is( $field[1]->subfield("a"), 'Orwant, Jon.', '  Jon Orwant' );
