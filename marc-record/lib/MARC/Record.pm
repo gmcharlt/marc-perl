@@ -6,23 +6,22 @@ MARC::Record - Perl extension for handling MARC records
 
 =cut
 
-use 5.004;
+use 5.6.0;
 use strict;
 use integer;
-use vars qw( $VERSION $ERROR $DEBUG );
+use vars qw( $VERSION $ERROR );
 
 use MARC::Field;
 
 =head1 VERSION
 
-Version 0.15
+Version 1.00;
 
-    $Id: Record.pm,v 1.5 2002/03/20 16:06:32 petdance Exp $
+    $Id: Record.pm,v 1.6 2002/04/01 02:50:06 petdance Exp $
 
 =cut
 
-$VERSION = '0.15';
-$DEBUG = 0;
+$VERSION = '1.00';
 
 use constant SUBFIELD_INDICATOR	=> "\x1F";
 use constant END_OF_FIELD	=> "\x1E";
@@ -34,11 +33,11 @@ use constant DIRECTORY_ENTRY_LEN 	=> 12;
 
 =head1 SYNOPSIS
 
-  use MARC::Record;
+    use MARC::Record;
 
-  open( IN, "<", $filename ) or die "Couldn't open $filename: $!\n";
-  binmode( IN ); # for the Windows folks
-  while ( !eof(IN) ) {
+    open( IN, "<", $filename ) or die "Couldn't open $filename: $!\n";
+    binmode( IN ); # for the Windows folks
+    while ( !eof(IN) ) {
   	my $marc = MARC::Record::next_from_file( *IN );
 	die $MARC::Record::ERROR unless $marc;
 
@@ -49,9 +48,9 @@ use constant DIRECTORY_ENTRY_LEN 	=> 12;
 	for my $subject ( $marc->field( "6XX" ) ) {
 		print "\t", $subject->tag, ": ", $subject->subfield("a"), "\n";
 	} # for subject
-  } # while
+    } # while
 
-  close IN or die "Error closing $filename: $!\n";
+    close IN or die "Error closing $filename: $!\n";
 
 =head1 DESCRIPTION
 
