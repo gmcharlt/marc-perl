@@ -1,15 +1,10 @@
 Revision history for Perl extension MARC::Record.
 
-1.36
-
-	[ENHANCEMENTS]
-	- Finished documentation on all modules.  Updated t/pod-coverage.t
-	  to keep us in line.
+1.36	March 9th, 2004
 
 	[THINGS THAT MAY BREAK YOUR CODE]
 	- Renamed MARC::Field->is_control_tag() to is_control_field().
 
-1.35    February 20, 2004
 	[FIXES]
 	- fixed SYNOPSIS in MARC::Batch to use constructor. Thanks Ed Sperr
 	  New England College of Optometry.
@@ -23,6 +18,10 @@ Revision history for Perl extension MARC::Record.
           Previously a warning was generated, and MARC::Field continued
           along only to barf when it was unable to find an array ref in 
           $self->{ _subfields }.
+
+	[ENHANCEMENTS]
+	- Finished documentation on all modules.  Updated t/pod-coverage.t
+	  to keep us in line.
 
 1.34	December 16th, 2003
 	[ENHANCEMENTS]
