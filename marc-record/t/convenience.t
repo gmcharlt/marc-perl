@@ -1,4 +1,4 @@
-# $Id: convenience.t,v 1.2 2003/01/28 21:23:30 petdance Exp $
+# $Id: convenience.t,v 1.3 2003/01/28 21:40:57 petdance Exp $
 
 use strict;
 use integer;
@@ -6,8 +6,9 @@ eval 'use warnings' if $] >= 5.006;
 
 use constant PERLCONF_SKIPS => 6;
 use constant CAMEL_SKIPS => 2;
+use constant XPLATFORM_SKIPS => 2;
 
-use Test::More tests=>( 2 + (5*2) + CAMEL_SKIPS + PERLCONF_SKIPS );
+use Test::More tests=>( 2 + (5*3) + CAMEL_SKIPS + PERLCONF_SKIPS + XPLATFORM_SKIPS );
 
 BEGIN {
     use_ok( 'MARC::File::USMARC' );
@@ -37,6 +38,17 @@ is( $marc->author,		'Wall, Larry.' );
 is( $marc->title,		'Programming Perl / Larry Wall, Tom Christiansen & Jon Orwant.' );
 is( $marc->title_proper,	'Programming Perl /' );
 is( $marc->edition,		'3rd ed.' );
+is( $marc->publication_date,	'2000.' );
+
+for ( 1..XPLATFORM_SKIPS ) { # Skip to Cross-Platform Perl
+    $marc = $file->next();
+    isa_ok( $marc, 'MARC::Record', 'Got a record' );
+}
+
+is( $marc->author,		'Foster-Johnson, Eric.' );
+is( $marc->title,		'Cross-platform Perl / Eric F. Johnson.' );
+is( $marc->title_proper,	'Cross-platform Perl /' );
+is( $marc->edition,		'' );
 is( $marc->publication_date,	'2000.' );
 
 $file->close;
