@@ -12,7 +12,7 @@ use base qw(Exporter AutoLoader);
 
 @EXPORT_OK = qw(%GeogAreaCodes %ObsoleteGeogAreaCodes %LanguageCodes %ObsoleteLanguageCodes %CountryCodes %ObsoleteCountryCodes %Sources600_651 %ObsoleteSources600_651 %Sources655 %ObsoleteSources655);
 
-=head1 NAME
+=head1 NAME and DESCRIPTION
 
 MARC::Lint::CodeData -- Contains codes from the MARC code lists for Geographic Areas, Languages, and Countries.
 
@@ -21,6 +21,10 @@ Code data is used for validating fields 008, 040, 041, and 043.
 Also, sources for subfield 2 in 600-651 and 655.
 
 Stores codes in hashes, %MARC::Lint::CodeData::[name].
+
+Note: According to the official MARC documentation, Sears is not a valid 655
+term. The code data below treats it as valid, in anticipation of a change in
+the official documentation.
 
 =head1 SYNOPSIS
 
@@ -92,10 +96,10 @@ They output tab-separated codes for updating the data below.
 
 
 
-Version 1.01: Updated Jan. 5-Feb. 4, 2005.
+Version 1.01: Updated Jan. 5-Feb. 10, 2005. Released (to CPAN) Feb. 13, 2005 (with new version of MARC::Errorchecks).
 
  -Added code list data for 600-651 subfield 2 and for 655 subfield 2 sources.
- -Updated codes based on changes made Jan. 19 (languages), Feb. 2 (sources). 
+ -Updated codes based on changes made Jan. 19 (languages), Feb. 2 (sources), Feb. 9 (sources). 
  
 Version 1.00 (original version): First release, Dec. 5, 2004. Uploaded to SourceForge CVS, Jan. 3, 2005.
  -Included in MARC::Errorchecks distribution on CPAN.
@@ -127,7 +131,7 @@ Version 1.00 (original version): First release, Dec. 5, 2004. Uploaded to Source
 
 %ObsoleteCountryCodes = map {($_, 1)} (split "\t", ("ai 	air	ac 	ajr	bwr	cn 	cz 	cp 	ln 	cs 	err	gsr	ge 	gn 	hk 	iw 	iu 	jn 	kzr	kgr	lvr	lir	mh 	mvr	nm 	pt 	rur	ry 	xi 	sk 	xxr	sb 	sv 	tar	tt 	tkr	unr	uk 	ui 	us 	uzr	vn 	vs 	wb 	ys "));
 
-%Sources600_651 = map {($_, 1)} (split "\t", ("aass	aat	abne	agrifors	agrovoc	agrovocf	agrovocs	albt	allars	amg	apaist	asft	asth	atla	barn	bella	bet	bhammf	bhashe	bicssc	bidex	blmlsh	bt	cabt	cash	ccte	cctf	ceeus	cht	ciesiniv	cilla	csahssa	csalsct	csapa	csh	cstud	ddcrit	dissao	dit	drama	dtict	ebfem	eclas	eks	ericd	est	fast	fgtpcm	fmesh	francis	galestne	gem	georeft	gtt	hapi	helecon	henn	hlasstg	huc	iaat	ica	icpsr	idas	iescs	iest	ilot	ilpt	inist	inspect	ipat	ipsp	isis	itoamc	itrt	jlabsh	kaa	kao	kaunokki	kdm	kitu	kssbar	kta	ktpt	ktta	kula	kupu	larpcal	lcsh	lcshac	lctgm	lemac	lemb	liv	lnmmbr	local	ltcsh	lua	maaq	mar	masa	mesh	mipfesd	mmm	mpirdes	mtirdes	musa	nal	nasat	ncjt	ndllsh	nicem	nimacsc	ntcpsc	ntcsd	ntissc	nznb	ogst	opms	pascal	peri	pha	pmbok	poliscit	popinte	precis	prvt	psychit	qrma	qrmak	ram	rasuqam	renib	rero	reveal	rpe	rswk	rugeo	rurkp	rvm	sao	sbiao	scgdst	scisshl	scot	sears	sfit	shbe	she	sigle	sipri	sk	slem	smda	sosa	swd	swemesh	taika	taxhs	tbit	test	tgn	tlka	tlsh	toit	trt	trtsa	tsht	ttka	umitrist	unbisn	unbist	unescot	usaidt	vmj	waqaf	watrest	wgst	wot	wpicsh	ysa"));
+%Sources600_651 = map {($_, 1)} (split "\t", ("aass	aat	abne	agrifors	agrovoc	agrovocf	agrovocs	albt	allars	amg	apaist	asft	asth	atla	barn	bella	bet	bhammf	bhashe	bicssc	bidex	blmlsh	bt	cabt	cash	ccte	cctf	ceeus	cht	ciesiniv	cilla	csahssa	csalsct	csapa	csh	cstud	ddcrit	dissao	dit	drama	dtict	ebfem	eclas	eks	ericd	est	fast	fgtpcm	fmesh	fnhl	francis	galestne	gem	georeft	gtt	hapi	helecon	henn	hlasstg	huc	iaat	ica	icpsr	idas	iescs	iest	ilot	ilpt	inist	inspect	ipat	ipsp	isis	itoamc	itrt	jlabsh	kaa	kao	kaunokki	kdm	kitu	kssbar	kta	ktpt	ktta	kula	kupu	larpcal	lcsh	lcshac	lctgm	lemac	lemb	liv	lnmmbr	local	ltcsh	lua	maaq	mar	masa	mesh	mipfesd	mmm	mpirdes	mtirdes	musa	nal	nasat	ncjt	ndllsh	nicem	nimacsc	ntcpsc	ntcsd	ntissc	nznb	ogst	opms	pascal	peri	pha	pmbok	poliscit	popinte	precis	prvt	psychit	qrma	qrmak	ram	rasuqam	renib	rero	reveal	rpe	rswk	rugeo	rurkp	rvm	sao	sbiao	scgdst	scisshl	scot	sears	sfit	shbe	she	sigle	sipri	sk	slem	smda	sosa	swd	swemesh	taika	taxhs	tbit	test	tgn	tlka	tlsh	toit	trt	trtsa	tsht	ttka	umitrist	unbisn	unbist	unescot	usaidt	vmj	waqaf	watrest	wgst	wot	wpicsh	ysa"));
 
 #The codes cash, lcsh, lcshac, mesh, nal, and rvm are covered by 2nd indicators in 600-655
 #they are only used when indicators are not available
