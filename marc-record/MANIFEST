@@ -3,6 +3,8 @@ Changes
 MANIFEST
 Makefile.PL
 README
+etc/specs
+etc/ecbdlist.html
 lib/MARC/Batch.pm
 lib/MARC/Doc/Tutorial.pod
 lib/MARC/Field.pm
