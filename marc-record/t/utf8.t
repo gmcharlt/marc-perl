@@ -18,7 +18,7 @@ TODO: {
 	## only do these tests with the first stable release of perl 
 	## that can do unicode.
 	if ( $] < 5.008 ) { 
-	    skip( 'need perl5.8 or greater to test unicode', 1 );
+	    skip( 'need perl5.8 or greater to test unicode', 2 );
 	}
 
 	local $TODO = 'utf8 handling';
