@@ -56,6 +56,7 @@ sub in {
 	undef $self;
 	$MARC::File::ERROR = "Couldn't open $filename: $@";
     } else {
+	binmode $fh;
 	$self->{fh} = $fh;
     }
 	
