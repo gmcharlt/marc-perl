@@ -1,0 +1,36 @@
+#!/usr/bin/perl -w
+
+# This isn't meant to be installed, just used by the maintainer.
+
+my @vers = qw( 5.5.3 5.6.0 5.6.1 5.6.2 5.8.0 5.8.1 5.8.2 blead );
+@vers = ( @vers, shuffle( @vers ), reverse( @vers ) );
+
+for my $perlver ( @vers ) {
+    my $perl = "perl$perlver";
+
+
+    warn "\n\n\n# Testing $perl\n";
+    execute( "make realclean" );
+    do_or_die( $perl, "Makefile.PL" );
+    do_or_die( "make test" );
+}
+
+sub execute {
+    print "@_", "\n";
+    system( @_ );
+}
+
+sub do_or_die {
+    print "@_", "\n";
+    system( @_ ) == 0 or die "Failed executing @_";
+}
+
+sub shuffle {
+    my @list = @_;
+    my $i = @list;
+    while ($i) {
+        my $j = rand $i--;
+        @list[$i, $j] = @list[$j, $i];
+    }
+    return @list; 
+}
