@@ -260,45 +260,40 @@ Andy Lester, E<lt>marc@petdance.comE<gt>
 
 # Used only to read the stuff from __DATA__
 sub _read_rules() {
-	my $self = shift;
+    my $self = shift;
+    
+    my $tell = tell(DATA);  # Stash the position so we can reset it for next time
+
+    local $/ = "";
+    while ( my $tagblock = <DATA> ) {
+	my @lines = split( /\n/, $tagblock );
+	s/\s+$// for @lines;
+
+	next unless @lines >= 4; # Some of our entries are tag-only
 	
-	my $tell = tell(DATA);  # Stash the position so we can reset it for next time
+	my $tagline = shift @lines;
+	my @keyvals = split( /\s+/, $tagline, 3 );
+	my $tagno = shift @keyvals;
+	my $repeatable = shift @keyvals;
+	
+	$self->_parse_tag_rules( $tagno, $repeatable, @lines );
+    } # while
 
-	local $/ = "";
-	while ( my $lines = <DATA> ) {
-		$lines =~ s/\s+$//;
-		my @keyvals = split( /\s+/, $lines );
-
-		my $tagno = shift @keyvals;
-		my $repeatable = shift @keyvals;
-		
-		my @tag_range = ($tagno);
-		if ( $tagno =~ /^(\d\d)X/ ) {
-			my $base = $1;
-			@tag_range = ( "${base}0" .. "${base}9" );
-		}
-
-		# Handle the ranges of tags.
-		for my $currtag ( @tag_range ) {
-			$self->_parse_tag_rules( $currtag, $repeatable, @keyvals );
-		} # for
-		# I guess I could just have multiple references to the same tag, but I'm not that worried about memory
-	} # while
-
-	# Set the pointer back to where it was, in case we do this again
-	seek( DATA, $tell, 0 );
+    # Set the pointer back to where it was, in case we do this again
+    seek( DATA, $tell, 0 );
 }
 
 sub _parse_tag_rules {
 	my $self = shift;
 	my $tagno = shift;
 	my $repeatable = shift;
-	my @keyvals = @_;
+	my @lines = @_;
 
 	my $rules = ($self->{_rules}->{$tagno} ||= {});
 	$rules->{$repeatable} = $repeatable;
 
-	while ( @keyvals ) {
+	for ( @lines ) {
+		my @keyvals = split( /\s+/, $_, 3 );
 		my $key = shift @keyvals;
 		my $val = shift @keyvals;
 		
