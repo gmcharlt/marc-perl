@@ -1,1 +1,2 @@
-Changes
+1.39    Thu Dec 16 20:25:41 CST 2004
+        - initial baseline release after separation from MARC::Record proper

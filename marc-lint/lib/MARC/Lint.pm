@@ -5,7 +5,7 @@ use integer;
 use MARC::Record;
 use MARC::Field;
 
-our $VERSION = 1.38;
+our $VERSION = 1.39;
 
 =head1 NAME
 
