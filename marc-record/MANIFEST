@@ -5,10 +5,12 @@ README
 lib/MARC/Record.pm
 lib/MARC/Field.pm
 lib/MARC/Lint.pm
+lib/MARC/Batch.pm
 pl/marcdump
 pl/marclint
 pl/lif2marc
 t/00.load.t
+t/00.version.t
 t/10.camel.t
 t/20.clone.t
 t/camel.usmarc
