@@ -1,10 +1,11 @@
-#!perl -Tw
+#!perl 
 
 use strict;
 use integer;
+use warnings;
 use File::Spec;
 
-use Test::More tests=>268;
+use Test::More tests=>267;
 
 BEGIN: {
     use_ok( 'MARC::Batch' );
@@ -32,11 +33,11 @@ USMARC: {
 
 MicroLIF: {
 
-    my $filepath = File::Spec->catdir( 't' );
-    opendir(TESTDIR, $filepath) || die "can't opendir $filepath: $!";
-    my @files = map {$filepath.$_} (grep { /sample.*\.lif/ && -f $filepath.$_ } readdir(TESTDIR));
-    closedir TESTDIR;
-    is( scalar @files, 3, 'Only have 3 sample*.lif files' );
+    my @files = (
+        File::Spec->catfile( 't', 'sample1.lif' ),
+        File::Spec->catfile( 't', 'sample20.lif' ),
+        File::Spec->catfile( 't', 'sample100.lif' )
+    );
 
     my $batch = new MARC::Batch( 'MicroLIF', @files );
     isa_ok( $batch, 'MARC::Batch', 'MicroLIF batch' );
