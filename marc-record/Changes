@@ -1,9 +1,12 @@
 Revision history for Perl extension MARC::Record.
 
-0.94	??? ??, 2002?
+0.94	June 10, 2002
 	- Added $MARC::Record::DEBUG
 	- Added --debug flag to marcdump to enable $MARC::Record::DEBUG
 	- Added 'Validation' section to MARC::Doc::Tutorial
+	- Added append_field(), insert_field_after(), insert_field_before()
+	  and deprecated add_fields()
+	- Added test of new methods (t/60.insert.t)
 
 0.93	May 21, 2002
 	- Added update() and replace_with() methods to MARC::Field (ehs)
