@@ -1,4 +1,4 @@
-use Test::More tests => 25;
+use Test::More tests => 32;
 
 use strict;
 use_ok( 'MARC::Record' );
@@ -20,6 +20,7 @@ use_ok( 'MARC::File::USMARC' );
 ## slurp up some microlif
 open(IN, 't/sample1.lif' );
 my $str = join( '', <IN> );
+close IN;
 
 ## attempt to use decode() on it
 
@@ -38,6 +39,7 @@ DECODE_MICROLIF_FUNCTION: {
 ## slurp up some usmarc
 open(IN, 't/sample1.usmarc' );
 $str = join( '', <IN> );
+close IN;
 
 ## attempt to use decode on it
 
@@ -109,3 +111,34 @@ SHUFFLED_FRAGMENTS: {
     is( $rec->field('650')->as_string(), 'LC subject heading.', '650 field correct' );
 }
 
+
+#
+# make sure that MARC::File::MicroLIF::decode can handle
+# fields with no subfields without causing MARC::Field
+# to croak().
+# 
+
+MICROLIF_NOSUBFIELDS: {
+    # both the 040 and 041 should be discarded
+    my $str = <<EOT;
+LDR00180nam  22     2  4500^
+008891207s19xx    xxu           00010 eng d^
+040  ^
+041  _^
+245 0_aAll about whales.^
+260  _bHoliday,_c1987.^
+300  _a[ ] p.^
+900  _aALL^
+952  _a20571_cR_dALL^`
+EOT
+
+    my $rec = MARC::File::MicroLIF::decode( $str );
+    isa_ok( $rec, 'MARC::Record' );
+    my @warnings = $rec->warnings();
+    is( scalar @warnings, 2, 'check for appropriate warnings count' );
+    ok( grep( /Tag 040.*discarded/, @warnings ), '040 warning present' );
+    ok( grep( /Tag 041.*discarded/, @warnings ), '041 warning present' );
+    ok( $rec->field('245'), '245 should not exist' );
+    ok( !$rec->field('040'), '040 should not exist' );
+    ok( !$rec->field('041'), '041 should not exist' );
+}
