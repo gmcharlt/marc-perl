@@ -1132,3 +1132,28 @@ Which will generate results like this:
 
 =head2 MicroLif
 
+=head1 CONTRIBUTORS
+
+Many thanks to all the contributors who have made this document possible.
+
+=over 4
+
+=item * 
+
+Andy Lester <andy@petdance.com>
+
+=item *
+
+Christopher Morgan <morgan@acm.org>
+
+=item *
+
+Jackie Shieh <jshieh@umich.edu>
+
+=item * 
+
+Ed Summers <ehs@pobox.com>
+
+=back
+
+
