@@ -69,7 +69,7 @@ sub new($) {
 		_warnings => [],
 		}, $class;
 	
-	if ( $self->is_control_tag() ) {
+	if ( $self->is_control_field ) {
 		$self->{_data} = shift;
 	} else {
 		for my $indcode ( qw( _ind1 _ind2 ) ) {
@@ -116,7 +116,7 @@ sub indicator($) {
 	my $indno = shift;
 
 	$self->_warn( "Fields below 010 do not have indicators" )
-	    if $self->is_control_tag(); 
+	    if $self->is_control_field; 
 
 	if ( $indno == 1 ) {
 		return $self->{_ind1};
@@ -125,6 +125,17 @@ sub indicator($) {
 	} else {
 		croak( "Indicator number must be 1 or 2" );
 	}
+}
+
+=head2 is_control_field()
+
+Tells whether this field is one of the control tags from 001-009.
+
+=cut
+
+sub is_control_field {
+    my $self = shift;
+    return ($self->{_tag} =~ /^\d+$/) && ($self->{_tag} < 10);
 }
 
 =head2 subfield(code)
@@ -152,7 +163,7 @@ sub subfield {
 	my $code_wanted = shift;
 
         croak( "Fields below 010 do not have subfields, use data()" )
-            if $self->is_control_tag();
+            if $self->is_control_field;
 
 	my @data = @{$self->{_subfields}};
 	my @found;
@@ -182,7 +193,7 @@ sub subfields {
 	my $self = shift;
 
 	$self->_warn( "Fields below 010 do not have subfields" )
-	    if $self->is_control_tag();
+	    if $self->is_control_field;
 
 	my @list;
 	my @data = @{$self->{_subfields}};
@@ -202,7 +213,7 @@ sub data($) {
 	my $self = shift;
 
         croak( "data() is only for tags less than 010, use subfield()" )
-            unless $self->is_control_tag();
+            unless $self->is_control_field;
 		
 	$self->{_data} = $_[0] if @_;
 
@@ -223,7 +234,7 @@ sub add_subfields(@) {
 	my $self = shift;
 
 	croak( "Subfields are only for tags >= 10" )
-	    if $self->is_control_tag();
+	    if $self->is_control_field;
 
 	push( @{$self->{_subfields}}, @_ );
 	return @_/2;
@@ -267,7 +278,7 @@ sub update {
   my $self = shift;
 
   ## tags 000 - 009 don't have indicators or subfields
-  if ( $self->is_control_tag() ) {
+  if ( $self->is_control_field ) {
     $self->{_data} = shift;
     return(1);
   }
@@ -368,7 +379,7 @@ sub as_string() {
 	my $self = shift;
 	my $subfields = shift;
 
-	if ( $self->is_control_tag() ) {
+	if ( $self->is_control_field ) {
 	    return $self->{_data};
 	}
 
@@ -396,7 +407,7 @@ sub as_formatted() {
 
 	my @lines;
 
-	if ( $self->is_control_tag() ) {
+	if ( $self->is_control_field ) {
 		push( @lines, sprintf( "%03s     %s", $self->{_tag}, $self->{_data} ) );
 	} else {
 		my $hanger = sprintf( "%03s %1.1s%1.1s", $self->{_tag}, $self->{_ind1}, $self->{_ind2} );
@@ -425,7 +436,7 @@ sub as_usmarc() {
 	my $self = shift;
 
 	# Tags < 010 are pretty easy
-	if ( $self->is_control_tag() ) {
+	if ( $self->is_control_field ) {
 		return $self->data . END_OF_FIELD;
 	} else {
 		my @subs;
@@ -468,7 +479,7 @@ sub clone {
 	    _warnings => [],
 	}, ref($self);
 
-    if ( $self->is_control_tag() ) {
+    if ( $self->is_control_field ) {
 	$clone->{_data} = $self->{_data};
     } else {
 	$clone->{_ind1} = $self->{_ind1};
@@ -500,11 +511,6 @@ sub _warn($) {
 	my $self = shift;
 
 	push( @{$self->{_warnings}}, join( "", @_ ) );
-}
-
-sub is_control_tag {
-    my $self = shift;
-    return ($self->{_tag} =~ /^\d+$/) && ($self->{_tag} < 10);
 }
 
 sub _gripe(@) {
