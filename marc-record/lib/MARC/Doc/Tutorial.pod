@@ -1,6 +1,6 @@
 =head1 NAME
 
-MARC::Doc::Tutorial - A documention-only module for new users of MARC::Record
+MARC::Doc::Tutorial - A documentation-only module for new users of MARC::Record
 
 =head1 SYNOPSIS
 
