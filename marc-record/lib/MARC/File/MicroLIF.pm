@@ -14,13 +14,13 @@ use vars qw( $ERROR );
 
 =head1 VERSION
 
-Version 1.11
+Version 1.13
 
-    $Id: MicroLIF.pm,v 1.17 2002/10/24 22:01:54 edsummers Exp $
+    $Id: MicroLIF.pm,v 1.18 2002/10/24 22:08:02 edsummers Exp $
 
 =cut
 
-use vars '$VERSION'; $VERSION = '1.12';
+use vars '$VERSION'; $VERSION = '1.13';
 
 use MARC::File;
 use vars qw( @ISA ); @ISA = qw( MARC::File );
