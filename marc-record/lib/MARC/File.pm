@@ -29,18 +29,18 @@ None.
 
 =head1 METHODS
 
-=head2 in()
+=head2 C<in()>
 
-Opens a file for import. Ordinarily you will use MARC::File::USMARC
-or MARC::File::MicroLIF to do this.
+Opens a file for import. Ordinarily you will use C<MARC::File::USMARC>
+or C<MARC::File::MicroLIF> to do this.
 
     my $file = MARC::File::USMARC->in( 'file.marc' );
 
-Returns a MARC::File object, or C<undef> on failure. If you 
+Returns a C<MARC::File> object, or C<undef> on failure. If you 
 encountered an error the error message will be stored in 
-$MARC::File::ERROR.
+C<$MARC::File::ERROR>.
 
-Optionally you can also pass in a filehandle, and MARC::File
+Optionally you can also pass in a filehandle, and C<MARC::File>.
 will "do the right thing".
 
     my $handle = IO::File->new( 'gunzip -c file.marc.gz |' );
@@ -121,11 +121,11 @@ sub skip {
     return $rec ? 1 : undef;
 }
 
-=head2 warnings()
+=head2 C<warnings()>
 
-Simlilar to MARC::Record and MARC::Batch, warnings() will return any 
-warnings that have accumulated while processing this file; and as a 
-side-effect will clear the warnings buffer.
+Simlilar to the methods in L<MARC::Record> and L<MARC::Batch>,
+C<warnings()> will return any warnings that have accumulated while
+processing this file; and as a side-effect will clear the warnings buffer.
 
 =cut 
 
@@ -212,7 +212,7 @@ employers of the various contributors to the code.
 
 =head1 AUTHOR
 
-Andy Lester, E<lt>marc@petdance.comE<gt>
+Andy Lester, C< <<andy@petdance.com>> >
 
 =cut
 
