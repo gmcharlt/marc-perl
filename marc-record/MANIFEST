@@ -25,6 +25,8 @@ t/61.replace.t
 t/62.before.t
 t/63.after.t
 t/64.create.t
+t/65.badldr.t
+t/badldr.usmarc
 t/camel.usmarc
 t/sample100.lif
 t/sample20.lif
