@@ -130,7 +130,7 @@ sub decode {
 
     # Check for an all-numeric record length
     ($text =~ /^(\d{5})/)
-	or $marc->_warn( "Record length \"", substr( $text, 0, 5 ), "\" is not numeric $location" );
+	or return $marc->_warn( "Record length \"", substr( $text, 0, 5 ), "\" is not numeric $location" );
 
     my $reclen = $1;
     ($reclen == length($text))
