@@ -17,13 +17,13 @@ use Carp qw(croak);
 
 =head1 VERSION
 
-Version 1.10
+Version 1.11
 
-    $Id: Record.pm,v 1.32 2002/09/10 21:11:43 edsummers Exp $
+    $Id: Record.pm,v 1.33 2002/09/12 16:01:07 edsummers Exp $
 
 =cut
 
-use vars '$VERSION'; $VERSION = '1.10';
+use vars '$VERSION'; $VERSION = '1.11';
 
 use Exporter;
 use vars qw( @ISA @EXPORTS @EXPORT_OK );
@@ -167,7 +167,7 @@ sub insert_grouped_field {
     my $found = 0;
     foreach my $field ($self->fields()) {
 	if ( int($field->tag() / 100) > $limit ) {
-	    $self->insert_field_before($field,$new);
+	    $self->insert_fields_before($field,$new);
 	    $found = 1;
 	    last;
 	}
@@ -255,7 +255,8 @@ sub insert_fields_before {
 
 =head2 insert_fields_after($after_field,@new_fields)
 
-Identical to L<insert_fields_before()>, but fields are added after C<$after_field>.
+Identical to C<insert_fields_before()>, but fields are added after 
+C<$after_field>.
 
 =cut
 
@@ -473,9 +474,10 @@ sub warnings() {
 
 =head2 add_fields()
 
-C<add_fields()> is now deprecated, and users are encouraged to use C<append_field()>,
-C<insert_field_after()>, and C<insert_field_before()> since they do what you want 
-probably. It is still here though, for backwards compatability.
+C<add_fields()> is now deprecated, and users are encouraged to use 
+C<append_fields()>, C<insert_fields_after()>, and C<insert_fields_before()> 
+since they do what you want probably. It is still here though, for backwards 
+compatability.
 
 C<add_fields()> adds MARC::Field objects to the end of the list.  Returns the 
 number of fields added, or C<undef> if there was an error.

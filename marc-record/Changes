@@ -1,6 +1,11 @@
 Revision history for Perl extension MARC::Record.
 
-1.11	XXXXX, XX, 2002
+1.12	XXX XX, XXXX
+	- Makefile.PL will now generate PDF and HTML documentation for 
+	  Sourceforge when asked to.
+	- Added a test for insert_field_grouped()
+
+1.11	September 10, 2002
 	[ENHANCEMENTS]
 	- Added a 99.pod.t to check pod
 	- insert_fields_before(), insert_fields_after(), appned_fields(),
