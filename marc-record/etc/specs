@@ -33,10 +33,10 @@ my @lines = split( /\n/, $text );
 
 
 my $in_tag = undef;
-my $i;
 my $i1;
 my $i2;
 my $curr_indicator;
+my $ntags;
 
 my $started = 0;
 for ( @lines ) {
@@ -48,16 +48,17 @@ for ( @lines ) {
     s/\s+$//;
     next if $_ eq "";
 
-    #print ">> $_\n";
     if (/^(\d\d\d) -/) {
 	my $tag = $1;
 	if (/OBSOLETE/) { 
 	    $in_tag = 0;
 	    next; 
 	}
+	++$ntags;
 	$in_tag = 1;
 	my $r = /\(NR\)/ ? "NR" : "R";
-	print "\n$tag\t$r\n";
+	print "\n" if $ntags > 1;
+	print "$tag\t$r\n";
 	$i1 = $i2 = "";
 	next;
     }
@@ -109,83 +110,3 @@ sub print_indicator {
 
     print "ind$n\t$val\n";
 }
-
-# Dump the hardcoded ones that aren't in the HTML file.
-print <DATA>;
-
-__END__
-850	R
-ind1	blank
-ind2	blank
-a	R
-8	R
-
-852	R
-ind1	b012345678
-ind2	b012
-a	NR
-b	R
-c	R
-e	R
-f	R
-g	R
-h	NR
-i	R
-j	NR
-k	R
-l	NR
-m	R
-n	NR
-p	NR
-q	NR
-s	R
-t	NR
-x	R
-z	R
-2	NR
-3	NR
-6	NR
-8	NR
-
-856	R
-ind1	b012347
-ind2	b0128
-a	R
-b	R
-c	R
-d	R
-f	R
-h	NR
-i	R
-j	NR
-k	NR
-l	NR
-m	R
-n	NR
-o	NR
-p	NR
-q	NR
-r	NR
-s	R
-t	R
-u	R
-v	R
-w	R
-x	R
-y	R
-z	R
-2	NR
-3	NR
-6	NR
-8	R
-
-880	R
-ind1	
-ind2	
-6	NR
-
-887	R
-ind1	blank
-ind2	blank
-a	NR
-2	NR
