@@ -15,7 +15,7 @@ use vars qw( $VERSION $ERROR );
 
 Version 0.94
 
-    $Id: USMARC.pm,v 1.11 2002/06/11 18:45:17 petdance Exp $
+    $Id: USMARC.pm,v 1.12 2002/07/02 04:04:06 petdance Exp $
 
 =cut
 
@@ -98,7 +98,7 @@ sub decode {
 
     $marc->leader( substr( $text, 0, LEADER_LEN ) );
     my @fields = split( END_OF_FIELD, substr( $text, LEADER_LEN ) );
-    my $dir = shift @fields or return _gripe( "No directory found" );
+    my $dir = shift @fields or return $marc->_gripe( "No directory found" );
 
     (length($dir) % 12 == 0)
 	or return $marc->_gripe( "Invalid directory length" );
