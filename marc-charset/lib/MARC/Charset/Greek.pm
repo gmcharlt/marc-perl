@@ -20,7 +20,6 @@ probably don't need to use this yourself.
 =cut 
 
 use strict;
-use utf8;
 use constant CHAR_SIZE	    => 1;
 my %marc2unicode;
 my %combining;

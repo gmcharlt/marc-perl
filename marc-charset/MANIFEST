@@ -14,6 +14,8 @@ lib/MARC/Charset/Hebrew.pm
 lib/MARC/Charset/Subscripts.pm
 lib/MARC/Charset/Superscripts.pm
 lib/MARC/Charset/Controls.pm
+lib/MARC/Charset/EastAsian.pm
+data/EastAsian.txt
 README
 t/000.load.t
 t/010.default.t
@@ -25,5 +27,6 @@ t/060.arabic.t
 t/070.cyrillic.t
 t/080.hebrew.t
 t/090.greek.t
+t/095.eastasian.t
 t/100.escape1.t
 t/110.escape2.t

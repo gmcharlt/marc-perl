@@ -6,11 +6,11 @@ MARC::Charset - A module for doing MARC-8/UTF8 translation
 
 =cut 
 
-use 5.6.0;
+use 5.8.0;
 use strict;
 use base qw( Exporter );
 
-our $VERSION = 0.2;
+our $VERSION = 0.4;
 
 =head1 SYNOPSIS
 
@@ -49,12 +49,13 @@ found at LC, and supports the following character sets:
 
 =item * Greek
 
-=back
+=item * East Asian Characters 
 
-Since the East Asian character set is 32 bit, there isn't support just yet
-in MARC::Charset for them. It's been built with an eye for the future, and so 
-when more is understood about how 32 bit graphical character sets are
-designated as working G0 and G1 sets, then more will be done.
+Includes 13,478 "han" characters, Japanese Hiragana and Katakana (172 
+characters), Korean Hangul (2,028 characters), East Asian Punctuation 
+Marks (25 characters), "Component Input Method" Characters (35 characters)
+
+=back
 
 =cut
 
@@ -134,6 +135,8 @@ our @EXPORT_OK = qw(
     );
 
 
+
+
 =head1 METHODS
 
 =head2 new()
@@ -193,7 +196,7 @@ sub new {
 Pass to_utf8() a string of MARC8 encoded characters and get back a string
 of UTF8 characters. to_utf8() will handle escape sequences within the string 
 that change the working character sets to Greek, Hebrew, Arabic (Basic + 
-Extended), Cyrillic (Basic + Extended)...but not 32 bit East Asian (see TODO).
+Extended), Cyrillic (Basic + Extended), and East Asian. 
 
 =cut
 
@@ -252,16 +255,6 @@ sub g1 {
 
 A function for going from Unicode to MARC-8 character encodings.
 
-=item * Support for 32bit MARC-8 characters: 
-
-This concerns the East Asian character sets: Han, Hiragana, Katakana, Hangul 
-and Punctuation. I'm a bit confused about whether 7/8 bit character sets can 
-interoperate with 32 bit character sets. For example if ASCII is designated as 
-the working G0 character set, and East Asian as the working G1 character set. 
-While I've tried to program towards supporting 32 bit character sets I need to 
-know exactly how they are implemented in the 'real world'. So if you have 
-any East Asian MARC data please email it to me!!
-
 =back
 
 =head1 SEE ALSO
@@ -281,6 +274,8 @@ any East Asian MARC data please email it to me!!
 =item L<MARC::Charset::CyrillicBasic>
 
 =item L<MARC::Charset::CyrillicExtended>
+
+=item L<MARC::Charset::EastAsian>
 
 =item L<MARC::Charset::Greek>
 
@@ -326,75 +321,72 @@ v.01 - 2002.07.17 (ehs)
 ## only called by to_utf8() which optimizes some stuff by making sure 
 ## _marc2unicode() gets a reference to a string, a left index, a right index 
 
-sub _marc2utf8 ($$$$) {
+sub _marc2utf8 {
 
-    my ($self,$strRef,$left,$right) = @_;
-    return('') if $left >= $right;
+    my ($self,$strRef) = @_;
+    my $index = 0;
+    my $length = length($$strRef);
+    my $newString = '';
+    my $combining = '';
+    
+    CHAR_LOOP: while ( $index < $length ) {
 
-    my $g0 = $self->[ G0 ];
-    my $g1 = $self->[ G1 ];
+	my @G = ( $self->[G0], $self->[G1], $controls );
+	my $new;
+	my $saveIndex = $index;
 
-    ## charsize is 1 now, but will need to change when 
-    ## support for East Asian character sets is added
-    my $charSize = 1;
-    my $char = substr($$strRef,$left,$charSize);
+	CHARSET_LOOP: foreach my $g ( @G ) {
 
-    if ( $char eq  ESCAPE ) {
-	my $newLeft = $self->_escape($strRef,$left,$right);
-	## $newLeft will be different from $left if _escape() was 
-	## able to determine a character escape sequence, in which 
-	## case we will recur with the new index
-	if ( $newLeft != $left ) {
-	    return( $self->_marc2utf8($strRef,$newLeft,$right) );
+	    my $charSize = $g->getCharSize();
+	    my $old = substr( $$strRef, $index, $charSize );
+	    if ( $old =~ /^\x1B/ ) { 
+		my $newIndex = $self->_escape($strRef,$index,$length);
+		if ( $newIndex != $index ) { 
+		    $index = $newIndex;
+		    next CHAR_LOOP;
+		}
+	    }
+
+	    if ( $g->combining($old) ) {
+		$combining .= $g->lookup($old);
+		$index += $charSize;
+		next CHAR_LOOP;
+	    }
+
+	    $new = $g->lookup( $old );
+	    if ( defined($new) ) {
+		$index += $charSize;
+		last CHARSET_LOOP;
+	    }
+
 	}
-    }
 
-    ## handle sequences of valid combining characters by putting them
-    ## AFTER the character that they modify. In MARC-8 combining characters
-    ## modify the character that follows them, whereas in Unicode combining
-    ## characters modify the character that they follow
-
-    my $combining_chars = '';
-
-    while ($g0->combining($char) || $g1->combining($char)) {
-	$combining_chars .= $g0->lookup($char) || $g1->lookup($char);
-	$left += $charSize;
-	$char = substr($$strRef,$left,$charSize);
-    } 
-
-    ## look up the character in our working character sets
-    ## since g0 can include 0 we have can't short circuit on a g0 lookup
-
-    my $translated = $g0->lookup($char);
-    if (! defined($translated) ) {
-	$translated = $g1->lookup($char) || $controls->lookup($char);
-    }
-
-    ## if we didn't get anything then this character isn't valid!
-
-    if ( !defined($translated) ) { 
-	## to avoid warnings on concatenation
-	$translated = ''; 
-	## give em a warning if they want them
-	if ( $self->[ DIAGNOSTICS ] ) {
-	    my $hex = sprintf("0x%2x",ord($char));
-	    _warning(
-		"chr($hex) is not a valid character in " . 
-		'the control sets or the current working sets ' .  
-		$g0->name() . '(G0), ' . $g1->name() . '(G1)'
-	    );
+	if ( ! defined( $new ) and $combining eq '' ) { 
+	    if ( $self->[ DIAGNOSTICS ] ) {
+		my $g0 = $self->[G0];
+		my $g1 = $self->[G1];
+		_warning(
+		    "no mapping to a valid character at position ".
+		    ($saveIndex+1) .  ': considered ' .
+		    _getHex( $strRef, $g0, $saveIndex ) . " in " . $g0->name(). 
+		    ' ; ' . 
+		    _getHex( $strRef, $g1, $saveIndex ) . " in " . $g1->name().
+		    ' ; ' . 
+		    _getHex( $strRef, $controls, $saveIndex ) . " in ".
+		    $controls->name()
+		);
+	    }
+	    $index++;
 	}
+	
+	else {
+	    $newString .= $new . $combining;
+	    $combining = '';
+	}
+
     }
 
-    ## here's the magic: return the concatenation of our translated character 
-    ## to any combining characters we found plus the rest of the string 
-    ## converted to unicode
-
-    return(
-	$translated .
-	$combining_chars .
-	$self->_marc2utf8($strRef,$left+$charSize,$right)
-    );
+    return( $newString.$combining ); 
 
 }
 
@@ -502,47 +494,47 @@ sub _getCharset {
     ## not the use of 1; to ensure that the eval doesn't emit warnings
 
     if ( $code eq BASIC_ARABIC ) { 
-	eval { use MARC::Charset::ArabicBasic; 1; };
+	eval( "use MARC::Charset::ArabicBasic; 1;" );
 	return( MARC::Charset::ArabicBasic->new() );
     } 
     
     elsif ( $code eq EXTENDED_ARABIC ) {
-	eval { use MARC::Charset::ArabicExtended; 1; };
+	eval( "use MARC::Charset::ArabicExtended; 1;" );
 	return( MARC::Charset::ArabicExtended->new() );
     } 
     
     elsif ( $code eq BASIC_LATIN ) {
-	eval { use MARC::Charset::ASCII; 1; };
+	eval( "use MARC::Charset::ASCII; 1;" );
 	return( MARC::Charset::ASCII->new() );
     } 
 
     elsif ( $code eq EXTENDED_LATIN ) {
-	eval { use MARC::Charset::Ansel; 1; };
+	eval( "use MARC::Charset::Ansel; 1;" );
 	return( MARC::Charset::Ansel->new() );
     }
     
     elsif ( $code eq CJK ) {
-	_warning( 'MARC::Charset does not support CJK yet!' );
-	return( undef );
+	eval( "use MARC::Charset::EastAsian; 1;" );
+	return( MARC::Charset::EastAsian->new() );
     } 
     
     elsif ( $code eq BASIC_CYRILLIC ) {
-	eval { use MARC::Charset::CyrillicBasic; 1; };
+	eval( "use MARC::Charset::CyrillicBasic; 1;" );
 	return( MARC::Charset::CyrillicBasic->new() );
     } 
     
     elsif ( $code eq EXTENDED_CYRILLIC ) { 
-	eval { use MARC::Charset::CyrillicExtended; 1; };
+	eval( "use MARC::Charset::CyrillicExtended; 1;" );
 	return( MARC::Charset::CyrillicExtended->new() );
     } 
     
     elsif ( $code eq BASIC_GREEK ) {
-	eval { use MARC::Charset::Greek; 1; };
+	eval( "use MARC::Charset::Greek; 1;" );
 	return( MARC::Charset::Greek->new() );
     } 
     
     elsif ( $code eq BASIC_HEBREW ) {
-	eval { use MARC::Charset::Hebrew; 1; };
+	eval( "use MARC::Charset::Hebrew; 1;" );
 	return( MARC::Charset::Hebrew->new() );
     } 
     
@@ -553,5 +545,30 @@ sub _getCharset {
 
 }
 
+## internal sub which will return a string describing the hex values
+## at a particular position in a string for a given graphical character
+## set. It takes into consideration the character size (8/24 bits) when 
+## generating hex values. It is primarily used when generating warnings. 
+
+sub _getHex {
+    my ( $strRef, $g, $i ) = @_;
+    my $hex = '';
+    my $literal = '';
+    for ( my $j=$i; $j < $i+$g->getCharSize(); $j++ ) {
+	my $char = substr( $$strRef, $j, 1 );
+	$literal .= $char;
+	$hex .= _hexify( $char ) .  ' ';
+    }
+    chop($hex);
+    return( "$literal ($hex)" );
+}
+
+sub _hexify {
+    return sprintf( "0x%02X", ord( shift ) );
+}
+
+sub _hexifyU {
+    return sprintf( "0x%04X", ord( shift ) );
+}
 
 1;

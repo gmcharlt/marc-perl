@@ -20,7 +20,6 @@ probably don't need to use this yourself.
 =cut 
 
 use strict;
-use utf8;
 use constant CHAR_SIZE	    => 1;
 our %marc2unicode;
 our %combining;
@@ -70,7 +69,7 @@ a combining character, and false (undef) if it is not.
 
 sub combining {
     my ($self,$char) = @_;
-    return($combining{$char});
+    return( $combining{$char} );
 }
 
 =head1 getCharSize()

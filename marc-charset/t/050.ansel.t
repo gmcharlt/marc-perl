@@ -4,7 +4,7 @@ use MARC::Charset;
 
 ## Test Ansel character set:
 
-my $cs = MARC::Charset->new();
+my $cs = MARC::Charset->new( DIAGNOSTICS => 1 );
 
 my %valid = (
 
