@@ -1,8 +1,9 @@
 Revision history for Perl extension MARC::Record.
 
-next release
+1.24	April 22, 2003
 	[ENHANCEMENTS]
 	- expanded documentation for MARC::Field::as_string()
+
 	[FIX]
 	- modified MARC::File::USMARC to silently ignore any
 	  combination of nulls, spaces, CRs, and LFs between
