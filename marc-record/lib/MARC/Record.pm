@@ -16,7 +16,7 @@ use Carp qw(croak);
 
 =head1 VERSION 1.33
 
-    $Id: Record.pm,v 1.73 2003/12/16 17:26:30 petdance Exp $
+    $Id: Record.pm,v 1.74 2003/12/16 17:34:32 petdance Exp $
 
 =cut
 
@@ -306,7 +306,7 @@ sub insert_fields_before {
     ## insert before $before 
     if ($pos >= @$fields) {
 	$self->_warn("Couldn't find field to insert before");
-	return(undef);
+	return;
     }
     splice(@$fields,$pos,0,@new);
     return scalar @new;
@@ -338,7 +338,7 @@ sub insert_fields_after {
     ## insert after $after
     if ($pos+1 >= @$fields) { 
 	$self->_warn("Couldn't find field to insert after");
-	return(undef);
+	return;
     }
     splice(@$fields,$pos+1,0,@new);
     return scalar @new;

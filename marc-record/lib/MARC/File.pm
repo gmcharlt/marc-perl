@@ -66,7 +66,7 @@ sub in {
 	$fh = eval { local *FH; open( FH, $arg ) or die; *FH{IO}; };
 	if ( $@ ) { 
 	    $MARC::File::ERROR = "Couldn't open $filename: $@";
-	    return( undef );
+	    return;
 	}
     }
 
@@ -101,8 +101,7 @@ Returns a MARC::Record reference, or C<undef> on error.
 sub next {
     my $self = shift;
     $self->{recnum}++;
-    my $rec = $self->_next();
-    return unless $rec;
+    my $rec = $self->_next() or return;
     return $self->decode($rec, @_);
 }
 
@@ -118,8 +117,8 @@ Returns 1 or undef.
 
 sub skip {
     my $self = shift;
-    my $rec = $self->_next();
-    return $rec ? 1 : undef;
+    my $rec = $self->_next() or return;
+    return 1;
 }
 
 =head2 C<warnings()>
