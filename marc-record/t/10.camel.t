@@ -1,4 +1,4 @@
-# $Id: 10.camel.t,v 1.9 2002/07/01 15:45:27 petdance Exp $
+# $Id: 10.camel.t,v 1.10 2002/07/02 04:14:28 petdance Exp $
 # Test creating a MARC record for the Camel book
 #
 # Bugs, comments, suggestions welcome: marc@petdance.com
@@ -91,12 +91,12 @@ is( $marc->subfield( 100, "a" ), "Wall, Larry.", 'Field/subfield lookup' );
 # Test 6: Reading from disk
 
 my $file = MARC::File::USMARC->in( "t/camel.usmarc" );
-ok( defined $file, "Opened input file" );
+isa_ok( $file, 'MARC::File', "Opened input file" );
 
 my $diskmarc;
 for my $n ( 1..8 ) {
 	$diskmarc = $file->next();
-	ok( defined $diskmarc, "  Record #$n" );
+	isa_ok( $diskmarc, 'MARC::Record', "  Record #$n" );
 }
 	
 if ( $diskmarc ) {
