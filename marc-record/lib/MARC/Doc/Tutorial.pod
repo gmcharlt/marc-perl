@@ -1062,61 +1062,60 @@ Suppose you have a batch of MARC records and you want to extract all the
 subject headings, and generate a report of how many times each subject
 heading appeared in the batch. 
 
-   1      use MARC::File::USMARC;
-   2   
-   3      use constant MAX => 20;
-   4   
-   5      my %counts;
-   6   
-   7      my $filename = shift or die "Must specify filename\n";
-   8      my $file = MARC::File::USMARC->in( $filename );
-   9   
-  10      while ( my $marc = $file->next() ) {
-  11   	for my $field ( $marc->field("6XX") ) {
-  12   	    my $heading = $field->subfield('a');
-  13   
-  14   	    # Remove certain trailing whitespace and punctuation.
-  15   	    $heading =~ s/[.,]?\s*$//;
-  16   
-  17   	    # Now count it
-  18   	    ++$counts{$heading};
-  19   	}
-  20      }
-  21      $file->close();
-  22   
-  23      # Sort the list of headings based on the count of each.
-  24      my @headings = reverse sort { $counts{$a} <=> $counts{$b} } keys %counts;
-  25   
-  26      # Take the top N hits.
-  27      @headings = @headings[0..MAX-1];
-  28   
-  29      # Print out the results
-  30      for my $heading ( @headings ) {
-  31   	printf( "%5d %s\n", $counts{$heading}, $heading );
-  32      }
+   1   use MARC::File::USMARC;
+   2   use constant MAX => 20;
+   3   
+   4   my %counts;
+   5   
+   6   my $filename = shift or die "Must specify filename\n";
+   7   my $file = MARC::File::USMARC->in( $filename );
+   8   
+   9   while ( my $marc = $file->next() ) {
+  10       for my $field ( $marc->field("6XX") ) {
+  11           my $heading = $field->subfield('a');
+  12   
+  13           # Remove certain trailing whitespace and punctuation.
+  14           $heading =~ s/[.,]?\s*$//;
+  15   
+  16           # Now count it
+  17           ++$counts{$heading};
+  18       }
+  19   }
+  20   $file->close();
+  21   
+  22   # Sort the list of headings based on the count of each.
+  23   my @headings = reverse sort { $counts{$a} <=> $counts{$b} } keys %counts;
+  24   
+  25   # Take the top N hits.
+  26   @headings = @headings[0..MAX-1];
+  27   
+  28   # Print out the results
+  29   for my $heading ( @headings ) {
+  30       printf( "%5d %s\n", $counts{$heading}, $heading );
+  31   }
 
 Which will generate results like this:
 
-      600 United States
-      140 World War, 1939-1945
-       78 Great Britain
-       63 Afro-Americans
-       61 Indians of North America
-       58 American poetry
-       55 France
-       53 West (U.S.)
-       53 Science fiction
-       53 American literature
-       50 Shakespeare, William
-       48 Soviet Union
-       46 Mystery and detective stories
-       45 Presidents
-       43 China
-       40 Frontier and pioneer life
-       38 English poetry
-       37 Authors, American
-       37 English language
-       35 Japan
+  600 United States
+  140 World War, 1939-1945
+   78 Great Britain
+   63 Afro-Americans
+   61 Indians of North America
+   58 American poetry
+   55 France
+   53 West (U.S.)
+   53 Science fiction
+   53 American literature
+   50 Shakespeare, William
+   48 Soviet Union
+   46 Mystery and detective stories
+   45 Presidents
+   43 China
+   40 Frontier and pioneer life
+   38 English poetry
+   37 Authors, American
+   37 English language
+   35 Japan
 
 =head2 HTML
 
