@@ -8,15 +8,27 @@ Turns http://www.loc.gov/marc/bibliographic/ecbdist.html into the format
 used by MARC::Lint.pm
 
 Takes ecbdist.html as input.  Skips fixed fields and data marked
-[OBSOLETE] Doesn't handle the tags 841-88X properly. Excise these
-manually.
+"[OBSOLETE]"  Also, the HTML file doesn't include the 841-88X tags,
+so those are hardcoded here.
 
 =head1 AUTHOR
 
-Originally written by Colin Campbell at Sirsi, and taken over and tweaked.
+Originally written by Colin Campbell at Sirsi, and taken over and modified
+by Andy Lester.
 
 =cut
 
+open( my $fh, "../lib/MARC/Lint.pm" ) or die "Can't open module";
+while ( <$fh> ) {
+    print;
+    last if /^__DATA__/;
+}
+close $fh;
+
+my $in_tag = undef;
+my $i;
+my $i1;
+my $i2;
 
 my $v = 0;
 while(<>) {
@@ -29,7 +41,7 @@ while(<>) {
     }
     s/^ *//;
     if (/^(\d\d\d) -/) {
-	$tag = $1;
+	my $tag = $1;
 	if (/OBSOLETE/) { 
 	    $in_tag = 0;
 	    next; 
@@ -66,7 +78,7 @@ while(<>) {
 	} else {
 	    if ($i) {
 		next if /OBSOLETE/;
-		$data = '';
+		my $data = '';
 		if (/^(\d-\d)/) {
 		    $data = $1;
 		} elsif (/^[#0123456789]/) {
@@ -93,3 +105,82 @@ while(<>) {
     }
 }
 
+# Dump the hardcoded ones that aren't in the HTML file.
+print <DATA>;
+
+__END__
+850	R
+ind1	blank
+ind2	blank
+a	R
+8	R
+
+852	R
+ind1	b012345678
+ind2	b012
+a	NR
+b	R
+c	R
+e	R
+f	R
+g	R
+h	NR
+i	R
+j	NR
+k	R
+l	NR
+m	R
+n	NR
+p	NR
+q	NR
+s	R
+t	NR
+x	R
+z	R
+2	NR
+3	NR
+6	NR
+8	NR
+
+856	R
+ind1	b012347
+ind2	b0128
+a	R
+b	R
+c	R
+d	R
+f	R
+h	NR
+i	R
+j	NR
+k	NR
+l	NR
+m	R
+n	NR
+o	NR
+p	NR
+q	NR
+r	NR
+s	R
+t	R
+u	R
+v	R
+w	R
+x	R
+y	R
+z	R
+2	NR
+3	NR
+6	NR
+8	R
+
+880	R
+ind1	
+ind2	
+6	NR
+
+887	R
+ind1	blank
+ind2	blank
+a	NR
+2	NR
