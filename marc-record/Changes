@@ -1,5 +1,11 @@
 Revision history for Perl extension MARC::Record.
 
+1.37_01
+        [ENHANCEMENTS]
+        - Performance tweak on MARC::Field->is_control_field() since it
+          gets called a lot when cloning records.
+
+
 1.36    March 9th, 2004
 
         [THINGS THAT MAY BREAK YOUR CODE]

@@ -63,13 +63,15 @@ sub new($) {
     my $tagno = shift;
     ($tagno =~ /^[0-9A-Za-z]{3}$/)
         or croak( "Tag \"$tagno\" is not a valid tag." );
+    my $is_control = (($tagno =~ /^\d+$/) && ($tagno < 10));
 
     my $self = bless {
         _tag => $tagno,
         _warnings => [],
+        _is_control_field => $is_control,
     }, $class;
 
-    if ( $self->is_control_field ) {
+    if ( $is_control ) {
         $self->{_data} = shift;
     } else {
         for my $indcode ( qw( _ind1 _ind2 ) ) {
@@ -135,7 +137,7 @@ Tells whether this field is one of the control tags from 001-009.
 
 sub is_control_field {
     my $self = shift;
-    return ($self->{_tag} =~ /^\d+$/) && ($self->{_tag} < 10);
+    return $self->{_is_control_field};
 }
 
 =head2 subfield(code)
@@ -475,14 +477,16 @@ sub clone {
     my $self = shift;
 
     my $tagno = $self->{_tag};
+    my $is_control = (($tagno =~ /^\d+$/) && ($tagno < 10));
 
     my $clone =
         bless {
             _tag => $tagno,
             _warnings => [],
+            _is_control_field => $is_control,
         }, ref($self);
 
-    if ( $self->is_control_field ) {
+    if ( $is_control ) {
         $clone->{_data} = $self->{_data};
     } else {
         $clone->{_ind1} = $self->{_ind1};
