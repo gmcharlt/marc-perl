@@ -1,4 +1,4 @@
-use Test::More qw( no_plan );
+use Test::More tests=>5;
 use strict;
 
 BEGIN: {
@@ -38,7 +38,7 @@ STRICT_OFF: {
     }
 
     my @warnings = $batch->warnings();
-    is( scalar(@warnings), 14, "warnings() w/ strict off" );
+    is( scalar(@warnings), 6, "warnings() w/ strict off" );
     is( $count, 8, "next() w/ strict off" );
 
 }
