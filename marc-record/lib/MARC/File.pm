@@ -137,6 +137,12 @@ sub warnings {
     return(@warnings);
 }
 
+=head2 close()
+
+Closes the file, both from the object's point of view, and the actual file.
+
+=cut
+
 sub close {
     my $self = shift;
     close( $self->{fh} );
@@ -150,6 +156,18 @@ sub _unimplemented() {
     my $method = shift;
     warn "Method $method must be overridden";
 }
+
+=head2 write()
+
+Writes a record to the output file.  This method must be overridden
+in your subclass.
+
+=head2 decode()
+
+Decodes a record into a USMARC format.  This method must be overridden
+in your subclass.
+
+=cut
 
 sub write   { $_[0]->_unimplemented("write"); }
 sub decode  { $_[0]->_unimplemented("decode"); }

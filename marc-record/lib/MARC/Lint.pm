@@ -219,6 +219,10 @@ sub check_record {
 Various functions to check the different fields.  If the function doesn't exist, 
 then it doesn't get checked.
 
+=head2 check_245( $field )
+
+Makes sure that the 245 has an _a subfield.
+
 =cut
 
 sub check_245 {

@@ -31,25 +31,33 @@ use MARC::Record qw( LEADER_LEN );
 
 None.  
 
-=head1 METHODS
-
 =cut
 
 
-#
-# The buffer must be large enough to handle any valid record because 
-# we don't check for cases like a CR/LF pair or an 
-# end-of-record/CR/LF trio being only partially in the buffer.
-#
-# The max valid record is the max MARC record size (99999)
-# plus one or two characters per tag (CR, LF, or CR/LF).
-# It's hard to say what the max number of tags is, so here
-# we use 6000.  (6000 tags can be squeezed into a MARC record
-# only if every tag has only one subfield containing a maximum 
-# of one character, or if data from multiple tags overlaps in
-# the MARC record body.  We're pretty safe.)
-#
+=for internal
+
+The buffer must be large enough to handle any valid record because
+we don't check for cases like a CR/LF pair or an end-of-record/CR/LF
+trio being only partially in the buffer.
+
+The max valid record is the max MARC record size (99999) plus one
+or two characters per tag (CR, LF, or CR/LF).  It's hard to say
+what the max number of tags is, so here we use 6000.  (6000 tags
+can be squeezed into a MARC record only if every tag has only one
+subfield containing a maximum of one character, or if data from
+multiple tags overlaps in the MARC record body.  We're pretty safe.)
+
+=cut
+
 use constant BUFFER_MIN => (99999 + 6000 * 2);
+
+=head1 METHODS
+
+=head2 in()
+
+Opens a MicroLIF file for reading.
+
+=cut
 
 sub in {
     my $class = shift;
@@ -200,6 +208,17 @@ sub header {
     return $self->{header};
 }
 
+=head2 decode()
+
+Decodes a MicroLIF record and returns a USMARC record.
+
+Can be called in one of three different ways:
+
+    $object->decode( $lif )
+    MARC::File::MicroLIF->decode( $lif )
+    MARC::File::MicroLIF::decode( $lif )
+
+=cut
 
 sub decode {
     my $self = shift;
@@ -207,9 +226,6 @@ sub decode {
     my $text = '';
 
     ## decode can be called in a variety of ways
-    ## $object->decode( $string )
-    ## MARC::File::MicroLIF->decode( $string )
-    ## MARC::File::MicroLIF::decode( $string )
     ## this bit of code covers all three
     
     if ( ref($self) =~ /^MARC::File/ ) {
