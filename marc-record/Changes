@@ -1,5 +1,11 @@
 Revision history for Perl extension MARC::Record.
 
+1.11	XXXXX, XX, 2002
+	- insert_fields_before(), insert_fields_after(), appned_fields(),
+	  and insert_grouped_fields() now call croak() instead of _gripe
+	  in order to help MARC::Record users to locate where their call 
+	  is failing.
+
 1.10	August 30, 2002
 	[ENHANCEMENTS]
 	- Now runs under Perl 5.005.  All you people who have older Perls can
