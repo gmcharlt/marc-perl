@@ -14,8 +14,6 @@ use warnings;
 use strict;
 use integer;
 
-use lib qw( /home/alester/marc-record/lib );
-
 use MARC::File;
 use Getopt::Long;
 
