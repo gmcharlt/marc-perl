@@ -1,5 +1,6 @@
 Revision history for Perl extension MARC::Record.
 
+1.35_01
 	[FIXES]
 	- marcdump and marclint didn't recognize the -v flag.
 
