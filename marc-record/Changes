@@ -1,5 +1,8 @@
 Revision history for Perl extension MARC::Record.
 
+0.92    April 2, 2002
+	- Fixed marclint to use the new MARC::File object
+
 0.91	April 2, 2002
 	- Fixed a bad build: MARC::Batch wasn't included in the tarball.
 
