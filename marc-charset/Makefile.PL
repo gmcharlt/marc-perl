@@ -1,8 +1,9 @@
 use 5.8.0;
-use strict;
+use lib "lib";
 use ExtUtils::MakeMaker;
 use File::Find;
 use File::Copy;
+use Unicode::UCD qw( charinfo );
 
 find( \&filecheck, "." );
 
@@ -18,11 +19,6 @@ you nearest CPAN mirror.
 
 WARNING
 
-
-sub filecheck {
-	unlink if /~$/;	# Remove any vi backup files
-	die "Aborting: Swapfile $_ found" if /\.swp$/;
-}
 
 &WriteMakefile(
 	NAME		=> 'MARC::Charset',
@@ -55,29 +51,63 @@ sub filecheck {
 ##
 ## The idea here was to make it easy to extend this code if we wanted
 ## to use Berkeley DBs for other character lookups. But it's just East
-## Asian at the moment.
+## Asian at the moment + the reverse mapping for UTF-8 => MARC-8
 
 sub makeDbs {
+
+    print "creating character mapping databases...this might take a while\n";
+
+    ## create a berkeley db for our reverse mapping (UTF-8 => MARC-8)
+    tie( my %reverse, 'DB_File', 'lib/MARC/Charset/UTF8.db' )
+	|| die 'unable to create lib/MARC/Charset/UTF8.db';
+
+    ## now cycle through dbs that we need forwards mapping for
     foreach my $db ( 'EastAsian' ) {
 	next if ! -f "data/$db.txt";
 	tie( my %db, "DB_File", "lib/MARC/Charset/$db.db" )
 	    || die "unable to create lib/MARC/Charset/$db.db: $!";
 	open( IN, "data/$db.txt" ) 
 	    || die "couldn't find data/$db.txt: $!";
-	print "creating DB_File lib/MARC/Charset/$db.db\n";
 	while ( my $line = <IN> ) {
 	    next if $line =~ /^#/; ## skip any comments
 	    my @cols = split/,/,$line;
 	    my @from = ( $cols[0] =~ /(..)(..)(..)/ );
 	    my $key;
 	    foreach ( @from ) { $key .= chr( hex($_) ); }
-	    my $value = $cols[1];
+	    my $value = $cols[1] + 0;
 	    $db{ $key } = $value;
+	    $reverse{ $value } = join( '~~', $key, $db, 0 );
 	}
 	untie(%db);
     }
+
+    ## add additional charsets to reverse mapping db
+    my @charsets = qw(
+	Ansel ArabicBasic ArabicExtended ASCII 
+	CyrillicBasic CyrillicExtended Greek 
+	GreekSymbols Hebrew Subscripts Superscripts 
+    );
+
+    no strict;
+
+    foreach my $charset ( @charsets ) {
+
+	eval "use MARC::Charset::$charset";
+	die "couldn't use MARC::Charset::$charset" if $@;
+
+	while ( my ($marc8,$utf8) = 
+	    each %{"MARC::Charset::${charset}::marc2unicode"} ) {
+	    my $ord = ord( $utf8 );
+	    my $char = charinfo( $ord );
+	    $reverse{ $ord } = join( '~~' ,
+		$marc8, $charset, $char->{ combining } );
+	}
+
+    }
+
 }
 
+untie( %reverse );
 
 if ( shift eq 'sfdocs' ) {
     print "making HTML and PDF for SourceForge\n";
@@ -87,6 +117,17 @@ if ( shift eq 'sfdocs' ) {
     system( "tar cvfz sfdocs.tar.gz sfdocs/ > /dev/null");
     system( "rm -rf sfdocs" );
 }
+
+
+## make sure files aren't in mid-edit
+
+sub filecheck {
+	unlink if /~$/;	# Remove any vi backup files
+	die "Aborting: Swapfile $_ found" if /\.swp$/;
+}
+
+
+## build documentation for sourceforge
 
 sub sfdocs {
     if ( $File::Find::name =~ m|.+/(.+)\.pm$| ) {
