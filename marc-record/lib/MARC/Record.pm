@@ -16,7 +16,7 @@ use Carp qw(croak);
 
 =head1 VERSION 1.31
 
-    $Id: Record.pm,v 1.65 2003/10/16 15:59:42 edsummers Exp $
+    $Id: Record.pm,v 1.66 2003/10/21 16:27:08 edsummers Exp $
 
 =cut
 
@@ -526,8 +526,10 @@ sub clone {
 
 =head2 warnings()
 
-Returns the warnings that were created when the record was read.
+Returns the warnings (as a list) that were created when the record was read.
 These are things like "Invalid indicators converted to blanks".
+
+    my @warnings = $record->warnings();
 
 The warnings are items that you might be interested in, or might
 not.  It depends on how stringently you're checking data.  If
