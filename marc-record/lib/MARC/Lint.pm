@@ -23,7 +23,7 @@ MARC::Lint - Perl extension for checking validity of MARC records
 	print $marc->title, "\n";
 
 	# Print the errors that were found
-	print join( "\n", $linter->warnings ), "\n";
+	print join( "\n", $lint->warnings ), "\n";
     } # while
 
 Given the following MARC record:
