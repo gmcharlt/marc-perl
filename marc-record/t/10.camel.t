@@ -8,7 +8,7 @@ use integer;
 use MARC::Record;
 use Test::More 'no_plan';
 
-ok( 1, 'Loaded modules' );
+pass( 'Loaded modules' );
 
 # Test 1: Testing as_usmarc()
 my $marc = MARC::Record->new();
