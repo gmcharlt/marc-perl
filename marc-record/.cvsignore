@@ -1,0 +1,13 @@
+MARC-Record-1.*
+.sfrc
+sf
+sf-test.pl.txt
+.lwpcookies
+.DS_Store
+pm_to_blib
+Makefile
+*.bak
+blib
+*tar
+*gz
+
