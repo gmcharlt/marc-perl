@@ -13,7 +13,7 @@ use DB_File;
 use MARC::Charset::Generic qw( :all );
 use Carp qw( croak );
 
-our $VERSION = 0.4;
+our $VERSION = 0.5;
 
 =head1 SYNOPSIS
 

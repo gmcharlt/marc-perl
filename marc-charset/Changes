@@ -1,6 +1,6 @@
 Revision history for MARC::Charset
 
-0.4  Fri Apr 11 06:47:00 2003
+0.5  Fri Apr 11 06:47:00 2003
     - all Charset classes inherit from MARC::Charset::Generic
     - added MARC::Charset::UTF8
     - added MARC::Charset::to_marc8() for conversion of UTF8 back to MARC8
