@@ -1,6 +1,7 @@
 package MARC::Lint;
 
 use strict;
+use warnings;
 use integer;
 use MARC::Record;
 use MARC::Field;
@@ -593,7 +594,7 @@ sub _check_article {
 	#report non-numeric non-filing indicators as invalid
 	$self->warn ( $tagno, ": Non-filing indicator is non-numeric" ) unless ($ind =~ /^[0-9]$/);
 	#get subfield 'a' of the title field
-	my $title = $field->subfield('a');
+	my $title = $field->subfield('a') || '';
 
 
 	my $char1_notalphanum = 0;
@@ -604,13 +605,16 @@ sub _check_article {
 		$title =~ s/^["'\[\(*]//;
 	}
 	# split title into first word + rest on space, apostrophe or hyphen
-	$title =~ /^([^ '\-]+)([ '\-])?(.*)/i;
-	my $firstword=$1, my $separator=$2; my $etc=$3;
+	my ($firstword,$separator,$etc) = $title =~ /^([^ '\-]+)([ '\-])?(.*)/i;
+        $firstword = '' if ! defined( $firstword );
+        $separator = '' if ! defined( $separator );
+        $etc = '' if ! defined( $etc );
+
 	#get length of first word plus the number of chars removed above plus one for the separator
 	my $nonfilingchars = length($firstword) + $char1_notalphanum + 1;
 
-	my $isan_exception =0;
 	#check to see if first word is an exception
+	my $isan_exception = 0;
 	$isan_exception = grep {$title =~ /^\Q$_\E/i} (keys %exceptions);
 
 	#lowercase chars of $firstword for comparison with article list
