@@ -1,13 +1,10 @@
-.releaserc
 Changes
 MANIFEST
 Makefile.PL
 META.yml
 README
 bin/marcdump
-bin/marclint
-etc/ecbdlist.html
-etc/specs
+
 lib/MARC/Batch.pm
 lib/MARC/Doc/Tutorial.pod
 lib/MARC/Field.pm
@@ -16,6 +13,7 @@ lib/MARC/File.pm
 lib/MARC/File/USMARC.pm
 lib/MARC/File/Utils.pm
 lib/MARC/Record.pm
+
 t/00.load.t
 t/10.camel.t
 t/11.astring.t

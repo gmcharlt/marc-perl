@@ -16,14 +16,12 @@ use Carp qw(croak);
 
 =head1 VERSION
 
-Version 1.39_01
-
-    $Id: Record.pm,v 1.88 2004/09/30 03:41:26 moregan Exp $
+Version 1.39_02
 
 =cut
 
 use vars qw( $VERSION );
-$VERSION = '1.4';
+$VERSION = '1.39_02';
 
 use Exporter;
 use vars qw( @ISA @EXPORTS @EXPORT_OK );
@@ -39,10 +37,6 @@ use constant LEADER_LEN => 24;
 
 Module for handling MARC records as objects.  The file-handling stuff is
 in MARC::File::*.
-
-=head1 EXPORT
-
-None.
 
 =head1 ERROR HANDLING
 
