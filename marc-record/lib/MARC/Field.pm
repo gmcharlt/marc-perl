@@ -115,7 +115,7 @@ sub indicator($) {
 	my $self = shift;
 	my $indno = shift;
 
-	croak( "Fields below 010 do not have indicators" )
+	$self->_warn( "Fields below 010 do not have indicators" )
 	    if $self->is_control_tag(); 
 
 	if ( $indno == 1 ) {
@@ -151,7 +151,7 @@ sub subfield {
 	my $self = shift;
 	my $code_wanted = shift;
 
-	croak( "Fields below 010 do not have subfields" )
+	$self->_warn( "Fields below 010 do not have subfields" )
 	    if $self->is_control_tag();
 
 	my @data = @{$self->{_subfields}};
@@ -181,7 +181,7 @@ For example, this might be the subfields from a 245 field:
 sub subfields {
 	my $self = shift;
 
-	croak( "Fields below 010 do not have subfields" )
+	$self->_warn( "Fields below 010 do not have subfields" )
 	    if $self->is_control_tag();
 
 	my @list;
@@ -201,7 +201,7 @@ Returns the data part of the field, if the tag number is less than 10.
 sub data($) {
 	my $self = shift;
 
-	croak( "data() is only for tags less than 010" )
+	$self->_warn( "data() is only for tags less than 010" )
 	    unless $self->is_control_tag();
 		
 	$self->{_data} = $_[0] if @_;
