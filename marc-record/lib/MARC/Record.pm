@@ -13,12 +13,13 @@ eval 'use warnings' if $] >= 5.006;
 use vars qw( $ERROR );
 
 use MARC::Field;
+use Carp qw(croak);
 
 =head1 VERSION
 
 Version 1.10
 
-    $Id: Record.pm,v 1.29 2002/08/30 22:43:10 petdance Exp $
+    $Id: Record.pm,v 1.30 2002/09/03 14:37:15 edsummers Exp $
 
 =cut
 
@@ -159,7 +160,7 @@ below.
 
 sub insert_grouped_field {
     my ($self,$new) = @_;
-    _all_parms_are_fields($new) or return(_gripe('Argument must be MARC::Fieldobject'));
+    _all_parms_are_fields($new) or croak('Argument must be MARC::Field object');
 
     ## try to find the end of the field group and insert it there
     my $limit = int($new->tag() / 100);
@@ -208,7 +209,7 @@ Returns the number of fields appended.
 sub append_fields {
     my $self = shift;
 
-    _all_parms_are_fields(@_) or return(_gripe('Arguments must be MARC::Field objects'));
+    _all_parms_are_fields(@_) or croak('Arguments must be MARC::Field objects');
 
     push(@{ $self->{_fields} }, @_); 
     return scalar @_;
@@ -229,7 +230,7 @@ Both C<$before_field> and all C<@new_fields> need to be MARC::Field objects.
 sub insert_fields_before {
     my $self = shift;
 
-    _all_parms_are_fields(@_) or return(_gripe('All arguments must be MARC::Field objects'));
+    _all_parms_are_fields(@_) or croak('All arguments must be MARC::Field objects');
     my ($before,@new) = @_;
 
     ## find position of $before
@@ -258,7 +259,7 @@ Identical to L<insert_fields_before()>, but fields are added after C<$after_fiel
 sub insert_fields_after {
     my $self = shift;
 
-    _all_parms_are_fields(@_) or return(_gripe('All arguments must be MARC::Field objects'));
+    _all_parms_are_fields(@_) or croak('All arguments must be MARC::Field objects');
     my ($after,@new) = @_;
 
     ## find position of $after
