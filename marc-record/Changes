@@ -3,6 +3,7 @@ Revision history for Perl extension MARC::Record.
 0.92    April 2, 2002
 	- Fixed marclint to use the new MARC::File object
 	- Added MARC::Record::new_from_usmarc() for backward compatibility.
+	This is in addition to the MARC::Record::as_usmarc() function.
 
 0.91	April 2, 2002
 	- Fixed a bad build: MARC::Batch wasn't included in the tarball.
