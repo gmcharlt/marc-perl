@@ -9,6 +9,7 @@ lib/MARC/File.pm
 lib/MARC/File/USMARC.pm
 lib/MARC/File/MicroLIF.pm
 lib/MARC/Batch.pm
+lib/MARC/Doc/Tutorial.pod
 pl/marcdump
 pl/marclint
 t/00.load.t
