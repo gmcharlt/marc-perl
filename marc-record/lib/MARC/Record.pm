@@ -10,7 +10,7 @@ use strict;
 use integer;
 eval 'use warnings' if $] >= 5.006;
 
-use vars qw( $VERSION $ERROR );
+use vars qw( $ERROR );
 
 use MARC::Field;
 
@@ -18,11 +18,11 @@ use MARC::Field;
 
 Version 1.00
 
-    $Id: Record.pm,v 1.26 2002/08/25 16:38:51 petdance Exp $
+    $Id: Record.pm,v 1.27 2002/08/25 21:27:59 petdance Exp $
 
 =cut
 
-our $VERSION = '1.00';
+use vars '$VERSION'; $VERSION = '1.00';
 
 use Exporter;
 our @ISA = qw( Exporter );

@@ -1,8 +1,9 @@
-# $Id: 61.replace.t,v 1.2 2002/07/01 15:43:23 petdance Exp $
+# $Id: 61.replace.t,v 1.3 2002/08/25 21:27:59 petdance Exp $
 # Test updating a MARC record for the Camel book
 
 use strict;
 use integer;
+eval 'use warnings' if $] >= 5.006;
 
 use Test::More tests=>8;
 

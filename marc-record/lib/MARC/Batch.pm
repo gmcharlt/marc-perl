@@ -14,11 +14,11 @@ eval 'use warnings' if $] >= 5.006;
 
 Version 1.00
 
-    $Id: Batch.pm,v 1.11 2002/08/25 16:38:51 petdance Exp $
+    $Id: Batch.pm,v 1.12 2002/08/25 21:27:58 petdance Exp $
 
 =cut
 
-our $VERSION = '1.00';
+use vars '$VERSION'; $VERSION = '1.00';
 
 =head1 SYNOPSIS
 

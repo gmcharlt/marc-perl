@@ -1,10 +1,11 @@
-# $Id: 00.load.t,v 1.1 2002/03/15 22:04:22 petdance Exp $
+# $Id: 00.load.t,v 1.2 2002/08/25 21:27:59 petdance Exp $
 
-BEGIN { $| = 1; print "1..1\n"; }
-END   { print "not ok 1\n" unless $loaded; }
+use strict;
+eval 'use warnings' if $] >= 5.006;
 
-use MARC::Record;
+use Test::More tests=>2;
 
-$loaded = 1;
-print "ok\n";
-
+BEGIN {
+    use_ok( 'MARC::Record' );
+    use_ok( 'MARC::Batch' );
+}

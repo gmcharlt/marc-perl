@@ -1,6 +1,8 @@
-# $Id: 00.version.t,v 1.4 2002/04/02 14:08:39 petdance Exp $
+# $Id: 00.version.t,v 1.5 2002/08/25 21:27:59 petdance Exp $
 
 use Test::More tests=>13;
+use strict;
+eval 'use warnings' if $] >= 5.006;
 
 BEGIN {
     use_ok( $_ ) for qw( 

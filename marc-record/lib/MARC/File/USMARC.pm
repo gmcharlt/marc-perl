@@ -11,17 +11,17 @@ use integer;
 use bytes; 
 eval 'use warnings' if $] >= 5.006;
 
-use vars qw( $VERSION $ERROR );
+use vars qw( $ERROR );
 
 =head1 VERSION
 
 Version 1.00
 
-    $Id: USMARC.pm,v 1.17 2002/08/25 16:38:51 petdance Exp $
+    $Id: USMARC.pm,v 1.18 2002/08/25 21:27:59 petdance Exp $
 
 =cut
 
-our $VERSION = '1.00';
+use vars '$VERSION'; $VERSION = '1.00';
 
 use MARC::File;
 our @ISA = qw( MARC::File );

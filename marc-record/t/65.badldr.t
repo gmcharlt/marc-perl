@@ -6,6 +6,8 @@ use Test::More tests=>3;
 ## and check that we get an appropriate warning
 
 use strict;
+eval 'use warnings' if $] >= 5.006;
+
 use MARC::Batch;
 
 my $batch = MARC::Batch->new('USMARC','t/badldr.usmarc');

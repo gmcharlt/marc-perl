@@ -1,10 +1,10 @@
-# $Id: 10.camel.t,v 1.10 2002/07/02 04:14:28 petdance Exp $
+# $Id: 10.camel.t,v 1.11 2002/08/25 21:27:59 petdance Exp $
 # Test creating a MARC record for the Camel book
 #
 # Bugs, comments, suggestions welcome: marc@petdance.com
 
 use strict;
-use integer;
+eval 'use warnings' if $] >= 5.006;
 
 use Test::More tests => 27;
 

@@ -7,7 +7,7 @@ eval 'use warnings' if $] >= 5.006;
 use constant SUBFIELD_INDICATOR => "\x1F";
 use constant END_OF_FIELD       => "\x1E";
 
-use vars qw( $ERROR $VERSION );
+use vars qw( $ERROR );
 
 =head1 NAME
 
@@ -17,11 +17,11 @@ MARC::Field - Perl extension for handling MARC fields
 
 Version 1.00
 
-    $Id: Field.pm,v 1.14 2002/08/25 16:38:51 petdance Exp $
+    $Id: Field.pm,v 1.15 2002/08/25 21:27:59 petdance Exp $
 
 =cut
 
-our $VERSION = '1.00';
+use vars '$VERSION'; $VERSION = '1.00';
 
 =head1 SYNOPSIS
 
