@@ -8,12 +8,13 @@ MARC::Batch - Perl module for handling files of MARC::Record objects
 
 use strict;
 use integer;
+eval 'use warnings' if $] >= 5.006;
 
 =head1 VERSION
 
 Version 1.00
 
-    $Id: Batch.pm,v 1.10 2002/07/30 15:32:51 edsummers Exp $
+    $Id: Batch.pm,v 1.11 2002/08/25 16:38:51 petdance Exp $
 
 =cut
 

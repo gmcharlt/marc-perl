@@ -8,13 +8,15 @@ MARC::File - Base class for files of MARC records
 
 use strict;
 use integer;
+eval 'use warnings' if $] >= 5.006;
+
 use vars qw( $VERSION $ERROR );
 
 =head1 VERSION
 
 Version 1.00
 
-    $Id: File.pm,v 1.13 2002/07/30 15:32:51 edsummers Exp $
+    $Id: File.pm,v 1.14 2002/08/25 16:38:51 petdance Exp $
 
 =cut
 

@@ -2,11 +2,12 @@ package MARC::Field;
 
 use strict;
 use integer;
+eval 'use warnings' if $] >= 5.006;
 
 use constant SUBFIELD_INDICATOR => "\x1F";
 use constant END_OF_FIELD       => "\x1E";
 
-use vars qw( $ERROR );
+use vars qw( $ERROR $VERSION );
 
 =head1 NAME
 
@@ -16,7 +17,7 @@ MARC::Field - Perl extension for handling MARC fields
 
 Version 1.00
 
-    $Id: Field.pm,v 1.13 2002/07/15 19:41:55 petdance Exp $
+    $Id: Field.pm,v 1.14 2002/08/25 16:38:51 petdance Exp $
 
 =cut
 

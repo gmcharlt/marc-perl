@@ -9,13 +9,15 @@ MARC::File::USMARC - USMARC-specific file handling
 use strict;
 use integer;
 use bytes; 
+eval 'use warnings' if $] >= 5.006;
+
 use vars qw( $VERSION $ERROR );
 
 =head1 VERSION
 
 Version 1.00
 
-    $Id: USMARC.pm,v 1.16 2002/07/30 15:36:33 edsummers Exp $
+    $Id: USMARC.pm,v 1.17 2002/08/25 16:38:51 petdance Exp $
 
 =cut
 

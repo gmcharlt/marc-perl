@@ -8,6 +8,8 @@ MARC::Record - Perl extension for handling MARC records
 
 use strict;
 use integer;
+eval 'use warnings' if $] >= 5.006;
+
 use vars qw( $VERSION $ERROR );
 
 use MARC::Field;
@@ -16,7 +18,7 @@ use MARC::Field;
 
 Version 1.00
 
-    $Id: Record.pm,v 1.25 2002/07/30 15:32:51 edsummers Exp $
+    $Id: Record.pm,v 1.26 2002/08/25 16:38:51 petdance Exp $
 
 =cut
 

@@ -2,6 +2,7 @@ package MARC::Lint;
 
 use strict;
 use integer;
+eval 'use warnings' if $] >= 5.006;
 
 =head1 NAME
 
@@ -11,7 +12,7 @@ MARC::Lint - Perl extension for checking validity of MARC records
 
 Version 1.00
 
-    $Id: Lint.pm,v 1.10 2002/07/29 15:03:37 edsummers Exp $
+    $Id: Lint.pm,v 1.11 2002/08/25 16:38:51 petdance Exp $
 
 =cut
 

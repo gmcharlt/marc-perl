@@ -8,13 +8,15 @@ MARC::File::MicroLIF - MicroLIF-specific file handling
 
 use strict;
 use integer;
+eval 'use warnings' if $] >= 5.006;
+
 use vars qw( $VERSION $ERROR );
 
 =head1 VERSION
 
 Version 1.00
 
-    $Id: MicroLIF.pm,v 1.10 2002/07/15 19:41:55 petdance Exp $
+    $Id: MicroLIF.pm,v 1.11 2002/08/25 16:38:51 petdance Exp $
 
 =cut
 
