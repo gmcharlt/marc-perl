@@ -23,7 +23,6 @@ my $opt_stats = 1;
 my @opt_field = ();
 my $opt_help = 0;
 my $opt_lif = 0;
-my $opt_version = 0;
 
 my $rc =
     GetOptions(
