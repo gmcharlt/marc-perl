@@ -2,6 +2,10 @@ Revision history for Perl extension MARC::Record.
 
 1.17	Jan???
 	[ENHANCEMENTS]
+	- Added tag-based filtering on the USMARC constructors and 
+	  passthru support for this in MARC::File::next().  Now you can 
+	  select which tags get put into your MARC record, and not have
+	  to pay the processing costs for fields you're going to ignore.
 	- title_proper() now returns the _a, _n and _p from the 245 in
 	  whatever order they happen to appear.  Thanks to Anne Highsmith
 	  for the change and the test data.

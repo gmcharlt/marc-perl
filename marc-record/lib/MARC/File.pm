@@ -16,7 +16,7 @@ use vars qw( $ERROR );
 
 Version 1.16
 
-    $Id: File.pm,v 1.26 2003/01/28 21:41:36 petdance Exp $
+    $Id: File.pm,v 1.27 2003/01/29 18:14:34 petdance Exp $
 
 =cut
 
@@ -77,9 +77,13 @@ sub out {
     die "Not yet written";
 }
 
-=head2 next()
+=head2 next( [\&filter_func] )
 
 Reads the next record from the file handle passed in.
+
+The C<$filter_func> is a reference to a filtering function.  Currently,
+only USMARC records support this.  See L<MARC::File::USMARC>'s C<decode()>
+function for details.
 
 Returns a MARC::Record reference, or C<undef> on error.
 
@@ -89,7 +93,7 @@ sub next {
     my $self = shift;
     $self->{recnum}++;
     my $rec = $self->_next();
-    return $rec ? $self->decode($rec) : undef;
+    return $rec ? $self->decode($rec, @_) : undef;
 }
 
 =head2 skip()
