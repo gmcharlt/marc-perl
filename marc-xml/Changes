@@ -1,0 +1,51 @@
+Revision history for Perl extension MARC-XML
+
+0.51  Thu Sep 04 10:33:12 2003 <Summer>
+    - docfix
+
+0.5   Thu Jul 29 13:55:38 2003 <Summers>
+    - updated so that it uses LC's MARCXML schema
+    - updated so that it can plug into MARC::Record 
+
+0.4   Sun Apr 23 20:50:47 CDT 2000 <Birthisel>
+    - Update "Windows" test in Makefile.PL
+    - Needs MARC 1.07 to cover recent fixes and incompatibilities
+    - Perl 5.6.0 warns on "join (//,", change to "join (''," instead.
+    - add $MARC::TEST to t/test?.t
+    - various documentation fixes
+
+0.3   Tue Jan 25 15:43:55 CST 2000 <Birthisel>
+    - update to XML::Parser 2.27 and MARC 1.04
+    - add Document Type Declaration support
+    - header defaults to "US-ASCII"
+    - add character set output processing and ansel_default
+    - add entity input translation and register_default
+    - add incremental input file processing: openxml, nextxml, closexml
+    - add eg/pacific.pl, eg/pacific0.dat, and eg/read_pfa.pl
+    - add t/ansel.ent and expand test2.t
+    - rename $XDEBUG, add $XTEST and xcarp()
+    - add "wrapper" methods output_header, output_body, output_footer
+
+0.26  Fri Jan 7 22:35:40 EST 2000 <Summers>
+    - Corrected dangerous interpolation in field_ handler
+
+0.25  Tue Nov 23 11:32:16 CST 1999 <Birthisel>
+    - original CPAN-style version; created by h2xs 1.18
+    - linux command: h2xs -A -X -n MARC::XML
+    - added Makefile.PL, MANIFEST, README, etc.
+    - ported t directory and tests from MARC.pm, added test4.t
+    - surgery--XML::Parser wants global subs and other scope changes.
+    - cleanup inheritance details
+    - add "ordered" option to new()
+    - numerous documentation changes
+
+
+0.2   Sun Nov 21 18:49:00 EST 1999 <Summers>
+        - removed MARC::XML specific pod from MARC.pm and added to MARC::XML
+
+0.1   Sun Nov 14 21:59:00 EST 1999 <Summers>
+        - created MARC::XML subclass to handle MARC<->XML conversions
+        - moved _marc2xml() from MARC.pm into MARC::XML
+
+0.01  Tue Jul 29 13:55:38 2003
+
