@@ -3,14 +3,29 @@
 use strict;
 use integer;
 
+use constant EMPTY_TESTS => 10;
 use constant PERLCONF_SKIPS => 6;
 use constant CAMEL_SKIPS => 2;
 use constant XPLATFORM_SKIPS => 2;
 
-use Test::More tests=>( 2 + (5*3) + CAMEL_SKIPS + PERLCONF_SKIPS + XPLATFORM_SKIPS );
+# the 10 is for the EMPTY: block of tests
+use Test::More tests=>( 2 + EMPTY_TESTS + (5*3) + CAMEL_SKIPS + PERLCONF_SKIPS + XPLATFORM_SKIPS );
 
 BEGIN {
     use_ok( 'MARC::File::USMARC' );
+}
+
+EMPTY: { my $marc = MARC::Record->new();
+    ok( defined $marc->title(), 'if data not present, title() is not undef' );
+    is( $marc->title(), '', 'if data not present, title() is empty string' );
+    ok( defined $marc->title_proper(), 'if data not present, title_proper() is not undef' );
+    is( $marc->title_proper(), '', 'if data not present, title_proper() is empty string' );
+    ok( defined $marc->author(), 'if data not present, author() is not undef' );
+    is( $marc->author(), '', 'if data not present, author() is empty string' );
+    ok( defined $marc->edition(), 'if data not present, edition() is not undef' );
+    is( $marc->edition(), '', 'if data not present, edition() is empty string' );
+    ok( defined $marc->publication_date(), 'if data not present, publication_date() is not undef' );
+    is( $marc->publication_date(), '', 'if data not present, publication_date() is empty string' );
 }
 
 my $file = MARC::File::USMARC->in( 't/camel.usmarc' );
