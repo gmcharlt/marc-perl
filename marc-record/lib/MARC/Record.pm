@@ -19,7 +19,7 @@ use Carp qw(croak);
 
 Version 1.16
 
-    $Id: Record.pm,v 1.44 2003/01/29 17:06:53 petdance Exp $
+    $Id: Record.pm,v 1.45 2003/01/29 18:04:44 petdance Exp $
 
 =cut
 
@@ -70,10 +70,12 @@ sub new {
     return bless $self, $class;
 } # new()
 
-=head2 new_from_usmarc( $marcblob )
+=head2 new_from_usmarc( $marcblob [, \&filter_func($tagno,$tagdata)] )
 
 This is a wrapper around C<MARC::File::USMARC::decode()> for compatibility with
 older versions of MARC::Record.
+
+The C<wanted_func()> is optional.  See L<MARC::File::USMARC>::decode for details.
 
 =cut
 
@@ -83,7 +85,7 @@ sub new_from_usmarc {
 
     require MARC::File::USMARC;
 
-    return MARC::File::USMARC::decode( $blob );
+    return MARC::File::USMARC::decode( $blob, @_ );
 }
 
 =head1 COMMON FIELD RETRIEVAL METHODS
