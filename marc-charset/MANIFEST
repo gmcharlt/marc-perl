@@ -2,6 +2,7 @@ Changes
 Makefile.PL
 MANIFEST
 lib/MARC/Charset.pm
+lib/MARC/Charset/Generic.pm
 lib/MARC/Charset/ASCII.pm
 lib/MARC/Charset/Ansel.pm
 lib/MARC/Charset/GreekSymbols.pm
@@ -15,6 +16,7 @@ lib/MARC/Charset/Subscripts.pm
 lib/MARC/Charset/Superscripts.pm
 lib/MARC/Charset/Controls.pm
 lib/MARC/Charset/EastAsian.pm
+lib/MARC/Charset/UTF8.pm
 data/EastAsian.txt
 README
 t/000.load.t
@@ -30,3 +32,4 @@ t/090.greek.t
 t/095.eastasian.t
 t/100.escape1.t
 t/110.escape2.t
+t/115.utf8.t
