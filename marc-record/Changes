@@ -1,6 +1,7 @@
 Revision history for Perl extension MARC::Record.
 
-1.13    November, 26, 2002 
+1.13    November 26, 2002 
+	[ENHANCEMENTS]
 	- Moved new_from_usmarc() docs & code up right after new() to 
 	  be more prominent. Thanks to Chris Biemesderfer for pointing this 
 	  out.
@@ -15,7 +16,8 @@ Revision history for Perl extension MARC::Record.
 	- Added new tests for the improved handling of errors in MARC::Batch.
 	- Added new warnings and strict methods to MARC::Doc::Tutorial, also
 	  added more use of MARC::Batch instead of using MARC::File directly.
-	- Added details about return codes to MARC::Batch.
+	- Improved docs on some functions to explicitly says what gets
+	  returned from each function.
 
 1.12	October 9, 2002 
 	- Makefile.PL will now generate PDF and HTML documentation for 
