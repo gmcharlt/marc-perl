@@ -24,9 +24,11 @@ my $opt_stats = 1;
 my @opt_field = ();
 my $opt_help = 0;
 my $opt_lif = 0;
+my $opt_version = 0;
 
 my $rc =
     GetOptions(
+	"version"   => \$opt_version,
 	"print!"    => \$opt_print,
 	"lif!"	    => \$opt_lif,
 	"quiet"	    => \$opt_quiet,
@@ -39,6 +41,11 @@ my $rc =
 my @files = @ARGV;
 if ( $opt_help || !@files || !$rc ) {
     print <DATA>;
+    exit 1;
+}
+
+if ( $opt_version ) {
+    print "marcdump v$MARC::Record::VERSION\n";
     exit 1;
 }
 
@@ -84,7 +91,6 @@ __END__
 Usage: marcdump [options] file(s)
 
 Options:
-    --help	    Print this summary
     --[no]print	    Print a MicroLIF-style dump of each record
     --lif	    Input files are MicroLIF, not USMARC
     --field=spec    Specify a field spec to include.  There may be many.
@@ -92,3 +98,5 @@ Options:
 			--field=245 --field=1XX
     --[no]quiet	    Print status messages
     --[no]stats	    Print a statistical summary by file at the end
+    --version	    Print version information
+    --help	    Print this summary
