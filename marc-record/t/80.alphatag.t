@@ -1,9 +1,11 @@
-use Test::More tests => 16;
+use Test::More tests => 17;
 
 use strict;
 use MARC::Record;
 use MARC::Field;
 use MARC::File;
+use MARC::File::USMARC;
+use MARC::File::MicroLIF;
 use Data::Dumper;
 
 ## According to the MARC spec tags can have alphanumeric
@@ -44,11 +46,11 @@ like( $@, qr/data\(\) is only for tags less than 010/, 'data()' );
 is( $field->indicator(1), '1', 'indicator(1)' );
 is( $field->indicator(2), '2', 'indicator(2)' );
 
-$field->add_subfields( 'b' => 'Freak' );
-is( $field->subfield('b'), 'Freak', 'add_subfields()' );
-is( $field->as_string(), '123 Freak', 'as_string()' );
+$field->add_subfields( 'b' => 'Tweak' );
+is( $field->subfield('b'), 'Tweak', 'add_subfields()' );
+is( $field->as_string(), '123 Tweak', 'as_string()' );
 
-my $text = "RAZ 12 _a123\n       _bFreak";
+my $text = "RAZ 12 _a123\n       _bTweak";
 is( $field->as_formatted(), $text, 'as_formatted()' );
 
 ## make sure we can add a field with an alphanumeric tag to 
@@ -77,7 +79,15 @@ close(OUT);
 
 my $file = MARC::File::USMARC->in( "$0.usmarc" );
 my $newRec = $file->next();
-
 is( $newRec->as_usmarc(), $marc, 'as_usmarc()' );
 unlink( "$0.usmarc" );
+
+
+## test output as MicroLIF
+
+my $micro = $record->as_formatted();
+
+$file = MARC::File::MicroLIF->in( 't/alphatag.lif' );
+$newRec = $file->next();
+is ($newRec->as_formatted(), $micro, 'as_formatted()' );
 

@@ -30,6 +30,7 @@ t/66.grouped.t
 t/70.croak.t
 t/71.warnings.t
 t/80.alphatag.t
+t/alphatag.lif
 t/99.pod.t
 t/badsubf.usmarc
 t/badldr.usmarc

@@ -19,7 +19,7 @@ MARC::Field - Perl extension for handling MARC fields
 
 Version 1.11
 
-    $Id: Field.pm,v 1.21 2002/10/10 02:36:09 edsummers Exp $
+    $Id: Field.pm,v 1.22 2002/10/24 22:01:54 edsummers Exp $
 
 =cut
 
@@ -408,8 +408,6 @@ sub as_formatted() {
 			$hanger = "";
 		} # for
 	}
-
-
 
 	return join( "\n", @lines );
 }

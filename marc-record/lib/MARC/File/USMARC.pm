@@ -17,7 +17,7 @@ use vars qw( $ERROR );
 
 Version 1.11
 
-    $Id: USMARC.pm,v 1.25 2002/10/10 02:36:09 edsummers Exp $
+    $Id: USMARC.pm,v 1.26 2002/10/24 22:01:54 edsummers Exp $
 
 =cut
 
@@ -119,10 +119,6 @@ sub decode {
     # Walk thru the directories, and shift off the fields while we're at it
     # Shouldn't be any non-digits anywhere in any directory entry
     my @directory = unpack( "A3 A4 A5" x $nfields, $dir );
-    my @bad = grep /\D/, @directory;
-    if ( @bad ) { 
-	return $marc->_warn( "Non-numeric entries in the tag directory: ", join( ", ", map { "\"$_\"" } @bad ) );
-    }
 
     my $databytesused = 0;
     while ( @directory ) {
@@ -133,8 +129,8 @@ sub decode {
 	warn "Specs: ", join( "|", $tagno, $len, $offset, $tagdata ), "\n" if $MARC::Record::DEBUG;
 
 	# Check directory validity
-	($tagno =~ /^\d\d\d$/)
-	    or return $marc->_warn( "Invalid field number in directory: \"$tagno\"" );
+	($tagno =~ /^[0-9A-Za-z]{3}$/)
+	    or return $marc->_warn( "Invalid tag in directory: \"$tagno\"" );
 
 	($len == length($tagdata) + 1)
 	    or return $marc->_warn( "Invalid length in the directory for tag $tagno" );
@@ -143,7 +139,7 @@ sub decode {
 	    or return $marc->_warn( "Directory offsets are out of whack" );
 	$databytesused += $len;
 
-	if ( $tagno < 10 ) {
+	if ( _isnum($tagno) and $tagno < 10 ) {
 	    $marc->add_fields( $tagno, $tagdata )
 		or return undef; # We're relying on add_fields() having set $MARC::Record::ERROR
 	} else {
@@ -216,7 +212,7 @@ sub _build_tag_directory {
 
 		# Create directory entry
 		my $len = length $str;
-		my $direntry = sprintf( "%03d%04d%05d", $field->tag, $len, $dataend );
+		my $direntry = sprintf( "%03s%04d%05d", $field->tag, $len, $dataend );
 		push( @directory, $direntry );
 		$dataend += $len;
 	}
@@ -254,6 +250,12 @@ sub encode() {
 
     # Glomp it all together
     return join("",$marc->leader, @$directory, END_OF_FIELD, @$fields, END_OF_RECORD);
+}
+
+sub _isnum {
+    my $x = shift;
+    return(1) if $x =~ /^[0-9]+$/;
+    return(0);
 }
 
 1;

@@ -16,7 +16,7 @@ use vars qw( $ERROR );
 
 Version 1.11
 
-    $Id: MicroLIF.pm,v 1.16 2002/10/10 02:36:09 edsummers Exp $
+    $Id: MicroLIF.pm,v 1.17 2002/10/24 22:01:54 edsummers Exp $
 
 =cut
 
@@ -70,15 +70,16 @@ sub decode {
 	# Ignore the file header if the calling program hasn't already dealt with it
 	next if $line =~ /^HDR/;
 
-	($line =~ s/^(\d\d\d|LDR)//) or
+	($line =~ s/^([0-9A-Za-z]{3})//) or
 	return $marc->_gripe( "Invalid tag number: ", substr( $line, 0, 3 ) );
 	my $tagno = $1;
 
-	($line =~ s/\^$//) or $marc->_warn( "Tag $tagno is missing a trailing caret." );
+	($line =~ s/\^$//) 
+	    or $marc->_warn( "Tag $tagno is missing a trailing caret." );
 
 	if ( $tagno eq "LDR" ) {
 	    $marc->leader( substr( $line, 0, LEADER_LEN ) );
-	} elsif ( $tagno < 10 ) {
+	} elsif ( $tagno =~ /^\d+$/ and $tagno < 10 ) {
 	    $marc->add_fields( $tagno, $line );
 	} else {
 	    $line =~ s/^(.)(.)//;
