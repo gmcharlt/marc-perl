@@ -26,7 +26,7 @@ our $VERSION = 0.6;
  my $ansel = chr(0xC3) . ' copyright 1969'.
 
  ## the same string, but now encoded in UTF8!
- my $utf8 = $charset->to_utf8($extLatin);
+ my $utf8 = $charset->to_utf8($ansel);
 
 =head1 DESCRIPTION
 
