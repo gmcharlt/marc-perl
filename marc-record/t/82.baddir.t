@@ -1,3 +1,5 @@
+#!perl -Tw
+
 use strict;
 use Test::More tests => 4;
 use MARC::File::USMARC;

@@ -1,7 +1,4 @@
-# $Id: 20.clone.t,v 1.7 2003/02/25 20:41:58 petdance Exp $
-# Test creating a MARC record for the Camel book
-#
-# Bugs, comments, suggestions welcome: marc@petdance.com
+#!perl -Tw
 
 use integer;
 use strict;

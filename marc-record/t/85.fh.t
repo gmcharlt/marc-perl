@@ -1,3 +1,5 @@
+#!perl -Tw
+
 # test that we can pass filehandles to MARC::File::USMARC and MARC::Batch
 
 use Test::More tests => 206;

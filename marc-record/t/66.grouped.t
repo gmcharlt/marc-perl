@@ -1,4 +1,4 @@
-# $Id: 66.grouped.t,v 1.3 2003/02/26 05:43:16 petdance Exp $
+#!perl -Tw
 
 use strict;
 use integer;

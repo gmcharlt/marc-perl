@@ -1,3 +1,5 @@
+#!perl -Tw
+
 use strict;
 use integer;
 

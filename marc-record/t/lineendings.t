@@ -1,7 +1,4 @@
-# $Id: lineendings.t,v 1.3 2003/11/25 04:01:48 petdance Exp $
-# Test creating a MARC record for the Camel book
-#
-# Bugs, comments, suggestions welcome: marc@petdance.com
+#!perl -Tw
 
 use strict;
 
@@ -25,7 +22,7 @@ foreach my $ending ( @endings ) {
     my $record = $file->next();
     isa_ok( $record, 'MARC::Record', 'successfully decoded' );
     is( scalar $record->warnings(), 0, 'no record warnings' );
-    
+
     is( scalar $record->fields(), 7, 'checking the number of fields in the record' );
     is( $record->leader(),                  '00180nam  22     2  4500', "checking $filename LDR" );
     is( $record->field('008')->as_string(), '891207s19xx    xxu           00010 eng d', "checking $filename 008" );

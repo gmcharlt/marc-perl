@@ -1,8 +1,7 @@
-# $Id: filler.t,v 1.2 2003/04/23 02:31:29 petdance Exp $
+#!perl -Tw
 
 use strict;
 use integer;
-
 
 use Test::More 'no_plan';
 

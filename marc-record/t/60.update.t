@@ -1,5 +1,4 @@
-# $Id: 60.update.t,v 1.10 2003/05/21 13:42:59 edsummers Exp $
-# Test updating a MARC record for the Camel book
+#!perl -Tw
 
 use strict;
 use integer;

@@ -1,7 +1,4 @@
-# $Id: 10.camel.t,v 1.16 2003/04/23 03:19:34 petdance Exp $
-# Test creating a MARC record for the Camel book
-#
-# Bugs, comments, suggestions welcome: marc@petdance.com
+#!perl -Tw
 
 use strict;
 

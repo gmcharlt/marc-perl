@@ -1,4 +1,4 @@
-# $Id: 61.append.t,v 1.7 2003/02/26 05:30:45 petdance Exp $
+#!perl -Tw
 
 use strict;
 use integer;

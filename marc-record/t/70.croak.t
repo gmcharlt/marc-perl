@@ -1,3 +1,5 @@
+#!perl -Tw
+
 use Test::More tests=>9;
 
 ## methods should croak when called wrong so that MARC::Record users can 

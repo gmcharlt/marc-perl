@@ -1,4 +1,4 @@
-# $Id: 50.batch.t,v 1.11 2004/05/23 23:08:35 edsummers Exp $
+#!perl -Tw
 
 use strict;
 use integer;

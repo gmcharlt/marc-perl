@@ -1,4 +1,4 @@
-# $Id: 00.load.t,v 1.5 2004/03/09 23:25:18 petdance Exp $
+#!perl -Tw
 
 use strict;
 

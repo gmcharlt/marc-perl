@@ -1,3 +1,5 @@
+#!perl -Tw
+
 use Test::More tests=>17;
 use strict;
 

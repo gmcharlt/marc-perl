@@ -1,4 +1,4 @@
-# $Id: file-header.t,v 1.1 2003/03/12 20:15:56 moregan Exp $
+#!perl -Tw
 
 use strict;
 use integer;

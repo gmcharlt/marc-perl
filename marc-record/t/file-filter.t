@@ -1,4 +1,4 @@
-# $Id: file-filter.t,v 1.2 2003/02/25 20:42:08 petdance Exp $
+#!perl -Tw
 
 use strict;
 use integer;

@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!perl -Tw
 
 # test to make sure leader is being populated properly
 

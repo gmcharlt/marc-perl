@@ -1,4 +1,4 @@
-# $Id: 64.create.t,v 1.8 2003/10/16 15:59:42 edsummers Exp $
+#!perl -Tw
 
 use strict;
 use integer;

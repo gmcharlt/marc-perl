@@ -1,4 +1,4 @@
-# $Id: 62.before.t,v 1.7 2003/02/26 05:57:49 petdance Exp $
+#!perl -Tw
 
 use strict;
 use integer;

@@ -11,6 +11,7 @@ Revision history for Perl extension MARC::Record.
         - t/utf8.t is no longer skipped.
         - removed redundant record length check in MARC::File::USMARC::_next()
           and adjusted tests in t/75.warnings.t
+        - All tests run under -T.
 
 1.38    March 16th, 2004
 

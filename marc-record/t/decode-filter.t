@@ -1,7 +1,4 @@
-# $Id: decode-filter.t,v 1.3 2003/02/26 05:52:35 petdance Exp $
-# Test creating a MARC record for the Camel book
-#
-# Bugs, comments, suggestions welcome: marc@petdance.com
+#!perl -Tw
 
 use strict;
 
