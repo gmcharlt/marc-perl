@@ -1,9 +1,15 @@
 Revision history for Perl extension MARC::Record.
 
+1.30
+	[FIXES]
+	- Fixed an incorrect instruction in MARC::File::MicroLIF.
+
 1.29	June 05, 2003	
 	[ENHANCEMENTS]
-	- MARC::Field::subfield() will return a list of all subfield data when
-	  called in a list context...and only the first when called in a scalar           context. Also added a test 67.subfield.t to test new functionality. 
+	- MARC::Field::subfield() will return a list of all subfield
+	  data when called in a list context...and only the first when
+	  called in a scalar context. Also added a test 67.subfield.t
+	  to test new functionality.
 
 1.28	May 23, 2003
 	[FIXES]

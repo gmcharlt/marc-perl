@@ -19,7 +19,7 @@ use MARC::Record qw( LEADER_LEN );
 
     use MARC::File::MicroLIF;
 
-    my $file = MARC::File::MicroLIF::in( $filename );
+    my $file = MARC::File::MicroLIF->in( $filename );
     
     while ( my $marc = $file->next() ) {
 	# Do something
