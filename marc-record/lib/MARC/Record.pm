@@ -17,7 +17,7 @@ use MARC::Field;
 
 Version 0.93
 
-    $Id: Record.pm,v 1.19 2002/06/10 22:07:49 edsummers Exp $
+    $Id: Record.pm,v 1.20 2002/06/10 22:36:11 petdance Exp $
 
 =cut
 
@@ -142,6 +142,17 @@ sub subfield($$) {
     return $field->subfield($subfield);
 } # subfield()
 
+=for internal
+
+=cut
+
+sub _all_parms_are_fields {
+    for ( @_ ) {
+	return 0 unless ref($_) eq 'MARC::Field';
+    }
+    return 1;
+}
+
 =head2 append_field(C<$field>)
 
 Appends the field specified by $field to the end of the record. $field
@@ -150,35 +161,36 @@ needs to be a MARC::Field object.
     my $field = MARC::Field->new('590','','','a' => 'My local note.');
     $record->append_field($field);
 
+Returns the number of fields appended.
+
 =cut
 
-sub append_field($) {
-    my ($r,$f) = @_;
-    if (ref($f) ne 'MARC::Field') {
-	return(_gripe('argument must be a MARC::Field object'))
-    }
-    push(@{ $r->{_fields} }, $f); 
-    return(1);
+sub append_fields {
+    my $self = shift;
+
+    _all_parms_are_fields(@_) or return(_gripe('Arguments must be MARC::Field objects'));
+
+    push(@{ $self->{_fields} }, @_); 
+    return scalar @_;
 }
 
-=head2 insert_field_before($before_field,$new_field)
+=head2 insert_fields_before($before_field,@new_fields)
 
 Inserts the field specified by $new_field before the field $before_field. 
-Returns TRUE (1) on success, FALSE (0) otherwise. Both $new_field and 
-$before_field need to be MARC::Field objects.
+Returns the number of fields inserted, or undef on failures.
+Both C<$before_field> and all C<@new_fields> need to be MARC::Field objects.
 
     my $before_field = $record->field('260');
     my $new_field = MARC::Field->new('250','','','a' => '2nd ed.');
-    $record->insert_field_before($before_field,$after_field);
+    $record->insert_fields_before($before_field,$new_field);
 
 =cut
 
-sub insert_field_before() {
+sub insert_fields_before {
+    my $self = shift;
 
-    my ($self,$before,$new) = @_;
-    if (ref($before) ne 'MARC::Field' or ref($new) ne 'MARC::Field') {
-	return(_gripe('Arguments must be two MARC::Field objects'))
-    }
+    _all_parms_are_fields(@_) or return(_gripe('All arguments must be MARC::Field objects'));
+    my ($before,@new) = @_;
 
     ## find position of $before
     my $fields = $self->{_fields};
@@ -192,29 +204,22 @@ sub insert_field_before() {
     if ($pos >= @$fields) {
 	return(_gripe("Couldn't find field to insert before"));
     }
-    splice(@$fields,$pos,0,$new);
-    return(1);
+    splice(@$fields,$pos,0,@new);
+    return scalar @new;
 
 }
 
-=head2 insert_field_after($after_field,$new_field)
+=head2 insert_fields_after($after_field,@new_fields)
 
-Inserts the field specified by $new_field after the field $after_field in the
-MARC::Record object. Returns true (1) on success, and false (0) otherwise.
-Both $new_field and $after_field need to be MARC::Field objects.
-
-    my $after_field = $record->field('245');
-    my $new_field = MARC::Field->new('250','','','a' => '2nd ed.');
-    $record->insert_field_after($after_field,$new_field);
+Identical to L<insert_fields_before()>, but fields are added after C<$after_field>.
 
 =cut
 
-sub insert_field_after($$) {
+sub insert_fields_after {
+    my $self = shift;
 
-    my ($self,$after,$new) = @_;
-    if (ref($after) ne 'MARC::Field' or ref($new) ne 'MARC::Field') {
-	return(_gripe('Arguments must be two MARC::Field objects'));
-    }
+    _all_parms_are_fields(@_) or return(_gripe('All arguments must be MARC::Field objects'));
+    my ($after,@new) = @_;
 
     ## find position of $after
     my $fields = $self->{_fields};
@@ -228,9 +233,8 @@ sub insert_field_after($$) {
     if ($pos+1 >= @$fields) { 
 	return(_gripe("Couldn't find field to insert after"));
     }
-    splice(@$fields,$pos+1,0,$new);
-    return(1);
-
+    splice(@$fields,$pos+1,0,@new);
+    return scalar @new;
 }
 
 =head2 delete_field(C<$field>)
@@ -250,7 +254,7 @@ This shouldn't be 0 unless you didn't get the tag properly.
 
 =cut
 
-sub delete_field($) {
+sub delete_field {
     my $self = shift;
     my $deleter = shift;
     my $list = $self->{_fields};
