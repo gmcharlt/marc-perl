@@ -17,7 +17,7 @@ use MARC::Field;
 
 Version 0.94
 
-    $Id: Record.pm,v 1.21 2002/06/10 23:12:18 petdance Exp $
+    $Id: Record.pm,v 1.22 2002/06/17 16:41:24 edsummers Exp $
 
 =cut
 
@@ -60,7 +60,7 @@ sub new {
     my $class = shift;
     $class = ref($class) || $class; # Handle cloning
     my $self = {
-	_leader => undef,
+	_leader => ' ' x 24,
 	_fields => [],
 	_warnings => [],
     };
@@ -141,6 +141,44 @@ sub subfield($$) {
     my $field = $self->field($tag) or return undef;
     return $field->subfield($subfield);
 } # subfield()
+
+=head2 insert_grouped_field(C<$field>)
+
+Will insert the specified MARC::Field object into the record in 'grouped
+order' and return true (1) on success, and false (undef) on failure.
+For example, if a '650' field is inserted with insert_grouped_field()
+it will be inserted at the end of the 6XX group of tags. After some discussion
+on the perl4lib list it was descided that this is ordinarily what you will 
+want. If you would like to insert at a specific point in the record you can use 
+insert_fields_after() and insert_fields_before() methods which are described 
+below. 
+
+=cut 
+
+sub insert_grouped_field {
+    my ($self,$new) = @_;
+    _all_parms_are_fields($new) or return(_gripe('Argument must be MARC::Fieldobject'));
+
+    ## try to find the end of the field group and insert it there
+    my $limit = int($new->tag() / 100);
+    my $found = 0;
+    foreach my $field ($self->fields()) {
+	if ( int($field->tag() / 100) > $limit ) {
+	    $self->insert_field_before($field,$new);
+	    $found = 1;
+	    last;
+	}
+    }
+
+    ## if we couldn't find the end of the group, then we must not have 
+    ## any tags this high yet, so just append it
+    if (!$found) {
+	$self->append_fields($new); 
+    }
+
+    return(1);
+
+}
 
 =for internal
 
@@ -359,7 +397,6 @@ sub set_leader_lengths {
     my $self = shift;
     my $reclen = shift;
     my $baseaddr = shift;
-
     substr($self->{_leader},0,5)  = sprintf("%05d",$reclen);
     substr($self->{_leader},12,5) = sprintf("%05d",$baseaddr);
 }
