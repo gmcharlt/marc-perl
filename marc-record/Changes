@@ -1,6 +1,9 @@
 Revision history for Perl extension MARC::Record.
 
-0.94	May 21, 2002
+0.94	??? ??, 2002?
+
+
+0.93	May 21, 2002
 	- Added update() and replace_with() methods to MARC::Field (ehs)
 	- Added more stuff to MARC::Doc::Tutorial
 	- Added MARC::Doc::Tutorial (ehs)
