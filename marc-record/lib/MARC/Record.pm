@@ -17,13 +17,13 @@ use Carp qw(croak);
 
 =head1 VERSION
 
-Version 1.11
+Version 1.13
 
-    $Id: Record.pm,v 1.37 2002/10/10 16:21:09 petdance Exp $
+    $Id: Record.pm,v 1.38 2002/10/24 22:07:33 edsummers Exp $
 
 =cut
 
-use vars '$VERSION'; $VERSION = '1.12';
+use vars '$VERSION'; $VERSION = '1.13';
 
 use Exporter;
 use vars qw( @ISA @EXPORTS @EXPORT_OK );
@@ -70,8 +70,21 @@ sub new {
     return bless $self, $class;
 } # new()
 
+=head2 new_from_usmarc( $marcblob )
 
+This is a wrapper around C<MARC::File::USMARC::decode()> for compatibility with
+older versions of MARC::Record.
 
+=cut
+
+sub new_from_usmarc {
+    my $blob = shift;
+    $blob = shift if (ref($blob) || ($blob eq "MARC::Record"));
+
+    require MARC::File::USMARC;
+
+    return MARC::File::USMARC::decode( $blob );
+}
 
 =head2 fields()
 
@@ -545,23 +558,6 @@ sub add_fields {
 
     return $nfields;
 }
-
-=head2 new_from_usmarc( $marcblob )
-
-This is a wrapper around C<MARC::File::USMARC::decode()> for compatibility with
-older versions of MARC::Record.
-
-=cut
-
-sub new_from_usmarc {
-    my $blob = shift;
-    $blob = shift if (ref($blob) || ($blob eq "MARC::Record"));
-
-    require MARC::File::USMARC;
-
-    return MARC::File::USMARC::decode( $blob );
-}
-
 
 # NOTE: _warn is an object method
 sub _warn {
