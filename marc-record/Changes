@@ -1,5 +1,30 @@
 Revision history for Perl extension MARC::Record.
 
+next version
+	[ENHANCEMENTS]
+	- MARC::File::MicroLIF now reads the MicroLIF header from
+	  the input file and makes it available via the header()
+          call.  If there is no header in the file, header()
+	  will return undef.  Because the header is now taken
+	  care of when the file is opened, 
+	  MARC::File::MicroLIF::decode no longer supports skipping 
+	  the file header.
+	- MARC:File::MicroLIF::decode now detects fields that
+	  have no subfields (other than 001-009) rather than
+	  passing them through to MARC::Field which croak()s.
+	  When such a tag is encountered it is thrown away and
+	  a warning added to the MARC::Record, rather than
+	  allowing MARC::Field to croak().
+	- Updated data files used to test MARC::File::MicroLIF
+	  so that they have a header.
+	[FIXES]
+	- MARC:File::MicroLIF now supports input files with any
+	  type of line ending--\x0d, \x0a, or \x0d\0a.  A file no
+	  longer has to have created on a system with compatible
+	  line endings.
+	- Fixed invalid assumption in MARC::File::MicroLIF that
+	  the MicroLIF header is supposed to begin with 'HDR'.
+
 1.20	February 26, 2003
 	[FIXES]
 	- Removed $VERSION from all modules except for MARC::Record
