@@ -207,6 +207,13 @@ sub check_record {
             } # for $subfields
         } # if $tagno >= 10
 
+        elsif ($tagno < 10) {
+            #check for subfield characters
+            if ($field->data() =~ /\x1F/) {
+                $self->warn( "$tagno: Subfields are not allowed in fields lower than 010" );
+            } #if control field has subfield delimiter
+        } #elsif $tagno < 10
+
         # Check to see if a check_xxx() function exists, and call it on the field if it does
         my $checker = "check_$tagno";
         if ( $self->can( $checker ) ) {
@@ -223,6 +230,122 @@ sub check_record {
 
 Various functions to check the different fields.  If the function doesn't exist,
 then it doesn't get checked.
+
+=head2 check_020()
+
+Looks at 020$a and reports errors if the check digit is wrong.
+Looks at 020$z and validates number if hyphens are present.
+
+Uses Business::ISBN to do validation. Thirteen digit checking is currently done
+with the internal sub _isbn13_check_digit(), based on code from Business::ISBN.
+
+TO DO (check_020):
+
+ Fix 13-digit ISBN checking.
+
+=cut
+
+sub check_020 {
+
+
+    use Business::ISBN;
+
+    my $self = shift;
+    my $field = shift;
+
+###################################################
+
+# break subfields into code-data array and validate data
+
+    my @subfields = $field->subfields();
+
+    while (my $subfield = pop(@subfields)) {
+        my ($code, $data) = @$subfield;
+        my $isbnno = $data;
+        #remove any hyphens
+        $isbnno =~ s/\-//g;
+        #remove nondigits
+        $isbnno =~ s/^\D*(\d{9,12}[X\d])\b.*$/$1/;
+
+        #report error if this is subfield 'a' 
+        #and the first 10 or 13 characters are not a match for $isbnno
+        if ($code eq 'a') { 
+            if ((substr($data,0,length($isbnno)) ne $isbnno)) {
+                $self->warn( "020: Subfield a may have invalid characters.");
+            } #if first characters don't match
+
+            #report error if no space precedes a qualifier in subfield a
+            if ($data =~ /\(/) {
+                $self->warn( "020: Subfield a qualifier must be preceded by space, $data.") unless ($data =~ /[X0-9] \(/);
+            } #if data has parenthetical qualifier
+
+            #report error if unable to find 10-13 digit string of digits in subfield 'a'
+            if (($isbnno !~ /(?:^\d{10}$)|(?:^\d{13}$)|(?:^\d{9}X$)/)) {
+                $self->warn( "020: Subfield a has the wrong number of digits, $data."); 
+            } # if subfield 'a' but not 10 or 13 digit isbn
+            #otherwise, check 10 and 13 digit checksums for validity
+            else {
+                if ((length ($isbnno) == 10)) {
+                    $self->warn( "020: Subfield a has bad checksum, $data.") if (Business::ISBN::is_valid_checksum($isbnno) != 1); 
+                } #if 10 digit ISBN has invalid check digit
+                # do validation check for 13 digit isbn
+#########################################
+### Not yet fully implemented ###########
+#########################################
+                elsif (length($isbnno) == 13){
+                    #change line below once Business::ISBN handles 13-digit ISBNs
+                    my $is_valid_13 = _isbn13_check_digit($isbnno);
+                    $self->warn( "020: Subfield a has bad checksum (13 digit), $data.") unless ($is_valid_13 == 1); 
+                } #elsif 13 digit ISBN has invalid check digit
+###################################################
+            } #else subfield 'a' has 10 or 13 digits
+        } #if subfield 'a'
+        #look for valid isbn in 020$z
+        elsif ($code eq 'z') {
+            if (($data =~ /^ISBN/) || ($data =~ /^\d*\-\d+/)){
+##################################################
+## Turned on for now--Comment to unimplement ####
+##################################################
+                $self->warn( "020:  Subfield z is numerically valid.") if ((length ($isbnno) == 10) && (Business::ISBN::is_valid_checksum($isbnno) == 1)); 
+            } #if 10 digit ISBN has invalid check digit
+        } #elsif subfield 'z'
+
+    } # while @subfields
+
+} #check_020
+
+=head2 _isbn13_check_digit($ean)
+
+Internal sub to determine if 13-digit ISBN has a valid checksum. The code is
+taken from Business::ISBN::as_ean. It is expected to be temporary until
+Business::ISBN is updated to check 13-digit ISBNs itself.
+
+=cut
+
+sub _isbn13_check_digit { 
+
+    my $ean = shift;
+    #remove and store current check digit
+    my $check_digit = chop($ean);
+
+    #calculate valid checksum
+    my $sum = 0;
+    foreach my $index ( 0, 2, 4, 6, 8, 10 )
+        {
+        $sum +=     substr($ean, $index, 1);
+        $sum += 3 * substr($ean, $index + 1, 1);
+        }
+
+    #take the next higher multiple of 10 and subtract the sum.
+    #if $sum is 37, the next highest multiple of ten is 40. the
+    #check digit would be 40 - 37 => 3.
+    my $valid_check_digit = ( 10 * ( int( $sum / 10 ) + 1 ) - $sum ) % 10;
+
+    return $check_digit == $valid_check_digit ? 1 : 0;
+
+} # _isbn13_check_digit
+
+#########################################
 
 =head2 check_041( $field )
 
