@@ -42,6 +42,20 @@ C<$type> must be either "USMARC" or "MicroLIF".  If you want to specify
 "MARC::File::USMARC" or "MARC::File::MicroLIF", that's OK, too. new() returns a
 new MARC::Batch object.
 
+@files can be a list of filenames:
+
+    my $batch = MARC::Batch->new( 'USMARC', 'file1.marc', 'file2.marc' );
+
+And can also contain filehandles. So if you've got a large file that's
+gzipped you can open a pipe to gzip and pass it in:
+
+    my $fh = IO::File->new( 'gunzip -c marc.dat.gz |' );
+    my $batch = MARC::Batch->new( 'USMARC', $fh );
+
+And you can mix and match if you really want to:
+
+    my $batch = MARC::Batch->new( 'USMARC', $fh, 'file1.marc' );
+
 =cut
 
 sub new {
@@ -56,8 +70,7 @@ sub new {
     my @files = @_;
 
     my $self = {
-	filelist    =>	[@files],
-	filestack   =>	[@files],
+	filestack   =>	\@files,
 	filename    =>	undef,
 	marcclass   =>	$marcclass,
 	file	    =>  undef,

@@ -1,6 +1,14 @@
 Revision history for Perl extension MARC::Record.
 
 1.34	
+	[ENHANCEMENTS]
+	- modified MARC::File::in() to allow passing in filehandles instead
+	  of a filename. Useful in situations where you might have data
+	  compressed on disk, and want to read from a decompression pipe.
+	  This effects MARC::Batch of course as well, which has had its
+	  documentation updated. 
+	- added t/85.fh.t to test new filehandle passing
+
 	[FIXES]
 	- etc/specs modified to correctly parse LCs docs to get the 250 $b 
 	  properly. Thanks Bryan Baldus at Quality Books.

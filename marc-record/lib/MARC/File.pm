@@ -31,36 +31,55 @@ None.
 
 =head2 in()
 
-Opens a file for input.
+Opens a file for import. Ordinarily you will use MARC::File::USMARC
+or MARC::File::MicroLIF to do this.
 
-Returns a MARC::File object, or C<undef> on failure.
+    my $file = MARC::File::USMARC->in( 'file.marc' );
+
+Returns a MARC::File object, or C<undef> on failure. If you 
+encountered an error the error message will be stored in 
+$MARC::File::ERROR.
+
+Optionally you can also pass in a filehandle, and MARC::File
+will "do the right thing".
+
+    my $handle = IO::File->new( 'gunzip -c file.marc.gz |' );
+    my $file = MARC::File::USMARC->in( $handle );
 
 =cut
 
 sub in {
     my $class = shift;
-    my $filename = shift;
+    my $arg = shift;
+    my ( $filename, $fh );
 
+    ## if a valid filehandle was passed in
+    if ( defined( fileno( $arg ) ) ) { 
+	$filename = scalar( $arg );
+	$fh = $arg;
+    }
+
+    ## otherwise check if it's a filename, and 
+    ## return undef if we weren't able to open it
+    else {
+	$filename = $arg;
+	$fh = eval { local *FH; open( FH, $arg ) or die; *FH{IO}; };
+	if ( $@ ) { 
+	    $MARC::File::ERROR = "Couldn't open $filename: $@";
+	    return( undef );
+	}
+    }
+
+    binmode( $fh );
     my $self = {
-	filename    => $filename,
+	filename    => $filename, 
+	fh	    => $fh,
 	recnum	    => 0,
-	warnings   => [],
+	warnings    => [],
     };
 
-    bless $self, $class;
+    return( bless $self, $class );
 
-    my $fh = eval { local *FH; open( FH, $filename ) or die; *FH{IO}; };
-
-    if ( $@ ) {
-	undef $self;
-	$MARC::File::ERROR = "Couldn't open $filename: $@";
-    } else {
-	binmode $fh;
-	$self->{fh} = $fh;
-    }
-	
-
-    return $self;
 } # new()
 
 sub out {
@@ -98,9 +117,7 @@ Returns 1 or undef.
 
 sub skip {
     my $self = shift;
-
     my $rec = $self->_next();
-
     return $rec ? 1 : undef;
 }
 
@@ -121,18 +138,15 @@ sub warnings {
 
 sub close {
     my $self = shift;
-
     close( $self->{fh} );
     delete $self->{fh};
     delete $self->{filename};
-
     return;
 }
 
 sub _unimplemented() {
     my $self = shift;
     my $method = shift;
-
     warn "Method $method must be overridden";
 }
 
@@ -155,7 +169,8 @@ sub _gripe(@) {
 	my $self = shift @parms;
 
 	if ( ref($self) =~ /^MARC::File/ ) {
-	    push( @parms, " at byte ", tell($self->{fh}) ) if $self->{fh};
+	    push( @parms, " at byte ", tell($self->{fh}) ) 
+		if $self->{fh};
 	    push( @parms, " in file ", $self->{filename} ) if $self->{filename};
 	} else {
 	    unshift( @parms, $self );
