@@ -37,7 +37,7 @@ None.
 
 
 #
-# The buffer must large enough to handle any valid record because 
+# The buffer must be large enough to handle any valid record because 
 # we don't check for cases like a CR/LF pair or an 
 # end-of-record/CR/LF trio being only partially in the buffer.
 #
@@ -49,7 +49,7 @@ None.
 # of one character, or if data from multiple tags overlaps in
 # the MARC record body.  We're pretty safe.)
 #
-use constant BUFFER_MIN => 111999;  # 99999 + 6000 * 2
+use constant BUFFER_MIN => (99999 + 6000 * 2);
 
 sub in {
     my $class = shift;
@@ -108,14 +108,17 @@ sub _fill_buffer {
 }
 
 
-# get the next chunk of data.  if $want_line is true then 
-# you get the next chunk ending with any combination
-# of \r and \n of any length.  if it is false or not
-# passed then you get the next chunk ending with \x60
-# followed by any combination of \r and \n of any
-# length.
-#
-# All trailing \r and \n are stripped.
+=for internal
+
+Gets the next chunk of data.  If C<$want_line> is true then you get
+the next chunk ending with any combination of \r and \n of any length.
+If it is false or not passed then you get the next chunk ending with
+\x60 followed by any combination of \r and \n of any length.
+
+All trailing \r and \n are stripped.
+
+=cut
+
 sub _get_chunk {
     my $self = shift;
     my $want_line = shift || 0;
