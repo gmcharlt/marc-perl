@@ -1,13 +1,22 @@
 #!/usr/bin/perl
 
+use strict;
 
+=head1 specs
 
-# Quick & Dirty script to turn
-# http://www.loc.gov/marc/bibliographic/ecbdist.html into
-# the format used by MARC::Lint.pm
-# takes text version of ecbdist.html as input
-# skips fixed fields and data marked [OBSOLETE]
-# Dosn't handle the tags 841-88X properly excise these manually
+Turns http://www.loc.gov/marc/bibliographic/ecbdist.html into the format
+used by MARC::Lint.pm
+
+Takes ecbdist.html as input.  Skips fixed fields and data marked
+[OBSOLETE] Doesn't handle the tags 841-88X properly. Excise these
+manually.
+
+=head1 AUTHOR
+
+Originally written by Colin Campbell at Sirsi, and taken over and tweaked.
+
+=cut
+
 
 my $v = 0;
 while(<>) {
