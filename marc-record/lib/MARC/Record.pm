@@ -17,7 +17,7 @@ use MARC::Field;
 
 Version 0.92
 
-    $Id: Record.pm,v 1.14 2002/04/02 18:00:37 petdance Exp $
+    $Id: Record.pm,v 1.15 2002/05/13 21:11:09 petdance Exp $
 
 =cut
 
@@ -151,7 +151,7 @@ sub set_leader_lengths($$) {
 
 =head2 add_fields()
 
-Adds C<MARC::Field> objects to the end of the list.  Returns the number
+Adds MARC::Field objects to the end of the list.  Returns the number
 of fields added, or C<undef> if there was an error.
 
 There are three ways of calling C<add_fields()> to add data to the record.
@@ -342,7 +342,7 @@ sub as_formatted() {
 =head2 title()
 
 Returns the title from the 245 tag.
-Note that it is a string, not a C<MARC::Field> record.
+Note that it is a string, not a MARC::Field record.
 
 =cut
 
@@ -357,7 +357,7 @@ sub title() {
 =head2 author()
 
 Returns the author from the 100, 110 or 111 tag.
-Note that it is a string, not a C<MARC::Field> record.
+Note that it is a string, not a MARC::Field record.
 
 =cut
 
@@ -450,14 +450,14 @@ A brief discussion of why MARC::Record is done the way it is:
 =item * It's built for quick prototyping
 
 One of the areas Perl excels is in allowing the programmer to 
-create easy solutions quickly.  C<MARC::Record> is designed along
+create easy solutions quickly.  MARC::Record is designed along
 those same lines.  You want a program to dump all the 6XX
-tags in a file?  C<MARC::Record> is your friend.
+tags in a file?  MARC::Record is your friend.
 
 =item * It's built for extensibility
 
-Currently, I'm using C<MARC::Record> for analyzing bibliographic
-data, but who knows what might happen in the future?  C<MARC::Record>
+Currently, I'm using MARC::Record for analyzing bibliographic
+data, but who knows what might happen in the future?  MARC::Record
 needs to be just as adept at authority data, too.
 
 =item * It's designed around accessor methods
@@ -472,8 +472,8 @@ break your code.
 One of the tradeoffs in using accessor methods is some overhead
 in the method calls.  Is this slow?  I don't know, I haven't measured.
 I would suggest that if you're a cycle junkie that you use
-C<Benchmark.pm> to check to see where your bottlenecks are, and then
-decide if C<MARC::Record> is for you.
+Benchmark.pm to check to see where your bottlenecks are, and then
+decide if MARC::Record is for you.
 
 =back
 
