@@ -358,7 +358,7 @@ sub _ind_regex($) {
 
 1;
 
-__DATA__DATA__
+__DATA__
 001     NR      CONTROL NUMBER
 ind1    blank   Undefined
 ind2    blank   Undefined
