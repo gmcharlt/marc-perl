@@ -381,23 +381,23 @@ Note that subfield h comes before subfield b in the output.
 =cut
 
 sub as_string() {
-        my $self = shift;
-        my $subfields = shift;
+    my $self = shift;
+    my $subfields = shift;
 
-        if ( $self->is_control_field ) {
-            return $self->{_data};
-        }
+    if ( $self->is_control_field ) {
+        return $self->{_data};
+    }
 
-        my @subs;
+    my @subs;
 
-        my @subdata = @{$self->{_subfields}};
-        while ( @subdata ) {
-                my $code = shift @subdata;
-                my $text = shift @subdata;
-                push( @subs, $text ) if !$subfields || $code =~ /^[$subfields]$/;
-        } # for
+    my @subdata = @{$self->{_subfields}};
+    while ( @subdata ) {
+        my $code = shift @subdata;
+        my $text = shift @subdata;
+        push( @subs, $text ) if !$subfields || $code =~ /^[$subfields]$/;
+    } # for
 
-        return join( " ", @subs );
+    return join( " ", @subs );
 }
 
 
@@ -408,25 +408,25 @@ Returns a pretty string for printing in a MARC dump.
 =cut
 
 sub as_formatted() {
-        my $self = shift;
+    my $self = shift;
 
-        my @lines;
+    my @lines;
 
-        if ( $self->is_control_field ) {
-                push( @lines, sprintf( "%03s     %s", $self->{_tag}, $self->{_data} ) );
-        } else {
-                my $hanger = sprintf( "%03s %1.1s%1.1s", $self->{_tag}, $self->{_ind1}, $self->{_ind2} );
+    if ( $self->is_control_field ) {
+        push( @lines, sprintf( "%03s     %s", $self->{_tag}, $self->{_data} ) );
+    } else {
+        my $hanger = sprintf( "%03s %1.1s%1.1s", $self->{_tag}, $self->{_ind1}, $self->{_ind2} );
 
-                my @subdata = @{$self->{_subfields}};
-                while ( @subdata ) {
-                        my $code = shift @subdata;
-                        my $text = shift @subdata;
-                        push( @lines, sprintf( "%-6.6s _%1.1s%s", $hanger, $code, $text ) );
-                        $hanger = "";
-                } # for
-        }
+        my @subdata = @{$self->{_subfields}};
+        while ( @subdata ) {
+            my $code = shift @subdata;
+            my $text = shift @subdata;
+            push( @lines, sprintf( "%-6.6s _%1.1s%s", $hanger, $code, $text ) );
+            $hanger = "";
+        } # for
+    }
 
-        return join( "\n", @lines );
+    return join( "\n", @lines );
 }
 
 
@@ -438,25 +438,26 @@ useful by C<MARC::Record::as_usmarc()>.
 =cut
 
 sub as_usmarc() {
-        my $self = shift;
+    my $self = shift;
 
-        # Tags < 010 are pretty easy
-        if ( $self->is_control_field ) {
-                return $self->data . END_OF_FIELD;
-        } else {
-                my @subs;
-                my @subdata = @{$self->{_subfields}};
-                while ( @subdata ) {
-                        push( @subs, join( "", SUBFIELD_INDICATOR, shift @subdata, shift @subdata ) );
-                } # while
+    # Tags < 010 are pretty easy
+    if ( $self->is_control_field ) {
+        return $self->data . END_OF_FIELD;
+    } else {
+        my @subs;
+        my @subdata = @{$self->{_subfields}};
+        while ( @subdata ) {
+            push( @subs, join( "", SUBFIELD_INDICATOR, shift @subdata, shift @subdata ) );
+        } # while
 
-                return join( "",
-                        $self->indicator(1),
-                        $self->indicator(2),
-                        @subs,
-                        END_OF_FIELD,
-                        );
-        }
+        return
+	    join( "",
+		$self->indicator(1),
+                $self->indicator(2),
+                @subs,
+                END_OF_FIELD,
+                );
+    }
 }
 
 =head2 clone()
