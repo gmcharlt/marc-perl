@@ -1,5 +1,18 @@
 Revision history for Perl extension MARC::Record.
 
+1.22	March 23, 2003
+	- added t/85.utf8.t to test record lengths work when utf8 data
+	  is present in a record (regression test for RT #2165)
+	- warnings and bytes pragmas are now explicit
+	- added patch for removing warnings and bytes pragmas for Perl 
+	  versions < 5.006
+	- updated README to include information about the patch
+	[FIX]
+	- removed warnings pragma from MARC/File/USMARC.pm and 
+	  MARC/File/MicroLIF.pm since with warnings on, they generate quite 
+	  a few warnings. These are mainly thrown by substr() when 
+	  working with invalid MARC data.
+
 1.21	March 14, 2003
 	[ENHANCEMENTS]
 	- MARC::File::MicroLIF now reads the MicroLIF header from

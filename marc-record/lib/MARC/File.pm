@@ -8,7 +8,7 @@ MARC::File - Base class for files of MARC records
 
 use strict;
 use integer;
-eval 'use warnings' if $] >= 5.006;
+use warnings;
 
 use vars qw( $ERROR );
 

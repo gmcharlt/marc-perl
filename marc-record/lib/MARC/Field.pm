@@ -1,10 +1,9 @@
 package MARC::Field;
 
+use warnings;
 use strict;
 use integer;
 use Carp;
-
-eval 'use warnings' if $] >= 5.006;
 
 use constant SUBFIELD_INDICATOR => "\x1F";
 use constant END_OF_FIELD       => "\x1E";

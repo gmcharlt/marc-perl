@@ -6,9 +6,9 @@ MARC::Record - Perl extension for handling MARC records
 
 =cut
 
+use warnings;
 use strict;
 use integer;
-eval 'use warnings' if $] >= 5.006;
 
 use vars qw( $ERROR );
 
@@ -19,7 +19,7 @@ use Carp qw(croak);
 
 Version 1.21
 
-    $Id: Record.pm,v 1.53 2003/03/14 18:09:49 petdance Exp $
+    $Id: Record.pm,v 1.54 2003/03/23 18:08:08 edsummers Exp $
 
 =cut
 

@@ -8,7 +8,9 @@ MARC::File::MicroLIF - MicroLIF-specific file handling
 
 use strict;
 use integer;
-eval 'use warnings' if $] >= 5.006;
+use bytes;
+
+##MAKEFILE.PL_MACRO ($>=5.008) : use bytes;
 
 use vars qw( $ERROR );
 

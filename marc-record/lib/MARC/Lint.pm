@@ -1,8 +1,8 @@
 package MARC::Lint;
 
+use warnings;
 use strict;
 use integer;
-eval 'use warnings' if $] >= 5.006;
 
 =head1 NAME
 

@@ -7,14 +7,16 @@ The MARC::* series of modules create a simple object-oriented
 abstraction of MARC record handling.  The files are:
 
 MARC::Tutorial
-    A tutorial document on how to use the MARC::Record package.
+    A tutorial explaining how to use MARC::Record.
 
 MARC::Record
+    The core class for representing a single MARC record.
+
 MARC::Field
-    The basic MARC record that is the core of everything.
+    Another core class for representing a single field in a record.
 
 MARC::Batch
-    The basic object for access a batch of one or more MARC records.
+    The basic object for access to a batch of one or more MARC records.
 
 MARC::File
     Base class for the MARC file.
@@ -38,6 +40,13 @@ To install this module type the following:
 
 
 DEPENDENCIES
+
+If you would like to run MARC::Record under a Perl version that is earlier than 
+v5.006 there is a patch which you can apply prior to installing:
+
+    tar xvfz MARC-Record-1.XX.tar.gz
+    cd MARC-Record-1.XX
+    patch -p1 < pre5006.patch
 
 MARC::* requires Perl and Test::More for tests. Test::More comes standard in
 Perl 5.8.
