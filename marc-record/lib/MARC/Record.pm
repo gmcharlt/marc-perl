@@ -19,7 +19,7 @@ use Carp qw(croak);
 
 Version 1.11
 
-    $Id: Record.pm,v 1.33 2002/09/12 16:01:07 edsummers Exp $
+    $Id: Record.pm,v 1.34 2002/09/12 16:19:07 edsummers Exp $
 
 =cut
 
@@ -129,14 +129,14 @@ sub field {
 
 Shortcut method for getting just a subfield for a tag.  These are equivalent:
 
-  my $title = $marc->field(245)->subfield("a");
-  my $title = $marc->subfield(245,"a");
+  my $title = $marc->field('245')->subfield("a");
+  my $title = $marc->subfield('245',"a");
 
 If either the field or subfield can't be found, C<undef> is returned.
 
 =cut
 
-sub subfield($$) {
+sub subfield {
     my $self = shift;
     my $tag = shift;
     my $subfield = shift;
@@ -145,7 +145,7 @@ sub subfield($$) {
     return $field->subfield($subfield);
 } # subfield()
 
-=head2 insert_grouped_field(C<$field>)
+=head2 insert_grouped_field(field)
 
 Will insert the specified MARC::Field object into the record in 'grouped
 order' and return true (1) on success, and false (undef) on failure.
@@ -194,7 +194,7 @@ sub _all_parms_are_fields {
     return 1;
 }
 
-=head2 append_fields(C<@fields>)
+=head2 append_fields(@fields)
 
 Appends the field specified by C<$field> to the end of the record. 
 C<@fields> need to be MARC::Field objects.
@@ -283,7 +283,7 @@ sub insert_fields_after {
     return scalar @new;
 }
 
-=head2 delete_field(C<$field>)
+=head2 delete_field($field)
 
 Deletes a field from the record.
 
