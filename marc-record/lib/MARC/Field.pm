@@ -2,6 +2,8 @@ package MARC::Field;
 
 use strict;
 use integer;
+use Carp;
+
 eval 'use warnings' if $] >= 5.006;
 
 use constant SUBFIELD_INDICATOR => "\x1F";
@@ -17,7 +19,7 @@ MARC::Field - Perl extension for handling MARC fields
 
 Version 1.10
 
-    $Id: Field.pm,v 1.18 2002/09/03 18:48:55 edsummers Exp $
+    $Id: Field.pm,v 1.19 2002/09/10 21:11:43 edsummers Exp $
 
 =cut
 
@@ -64,7 +66,7 @@ sub new($) {
 
 	my $tagno = shift;
 	($tagno =~ /^\d\d\d$/)
-		or return _gripe( "Tag \"$tagno\" is not a valid tag number." );
+		or croak( "Tag \"$tagno\" is not a valid tag number." );
 
 	my $self = bless {
 		_tag => $tagno,
@@ -84,7 +86,7 @@ sub new($) {
 		} # for
 		
 		(@_ >= 2)
-			or return _gripe( "Field $tagno must have at least one subfield" );
+			or croak( "Field $tagno must have at least one subfield" );
 
 		# Normally, we go thru add_subfields(), but internally we can cheat
 		$self->{_subfields} = [@_];
@@ -209,7 +211,7 @@ sub replace_with {
 
   my ($self,$new) = @_;
   ref($new) =~ /^MARC::Field$/ 
-    or return _gripe("Must pass a MARC::Field object");
+    or croak("Must pass a MARC::Field object");
 
   %$self = %$new;
     
@@ -240,14 +242,14 @@ sub indicator($) {
 	my $indno = shift;
 
 	($self->tag >= 10)
-		or return _gripe( "Fields below 010 do not have indicators" );
+		or croak( "Fields below 010 do not have indicators" );
 
 	if ( $indno == 1 ) {
 		return $self->{_ind1};
 	} elsif ( $indno == 2 ) {
 		return $self->{_ind2};
 	} else {
-		return _gripe( "Indicator number must be 1 or 2" );
+		croak( "Indicator number must be 1 or 2" );
 	}
 }
 
@@ -270,7 +272,7 @@ sub subfield {
 	my $code_wanted = shift;
 
 	($self->tag >= 10)
-		or return _gripe( "Fields below 010 do not have subfields" );
+		or croak( "Fields below 010 do not have subfields" );
 
 	my @data = @{$self->{_subfields}};
 	while ( defined( my $code = shift @data ) ) {
@@ -299,7 +301,7 @@ sub subfields {
 	my $self = shift;
 
 	($self->tag >= 10)
-		or return _gripe( "Fields below 010 do not have subfields" );
+		or croak( "Fields below 010 do not have subfields" );
 
 	my @list;
 	my @data = @{$self->{_subfields}};
@@ -327,7 +329,7 @@ sub data($) {
 	my $self = shift;
 
 	($self->{_tag} < 10)
-		or return _gripe( "data() is only for tags less than 10" );
+		or croak( "data() is only for tags less than 10" );
 		
 	my $data = shift;
 	$self->{_data} = $data if defined( $data );
@@ -347,7 +349,7 @@ sub add_subfields(@) {
 	my $self = shift;
 
 	($self->{_tag} >= 10)
-		or return _gripe( "Subfields are only for tags >= 10" );
+		or croak( "Subfields are only for tags >= 10" );
 
 	push( @{$self->{_subfields}}, @_ );
 	return @_/2;

@@ -17,7 +17,7 @@ use vars qw( $ERROR );
 
 Version 1.10
 
-    $Id: USMARC.pm,v 1.22 2002/08/30 22:43:10 petdance Exp $
+    $Id: USMARC.pm,v 1.23 2002/09/10 21:11:43 edsummers Exp $
 
 =cut
 
@@ -69,14 +69,12 @@ sub _next {
 
     if ( length($usmarc) < 5 ) {
 	$self->_warn( "Couldn't find record length" );
-	return $self->_next();
     }
 
     $reclen = substr($usmarc,0,5);
 
     if ( $reclen !~ /^\d{5}$/ or $reclen != length($usmarc) ) {
 	$self->_warn( "Invalid record length \"$reclen\"" );
-	return $self->_next();
     }
 
     return $usmarc;
@@ -84,8 +82,8 @@ sub _next {
 
 =head2 decode()
 
-Constructor for handling data from a USMARC file.  This function takes care of all
-the tag directory parsing & mangling.
+Constructor for handling data from a USMARC file.  This function takes care of 
+all the tag directory parsing & mangling.
 
 Any warnings or coercions can be checked in the C<warnings()> function.
 
@@ -103,27 +101,27 @@ sub decode {
 
     my $reclen = $1;
     ($reclen == length($text))
-	or return $marc->_gripe( "Invalid record length: Leader says $reclen bytes, but it's actually ", length( $text ) );
+	or return $marc->_warn( "Invalid record length: Leader says $reclen bytes, but it's actually ", length( $text ) );
 
     $marc->leader( substr( $text, 0, LEADER_LEN ) );
     my @fields = split( END_OF_FIELD, substr( $text, LEADER_LEN ) );
     my $dir = shift @fields or return $marc->_warn( "No directory found" );
 
     (length($dir) % 12 == 0)
-	or return $marc->_gripe( "Invalid directory length" );
+	or return $marc->_warn( "Invalid directory length" );
     my $nfields = length($dir)/12;
 
     my $finalfield = pop @fields;
     # Check for the record terminator, and ignore it
     ($finalfield eq END_OF_RECORD)
-    	or $marc->_gripe( "Invalid record terminator: \"$finalfield\"" );
+    	or return $marc->_warn( "Invalid record terminator: \"$finalfield\"" );
 
     # Walk thru the directories, and shift off the fields while we're at it
     # Shouldn't be any non-digits anywhere in any directory entry
     my @directory = unpack( "A3 A4 A5" x $nfields, $dir );
     my @bad = grep /\D/, @directory;
     if ( @bad ) { 
-	return $marc->_gripe( "Non-numeric entries in the tag directory: ", join( ", ", map { "\"$_\"" } @bad ) );
+	return $marc->_warn( "Non-numeric entries in the tag directory: ", join( ", ", map { "\"$_\"" } @bad ) );
     }
 
     my $databytesused = 0;
@@ -136,13 +134,13 @@ sub decode {
 
 	# Check directory validity
 	($tagno =~ /^\d\d\d$/)
-	    or return $marc->_gripe( "Invalid field number in directory: \"$tagno\"" );
+	    or return $marc->_warn( "Invalid field number in directory: \"$tagno\"" );
 
 	($len == length($tagdata) + 1)
-	    or $marc->_warn( "Invalid length in the directory for tag $tagno" );
+	    or return $marc->_warn( "Invalid length in the directory for tag $tagno" );
 
 	($offset == $databytesused)
-	    or $marc->_warn( "Directory offsets are out of whack" );
+	    or return $marc->_warn( "Directory offsets are out of whack" );
 	$databytesused += $len;
 
 	if ( $tagno < 10 ) {
@@ -151,7 +149,7 @@ sub decode {
 	} else {
 	    my @subfields = split( SUBFIELD_INDICATOR, $tagdata );
 	    my $indicators = shift @subfields
-		or return $marc->_gripe( "No subfields found." );
+		or return $marc->_warn( "No subfields found." );
 	    my ($ind1,$ind2);
 	    if ( $indicators =~ /^([0-9 ])([0-9 ])$/ ) {
 		($ind1,$ind2) = ($1,$2);
@@ -163,13 +161,13 @@ sub decode {
 	    # Split the subfield data into subfield name and data pairs
 	    my @subfield_data = map { (substr($_,0,1),substr($_,1)) } @subfields;
 	    $marc->add_fields( $tagno, $ind1, $ind2, @subfield_data )
-		or return undef;
+		or return $marc->_warn(''); 
 	}
     } # while
 
     # Once we're done, there shouldn't be any fields left over: They should all have shifted off.
     (@fields == 0)
-    	or return $marc->_gripe( "I've got leftover fields that weren't in the directory" );
+    	or return $marc->_warn( "I've got leftover fields that weren't in the directory" );
 
     return $marc;
 }

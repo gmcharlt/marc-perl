@@ -14,7 +14,7 @@ eval 'use warnings' if $] >= 5.006;
 
 Version 1.10
 
-    $Id: Batch.pm,v 1.13 2002/08/30 22:43:10 petdance Exp $
+    $Id: Batch.pm,v 1.14 2002/09/10 21:11:42 edsummers Exp $
 
 =cut
 
@@ -65,6 +65,7 @@ sub new {
 	filename =>	undef,
 	marcclass =>	$marcclass,
 	file =>		undef,
+	_warnings =>	[],
     };
 
     bless $self, $class;
@@ -83,13 +84,27 @@ it and open the next one.
 sub next {
     my $self = shift;
 
-    # If we have an open file, just use it and go.
     if ( $self->{file} ) {
-	my $rec = $self->{file}->next();
-	return $rec if $rec;
-    }
 
-    $self->{file} = undef;
+	# get the next record
+	my $rec = $self->{file}->next();
+
+	# collect warnings from MARC::File::* object
+	my @warnings = $self->{file}->warnings();
+	push(@{ $self->{_warnings} }, @warnings ) if @warnings;
+
+	if ($rec) {
+
+	    # collect warnings from the MARC::Record object
+	    my @warnings = $rec->warnings();
+	    push(@{ $self->{_warnings} }, @warnings ) if @warnings;
+
+	    # return the MARC::Record object
+	    return($rec);
+
+	}
+
+    }
 
     # Get the next file off the stack, if there is one
     $self->{filename} = shift @{$self->{filestack}} or return undef;
@@ -98,7 +113,9 @@ sub next {
     my $marcclass = $self->{marcclass};
     $self->{file} = $marcclass->in( $self->{filename} ) or return undef;
 
-    return $self->{file}->next();
+    # call this method again now that we've got a file open
+    return( $self->next() );
+
 }
 
 =head2 filename()
@@ -115,16 +132,18 @@ sub filename {
 
 =head2 warnings() 
 
-Returns any warnings that have accumulated while processing a particular 
+Returns a list of warnings that have accumulated while processing a particular 
 batch file. As a side effect the warning buffer will be cleared.
+
+    my @warnings = $batch->warnings();
 
 =cut
 
 sub warnings {
     my $self = shift;
-    my $file = $self->{file}; 
-    return(undef) if !$file;
-    return ($file->warnings());
+    my @warnings = @{ $self->{_warnings} };
+    $self->{_warnings} = [];
+    return(@warnings);
 }
 
 

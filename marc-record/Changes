@@ -7,6 +7,12 @@ Revision history for Perl extension MARC::Record.
 	  and insert_grouped_fields() now call croak() instead of _gripe
 	  in order to help MARC::Record users to locate where their call 
 	  is failing. Thanks to Jackie Shieh for pointing this out.
+	- MARC::Batch is now fault tolerant, in that it will store 
+	  warnings about file format problems, but will not bomb out. 
+	  The method MARC::Batch::warnings() can be used to get info
+	  about what went wrong while reading a record, and users can
+	  determine what to do. Thanks to Betsy Earl for solidifying the
+	  need for this.
 
 1.10	August 30, 2002
 	[ENHANCEMENTS]

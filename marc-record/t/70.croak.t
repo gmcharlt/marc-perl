@@ -1,5 +1,8 @@
 use Test::More tests=>4;
 
+## methods should croak when called wrong so that MARC::Record users can 
+## identify the location of their mistakes.
+
 use MARC::Record;
 use MARC::Field;
 

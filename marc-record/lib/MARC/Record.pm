@@ -19,7 +19,7 @@ use Carp qw(croak);
 
 Version 1.10
 
-    $Id: Record.pm,v 1.31 2002/09/03 14:45:06 edsummers Exp $
+    $Id: Record.pm,v 1.32 2002/09/10 21:11:43 edsummers Exp $
 
 =cut
 
@@ -230,7 +230,9 @@ Both C<$before_field> and all C<@new_fields> need to be MARC::Field objects.
 sub insert_fields_before {
     my $self = shift;
 
-    _all_parms_are_fields(@_) or croak('All arguments must be MARC::Field objects');
+    _all_parms_are_fields(@_) 
+	or croak('All arguments must be MARC::Field objects');
+
     my ($before,@new) = @_;
 
     ## find position of $before
@@ -243,7 +245,8 @@ sub insert_fields_before {
 
     ## insert before $before 
     if ($pos >= @$fields) {
-	return(_gripe("Couldn't find field to insert before"));
+	$self->_warn("Couldn't find field to insert before");
+	return(undef);
     }
     splice(@$fields,$pos,0,@new);
     return scalar @new;
@@ -272,7 +275,8 @@ sub insert_fields_after {
 
     ## insert after $after
     if ($pos+1 >= @$fields) { 
-	return(_gripe("Couldn't find field to insert after"));
+	$self->_warn("Couldn't find field to insert after");
+	return(undef);
     }
     splice(@$fields,$pos+1,0,@new);
     return scalar @new;
@@ -534,7 +538,7 @@ sub add_fields {
 	    ++$nfields;
 
 	} else {
-	    return _gripe( "Unknown parm of type", ref($parm), " passed to add_fields()" );
+	    croak( "Unknown parm of type", ref($parm), " passed to add_fields()" );
 	} # if
 
     } # while
@@ -562,8 +566,8 @@ sub new_from_usmarc {
 # NOTE: _warn is an object method
 sub _warn {
     my $self = shift;
-
     push( @{$self->{_warnings}}, join( "", @_ ) );
+    return($self);
 }
 
 

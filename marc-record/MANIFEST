@@ -27,6 +27,8 @@ t/63.after.t
 t/64.create.t
 t/65.badldr.t
 t/70.croak.t
+t/71.warnings.t
+t/badsubf.usmarc
 t/badldr.usmarc
 t/camel.usmarc
 t/sample100.lif
