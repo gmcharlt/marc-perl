@@ -1,2 +1,7 @@
+1.40
+        - added DATA for tags 001-008
+        - updated DATA to incorporate update 4 (Oct. 2004)
+        - corrected errors in the DATA section
+
 1.39    Thu Dec 16 20:25:41 CST 2004
         - initial baseline release after separation from MARC::Record proper
