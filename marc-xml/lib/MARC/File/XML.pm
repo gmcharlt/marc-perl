@@ -9,7 +9,7 @@ use MARC::File::SAX;
 use IO::File;
 use Carp qw( croak );
 
-our $VERSION = '0.66';
+our $VERSION = '0.7';
 
 my $handler = MARC::File::SAX->new();
 my $parser = XML::SAX::ParserFactory->parser( Handler => $handler );

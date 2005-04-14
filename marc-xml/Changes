@@ -1,5 +1,8 @@
 Revision history for Perl extension MARC-XML
 
+0.7   Thu Apr 14 11:54:24 CDT 2005
+    - marc2xml uses MARC::Batch in lenient mode, thanks Rob Casson.
+
 0.66  Thu Sep 23 01:12:20 CDT 2004 <Summers>
     - added ability to change the encoding attribute.
 

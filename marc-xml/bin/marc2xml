@@ -47,6 +47,11 @@ binmode( $fh, ':utf8' );
 
 my $found = 0;
 my $batch = MARC::Batch->new( 'USMARC', $fh );
+
+# be lenient, it's MARC afterall :)
+$batch->warnings_off();
+$batch->strict_off();
+
 while ( my $record = $batch->next() ) { 
     if ( ! $found ) { 
         print MARC::File::XML::header();
