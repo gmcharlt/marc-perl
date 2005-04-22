@@ -307,8 +307,8 @@ sub update {
 
     ## tags 000 - 009 don't have indicators or subfields
     if ( $self->is_control_field ) {
-	$self->{_data} = shift;
-	return(1);
+        $self->{_data} = shift;
+        return(1);
     }
 
     ## otherwise we need to update subfields and indicators
@@ -317,34 +317,34 @@ sub update {
 
     while ( @_ ) {
 
-	my $arg = shift;
-	my $val = shift;
+        my $arg = shift;
+        my $val = shift;
 
-	## indicator update
-	if ($arg =~ /^ind[12]$/) {
-	    $self->{"_$arg"} = $val;
-	    $changes++;
-	}
+        ## indicator update
+        if ($arg =~ /^ind[12]$/) {
+            $self->{"_$arg"} = $val;
+            $changes++;
+        }
 
-	## subfield update
-	else {
-	    my $found = 0;
-	    ## update existing subfield
-	    for ( my $i=0; $i<@data; $i+=2 ) {
-		if ($data[$i] eq $arg) {
-		    $data[$i+1] = $val;
-		    $found = 1;
-		    $changes++;
-		    last;
-		}
-	    } # for
+        ## subfield update
+        else {
+            my $found = 0;
+            ## update existing subfield
+            for ( my $i=0; $i<@data; $i+=2 ) {
+                if ($data[$i] eq $arg) {
+                    $data[$i+1] = $val;
+                    $found = 1;
+                    $changes++;
+                    last;
+                }
+            } # for
 
-	    ## append new subfield
-	    if ( !$found ) {
-		push( @data, $arg, $val );
-		$changes++;
-	    }
-	}
+            ## append new subfield
+            if ( !$found ) {
+                push( @data, $arg, $val );
+                $changes++;
+            }
+        }
 
     } # while
 
@@ -417,7 +417,7 @@ sub as_string() {
     my $subs = $self->{_subfields};
     my $nfields = @$subs / 2;
     for my $i ( 1..$nfields ) {
-	my $offset = ($i-1)*2;
+        my $offset = ($i-1)*2;
         my $code = $subs->[$offset];
         my $text = $subs->[$offset+1];
         push( @subs, $text ) if !$subfields || $code =~ /^[$subfields]$/;
@@ -443,10 +443,10 @@ sub as_formatted() {
     } else {
         my $hanger = sprintf( "%03s %1.1s%1.1s", $self->{_tag}, $self->{_ind1}, $self->{_ind2} );
 
-	my $subs = $self->{_subfields};
-	my $nfields = @$subs / 2;
-	my $offset = 0;
-	for my $i ( 1..$nfields ) {
+        my $subs = $self->{_subfields};
+        my $nfields = @$subs / 2;
+        my $offset = 0;
+        for my $i ( 1..$nfields ) {
             push( @lines, sprintf( "%-6.6s _%1.1s%s", $hanger, $subs->[$offset++], $subs->[$offset++] ) );
             $hanger = "";
         } # for
@@ -477,12 +477,11 @@ sub as_usmarc() {
         } # while
 
         return
-	    join( "",
-		$self->indicator(1),
+            join( "",
+                $self->indicator(1),
                 $self->indicator(2),
                 @subs,
-                END_OF_FIELD,
-                );
+                END_OF_FIELD, );
     }
 }
 

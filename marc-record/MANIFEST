@@ -8,10 +8,10 @@ bin/marcdump
 lib/MARC/Batch.pm
 lib/MARC/Doc/Tutorial.pod
 lib/MARC/Field.pm
+lib/MARC/File/Encode.pm
 lib/MARC/File/MicroLIF.pm
 lib/MARC/File.pm
 lib/MARC/File/USMARC.pm
-lib/MARC/File/Utils.pm
 lib/MARC/Record.pm
 
 t/00.load.t
@@ -62,4 +62,3 @@ t/sample20.lif
 t/title_proper.t
 t/title_proper.usmarc
 t/utf8.t
-t/utils.t

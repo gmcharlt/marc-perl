@@ -19,7 +19,6 @@ use MARC::Record;
 use Getopt::Long;
 
 ## flag STDOUT for UTF8
-binmode( STDOUT, ':utf8' ) if MARC::File::utf8_safe();
 
 my $opt_print = 1;
 my $opt_quiet = 0;
@@ -70,7 +69,12 @@ for my $filename ( @files ) {
             $marc->leader('') unless $wants_leader;
         }
 
-        print $marc->as_formatted, "\n\n" if $opt_print;
+        # stifle warnings here in case there's utf8 data being printed
+        {
+            no warnings;
+            print $marc->as_formatted, "\n\n" if $opt_print;
+        }
+
         if ( $marc->warnings() ) {
             ++$errors{$filename};
             print join( "\n", $marc->warnings(), "" );

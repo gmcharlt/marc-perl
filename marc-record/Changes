@@ -1,5 +1,19 @@
 Revision history for Perl extension MARC::Record.
 
+2.0
+        [THINGS THAT MAY BREAK YOUR CODE]
+        - Perl 5.8.2 required for utf8 handling
+
+        [ENHANCEMENTS]
+        - removed dead utf8 handling code
+        - added MARC::File::Encode wrapper around Encode module since
+          Encode exports encode() by default which conflicts with existing
+          MARC::File::Encode::encode.
+        - added MARC::Record::encoding() for getting/setting record
+          encoding
+        - modified t/utf8.t to unconditionally do tests since a modern
+          perl will now be required.
+
 1.39_02 Tue Dec 21 09:29:45 CST 2004
 
         [THINGS THAT MAY BREAK YOUR CODE]

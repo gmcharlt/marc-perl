@@ -21,7 +21,7 @@ Version 1.39_02
 =cut
 
 use vars qw( $VERSION );
-$VERSION = '1.39_02';
+$VERSION = '2.0';
 
 use Exporter;
 use vars qw( @ISA @EXPORTS @EXPORT_OK );
@@ -496,6 +496,46 @@ sub leader {
 
     return $self->{_leader};
 } # leader()
+
+=head2 encoding()
+
+A method for getting/setting the encoding for a record. The encoding for a
+record is determined by position 09 in the leader, which is blank for MARC-8
+encoding, and 'a' for UCS/Unicode. encoding() will return a string, either 
+'MARC-8' or 'UTF-8' appropriately. 
+
+If you want to set the encoding for a MARC::Record object you can use the
+string values:
+
+    $record->encoding( 'UTF-8' );
+
+NOTE: MARC::Record objects created from scratch have an a default encoding
+of MARC-8, which has been the standard for years...but many online catlogs
+and record vendors are migrating to UTF-8.
+
+WARNING: you should be sure your record really does contain valid UTF-8 data
+when you manually set the encoding. 
+
+=cut
+
+sub encoding {
+    my ($self,$arg) = @_;
+    # we basically report from and modify the leader directly
+    my $leader = $self->leader();
+
+    # when setting
+    if ( defined($arg) ) {
+        if ( $arg =~ /UTF-8/i ) { 
+            substr($leader,9,1) = 'a';
+        }
+        elsif ( $arg =~ /MARC-8/i ) {
+            substr($leader,9,1) = ' ';
+        }
+        $self->leader($leader);
+    }
+
+    return substr($leader,9,1) eq 'a' ? 'UTF-8' : 'MARC-8';
+}
 
 =head2 set_leader_lengths( $reclen, $baseaddr )
 
