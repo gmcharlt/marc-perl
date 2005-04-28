@@ -981,9 +981,11 @@ z       R       Canceled or invalid record control number
 
 017     R       COPYRIGHT OR LEGAL DEPOSIT NUMBER
 ind1    blank   Undefined
-ind2    blank   Undefined
-a       R       Copyright registration number 
-b       NR      Assigning agency 
+ind2    b8      Undefined
+a       R       Copyright or legal deposit number
+b       NR      Assigning agency
+d       NR      Date
+i       NR      Display text
 2       NR      Source 
 6       NR      Linkage 
 8       R       Field link and sequence number 
@@ -1067,6 +1069,30 @@ a       NR      CODEN
 z       R       Canceled/invalid CODEN 
 6       NR      Linkage 
 8       R       Field link and sequence number 
+
+031     R       MUSICAL INCIPITS INFORMATION
+ind1    blank   Undefined
+ind2    blank   Undefined
+a       NR      Number of work
+b       NR      Number of movement
+c       NR      Number of excerpt
+d       R       Caption or heading
+e       NR      Role
+g       NR      Clef
+m       NR      Voice/instrument
+n       NR      Key signature
+o       NR      Time signature
+p       NR      Musical notation
+q       R       General note
+r       NR      Key or mode
+s       R       Coded validity note
+t       R       Text incipit
+u       R       Uniform Resource Identifier
+y       R       Link text
+z       R       Public note
+2       NR      System code
+6       NR      Linkage
+8       R       Field link and sequence number
 
 032     R       POSTAL REGISTRATION NUMBER
 ind1    blank   Undefined
@@ -1259,7 +1285,7 @@ d       R       Populated place name
 8       R       Field link and sequence number 
 
 055     R       CLASSIFICATION NUMBERS ASSIGNED IN CANADA
-ind1    b01     Existence in NLC collection
+ind1    b01     Existence in LAC collection
 ind2    0123456789   Type, completeness, source of class/call number
 a       NR      Classification number 
 b       NR      Item number 
@@ -1601,16 +1627,24 @@ a       NR      Country of producing entity
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
+258     R       PHILATELIC ISSUE DATE
+ind1    blank   Undefined
+ind2    blank   Undefined
+a       NR      Issuing jurisdiction
+b       NR      Denomination
+6       NR      Linkage
+8       R       Field link and sequence number
+
 260     R       PUBLICATION, DISTRIBUTION, ETC. (IMPRINT)
 ind1    b23     Sequence of publishing statements
 ind2    blank   Undefined
 a       R       Place of publication, distribution, etc. 
 b       R       Name of publisher, distributor, etc. 
 c       R       Date of publication, distribution, etc. 
-d       NR      Plate or publisher's number for music (Pre-AACR 2) 
-e       NR      Place of manufacture 
-f       NR      Manufacturer 
-g       NR      Date of manufacture 
+d       NR      Plate or publisher's number for music (Pre-AACR 2)
+e       R       Place of manufacture 
+f       R       Manufacturer 
+g       R       Date of manufacture 
 3       NR      Materials specified 
 6       NR      Linkage 
 8       R       Field link and sequence number 
@@ -2246,7 +2280,7 @@ u       R       Uniform Resource Identifier
 8       R       Field link and sequence number 
 
 541     R       IMMEDIATE SOURCE OF ACQUISITION NOTE
-ind1    blank   Undefined
+ind1    b01     Undefined
 ind2    blank   Undefined
 a       NR      Source of acquisition 
 b       NR      Address 
@@ -2352,7 +2386,7 @@ z       R       International Standard Book Number
 8       R       Field link and sequence number 
 
 561     R       OWNERSHIP AND CUSTODIAL HISTORY
-ind1    blank   Undefined
+ind1    b01     Undefined
 ind2    blank   Undefined
 a       NR      History 
 3       NR      Materials specified 
@@ -2419,7 +2453,7 @@ z       R       International Standard Book Number
 8       R       Field link and sequence number 
 
 583     R       ACTION NOTE
-ind1    blank   Undefined
+ind1    b01     Undefined
 ind2    blank   Undefined
 a       NR      Action 
 b       R       Action identification 
