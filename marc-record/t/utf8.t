@@ -1,6 +1,6 @@
 ##!perl -Tw
 
-use Test::More tests => 19;
+use Test::More tests => 20;
 
 use strict;
 use MARC::Record;
@@ -14,6 +14,7 @@ use File::Spec;
 ## read it back from disk as a MARC::Record.
 
 my $aleph = chr(0x05d0);
+ok( Encode::is_utf8($aleph), 'is_utf8()' );
 my $filename = File::Spec->catfile( 't', 'utf8.marc' );
 
 CREATE_FILE: {
