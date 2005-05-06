@@ -4,6 +4,7 @@ use Test::More tests => 19;
 
 use strict;
 use MARC::Record;
+use MARC::Batch;
 use MARC::File::USMARC;
 use Encode;
 use File::Spec;
@@ -32,7 +33,7 @@ CREATE_FILE: {
     ## write record to disk, telling perl (as we should) that we
     ## will be writing utf8 unicode
     open( OUT, ">$filename" );
-    binmode( OUT, ':utf8' );
+    binmode( OUT, ':utf8' ); # so we don't get a warning
     print OUT $r->as_usmarc();
     close( OUT );
 }
@@ -60,35 +61,31 @@ REREAD_FILE: {
     unlink( $filename );
 }
 
-WRITE_CRAP_UTF8: {
+WRITE_ANSEL: {
     my $r = MARC::Record->new();
     isa_ok( $r, 'MARC::Record' );
-
     is( $r->encoding(), 'MARC-8', 'default encoding' );
-    $r->encoding( 'UTF-8' );
-    is( $r->encoding(), 'UTF-8', 'set encoding' );
 
-    my $f = MARC::Field->new( 245, 0, 0, a => chr(0x00) );
+    my $f = MARC::Field->new( 245, 0, 0, a => "foo".chr(0xE2)."e" );
     isa_ok( $f, 'MARC::Field' );
 
     my $nadds = $r->append_fields( $f );
     is( $nadds, 1, "Added one field" );
 
     open( OUT, ">$filename" );
-    binmode( OUT, ':utf8' );
     print OUT $r->as_usmarc();
     close( OUT );    
 }
 
-READ_CRAP_UTF8: {
+READ_ANSEL: {
     my $f = MARC::File::USMARC->in( $filename );
     isa_ok( $f, 'MARC::File::USMARC' );
 
     my $r = $f->next();
     isa_ok( $r, 'MARC::Record' );
+    is( scalar( $r->warnings() ), 0, 'Reading it generated no warnings' ); 
 
-    is( $r->field('245')->subfield('a'), chr(0x00), 'eh?' );
+    is( $r->field('245')->subfield('a'), "foo".chr(0xE2)."e", 'non-utf8' );
     unlink( $filename );
 }
-
 
