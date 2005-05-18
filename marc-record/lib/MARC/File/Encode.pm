@@ -30,6 +30,8 @@ Simple wrapper around Encode::decode().
 =cut
 
 sub marc_to_utf8 {
+    # if there is invalid utf8 date then this will through an exception
+    # let's just hope it's valid :-)
     return decode( 'UTF-8', $_[0], 1 );
 }
 
