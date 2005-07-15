@@ -152,7 +152,7 @@ sub check_record {
 
     $self->clear_warnings();
 
-    (ref($marc) eq "MARC::Record")
+    ( (ref $marc) && $marc->isa('MARC::Record') )
         or return $self->warn( "Must pass a MARC::Record object to check_record" );
 
     my @_1xx = $marc->field( "1.." );
