@@ -13,6 +13,11 @@ Revision history for Perl extension MARC::Record.
           encoding
         - modified t/utf8.t to unconditionally do tests since a modern
           perl will now be required.
+        - Added --hex switch to marcdump, which dumps the record in
+          hexadecimal.  The offsets are in decimal so that you can match
+          them up to values in the leader.  The offset is reset to 0
+          when we're past the directory so that you can match up the data
+          with the offsets in the directory.
 
 1.39_02 Tue Dec 21 09:29:45 CST 2004
 
