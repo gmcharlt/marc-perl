@@ -756,15 +756,15 @@ sub _check_article {
 		}
 		#special case for 'en' (unsure why)
 		if ($firstword eq 'en') {
-			$self->warn ( $tagno, ": First word, , $firstword, may be an article, check $first_or_second indicator ($ind)." ) unless (($ind == 3) || ($ind == 0));
+			$self->warn ( $tagno, ": First word, , $firstword, may be an article, check $first_or_second indicator ($ind)." ) unless (($ind eq '3') || ($ind eq '0'));
 		}
-		elsif ($nonfilingchars != $ind) {
+		elsif ($nonfilingchars ne $ind) {
 			$self->warn ( $tagno, ": First word, $firstword, may be an article, check $first_or_second indicator ($ind)." );
 		} #unless ind is same as length of first word and nonfiling characters
 	} #if first word is in article list
 	#not an article so warn if $ind is not 0
 	else {
-		unless ($ind == 0) {
+		unless ($ind eq '0') {
 			$self->warn ( $tagno, ": First word, $firstword, does not appear to be an article, check $first_or_second indicator ($ind)." );
 		} #unless ind is 0
 	} #else not in article list

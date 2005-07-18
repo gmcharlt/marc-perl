@@ -60,6 +60,9 @@
         - added check041043.t to test the new check_041 and check_043 methods
 
         - check_record() now accepts any isa( 'MARC::Record' ).
+
+        - _check_article() no longer trips a Perl warning if an indicator
+          has a non-numeric value.
         
 1.40    Mon Dec 20 14:01:53 CST 2004
         - added DATA for tags 001-008
