@@ -64,6 +64,10 @@
         - _check_article() no longer trips a Perl warning if an indicator
           has a non-numeric value.
         
+        - _check_article() updated with exceptions for 'a posteriori' and 'a priori'
+        
+        -Replaced indenting tabs with 4 spaces
+        
 1.40    Mon Dec 20 14:01:53 CST 2004
         - added DATA for tags 001-008
         - updated DATA to incorporate update 4 (Oct. 2003)
