@@ -758,7 +758,7 @@ decide if MARC::Record is for you.
 
 =head1 RELATED MODULES
 
-L<MARC::Record>, L<MARC::Lint>
+L<MARC::File::XML>, L<MARC::Charset>, L<MARC::Lint>
 
 =head1 SEE ALSO
 
