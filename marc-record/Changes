@@ -18,6 +18,7 @@ Revision history for Perl extension MARC::Record.
           them up to values in the leader.  The offset is reset to 0
           when we're past the directory so that you can match up the data
           with the offsets in the directory.
+        - fixed RELATED MODULES section in Record.pm (thanks Todd Holbrook)
 
 1.39_02 Tue Dec 21 09:29:45 CST 2004
 
