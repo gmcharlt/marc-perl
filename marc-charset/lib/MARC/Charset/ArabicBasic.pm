@@ -161,21 +161,23 @@ chr(0x7A)=>chr(0x201C), #LEFT DOUBLE QUOTATION MARK
 
 =over 4 
 
-=item *
-
-Nothing
+=item * Nothing
 
 =back
 
 =head1 SEE ALSO
 
-=item MARC::Charset::Generic
+=over 4
+
+=item * MARC::Charset::Generic
+
+=back
 
 =head1 AUTHORS
 
 =over 4
 
-=item Ed Summers <ehs@pobox.com>
+=item * Ed Summers <ehs@pobox.com>
 
 =back
 
