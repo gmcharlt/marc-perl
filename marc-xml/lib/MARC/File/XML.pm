@@ -114,7 +114,7 @@ to serialize more than one record as XML.
 A constructor for creating a MARC::File::XML object that can write XML to a
 file. You must pass in the name of a file to write XML to.
 
-    my $file = MARC::XML::File->out( $filename );
+    my $file = MARC::File::XML->out( $filename );
 
 =cut
 
