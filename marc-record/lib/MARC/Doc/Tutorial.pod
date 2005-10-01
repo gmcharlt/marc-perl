@@ -396,7 +396,7 @@ MARC::Record object. For example:
    5   my $record = MARC::Record->new();
    6
    7   ## add the leader to the record. optional.
-   8   $record->leader('00903pam   2200265 a 4500');
+   8   $record->leader('00903pam  2200265 a 4500');
    9
   10   ## create an author field.
   11   my $author = MARC::Field->new(
@@ -438,7 +438,7 @@ and save it to a file called 'record.dat'.
    5   my $record = MARC::Record->new();
    6
    7   ## add the leader to the record. optional.
-   8   $record->leader('00903pam   2200265 a 4500');
+   8   $record->leader('00903pam  2200265 a 4500');
    9
   10   ## create an author field.
   11   my $author = MARC::Field->new(
