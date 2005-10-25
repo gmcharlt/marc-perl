@@ -22,12 +22,12 @@ use Test::More tests=>10;
 BEGIN { use_ok( 'MARC::Batch' ); }
 BEGIN { use_ok( 'MARC::File::USMARC' ); }
 BEGIN { use_ok( 'MARC::File::MARCMaker' ); }
-print "MARC::File::MARCMaker version $MARC::File::MARCMaker::VERSION\n";
 
 if (UNIVERSAL::can('MARC::Field', 'as_marcmaker')) {
     warn "MARC::Field now has an as_marcmaker() method";
 } 
 else {
+    no warnings;
     *MARC::Field::as_marcmaker = *MARC::File::MARCMaker::as_marcmaker;
 }
 

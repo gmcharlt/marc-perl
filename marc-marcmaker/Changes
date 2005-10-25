@@ -2,7 +2,10 @@ Version History
 
 Version xx
 
-  -moved 00.load.t.txt to 00.load.t 
+  -Moved 00.load.t.txt to 00.load.t 
+  -Removed ABSTRACT_FROM from Makefile.PL since it wasn't working
+  -Modified t/marmaker.t to not emit warnings and output that might confuse
+   the test harness. 
 
 Version 0.04: Updated Oct. 20. Initial commit to SourceForge CVS, Oct. 23, 2005.
 
