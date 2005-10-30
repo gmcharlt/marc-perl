@@ -1139,6 +1139,81 @@ Which will generate results like this:
 
 =head2 XML
 
+=head2 MARCMaker
+
+MARC::File::MARCMaker, available on CPAN and in cvs on SourceForge, is a
+subclass of MARC::File for working with MARC 21 data encoded in the format used
+by the Library of Congress MARCMaker and MARCBreaker programs
+(L<http://www.loc.gov/marc/makrbrkr.html>) and MarcEdit ().
+
+An example of a brief record in this format:
+
+ =LDR  00314nam  22001215a 4500
+ =001  ctr00000123\
+ =003  XX-XxUND
+ =005  20000613133448.0
+ =008  051029s2005\\\\xxua\\\\\\\\\\001\0\eng\\
+ =040  \\$aXX-XxUND$cXX-XxUND
+ =245  00$aSample of MARCMaker record.
+ =260  \\$a[United States] :$b[S.n.],$c2005.
+ =300  \\$a1 p. ;$c28 cm.
+
+The following example converts an ISO2709 format record into MARCMaker format.
+
+   1    ## Example Maker1
+   2
+   3    use MARC::Batch;
+   4    use MARC::File::MARCMaker;
+   5
+   6    #mrc indicates ISO2709 format
+   7    my $mrc_in = 'in.mrc';
+   8    #mrk indicates MARCMaker format
+   9    my $mrk_out = 'out.mrk';
+   10
+   11   #initialize $batch_mrc as new MARC::Batch object
+   12   my $batch_mrc = MARC::Batch->new('USMARC', $mrc_in);
+   13
+   14   #open mrk (MARCMaker) format output file
+   15   open (OUTMRK, ">$mrk_out") || die "Cannot open $mrk_out, $!";
+   16
+   17   my $rec_count = 0;
+   18   while (my $record = $batch_mrc->next()) {
+   19      $rec_count++;
+   20
+   21      print OUTMRK MARC::File::MARCMaker->encode($record);
+   22
+   23   } # while
+   24
+   25   print "$rec_count records processed\n";
+
+The following example shows conversion from MARCMaker format to ISO2709 format.
+
+   1    ## Example Maker2
+   2
+   3    use MARC::Batch;
+   4    use MARC::File::MARCMaker;
+   5
+   6    #mrk indicates MARCMaker format
+   7    my $mrk_in = 'in.mrk';
+   8    #mrc indicates ISO2709 format
+   9    my $mrc_out = 'out.mrc';
+   10
+   11   #initialize $batch_mrk as new MARC::Batch object
+   12   my $batch_mrk = MARC::Batch->new( 'MARCMaker', $mrk_in);
+   13
+   14   #open mrc (ISO2709) format output file
+   15   open (OUTMRC, ">$mrc_out") || die "Cannot open $mrc_out, $!";
+   16
+   17   my $rec_count = 0;
+   18   while (my $record = $batch_mrk->next()) {
+   19      $rec_count++;
+   20
+   21      print OUTMRC $record->as_usmarc();
+   22
+   23   } # while
+   24
+   25   print "$rec_count records processed\n";
+
 =head2 Excel
 
 =head2 Z39.50
