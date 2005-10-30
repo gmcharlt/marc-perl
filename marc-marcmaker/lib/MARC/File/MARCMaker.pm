@@ -13,7 +13,7 @@ use integer;
 
 use vars qw( $VERSION $ERROR );
 
-$VERSION = 0.04;
+$VERSION = 0.05;
 
 use MARC::File;
 use vars qw( @ISA ); @ISA = qw( MARC::File );
@@ -107,6 +107,8 @@ Decode should mostly be working. Test for correctness.
 Remove unnecessary code and documentation, remnants of the initial development of the module. Move internal subs to end of module?
 
 =head1 VERSION HISTORY
+
+Version 0.05: First CPAN release, Oct. 30, 2005.
 
 Version 0.04: Updated Oct. 22, 2005. Released Oct. 23, 2005.
 

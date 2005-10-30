@@ -1,6 +1,6 @@
 Version History
 
-Version xx
+Version 0.05: First CPAN release, Oct. 30, 2005.
 
   -Moved 00.load.t.txt to 00.load.t 
   -Removed ABSTRACT_FROM from Makefile.PL since it wasn't working
