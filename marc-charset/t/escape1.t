@@ -5,11 +5,8 @@ use Test::More tests => 3;
 ## Technique 1: Greek Symbols, Subscript, and Superscript Characters
 
 use strict;
-use MARC::Charset;
-use MARC::Charset::Generic qw( :all );
-
-my $cs = MARC::Charset->new();
-
+use MARC::Charset qw(marc8_to_utf8);
+use MARC::Charset::Constants qw(:all);
 
 ## Greek Symbols
 
@@ -22,11 +19,11 @@ my $test =
 
 my $expected = 
     'it is all greek ' .
+    # ucs chr(0xCEB1) . chr(0xCEB2) . chr(0xCEB3) .
     chr(0x03B1) . chr(0x03B2) . chr(0x03B3) .
     ' to me';
 
-is( $cs->to_utf8($test), $expected, 'Greek Symbols' );
-
+is( marc8_to_utf8($test), $expected, 'Greek Symbols' );
 
 ## Subscripts
 
@@ -48,8 +45,11 @@ $expected =
     'subscript1' . chr(0x2081) . 
     'subscript9' . chr(0x2089) . 
     'subscript10' . chr(0x2081) . chr(0x2080); 
+    # ucs 'subscript1' . chr(0xE28281) . 
+    # ucs 'subscript9' . chr(0xE28289) . 
+    # ucs 'subscript10' . chr(0xE28281) . chr(0xE28280); 
 
-is( $cs->to_utf8($test), $expected, 'Subscripts' );
+is( marc8_to_utf8($test), $expected, 'Subscripts' );
 
 
 ## Superscripts
@@ -72,6 +72,9 @@ $expected =
     'superscript1' . chr(0x00B9) . 
     'superscript9' . chr(0x2079) . 
     'superscript10' . chr(0x00B9) . chr(0x2070); 
+    # ucs 'superscript1' . chr(0xC2B9) .
+    # ucs 'superscript9' . chr(0xE281B9) . 
+    # ucs 'superscript10' . chr(0xC2B9) . chr(0xE281B0); 
 
-is( $cs->to_utf8($test), $expected, 'Superscripts' );
+is( marc8_to_utf8($test), $expected, 'Superscripts' );
     

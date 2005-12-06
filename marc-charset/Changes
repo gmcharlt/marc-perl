@@ -1,5 +1,8 @@
 Revision history for MARC::Charset
 
+0.8 Tue Dec  6 07:10:19 CST 2005
+    - complete overhaul to make MARC::Charset use LoC XML mapping table.
+
 0.7  Wed Sep  7 21:34:18 2005
     - pod fixes
 
