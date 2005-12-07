@@ -18,7 +18,7 @@ sub new
 {
     my $class = shift;
     my $self = bless {}, ref($class) || $class;
-    $self->_init();
+    $self->_init(O_RDWR);
     return $self;
 }
 
@@ -48,7 +48,8 @@ sub get_code
 {
     my ($self, $key) = @_;
     my $db = $self->db();
-    return thaw($db->{$key}) if exists($db->{$key});
+    my $frozen = $db->{$key};
+    return thaw($frozen) if $frozen;
     return undef;
 }
 
@@ -101,20 +102,20 @@ sub db_path
 }
 
 
-=head2 erase()
+=head2 brand_new()
 
-Will zap an existing db and start over from scratch. Useful when 
-regenerating the table.
+An alternate constructor which removes the existing database and starts
+afresh. Be careful with this one, it's really only used on MARC::Charset
+installation.
 
 =cut
 
-sub erase 
+sub brand_new 
 {
-    my $self = shift;
-    my $db = $self->db();
-    untie %$db;
-    unlink(db_path());
-    $self->_init();
+    my $class = shift;
+    my $self = bless {}, ref($class) || $class;
+    $self->_init(O_CREAT|O_RDWR);
+    return $self;
 }
 
 
@@ -122,10 +123,12 @@ sub erase
 
 sub _init 
 {
-    my $self = shift;
-    tie my %db, 'AnyDBM_File', db_path(), O_CREAT|O_RDWR, 0644;
+    my ($self,$opts) = @_;
+    tie my %db, 'AnyDBM_File', db_path(), $opts, 0644;
     $self->{db} = \%db;
 }
+
+
 
 
 

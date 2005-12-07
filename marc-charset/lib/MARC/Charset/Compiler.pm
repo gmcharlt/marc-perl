@@ -38,7 +38,7 @@ The constructor.
 sub new 
 {
     my $self = bless {}, 'MARC::Charset::Compiler';
-    $self->{table} = MARC::Charset::Table->new();
+    $self->{table} = MARC::Charset::Table->brand_new();
     $self->{current_code} = undef;
     $self->{text} = '';
     return $self;
@@ -54,9 +54,6 @@ Pass in the path to an XML file to compile.
 sub compile 
 {
     my ($self, $file) = @_;
-
-    # erase the existing table
-    $self->{table}->erase();
 
     my $factory = XML::SAX::ParserFactory->new();
     my $parser = $factory->parser(Handler => $self);
