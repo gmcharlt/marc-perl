@@ -18,7 +18,7 @@ sub new
 {
     my $class = shift;
     my $self = bless {}, ref($class) || $class;
-    $self->_init(O_RDWR);
+    $self->_init(0);
     return $self;
 }
 

@@ -12,6 +12,10 @@ isa_ok($table, 'MARC::Charset::Table');
 isa_ok($table->db(), 'HASH', 'db()');
 like($table->db_path(), qr|MARC/Charset/Table|, 'db_path()');
 
+# fake the table into thinking it's a hash don't want to change the 
+# real db that was created when we ran Makefile.PL
+$table->{db} = {};
+
 # add a code
 my $code = MARC::Charset::Code->new();
 $code->name('UPPERCASE POLISH L');
