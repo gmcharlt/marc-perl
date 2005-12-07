@@ -1,4 +1,4 @@
-MARC-Charset-0.7
+MARC-Charset
 ================
 
 INTRODUCTION
@@ -41,12 +41,11 @@ To install this module type the following:
 
 DEPENDENCIES
 
-Perl 5.6.0
-This module requires that you have Perl 5.6.0 installed for Unicode support.
+- Perl 5.8.0
+- Test::More
+- XML::SAX
+- Class::Accessor
 
-Test::More
-The testing phase of 'make test' relies on functionality found in Test::More.
-If you want to run the tests, you better install Test::More.
 
 You may also want to install MARC::Record to process MARC data, but you can 
 use MARC::Charset by itself if you like.
