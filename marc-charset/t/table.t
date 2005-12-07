@@ -10,7 +10,7 @@ isa_ok($table, 'MARC::Charset::Table');
 
 # underlying db
 isa_ok($table->db(), 'HASH', 'db()');
-like($table->db_path(), qr|MARC/Charset/Table.db|, 'db_path()');
+like($table->db_path(), qr|MARC/Charset/Table|, 'db_path()');
 
 # add a code
 my $code = MARC::Charset::Code->new();

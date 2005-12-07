@@ -7,6 +7,7 @@ my $ok = WriteMakefile(
     VERSION_FROM    => 'lib/MARC/Charset.pm',
     ABSTRACT_FROM   => 'lib/MARC/Charset.pm',
     AUTHOR          => 'Ed Summers <ehs@pobox.com>',
+    PMLIBDIRS       => ['lib'],
     PREREQ_FATAL    => 1,
     PREREQ_PM       => {
                             'Test::More'        => 0, 

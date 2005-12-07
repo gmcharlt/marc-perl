@@ -97,7 +97,7 @@ statically too:
 sub db_path
 {
     my $path = $INC{'MARC/Charset/Table.pm'};
-    $path =~ s/pm$/db/;
+    $path =~ s/\.pm$//;
     return $path;
 }
 
