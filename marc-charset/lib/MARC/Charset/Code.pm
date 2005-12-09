@@ -112,14 +112,15 @@ sub to_string
 }
 
 
-=head2 hash_code()
+=head2 marc8_hash_code()
 
-Returns a hash code for this Code object. First portion is the 
-character set code and the second is the MARC-8 value.
+Returns a hash code for this Code object for looking up the object using
+MARC8. First portion is the character set code and the second is the 
+MARC-8 value.
 
 =cut
 
-sub hash_code 
+sub marc8_hash_code 
 {
     my $self = shift;
     my $marc = $self->marc();

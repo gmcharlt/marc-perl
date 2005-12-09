@@ -5,7 +5,7 @@ use strict;
 use warnings;
 
 use base qw(Exporter);
-our @EXPORT_OK = qw(marc8_to_utf8);
+our @EXPORT_OK = qw(marc8_to_utf8 utf8_to_marc8);
 
 use MARC::Charset::Table;
 use MARC::Charset::Constants qw(:all);
@@ -52,7 +52,14 @@ my $G1;
 
 =head2 marc8_to_utf8()
 
-Converts a MARC-8 encoded string to UTF-8. 
+Converts a MARC-8 encoded string to UTF-8.
+
+    my $utf8 = marc8_to_utf8($marc8);
+
+If you'd like to ignore errors pass in a true value as the 2nd 
+parameter:
+
+    my $utf8 = marc8_to_utf8($marc8, 'ignore-errors');
 
 =cut
 
@@ -131,6 +138,28 @@ sub marc8_to_utf8
     reset_charsets();
     return $utf8;
 }
+
+
+
+=head2 utf8_to_marc8()
+
+Will attempt to translate utf8 into marc8. 
+
+    my $marc8 = utf8_to_marc8($utf8);
+
+If you'd like to ignore errors, or characters that can't be
+converted to marc8 then pass in a true value as the second
+parameter:
+
+    my $marc8 = utf8_to_marc8($utf8, 'ignore-errors');
+
+=cut
+
+sub utf8_to_marc8
+{
+}
+
+
 
 =head1 DEFAULT CHARACTER SETS
 

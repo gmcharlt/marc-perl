@@ -33,7 +33,7 @@ Add a MARC::Charset::Code to the table.
 sub add_code
 {
     my ($self, $code) = @_;
-    my $key = $code->hash_code();
+    my $key = $code->marc8_hash_code();
     $self->{db}->{$key} =  freeze($code);
 }
 

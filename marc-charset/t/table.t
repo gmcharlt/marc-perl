@@ -25,7 +25,7 @@ $code->charset('45');
 $table->add_code($code);
 
 # see if we can get it back
-my $retrieved_code = $table->get_code($code->hash_code());
+my $retrieved_code = $table->get_code($code->marc8_hash_code());
 is($retrieved_code->to_string(), $code->to_string(), 'add_code() & get_code()');
 
 
