@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use POSIX;
 use AnyDBM_File;
+use SDBM_File;
 use MARC::Charset::Code;
 use MARC::Charset::Constants qw(:all);
 use Storable qw(freeze thaw);
@@ -124,7 +125,7 @@ sub brand_new
 sub _init 
 {
     my ($self,$opts) = @_;
-    tie my %db, 'AnyDBM_File', db_path(), $opts, 0644;
+    tie my %db, 'SDBM_File', db_path(), $opts, 0644;
     $self->{db} = \%db;
 }
 
