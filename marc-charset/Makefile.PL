@@ -1,7 +1,10 @@
 use 5.8.0;
 use ExtUtils::MakeMaker;
 
-my $ok = WriteMakefile(
+# try to build the character mapping db
+build_db();
+
+WriteMakefile(
     NAME            => 'MARC::Charset',
     DISTNAME        => 'MARC-Charset',
     VERSION_FROM    => 'lib/MARC/Charset.pm',
@@ -16,11 +19,16 @@ my $ok = WriteMakefile(
                        },
 );
 
-# get the compiler from the lib directory and use it to compile
-# the LoC XML mapping file into a database 
+# build_db will return immediately if we can't use
+# MARC::Charset::Compiler which will typically 
+# happen when dependencies aren't met
 
-eval('use lib "lib"; use MARC::Charset::Compiler');
+sub build_db
+{
+    eval('use lib "lib"; use MARC::Charset::Compiler');
+    return if $@;
 
-print "compiling marc8/utf8 database, please be patient\n";
-my $compiler = MARC::Charset::Compiler->new();
-$compiler->compile('etc/codetables.xml');
+    print "compiling marc8/utf8 database, please be patient\n";
+    my $compiler = MARC::Charset::Compiler->new();
+    $compiler->compile('etc/codetables.xml');
+}
