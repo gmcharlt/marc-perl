@@ -29,3 +29,4 @@ t/no_escape.t
 t/pod.t
 t/space.t
 t/table.t
+t/utf8.t
