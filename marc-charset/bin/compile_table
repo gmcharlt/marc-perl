@@ -10,7 +10,7 @@ compile_table - compile the LoC mapping table
 
 =head1 DESCRIPTION
 
-This is a command line utility for recompiling the BerkleyDB that MARC::Charset
+This is a command line utility for recompiling the database that MARC::Charset 
 uses for storing the Library of Congress XML mapping table.
 
 =head1 SEE ALSO
