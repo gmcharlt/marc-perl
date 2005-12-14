@@ -26,6 +26,13 @@ $table->add_code($code);
 
 # see if we can get it back
 my $retrieved_code = $table->get_code($code->marc8_hash_code());
-is($retrieved_code->to_string(), $code->to_string(), 'add_code() & get_code()');
+is($retrieved_code->to_string(), $code->to_string(), 'get_code() marc8');
 
+$retrieved_code = $table->get_code($code->utf8_hash_code());
+is($retrieved_code->to_string(), $code->to_string(), 'get_code() utf8');
 
+$retrieved_code = $table->lookup_by_marc8(chr(0x45), chr(0xA1));
+is($retrieved_code->to_string(), $code->to_string(), 'lookup_by_marc8()');
+
+$retrieved_code = $table->lookup_by_utf8(chr(0x0141));
+is($retrieved_code->to_string(), $code->to_string(), 'lookup_by_utf8()');

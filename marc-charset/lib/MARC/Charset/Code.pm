@@ -5,7 +5,7 @@ use warnings;
 use base qw(Class::Accessor);
 use Carp qw(croak);
 use Encode qw(encode_utf8);
-use MARC::Charset::Constants;
+use MARC::Charset::Constants qw(:all);
 
 MARC::Charset::Code
     ->mk_accessors(qw(marc ucs name charset is_combining));
@@ -89,7 +89,7 @@ Returns the name of the character set, instead of the code.
 
 sub charset_name()
 {
-    return MARC::Charset::Constants::charset_name(chr(hex(shift->charset())));
+    return MARC::Charset::Constants::charset_name(shift->charset_value());
 }
 
 =head2 to_string()
@@ -123,32 +123,94 @@ MARC-8 value.
 sub marc8_hash_code 
 {
     my $self = shift;
-    my $marc = $self->marc();
-
-    # most MARC-8 character sets use 2 characters representing 
-    # the hex value for a byte
-    if (length($marc) == 2)
-    {
-        return sprintf(
-            '%s:%s', 
-            chr(hex($self->charset())),
-            chr(hex($marc)));
-    }
-
-    # the East Asian character set uses three bytes
-    # encoded as three, 2 character sequences run together
-    if (length($marc) == 6)
-    {
-        return sprintf(
-            '%s:%s%s%s',
-            chr(hex($self->charset())),
-            chr(hex(substr($marc,0,2))),
-            chr(hex(substr($marc,2,2))),
-            chr(hex(substr($marc,4,2))))
-    }
-
-    croak("invalid hex code size: $marc in ".$self->to_string());
+    return sprintf('%s:%s', $self->charset_value(), $self->marc_value());
 }
+
+
+=head2 utf8_hash_code()
+
+Returns a hash code for uniquely identifying a Code by it's UCS value.
+
+=cut 
+
+sub utf8_hash_code
+{
+    return int(hex(shift->ucs()));
+}
+
+
+=head2 default_charset_group
+
+Returns 'G0' or 'G1' indicating where the character is typicalling used 
+in the MARC-8 environment.
+
+=cut
+
+sub default_charset_group
+{
+    my $charset = shift->charset_value();
+
+    return 'G0'
+        if $charset eq ASCII_DEFAULT 
+            or $charset eq GREEK_SYMBOLS
+            or $charset eq SUBSCRIPTS
+            or $charset eq SUPERSCRIPTS
+            or $charset eq BASIC_LATIN
+            or $charset eq BASIC_ARABIC
+            or $charset eq BASIC_CYRILLIC
+            or $charset eq BASIC_GREEK
+            or $charset eq BASIC_HEBREW
+            or $charset eq CJK;
+
+    return 'G1';
+}
+
+
+=head2 get_marc8_escape
+
+Returns an escape sequence to move to the Code from another marc-8 character
+set.
+
+=cut
+
+sub get_escape 
+{
+    my $charset = shift->charset_value();
+
+    return ESCAPE . $charset
+        if $charset eq ASCII_DEFAULT 
+            or $charset eq GREEK_SYMBOLS
+            or $charset eq SUBSCRIPTS
+            or $charset eq SUPERSCRIPTS;
+
+    return ESCAPE . SINGLE_G0_A . $charset
+        if $charset eq ASCII_DEFAULT
+            or $charset eq BASIC_LATIN
+            or $charset eq BASIC_ARABIC
+            or $charset eq BASIC_CYRILLIC
+            or $charset eq BASIC_GREEK
+            or $charset eq BASIC_HEBREW;
+
+    return ESCAPE . SINGLE_G1_A . $charset
+        if $charset eq EXTENDED_ARABIC
+            or $charset eq EXTENDED_LATIN
+            or $charset eq EXTENDED_CYRILLIC;
+
+    return ESCAPE . MULTI_G0_A . CJK
+        if $charset eq CJK;
+}
+
+=head2 charset_value
+
+Returns the charset value, not the hex sequence.
+
+=cut
+
+sub charset_value
+{
+    return chr(hex(shift->charset()));
+}
+
 
 
 1;

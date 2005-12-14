@@ -144,6 +144,8 @@ my $lastCharset = '';
 my $count = 0;
 for my $k (sort(keys(%$db))) 
 {
+    # ignore the utf8 keys
+    next if $k =~ /^\d+$/;
 
     # pull the Code object out
     my $code = thaw($db->{$k});

@@ -43,7 +43,7 @@ our $table = MARC::Charset::Table->new();
 # set default character sets
 # these are viewable at the package level
 # in case someone wants to set them
-our $DEFAULT_G0 = BASIC_LATIN; 
+our $DEFAULT_G0 = ASCII_DEFAULT; 
 our $DEFAULT_G1 = EXTENDED_LATIN;
 
 # place holders for working graphical character sets
@@ -97,7 +97,7 @@ sub marc8_to_utf8
 	    my $chunk = substr($marc8, $index, $char_size);
 
             # look up the character to see if it's in our mapping 
-            my $code = $table->lookup($charset, $chunk);
+            my $code = $table->lookup_by_marc8($charset, $chunk);
 
             # try the next character set if no mapping was found
             next CHARSET_LOOP if ! $code;
@@ -157,6 +157,74 @@ parameter:
 
 sub utf8_to_marc8
 {
+    my ($utf8, $ignore_errors) = @_;
+    reset_charsets();
+
+    my $len = length($utf8);
+    my $marc8 = '';
+    for (my $i=0; $i<$len; $i++)
+    {
+        # try to find the code point in our mapping table 
+        my $code = $table->lookup_by_utf8(substr($utf8, $i, 1));
+
+        if (! $code)
+        {
+            warn("no mapping found at position $i in $utf8"); 
+            reset_charsets() and return unless $ignore_errors;
+        }
+
+        # if it's a combining character move it around
+        if ($code->is_combining())
+        {
+            my $prev = chop($marc8);
+            $marc8 .= $code->marc_value() . $prev;
+            next;
+        }
+
+        # look to see if we need to escape to a new G0 charset
+        my $charset_value = $code->charset_value();
+
+        if ($code->default_charset_group() eq 'G0' 
+            and $G0 ne $charset_value)
+        {
+            if ($G0 eq ASCII_DEFAULT and $charset_value eq BASIC_LATIN)
+            {
+                # don't bother escaping, they're functionally the same 
+            }
+            else 
+            {
+                $marc8 .= $code->get_escape();
+                $G0 = $charset_value;
+            }
+        }
+
+        # look to see if we need to escape to a new G1 charset
+        elsif ($code->default_charset_group() eq 'G1'
+            and $G1 ne $charset_value)
+        {
+            $marc8 .= $code->get_escape();
+            $G1 = $charset_value;
+        }
+
+        $marc8 .= $code->marc_value();
+    }
+
+    # escape back to default G0 if necessary
+    if ($G0 ne $DEFAULT_G0)
+    {
+        if ($DEFAULT_G0 eq ASCII_DEFAULT) { $marc8 .= ESCAPE . ASCII_DEFAULT; }
+        elsif ($DEFAULT_G0 eq CJK) { $marc8 .= ESCAPE . MULTI_G0_A . CJK; }
+        else { $marc8 .= ESCAPE . SINGLE_G0_A . $DEFAULT_G0; }
+    }
+
+    # escape back to default G1 if necessary
+    if ($G1 ne $DEFAULT_G1)
+    {
+        if ($DEFAULT_G1 eq CJK) { $marc8 .= ESCAPE . MULTI_G1_A . $DEFAULT_G1; }
+        else { $marc8 .= ESCAPE . SINGLE_G1_A . $DEFAULT_G1; }
+    }
+
+    return $marc8;
 }
 
 
@@ -201,7 +269,6 @@ sub _process_escape
     ## this stuff is kind of scary ... for an explanation of what is 
     ## going on here check out the MARC-8 specs at LC. 
     ## http://lcweb.loc.gov/marc/specifications/speccharmarc8.html
-    ## see the section "Technique 2: Other Alternate Graphic Character Sets"
     my ($str_ref, $left, $right) = @_;
 
     # first char needs to be an escape or else this isn't an escape sequence
@@ -211,7 +278,7 @@ sub _process_escape
     ## then this can't be a character escape sequence
     return $left if ($left+1 >= $right); 
 
-    ## pull of the first escape
+    ## pull off the first escape
     my $esc_char_1 = substr($$str_ref, $left+1, 1);
 
     ## the first method of escaping to small character sets

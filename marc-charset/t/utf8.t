@@ -28,8 +28,8 @@ is(
 
 is(
     utf8_to_marc8(chr(0x068D)),
-    ESCAPE . SINGLE_G0_A . EXTENDED_ARABIC . chr(0xB9) . 
-	ESCAPE . ASCII_DEFAULT,
+    ESCAPE . SINGLE_G1_A . EXTENDED_ARABIC . chr(0xB9) . 
+	ESCAPE . SINGLE_G1_A . EXTENDED_LATIN,
     'Extended Arabic'
 );
 
@@ -42,8 +42,8 @@ is(
 
 is(
     utf8_to_marc8(chr(0x0408)),
-    ESCAPE . SINGLE_G0_A . EXTENDED_CYRILLIC . chr(0xE8) . 
-	ESCAPE . ASCII_DEFAULT,
+    ESCAPE . SINGLE_G1_A . EXTENDED_CYRILLIC . chr(0xE8) . 
+	ESCAPE . SINGLE_G1_A . EXTENDED_LATIN,
     'Extended Cyrillic'
 );
 
@@ -96,7 +96,7 @@ is(
 is(
     utf8_to_marc8('abc' . chr(0x0327) . chr(0x0300) . chr(0x0301) 
 	. 'def'),
-    'ab' . chr(0xF0) . chr(0xE1) . chr(0xE2) . 'cdef',
+    'ab' . chr(0xF0) . chr(0x21) . chr(0x22) . 'cdef',
     'string with multiple interior combining characters'
 );
 

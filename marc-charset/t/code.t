@@ -12,7 +12,8 @@ ONE_BYTE_CHAR:
     $code->ucs('0141');
     $code->charset('45');
 
-    is(chr(0x45). ':' . chr(0xA1), $code->marc8_hash_code(), 'hash_code()');
+    is(chr(0x45). ':' . chr(0xA1), $code->marc8_hash_code(), 'marc8_hash_code()');
+    is(int(0x0141), $code->utf8_hash_code(), 'utf8_hash_code()');
     is('EXTENDED_LATIN', $code->charset_name(), 'charset_name()');
 }
 
@@ -26,6 +27,7 @@ THREE_BYTE_CHAR:
 
     is(chr(0x31).':'.chr(0x21).chr(0x2A).chr(0x45), $code->marc8_hash_code(), 
         'three byte hash_code()');
+    is(int(0xE8F2), $code->utf8_hash_code(), 'utf_hash_code()');
     is('CJK', $code->charset_name(), 'three byte charset_name()');
 }
 
