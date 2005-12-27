@@ -18,6 +18,7 @@ t/cjk3.marc
 t/cjk4.marc
 t/code.t
 t/cyrillic.marc
+t/decompose.t
 t/escape1.t
 t/escape2.t
 t/hebrew1.marc

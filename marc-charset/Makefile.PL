@@ -13,9 +13,10 @@ WriteMakefile(
     PMLIBDIRS       => ['lib'],
     PREREQ_FATAL    => 1,
     PREREQ_PM       => {
-                            'Test::More'        => 0, 
-                            'XML::SAX'          => 0,
-                            'Class::Accessor'   => 0,
+                            'Test::More'            => 0, 
+                            'XML::SAX'              => 0,
+                            'Class::Accessor'       => 0,
+                            'Unicode::Normalize'    => 0,
                        },
 );
 

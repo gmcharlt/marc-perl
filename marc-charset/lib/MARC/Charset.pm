@@ -7,6 +7,7 @@ use warnings;
 use base qw(Exporter);
 our @EXPORT_OK = qw(marc8_to_utf8 utf8_to_marc8);
 
+use Unicode::Normalize;
 use MARC::Charset::Table;
 use MARC::Charset::Constants qw(:all);
 
@@ -159,6 +160,9 @@ sub utf8_to_marc8
 {
     my ($utf8, $ignore_errors) = @_;
     reset_charsets();
+
+    # decompose combined characters
+    $utf8 = NFD($utf8);
 
     my $len = length($utf8);
     my $marc8 = '';
