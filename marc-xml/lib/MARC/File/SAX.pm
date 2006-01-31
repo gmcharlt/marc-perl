@@ -13,6 +13,7 @@ use strict;
 use XML::SAX;
 use base qw( XML::SAX::Base );
 use Data::Dumper;
+use MARC::Charset qw(utf8_to_marc8);
 
 sub start_element {
     my ( $self, $element ) = @_;
@@ -34,15 +35,19 @@ sub end_element {
     my ( $self, $element ) = @_;
     my $name = $element->{ Name };
     if ( $name eq 'subfield' ) { 
-	push( @{ $self->{ subfields } }, $self->{ subcode }, $self->{ chars } );
+	push @{ $self->{ subfields } }, $self->{ subcode };
+	
+	if ($self->{ transcode }) {
+           push @{ $self->{ subfields } }, utf8_to_marc8($self->{ chars });
+	} else {
+           push @{ $self->{ subfields } }, $self->{ chars } ;
+	}
+
 	$self->{ chars } = '';
 	$self->{ subcode } = '';
     } elsif ( $name eq 'controlfield' ) { 
 	$self->{ record }->append_fields(
-	    MARC::Field->new(
-		$self->{ tag },
-		$self->{ chars }
-	    )
+	    MARC::Field->new( $self->{ tag }, $self->{ chars } )
 	);
 	$self->{ chars } = '';
 	$self->{ tag } = '';
@@ -61,7 +66,12 @@ sub end_element {
 	$self->{ subfields } = [];
 	$self->{ chars } = '';
     } elsif ( $name eq 'leader' ) { 
-	$self->{ record }->leader( $self->{ chars } );
+	my $ldr = $self->{ chars };
+	$self->{ transcode }++
+		if (substr($ldr,9,1) eq 'a');
+	
+	substr($ldr,9,1,' ');
+	$self->{ record }->leader( $ldr );
 	$self->{ chars } = '';
 	$self->{ tag } = '';
     }

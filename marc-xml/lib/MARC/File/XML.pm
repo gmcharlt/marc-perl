@@ -2,17 +2,26 @@ package MARC::File::XML;
 
 use warnings;
 use strict;
+use vars qw( $VERSION );
 use base qw( MARC::File );
 use MARC::Record;
 use MARC::Field;
 use MARC::File::SAX;
+use XML::SAX qw(Namespaces Validation);
+
+use MARC::Charset qw( marc8_to_utf8 utf8_to_marc8 );
 use IO::File;
 use Carp qw( croak );
+use Encode ();
 
-our $VERSION = '0.7';
+$VERSION = 0.68;
 
 my $handler = MARC::File::SAX->new();
-my $parser = XML::SAX::ParserFactory->parser( Handler => $handler );
+
+my $factory = XML::SAX::ParserFactory->new();
+$factory->require_feature(Namespaces);
+
+my $parser = $factory->parser( Handler => $handler, ProtocolEncoding => 'UTF-8' );
 
 
 =head1 NAME
@@ -208,9 +217,8 @@ broken records that are in ISO-8859-1 (ANSI) format with 8-bit characters.
 =cut 
 
 sub header {
-    my $encoding = shift || 'UTF-8';
     return( <<MARC_XML_HEADER );
-<?xml version="1.0" encoding="$encoding"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <collection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd" xmlns="http://www.loc.gov/MARC21/slim">
 MARC_XML_HEADER
 }
@@ -233,15 +241,37 @@ Returns a chunk of XML suitable for placement between the header and the footer.
 
 sub record {
     my $record = shift;
+
+    my $_transcode = 0;
+    my $ldr = $record->leader;
+    my $orignal_charset;
+    my $orignal_encoding = substr($ldr,9,1);
+
+    # Does the record think it is already Unicode?
+    if ($orignal_encoding ne 'a') {
+    	# If not, we'll make it so
+        $_transcode++;
+	
+    	# XXX Need to generat a '066' field here, but I don't understand how yet.
+
+	substr($ldr,9,1,'a');
+	$record->leader( $ldr );
+	if ( ($orignal_charset) = $record->field('066') ) {
+		$record->delete_field( $orignal_charset );
+	}
+	
+    }
+
     my @xml = ();
     push( @xml, "<record>" );
-    push( @xml, "  <leader>" . escape($record->leader()) . "</leader>" );
+    push( @xml, "  <leader>" . escape( $record->leader ) . "</leader>" );
+
     foreach my $field ( $record->fields() ) {
         my $tag = $field->tag();
         if ( $field->is_control_field() ) { 
-            my $data = $field->data();
+	    my $data = $field->data;
             push( @xml, qq(  <controlfield tag="$tag">) .
-                escape($data). qq(</controlfield>) );
+                escape( ($_transcode ? marc8_to_utf8($data) : $data) ). qq(</controlfield>) );
         } else {
             my $i1 = $field->indicator( 1 );
             my $i2 = $field->indicator( 2 );
@@ -249,12 +279,21 @@ sub record {
             foreach my $subfield ( $field->subfields() ) { 
                 my ( $code, $data ) = @$subfield;
                 push( @xml, qq(    <subfield code="$code">).
-                    escape($data).qq(</subfield>) );
+                    escape( ($_transcode ? marc8_to_utf8($data) : $data) ).qq(</subfield>) );
             }
             push( @xml, "  </datafield>" );
         }
     }
     push( @xml, "</record>\n" );
+
+    if ($_transcode) {
+    	if (defined $orignal_charset) {
+        	$record->insert_fields_ordered($orignal_charset);
+	}
+	substr($ldr,9,1,$orignal_encoding);
+	$record->leader( $ldr );
+    }
+
     return( join( "\n", @xml ) );
 }
 
@@ -345,18 +384,18 @@ broken records that are in ISO-8859-1 (ANSI) format with 8-bit characters.
 
 sub encode {
     my $record = shift;
+
     my @xml = ();
-    push( @xml, header(shift) );
+    push( @xml, header() );
     push( @xml, record( $record ) );
     push( @xml, footer() );
+
     return( join( "\n", @xml ) );
 }
 
 =head1 TODO
 
 =over 4
-
-=item * Support for character translation using MARC::Charset.
 
 =item * Support for callback filters in decode().
 

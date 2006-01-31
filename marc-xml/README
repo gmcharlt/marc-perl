@@ -20,6 +20,7 @@ DEPENDENCIES
 This module requires these other modules and libraries:
 
 - MARC::Record
+- MARC::Charset
 - XML::SAX
 
 COPYRIGHT AND LICENCE

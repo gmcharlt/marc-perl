@@ -1,11 +1,12 @@
 # http://module-build.sourceforge.net/META-spec.html
 #XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
 name:         MARC-XML
-version:      0.66
+version:      0.68
 version_from: lib/MARC/File/XML.pm
 installdirs:  site
 requires:
     MARC::Record:                  1.36
+    MARC::Charset:                 0.8
     XML::SAX:                      0.12
 
 distribution_type: module
