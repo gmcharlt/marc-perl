@@ -45,6 +45,7 @@ DEPENDENCIES
 - Test::More
 - XML::SAX
 - Class::Accessor
+- Unicode::Normalize
 
 
 You may also want to install MARC::Record to process MARC data, but you can 
