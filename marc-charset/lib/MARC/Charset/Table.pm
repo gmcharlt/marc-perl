@@ -73,8 +73,13 @@ sub add_code
     my $marc8_key = $code->marc8_hash_code();
     my $utf8_key = $code->utf8_hash_code();
 
-    $self->{db}->{$utf8_key} = $frozen;
+    # stash away the marc8 lookup key
     $self->{db}->{$marc8_key} = $frozen;
+
+    # stash away the utf8 lookup key (only if it's not already there!)
+    # this means that the sets that appear in the xml file will have
+    # precedence ascii/ansel
+    $self->{db}->{$utf8_key} = $frozen unless exists $self->{db}->{$utf8_key};
 }
 
 

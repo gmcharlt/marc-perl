@@ -96,7 +96,7 @@ is(
 is(
     utf8_to_marc8('abc' . chr(0x0327) . chr(0x0300) . chr(0x0301) 
 	. 'def'),
-    'ab' . chr(0xF0) . chr(0x21) . chr(0x22) . 'cdef',
+    'ab' . chr(0xF0) . chr(0xE1) . chr(0xE2) . 'cdef',
     'string with multiple interior combining characters'
 );
 

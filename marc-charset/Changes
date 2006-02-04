@@ -1,5 +1,16 @@
 Revision history for MARC::Charset
 
+0.9 Fri Feb  3 22:25:39 EST 2006
+    - the utf8->marc8 will prefer the first mapping it runs across in the
+      LoC XML mapping table. v0.8 preferred the last mapping found which
+      meant that utf8_to_marc8 would escape to non-ascii character sets
+      for some punctuation. Thanks Mike Rylander for helping isolate
+      this problem.
+    - added a test that makes sure punctuation is working properly
+      to no_escape.t
+    - modified test of multiple combining characters in utf8.t to 
+      actually test for correct result
+
 0.8 Tue Dec  6 07:10:19 CST 2005
     - complete overhaul to make MARC::Charset use LoC XML mapping table.
 
