@@ -1,5 +1,8 @@
 Revision history for MARC::Charset
 
+0.91 Fri Feb  3 23:10:59 EST 2006
+     - fix in marc8_to_utf8 for error reporting when no mapping is found
+
 0.9 Fri Feb  3 22:25:39 EST 2006
     - the utf8->marc8 will prefer the first mapping it runs across in the
       LoC XML mapping table. v0.8 preferred the last mapping found which

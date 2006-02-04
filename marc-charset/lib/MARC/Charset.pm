@@ -124,7 +124,8 @@ sub marc8_to_utf8
         if (!$found)
         {
             warn("no mapping found at position $index in $marc8 ".
-                "g0=".charset_name($G0) . " g1=".charset_name($G1));
+                "g0=".MARC::Charset::Constants::charset_name($G0) . " " .
+                "g1=".MARC::Charset::Constants::charset_name($G1));
             if (!$ignore_errors)
             {
                 reset_charsets();
