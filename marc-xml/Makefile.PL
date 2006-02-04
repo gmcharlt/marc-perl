@@ -9,7 +9,7 @@ WriteMakefile(
     'PREREQ_PM'		=> { 
 			    'XML::SAX'		=> 0.12,
 			    'MARC::Record'	=> 1.36,
-			    'MARC::Charset'	=> 0.9,
+			    'MARC::Charset'	=> 0.91,
 			    },
     'EXE_FILES'         => [ qw( bin/marc2xml bin/xml2marc ) ]
 );

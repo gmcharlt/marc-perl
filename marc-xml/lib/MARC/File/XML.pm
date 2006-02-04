@@ -14,7 +14,7 @@ use IO::File;
 use Carp qw( croak );
 use Encode ();
 
-$VERSION = '0.8';
+$VERSION = '0.81';
 
 my $handler = MARC::File::SAX->new();
 
@@ -310,6 +310,7 @@ my $ESCAPE_REGEX =
 
 sub escape {
     my $string = shift;
+    return '' if ! defined $string or $string eq '';
     $string =~ s/($ESCAPE_REGEX)/$ESCAPES{$1}/oge;
     return( $string );
 }

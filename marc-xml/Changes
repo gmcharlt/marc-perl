@@ -1,5 +1,9 @@
 Revision history for Perl extension MARC-XML
 
+0.81  Fri Feb  3 23:29:04 EST 2006
+      - minor changes so that diagnostics (when character mappings aren't found)
+        will not throw warnings about unitialized variables too.
+
 0.8   Fri Feb  3 22:49:11 EST 2006
       - overhaul by Mike Rylander to use the new MARC::Charset for mapping
         back and forth from marc8 encoding to utf8 encoding
