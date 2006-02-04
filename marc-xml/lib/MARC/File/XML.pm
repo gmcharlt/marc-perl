@@ -14,7 +14,7 @@ use IO::File;
 use Carp qw( croak );
 use Encode ();
 
-$VERSION = 0.68;
+$VERSION = '0.8';
 
 my $handler = MARC::File::SAX->new();
 
@@ -244,11 +244,11 @@ sub record {
 
     my $_transcode = 0;
     my $ldr = $record->leader;
-    my $orignal_charset;
-    my $orignal_encoding = substr($ldr,9,1);
+    my $original_charset;
+    my $original_encoding = substr($ldr,9,1);
 
     # Does the record think it is already Unicode?
-    if ($orignal_encoding ne 'a') {
+    if ($original_encoding ne 'a') {
     	# If not, we'll make it so
         $_transcode++;
 	
@@ -256,8 +256,8 @@ sub record {
 
 	substr($ldr,9,1,'a');
 	$record->leader( $ldr );
-	if ( ($orignal_charset) = $record->field('066') ) {
-		$record->delete_field( $orignal_charset );
+	if ( ($original_charset) = $record->field('066') ) {
+		$record->delete_field( $original_charset );
 	}
 	
     }
@@ -287,10 +287,10 @@ sub record {
     push( @xml, "</record>\n" );
 
     if ($_transcode) {
-    	if (defined $orignal_charset) {
-        	$record->insert_fields_ordered($orignal_charset);
+    	if (defined $original_charset) {
+        	$record->insert_fields_ordered($original_charset);
 	}
-	substr($ldr,9,1,$orignal_encoding);
+	substr($ldr,9,1,$original_encoding);
 	$record->leader( $ldr );
     }
 
