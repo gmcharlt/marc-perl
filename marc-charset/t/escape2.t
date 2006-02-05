@@ -1,4 +1,4 @@
-use Test::More tests=>3;
+use Test::More tests=>4;
 
 use MARC::Charset::Constants qw(:all);
 
@@ -30,7 +30,6 @@ $test =
     chr(0xBA);				    ## DUL (from Extended)
 
 $expected = chr(0x062D) . chr(0x068E);
-
 is(marc8_to_utf8($test), $expected, 'escape type 2 to Basic+Ext Arabic');
 
 ## test some Hebrew and Arabic mixed together
@@ -44,5 +43,18 @@ $test =
     chr(0xE9); 				    ## RNOON (ArabicExtended)
 
 $expected = chr(0x0627) . chr(0x05E1) . chr(0x06BB);
-
 is(marc8_to_utf8($test), $expected, 'escape type 2 Arabic + Hebrew mixed');
+
+## test some greek with spaces
+$test = 
+    ESCAPE . SINGLE_G0_A . BASIC_GREEK .    ## set G0 to Greek
+    chr(0x49) .                             ## ZETA
+    chr(0x4B) .                             ## THETA
+    ' ' .                                   ## SPACE
+    chr(0x4E) .                             ## LAMBDA
+    ESCAPE . SINGLE_G0_A . BASIC_LATIN;     ## Back to ASCII 
+
+$expected = chr(0x0396) . chr(0x0398) . ' ' . chr(0x039B);
+is(marc8_to_utf8($test), $expected, 'greek with internal space');
+
+

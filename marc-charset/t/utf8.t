@@ -81,10 +81,6 @@ is(
     'East Asian'
 );
 
-
-
-
-
 ## COMBINING CHARACTERS
 
 is(
@@ -119,3 +115,12 @@ is(
     'string with multiple character sets'
 );
 
+is(
+    utf8_to_marc8(chr(0x0396). ' ' . chr(0x0398)),
+    ESCAPE . SINGLE_G0_A . BASIC_GREEK .    ## set G0 to Greek
+    chr(0x49) .                             ## ZETA
+    ' ' .                                   ## SPACE
+    chr(0x4B) .                             ## THETA
+    ESCAPE . ASCII_DEFAULT,                 ## Back to ASCII 
+    'greek utf8 with an internal space'
+);

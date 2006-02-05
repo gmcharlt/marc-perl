@@ -1,5 +1,10 @@
 Revision history for MARC::Charset
 
+0.92 Sat Feb  4 19:34:19 CST 2006
+     - marc8_to_utf8 and utf8_to_marc8 needed to pass along spaces 
+       without translation
+     - added tests to t/escape2.t and t/utf8.t to test space behavior
+
 0.91 Fri Feb  3 23:10:59 EST 2006
      - fix in marc8_to_utf8 for error reporting when no mapping is found
 

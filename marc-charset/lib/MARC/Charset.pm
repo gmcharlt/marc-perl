@@ -1,6 +1,6 @@
 package MARC::Charset;
 
-our $VERSION = '0.91';
+our $VERSION = '0.92';
 use strict;
 use warnings;
 
@@ -78,6 +78,13 @@ sub marc8_to_utf8
     my $combining = '';
     CHAR_LOOP: while ($index < $length) 
     {
+        # spaces just get added on unmolested
+        if (substr($marc8, $index, 1) eq ' ')
+        {
+            $utf8 .= ' ';
+            $index += 1;
+            next CHAR_LOOP;
+        }
 
         # look for any escape sequences
         my $new_index = _process_escape(\$marc8, $index, $length);
@@ -169,8 +176,17 @@ sub utf8_to_marc8
     my $marc8 = '';
     for (my $i=0; $i<$len; $i++)
     {
+        my $slice = substr($utf8, $i, 1);
+
+        # spaces are copied from utf8 into marc8
+        if ($slice eq ' ')
+        {
+            $marc8 .= ' ';
+            next;
+        }
+        
         # try to find the code point in our mapping table 
-        my $code = $table->lookup_by_utf8(substr($utf8, $i, 1));
+        my $code = $table->lookup_by_utf8($slice);
 
         if (! $code)
         {
