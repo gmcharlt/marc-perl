@@ -40,7 +40,7 @@ else {
 }
 
 ## set up intput/output for utf8 encoding
-binmode( STDOUT, ':utf8' );
+binmode( STDOUT, ':bytes' );
 binmode( $fh, ':utf8' );
 
 my $batch = MARC::Batch->new( 'XML', $fh );

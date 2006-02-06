@@ -43,7 +43,7 @@ else {
 
 ## set up intput/output for utf8 encoding
 binmode( STDOUT, ':utf8' );
-binmode( $fh, ':utf8' );
+binmode( $fh, ':bytes' );
 
 my $found = 0;
 my $batch = MARC::Batch->new( 'USMARC', $fh );
