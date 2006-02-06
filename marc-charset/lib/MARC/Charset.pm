@@ -122,6 +122,7 @@ sub marc8_to_utf8
             else
             {
                 $utf8 .= $code->char_value() . $combining;
+                $combining = '';
             }
 
             $index += $char_size;
