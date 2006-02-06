@@ -2,6 +2,7 @@ Changes
 Makefile.PL
 MANIFEST
 README
+bin/entity-escape-xml
 bin/marc2xml
 bin/xml2marc
 lib/MARC/File/XML.pm
