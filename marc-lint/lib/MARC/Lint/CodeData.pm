@@ -6,7 +6,7 @@ use warnings;
 #declare the necessary variables
 use vars qw($VERSION @EXPORT_OK %GeogAreaCodes %ObsoleteGeogAreaCodes %LanguageCodes %ObsoleteLanguageCodes %CountryCodes %ObsoleteCountryCodes %Sources600_651 %ObsoleteSources600_651 %Sources655 %ObsoleteSources655);
 
-$VERSION = '1.05';
+$VERSION = '1.06';
 
 use base qw(Exporter AutoLoader);
 
@@ -92,6 +92,11 @@ They output tab-separated codes for updating the data below.
 
 =head1 VERSION HISTORY
 
+Version 1.06: Updated Feb. 23, 2006.
+
+ -Added new language codes from Technical Notice of Feb 23, 2006.
+ -Alphabetized language codes.
+
 Version 1.05: Updated Jan. 11, 2006.
 
  -Added new sources codes from Technical Notice of Jan. 10, 2006.
@@ -131,7 +136,7 @@ Version 1.00 (original version): First release, Dec. 5, 2004. Uploaded to Source
 
 #fill the valid Language Codes hash
 
-%LanguageCodes = map {($_, 1)} (split "\t", ("   	abk	ace	ach	ada	ady	aar	afh	afr	afa	ain	aka	akk	alb	ale	alg	alt	tut	amh	apa	ara	arg	arc	arp	arw	arm	art	asm	ath	aus	map	ava	ave	awa	aym	aze	ast	ban	bat	bal	bam	bai	bad	bnt	bas	bak	baq	btk	bej	bel	bem	ben	ber	bho	bih	bik	bis	bos	bra	bre	bug	bul	bua	bur	byn	cad	car	cat	cau	ceb	cel	cai	chg	cmc	cha	che	chr	chy	chb	chi	chn	chp	cho	chu	chv	cop	cor	cos	cre	mus	crp	cpe	cpf	cpp	crh	scr	csb	cus	cze	dak	dan	dar	day	del	din	div	doi	dgr	dra	dsb	dua	dut	dum	dyu	dzo	bin	efi	egy	eka	elx	eng	enm	ang	epo	est	gez	ewe	ewo	fan	fat	fao	fij	fil	fin	fiu	fon	fre	frm	fro	fry	fur	ful	glg	lug	gay	gba	geo	ger	gmh	goh	gem	gil	gon	gor	got	grb	grc	gre	grn	guj	gwi	gaa	hai	hat	hau	haw	heb	her	hil	him	hin	hmo	hit	hmn	hsb	hun	hup	iba	ice	ido	ibo	ijo	ilo	smn	inc	ine	ind	inh	ina	ile	iku	ipk	ira	gle	mga	sga	iro	ita	jpn	jav	jbo	jrb	jpr	kbd	kab	kac	xal	kal	kam	kan	kau	kaa	kar	kas	kaw	kaz	kha	khm	khi	kho	kik	kmb	kin	kom	kon	kok	kor	kpe	krc	kro	kua	kum	kur	kru	kos	kut	kir	lad	lah	lam	lao	lat	lav	ltz	lez	lim	lin	lit	nds	loz	lub	lua	lui	smj	lun	luo	lus	mac	mad	mag	mai	mak	mlg	may	mal	mlt	mnc	mdr	man	mni	mno	glv	mao	arn	mar	chm	mah	mwr	mas	myn	mdf	men	mic	min	mis	moh	mol	mkh	lol	mon	mos	mul	mun	mwl	myv	nah	nau	nav	nbl	nde	ndo	nap	nep	new	nia	nic	ssa	niu	nog	nai	sme	nso	nor	nob	nno	nub	nwc	nym	nya	nyn	nyo	nzi	oci	oji	non	peo	ori	orm	osa	oss	oto	pal	pau	pli	pam	pag	pan	pap	paa	per	phi	phn	pol	pon	por	pra	pro	pus	que	roh	raj	rap	rar	roa	rom	rum	run	rus	sal	sam	smi	smo	sad	sag	san	sat	srd	sas	scn	sco	gla	sel	sem	scc	srr	shn	sna	iii	sid	sgn	bla	snd	sin	sit	sio	sms	den	sla	slo	slv	sog	som	son	snk	wen	sot	sai	sma	spa	srn	suk	sux	sun	sus	swa	ssw	swe	syr	tgl	tah	tai	tgk	tmh	tam	tat	tel	tem	ter	tet	tha	tib	tir	tig	tiv	tli	tpi	tkl	tlh	tog	ton	chk	tsi	tso	tsn	tum	tup	tur	ota	tuk	tvl	tyv	twi	udm	uga	uig	ukr	umb	und	urd	uzb	vai	ven	vie	vol	vot	wak	wal	wln	war	was	wel	wol	xho	sah	yao	yap	yid	yor	ypk	znd	zap	zen	zha	zul	zun"));
+%LanguageCodes = map {($_, 1)} (split "\t", ("   	aar	abk	ace	ach	ada	ady	afa	afh	afr	ain	aka	akk	alb	ale	alg	alt	amh	ang	anp	apa	ara	arc	arg	arm	arn	arp	art	arw	asm	ast	ath	aus	ava	ave	awa	aym	aze	bad	bai	bak	bal	bam	ban	baq	bas	bat	bej	bel	bem	ben	ber	bho	bih	bik	bin	bis	bla	bnt	bos	bra	bre	btk	bua	bug	bul	bur	byn	cad	cai	car	cat	cau	ceb	cel	cha	chb	che	chg	chi	chk	chm	chn	cho	chp	chr	chu	chv	chy	cmc	cop	cor	cos	cpe	cpf	cpp	cre	crh	crp	csb	cus	cze	dak	dan	dar	day	del	den	dgr	din	div	doi	dra	dsb	dua	dum	dut	dyu	dzo	efi	egy	eka	elx	eng	enm	epo	est	ewe	ewo	fan	fao	fat	fij	fil	fin	fiu	fon	fre	frm	fro	frr	frs	fry	ful	fur	gaa	gay	gba	gem	geo	ger	gez	gil	gla	gle	glg	glv	gmh	goh	gon	gor	got	grb	grc	gre	grn	gsw	guj	gwi	hai	hat	hau	haw	heb	her	hil	him	hin	hit	hmn	hmo	hsb	hun	hup	iba	ibo	ice	ido	iii	ijo	iku	ile	ilo	ina	inc	ind	ine	inh	ipk	ira	iro	ita	jav	jbo	jpn	jpr	jrb	kaa	kab	kac	kal	kam	kan	kar	kas	kau	kaw	kaz	kbd	kha	khi	khm	kho	kik	kin	kir	kmb	kok	kom	kon	kor	kos	kpe	krc	krl	kro	kru	kua	kum	kur	kut	lad	lah	lam	lao	lat	lav	lez	lim	lin	lit	lol	loz	ltz	lua	lub	lug	lui	lun	luo	lus	mac	mad	mag	mah	mai	mak	mal	man	mao	map	mar	mas	may	mdf	mdr	men	mga	mic	min	mis	mkh	mlg	mlt	mnc	mni	mno	moh	mol	mon	mos	mul	mun	mus	mwl	mwr	myn	myv	nah	nai	nap	nau	nav	nbl	nde	ndo	nds	nep	new	nia	nic	niu	nno	nob	nog	non	nor	nso	nub	nwc	nya	nym	nyn	nyo	nzi	oci	oji	ori	orm	osa	oss	ota	oto	paa	pag	pal	pam	pan	pap	pau	peo	per	phi	phn	pli	pol	pon	por	pra	pro	pus	que	raj	rap	rar	roa	roh	rom	rum	run	rus	sad	sag	sah	sai	sal	sam	san	sas	sat	scc	scn	sco	scr	sel	sem	sga	sgn	shn	sid	sin	sio	sit	sla	slo	slv	sma	sme	smi	smj	smn	smo	sms	sna	snd	snk	sog	som	son	sot	spa	srd	srn	srr	ssa	ssw	suk	sun	sus	sux	swa	swe	syr	tah	tai	tam	tat	tel	tem	ter	tet	tgk	tgl	tha	tib	tig	tir	tiv	tkl	tlh	tli	tmh	tog	ton	tpi	tsi	tsn	tso	tuk	tum	tup	tur	tut	tvl	twi	tyv	udm	uga	uig	ukr	umb	und	urd	uzb	vai	ven	vie	vol	vot	wak	wal	war	was	wel	wen	wln	wol	xal	xho	yao	yap	yid	yor	ypk	zap	zen	zha	znd	zul	zun	zxx"));
 
 #fill the obsolete Language Codes hash
 
