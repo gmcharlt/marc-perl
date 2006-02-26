@@ -6,7 +6,6 @@ lib/MARC/Lint/CodeData.pm
 lib/MARC/Lint.pm
 Makefile.PL
 MANIFEST
-META.yml
 README
 t/camel.usmarc
 t/check020.t
