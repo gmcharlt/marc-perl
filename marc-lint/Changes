@@ -1,3 +1,7 @@
+1.42    [unreleased]
+        - Removed META.yml from MANIFEST
+        - Updated MARC::Lint::CodeData with most recent version
+
 1.41    Wed Sept 21 17:49:00 CDT 2005
         [THINGS THAT MAY BREAK YOUR CODE]
         - updated DATA to incorporate MARC update 5 (Oct. 2004)
