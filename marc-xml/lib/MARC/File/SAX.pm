@@ -68,9 +68,9 @@ sub end_element {
     } elsif ( $name eq 'leader' ) { 
 	my $ldr = $self->{ chars };
 	$self->{ transcode }++
-		if (substr($ldr,9,1) eq 'a');
+		if (substr($ldr,9,1) eq 'a' and $self->{toMARC8});
 	
-	substr($ldr,9,1,' ');
+	substr($ldr,9,1,' ') if ($self->{ transcode });
 	$self->{ record }->leader( $ldr );
 	$self->{ chars } = '';
 	$self->{ tag } = '';

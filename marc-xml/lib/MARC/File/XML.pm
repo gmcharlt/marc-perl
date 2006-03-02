@@ -2,7 +2,7 @@ package MARC::File::XML;
 
 use warnings;
 use strict;
-use vars qw( $VERSION );
+use vars qw( $VERSION %_load_args );
 use base qw( MARC::File );
 use MARC::Record;
 use MARC::Field;
@@ -23,6 +23,10 @@ $factory->require_feature(Namespaces);
 
 my $parser = $factory->parser( Handler => $handler, ProtocolEncoding => 'UTF-8' );
 
+sub import {
+	my $class = shift;
+	%_load_args = @_;
+}
 
 =head1 NAME
 
@@ -30,6 +34,9 @@ MARC::File::XML - Work with MARC data encoded as XML
 
 =head1 SYNOPSIS
 
+    ## Loading with USE options
+    use MARC::File::XML ( BinaryEncoding => 'utf8' );
+    
     ## reading with MARC::Batch
     my $batch = MARC::Batch->new( 'XML', $filename );
     my $record = $batch->next();
@@ -97,9 +104,11 @@ sub MARC::Record::as_xml {
 =head2 new_from_xml()
 
 If you have a chunk of XML and you want a record object for it you can use 
-this method to generate a MARC::Record object.
+this method to generate a MARC::Record object.  You can pass an optional
+encoding parameter to specify which encoding (UTF-8 or MARC-8) you would like
+the resulting record to be in.
 
-    my $record = MARC::Record->new_from_xml( $xml );
+    my $record = MARC::Record->new_from_xml( $xml, $encoding );
 
 Note: only works for single record XML chunks.
 
@@ -110,7 +119,9 @@ sub MARC::Record::new_from_xml {
     ## to allow calling as MARC::Record::new_from_xml()
     ## or MARC::Record->new_from_xml()
     $xml = shift if ( ref($xml) || ($xml eq "MARC::Record") );
-    return( MARC::File::XML::decode( $xml ) );
+
+    my $enc = shift || $_load_args{BinaryEncoding};
+    return( MARC::File::XML::decode( $xml, $enc ) );
 }
 
 =pod 
@@ -209,10 +220,6 @@ different portions.
 =head2 header() 
 
 Returns a string of XML to use as the header to your XML file.
-
-This method takes an optional $encoding parameter to set the output encoding
-to something other than 'UTF-8'.  This is meant mainly to support slightly
-broken records that are in ISO-8859-1 (ANSI) format with 8-bit characters.
 
 =cut 
 
@@ -361,25 +368,24 @@ sub decode {
 	$text = $self=~/MARC::File/ ? shift : $self;
     }
 
+    my $enc = shift || $_load_args{BinaryEncoding};
+
     $parser->{ tagStack } = [];
     $parser->{ subfields } = [];
     $parser->{ Handler }{ record } = MARC::Record->new();
+    $parser->{ Handler }{ toMARC8 } = ($enc && lc($enc) =~ /^utf-?8$/o) ? 0 : 1;
     $parser->parse_string( $text );
 
     return( $parser->{ Handler }{ record } );
     
 }
 
-=head2 encode([$encoding])
+=head2 encode()
 
 You probably want to use the as_marc() method on your MARC::Record object
 instead of calling this directly. But if you want to you just need to 
 pass in the MARC::Record object you wish to encode as XML, and you will be
 returned the XML as a scalar.
-
-This method takes an optional $encoding parameter to set the output encoding
-to something other than 'UTF-8'.  This is meant mainly to support slightly
-broken records that are in ISO-8859-1 (ANSI) format with 8-bit characters.
 
 =cut
 
