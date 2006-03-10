@@ -1,5 +1,5 @@
 # vi:et:sw=4 ts=4
-require v5.8.2;
+require v5.8.1;
 use strict;
 use ExtUtils::MakeMaker;
 
