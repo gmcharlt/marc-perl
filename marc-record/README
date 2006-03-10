@@ -41,20 +41,8 @@ To install this module type the following:
 
 DEPENDENCIES
 
-If you would like to run MARC::Record under a Perl version that is earlier than 
-v5.006 there is a patch which you can apply prior to installing:
-
-    tar xvfz MARC-Record-1.XX.tar.gz
-    cd MARC-Record-1.XX
-    patch -p1 < pre5006.patch
-
-MARC::* requires Perl and Test::More for tests. Test::More comes standard in
-Perl 5.8.
-
-Tests are known to fail under Perl 5.6.0. We recommend you upgrade to a later
-version of Perl, or downgrade to an earlier one if you want to use
-MARC::Record. Perl 5.6.0 is known to have been an unstable release of Perl,
-which was quickly rectified in 5.6.1 and later releases.
+MARC::Record now requires a perl version >= 5.8.1 for processing unicode
+correctly.
 
 COPYRIGHT AND LICENCE
 
