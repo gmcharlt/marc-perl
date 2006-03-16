@@ -26,6 +26,10 @@ my $parser = $factory->parser( Handler => $handler, ProtocolEncoding => 'UTF-8' 
 sub import {
 	my $class = shift;
 	%_load_args = @_;
+	$_load_args{ DefaultEncoding } ||= 'UTF-8';
+	$_load_args{ RecordFormat } ||= 'USMARC';
+
+ 	$parser = $factory->parser( Handler => $handler, ProtocolEncoding => $_load_args{DefaultEncoding} );
 }
 
 =head1 NAME
@@ -35,7 +39,10 @@ MARC::File::XML - Work with MARC data encoded as XML
 =head1 SYNOPSIS
 
     ## Loading with USE options
-    use MARC::File::XML ( BinaryEncoding => 'utf8' );
+    use MARC::File::XML ( BinaryEncoding => 'utf8', RecordFormat => 'UNIMARC' );
+
+    ## Setting the record format without USE options
+    MARC::File::XML->default_record_format('USMARC');
     
     ## reading with MARC::Batch
     my $batch = MARC::Batch->new( 'XML', $filename );
@@ -88,6 +95,25 @@ at L<http://perl4lib.perl.org>.
 When you use MARC::File::XML your MARC::Record objects will have two new
 additional methods available to them: 
 
+=head2 MARC::File::XML->default_record_format([$format])
+
+Sets or returns the default record format used by MARC::File::XML.  Valid
+formats are B<MARC21>, B<USMARC> and B<UNIMARC>.
+
+    MARC::File::XML->default_record_format('UNIMARC');
+
+=cut
+
+sub default_record_format {
+	my $self = shift;
+	my $format = shift;
+
+	$_load_args{RecordFormat} = $format if ($format);
+
+	return $_load_args{RecordFormat};
+}
+
+
 =head2 as_xml()
 
 Returns a MARC::Record object serialized in XML.
@@ -98,17 +124,19 @@ Returns a MARC::Record object serialized in XML.
 
 sub MARC::Record::as_xml {
     my $record = shift;
-    return(  MARC::File::XML::encode( $record ) );
+    my $format = shift || $_load_args{RecordFormat};
+    return(  MARC::File::XML::encode( $record, $format ) );
 }
 
-=head2 new_from_xml()
+=head2 new_from_xml([$encoding, $format])
 
 If you have a chunk of XML and you want a record object for it you can use 
 this method to generate a MARC::Record object.  You can pass an optional
 encoding parameter to specify which encoding (UTF-8 or MARC-8) you would like
-the resulting record to be in.
+the resulting record to be in.  You can also pass a format parameter to specify
+the source record type, such as UNIMARC, USMARC or MARC21.
 
-    my $record = MARC::Record->new_from_xml( $xml, $encoding );
+    my $record = MARC::Record->new_from_xml( $xml, $encoding, $format );
 
 Note: only works for single record XML chunks.
 
@@ -121,7 +149,8 @@ sub MARC::Record::new_from_xml {
     $xml = shift if ( ref($xml) || ($xml eq "MARC::Record") );
 
     my $enc = shift || $_load_args{BinaryEncoding};
-    return( MARC::File::XML::decode( $xml, $enc ) );
+    my $format = shift || $_load_args{RecordFormat};
+    return( MARC::File::XML::decode( $xml, $enc, $format ) );
 }
 
 =pod 
@@ -224,8 +253,10 @@ Returns a string of XML to use as the header to your XML file.
 =cut 
 
 sub header {
+    my $format = shift;
+    my $enc = shift || 'UTF-8';
     return( <<MARC_XML_HEADER );
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="$enc"?>
 <collection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd" xmlns="http://www.loc.gov/MARC21/slim">
 MARC_XML_HEADER
 }
@@ -248,6 +279,9 @@ Returns a chunk of XML suitable for placement between the header and the footer.
 
 sub record {
     my $record = shift;
+    my $format = shift;
+
+    $format ||= $_load_args{RecordFormat};
 
     my $_transcode = 0;
     my $ldr = $record->leader;
@@ -255,7 +289,7 @@ sub record {
     my $original_encoding = substr($ldr,9,1);
 
     # Does the record think it is already Unicode?
-    if ($original_encoding ne 'a') {
+    if ($original_encoding ne 'a' && lc($format) ne 'unimarc') {
     	# If not, we'll make it so
         $_transcode++;
 	
@@ -369,11 +403,13 @@ sub decode {
     }
 
     my $enc = shift || $_load_args{BinaryEncoding};
+    my $format = shift || $_load_args{RecordFormat};
 
     $parser->{ tagStack } = [];
     $parser->{ subfields } = [];
     $parser->{ Handler }{ record } = MARC::Record->new();
-    $parser->{ Handler }{ toMARC8 } = ($enc && lc($enc) =~ /^utf-?8$/o) ? 0 : 1;
+    $parser->{ Handler }{ toMARC8 } = (lc($format) ne 'unimarc' && $enc && lc($enc) =~ /^utf-?8$/o) ? 0 : 1;
+
     $parser->parse_string( $text );
 
     return( $parser->{ Handler }{ record } );
@@ -382,7 +418,7 @@ sub decode {
 
 =head2 encode()
 
-You probably want to use the as_marc() method on your MARC::Record object
+You probably want to use the as_xml() method on your MARC::Record object
 instead of calling this directly. But if you want to you just need to 
 pass in the MARC::Record object you wish to encode as XML, and you will be
 returned the XML as a scalar.
@@ -391,13 +427,33 @@ returned the XML as a scalar.
 
 sub encode {
     my $record = shift;
+    my $format = shift || $_load_args{RecordFormat};
+
+    my $enc = 'UTF-8';
+    if (lc($format) eq 'unimarc') {
+        $enc = _unimarc_encoding( $record );
+    }
 
     my @xml = ();
-    push( @xml, header() );
-    push( @xml, record( $record ) );
+    push( @xml, header( $enc ) );
+    push( @xml, record( $record, $format ) );
     push( @xml, footer() );
 
     return( join( "\n", @xml ) );
+}
+
+sub _unimarc_encoding {
+	my $r = shift;
+
+	my $enc = substr( $r->subfield(100 => 'a'), 26, 2 );
+
+	if ($enc eq '01') {
+		return 'ISO-8859-1';
+	} elsif ($enc eq '50') {
+		return 'UTF-8';
+	} else {
+		die "Unsupported UNIMARC charater encoding [$enc] for XML output";
+	}
 }
 
 =head1 TODO
