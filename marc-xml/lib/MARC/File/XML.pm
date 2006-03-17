@@ -116,9 +116,11 @@ sub default_record_format {
 
 =head2 as_xml()
 
-Returns a MARC::Record object serialized in XML.
+Returns a MARC::Record object serialized in XML. You can pass an optional format
+parameter to tell MARC::File::XML what type of record (USMARC, UNIMARC) you are
+serializing.
 
-    print $record->as_xml();
+    print $record->as_xml([$format]);
 
 =cut 
 
@@ -126,6 +128,22 @@ sub MARC::Record::as_xml {
     my $record = shift;
     my $format = shift || $_load_args{RecordFormat};
     return(  MARC::File::XML::encode( $record, $format ) );
+}
+
+=head2 as_xml_record([$format])
+
+Returns a MARC::Record object serialized in XML without a collection wrapper.
+You can pass an optional format parameter to tell MARC::File::XML what type of
+record (USMARC, UNIMARC) you are serializing.
+
+    print $record->as_xml_record('UNIMARC');
+
+=cut 
+
+sub MARC::Record::as_xml_record {
+    my $record = shift;
+    my $format = shift || $_load_args{RecordFormat};
+    return(  MARC::File::XML::encode( $record, $format, 1 ) );
 }
 
 =head2 new_from_xml([$encoding, $format])
@@ -257,7 +275,10 @@ sub header {
     my $enc = shift || 'UTF-8';
     return( <<MARC_XML_HEADER );
 <?xml version="1.0" encoding="$enc"?>
-<collection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd" xmlns="http://www.loc.gov/MARC21/slim">
+<collection
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd"
+  xmlns="http://www.loc.gov/MARC21/slim">
 MARC_XML_HEADER
 }
 
@@ -280,6 +301,8 @@ Returns a chunk of XML suitable for placement between the header and the footer.
 sub record {
     my $record = shift;
     my $format = shift;
+    my $without_header = shift;
+    my $enc = shift;
 
     $format ||= $_load_args{RecordFormat};
 
@@ -304,7 +327,20 @@ sub record {
     }
 
     my @xml = ();
-    push( @xml, "<record>" );
+
+    if ($without_header) {
+        push @xml, <<HEADER
+<?xml version="1.0" encoding="$enc"?>
+<record
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/ standards/marcxml/schema/MARC21slim.xsd"
+  xmlns="http://www.loc.gov/MARC21/slim>
+HEADER
+
+    } else {
+        push( @xml, "<record>" );
+    }
+    
     push( @xml, "  <leader>" . escape( $record->leader ) . "</leader>" );
 
     foreach my $field ( $record->fields() ) {
@@ -428,6 +464,7 @@ returned the XML as a scalar.
 sub encode {
     my $record = shift;
     my $format = shift || $_load_args{RecordFormat};
+    my $without_header = shift;
 
     my $enc = 'UTF-8';
     if (lc($format) eq 'unimarc') {
@@ -435,9 +472,9 @@ sub encode {
     }
 
     my @xml = ();
-    push( @xml, header( $enc ) );
-    push( @xml, record( $record, $format ) );
-    push( @xml, footer() );
+    push( @xml, header( $enc ) ) unless ($without_header);
+    push( @xml, record( $record, $format, $without_header, $enc ) );
+    push( @xml, footer() ) unless ($without_header);
 
     return( join( "\n", @xml ) );
 }
