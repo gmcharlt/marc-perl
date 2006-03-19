@@ -6,7 +6,7 @@ use warnings;
 #declare the necessary variables
 use vars qw($VERSION @EXPORT_OK %GeogAreaCodes %ObsoleteGeogAreaCodes %LanguageCodes %ObsoleteLanguageCodes %CountryCodes %ObsoleteCountryCodes %Sources600_651 %ObsoleteSources600_651 %Sources655 %ObsoleteSources655);
 
-$VERSION = '1.06';
+$VERSION = '1.07';
 
 use base qw(Exporter AutoLoader);
 
@@ -92,6 +92,10 @@ They output tab-separated codes for updating the data below.
 
 =head1 VERSION HISTORY
 
+Version 1.07: Updated Mar. 13, 2006.
+
+ -Added new source codes from Technical Notice of Mar. 10, 2006.
+
 Version 1.06: Updated Feb. 23, 2006.
 
  -Added new language codes from Technical Notice of Feb 23, 2006.
@@ -150,17 +154,17 @@ Version 1.00 (original version): First release, Dec. 5, 2004. Uploaded to Source
 
 %ObsoleteCountryCodes = map {($_, 1)} (split "\t", ("ai 	air	ac 	ajr	bwr	cn 	cz 	cp 	ln 	cs 	err	gsr	ge 	gn 	hk 	iw 	iu 	jn 	kzr	kgr	lvr	lir	mh 	mvr	nm 	pt 	rur	ry 	xi 	sk 	xxr	sb 	sv 	tar	tt 	tkr	unr	uk 	ui 	us 	uzr	vn 	vs 	wb 	ys "));
 
-%Sources600_651 = map {($_, 1)} (split "\t", ("aass	aat	abne	agrifors	agrovoc	agrovocf	agrovocs	albt	allars	amg	apaist	asft	asth	atla	barn	bella	bet	bhammf	bhashe	bicssc	bidex	blmlsh	bt	cabt	cash	ccte	cctf	ceeus	cht	ciesiniv	cilla	csahssa	csalsct	csapa	csh	cstud	dcs	ddcrit	dissao	dit	drama	dtict	ebfem	eclas	eks	ericd	est	fast	fgtpcm	fire	fmesh	fnhl	francis	galestne	gem	georeft	gtt	hapi	hkcan	helecon	henn	hlasstg	huc	iaat	ica	icpsr	idas	iescs	iest	ilot	ilpt	inist	inspect	ipat	ipsp	isis	itoamc	itrt	jhpb	jhpk	jlabsh	kaa	kao	kaunokki	kdm	kitu	kssbar	kta	ktpt	ktta	kula	kupu	lacnaf	larpcal	lcsh	lcshac	lctgm	lemac	lemb	liv	lnmmbr	local	ltcsh	lua	maaq	mar	masa	mesh	mipfesd	mmm	mpirdes	mtirdes	musa	nal	nalnaf	nasat	ncjt	ndllsh	nicem	nimacsc	nlmnaf	ntcpsc	ntcsd	ntissc	nznb	ogst	opms	pascal	peri	pha	pmbok	pmcsg	poliscit	popinte	precis	prvt	psychit	qrma	qrmak	ram	rasuqam	renib	rero	reroa	reveal	rpe	rswk	rugeo	rurkp	rvm	sao	sbiao	scgdst	scisshl	scot	sears	sfit	shbe	she	sigle	sipri	sk	slem	smda	sosa	swd	swemesh	taika	taxhs	tbit	test	tgn	thub	tlka	tlsh	toit	trt	trtsa	tsht	ttka	ulan	umitrist	unbisn	unbist	unescot	usaidt	vmj	waqaf	watrest	wgst	wot	wpicsh	ysa"));
+%Sources600_651 = map {($_, 1)} (split "\t", ("aass	aat	abne	agrifors	agrovoc	agrovocf	agrovocs	albt	allars	amg	apaist	asft	asth	atla	barn	bella	bet	bhammf	bhashe	bicssc	bidex	blmlsh	bt	cabt	cash	cct	ccte	cctf	ceeus	cht	ciesiniv	cilla	csahssa	csalsct	csapa	csh	cstud	dcs	ddcrit	dissao	dit	drama	dtict	ebfem	eclas	eks	ericd	est	fast	fgtpcm	fire	fmesh	fnhl	francis	galestne	gem	georeft	gtt	hapi	hkcan	helecon	henn	hlasstg	huc	iaat	ica	icpsr	idas	iescs	iest	ilot	ilpt	inist	inspect	ipat	ipsp	isis	itoamc	itrt	jhpb	jhpk	jlabsh	kaa	kao	kaunokki	kdm	kitu	kssbar	kta	ktpt	ktta	kula	kupu	lacnaf	larpcal	lcsh	lcshac	lctgm	lemac	lemb	liv	lnmmbr	local	ltcsh	lua	maaq	mar	masa	mesh	mipfesd	mmm	mpirdes	mtirdes	musa	nal	nalnaf	nasat	ncjt	ndllsh	nicem	nimacsc	nlmnaf	ntcpsc	ntcsd	ntissc	nznb	ogst	opms	pascal	peri	pha	pmbok	pmcsg	poliscit	popinte	precis	prvt	psychit	qrma	qrmak	raam	ram	rasuqam	renib	rero	rerovoc	reveal	rpe	rswk	rugeo	rurkp	rvm	sao	sbiao	scgdst	scisshl	scot	sears	sfit	sgc	sgce	shbe	she	sigle	sipri	sk	slem	smda	sosa	swd	swemesh	taika	taxhs	tbit	test	tgn	thub	tlka	tlsh	toit	trt	trtsa	tsht	ttka	ulan	umitrist	unbisn	unbist	unescot	usaidt	vmj	waqaf	watrest	wgst	wot	wpicsh	ysa"));
 
 #The codes cash, lcsh, lcshac, mesh, nal, and rvm are covered by 2nd indicators in 600-655
 #they are only used when indicators are not available
-%ObsoleteSources600_651 = map {($_, 1)} (split "\t", ("cash	lcsh	lcshac	mesh	nal	rvm"));
+%ObsoleteSources600_651 = map {($_, 1)} (split "\t", ("cash	lcsh	lcshac	mesh	nal	reroa	rvm"));
 
-%Sources655 = map {($_, 1)} (split "\t", ("	aat	amg	asth	barn	bt	cash	dcs	dct	ericd	estc	fast	fbg	fire	galestne	gem	gmgpc	gsafd	gtlm	hapi	hkcan	ica	ilot	itrt	jhpb	jhpk	lacnaf	lcsh	lcshac	lctgm	lemac	local	maaq	mar	marcgt	mesh	migfg	mim	nal	nalnaf	ngl	nimafc	nlmnaf	nmc	nznb	opms	pmcsg	qrmak	radfg	rbbin	rbgenr	rbpap	rbpri	rbprov	rbpub	rbtyp	reroa	reveal	rugeo	rvm	sao	sears	sgp	sipri	swemesh	tbit	thub	toit	tsht	ulan	vmj	waqaf"));
+%Sources655 = map {($_, 1)} (split "\t", ("	aat	amg	asth	barn	bt	cash	cct	dcs	dct	ericd	estc	fast	fbg	fire	galestne	gem	gmgpc	gsafd	gtlm	hapi	hkcan	ica	ilot	itrt	jhpb	jhpk	lacnaf	lcsh	lcshac	lctgm	lemac	local	maaq	mar	marcgt	mesh	migfg	mim	nal	nalnaf	ngl	nimafc	nlmnaf	nmc	nznb	opms	pmcsg	qrmak	raam	radfg	rbbin	rbgenr	rbpap	rbpri	rbprov	rbpub	rbtyp	rerovoc	reveal	rugeo	rvm	sao	sears	sgc	sgce	sgp	sipri	swemesh	tbit	thub	toit	tsht	ulan	vmj	waqaf"));
 
 #The codes cash, lcsh, lcshac, mesh, nal, and rvm are covered by 2nd indicators in 600-655
 #they are only used when indicators are not available
-%ObsoleteSources655 = map {($_, 1)} (split "\t", ("cash	ftamc	lcsh	lcshac	mesh	nal	rvm"));
+%ObsoleteSources655 = map {($_, 1)} (split "\t", ("cash	ftamc	lcsh	lcshac	mesh	nal	reroa	rvm"));
 
 1;
 
@@ -176,7 +180,7 @@ employers of the various contributors to the code.
 Bryan Baldus
 eijabb@cpan.org
 
-Copyright (c) 2004-2005.
+Copyright (c) 2004-2006.
 
 =cut
 
