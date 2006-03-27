@@ -8,6 +8,7 @@ use base qw(Exporter);
 our @EXPORT_OK = qw(marc8_to_utf8 utf8_to_marc8);
 
 use Unicode::Normalize;
+use Encode 'decode_utf8';
 use MARC::Charset::Table;
 use MARC::Charset::Constants qw(:all);
 
@@ -47,6 +48,51 @@ our $table = MARC::Charset::Table->new();
 our $DEFAULT_G0 = ASCII_DEFAULT; 
 our $DEFAULT_G1 = EXTENDED_LATIN;
 
+=head2 ignore_errors()
+
+Tells MARC::Charset whether or not to ignore all encoding errors, and
+returns the current setting.  This is helepfuli if you have records that
+contain both MARC8 and UNICODE characters.
+
+    my $ignore = MARC::Charset->ignore_errors();
+    
+    MARC::Charset->ignore_errors(1); # ignore errors
+    MARC::Charset->ignore_errors(0); # DO NOT ignore errors
+
+=cut
+
+
+our $_ignore_errors = 0;
+sub ignore_errors {
+	my ($self,$i) = @_;
+	$_ignore_errors = $i if (defined($i));
+	return $_ignore_errors;
+}
+
+
+=head2 assume_unicode()
+
+Tells MARC::Charset whether or not to assume UNICODE when an error is
+encountered in ignore_errors mode and returns the current setting.
+This is helepfuli if you have records that contain both MARC8 and UNICODE
+characters.
+
+    my $setting = MARC::Charset->assume_unicode();
+    
+    MARC::Charset->assume_unicode(1); # ignore errors
+    MARC::Charset->assume_unicode(0); # DO NOT ignore errors
+
+=cut
+
+
+our $_assume_unicode = 0;
+sub assume_unicode {
+	my ($self,$i) = @_;
+	$_assume_unicode = $i if (defined($i));
+	return $_assume_unicode;
+}
+
+
 # place holders for working graphical character sets
 my $G0; 
 my $G1;
@@ -58,9 +104,15 @@ Converts a MARC-8 encoded string to UTF-8.
     my $utf8 = marc8_to_utf8($marc8);
 
 If you'd like to ignore errors pass in a true value as the 2nd 
-parameter:
+parameter or call MARC::Charset->ignore_errors() with a true
+value:
 
     my $utf8 = marc8_to_utf8($marc8, 'ignore-errors');
+
+  or
+  
+    MARC::Charset->ignore_errors(1);
+    my $utf8 = marc8_to_utf8($marc8);
 
 =cut
 
@@ -69,6 +121,8 @@ sub marc8_to_utf8
 {
     my ($marc8, $ignore_errors) = @_;
     reset_charsets();
+
+    $ignore_errors = $_ignore_errors if (!defined($ignore_errors));
 
     # holder for our utf8
     my $utf8 = '';
@@ -138,6 +192,11 @@ sub marc8_to_utf8
             {
                 reset_charsets();
                 return;
+            }
+            if ($_assume_unicode)
+            {
+                reset_charsets();
+                return NFC(decode_utf8($marc8));
             }
             $index += 1;
         }
