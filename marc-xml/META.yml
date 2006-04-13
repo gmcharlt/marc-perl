@@ -5,7 +5,7 @@ version:      0.81
 version_from: lib/MARC/File/XML.pm
 installdirs:  site
 requires:
-    MARC::Charset:                 0.9
+    MARC::Charset:                 0.91
     MARC::Record:                  1.36
     XML::SAX:                      0.12
 

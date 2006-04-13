@@ -1,5 +1,11 @@
 Revision history for Perl extension MARC-XML
 
+0.83 
+      - remove premature return from close() thanks Jay Luker (exlibris)
+
+0.82 March 4, 2006
+      - details unknown :(
+
 0.81  Fri Feb  3 23:29:04 EST 2006
       - minor changes so that diagnostics (when character mappings aren't found)
         will not throw warnings about unitialized variables too.

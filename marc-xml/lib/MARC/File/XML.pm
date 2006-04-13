@@ -234,7 +234,6 @@ use the close() method.
 =cut
 
 sub close {
-    return( 1 );
     my $self = shift;
     if ( $self->{ fh } ) {
         $self->{ fh }->print( footer() ) if $self->{ header };
@@ -273,7 +272,7 @@ Returns a string of XML to use as the header to your XML file.
 
 sub header {
     my $enc = shift; 
-    $enc = shift if ( ref($enc) || ($enc eq "MARC::File::XML") );
+    $enc = shift if ( $enc && (ref($enc) || ($enc eq "MARC::File::XML")) );
     $enc ||= 'UTF-8';
     return( <<MARC_XML_HEADER );
 <?xml version="1.0" encoding="$enc"?>
