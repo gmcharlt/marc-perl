@@ -207,7 +207,7 @@ Used in tandem with out() to write records to a file.
 =cut
 
 sub write {
-    my ( $self, $record ) = @_;
+    my ( $self, $record, $enc ) = @_;
     if ( ! $self->{ fh } ) { 
         croak( "MARC::File::XML object not open for writing" );
     }
@@ -216,7 +216,8 @@ sub write {
     }
     ## print the XML header if we haven't already
     if ( ! $self->{ header } ) { 
-        $self->{ fh }->print( header() );
+    	$enc ||= $_load_args{DefaultEncoding};
+        $self->{ fh }->print( header( $enc ) );
         $self->{ header } = 1;
     } 
     ## print out the record
@@ -271,8 +272,9 @@ Returns a string of XML to use as the header to your XML file.
 =cut 
 
 sub header {
-    my $format = shift;
-    my $enc = shift || 'UTF-8';
+    my $enc = shift; 
+    $enc = shift if ( ref($enc) || ($enc eq "MARC::File::XML") );
+    $enc ||= 'UTF-8';
     return( <<MARC_XML_HEADER );
 <?xml version="1.0" encoding="$enc"?>
 <collection
@@ -465,8 +467,8 @@ sub encode {
     my $record = shift;
     my $format = shift || $_load_args{RecordFormat};
     my $without_header = shift;
+    my $enc = shift || $_load_args{DefaultEncoding};
 
-    my $enc = 'UTF-8';
     if (lc($format) eq 'unimarc') {
         $enc = _unimarc_encoding( $record );
     }
