@@ -1,6 +1,6 @@
 Revision history for Perl extension MARC-XML
 
-0.83 
+0.83 Fri Apr 21 15:19:20 EST 2006
       - remove premature return from close() thanks Jay Luker (exlibris)
 
 0.82 March 4, 2006
