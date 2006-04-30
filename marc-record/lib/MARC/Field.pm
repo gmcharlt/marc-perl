@@ -250,7 +250,7 @@ sub add_subfields {
 delete_subfield() will remove *all* of a particular type of subfield from 
 a field.
 
-    my $count = $field->delete_subfield( code => 'a');
+    my $count = $field->delete_subfield(code => 'a');
     print "deleted $count subfield 'a' from the field\n";
 
 If you only want to delete the first n subfields you can pass in a 
@@ -271,6 +271,8 @@ sub delete_subfield {
     my $code = $options{code};
     my $match = $options{match};
     my $count = $options{count};
+
+    croak 'match must be a compiled regex' if $match and ref($match) ne 'Regexp';
 
     my @current_subfields = @{$self->{_subfields}};
     my @new_subfields = ();
