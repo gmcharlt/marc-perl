@@ -245,30 +245,52 @@ sub add_subfields {
     return @_/2;
 }
 
-=head2 delete_subfields()
+=head2 delete_subfield()
 
-delete_subfields() will remove *all* of a particular type of subfield from 
+delete_subfield() will remove *all* of a particular type of subfield from 
 a field.
 
-    my $count = $field->subfields( 'a' );
+    my $count = $field->delete_subfield('a');
     print "deleted $count subfield 'a' from the field\n";
 
-    my $count = $field->subfields( 'xz' );
-    print "deleted $count subfields 'x' and 'z' from the field\n";
-   
+If you only want to delete the first n subfields you can pass in a 
+second integer parameter:
+
+    # delete the first two subfield u
+    $field->delete_subfield('u', 2);
+
+You can specify a regex to for only deleting subfield that match:
+
+   # delete the first subfield u that matches zombo.com
+   $field->delete_subfield('u', 1, qr/zombo.com/);
+
+   # delete any subfield u that matches zombo.com
+   $field->delete_subfield('u', 0, qr/zombo.com/);
+
 =cut
 
-sub delete_subfields {
-    my ( $self, $deletes ) = @_;
-    my @deletes = split //, $deletes;
-    my @subfields = @{ $self->{_subfields} };
-    my @new_subfields;
-    for ( my $i=0; $i<@subfields; $i=$i+2 ) {
-        push( @new_subfields, $subfields[$i], $subfields[$i+1] )
-            unless grep { $_ eq $subfields[$i] } @deletes;
+sub delete_subfield {
+    my ($self, %options) = @_;
+    my $code = $options{code};
+    my $match = $options{match};
+    my $count = $options{count};
+
+    my @current_subfields = @{$self->{_subfields}};
+    my @new_subfields = ();
+    my $removed = 0;
+    while (@current_subfields > 0) {
+        my $subfield_code = shift @current_subfields;
+        my $subfield_value = shift @current_subfields;
+        if ((!$code or $subfield_code eq $code)
+            and (!$match or $subfield_value =~ $match) 
+            and (!$count or $removed < $count)) {
+            $removed += 1;
+            next;
+        }
+        push( @new_subfields, $subfield_code, $subfield_value);
     }
     $self->{_subfields} = \@new_subfields;
-    return( (@subfields - @new_subfields)/2 );
+    return $removed;
 }
 
 =head2 update()

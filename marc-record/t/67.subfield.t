@@ -1,6 +1,6 @@
 #!perl -Tw
 
-use Test::More tests => 12; 
+use Test::More tests => 6; 
 
 use strict;
 
@@ -26,22 +26,4 @@ like(
     $@, qr/Fields below 010 do not have subfields/, 
     'subfield cannot be called on fields < 010' 
 );
-
-## make sure we can delete subfields
-$field = MARC::Field->new( '245', '', '', a=>'foo', b=>'bar', c=>'bez' );
-is( $field->delete_subfields( 'b' ), 1, 'delete_subfields() return one field' );
-is ( $field->as_string(), 'foo bez', 'delete_subfields() one field' );
-
-## make sure we can delete multiple subfields
-$field = MARC::Field->new( '245', '', '', a=>'foo', b=>'bar', c=>'bez' );
-is( $field->delete_subfields( 'bc' ), 2,
-    'delete_subfields() return two fields');
-is ( $field->as_string(), 'foo', 'delete_subfields() two fields' );
-
-## and that all repeated subfields are removed
-$field = MARC::Field->new( '245', '', '', a=>'foo', a=>'bar', c=>'bez' );
-is( $field->delete_subfields( 'a' ), 2, 'delete_subfields() repeats return' );
-is ( $field->as_string(), 'bez', 'delete_subfields() repeats' );
-
-
 

@@ -19,6 +19,7 @@ Revision history for Perl extension MARC::Record.
           when we're past the directory so that you can match up the data
           with the offsets in the directory.
         - fixed RELATED MODULES section in Record.pm (thanks Todd Holbrook)
+        - added MARC::Field->delete_subfields
 
 1.39_02 Tue Dec 21 09:29:45 CST 2004
 
