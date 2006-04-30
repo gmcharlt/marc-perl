@@ -45,6 +45,7 @@ t/camel.usmarc
 t/cameleof.usmarc
 t/convenience.t
 t/decode-filter.t
+t/delete-subfield.t
 t/dosEOF.t
 t/file-filter.t
 t/file-header.t
