@@ -250,22 +250,19 @@ sub add_subfields {
 delete_subfield() will remove *all* of a particular type of subfield from 
 a field.
 
-    my $count = $field->delete_subfield('a');
+    my $count = $field->delete_subfield( code => 'a');
     print "deleted $count subfield 'a' from the field\n";
 
 If you only want to delete the first n subfields you can pass in a 
 second integer parameter:
 
     # delete the first two subfield u
-    $field->delete_subfield('u', 2);
+    $field->delete_subfield(code => 'u', count => 2);
 
 You can specify a regex to for only deleting subfield that match:
 
    # delete the first subfield u that matches zombo.com
-   $field->delete_subfield('u', 1, qr/zombo.com/);
-
-   # delete any subfield u that matches zombo.com
-   $field->delete_subfield('u', 0, qr/zombo.com/);
+   $field->delete_subfield(code => 'u', count => 1, match => qr/zombo.com/);
 
 =cut
 
