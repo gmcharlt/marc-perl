@@ -247,42 +247,51 @@ sub add_subfields {
 
 =head2 delete_subfield()
 
-delete_subfield() will remove *all* of a particular type of subfield from 
-a field.
+delete_subfield() allows you to remove subfields from a field: 
 
-    my $count = $field->delete_subfield(code => 'a');
-    print "deleted $count subfield 'a' from the field\n";
+    # delete any subfield a in the field
+    $field->delete_subfield(code => 'a');
 
-If you only want to delete the first n subfields you can pass in a 
-second integer parameter:
+    # delete any subfield a or u in the field
+    $field->delete_subfield(code => ['a', 'u']);
 
-    # delete the first two subfield u
-    $field->delete_subfield(code => 'u', count => 2);
+If you want to only delete subfields at a particular position you can 
+use the position parameter:
 
-You can specify a regex to for only deleting subfield that match:
+    # delete subfield u at the first position
+    $field->delete_subfield(code => 'u', position => 0);
 
-   # delete the first subfield u that matches zombo.com
-   $field->delete_subfield(code => 'u', count => 1, match => qr/zombo.com/);
+    # delete subfield u at first or second position
+    $field->delete_subfield(code => 'u', position => [0,1]);
+
+You can specify a regex to for only deleting subfields that match:
+
+   # delete any subfield u that matches zombo.com
+   $field->delete_subfield(code => 'u', match => qr/zombo.com/);
 
 =cut
 
 sub delete_subfield {
     my ($self, %options) = @_;
-    my $code = $options{code};
+    my $codes = _normalize_arrayref($options{code});
+    my $positions = _normalize_arrayref($options{position});
     my $match = $options{match};
-    my $count = $options{count};
-
-    croak 'match must be a compiled regex' if $match and ref($match) ne 'Regexp';
+   
+    croak 'match must be a compiled regex' 
+      if $match and ref($match) ne 'Regexp';
 
     my @current_subfields = @{$self->{_subfields}};
     my @new_subfields = ();
     my $removed = 0;
+    my $subfield_num = $[ - 1; # users $[ preferences control indexing 
+
     while (@current_subfields > 0) {
+        $subfield_num += 1;
         my $subfield_code = shift @current_subfields;
         my $subfield_value = shift @current_subfields;
-        if ((!$code or $subfield_code eq $code)
+        if ((@$codes==0 or grep {$_ eq $subfield_code} @$codes)
             and (!$match or $subfield_value =~ $match) 
-            and (!$count or $removed < $count)) {
+            and (@$positions==0 or grep {$_ == $subfield_num} @$positions)) {
             $removed += 1;
             next;
         }
@@ -574,6 +583,13 @@ sub _gripe(@) {
     warn $ERROR;
 
     return;
+}
+
+sub _normalize_arrayref {
+    my $ref = shift;
+    if (ref($ref) eq 'ARRAY') { return $ref }
+    elsif (defined $ref) { return [$ref] }
+    return [];
 }
 
 
