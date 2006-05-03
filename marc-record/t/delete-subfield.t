@@ -12,24 +12,20 @@ $field->delete_subfield(code => ['a','c']);
 is $field->as_string, 'bar', 'delete by multiple subfield codes';
 
 $field = MARC::Field->new('245', '0', '1', a=>'foo', b=>'bar', a=>'baz');
-$field->delete_subfield(position => 0);
-is $field->as_string, 'bar baz', 'delete by position';
+$field->delete_subfield(pos => 0);
+is $field->as_string, 'bar baz', 'delete by pos';
 
 $field = MARC::Field->new('245', '0', '1', a=>'foo', b=>'bar', a=>'baz');
-$field->delete_subfield(position => [0,2]);
-is $field->as_string, 'bar', 'delete by multiple positions';
+$field->delete_subfield(pos => [0,2]);
+is $field->as_string, 'bar', 'delete by multiple pos';
 
 $field = MARC::Field->new('245', '0', '1', a=>'foo', b=>'bar', a=>'baz');
-$field->delete_subfield(code => 'a', position => [0,2]);
-is $field->as_string, 'bar', 'delete by multiple positions with code';
+$field->delete_subfield(code => 'a', pos => [0,2]);
+is $field->as_string, 'bar', 'delete by multiple pos with code';
 
 $field = MARC::Field->new('245', '0', '1', a=>'foo', b=>'bar', a=>'baz');
-$field->delete_subfield(code => 'b', position => [0,2]);
-is $field->as_string, 'foo bar baz', 'delete by multiple positions with wrong code';
-
-$field = MARC::Field->new('245', '0', '1', a=>'foo', b=>'bar', a=>'baz');
-$field->delete_subfield(position => 0);
-is $field->as_string, 'bar baz', 'delete by position';
+$field->delete_subfield(code => 'b', pos => [0,2]);
+is $field->as_string, 'foo bar baz', 'delete by multiple pos with wrong code';
 
 $field = MARC::Field->new('245', '0', '1', a=>'foo', b=>'bar', a=>'baz');
 $field->delete_subfield(code => 'a', match => qr/baz/);

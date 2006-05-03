@@ -256,13 +256,13 @@ delete_subfield() allows you to remove subfields from a field:
     $field->delete_subfield(code => ['a', 'u']);
 
 If you want to only delete subfields at a particular position you can 
-use the position parameter:
+use the pos parameter:
 
     # delete subfield u at the first position
-    $field->delete_subfield(code => 'u', position => 0);
+    $field->delete_subfield(code => 'u', pos => 0);
 
     # delete subfield u at first or second position
-    $field->delete_subfield(code => 'u', position => [0,1]);
+    $field->delete_subfield(code => 'u', pos => [0,1]);
 
 You can specify a regex to for only deleting subfields that match:
 
@@ -274,7 +274,7 @@ You can specify a regex to for only deleting subfields that match:
 sub delete_subfield {
     my ($self, %options) = @_;
     my $codes = _normalize_arrayref($options{code});
-    my $positions = _normalize_arrayref($options{position});
+    my $positions = _normalize_arrayref($options{'pos'});
     my $match = $options{match};
    
     croak 'match must be a compiled regex' 
