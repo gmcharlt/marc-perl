@@ -1,6 +1,9 @@
 1.42    [unreleased]
         - Removed META.yml from MANIFEST
         - Updated MARC::Lint::CodeData with most recent version
+        - Updated Lint::DATA section with Update No. 6 (Oct. 2005)
+        - Updated etc/ecbdlist.html to Update No. 6 (October 2005)
+
 
 1.41    Wed Sept 21 17:49:00 CDT 2005
         [THINGS THAT MAY BREAK YOUR CODE]
