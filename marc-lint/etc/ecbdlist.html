@@ -4,12 +4,13 @@
 <head>
 <title>MARC 21 Format for Bibliographic Data: Field List</title>
 <base href="http://www.loc.gov/marc/bibliographic/ecbdlist.html">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <meta name="description" content="This document is the homepage
  for the list of data elements from the MARC 21 Bibliographic
-format/">
+format">
 <meta name="keywords" content="MARC 21 bibliographic format list
 of elements">
-</head>
+<script type='text/javascript' src='/global/triggerParams.js'></script><script type='text/javascript' src='/global/stdLauncher.js'></script><script type='text/javascript'>Poll();</script></head>
 <body bgcolor="#ffffff">
 <h1 align=center><em>MARC 21 FORMAT FOR BIBLIOGRAPHIC DATA: FIELD LIST</em></h1>
 <p align=center>1999 English Edition<br>
@@ -17,7 +18,9 @@ of elements">
   Update No. 2 (October 2001)<br>
   Update No. 3 (October 2002)<br>
   Update No. 4 (October 2003)<br>
-  Update No. 5 (October 2004)</p>
+  Update No. 5 (October 2004)<br>
+  Update No. 6 (October 2005)
+</p>
 <h2 align=center>Network Development and MARC Standards
  Office</h2>
 <p>This document lists all valid and obsolete data elements that may appear in 
@@ -2530,7 +2533,7 @@ DIRECTORY
          7 - Source specified in subfield $2 
    Subfield Codes
       $a - Language code of text/sound track or separate title (R)
-      $b - Language code of summary or abstract/overprinted title or subtitle (R)
+      $b - Language code for summary, abstract or subtitles (R)
       $d - Language code of sung or spoken text (R)
       $e - Language code of librettos (R)
       $f - Language code of table of contents (R)
@@ -2660,12 +2663,14 @@ DIRECTORY
    Indicators
       First - Undefined
          # - Undefined
-      Second - Undefined
-         # - Undefined
+      Second - Source of code
+         # - MARC code
+         7 - Source specified in subfield $2
    Subfield Codes
       $a - Performer or ensemble (R)
       $b - Soloist (R)
-      $8 - Field link and sequence number(R)
+      $2 - Source of code (NR)
+      $8 - Field link and sequence number (R)
    Instrument or Voices Codes 
       ba - Brass - Horn
       bb - Brass--Trumpet
@@ -5013,6 +5018,7 @@ DIRECTORY
    Subfield Codes
       $a - Uniform title (NR)
       $d - Date of treaty signing (R)
+      $e - Relator term (R)
       $f - Date of a work (NR)
       $g - Miscellaneous information (NR)
       $h - Medium (NR)
@@ -5031,6 +5037,7 @@ DIRECTORY
       $z - Geographic subdivision (R)
       $2 - Source of heading or term (NR)
       $3 - Materials specified (NR)
+      $4 - Relator code (R)
       $6 - Linkage (NR) 
       $8 - Field link and sequence number (R) 
   648 - SUBJECT ADDED ENTRY--CHRONOLOGICAL TERM (R)
@@ -5084,6 +5091,7 @@ DIRECTORY
       $z - Geographic subdivision (R)
       $2 - Source of heading or term (NR)
       $3 - Materials specified (NR)
+      $4 - Relator code (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)   
   651 - SUBJECT ADDED ENTRY--GEOGRAPHIC NAME (R)
@@ -5102,12 +5110,14 @@ DIRECTORY
    Subfield Codes
       $a - Geographic name (NR)
       $b - Geographic name following place entry element (R) [OBSOLETE]
+      $e - Relator term (R)
       $v - Form subdivision (R)
       $x - General subdivision (R)
       $y - Chronological subdivision (R)
       $z - Geographic subdivision (R)
       $2 - Source of heading or term (NR)
       $3 - Materials specified (NR)
+      $4 - Relator code (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)  
   652 - SUBJECT ADDED ENTRY--REVERSED GEOGRAPHIC (BK MP SE) [OBSOLETE] 
@@ -5147,11 +5157,13 @@ DIRECTORY
       $a - Focus term (R)
       $b - Non-focus term (R)
       $c - Facet/hierarchy designation (R)
+      $e - Relator term (R)
       $v - Form subdivision (R)
       $y - Chronological subdivision (R)
       $z - Geographic subdivision (R)
       $2 - Source of heading or term (NR)
       $3 - Materials specified (NR)
+      $4 - Relator code (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)   
   655 - INDEX TERM--GENRE/FORM (R)
@@ -5226,6 +5238,25 @@ DIRECTORY
       $c - Curriculum code (NR)
       $d - Correlation factor (NR)
       $2 - Source of term or code (NR)
+      $6 - Linkage (NR)
+      $8 - Field link and sequence number (R)
+  662 - SUBJECT ADDED ENTRY--HIERARCHICAL PLACE NAME (R)
+   Indicators
+      First - Undefined
+         # - Undefined
+      Second - Undefined
+         # - Undefined
+   Subfield Codes
+      $a - Country or larger entity (R)
+      $b - First-order political jurisdiction (NR)
+      $c - Intermediate political jurisdiction (R)
+      $d - City (NR)
+      $e - Relator term (R)
+      $f - City subsection (R)
+      $g - Other nonjurisdictional geographic region and feature (R)
+      $h - Extraterrestrial area (R)
+      $2 - Source of heading or term (NR)
+      $4 - Relator code (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)   
           
@@ -5474,10 +5505,14 @@ DIRECTORY
       Second - Undefined
          # - Undefined
    Subfield Codes
-      $a - Country (NR)
-      $b - State, province, territory (NR)
-      $c - County, region, islands area (NR)
+      $a - Country or larger entity (R)
+      $b - First-order political jurisdiction (NR)
+      $c - Intermediate political jurisdiction (R)
       $d - City (NR)
+      $f - City subsection (R)
+      $g - Other nonjurisdictional geographic region and feature (R)
+      $h - Extraterrestrial area (R)
+      $2 - Source of heading or term (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)  
   753 - SYSTEM DETAILS ACCESS TO COMPUTER FILES (R)
@@ -6376,8 +6411,8 @@ DIRECTORY
 </pre>
 <hr>
 <p> <b>Go to:</b> <a href="http://www.loc.gov/marc/marc.html">MARC Home Page</a> 
-  | <a href="http://www.loc.gov/">Library of Congress Home Page</a> 
-<p> 
+  | <a href="http://www.loc.gov/">Library of Congress Home Page</a> </p>
+<p> </p>
 <hr>
 <img src="http://www.loc.gov/homepage/lc2.gif" alt="Library of Congress"> <strong>Library 
 of Congress</strong><br>
@@ -6385,8 +6420,8 @@ of Congress</strong><br>
 <!--help desk email start -->
 <a href="http://www.loc.gov/help/help-desk.html">Library of Congress Help Desk</a> 
 <!--help desk email end -->
-(03/28/2005) </address>
-</body>
+(03/23/2006) </address>
+<script type='text/javascript' src='/global/s_code.js'></script></body>
 
 </html>
 
