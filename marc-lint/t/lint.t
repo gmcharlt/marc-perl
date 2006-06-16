@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 use File::Spec;
-use Test::More tests=>40;
+use Test::More tests=>41;
 
 BEGIN { use_ok( 'MARC::File::USMARC' ); }
 BEGIN { use_ok( 'MARC::Lint' ); }
@@ -50,6 +50,16 @@ FROM_TEXT: {
         ['043', "", "",
             a => 'n-us-pn',
             ],
+        ['082', "0", "4",
+            a => '005.13/3',
+            R => 'all', #typo 'R' for 'W' and missing 'b' subfield
+            2 => '21'
+        ],
+        ['082', "1", "4",
+            a => '005.13',
+            b => 'Wall',
+            2 => '14'
+        ],
         [100, "1","4", 
             a => "Wall, Larry",
             ],
@@ -83,13 +93,14 @@ FROM_TEXT: {
             q => "Another foreign thing",
             ],
     );
-    is( $nfields, 11, "All the fields added OK" );
+    is( $nfields, 13, "All the fields added OK" );
 
     my @expected = (
         q{1XX: Only one 1XX tag is allowed, but I found 2 of them.},
         q{041: Subfield _a, end (end), is not valid.},
         q{041: Subfield _a must be evenly divisible by 3 or exactly three characters if ind2 is not 7, (fren).},
         q{043: Subfield _a, n-us-pn, is not valid.},
+        q{082: Subfield _R is not allowed.},
         q{100: Indicator 2 must be blank but it's "4"},
         q{245: Indicator 1 must be 0 or 1 but it's "9"},
         q{245: Subfield _a is not repeatable.},
