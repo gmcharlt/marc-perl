@@ -1,4 +1,9 @@
 1.42    [unreleased]
+
+        [THINGS THAT MAY BREAK YOUR CODE]
+
+        - Fixed bug that allowed subfield R due to the way tag repeatability is set.
+
         - Removed META.yml from MANIFEST
         - Updated MARC::Lint::CodeData with most recent version
         - Updated Lint::DATA section with Update No. 6 (Oct. 2005)
