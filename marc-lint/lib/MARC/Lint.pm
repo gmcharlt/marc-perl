@@ -52,12 +52,12 @@ Given the following MARC record:
 the following errors are generated:
 
     1XX: Only one 1XX tag is allowed, but I found 2 of them.
-    100: Indicator 2 must be blank
-    245: Indicator 1 must be 0 or 1
+    100: Indicator 2 must be blank but it's "4"
+    245: Indicator 1 must be 0 or 1 but it's "9"
     245: Subfield _a is not repeatable.
     250: Field is not repeatable.
-    260: Subfield _r is not valid.
-    856: Indicator 2 must be blank, 0, 1, 2 or 8
+    260: Subfield _r is not allowed.
+    856: Indicator 2 must be blank, 0, 1, 2 or 8 but it's "3"
 
 =head1 DESCRIPTION
 
@@ -172,7 +172,7 @@ sub check_record {
         my $tagno = $field->tag;
         my $tagrules = $rules->{$tagno} or next;
 
-        if ( $tagrules->{NR} && $field_seen{$tagno} ) {
+        if ( ($tagrules->{'repeatable'} && ( $tagrules->{'repeatable'} eq 'NR' )) && $field_seen{$tagno} ) {
             $self->warn( "$tagno: Field is not repeatable." );
         }
 
@@ -847,7 +847,7 @@ sub _parse_tag_rules {
     my @lines = @_;
 
     my $rules = ($self->{_rules}->{$tagno} ||= {});
-    $rules->{$repeatable} = $repeatable;
+    $rules->{'repeatable'} = $repeatable;
 
     for my $line ( @lines ) {
         my @keyvals = split( /\s+/, $line, 3 );
