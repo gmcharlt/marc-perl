@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 10;
+use Test::More tests => 9;
 use MARC::Field;
 
 my $field = MARC::Field->new('245', '0', '1', a=>'foo', b=>'bar', a=>'baz');
