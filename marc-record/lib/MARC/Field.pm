@@ -301,6 +301,18 @@ sub delete_subfield {
     return $removed;
 }
 
+=head2 delete_subfields()
+
+Delete all subfields with a given subfield code. This is here for backwards
+compatability, you should use the more flexible delete_subfield().
+
+=cut
+
+sub delete_subfields {
+    my ($self, $code) = @_;
+    return $self->delete_subfield(code => $code);
+}
+
 =head2 update()
 
 Allows you to change the values of the field. You can update indicators

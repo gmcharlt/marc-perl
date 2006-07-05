@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 9;
+use Test::More tests => 10;
 use MARC::Field;
 
 my $field = MARC::Field->new('245', '0', '1', a=>'foo', b=>'bar', a=>'baz');
@@ -38,3 +38,7 @@ is $field->as_string, 'foo bar baz', 'do not delete wrong subfield match';
 eval { $field->delete_subfield(match => 'uhoh'); };
 like $@, qr/match must be a compiled regex/, 'exception if match is not regex'; 
 
+
+$field = MARC::Field->new('245', '0', '1', a=>'foo', b=>'bar', a=>'baz');
+$field->delete_subfields('a');
+is $field->as_string, 'bar', 'backwards compat with delete_subfields()';
