@@ -8,7 +8,7 @@ use base qw(Exporter);
 our @EXPORT_OK = qw(marc8_to_utf8 utf8_to_marc8);
 
 use Unicode::Normalize;
-use Encode 'decode_utf8';
+use Encode 'decode';
 use MARC::Charset::Table;
 use MARC::Charset::Constants qw(:all);
 
@@ -79,17 +79,38 @@ characters.
 
     my $setting = MARC::Charset->assume_unicode();
     
-    MARC::Charset->assume_unicode(1); # ignore errors
-    MARC::Charset->assume_unicode(0); # DO NOT ignore errors
+    MARC::Charset->assume_unicode(1); # assume characters are unicode (utf-8)
+    MARC::Charset->assume_unicode(0); # DO NOT assume characters are unicode
 
 =cut
 
 
-our $_assume_unicode = 0;
+our $_assume = '';
 sub assume_unicode {
 	my ($self,$i) = @_;
-	$_assume_unicode = $i if (defined($i));
-	return $_assume_unicode;
+	$_assume = 'utf8' if (defined($i) and $i);
+	return 1 if ($_assume eq 'utf8');
+}
+
+
+=head2 assume_encoding()
+
+Tells MARC::Charset whether or not to assume a specific encoding when an error
+is encountered in ignore_errors mode and returns the current setting.  This
+is helpful if you have records that contain both MARC8 and other characters.
+
+    my $setting = MARC::Charset->assume_encoding();
+    
+    MARC::Charset->assume_encoding('cp850'); # assume characters are cp850
+    MARC::Charset->assume_encoding(''); # DO NOT assume any encoding
+
+=cut
+
+
+sub assume_encoding {
+	my ($self,$i) = @_;
+	$_assume = $i if (defined($i));
+	return $_assume;
 }
 
 
@@ -185,18 +206,18 @@ sub marc8_to_utf8
 
         if (!$found)
         {
-            warn("no mapping found at position $index in $marc8 ".
+            warn(sprintf("no mapping found for [0x\%X] at position $index in $marc8 ".
                 "g0=".MARC::Charset::Constants::charset_name($G0) . " " .
-                "g1=".MARC::Charset::Constants::charset_name($G1));
+                "g1=".MARC::Charset::Constants::charset_name($G1), unpack('C',substr($marc8,$index,1))));
             if (!$ignore_errors)
             {
                 reset_charsets();
                 return;
             }
-            if ($_assume_unicode)
+            if ($_assume)
             {
                 reset_charsets();
-                return NFC(decode_utf8($marc8));
+                return NFC(decode($_assume => $marc8));
             }
             $index += 1;
         }
@@ -222,12 +243,19 @@ parameter:
 
     my $marc8 = utf8_to_marc8($utf8, 'ignore-errors');
 
+  or
+  
+    MARC::Charset->ignore_errors(1);
+    my $utf8 = marc8_to_utf8($marc8);
+
 =cut
 
 sub utf8_to_marc8
 {
     my ($utf8, $ignore_errors) = @_;
     reset_charsets();
+
+    $ignore_errors = $_ignore_errors if (!defined($ignore_errors));
 
     # decompose combined characters
     $utf8 = NFD($utf8);
