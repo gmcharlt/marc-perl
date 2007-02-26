@@ -1,5 +1,9 @@
 Revision history for Perl extension MARC-XML
 
+0.84 Mon Feb 26 2006
+      - Fixed UNIMARC encoding detection logic (miker)
+	  - Added UNIMARC Authority support (miker) 
+
 0.83 Fri Apr 21 15:19:20 EST 2006
       - remove premature return from close() thanks Jay Luker (exlibris)
 
