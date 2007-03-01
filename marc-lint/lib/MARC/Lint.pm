@@ -8,7 +8,7 @@ use MARC::Field;
 
 use MARC::Lint::CodeData qw(%GeogAreaCodes %ObsoleteGeogAreaCodes %LanguageCodes %ObsoleteLanguageCodes);
 
-our $VERSION = 1.42;
+our $VERSION = 1.43;
 
 =head1 NAME
 
@@ -786,9 +786,14 @@ Check the docs for L<MARC::Record>.  All software links are there.
 
 =over 4
 
+=item * Bug fix for 880 and subfield 6
+
+There is bug in dealing with 880 field and with linked subfields (subfield 6). 880 indicator valid values are currently improperly parsed, so 'Same' are the only allowed values (as in 'Same as associated field'). 
+For subfield 6, it should always be the 1st subfield according to MARC 21 specifications. This conflicts with Lint.pm's validation of the 245, which states that subfield a should be the 1st subfield.
+
 =item * ISBN and ISSN checking
 
-We can check the 020 and 022 fields with the C<Business::ISBN> and
+020 and 022 fields are validated with the C<Business::ISBN> and
 C<Business::ISSN> modules, respectively.
 
 =item * check_041 cleanup
