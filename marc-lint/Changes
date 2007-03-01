@@ -1,3 +1,16 @@
+1.43    [unreleased]
+
+        [THINGS THAT MAY BREAK YOUR CODE]
+
+        - Discovered bug in dealing with 880 field and with linked subfields
+        (subfield 6). 880 indicator valid values are currently improperly
+        parsed, so 'Same' are the only allowed values (as in 'Same as associated
+        field'). For subfield 6, it should always be the 1st subfield according
+        to MARC 21 specifications. This conflicts with Lint.pm's validation of
+        the 245, which states that subfield a should be the 1st subfield.
+
+        - Updated MARC::Lint::CodeData with most recent version
+
 1.42    Mon June 19 18:28:00 CDT 2006
 
         [THINGS THAT MAY BREAK YOUR CODE]
@@ -7,7 +20,7 @@
         - Removed META.yml from MANIFEST
         - Updated MARC::Lint::CodeData with most recent version
         - Updated Lint::DATA section with Update No. 6 (Oct. 2005)
-        - Updated etc/ecbdlist.html to Update No. 6 (October 2005)
+        - Updated etc/ecbdlist.html to Update No. 6 (Oct. 2005)
 
 
 1.41    Wed Sept 21 17:49:00 CDT 2005
