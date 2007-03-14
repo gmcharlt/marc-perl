@@ -1,5 +1,15 @@
 Revision history for MARC::Charset
 
+0.96 Wed Mar 14 01:24:48 EDT 2007
+     - added ignore_errors() to skip MARC8 -> UTF8 snafus
+     - added assume_encoding() to treat transcoding failures as if they
+       are from a known, specific encoding.  Useful if you have a set of
+       records that, for instance, report being MARC8 but are actually
+       encoded in Latin1 (which, btw, is completely invalid and also very
+       common).  Only in effect when ignore_errors() is true.
+     - added assume_unicode() to treat invalid MARC8 as UTF8.  This is a
+       convenience function based on assume_encoding().
+
 0.92 Sat Feb  4 19:34:19 CST 2006
      - marc8_to_utf8 and utf8_to_marc8 needed to pass along spaces 
        without translation
