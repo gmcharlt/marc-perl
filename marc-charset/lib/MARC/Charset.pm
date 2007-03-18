@@ -9,6 +9,7 @@ our @EXPORT_OK = qw(marc8_to_utf8 utf8_to_marc8);
 
 use Unicode::Normalize;
 use Encode 'decode';
+use charnames ':full';
 use MARC::Charset::Table;
 use MARC::Charset::Constants qw(:all);
 
@@ -153,10 +154,10 @@ sub marc8_to_utf8
     my $combining = '';
     CHAR_LOOP: while ($index < $length) 
     {
-        # spaces just get added on unmolested
-        if (substr($marc8, $index, 1) eq ' ')
+        # whitespace, line feeds and carriage returns just get added on unmolested
+        if (substr($marc8, $index, 1) =~ m/(\s+|\N{CR}+|\N{LF}+)/so)
         {
-            $utf8 .= ' ';
+            $utf8 .= $1;
             $index += 1;
             next CHAR_LOOP;
         }

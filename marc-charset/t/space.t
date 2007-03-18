@@ -1,4 +1,4 @@
-use Test::More tests => 3;
+use Test::More tests => 4;
 use strict;
 use warnings;
 
@@ -7,6 +7,7 @@ use MARC::Charset::Constants ':all';
 
 is('foo bar', marc8_to_utf8('foo bar'), 'one space');
 is('foo  bar', marc8_to_utf8('foo  bar'), 'two spaces');
+is("a \rb \nc\n", marc8_to_utf8("a \rb \nc\n"), 'spaces with newlines and carriage returns');
 
 my $test = 
     'a   ' . 
@@ -17,5 +18,4 @@ my $test =
 
 my $expected = 'a   ' . chr(0x0396) . '   b';
 is(marc8_to_utf8($test), $expected, 'spacing with escape');
-
 
