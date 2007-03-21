@@ -791,6 +791,10 @@ Check the docs for L<MARC::Record>.  All software links are there.
 There is bug in dealing with 880 field and with linked subfields (subfield 6). 880 indicator valid values are currently improperly parsed, so 'Same' are the only allowed values (as in 'Same as associated field'). 
 For subfield 6, it should always be the 1st subfield according to MARC 21 specifications. This conflicts with Lint.pm's validation of the 245, which states that subfield a should be the 1st subfield.
 
+=item * Subfield 9
+
+This subfield is not officially allowed in MARC, since it is locally defined. Some way needs to be made to allow messages/warnings about this subfield to be turned off (or otherwise deal with records using/allowing locally defined subfield 9).
+
 =item * ISBN and ISSN checking
 
 020 and 022 fields are validated with the C<Business::ISBN> and

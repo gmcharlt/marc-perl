@@ -9,6 +9,10 @@
         to MARC 21 specifications. This conflicts with Lint.pm's validation of
         the 245, which states that subfield a should be the 1st subfield.
 
+        - Added TODO concerning subfield 9. This subfield is not officially
+        allowed in MARC, since it is locally defined. Some way needs to be made
+        to allow messages/warnings about this subfield to be turned off.
+        
         - Updated MARC::Lint::CodeData with most recent version
 
 1.42    Mon June 19 18:28:00 CDT 2006
