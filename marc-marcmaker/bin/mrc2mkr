@@ -28,9 +28,10 @@ Print a record count by file at the end.  (Default: on)
 
 =head2 TODO
 
-Separate warnings printing from record printing.
 
-Print records to file rather than screen?
+MARCMaker output to STDOUT.
+
+Everything else to STDERR.
 
 Update once as_marcmaker() method is available for full record encoding.
 
@@ -70,7 +71,7 @@ my $rc = GetOptions(
     "stats!" => \$stats,
     "quiet!" => \$quiet,
     "help"   => \$help,
-    "version"   => sub { print "$0, using MARC::Record v$MARC::Record::VERSION and MARC::File::MARCMaker v$MARC::File::MARCMaker::VERSION\n"; exit 1; },
+    "version"   => sub { warn "$0, using MARC::Record v$MARC::Record::VERSION and MARC::File::MARCMaker v$MARC::File::MARCMaker::VERSION\n"; exit 1; },
     );
 
 my @files = @ARGV;
@@ -81,7 +82,7 @@ die USAGE if $help or (not $rc) or (@files == 0);
 ### Start main program ##
 #########################
 
-print ("Welcome to MARC to MARCMaker script\n");
+warn ("Welcome to MARC to MARCMaker script\n");
 
 my %counts;
 my %errors;
@@ -107,7 +108,7 @@ for my $filename ( @files ) {
 
         if ( my @warnings = $record->warnings() ) {
             ++$errors{$filename};
-            print join( "\n", $record->title, @warnings, "" );
+            warn join( "\n", $record->title, @warnings, "" );
         } #if warnings found during decoding process
 
 
@@ -116,11 +117,11 @@ for my $filename ( @files ) {
 } # for 
 
 if ( $stats ) {
-    print "\n\n";
-    print " Recs  Errs Filename\n";
-    print "----- ----- --------\n";
+    warn "\n\n";
+    warn " Recs  Errs Filename\n";
+    warn "----- ----- --------\n";
     for my $key ( sort keys %counts ) {
-        printf( "%5d %5d %s\n", $counts{$key}, $errors{$key}, $key );
+        warn sprintf( "%5d %5d %s\n", $counts{$key}, $errors{$key}, $key );
     } # for
 } # if stats
 
