@@ -1,5 +1,9 @@
 Version History
 
+Version 0.06: Updated Mar. 20, 2007. [unreleased]
+
+  -Updated bin/mkr2mrc and bin/mrc2mkr to 'warn' instead of 'print' non-MARC or non-MARCMaker data/messages.
+
 Version 0.05: First CPAN release, Oct. 30, 2005.
 
   -Moved 00.load.t.txt to 00.load.t 
