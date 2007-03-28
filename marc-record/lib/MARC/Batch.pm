@@ -33,9 +33,12 @@ use Carp qw( croak );
 
 Create a C<MARC::Batch> object that will process C<@files>.
 
-C<$type> must be either "USMARC" or "MicroLIF".  If you want to specify
-"MARC::File::USMARC" or "MARC::File::MicroLIF", that's OK, too. C<new()> returns a
-new MARC::Batch object.
+C<$type> must specify one of the file types handled by the MARC::File modules;
+"USMARC" and "MicroLIF" are bundled with MARC::Record, but MARC::File::XML is
+available as a separate module to provide MARCXML support.  You can specify
+either the full name of the file-handling module (for example,
+"MARC::File::USMARC"), or just the file-type (for example, "XML"). C<new()>
+returns a new MARC::Batch object.
 
 C<@files> can be a list of filenames:
 

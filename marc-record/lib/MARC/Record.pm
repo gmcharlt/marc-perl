@@ -16,12 +16,12 @@ use Carp qw(croak);
 
 =head1 VERSION
 
-Version 1.39_02
+Version 2.0.0
 
 =cut
 
 use vars qw( $VERSION );
-$VERSION = '2.0';
+$VERSION = '2.0.0';
 
 use Exporter;
 use vars qw( @ISA @EXPORTS @EXPORT_OK );
@@ -806,22 +806,13 @@ Imagine something like this:
 
 =item * Insert a field in an arbitrary place in the record
 
-=item * Allow deleting a field
-
-  for my $field ( $record->field( "856" ) ) {
-        $record->delete_field( $field ) unless useful($field);
-        } # for
-
-(from Anne Highsmith hismith@tamu.edu)
-
-
 =item * Modifying an existing field
 
 =back
 
 =head1 BUGS, WISHES AND CORRESPONDENCE
 
-Please feel free to email me at C<< <andy@petdance.com> >>.  I'm glad
+Please feel free to email me at C<< <mrylander@gmail.com> >>.  I'm glad
 to help as best I can, and I'm always interested in bugs, suggestions
 and patches.
 
@@ -844,7 +835,7 @@ Ideas are things that have been considered, but nobody's actually asked for.
 
 =item * Create multiple output formats.
 
-These could be ASCII, XML, or MarcMaker.
+These could be ASCII or MarcMaker.
 
 =back
 
