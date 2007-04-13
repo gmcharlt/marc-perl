@@ -445,7 +445,7 @@ sub decode {
     $parser->{ tagStack } = [];
     $parser->{ subfields } = [];
     $parser->{ Handler }{ record } = MARC::Record->new();
-    $parser->{ Handler }{ toMARC8 } = (lc($format) ne 'unimarc' && $enc && lc($enc) =~ /^utf-?8$/o) ? 0 : 1;
+    $parser->{ Handler }{ toMARC8 } = (lc($format) eq 'unimarc' && $enc && lc($enc) =~ /^utf-?8$/o) ? 0 : 1;
 
     $parser->parse_string( $text );
 
