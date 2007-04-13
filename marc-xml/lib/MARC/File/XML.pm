@@ -445,13 +445,23 @@ sub decode {
     $parser->{ tagStack } = [];
     $parser->{ subfields } = [];
     $parser->{ Handler }{ record } = MARC::Record->new();
-    $parser->{ Handler }{ toMARC8 } = (lc($format) =~ /^unimarc/o || ( $enc && lc($enc) =~ /^utf-?8$/o )) ? 0 : 1;
+    $parser->{ Handler }{ toMARC8 } = decideMARC8Binary($format,$encoding);
 
     $parser->parse_string( $text );
 
     return( $parser->{ Handler }{ record } );
     
 }
+
+sub decideMARC8Binary {
+	my $format = shift;
+	my $enc = shift;
+
+	return 0 if (defined($format) && lc($format) =~ /^unimarc/o);
+	return 0 if (defined($enc) && lc($enc) =~ /^utf-?8/o);
+	return 1;
+}
+
 
 =head2 encode()
 
