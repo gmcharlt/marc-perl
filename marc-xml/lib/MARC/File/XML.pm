@@ -98,7 +98,7 @@ additional methods available to them:
 =head2 MARC::File::XML->default_record_format([$format])
 
 Sets or returns the default record format used by MARC::File::XML.  Valid
-formats are B<MARC21>, B<USMARC> and B<UNIMARC>.
+formats are B<MARC21>, B<USMARC>, B<UNIMARC> and B<UNIMARCAUTH>.
 
     MARC::File::XML->default_record_format('UNIMARC');
 
@@ -117,7 +117,7 @@ sub default_record_format {
 =head2 as_xml()
 
 Returns a MARC::Record object serialized in XML. You can pass an optional format
-parameter to tell MARC::File::XML what type of record (USMARC, UNIMARC) you are
+parameter to tell MARC::File::XML what type of record (USMARC, UNIMARC, UNIMARCAUTH) you are
 serializing.
 
     print $record->as_xml([$format]);
@@ -134,7 +134,7 @@ sub MARC::Record::as_xml {
 
 Returns a MARC::Record object serialized in XML without a collection wrapper.
 You can pass an optional format parameter to tell MARC::File::XML what type of
-record (USMARC, UNIMARC) you are serializing.
+record (USMARC, UNIMARC, UNIMARCAUTH) you are serializing.
 
     print $record->as_xml_record('UNIMARC');
 
@@ -152,7 +152,7 @@ If you have a chunk of XML and you want a record object for it you can use
 this method to generate a MARC::Record object.  You can pass an optional
 encoding parameter to specify which encoding (UTF-8 or MARC-8) you would like
 the resulting record to be in.  You can also pass a format parameter to specify
-the source record type, such as UNIMARC, USMARC or MARC21.
+the source record type, such as UNIMARC, UNIMARCAUTH, USMARC or MARC21.
 
     my $record = MARC::Record->new_from_xml( $xml, $encoding, $format );
 
@@ -445,7 +445,7 @@ sub decode {
     $parser->{ tagStack } = [];
     $parser->{ subfields } = [];
     $parser->{ Handler }{ record } = MARC::Record->new();
-    $parser->{ Handler }{ toMARC8 } = (lc($format) eq 'unimarc' && $enc && lc($enc) =~ /^utf-?8$/o) ? 0 : 1;
+    $parser->{ Handler }{ toMARC8 } = (lc($format) =~ /^unimarc/o || ( $enc && lc($enc) =~ /^utf-?8$/o )) ? 0 : 1;
 
     $parser->parse_string( $text );
 
@@ -468,8 +468,8 @@ sub encode {
     my $without_header = shift;
     my $enc = shift || $_load_args{DefaultEncoding};
 
-    if (lc($format) eq 'unimarc') {
-        $enc = _unimarc_encoding( $record );
+    if (lc($format) =~ /^unimarc/o) {
+        $enc = _unimarc_encoding( $format => $record );
     }
 
     my @xml = ();
@@ -481,11 +481,15 @@ sub encode {
 }
 
 sub _unimarc_encoding {
+	my $f = shift;
 	my $r = shift;
 
-	my $enc = substr( $r->subfield(100 => 'a'), 26, 2 );
+	my $pos = 26;
+	$pos = 13 if (lc($f) eq 'unimarcauth');
 
-	if ($enc eq '01') {
+	my $enc = substr( $r->subfield(100 => 'a'), $pos, 2 );
+
+	if ($enc eq '01' || $enc eq '03') {
 		return 'ISO-8859-1';
 	} elsif ($enc eq '50') {
 		return 'UTF-8';
