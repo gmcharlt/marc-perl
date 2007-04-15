@@ -445,7 +445,7 @@ sub decode {
     $parser->{ tagStack } = [];
     $parser->{ subfields } = [];
     $parser->{ Handler }{ record } = MARC::Record->new();
-    $parser->{ Handler }{ toMARC8 } = decideMARC8Binary($format,$encoding);
+    $parser->{ Handler }{ toMARC8 } = decideMARC8Binary($format,$enc);
 
     $parser->parse_string( $text );
 
