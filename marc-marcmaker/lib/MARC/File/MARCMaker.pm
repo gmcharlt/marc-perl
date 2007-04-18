@@ -13,7 +13,7 @@ use integer;
 
 use vars qw( $VERSION $ERROR );
 
-$VERSION = 0.05;
+$VERSION = 0.06;
 
 use MARC::File;
 use vars qw( @ISA ); @ISA = qw( MARC::File );
@@ -84,6 +84,8 @@ None.
 
 =head1 TODO
 
+Currently (v. 0.05) appears to convert characters to/from mnemonics when they appear in subfield data, but not those appearing in subfield codes. To allow for round-tripping of records without loss, all special characters should be converted to/from mnemonics regardless of where they appear in the record.
+
 Do limit tests in filling the buffer and getting chunks. Seems to work for first fill, but may fail on larger reads/multiple reads to fill the buffer.
 
 Test special characters (those requiring escapes). Initial version may not fully support non-English characters. All MARC-8 may work, Unicode support is untested and unassured.
@@ -107,6 +109,10 @@ Decode should mostly be working. Test for correctness.
 Remove unnecessary code and documentation, remnants of the initial development of the module. Move internal subs to end of module?
 
 =head1 VERSION HISTORY
+
+Version 0.06: [unreleased] Updated Mar. 31, 2007
+
+ -Added TODO item concerning mnemonic encoding/decoding of subfield codes.
 
 Version 0.05: First CPAN release, Oct. 30, 2005.
 
@@ -824,6 +830,6 @@ employers of the various contributors to the code.
 Bryan Baldus
 eijabb@cpan.org
 
-Copyright (c) 2004-2005.
+Copyright (c) 2004-2007.
 
 =cut
