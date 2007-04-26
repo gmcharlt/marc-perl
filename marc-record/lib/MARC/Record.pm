@@ -846,9 +846,19 @@ This code may be distributed under the same terms as Perl itself.
 Please note that these modules are not products of or supported by the
 employers of the various contributors to the code.
 
-=head1 AUTHOR
+=head1 AUTHORS
 
-Andy Lester, C<< <andy@petdance.com> >>
+=over 4
+
+=item * Andy Lester 
+
+=item * Mike O'Regan
+
+=item * Ed Summers
+
+=item * Mike Rylander
+
+=back
 
 =cut
 

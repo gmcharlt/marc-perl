@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker;
     VERSION_FROM    => 'lib/MARC/Record.pm',
     ABSTRACT_FROM   => 'lib/MARC/Record.pm',
     PMLIBDIRS       => [ qw( lib/ ) ],
-    AUTHOR          => 'Andy Lester <andy@petdance.com>',
+    AUTHOR          => 'Mike Rylander <mrylander@gmail.com>',
     PREREQ_PM       => {
         'Test::More' => 0,
         'File::Spec' => 0,
