@@ -14,7 +14,7 @@ use IO::File;
 use Carp qw( croak );
 use Encode ();
 
-$VERSION = '0.85';
+$VERSION = '0.86';
 
 my $handler = MARC::File::SAX->new();
 
