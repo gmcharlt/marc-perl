@@ -1139,8 +1139,13 @@ k       NR      Declination--southern limit
 m       NR      Right ascension--eastern limit 
 n       NR      Right ascension--western limit 
 p       NR      Equinox 
+r       NR      Distance from earth
 s       R       G-ring latitude 
 t       R       G-ring longitude 
+x       NR      Beginning date
+y       NR      Ending date
+z       NR      Name of extraterrestrial body
+2       NR      Source
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
@@ -1255,15 +1260,16 @@ n       NR      End of date valid
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
-047     NR      FORM OF MUSICAL COMPOSITION CODE
+047     R       FORM OF MUSICAL COMPOSITION CODE
 ind1    blank   Undefined
-ind2    blank   Undefined
+ind2    b7      Source of code
 a       R       Form of musical composition code 
+2       NR      Source of code
 8       R       Field link and sequence number 
 
 048     R       NUMBER OF MUSICAL INSTRUMENTS OR VOICES CODE
 ind1    blank   Undefined
-ind2    b2      Source specified in subfield $2
+ind2    b7      Source specified in subfield $2
 a       R       Performer or ensemble 
 b       R       Soloist 
 2       NR      Source of code
@@ -1453,6 +1459,7 @@ d       NR      Date of meeting
 e       R       Subordinate unit 
 f       NR      Date of a work 
 g       NR      Miscellaneous information 
+j       R       Relator term
 k       R       Form subheading 
 l       NR      Language of a work 
 n       R       Number of part/section/meeting 
@@ -2043,14 +2050,16 @@ u       R       Uniform Resource Identifier
 8       R       Field link and sequence number 
 
 506     R       RESTRICTIONS ON ACCESS NOTE
-ind1    blank   Undefined
+ind1    b01     Restriction
 ind2    blank   Undefined
 a       NR      Terms governing access 
 b       R       Jurisdiction 
 c       R       Physical access provisions 
 d       R       Authorized users 
 e       R       Authorization 
+f       R       Standard terminology for access restiction 
 u       R       Uniform Resource Identifier 
+2       NR      Source of term
 3       NR      Materials specified 
 5       NR      Institution to which field applies 
 6       NR      Linkage 
@@ -2590,6 +2599,7 @@ e       R       Subordinate unit
 f       NR      Date of a work 
 g       NR      Miscellaneous information 
 h       NR      Medium 
+j       R       Relator term
 k       R       Form subheading 
 l       NR      Language of a work 
 n       R       Number of part/section/meeting 
@@ -2843,6 +2853,7 @@ e       R       Subordinate unit
 f       NR      Date of a work 
 g       NR      Miscellaneous information 
 h       NR      Medium 
+j       R       Relator term
 k       R       Form subheading 
 l       NR      Language of a work 
 n       R       Number of part/section/meeting 
@@ -3386,6 +3397,7 @@ e       R       Subordinate unit
 f       NR      Date of a work 
 g       NR      Miscellaneous information 
 h       NR      Medium 
+j       R       Relator term
 k       R       Form subheading 
 l       NR      Language of a work 
 n       R       Number of part/section/meeting 
@@ -3456,6 +3468,7 @@ p       NR      Piece designation
 q       NR      Piece physical condition 
 s       R       Copyright article-fee code 
 t       NR      Copy number 
+u       R       Uniform Resource Identifier
 x       R       Nonpublic note 
 z       R       Public note 
 2       NR      Source of classification or shelving scheme 

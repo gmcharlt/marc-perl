@@ -2,6 +2,7 @@
 
         [THINGS THAT MAY BREAK YOUR CODE]
 
+        - Updated Lint::DATA section with Update No. 7 (Oct. 2006)
         - Discovered bug in dealing with 880 field and with linked subfields
         (subfield 6). 880 indicator valid values are currently improperly
         parsed, so 'Same' are the only allowed values (as in 'Same as associated
