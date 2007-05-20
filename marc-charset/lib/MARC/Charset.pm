@@ -155,7 +155,7 @@ sub marc8_to_utf8
     CHAR_LOOP: while ($index < $length) 
     {
         # whitespace, line feeds and carriage returns just get added on unmolested
-        if (substr($marc8, $index, 1) =~ m/(\s+|\N{CR}+|\N{LF}+)/so)
+        if (substr($marc8, $index, 1) =~ m/(\s+|\x0A+|\x0D+)/so)
         {
             $utf8 .= $1;
             $index += 1;

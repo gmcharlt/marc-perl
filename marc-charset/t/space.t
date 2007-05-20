@@ -7,7 +7,7 @@ use MARC::Charset::Constants ':all';
 
 is('foo bar', marc8_to_utf8('foo bar'), 'one space');
 is('foo  bar', marc8_to_utf8('foo  bar'), 'two spaces');
-is("a \rb \nc\n", marc8_to_utf8("a \rb \nc\n"), 'spaces with newlines and carriage returns');
+is("a\r \x{0A}b \x{0D}c\n", marc8_to_utf8("a\r \x{0A}b \x{0D}c\n"), 'spaces with newlines and carriage returns');
 
 my $test = 
     'a   ' . 

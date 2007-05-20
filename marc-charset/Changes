@@ -6,6 +6,9 @@ Revision history for MARC::Charset
        defined. Previous versions of MARC::Charset would convert valid MARC8
        to null when it encountered a mapping that lacked a UCS value 
        many thanks to Michael O'Connor.
+     - allow carriage return and line feeds to pass unmolesteed, much the
+       same as spaces today.  Apparently, UNIMARC records embed these
+       formatting characters on a regular basis.
 
 0.96 Wed Mar 14 01:24:48 EDT 2007
      - added ignore_errors() to skip MARC8 -> UTF8 snafus
