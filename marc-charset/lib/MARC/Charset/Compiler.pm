@@ -94,6 +94,12 @@ sub end_element
     # if we're ending a code element
     if ($code and $name eq 'code')
     {
+        # if there is no ucs code, use what's in alt
+        $code->ucs($code->alt()) unless $code->ucs;
+
+        # can't process a code point that lacks a unicode representation
+        die("invalid code: " . $code->to_string()) unless $code->ucs;
+        
         # set the charset code
         $code->charset($self->{current_charset});
 
@@ -109,7 +115,7 @@ sub end_element
     }
    
     # add these elements
-    elsif ($code and $name =~ /marc|ucs|is_combining/)
+    elsif ($code and $name =~ /^(marc|ucs|is_combining|alt)$/)
     {
         $code->$name($self->text());
     }

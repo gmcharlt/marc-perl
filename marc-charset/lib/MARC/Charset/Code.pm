@@ -8,7 +8,7 @@ use Encode qw(encode_utf8);
 use MARC::Charset::Constants qw(:all);
 
 MARC::Charset::Code
-    ->mk_accessors(qw(marc ucs name charset is_combining));
+    ->mk_accessors(qw(marc ucs name charset is_combining alt));
 
 =head1 NAME
 

@@ -1,7 +1,11 @@
 Revision history for MARC::Charset
 
-x.xx
+0.97 Sun May 20 13:48:31 EDT 2007
      - added t/null.t
+     - fixed Charset::Compiler to use the <alt> element when <ucs> is not 
+       defined. Previous versions of MARC::Charset would convert valid MARC8
+       to null when it encountered a mapping that lacked a UCS value 
+       many thanks to Michael O'Connor.
 
 0.96 Wed Mar 14 01:24:48 EDT 2007
      - added ignore_errors() to skip MARC8 -> UTF8 snafus
