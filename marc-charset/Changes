@@ -1,5 +1,8 @@
 Revision history for MARC::Charset
 
+x.xx
+     - added t/null.t
+
 0.96 Wed Mar 14 01:24:48 EDT 2007
      - added ignore_errors() to skip MARC8 -> UTF8 snafus
      - added assume_encoding() to treat transcoding failures as if they
