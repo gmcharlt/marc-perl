@@ -1,5 +1,8 @@
 Revision history for Perl extension MARC::Record.
 
+2.x     
+        - added MARC::Record::delete_fields() and t/delete-field.t
+
 2.0
         [THINGS THAT MAY BREAK YOUR CODE]
         - Perl 5.8.2 required for utf8 handling

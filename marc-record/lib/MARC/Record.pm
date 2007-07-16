@@ -417,31 +417,41 @@ sub insert_grouped_field {
 }
 
 
-=head2 delete_field( $field )
+=head2 delete_fields( $field )
 
-Deletes a field from the record.
+Deletes a given list of MARC::Field objects from the the record.
 
-The field must have been retrieved from the record using the
-C<field()> method.  For example, to delete a 526 tag if it exists:
+    # delete all note fields
+    my @notes = $record->field('5..');
+    $record->delete_fields(@notes);
 
-    my $tag526 = $marc->field( "526" );
-    if ( $tag526 ) {
-        $marc->delete_field( $tag526 );
+delete_fields() will return the number of fields that were deleted.
+
+=cut
+
+sub delete_fields {
+    my $self = shift;
+    _all_parms_are_fields(@_) or croak('Arguments must be MARC::Field object');
+    my @fields = @{$self->{_fields}};
+    my $original_count = @fields;
+
+    foreach my $deleter (@_) {
+        @fields = grep { $_ != $deleter } @fields;
     }
+    $self->{_fields} = \@fields;
 
-C<delete_field()> returns the number of fields that were deleted.
-This shouldn't be 0 unless you didn't get the tag properly.
+    return $original_count - @fields;
+}
+
+=head2 delete_field()
+
+Same thing as delete_fields() but only expects a single MARC::Field to be passed
+in. Mainly here for backwards compatibility.
 
 =cut
 
 sub delete_field {
-    my $self = shift;
-    my $deleter = shift;
-    my $list = $self->{_fields};
-
-    my $old_count = @$list;
-    @$list = grep { $_ != $deleter } @$list;
-    return $old_count - @$list;
+    return delete_fields(@_);
 }
 
 =head2 as_usmarc()
