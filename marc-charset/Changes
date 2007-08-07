@@ -1,5 +1,19 @@
 Revision history for MARC::Charset
 
+0.98 Tue Aug  7 08:28:24 EDT 2007
+     - addition of two code elements to etc/codetables.xml that enable 
+       the conversion of some Arabic records that contain 0x8D and 0x8E
+       which ought to map to 0x200D and 0x200C in Unicode. These mappings
+       are present for Basic and Extended Latin, but are not present
+       in Arabic codetables. There are actually some records that seem
+       to prove the need for these rules (LCCN 2006552991). Thanks to 
+       François Charette <fcharette@ankabut.net> for finding and proposing
+       the fix. Rules were forwarded on to LC for inclusion in canonical 
+       character set mapping.
+     - added t/farsi.t and t/farsi.marc to enable testing of new 
+       code rules. Hopefully this will fail if the codetables.xml is 
+       inadvertently removed without LC having added the new rules.
+
 0.97 Sun May 20 13:48:31 EDT 2007
      - added t/null.t
      - fixed Charset::Compiler to use the <alt> element when <ucs> is not 

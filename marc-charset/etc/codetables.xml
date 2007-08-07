@@ -3801,7 +3801,32 @@ ABOVE</name>
 				<ucs>030C</ucs>
 				<utf-8>CC8C</utf-8>
 				<name>SHORT U / COMBINING CARON</name>
-			</code>
+                        </code>
+
+                        <!-- 
+                        These last two code points were suggested by 
+                        François Charette (fcharette@ankabut.net) to 
+                        process LCCN 2006552991. They were forwarded
+                        on to Clay Redding and Nate Trail at LC 
+                        for addition to the canonical tables. Before
+                        replacing this file with the one from LC 
+                        at some future date the presence of these
+                        two code points should be confirmed. 
+                        ehs Aug-07-2007.
+                        -->
+
+                        <code>
+                                <marc>8D</marc>
+                                <ucs>200D</ucs>
+                                <utf-8>E2808D</utf-8>
+                                <name>JOINER / ZERO WIDTH JOINER</name>
+                        </code>
+                        <code>  
+                                <marc>8E</marc>
+                                <ucs>200C</ucs>
+                                <utf-8>E2808C</utf-8>
+                                <name>NON-JOINER / ZERO WIDTH NON-JOINER</name>
+                        </code>
 		</characterSet>
 	</codeTable>
 	<codeTable name="Greek" date="January 2000" number="8">
