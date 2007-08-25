@@ -12,3 +12,4 @@ t/check020.t
 t/check041043.t
 t/check245.t
 t/lint.t
+t/test880and6.t
