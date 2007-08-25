@@ -5,7 +5,7 @@
 
 use strict;
 use warnings;
-use Test::More tests=>55;
+use Test::More tests=>60;
 
 BEGIN { use_ok( 'MARC::Field' ); }
 BEGIN { use_ok( 'MARC::Lint' ); }
@@ -44,6 +44,11 @@ my @fields = (
     [245, '0', '2', 'a', 'An article.'],
     [245, '0', '0', 'a', "L\'article."],
     [245, '0', '2', 'a', 'A la mode.'],
+    [245, '0', '5', 'a', 'The "quoted article".'],
+    [245, '0', '5', 'a', 'The (parenthetical article).'],
+    [245, '0', '6', 'a', '(The) article in parentheses).'],
+    [245, '0', '9', 'a', "\"(The)\" \'article\' in quotes and parentheses)."],
+    [245, '0', '5', 'a', '[The supplied title].'],
 
 
 );
