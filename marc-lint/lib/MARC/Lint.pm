@@ -170,11 +170,33 @@ sub check_record {
     my $rules = $self->{_rules};
     for my $field ( $marc->fields ) {
         my $tagno = $field->tag;
-        my $tagrules = $rules->{$tagno} or next;
 
-        if ( ($tagrules->{'repeatable'} && ( $tagrules->{'repeatable'} eq 'NR' )) && $field_seen{$tagno} ) {
-            $self->warn( "$tagno: Field is not repeatable." );
-        }
+        my $tagrules = '';
+        #if 880 field, inherit rules from tagno in subfield _6
+        my $is_880 = 0;
+        if ($tagno eq '880') {
+            $is_880 = 1;
+            if ($field->subfield('6')) {
+                my $sub6 = $field->subfield('6');
+                $tagno = substr($sub6, 0, 3);
+
+                $tagrules = $rules->{$tagno} or next;
+                #880 is repeatable, but its linked field may not be
+                if ( ($tagrules->{'repeatable'} && ( $tagrules->{'repeatable'} eq 'NR' )) && $field_seen{'880.'.$tagno} ) {
+                    $self->warn( "$tagno: Field is not repeatable." );
+                } #if repeatability
+            } #if subfield 6 present
+            else {
+                $self->warn( "880: No subfield 6." );
+            } #else no subfield 6 in 880 field
+        } #if this is 880 field
+        else {
+            $tagrules = $rules->{$tagno} or next;
+
+            if ( ($tagrules->{'repeatable'} && ( $tagrules->{'repeatable'} eq 'NR' )) && $field_seen{$tagno} ) {
+                $self->warn( "$tagno: Field is not repeatable." );
+            } #if repeatability
+        } #else not 880
 
         if ( $tagno >= 10 ) {
             for my $ind ( 1..2 ) {
@@ -220,7 +242,12 @@ sub check_record {
             $self->$checker( $field );
         }
 
-        ++$field_seen{$tagno};
+        if ($is_880) {
+            ++$field_seen{'880.'.$tagno};
+        } #if 880 field
+        else {
+            ++$field_seen{$tagno};
+        }
     } # for my $fields
 
     return;
@@ -286,7 +313,16 @@ sub check_020 {
             #otherwise, check 10 and 13 digit checksums for validity
             else {
                 if ((length ($isbnno) == 10)) {
-                    $self->warn( "020: Subfield a has bad checksum, $data.") if (Business::ISBN::is_valid_checksum($isbnno) != 1); 
+
+                    if ($Business::ISBN::VERSION gt '2.02_01') {
+                        $self->warn( "020: Subfield a has bad checksum, $data." ) if (Business::ISBN::valid_isbn_checksum($isbnno) != 1); 
+                    } #if Business::ISBN version higher than 2.02_01
+                    elsif ($Business::ISBN::VERSION lt '2') {
+                        $self->warn( "020: Subfield a has bad checksum, $data." ) if (Business::ISBN::is_valid_checksum($isbnno) != 1); 
+                    } #elsif Business::ISBN version lower than 2
+                    else {
+                        $self->warn( "Business::ISBN version must be below 2 or above 2.02_02." );
+                    } #else Business::ISBN version between 2 and 2.02_02
                 } #if 10 digit ISBN has invalid check digit
                 # do validation check for 13 digit isbn
 #########################################
@@ -497,6 +533,9 @@ sub check_245 {
 
     my $self = shift;
     my $field = shift;
+
+    #set tagno for reporting
+    my $tagno = '245';
     
     if ( not $field->subfield( "a" ) ) {
         $self->warn( "245: Must have a subfield _a." );
@@ -506,9 +545,12 @@ sub check_245 {
 
     my @subfields = $field->subfields();
     my @newsubfields = ();
+    my $has_sub_6 = 0;
 
     while (my $subfield = pop(@subfields)) {
         my ($code, $data) = @$subfield;
+        #check for subfield 6 being present
+        $has_sub_6 = 1 if ($code eq '6');
         unshift (@newsubfields, $code, $data);
     } # while
     
@@ -521,10 +563,29 @@ sub check_245 {
         $self->warn ( "245: MARC21 allows ? or ! as final punctuation but LCRI 1.0C, Nov. 2003, requires period.");
     }
 
-#subfield a should be first subfield
-    if ($newsubfields[0] ne 'a') {
-        $self->warn ( "245: First subfield must be _a, but it is _$newsubfields[0]");
-    }
+    ##Check for first subfield
+    #subfield a should be first subfield (or 2nd if subfield '6' is present)
+    if ($has_sub_6) {
+        #make sure there are at least 2 subfields
+        if ($#newsubfields < 3) {
+            $self->warn ("$tagno: May have too few subfields.");
+        } #if fewer than 2 subfields
+        else {
+            if ($newsubfields[0] ne '6') {
+                $self->warn ( "$tagno: First subfield must be _6, but it is $newsubfields[0]");
+            } #if 1st subfield not '6'
+            if ($newsubfields[2] ne 'a') {
+                $self->warn ( "$tagno: First subfield after subfield _6 must be _a, but it is _$newsubfields[2]");
+            } #if 2nd subfield not 'a'
+        } #else at least 2 subfields
+    } #if has subfield 6
+    else {
+        #1st subfield must be 'a'
+        if ($newsubfields[0] ne 'a') {
+            $self->warn ( "$tagno: First subfield must be _a, but it is _$newsubfields[0]");
+        } #if 2nd subfield not 'a'
+    } #else no subfield _6
+    ##End check for first subfield
     
     #subfield c, if present, must be preceded by /
     #also look for space between initials
@@ -695,6 +756,13 @@ sub _check_article {
 
     #get tagno to determine which indicator to check and for reporting
     my $tagno = $field->tag();
+    #retrieve tagno from subfield 6 if 880 field
+    if ($tagno eq '880') {
+        if ($field->subfield('6')) {
+            my $sub6 = $field->subfield('6');
+            $tagno = substr($sub6, 0, 3);
+        } #if subfield 6
+    } #if 880 field
 
     #$ind holds nonfiling character indicator value
     my $ind = '';
@@ -729,8 +797,8 @@ sub _check_article {
         $char1_notalphanum++;
         $title =~ s/^["'\[\(*]//;
     }
-    # split title into first word + rest on space, apostrophe or hyphen
-    my ($firstword,$separator,$etc) = $title =~ /^([^ '\-]+)([ '\-])?(.*)/i;
+    # split title into first word + rest on space, parens, bracket, apostrophe, quote, or hyphen
+    my ($firstword, $separator, $etc) = $title =~ /^([^ \(\)\[\]'"\-]+)([ \(\)\[\]'"\-])?(.*)/i;
         $firstword = '' if ! defined( $firstword );
         $separator = '' if ! defined( $separator );
         $etc = '' if ! defined( $etc );
@@ -752,10 +820,14 @@ sub _check_article {
 
     #if article then $nonfilingchars should match $ind
     if ($isan_article) {
-        #account for quotes or apostrophes before 2nd word (only checks for 1)
-        if (($separator eq ' ') && ($etc =~ /^['"]/)) {
-            $nonfilingchars++;
-        }
+        #account for quotes, apostrophes, parens, or brackets before 2nd word
+#        if (($separator eq ' ') && ($etc =~ /^['"]/)) {
+        if (($separator) && ($etc =~ /^[ \(\)\[\]'"\-]+/)) {
+            while ($etc =~ /^[ "'\[\]\(\)*]/){
+                $nonfilingchars++;
+                $etc =~ s/^[ "'\[\]\(\)*]//;
+            } #while etc starts with nonfiling chars
+        } #if separator defined and etc starts with nonfiling chars
         #special case for 'en' (unsure why)
         if ($firstword eq 'en') {
             $self->warn ( $tagno, ": First word, , $firstword, may be an article, check $first_or_second indicator ($ind)." ) unless (($ind eq '3') || ($ind eq '0'));
@@ -786,10 +858,13 @@ Check the docs for L<MARC::Record>.  All software links are there.
 
 =over 4
 
-=item * Bug fix for 880 and subfield 6
+=item * Subfield 6
 
-There is bug in dealing with 880 field and with linked subfields (subfield 6). 880 indicator valid values are currently improperly parsed, so 'Same' are the only allowed values (as in 'Same as associated field'). 
-For subfield 6, it should always be the 1st subfield according to MARC 21 specifications. This conflicts with Lint.pm's validation of the 245, which states that subfield a should be the 1st subfield.
+For subfield 6, it should always be the 1st subfield according to MARC 21 specifications. Perhaps a generic check should be added that warns if subfield 6 is not the 1st subfield.
+
+=item * Subfield 8.
+
+This subfield could be the 1st or 2nd subfield, so the code that checks for the 1st few subfields (check_245, check_250) should take that into account.
 
 =item * Subfield 9
 
@@ -798,7 +873,8 @@ This subfield is not officially allowed in MARC, since it is locally defined. So
 =item * ISBN and ISSN checking
 
 020 and 022 fields are validated with the C<Business::ISBN> and
-C<Business::ISSN> modules, respectively.
+C<Business::ISSN> modules, respectively. Business::ISBN versions between 2 and
+2.02_01 are incompatible with MARC::Lint.
 
 =item * check_041 cleanup
 

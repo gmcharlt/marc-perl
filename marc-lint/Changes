@@ -3,18 +3,35 @@
         [THINGS THAT MAY BREAK YOUR CODE]
 
         - Updated Lint::DATA section with Update No. 7 (Oct. 2006)
-        - Discovered bug in dealing with 880 field and with linked subfields
-        (subfield 6). 880 indicator valid values are currently improperly
-        parsed, so 'Same' are the only allowed values (as in 'Same as associated
-        field'). For subfield 6, it should always be the 1st subfield according
-        to MARC 21 specifications. This conflicts with Lint.pm's validation of
-        the 245, which states that subfield a should be the 1st subfield.
+        
+        - MARC::Lint is incompatibile with Business::ISBN versions 2.00-2.02_01.
+        Business::ISBN versions below 2 and 2.02_02 or above should work.
+
+        - Updated check_record's treatment of 880 fields. Now if the tagno is
+        880, check_record attempts to look at subfield 6 for the linked tagno
+        and uses that as the basis for the tagno to be checked.
+
+        - Updated _check_article to account for 880, using subfield 6 linked
+        tagno instead.
+        - Updated _check_article to account for articles followed parentheses,
+        apostrophes and/or quotes. Also related bug fixes for counting
+        punctuation around the article.
+
+        - For subfield 6, it should always be the 1st subfield according to MARC
+        21 specifications, so check_245 has been updated to account for subfield
+        6 being 1st, rather than requiring subfield a to be 1st.
+
+        - Added new test, test880and6.t for 880 field and for subfield 6.
 
         - Added TODO concerning subfield 9. This subfield is not officially
         allowed in MARC, since it is locally defined. Some way needs to be made
         to allow messages/warnings about this subfield to be turned off.
-        
-        - Updated MARC::Lint::CodeData with most recent version
+
+        - Added TODO concerning subfield 8. This subfield could be the 1st or
+        2nd subfield, so the code that checks for the 1st few subfields
+        (check_245, check_250) should take that into account.
+
+        - Updated MARC::Lint::CodeData with most recent version.
 
 1.42    Mon June 19 18:28:00 CDT 2006
 
