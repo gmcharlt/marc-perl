@@ -179,9 +179,11 @@ to serialize more than one record as XML.
 =head2 out()
 
 A constructor for creating a MARC::File::XML object that can write XML to a
-file. You must pass in the name of a file to write XML to.
+file. You must pass in the name of a file to write XML to.  If the $encoding
+parameter or the DefaultEncoding (see above) is set to UTF-8 then the binmode
+of the output file will be set appropriately.
 
-    my $file = MARC::File::XML->out( $filename );
+    my $file = MARC::File::XML->out( $filename [, $encoding] );
 
 =cut
 
