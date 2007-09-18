@@ -186,12 +186,21 @@ file. You must pass in the name of a file to write XML to.
 =cut
 
 sub out {
-    my ( $class, $filename ) = @_;
+    my ( $class, $filename, $enc ) = @_;
     my $fh = IO::File->new( ">$filename" ) or croak( $! );
+    $enc ||= $_load_args{DefaultEncoding};
+
+    if ($enc =~ /^utf-?8$/oi) {
+        $fh->binmode(':utf8');
+    } else {
+        $fh->binmode(':raw');
+    }
+
     my %self = ( 
         filename    => $filename,
         fh          => $fh, 
-        header      => 0
+        header      => 0,
+        encoding    => $enc
     );
     return( bless \%self, ref( $class ) || $class );
 }
@@ -216,7 +225,7 @@ sub write {
     }
     ## print the XML header if we haven't already
     if ( ! $self->{ header } ) { 
-    	$enc ||= $_load_args{DefaultEncoding};
+    	$enc ||= $self->{ encoding } || $_load_args{DefaultEncoding};
         $self->{ fh }->print( header( $enc ) );
         $self->{ header } = 1;
     } 
@@ -313,7 +322,7 @@ sub record {
     my $original_encoding = substr($ldr,9,1);
 
     # Does the record think it is already Unicode?
-    if ($original_encoding ne 'a' && lc($format) ne 'unimarc') {
+    if ($original_encoding ne 'a' && lc($format) ~! /^unimarc/o) {
     	# If not, we'll make it so
         $_transcode++;
 	
