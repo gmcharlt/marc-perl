@@ -320,22 +320,12 @@ sub record {
 
     my $_transcode = 0;
     my $ldr = $record->leader;
-    my $original_charset;
     my $original_encoding = substr($ldr,9,1);
 
     # Does the record think it is already Unicode?
-    if ($original_encoding ne 'a' && lc($format) ~! /^unimarc/o) {
-    	# If not, we'll make it so
+    if ($original_encoding ne 'a' && lc($format) !~ /^unimarc/o) {
+        # If not, we'll make it so
         $_transcode++;
-	
-    	# XXX Need to generat a '066' field here, but I don't understand how yet.
-
-	substr($ldr,9,1,'a');
-	$record->leader( $ldr );
-	if ( ($original_charset) = $record->field('066') ) {
-		$record->delete_field( $original_charset );
-	}
-	
     }
 
     my @xml = ();
@@ -344,23 +334,23 @@ sub record {
         push @xml, <<HEADER
 <?xml version="1.0" encoding="$enc"?>
 <record
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/ standards/marcxml/schema/MARC21slim.xsd"
-  xmlns="http://www.loc.gov/MARC21/slim">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/ standards/marcxml/schema/MARC21slim.xsd"
+    xmlns="http://www.loc.gov/MARC21/slim">
 HEADER
 
     } else {
         push( @xml, "<record>" );
     }
-    
+
     push( @xml, "  <leader>" . escape( $record->leader ) . "</leader>" );
 
     foreach my $field ( $record->fields() ) {
         my $tag = $field->tag();
         if ( $field->is_control_field() ) { 
-	    my $data = $field->data;
+            my $data = $field->data;
             push( @xml, qq(  <controlfield tag="$tag">) .
-                escape( ($_transcode ? marc8_to_utf8($data) : $data) ). qq(</controlfield>) );
+                    escape( ($_transcode ? marc8_to_utf8($data) : $data) ). qq(</controlfield>) );
         } else {
             my $i1 = $field->indicator( 1 );
             my $i2 = $field->indicator( 2 );
@@ -368,7 +358,7 @@ HEADER
             foreach my $subfield ( $field->subfields() ) { 
                 my ( $code, $data ) = @$subfield;
                 push( @xml, qq(    <subfield code="$code">).
-                    escape( ($_transcode ? marc8_to_utf8($data) : $data) ).qq(</subfield>) );
+                        escape( ($_transcode ? marc8_to_utf8($data) : $data) ).qq(</subfield>) );
             }
             push( @xml, "  </datafield>" );
         }
@@ -376,11 +366,8 @@ HEADER
     push( @xml, "</record>\n" );
 
     if ($_transcode) {
-    	if (defined $original_charset) {
-        	$record->insert_fields_ordered($original_charset);
-	}
-	substr($ldr,9,1,$original_encoding);
-	$record->leader( $ldr );
+        substr($ldr,9,1,$original_encoding);
+        $record->leader( $ldr );
     }
 
     return( join( "\n", @xml ) );
