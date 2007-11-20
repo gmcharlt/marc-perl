@@ -535,10 +535,10 @@ sub encoding {
 
     # when setting
     if ( defined($arg) ) {
-        if ( $arg =~ /UTF-8/i ) { 
+        if ( $arg =~ /UTF-?8/i ) { 
             substr($leader,9,1) = 'a';
         }
-        elsif ( $arg =~ /MARC-8/i ) {
+        elsif ( $arg =~ /MARC-?8/i ) {
             substr($leader,9,1) = ' ';
         }
         $self->leader($leader);
@@ -557,6 +557,9 @@ sub set_leader_lengths {
     my $self = shift;
     my $reclen = shift;
     my $baseaddr = shift;
+    if ($reclen > 99999) {
+            carp( "Record length of $reclen is larger than the MARC spec allows (99999 bytes)." );
+    }
     substr($self->{_leader},0,5)  = sprintf("%05d",$reclen);
     substr($self->{_leader},12,5) = sprintf("%05d",$baseaddr);
     # MARC21 defaults: http://www.loc.gov/marc/bibliographic/ecbdldrd.html
