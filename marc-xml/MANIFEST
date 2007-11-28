@@ -7,6 +7,8 @@ bin/marc2xml
 bin/xml2marc
 lib/MARC/File/XML.pm
 lib/MARC/File/SAX.pm
+t/subfield0.t
+t/subfield0.xml
 t/batch.t
 t/batch.xml
 t/encode.t
