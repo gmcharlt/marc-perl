@@ -1,9 +1,13 @@
 Revision history for Perl extension MARC-XML
 
+0.88 Wed Nov 28 2007
+      - String test for subfield code to avoid dropping $0 (Galen Charlton)
+
 0.88_1 Tue Oct 23 2007
       - Fixed a typo in M::F::X that could be the origin of the test failure(miker)
-	  - Removed some useless (and confusing) code that
+      - Removed some useless (and confusing) code that
 	    throws away some character set mapping information in the 066 (miker)
+
 0.85 Fri Feb 13 2007
       - fixed typo in handling of unimarc w/regard to marc8 (ppoulain)
 

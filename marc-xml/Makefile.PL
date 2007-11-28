@@ -8,8 +8,8 @@ WriteMakefile(
     'AUTHOR'		=> 'Ed Summers <ehs@pobox.com>',
     'PREREQ_PM'		=> { 
 			    'XML::SAX'		=> 0.12,
-			    'MARC::Record'	=> 1.36,
-			    'MARC::Charset'	=> 0.91,
+			    'MARC::Record'	=> 2.0,
+			    'MARC::Charset'	=> 0.98,
 			    },
     'EXE_FILES'         => [ qw( bin/marc2xml bin/xml2marc ) ]
 );
