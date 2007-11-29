@@ -8,7 +8,7 @@ use MARC::Field;
 
 use MARC::Lint::CodeData qw(%GeogAreaCodes %ObsoleteGeogAreaCodes %LanguageCodes %ObsoleteLanguageCodes);
 
-our $VERSION = 1.43;
+our $VERSION = 1.44;
 
 =head1 NAME
 
@@ -744,6 +744,7 @@ sub _check_article {
         'A la ' => 1,
         'A posteriori' => 1,
         'A priori' => 1,
+        'A to' => 1,
         'El Nino' => 1,
         'El Salvador' => 1,
         'L-' => 1,
