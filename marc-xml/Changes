@@ -1,5 +1,14 @@
 Revision history for Perl extension MARC-XML
 
+0.90 Fri Dec 14 2007
+      - modifications to MARC::File::SAX to use LocalName rather than Name
+        Name can contain a namespace prefix and cause parsing to fail
+        Should be ok to rely on LocalName since the parser factory is
+        requiring Namespace support?
+      - MARC::File::SAX also can build up multiple records now, for use 
+        in other SAX contexts like Net::OAI::Harvester. This required
+        a few changes in MARC::File::XML as well.
+
 0.88 Wed Nov 28 2007
       - String test for subfield code to avoid dropping $0 (Galen Charlton)
 

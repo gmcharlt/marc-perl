@@ -16,20 +16,14 @@ use Encode ();
 
 $VERSION = '0.88';
 
-my $handler = MARC::File::SAX->new();
-
 my $factory = XML::SAX::ParserFactory->new();
 $factory->require_feature(Namespaces);
 
-my $parser = $factory->parser( Handler => $handler, ProtocolEncoding => 'UTF-8' );
-
 sub import {
-	my $class = shift;
-	%_load_args = @_;
-	$_load_args{ DefaultEncoding } ||= 'UTF-8';
-	$_load_args{ RecordFormat } ||= 'USMARC';
-
- 	$parser = $factory->parser( Handler => $handler, ProtocolEncoding => $_load_args{DefaultEncoding} );
+    my $class = shift;
+    %_load_args = @_;
+    $_load_args{ DefaultEncoding } ||= 'UTF-8';
+    $_load_args{ RecordFormat } ||= 'USMARC';
 }
 
 =head1 NAME
@@ -105,12 +99,12 @@ formats are B<MARC21>, B<USMARC>, B<UNIMARC> and B<UNIMARCAUTH>.
 =cut
 
 sub default_record_format {
-	my $self = shift;
-	my $format = shift;
+    my $self = shift;
+    my $format = shift;
 
-	$_load_args{RecordFormat} = $format if ($format);
+    $_load_args{RecordFormat} = $format if ($format);
 
-	return $_load_args{RecordFormat};
+    return $_load_args{RecordFormat};
 }
 
 
@@ -227,7 +221,7 @@ sub write {
     }
     ## print the XML header if we haven't already
     if ( ! $self->{ header } ) { 
-    	$enc ||= $self->{ encoding } || $_load_args{DefaultEncoding};
+        $enc ||= $self->{ encoding } || $_load_args{DefaultEncoding};
         $self->{ fh }->print( header( $enc ) );
         $self->{ header } = 1;
     } 
@@ -422,7 +416,6 @@ It is normally invoked by a call to next(), see L<MARC::Batch> or L<MARC::File>.
 =cut
 
 sub decode { 
-
     my $text; 
     my $location = '';
     my $self = shift;
@@ -430,34 +423,35 @@ sub decode {
     ## see MARC::File::USMARC::decode for explanation of what's going on
     ## here
     if ( ref($self) =~ /^MARC::File/ ) {
-	$location = 'in record '.$self->{recnum};
-	$text = shift;
+        $location = 'in record '.$self->{recnum};
+        $text = shift;
     } else {
-	$location = 'in record 1';
-	$text = $self=~/MARC::File/ ? shift : $self;
+        $location = 'in record 1';
+        $text = $self=~/MARC::File/ ? shift : $self;
     }
 
     my $enc = shift || $_load_args{BinaryEncoding};
     my $format = shift || $_load_args{RecordFormat};
 
-    $parser->{ tagStack } = [];
-    $parser->{ subfields } = [];
-    $parser->{ Handler }{ record } = MARC::Record->new();
+    my $handler = MARC::File::SAX->new();
+    my $parser = $factory->parser(
+        Handler => $handler, 
+        ProtocolEncoding => $_load_args{DefaultEncoding}
+    );
     $parser->{ Handler }{ toMARC8 } = decideMARC8Binary($format,$enc);
 
     $parser->parse_string( $text );
 
-    return( $parser->{ Handler }{ record } );
-    
+    return( $handler->record() );
 }
 
 sub decideMARC8Binary {
-	my $format = shift;
-	my $enc = shift;
+    my $format = shift;
+    my $enc = shift;
 
-	return 0 if (defined($format) && lc($format) =~ /^unimarc/o);
-	return 0 if (defined($enc) && lc($enc) =~ /^utf-?8/o);
-	return 1;
+    return 0 if (defined($format) && lc($format) =~ /^unimarc/o);
+    return 0 if (defined($enc) && lc($enc) =~ /^utf-?8/o);
+    return 1;
 }
 
 
@@ -489,21 +483,21 @@ sub encode {
 }
 
 sub _unimarc_encoding {
-	my $f = shift;
-	my $r = shift;
+    my $f = shift;
+    my $r = shift;
 
-	my $pos = 26;
-	$pos = 13 if (lc($f) eq 'unimarcauth');
+    my $pos = 26;
+    $pos = 13 if (lc($f) eq 'unimarcauth');
 
-	my $enc = substr( $r->subfield(100 => 'a'), $pos, 2 );
+    my $enc = substr( $r->subfield(100 => 'a'), $pos, 2 );
 
-	if ($enc eq '01' || $enc eq '03') {
-		return 'ISO-8859-1';
-	} elsif ($enc eq '50') {
-		return 'UTF-8';
-	} else {
-		die "Unsupported UNIMARC character encoding [$enc] for XML output for $f; 100$a -> " . $r->subfield(100 => 'a');
-	}
+    if ($enc eq '01' || $enc eq '03') {
+        return 'ISO-8859-1';
+    } elsif ($enc eq '50') {
+        return 'UTF-8';
+    } else {
+        die "Unsupported UNIMARC character encoding [$enc] for XML output for $f; 100$a -> " . $r->subfield(100 => 'a');
+    }
 }
 
 =head1 TODO

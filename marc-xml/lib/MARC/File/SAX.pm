@@ -13,12 +13,47 @@ use strict;
 use XML::SAX;
 use base qw( XML::SAX::Base );
 use Data::Dumper;
+use MARC::Record;
 use MARC::Charset qw(utf8_to_marc8);
+
+=head2 new()
+
+Create the handler.
+
+=cut
+
+sub new {
+    my $class = shift;
+    return bless {records => []}, ref($class) || $class;
+}
+
+=head2 records()
+
+Get all the MARC::Records that were parsed out of the XML.
+
+=cut
+
+sub records {
+    return shift->{records};
+}
+
+=head2 record()
+
+In some contexts you might only expect there to be one record parsed. This
+is a shorthand for getting it.
+
+=cut 
+
+sub record {
+    return shift->{records}[0];
+}
 
 sub start_element {
     my ( $self, $element ) = @_;
-    my $name = $element->{ Name };
-    if ( $name eq 'leader' ) { 
+    my $name = $element->{ LocalName };
+    if ( $name eq 'record' ) {
+        $self->{ record } = MARC::Record->new();
+    } elsif ( $name eq 'leader' ) { 
 	$self->{ tag } = 'LDR';
     } elsif ( $name eq 'controlfield' ) {
 	$self->{ tag } = $element->{ Attributes }{ '{}tag' }{ Value };
@@ -33,7 +68,7 @@ sub start_element {
 
 sub end_element { 
     my ( $self, $element ) = @_;
-    my $name = $element->{ Name };
+    my $name = $element->{ LocalName };
     if ( $name eq 'subfield' ) { 
 	push @{ $self->{ subfields } }, $self->{ subcode };
 	
@@ -74,6 +109,9 @@ sub end_element {
 	$self->{ record }->leader( $ldr );
 	$self->{ chars } = '';
 	$self->{ tag } = '';
+    } elsif ( $name eq 'record' ) {
+        push(@{ $self->{ records } }, $self->{ record });
+        undef $self->{ record };
     }
 
 }
