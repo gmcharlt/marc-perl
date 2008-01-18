@@ -1,5 +1,7 @@
 1.44    [Unreleased]
 
+        - Updated TODO section with item about verfication of 008 presence and length.
+
         [THINGS THAT MAY BREAK YOUR CODE]
 
         - Updated _check_article with the exception 'A to'

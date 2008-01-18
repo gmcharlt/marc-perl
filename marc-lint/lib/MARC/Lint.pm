@@ -871,6 +871,10 @@ This subfield could be the 1st or 2nd subfield, so the code that checks for the 
 
 This subfield is not officially allowed in MARC, since it is locally defined. Some way needs to be made to allow messages/warnings about this subfield to be turned off (or otherwise deal with records using/allowing locally defined subfield 9).
 
+=item * 008 length and presence check
+
+Currently, 008 validation is not implemented in MARC::Lint, but is left to MARC::Errorchecks. It might be useful if MARC::Lint's basic validation checks included a verification that the 008 exists and is exactly 40 characters long. Additional 008-related checking and byte validation would remain in MARC::Errorchecks.
+
 =item * ISBN and ISSN checking
 
 020 and 022 fields are validated with the C<Business::ISBN> and
