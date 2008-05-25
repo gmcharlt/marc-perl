@@ -85,6 +85,10 @@ FROM_TEXT: {
         [590, "4","",
             a => "Personally signed by Larry.",
             ],
+        [650, "","0",
+            a => "Perl (Computer program language)",
+            0 => "(DLC)sh 95010633",
+            ],
         [856, "4","3",
             u => "http://www.perl.com/",
             ],
@@ -93,7 +97,7 @@ FROM_TEXT: {
             q => "Another foreign thing",
             ],
     );
-    is( $nfields, 13, "All the fields added OK" );
+    is( $nfields, 14, "All the fields added OK" );
 
     my @expected = (
         q{1XX: Only one 1XX tag is allowed, but I found 2 of them.},
