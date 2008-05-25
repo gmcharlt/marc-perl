@@ -1,6 +1,6 @@
 Revision history for MARC::Charset
 
-....
+0.99 Sun May 25 08:08:05 EDT 2008
      - Addition of characters used by III ILSs which are not covered
        by the official LoC codetables. Thanks go to Galen Charlton.
      - Removed PREREQ_FATAL from Makefile.PL to make CPAN testers happy
