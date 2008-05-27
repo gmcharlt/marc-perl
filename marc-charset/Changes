@@ -1,5 +1,9 @@
 Revision history for MARC::Charset
 
+1.00 Tue May 27 08:30:56 EDT 2008
+     - Forgot to add etc/additional-iii-characters.xml to the MANIFEST
+     - seems like as good a time as any for a v1.0 release :-)
+
 0.99 Sun May 25 08:08:05 EDT 2008
      - Addition of characters used by III ILSs which are not covered
        by the official LoC codetables. Thanks go to Galen Charlton.

@@ -2,6 +2,7 @@ bin/compile_table
 bin/print_table
 Changes
 etc/codetables.xml
+etc/additional-iii-characters.xml
 lib/MARC/Charset.pm
 lib/MARC/Charset/Code.pm
 lib/MARC/Charset/Compiler.pm
@@ -21,6 +22,8 @@ t/cyrillic.marc
 t/decompose.t
 t/escape1.t
 t/escape2.t
+t/farsi.marc
+t/farsi.t
 t/hebrew1.marc
 t/hebrew2.marc
 t/hebrew3.marc
