@@ -740,6 +740,7 @@ sub _check_article {
         'A-' => 1,
         'A+' => 1,
         'A is ' => 1,
+        'A isn\'t ' => 1,
         'A l\'' => 1,
         'A la ' => 1,
         'A posteriori' => 1,
