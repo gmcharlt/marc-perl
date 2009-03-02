@@ -54,15 +54,15 @@ sub start_element {
     if ( $name eq 'record' ) {
         $self->{ record } = MARC::Record->new();
     } elsif ( $name eq 'leader' ) { 
-	$self->{ tag } = 'LDR';
+        $self->{ tag } = 'LDR';
     } elsif ( $name eq 'controlfield' ) {
-	$self->{ tag } = $element->{ Attributes }{ '{}tag' }{ Value };
+        $self->{ tag } = $element->{ Attributes }{ '{}tag' }{ Value };
     } elsif ( $name eq 'datafield' ) { 
-	$self->{ tag } = $element->{ Attributes }{ '{}tag' }{ Value };
-	$self->{ i1 } = $element->{ Attributes }{ '{}ind1' }{ Value };
-	$self->{ i2 } = $element->{ Attributes }{ '{}ind2' }{ Value };
+        $self->{ tag } = $element->{ Attributes }{ '{}tag' }{ Value };
+        $self->{ i1 } = $element->{ Attributes }{ '{}ind1' }{ Value };
+        $self->{ i2 } = $element->{ Attributes }{ '{}ind2' }{ Value };
     } elsif ( $name eq 'subfield' ) { 
-	$self->{ subcode } = $element->{ Attributes }{ '{}code' }{ Value };
+        $self->{ subcode } = $element->{ Attributes }{ '{}code' }{ Value };
     }
 }
 
@@ -70,57 +70,60 @@ sub end_element {
     my ( $self, $element ) = @_;
     my $name = $element->{ LocalName };
     if ( $name eq 'subfield' ) { 
-	push @{ $self->{ subfields } }, $self->{ subcode };
-	
-	if ($self->{ transcode }) {
-           push @{ $self->{ subfields } }, utf8_to_marc8($self->{ chars });
-	} else {
-           push @{ $self->{ subfields } }, $self->{ chars } ;
-	}
+        push @{ $self->{ subfields } }, $self->{ subcode };
 
-	$self->{ chars } = '';
-	$self->{ subcode } = '';
+        if ($self->{ transcode }) {
+            push @{ $self->{ subfields } }, utf8_to_marc8($self->{ chars });
+        } else {
+            push @{ $self->{ subfields } }, $self->{ chars } ;
+        }
+
+        $self->{ chars } = '';
+        $self->{ subcode } = '';
     } elsif ( $name eq 'controlfield' ) { 
-	$self->{ record }->append_fields(
-	    MARC::Field->new( $self->{ tag }, $self->{ chars } )
-	);
-	$self->{ chars } = '';
-	$self->{ tag } = '';
+        $self->{ record }->append_fields(
+            MARC::Field->new( $self->{ tag }, $self->{ chars } )
+        );
+        $self->{ chars } = '';
+        $self->{ tag } = '';
     } elsif ( $name eq 'datafield' ) { 
-	$self->{ record }->append_fields( 
-	    MARC::Field->new( 
-		$self->{ tag }, 
-		$self->{ i1 }, 
-		$self->{ i2 },
-		@{ $self->{ subfields } }
-	    )
-	);
-	$self->{ tag } = '';
-	$self->{ i1 } = '';
-	$self->{ i2 } = '';
-	$self->{ subfields } = [];
-	$self->{ chars } = '';
+        $self->{ record }->append_fields( 
+            MARC::Field->new( 
+                $self->{ tag }, 
+                $self->{ i1 }, 
+                $self->{ i2 },
+                @{ $self->{ subfields } }
+            )
+        );
+        $self->{ tag } = '';
+        $self->{ i1 } = '';
+        $self->{ i2 } = '';
+        $self->{ subfields } = [];
+        $self->{ chars } = '';
     } elsif ( $name eq 'leader' ) { 
-	my $ldr = $self->{ chars };
-	$self->{ transcode }++
-		if (substr($ldr,9,1) eq 'a' and $self->{toMARC8});
-	
-	substr($ldr,9,1,' ') if ($self->{ transcode });
-	$self->{ record }->leader( $ldr );
-	$self->{ chars } = '';
-	$self->{ tag } = '';
+        my $ldr = $self->{ chars };
+
+        $self->{ transcode }++
+            if (substr($ldr,9,1) eq 'a' and $self->{toMARC8});
+
+        substr($ldr,9,1,' ') if ($self->{ transcode });
+
+        $self->{ record }->leader( $ldr );
+        $self->{ chars } = '';
+        $self->{ tag } = '';
     } elsif ( $name eq 'record' ) {
         push(@{ $self->{ records } }, $self->{ record });
         undef $self->{ record };
     }
-
 }
 
 sub characters {
     my ( $self, $chars ) = @_;
-    if ( ( exists $self->{ subcode } and $self->{ subcode } ne '') or ( $self->{ tag } and 
-	( $self->{ tag } eq 'LDR' or $self->{ tag } < 10 ) ) ) { 
-	$self->{ chars } .= $chars->{ Data };
+    if (
+        ( exists $self->{ subcode } && $self->{ subcode } ne '')
+        || ( $self->{ tag } && ( $self->{ tag } eq 'LDR' || $self->{ tag } < 10 ))
+    ) { 
+        $self->{ chars } .= $chars->{ Data };
     } 
 }
 
