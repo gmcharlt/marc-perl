@@ -320,6 +320,8 @@ sub record {
     if ($original_encoding ne 'a' && lc($format) !~ /^unimarc/o) {
         # If not, we'll make it so
         $_transcode++;
+        substr($ldr,9,1,'a');
+        $record->leader( $ldr );
     }
 
     my @xml = ();
@@ -329,7 +331,7 @@ sub record {
 <?xml version="1.0" encoding="$enc"?>
 <record
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/ standards/marcxml/schema/MARC21slim.xsd"
+    xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd"
     xmlns="http://www.loc.gov/MARC21/slim">
 HEADER
 
