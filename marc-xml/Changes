@@ -1,5 +1,11 @@
 Revision history for Perl extension MARC-XML
 
+0.91 Wed Mar 25 2009
+      - Nixing the stray space (always been there) in the schemaLocation
+        attribute for single-record output
+      - Properly apply the leader modification for USMARC to signal UTF-8
+        encoding.
+
 0.90 Fri Dec 14 2007
       - modifications to MARC::File::SAX to use LocalName rather than Name
         Name can contain a namespace prefix and cause parsing to fail
