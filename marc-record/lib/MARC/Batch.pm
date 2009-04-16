@@ -12,6 +12,11 @@ multiple-file aspects.
 
     use MARC::Batch;
 
+    # If you have werid control fields...
+    use MARC::Field;
+    MARC::Field->allow_controlfield_tags('FMT', 'LDX');    
+    
+
     my $batch = MARC::Batch->new( 'USMARC', @files );
     while ( my $marc = $batch->next ) {
         print $marc->subfield(245,"a"), "\n";
@@ -33,12 +38,9 @@ use Carp qw( croak );
 
 Create a C<MARC::Batch> object that will process C<@files>.
 
-C<$type> must specify one of the file types handled by the MARC::File modules;
-"USMARC" and "MicroLIF" are bundled with MARC::Record, but MARC::File::XML is
-available as a separate module to provide MARCXML support.  You can specify
-either the full name of the file-handling module (for example,
-"MARC::File::USMARC"), or just the file-type (for example, "XML"). C<new()>
-returns a new MARC::Batch object.
+C<$type> must be either "USMARC" or "MicroLIF".  If you want to specify
+"MARC::File::USMARC" or "MARC::File::MicroLIF", that's OK, too. C<new()> returns a
+new MARC::Batch object.
 
 C<@files> can be a list of filenames:
 
@@ -282,5 +284,9 @@ This code may be distributed under the same terms as Perl itself.
 
 Please note that these modules are not products of or supported by the
 employers of the various contributors to the code.
+
+=head1 AUTHOR
+
+Andy Lester, C<< <andy@petdance.com> >>
 
 =cut

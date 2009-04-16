@@ -17,6 +17,9 @@ MARC::Field - Perl extension for handling MARC fields
 
   use MARC::Field;
 
+  # If your system uses wacky control field tags, add them
+  MARC::Field->allow_controlfield_tags('FMT', 'LLE');
+
   my $field = MARC::Field->new( 245, '1', '0',
        'a' => 'Raccoons and ripe corn / ',
        'c' => 'Jim Arnosky.'
@@ -33,6 +36,18 @@ you could use them on their own, but that wouldn't be very interesting.
 None by default.  Any errors are stored in C<$MARC::Field::ERROR>, which
 C<$MARC::Record> usually bubbles up to C<$MARC::Record::ERROR>.
 
+=head1 CLASS VARIBALES
+
+B<extra_controlfield_tags>: Some systems (notably Ex Libris's Aleph) throw
+extra control fields in their MARC (e.g., Aleph's MARC-XML tends to have a 
+C<FMT> control field). We keep a class-level hash to track to track them; it can
+be manipulated with C<allow_controlfield_tags> and c<disallow_controlfield_tags>.
+
+=cut
+
+my %extra_controlfield_tags = ();
+
+
 =head1 METHODS
 
 =head2 new()
@@ -47,7 +62,7 @@ subfield/data pairs. For example:
        'c' => 'Jim Arnosky.'
   );
 
-Or if you want to add a field < 010 that does not have indicators.
+Or if you want to add a control field (< 010) that does not have indicators.
 
   my $field = MARC::Field->new( '001', ' 14919759' );
 
@@ -59,11 +74,14 @@ sub new {
 
     ## MARC spec indicates that tags can have alphabetical
     ## characters in them! If they do appear we assume that
-    ## they have indicators like tags > 010
+    ## they have indicators like tags > 010 unless they've
+    ## been previously defined as control tags using
+    ## add_controlfield
+    
     my $tagno = shift;
     ($tagno =~ /^[0-9A-Za-z]{3}$/)
         or croak( "Tag \"$tagno\" is not a valid tag." );
-    my $is_control = (($tagno =~ /^\d+$/) && ($tagno < 10));
+    my $is_control = $class->is_controlfield_tag($tagno);
 
     my $self = bless {
         _tag => $tagno,
@@ -73,10 +91,12 @@ sub new {
 
     if ( $is_control ) {
         $self->{_data} = shift;
+        $self->_warn("Too much data for control field '$tagno'") if (@_);
     } else {
         for my $indcode ( qw( _ind1 _ind2 ) ) {
             my $indicator = shift;
-            if ( $indicator !~ /^[0-9A-Za-z ]$/ ) {
+            scalar(@_) or croak("Field $tagno must have indicators (use ' ' for empty indicators)");
+            if ($indicator !~ /^[0-9A-Za-z ]$/ ) {
                 $self->_warn( "Invalid indicator \"$indicator\" forced to blank" ) unless ($indicator eq "");
                 $indicator = " ";
             }
@@ -117,7 +137,7 @@ sub indicator($) {
     my $self = shift;
     my $indno = shift;
 
-    $self->_warn( "Fields below 010 do not have indicators" )
+    $self->_warn( "Control fields (generally, those with tags below 010) do not have indicators" )
         if $self->is_control_field;
 
     if ( $indno == 1 ) {
@@ -128,6 +148,57 @@ sub indicator($) {
         croak( "Indicator number must be 1 or 2" );
     }
 }
+
+=head2 allow_controlfield_tags($tag, $tag2, ...)
+
+Add $tags to class-level list of strings to consider valid control fields tags (in addition to 001 through 009).
+Tags must have three characters. 
+
+=cut
+
+sub allow_controlfield_tags {
+  my $self = shift;
+  foreach my $tag (@_) {
+    $extra_controlfield_tags{$tag} = 1;
+  }
+}
+
+=head2 disallow_controlfield_tags($tag, $tag2, ...)
+=head2 disallow_controlfield_tags('*')
+
+Revoke the validity of a control field tag previously added with allow_controlfield_tags. As a special case, 
+if you pass the string '*' it will clear out all previously-added tags.
+
+NOTE that this will only deal with stuff added with allow_controlfield_tags; you can't disallow '001'.
+
+=cut
+
+sub disallow_controlfield_tags {
+  my $self = shift;
+  if ($_[0] eq '*') {
+    %extra_controlfield_tags = ();
+    return;
+  }
+  foreach my $tag (@_) {
+    delete $extra_controlfield_tags{$tag};
+  }
+}
+
+=head2 is_controlfield_tag($tag) -- does the given tag denote a control field?
+
+Generally called as a class method (e.g., MARC::Field->is_controlfield_tag('001'))
+
+=cut
+
+sub is_controlfield_tag
+{
+  my $self = shift;
+  my $tag = shift;
+  return 1 if ($extra_controlfield_tags{$tag});
+  return 1 if (($tag =~ /^\d+$/) && ($tag < 10));
+  return 0; # otherwise, it's not a control field
+}
+
 
 =head2 is_control_field()
 
@@ -155,7 +226,7 @@ calling in a list context:
 If no matching subfields are found, C<undef> is returned in a scalar context
 and an empty list in a list context.
 
-If the tag is less than an 010, C<undef> is returned and
+If the tag is a control field, C<undef> is returned and
 C<$MARC::Field::ERROR> is set.
 
 =cut
@@ -164,7 +235,7 @@ sub subfield {
     my $self = shift;
     my $code_wanted = shift;
 
-    croak( "Fields below 010 do not have subfields, use data()" )
+    croak( "Control fields (generally, just tags below 010) do not have subfields, use data()" )
         if $self->is_control_field;
 
     my @data = @{$self->{_subfields}};
@@ -197,7 +268,7 @@ For example, this might be the subfields from a 245 field:
 sub subfields {
     my $self = shift;
 
-    $self->_warn( "Fields below 010 do not have subfields" )
+    $self->_warn( "Control fields (generally, just tags below 010)  do not have subfields" )
         if $self->is_control_field;
 
     my @list;
@@ -217,7 +288,7 @@ Returns the data part of the field, if the tag number is less than 10.
 sub data {
     my $self = shift;
 
-    croak( "data() is only for tags less than 010, use subfield()" )
+    croak( "data() is only for control fields (generally, just tags below 010) , use subfield()" )
         unless $self->is_control_field;
 
     $self->{_data} = $_[0] if @_;
@@ -238,7 +309,7 @@ Returns the number of subfields added, or C<undef> if there was an error.
 sub add_subfields {
     my $self = shift;
 
-    croak( "Subfields are only for tags >= 10" )
+    croak( "Subfields are only for data fields (generally, just tags >= 010)" )
         if $self->is_control_field;
 
     push( @{$self->{_subfields}}, @_ );
@@ -508,7 +579,7 @@ useful by C<MARC::Record::as_usmarc()>.
 sub as_usmarc() {
     my $self = shift;
 
-    # Tags < 010 are pretty easy
+    # Control fields are pretty easy
     if ( $self->is_control_field ) {
         return $self->data . END_OF_FIELD;
     } else {
@@ -545,7 +616,7 @@ sub clone {
     my $self = shift;
 
     my $tagno = $self->{_tag};
-    my $is_control = (($tagno =~ /^\d+$/) && ($tagno < 10));
+    my $is_control = $self->is_controlfield_tag($tagno);
 
     my $clone =
         bless {
@@ -625,5 +696,9 @@ This code may be distributed under the same terms as Perl itself.
 
 Please note that these modules are not products of or supported by the
 employers of the various contributors to the code.
+
+=head1 AUTHOR
+
+Andy Lester, C<< <andy@petdance.com> >>
 
 =cut

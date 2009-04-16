@@ -1,6 +1,9 @@
 Revision history for Perl extension MARC::Record.
 
-2.x     
+2.0.1
+       [ENHANCEMENTS]
+       - added methods to MARC::Field to allow a (class-level) list of fields that should
+         be considered control fields in addition to 001-009. Includes test t/extra_controlfields.t
         - added MARC::Record::delete_fields() and t/delete-field.t
 
 2.0

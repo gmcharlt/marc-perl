@@ -47,6 +47,7 @@ t/convenience.t
 t/decode-filter.t
 t/delete-subfield.t
 t/dosEOF.t
+t/extra_controlfields.t
 t/file-filter.t
 t/file-header.t
 t/lineendings-0a.lif

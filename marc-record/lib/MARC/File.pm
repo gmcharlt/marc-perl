@@ -15,6 +15,10 @@ use vars qw( $ERROR );
 
     use MARC::File::USMARC;
 
+    # If you have werid control fields...
+    use MARC::Field;
+    MARC::Field->allow_controlfield_tags('FMT', 'LDX');    
+
     my $file = MARC::File::USMARC->in( $filename );
 
     while ( my $marc = $file->next() ) {
@@ -227,6 +231,10 @@ This code may be distributed under the same terms as Perl itself.
 
 Please note that these modules are not products of or supported by the
 employers of the various contributors to the code.
+
+=head1 AUTHOR
+
+Andy Lester, C<< <andy@petdance.com> >>
 
 =cut
 
