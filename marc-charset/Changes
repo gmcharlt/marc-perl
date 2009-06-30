@@ -1,5 +1,10 @@
 Revision history for MARC::Charset
 
+1.1 Tue Jun 30 15:51:16 EDT 2009
+     - Patch from Damyan Ivanov of the Debian Perl Group to trim the size
+       of the character mapping db by 70 times! Uses GDBM_File instead of 
+       SDBM_File.
+
 1.00 Tue May 27 08:30:56 EDT 2008
      - Forgot to add etc/additional-iii-characters.xml to the MANIFEST
      - seems like as good a time as any for a v1.0 release :-)

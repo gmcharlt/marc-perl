@@ -34,7 +34,7 @@ UCS code point. These keys map to a serialized MARC::Charset::Code object.
 use strict;
 use warnings;
 use POSIX;
-use SDBM_File;
+use GDBM_File;
 use MARC::Charset::Code;
 use MARC::Charset::Constants qw(:all);
 use Storable qw(freeze thaw);
@@ -49,7 +49,7 @@ sub new
 {
     my $class = shift;
     my $self = bless {}, ref($class) || $class;
-    $self->_init(O_RDONLY);
+    $self->_init(&GDBM_READER);
     return $self;
 }
 
@@ -174,7 +174,7 @@ sub brand_new
 {
     my $class = shift;
     my $self = bless {}, ref($class) || $class;
-    $self->_init(O_CREAT|O_RDWR);
+    $self->_init(&GDBM_WRCREAT);
     return $self;
 }
 
@@ -184,7 +184,7 @@ sub brand_new
 sub _init 
 {
     my ($self,$opts) = @_;
-    tie my %db, 'SDBM_File', db_path(), $opts, 0644;
+    tie my %db, 'GDBM_File', db_path(), $opts, 0644;
     $self->{db} = \%db;
 }
 
