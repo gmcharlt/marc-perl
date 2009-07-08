@@ -1,46 +1,58 @@
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html40/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
 <html>
-   <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>MARC 21 Format for Bibliographic Data:  Table of Contents (Network Development and MARC Standards Office, Library of Congress)
-      </title>
-      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-      <meta name="description" content="This page lists the table of contents for the MARC 21 Format for Bibliographic Data (Network Development and MARC Standards Office, Library of Congress)">
-      <meta name="keywords" content="marc, marc21, marc standards">
-      <meta name="author" content="Library of Congress Network Development and MARC Standards Office">
-      <link href="http://www.loc.gov/marc/marc-generic.css" rel="stylesheet" type="text/css"><style type="text/css">
-					body {margin-left:.5em; margin-right:.5em;} 
-					h1 {text-align:center;}
-					h3 {text-align:left;}
-					h4 {margin-top:.5em; margin-bottom:.5em;}
-					p {text-align:justify; margin-left:2em; margin-right:2em;}
-					.banner {text-align:center;}
-					.introduction {font-weight:bold; font-family:Arial, Helvetica, sans-serif; text-align:center}
-					.contents {font-style:italic; font-weight:bold; margin-left:2em; font-size:20px; margin-top:1em;}
-					.contentslist {margin-left:3em;}
-			.style1 {color: #FF0000}
-      </style>
+<head>
+<title>MARC 21 Format for Bibliographic Data: Table of Contents
+(Network Development and MARC Standards Office, Library of
+Congress)</title>
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8">
+<meta name="description" content=
+"This page lists the table of contents for the MARC 21 Format for Bibliographic Data (Network Development and MARC Standards Office, Library of Congress)">
+<meta name="keywords" content="marc, marc21, marc standards">
+<meta name="author" content=
+"Library of Congress Network Development and MARC Standards Office">
+<link href="http://www.loc.gov/marc/marc-generic.css" rel=
+"stylesheet" type="text/css">
+<style type="text/css">
+body {margin-left: 5em; margin-right: 5em;} 
+h1 {text-align:center;}
+h3 {text-align:left;}
+h4 {margin-top:.5em; margin-bottom:.5em;}
+.edition {font-weight:bold; text-align:center}
+</style>
 <script type='text/javascript' src='/global/triggerParams.js'></script><script type='text/javascript' src='/global/stdLauncher.js'></script><script type='text/javascript'>Poll();</script></head>
-			<body bgcolor="#ffffff">
-      <div class="head-nav"><a href="http://www.loc.gov/">Library of Congress</a> &gt;&gt;  <a href="http://www.loc.gov/marc/">MARC</a> &gt;&gt; <strong>Bibliographic Field List </strong></div>
-      <hr><a name="skip_menu"></a>
-	<h1>MARC 21 Format for Bibliographic Data</h1>
-	<h1>Field List</h1>
-      <hr>
-      <div class="introduction">1999 Edition</div>
-	  <div class="introduction">Update No. 1 (October 2001) through Update No. 8 (October 2007)</div>
-      <hr>
-<p>This document lists all valid and obsolete data elements that may appear in 
-  MARC 21 bibliographic records. It is intended to meet the need for a simple 
-  data element list to support MARC system development and online validation of 
-  MARC data elements. This listing does not include any descriptions or examples 
-  of MARC data elements. Descriptions and examples can be found in the <em><a href="ecbdhome.html">MARC 
-  21 Format for Bibliographic Data </a></em>.</p>
+<body>
+
+<div class="head-nav"><a href="http://www.loc.gov/">Library of
+Congress</a> &gt;&gt; <a href="http://www.loc.gov/marc/">MARC</a>
+&gt;&gt; <strong>Bibliographic Field List</strong></div>
+
 <hr>
+<a name="skip_menu"></a> 
+
+<h1>MARC 21 Format for Bibliographic Data<br>Field List</h1>
+
+<hr>
+
+<div class="edition">1999 Edition<br>
+Update No. 1 (October 2001) through Update No. 9 (October 2008)</div>
+
+<hr>
+
+<p>This document lists all valid and obsolete data elements that
+may appear in MARC 21 bibliographic records. It is intended to
+meet the need for a simple data element list to support MARC
+system development and online validation of MARC data elements.
+This listing does not include any descriptions or examples of
+MARC data elements. Descriptions and examples can be found in the
+<a href="ecbdhome.html"><cite>MARC 21 Format for Bibliographic
+Data</cite></a>.</p>
+
+<hr>
+
 <pre>
 --Leader and Directory--
-
   LEADER
      Character Positions
      00-04 - Logical record length
@@ -113,24 +125,24 @@
      21 - Length of the starting-character-position portion
      22 - Length of the implementation-defined portion
      23 - Undefined Entry map character position
-DIRECTORY
+
+   DIRECTORY
    Character Positions
       00-02 - Tag
       03-06 - Field length
       07-11 - Starting character position
 
---Control Fields (001-006)--
 
+--Control Fields (001-006)--
 001 - CONTROL NUMBER (NR)
 
 003 - CONTROL NUMBER IDENTIFIER (NR)
 
 005 - DATE AND TIME OF LATEST TRANSACTION (NR)
 
-006 - FIXED-LENGTH DATA ELEMENTS--ADDITIONAL MATERIAL CHARACTERISTICS
-        --GENERAL INFORMATION (R)
- 006--BOOKS
-  Character Positions
+006 - FIXED-LENGTH DATA ELEMENTS--ADDITIONAL MATERIAL CHARACTERISTICS--GENERAL INFORMATION (R)
+  006--BOOKS
+    Character Positions
      00 - Form of material
         a - Language material
         t - Manuscript language material
@@ -145,8 +157,8 @@ DIRECTORY
      15 - Undefined
      16 - Literary form
      17 - Biography
- 006--COMPUTER FILES/ELECTRONIC RESOURCES
-  Character Positions
+  006--COMPUTER FILES/ELECTRONIC RESOURCES
+    Character Positions
      00 - Form of material
         m - Computer file/Electronic resource
      01-04 - Undefined
@@ -156,8 +168,8 @@ DIRECTORY
      10 - Undefined
      11 - Government publication
      12-17 - Undefined
- 006--MAPS
-  Character Positions
+  006--MAPS
+    Character Positions
      00 - Form of material
         e - Cartographic material
         f - Manuscript cartographic material
@@ -174,15 +186,15 @@ DIRECTORY
      14 - Index
      15 - Undefined
      16-17 - Special format characteristics
- 006--MIXED MATERIALS
-  Character Positions
+  006--MIXED MATERIALS
+    Character Positions
      00 - Form of material
         p - Mixed material
      01-05 - Undefined
      06 - Form of item
      07-17 - Undefined
- 006--MUSIC
-  Character Positions
+  006--MUSIC
+    Character Positions
      00 - Form of material
         c - Notated music
         d - Manuscript notated music
@@ -198,8 +210,8 @@ DIRECTORY
      15 - Undefined
      16 - Transposition and arrangement
      17 - Undefined
- 006--CONTINUING RESOURCES
-  Character Positions
+  006--CONTINUING RESOURCES
+    Character Positions
      00 - Form of material
         s - Serial/Integrating resource
      01 - Frequency
@@ -215,8 +227,8 @@ DIRECTORY
      13-15 - Undefined
      16 - Original alphabet or script of title
      17 - Entry convention
- 006--VISUAL MATERIALS
-  Character Positions
+  006--VISUAL MATERIALS
+    Character Positions
      00 - Form of material
         g - Projected medium
         k - Two-dimensional nonprojectable graphic
@@ -233,11 +245,11 @@ DIRECTORY
      13-15 - Undefined
      16 - Type of visual material
      17 - Technique
+	 
 --Control Field 007--
-  007 - PHYSICAL DESCRIPTION FIXED FIELD
-        --GENERAL INFORMATION (R)
+007 - PHYSICAL DESCRIPTION FIXED FIELD--GENERAL INFORMATION (R)
   007--MAP
-   Character Positions
+    Character Positions
       00 - Category of material
          a - Map
       01 - Specific material designation
@@ -295,8 +307,8 @@ DIRECTORY
          m - Mixed polarity
          n - Not applicable
          | - No attempt to code
-  007--ELECTRONIC RESOURCE
-   Character Positions
+   007--ELECTRONIC RESOURCE
+     Character Positions
       00 - Category of material
          c - Computer file
       01 - Specific material designation
@@ -380,8 +392,8 @@ DIRECTORY
          r - Replacement
          u - Unknown
          | - No attempt to code
-  007--GLOBE
-   Character Positions
+   007--GLOBE
+     Character Positions
       00 - Category of material
          d - Globe
       01 - Specific material designation
@@ -415,8 +427,8 @@ DIRECTORY
          u - Unknown
          z - Other
          | - No attempt to code
-  007--TACTILE MATERIAL
-   Character Positions
+   007--TACTILE MATERIAL
+     Character Positions
       00 - Category of material
          f - Tactile material
       01 - Specific material designation
@@ -473,8 +485,8 @@ DIRECTORY
          u - Unknown
          z - Other
          | - No attempt to code
-  007--PROJECTED GRAPHIC
-   Character Positions
+   007--PROJECTED GRAPHIC
+     Character Positions
       00 - Category of material
          g - Projected graphic
       01 - Specific material designation
@@ -559,8 +571,8 @@ DIRECTORY
          u - Unknown
          z - Other
          | - No attempt to code
-  007--MICROFORM
-   Character Positions
+   007--MICROFORM
+     Character Positions
       00 - Category of material
          h - Microform
       01 - Specific material designation
@@ -640,8 +652,8 @@ DIRECTORY
          u - Unknown
          z - Other
          | - No attempt to code
-  007--NONPROJECTED GRAPHIC
-   Character Positions
+   007--NONPROJECTED GRAPHIC
+     Character Positions
       00 - Category of material
          k - Nonprojected graphic
       01 - Specific material designation
@@ -708,8 +720,8 @@ DIRECTORY
          u - Unknown
          z - Other
          | - No attempt to code
-  007--MOTION PICTURE
-   Character Positions
+   007--MOTION PICTURE
+     Character Positions
       00 - Category of material
          m - Motion picture
       01 - Specific material designation
@@ -871,22 +883,22 @@ DIRECTORY
          u - Unknown
          | - No attempt to code
       17-22 - Film inspection date
-  007--KIT
-   Character Positions
+   007--KIT
+     Character Positions
       00 - Category of material
          o - Kit
       01 - Specific material designation
          u - Unspecified
          | - No attempt to code
-  007--NOTATED MUSIC
-   Character Positions
+   007--NOTATED MUSIC
+     Character Positions
       00 - Category of material
          q - Notated music
       01 - Specific material designation
          u - Unspecified
          | - No attempt to code
-  007--REMOTE-SENSING IMAGE
-   Character Positions
+   007--REMOTE-SENSING IMAGE
+     Character Positions
       00 - Category of material
          r - Remote-sensing image
       01 - Specific material designation
@@ -994,8 +1006,8 @@ DIRECTORY
          uu - Unknown
          zz - Other
          || - No attempt to code
-  007--SOUND RECORDING
-   Character Positions
+   007--SOUND RECORDING
+     Character Positions
       00 - Category of material
          s - Sound recording
       01 - Specific material designation
@@ -1134,8 +1146,8 @@ DIRECTORY
          u - Unknown
          z - Other
          | - No attempt to code
-  007--TEXT
-   Character Positions
+   007--TEXT
+     Character Positions
       00 - Category of material
          t - Text
       01 - Specific material designation
@@ -1146,8 +1158,8 @@ DIRECTORY
          u - Unspecified
          z - Other
          | - No attempt to code
-  007--VIDEORECORDING
-   Character Positions
+   007--VIDEORECORDING
+     Character Positions
       00 - Category of material
          v - Videorecording
       01 - Specific material designation
@@ -1184,6 +1196,7 @@ DIRECTORY
          o - D-2 (3/4 in., videocassette)
          p - 8 mm.
          q - Hi-8 mm.
+         s - Blu-ray disc
          u - Unknown
          v - DVD
          z - Other
@@ -1227,8 +1240,8 @@ DIRECTORY
          u - Unknown
          z - Other
          | - No attempt to code
-  007--UNSPECIFIED
-   Character Positions
+   007--UNSPECIFIED
+     Character Positions
       00 - Category of material
          z - Unspecified
       01 - Specific material designation
@@ -1238,9 +1251,9 @@ DIRECTORY
          | - No attempt to code
 
 --Control Field 008--
-  008 - FIXED-LENGTH DATA ELEMENTS--GENERAL INFORMATION (NR)
+008 - FIXED-LENGTH DATA ELEMENTS--GENERAL INFORMATION (NR)
   008--ALL MATERIALS
-   Character Positions
+    Character Positions
       00-05 - Date entered on file
       06 - Type of date/Publication status
          b - No dates given; B.C. date involved
@@ -1289,8 +1302,8 @@ DIRECTORY
          n - Report to [OBSOLETE]
          u - Unknown
          | - No attempt to code
-  008--BOOKS
-   Character Positions
+   008--BOOKS
+     Character Positions
       18-21 - Illustrations
          # - No illustrations
          a - Illustrations
@@ -1360,9 +1373,11 @@ DIRECTORY
          v - Legal cases and case notes
          w - Law reports and digests
          x - Technical reports [OBSOLETE]
-         y - Yearbooks [OBSOLETE]
+         y - Yearbooks
          z - Treaties
          2 - Offprints
+         5 - Calendars
+         6 - Comics/graphic novels
          | - No attempt to code
       28 - Government publication
          # - Not a government publication
@@ -1398,7 +1413,7 @@ DIRECTORY
       33 - Literary form
          0 - Not fiction (not further specified)
          1 - Fiction (not further specified)
-         c - Comic strips
+         c - Comic strips [OBSOLETE]
          d - Dramas
          e - Essays
          f - Novels
@@ -1418,7 +1433,7 @@ DIRECTORY
          d - Contains biographical information
          | - No attempt to code
   008--COMPUTER FILES
-   Character Positions
+    Character Positions
       18-21 - Undefined
       18 - Frequency [OBSOLETE]
          # - No determinable frequency
@@ -1492,7 +1507,7 @@ DIRECTORY
          | - No attempt to code
       29-34 - Undefined
   008--MAPS
-   Character Positions
+    Character Positions
       18-21 - Relief
          # - No relief shown
          a - Contours
@@ -1631,7 +1646,7 @@ DIRECTORY
          z - Other
          | - No attempt to code
   008--MUSIC
-   Character Positions
+    Character Positions
       18-19 - Form of composition
          an - Anthems
          bd - Ballads
@@ -1745,7 +1760,7 @@ DIRECTORY
          c - Microopaque
          d - Large print
          f - Braille
-         g - Punched paper tape [	]
+         g - Punched paper tape [   ]
          h - Magnetic tape [OBSOLETE]
          i - Multimedia [OBSOLETE]
          r - Regular print reproduction
@@ -1809,7 +1824,7 @@ DIRECTORY
          | - No attempt to code 
       34 - Undefined
   008--CONTINUING RESOURCES
-   Character Positions
+    Character Positions
       18 - Frequency
          # - No determinable frequency
          a - Annual
@@ -1915,8 +1930,10 @@ DIRECTORY
          u - Standards/specifications
          v - Legal cases and case notes
          w - Law reports and digests
-         y - Yearbooks [OBSOLETE]
+         y - Yearbooks
          z - Treaties
+         5 - Calendars
+         6 - Comics/graphic novels
          | - No attempt to code
       25-27 - Nature of contents
          # - No specified nature of contents
@@ -1943,8 +1960,10 @@ DIRECTORY
          u - Standards/specifications
          v - Legal cases and case notes
          w - Law reports and digests
-         y - Yearbooks [OBSOLETE]
+         y - Yearbooks
          z - Treaties
+         5 - Calendars
+         6 - Comics/graphic novels
          | - No attempt to code
       28 - Government publication
          # - Not a government publication
@@ -2023,7 +2042,7 @@ DIRECTORY
          2 - Integrated entry
          | - No attempt to code
   008--VISUAL MATERIALS
-   Character Positions
+    Character Positions
       18-20 - Running time for motion pictures and videorecordings
          000 - Running time exceeds three characters
          001-999 - Running time
@@ -2123,7 +2142,7 @@ DIRECTORY
          z - Other technique
          | - No attempt to code
   008--MIXED MATERIALS
-   Character Positions
+    Character Positions
       18-22 - Undefined
       23 - Form of item
          # - None of the following
@@ -2168,8 +2187,9 @@ DIRECTORY
          d - Control by folder
          e - Control by item
          u - Unknown
+
   009 - PHYSICAL DESCRIPTION FIXED-FIELD FOR ARCHIVAL COLLECTION (VM) - [OBSOLETE]
-   Character Positions
+    Character Positions
       00 - Genealogical stage
       01 - Technical stage
       02 - Color stage
@@ -2182,8 +2202,10 @@ DIRECTORY
       09 - Film deterioration
       10 - Completeness
       11-14 - Film inspection date
+
+
 --Number and Code Fields (01X-04X)--
-  010 - LIBRARY OF CONGRESS CONTROL NUMBER (NR)
+010 - LIBRARY OF CONGRESS CONTROL NUMBER (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -2194,7 +2216,8 @@ DIRECTORY
       $b - NUCMC control number (R)
       $z - Canceled/invalid LC control number (R)
       $8 - Field link and sequence number (R)
-  011 - LINKING LIBRARY OF CONGRESS CONTROL NUMBER (NR) [OBSOLETE]
+
+011 - LINKING LIBRARY OF CONGRESS CONTROL NUMBER (NR) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -2202,7 +2225,8 @@ DIRECTORY
          # - Undefined
    Subfield Codes
       $a - LINKING LC control number (R)
-  013 - PATENT CONTROL INFORMATION (R)
+
+013 - PATENT CONTROL INFORMATION (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2217,7 +2241,8 @@ DIRECTORY
       $f - Party to document (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  015 - NATIONAL BIBLIOGRAPHY NUMBER (R)
+
+015 - NATIONAL BIBLIOGRAPHY NUMBER (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2228,8 +2253,9 @@ DIRECTORY
       $z - Canceled/Invalid national bibliography number (R)
       $2 - Source (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  016 - NATIONAL BIBLIOGRAPHIC AGENCY CONTROL NUMBER (R)
+      $8 - Field link and sequence number (R)
+
+016 - NATIONAL BIBLIOGRAPHIC AGENCY CONTROL NUMBER (R)
    Indicators
       First - National bibliographic agency
          # - Library and Archives Canada 
@@ -2240,8 +2266,9 @@ DIRECTORY
       $a - Record control number (NR)
       $z - Canceled or invalid record control number (R)
       $2 - Source (NR)
-      $8 - Field link and sequence number (R)   
-  017 - COPYRIGHT OR LEGAL DEPOSIT NUMBER (R)
+      $8 - Field link and sequence number (R)
+
+017 - COPYRIGHT OR LEGAL DEPOSIT NUMBER (R)
    Indicators
       First - Government jurisdiction (BK MP MU VM)[OBSOLETE]
          0 - United States [OBSOLETE]
@@ -2259,10 +2286,12 @@ DIRECTORY
       $b - Assigning agency (NR)
       $d - Date (NR)
       $i - Display text (NR)
+      $z - Canceled/invalid copyright or legal deposit number (R) 
       $2 - Source (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  018 - COPYRIGHT ARTICLE-FEE CODE (NR)
+      $8 - Field link and sequence number (R)
+
+018 - COPYRIGHT ARTICLE-FEE CODE (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -2271,8 +2300,9 @@ DIRECTORY
    Subfield Code
       $a - Copyright article-fee code (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  020 - INTERNATIONAL STANDARD BOOK NUMBER (R)
+      $8 - Field link and sequence number (R)
+
+020 - INTERNATIONAL STANDARD BOOK NUMBER (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2283,8 +2313,9 @@ DIRECTORY
       $c - Terms of availability (NR)
       $z - Canceled/invalid ISBN (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  022 - INTERNATIONAL STANDARD SERIAL NUMBER (R)
+      $8 - Field link and sequence number (R)
+
+022 - INTERNATIONAL STANDARD SERIAL NUMBER (R)
    Indicators
       First - Level of international interest
          # - No level specified
@@ -2300,8 +2331,9 @@ DIRECTORY
       $z - Canceled ISSN (R)
       $2 - Source (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  024 - OTHER STANDARD IDENTIFIER (R)
+      $8 - Field link and sequence number (R)
+
+024 - OTHER STANDARD IDENTIFIER (R)
    Indicators
       First - Type of standard number or code
          0 - International Standard Recording Code (ISRC)
@@ -2322,8 +2354,9 @@ DIRECTORY
       $z - Canceled/invalid standard number or code (R)
       $2 - Source of number or code (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  025 - OVERSEAS ACQUISITION NUMBER (R)
+      $8 - Field link and sequence number (R)
+
+025 - OVERSEAS ACQUISITION NUMBER (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2331,8 +2364,9 @@ DIRECTORY
          # - Undefined
    Subfield Code
       $a - Overseas acquisition number (R)
-      $8 - Field link and sequence number (R)   
-  026 - FINGERPRINT IDENTIFIER (R)
+      $8 - Field link and sequence number (R)
+
+026 - FINGERPRINT IDENTIFIER (R)
    Indicators
        First - Undefined
          # - Undefined
@@ -2348,7 +2382,8 @@ DIRECTORY
       $5 - Institution to which field applies (R) 
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  027 - STANDARD TECHNICAL REPORT NUMBER (R)
+
+027 - STANDARD TECHNICAL REPORT NUMBER (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2358,8 +2393,9 @@ DIRECTORY
       $a - Standard technical report number (NR)
       $z - Canceled/invalid number (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  028 - PUBLISHER NUMBER (R)
+      $8 - Field link and sequence number (R)
+
+028 - PUBLISHER NUMBER (R)
    Indicators
       First - Type of publisher number
          0 - Issue number
@@ -2377,8 +2413,9 @@ DIRECTORY
       $a - Publisher number (NR)
       $b - Source (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  030 - CODEN DESIGNATION (R) 
+      $8 - Field link and sequence number (R)
+
+030 - CODEN DESIGNATION (R) 
    Indicators
       First - Undefined
          # - Undefined
@@ -2388,8 +2425,9 @@ DIRECTORY
       $a - CODEN (NR)
       $z - Canceled/invalid CODEN (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  031 - MUSICAL INCIPITS INFORMATION (R) 
+      $8 - Field link and sequence number (R)
+
+031 - MUSICAL INCIPITS INFORMATION (R) 
    Indicators
       First - Undefined
          # - Undefined
@@ -2416,7 +2454,8 @@ DIRECTORY
       $2 - System code (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  032 - POSTAL REGISTRATION NUMBER (R)
+
+032 - POSTAL REGISTRATION NUMBER (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2426,8 +2465,9 @@ DIRECTORY
       $a - Postal registration number (NR)
       $b - Source (agency assigning number) (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  033 - DATE/TIME AND PLACE OF AN EVENT (R)
+      $8 - Field link and sequence number (R)
+	  
+033 - DATE/TIME AND PLACE OF AN EVENT (R)
    Indicators
       First - Type of date in subfield $a
          # - No date information
@@ -2445,8 +2485,9 @@ DIRECTORY
       $c - Geographic classification subarea code (R)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  034 - CODED CARTOGRAPHIC MATHEMATICAL DATA (R)
+      $8 - Field link and sequence number (R)
+
+034 - CODED CARTOGRAPHIC MATHEMATICAL DATA (R)
    Indicators
       First - Type of scale
          0 - Scale indeterminable/No scale recorded
@@ -2482,7 +2523,8 @@ DIRECTORY
       $2 - Source  (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  035 - SYSTEM CONTROL NUMBER (R)
+
+035 - SYSTEM CONTROL NUMBER (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2493,7 +2535,8 @@ DIRECTORY
       $z - Canceled/invalid control number (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  036 - ORIGINAL STUDY NUMBER FOR COMPUTER DATA FILES (NR)
+
+036 - ORIGINAL STUDY NUMBER FOR COMPUTER DATA FILES (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -2503,8 +2546,9 @@ DIRECTORY
       $a - Original study number (NR)
       $b - Source (agency assigning number) (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  037 - SOURCE OF ACQUISITION (R)
+      $8 - Field link and sequence number (R)
+
+037 - SOURCE OF ACQUISITION (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2518,8 +2562,9 @@ DIRECTORY
       $g - Additional format characteristics (R)
       $n - Note (R)
       $6 - Linkage (NR)
-       $8 - Field link and sequence number (R) 
-  038 - RECORD CONTENT LICENSOR (NR)
+       $8 - Field link and sequence number (R)
+
+038 - RECORD CONTENT LICENSOR (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -2529,7 +2574,8 @@ DIRECTORY
       $a - Record content licensor (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  040 - CATALOGING SOURCE (NR)
+
+040 - CATALOGING SOURCE (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -2543,9 +2589,11 @@ DIRECTORY
       $e - Description conventions (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  041 - LANGUAGE CODE (R)
+
+041 - LANGUAGE CODE (R)
    Indicators
       First - Translation indication
+         # - No information provided
          0 - Item not a translation/does not include a translation
          1 - Item is or includes a translation
       Second - Source of code
@@ -2564,8 +2612,9 @@ DIRECTORY
       $j - Language code of subtitles or captions (R)
       $2 - Source of code (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  042 - AUTHENTICATION CODE (NR)
+      $8 - Field link and sequence number (R)
+
+042 - AUTHENTICATION CODE (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -2575,7 +2624,7 @@ DIRECTORY
       $a - Authentication code (R)
          dc - Dublin Core 
          dhca - Dance Heritage Coalition Access Project
-         gamma - Georgia Archives & Manuscripts Automated Access Project
+         gamma - Georgia Archives &amp; Manuscripts Automated Access Project
          gils - Government Information Location Service
          isds/c - ISSN Canada
          lc - Library of Congress
@@ -2601,8 +2650,9 @@ DIRECTORY
          xisds/c - ISSN Canada does not consider item a serial
          xlc - LC does not consider item a serial
          xnlc - NLC does not consider item a serial
-         xnsdp - NSDP does not consider item a serial   
-  043 - GEOGRAPHIC AREA CODE (NR)
+         xnsdp - NSDP does not consider item a serial
+
+043 - GEOGRAPHIC AREA CODE (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -2615,7 +2665,8 @@ DIRECTORY
       $2 - Source of local code (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  044 - COUNTRY OF PUBLISHING/PRODUCING ENTITY CODE (NR)
+
+044 - COUNTRY OF PUBLISHING/PRODUCING ENTITY CODE (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -2628,7 +2679,8 @@ DIRECTORY
       $2 - Source of local subentity code (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  045 - TIME PERIOD OF CONTENT (NR)
+
+045 - TIME PERIOD OF CONTENT (NR)
    Indicators 
       First - Type of time period in subfield $b or $c
          # - Subfield $b or $c not present
@@ -2642,8 +2694,9 @@ DIRECTORY
       $b - Formatted 9999 B.C. through C.E. time period (R)
       $c - Formatted pre-9999 B.C. time period (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  046 - SPECIAL CODED DATES (R)
+      $8 - Field link and sequence number (R)
+
+046 - SPECIAL CODED DATES (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2672,8 +2725,9 @@ DIRECTORY
       $n - End of date valid (NR)
       $2 - Source of date (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  047 - FORM OF MUSICAL COMPOSITION CODE (R)
+      $8 - Field link and sequence number (R)
+
+047 - FORM OF MUSICAL COMPOSITION CODE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2684,7 +2738,8 @@ DIRECTORY
       $a - Form of musical composition code (R)
       $2 - Source of code (NR)
       $8 - Field link and sequence number (R)
-  048 - NUMBER OF MUSICAL INSTRUMENTS OR VOICES CODE (R)
+
+048 - NUMBER OF MUSICAL INSTRUMENTS OR VOICES CODE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2797,8 +2852,9 @@ DIRECTORY
       zn - Unspecified instruments
       zu - Unknown
 
+
 --Classification and Call Number Fields (05X-08X)--
-  050 - LIBRARY OF CONGRESS CALL NUMBER (R)
+050 - LIBRARY OF CONGRESS CALL NUMBER (R)
    Indicators
       First - Existence in LC collection
          # - No information provided
@@ -2819,8 +2875,10 @@ DIRECTORY
       $d - Supplementary class number (MU) [OBSOLETE]
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  051 - LIBRARY OF CONGRESS COPY, ISSUE, OFFPRINT STATEMENT (R)
+      $8 - Field link and sequence number (R)
+
+
+051 - LIBRARY OF CONGRESS COPY, ISSUE, OFFPRINT STATEMENT (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2836,7 +2894,8 @@ DIRECTORY
       $b - Item number (NR)
       $c - Copy information (NR)
       $8 - Field link and sequence number (R)
-  052 - GEOGRAPHIC CLASSIFICATION (R)
+
+052 - GEOGRAPHIC CLASSIFICATION (R)
    Indicators
       First - Code source
          # - Library of Congress Classification
@@ -2852,8 +2911,9 @@ DIRECTORY
       $d - Populated place name (R)
       $2 - Code source (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  055 - CLASSIFICATION NUMBERS ASSIGNED IN CANADA (R)
+      $8 - Field link and sequence number (R)
+
+055 - CLASSIFICATION NUMBERS ASSIGNED IN CANADA (R)
    Indicators
       First - Existence in LAC collection
          # - Information not provided
@@ -2874,8 +2934,9 @@ DIRECTORY
       $a - Classification number (NR)
       $b - Item number (NR)
       $2 - Source of call/class number (NR)
-      $8 - Field link and sequence number (R)  
-  060 - NATIONAL LIBRARY OF MEDICINE CALL NUMBER (R)
+      $8 - Field link and sequence number (R)
+
+060 - NATIONAL LIBRARY OF MEDICINE CALL NUMBER (R)
    Indicators
       First - Existence in NLM collection
          # - No information provided
@@ -2894,7 +2955,8 @@ DIRECTORY
       $a - Classification number (R)
       $b - Item number (NR)
       $8 - Field link and sequence number (R)
-  061 - NATIONAL LIBRARY OF MEDICINE COPY STATEMENT (R)
+
+061 - NATIONAL LIBRARY OF MEDICINE COPY STATEMENT (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2910,7 +2972,8 @@ DIRECTORY
       $b - Item number (NR)
       $c - Copy information (NR)
       $8 - Field link and sequence number (R)
-  066 - CHARACTER SETS PRESENT (NR)
+
+066 - CHARACTER SETS PRESENT (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -2920,7 +2983,8 @@ DIRECTORY
       $a - Primary G0 character set (NR)
       $b - Primary G1 character set (NR)
       $c - Alternate G0 or G1 character set (R)
-  070 - NATIONAL AGRICULTURAL LIBRARY CALL NUMBER (R)
+
+070 - NATIONAL AGRICULTURAL LIBRARY CALL NUMBER (R)
    Indicators
       First - Existence in NAL collection
          0 - Item is in NAL
@@ -2935,8 +2999,9 @@ DIRECTORY
    Subfield Codes
       $a - Classification number (R)
       $b - Item number (NR)
-      $8 - Field link and sequence number (R)  
-  071 - NATIONAL AGRICULTURAL LIBRARY COPY STATEMENT (R)
+      $8 - Field link and sequence number (R)
+
+071 - NATIONAL AGRICULTURAL LIBRARY COPY STATEMENT (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2952,7 +3017,8 @@ DIRECTORY
       $b - Item number (NR)
       $c - Copy information (NR)
       $8 - Field link and sequence number (R)
-  072 - SUBJECT CATEGORY CODE (R)
+
+072 - SUBJECT CATEGORY CODE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2965,7 +3031,8 @@ DIRECTORY
       $2 - Source (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  074 - GPO ITEM NUMBER (R)
+
+074 - GPO ITEM NUMBER (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2974,8 +3041,9 @@ DIRECTORY
    Subfield Codes
       $a - GPO item number (NR)
       $z - Canceled/invalid GPO item number (R)
-      $8 - Field link and sequence number (R)  
-  080 - UNIVERSAL DECIMAL CLASSIFICATION NUMBER (R)
+      $8 - Field link and sequence number (R)
+
+080 - UNIVERSAL DECIMAL CLASSIFICATION NUMBER (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -2987,8 +3055,9 @@ DIRECTORY
       $x - Common auxiliary subdivision (R)
       $2 - Edition identifier (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  082 - DEWEY DECIMAL CLASSIFICATION NUMBER (R)
+      $8 - Field link and sequence number (R)
+
+082 - DEWEY DECIMAL CLASSIFICATION NUMBER (R)
    Indicators
       First - Type of edition
          # - No edition information recorded (BK CF MU VM SE) [OBSOLETE]
@@ -3003,10 +3072,31 @@ DIRECTORY
       $a - Classification number (R)
       $b - Item number (NR)
       $b - DDC number--abridged NST version (SE) [OBSOLETE]
+      $m - Standard or optional designation (NR)
+      $q - Assigning agency (NR)
       $2 - Edition number (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  084 - OTHER CLASSIFICATION NUMBER (R)
+      $8 - Field link and sequence number (R)
+
+083 - ADDITIONAL DEWEY DECIMAL CLASSIFICATION NUMBER
+   Indicators
+      First - Type of edition
+         0 - Full edition
+         1 - Abridged edition
+      Second - Undefined
+         # - Undefined
+   Subfield Codes
+      $a - Classification number (R)
+      $c - Classification number--Ending number of span (R)
+      $m - Standard or optional designation (NR)
+      $q - Assigning agency (NR)
+      $y - Table sequence number for internal subarrangement or add table (R)
+      $z - Table identification (R)
+      $2 - Edition number (NR)
+      $6 - Linkage (NR)
+      $8 - Field link and sequence number (R)
+
+084 - OTHER CLASSIFICATION NUMBER (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -3017,8 +3107,31 @@ DIRECTORY
       $b - Item number (NR)
       $2 - Source of number (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  086 - GOVERNMENT DOCUMENT CLASSIFICATION NUMBER (R)
+      $8 - Field link and sequence number (R)
+	  
+085  SYNTHESIZED CLASSIFICATION NUMBER COMPONENTS (R)
+   Indicators
+      First - Undefined
+         # - Undefined
+      Second - Undefined
+         # - Undefined
+   Subfield Codes
+      $a - Number where instructions are found-single number or beginning number of span (R)
+      $b - Base number (R)
+      $c - Classification number-ending number of span (R)
+      $f - Facet designator (R)
+      $r - Root number (R)
+      $s - Digits added from classification number in schedule or external table (R)
+      $t - Digits added from internal subarrangement or add table (R)
+      $u - Number being analyzed (R)
+      $v - Number in internal subarrangement or add table where instructions are found (R)
+      $w - Table identification-Internal subarrangement or add table (R)
+      $y - Table sequence number for internal subarrangement or add table (R)
+      $z - Table identification (R)
+      $6 - Linkage (NR)
+      $8 - Field link and sequence number (R)
+
+086 - GOVERNMENT DOCUMENT CLASSIFICATION NUMBER (R)
    Indicators
       First - Number source
          # - Source specified in subfield $2
@@ -3033,8 +3146,9 @@ DIRECTORY
       $z - Canceled/invalid classification number (R)
       $2 - Number source (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  088 - REPORT NUMBER (R)
+      $8 - Field link and sequence number (R)
+
+088 - REPORT NUMBER (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -3045,7 +3159,8 @@ DIRECTORY
       $z - Canceled/invalid report number (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  090 - LOCAL CALL NUMBER (BK AM CF MP MU VM SE) [OBSOLETE]
+
+090 - LOCAL CALL NUMBER (BK AM CF MP MU VM SE) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -3054,7 +3169,8 @@ DIRECTORY
    Subfield Codes
       $a - Local class number (NR)
       $b - Local Cutter number (NR)
-  090 - SHELF LOCATION (AM)[OBSOLETE]
+
+090 - SHELF LOCATION (AM)[OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -3062,7 +3178,8 @@ DIRECTORY
          # - Undefined
    Subfield Code
       $a - Shelf location (NR)
-  091 - MICROFILM SHELF LOCATION (AM) [OBSOLETE]
+
+091 - MICROFILM SHELF LOCATION (AM) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -3071,8 +3188,9 @@ DIRECTORY
    Subfield Code
       $a - Microfilm shelf location (NR)
 
+
 --Main Entry Fields (1XX)--
-  100 - MAIN ENTRY--PERSONAL NAME (NR)
+100 - MAIN ENTRY--PERSONAL NAME (NR)
    Indicators
       First - Type of personal name entry element
          0 - Forename
@@ -3101,8 +3219,9 @@ DIRECTORY
       $0 - Authority record control number (R)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  110 - MAIN ENTRY--CORPORATE NAME (NR)
+      $8 - Field link and sequence number (R)
+
+110 - MAIN ENTRY--CORPORATE NAME (NR)
    Indicators
       First - Type of corporate name entry element
          0 - Inverted name
@@ -3128,8 +3247,9 @@ DIRECTORY
       $0 - Authority record control number (R)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  111 - MAIN ENTRY--MEETING NAME (NR)
+      $8 - Field link and sequence number (R)
+
+111 - MAIN ENTRY--MEETING NAME (NR)
    Indicators
       First - Type of meeting name entry element
          0 - Inverted name 
@@ -3157,8 +3277,9 @@ DIRECTORY
       $0 - Authority record control number (R)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  130 - MAIN ENTRY--UNIFORM TITLE (NR)
+      $8 - Field link and sequence number (R)
+
+130 - MAIN ENTRY--UNIFORM TITLE (NR)
    Indicators 
       First - Nonfiling characters
          0-9 - Number of nonfiling characters present
@@ -3185,8 +3306,9 @@ DIRECTORY
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
 
+
 --Title and Title-Related Fields (20X-24X)--
-  210 - ABBREVIATED TITLE (R)
+210 - ABBREVIATED TITLE (R)
    Indicators
       First - Title added entry
          0 - No added entry
@@ -3199,8 +3321,9 @@ DIRECTORY
       $b - Qualifying information (NR)
       $2 - Source (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  211 - ACRONYM OR SHORTENED TITLE (R) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+211 - ACRONYM OR SHORTENED TITLE (R) [OBSOLETE]
    Indicators
       First - Title added entry
          0 - No title added entry
@@ -3210,7 +3333,8 @@ DIRECTORY
    Subfield Codes
       $a - Acronym or shortened title (NR)
       $6 - Linkage (NR)
-  212 - VARIANT ACCESS TITLE (R) [OBSOLETE]
+
+212 - VARIANT ACCESS TITLE (R) [OBSOLETE]
    Indicators
       First - Title added entry
          0 - No title added entry
@@ -3220,7 +3344,8 @@ DIRECTORY
    Subfield Codes
       $a - Variant access title (NR)
       $6 - Linkage (NR)
-  214 - AUGMENTED TITLE (R) [OBSOLETE]
+
+214 - AUGMENTED TITLE (R) [OBSOLETE]
    Indicators
       First - Title added entry
          0 - No title added entry
@@ -3230,12 +3355,12 @@ DIRECTORY
    Subfield Codes
       $a - Augmented title (NR)
       $6 - Linkage (NR)
-  222 - KEY TITLE (R)
+
+222 - KEY TITLE (R)
    Indicators
       First - Undefined
          # - Undefined
-      First - Specifies whether variant title and/or added entry is required
-              (CF SE) [OBSOLETE]
+      First - Specifies whether variant title and/or added entry is required (CF SE) [OBSOLETE]
          0 - No key title added entry; title proper same
          1 - Key title added entry; title proper different
          2 - Key title added entry; title proper same
@@ -3247,7 +3372,8 @@ DIRECTORY
       $b - Qualifying information (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  240 - UNIFORM TITLE (NR)
+
+240 - UNIFORM TITLE (NR)
    Indicators
       First - Uniform title printed or displayed
          0 - Not printed or displayed
@@ -3272,8 +3398,9 @@ DIRECTORY
       $s - Version (NR)
       $0 - Authority record control number (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  241 - ROMANIZED TITLE (BK AM CF MP MU VM) (NR) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+241 - ROMANIZED TITLE (BK AM CF MP MU VM) (NR) [OBSOLETE]
    Indicators
       First - Title added entry
          0 - No title added entry
@@ -3283,7 +3410,8 @@ DIRECTORY
    Subfield Codes
       $a - Romanized title (NR)
       $h - Medium (NR)
-  242 - TRANSLATION OF TITLE BY CATALOGING AGENCY (R)
+
+242 - TRANSLATION OF TITLE BY CATALOGING AGENCY (R)
    Indicators
       First - Title added entry
          0 - No added entry
@@ -3301,8 +3429,9 @@ DIRECTORY
       $p - Name of part/section of a work (R)
       $y - Language code of translated title (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  243 - COLLECTIVE UNIFORM TITLE (NR)
+      $8 - Field link and sequence number (R)
+
+243 - COLLECTIVE UNIFORM TITLE (NR)
    Indicators 
       First - Uniform title printed or displayed
          0 - Not printed or displayed
@@ -3326,8 +3455,9 @@ DIRECTORY
       $r - Key for music (NR)
       $s - Version (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  245 - TITLE STATEMENT (NR)
+      $8 - Field link and sequence number (R)
+
+245 - TITLE STATEMENT (NR)
    Indicators
       First - Title added entry
          0 - No added entry
@@ -3349,7 +3479,8 @@ DIRECTORY
       $s - Version (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  246 - VARYING FORM OF TITLE (R)
+
+246 - VARYING FORM OF TITLE (R)
    Indicators
       First - Note/added entry controller
          0 - Note, no added entry
@@ -3380,8 +3511,9 @@ DIRECTORY
       $p - Name of part/section of a work (R)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  247 - FORMER TITLE (R)
+      $8 - Field link and sequence number (R)
+
+247 - FORMER TITLE (R)
    Indicators
       First - Title added entry
          0 - No added entry
@@ -3403,8 +3535,9 @@ DIRECTORY
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
 
+
 --Edition, Imprint, etc. Fields 250-270--
-  250 - EDITION STATEMENT (NR)
+250 - EDITION STATEMENT (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -3415,7 +3548,8 @@ DIRECTORY
       $b - Remainder of edition statement (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  254 - MUSICAL PRESENTATION STATEMENT (NR)
+
+254 - MUSICAL PRESENTATION STATEMENT (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -3424,8 +3558,9 @@ DIRECTORY
    Subfield Codes
       $a - Musical presentation statement (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  255 - CARTOGRAPHIC MATHEMATICAL DATA (R)
+      $8 - Field link and sequence number (R)
+
+255 - CARTOGRAPHIC MATHEMATICAL DATA (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -3440,8 +3575,9 @@ DIRECTORY
       $f - Outer G-ring coordinate pairs (NR)
       $g - Exclusion G-ring coordinate pairs (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  256 - COMPUTER FILE CHARACTERISTICS (NR)
+      $8 - Field link and sequence number (R)
+
+256 - COMPUTER FILE CHARACTERISTICS (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -3450,8 +3586,9 @@ DIRECTORY
    Subfield Codes
       $a - Computer file characteristics (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  257 - COUNTRY OF PRODUCING ENTITY FOR ARCHIVAL FILMS (NR)
+      $8 - Field link and sequence number (R)
+
+257 - COUNTRY OF PRODUCING ENTITY FOR ARCHIVAL FILMS (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -3460,8 +3597,9 @@ DIRECTORY
    Subfield Codes
       $a - Country of producing entity (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  258 - PHILATELIC ISSUE DATE (R)
+      $8 - Field link and sequence number (R)
+
+258 - PHILATELIC ISSUE DATE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -3471,8 +3609,9 @@ DIRECTORY
       $a - Issuing jurisdiction (NR)
       $b - Denomination (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  260 - PUBLICATION, DISTRIBUTION, ETC. (IMPRINT) (R)
+      $8 - Field link and sequence number (R)
+
+260 - PUBLICATION, DISTRIBUTION, ETC. (IMPRINT) (R)
    Indicators
       First - Sequence of publishing statements
          # - Not applicable/No information provided/Earliest available publisher
@@ -3495,9 +3634,10 @@ DIRECTORY
       $f - Manufacturer (R)
       $g - Date of manufacture (R)
       $3 - Materials specified (NR)
-          $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  261 - IMPRINT STATEMENT FOR FILMS (Pre-AACR 1 Revised) (NR) [LOCAL]
+      $6 - Linkage (NR)
+      $8 - Field link and sequence number (R)
+
+261 - IMPRINT STATEMENT FOR FILMS (Pre-AACR 1 Revised) (NR) [LOCAL]
    Indicators
       First - Undefined
          # - Undefined
@@ -3510,8 +3650,9 @@ DIRECTORY
       $e - Contractual producer (R)
       $f - Place of production, release, etc. (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  262 - IMPRINT STATEMENT FOR SOUND RECORDINGS (Pre-AACR 2) (NR) [LOCAL]
+      $8 - Field link and sequence number (R)
+
+262 - IMPRINT STATEMENT FOR SOUND RECORDINGS (Pre-AACR 2) (NR) [LOCAL]
    Indicators
       First - Undefined
          # - Undefined
@@ -3524,8 +3665,9 @@ DIRECTORY
       $k - Serial identification (NR)
       $l - Matrix and/or take number (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  263 - PROJECTED PUBLICATION DATE (NR)
+      $8 - Field link and sequence number (R)
+
+263 - PROJECTED PUBLICATION DATE (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -3534,8 +3676,9 @@ DIRECTORY
    Subfield Code
       $a - Projected publication date (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  265 - SOURCE FOR ACQUISITION/SUBSCRIPTION ADDRESS (NR) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+265 - SOURCE FOR ACQUISITION/SUBSCRIPTION ADDRESS (NR) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -3544,7 +3687,8 @@ DIRECTORY
    Subfield Codes
       $a - Source for acquisition/subscription address (R)
       $6 - Linkage (NR)
-  270 - ADDRESS (R)
+
+270 - ADDRESS (R)
    Indicators
       First - Level
          # - No level specified
@@ -3576,9 +3720,10 @@ DIRECTORY
       $4 - Relator code (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-          
+
+
 --Physical Description, etc. Fields (3XX)--
-  300 - PHYSICAL DESCRIPTION (R)
+300 - PHYSICAL DESCRIPTION (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -3593,8 +3738,9 @@ DIRECTORY
       $g - Size of unit (R)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  301 - PHYSICAL DESCRIPTION FOR FILMS (PRE-AACR 2) (VM) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+301 - PHYSICAL DESCRIPTION FOR FILMS (PRE-AACR 2) (VM) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -3607,7 +3753,8 @@ DIRECTORY
       $d - Dimensions (NR)
       $e - Accompanying material (NR)
       $f - Speed (NR)
-  302 - PAGE OR ITEM COUNT (BK AM) [OBSOLETE]
+
+302 - PAGE OR ITEM COUNT (BK AM) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -3615,7 +3762,8 @@ DIRECTORY
          # - Undefined
    Subfield Codes
       $a - Page count (NR)
-  303 - UNIT COUNT (AM) [OBSOLETE]
+
+303 - UNIT COUNT (AM) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -3623,7 +3771,8 @@ DIRECTORY
          # - Undefined
    Subfield Codes
       $a - Unit count (NR)
-  304 - LINEAR FOOTAGE (AM) [OBSOLETE]
+
+304 - LINEAR FOOTAGE (AM) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -3631,7 +3780,8 @@ DIRECTORY
          # - Undefined
    Subfield Codes
       $a - Linear footage (NR)
-  305 - PHYSICAL DESCRIPTION FOR SOUND RECORDINGS (Pre-AACR 2) (MU) [OBSOLETE]
+
+305 - PHYSICAL DESCRIPTION FOR SOUND RECORDINGS (Pre-AACR 2) (MU) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -3647,7 +3797,8 @@ DIRECTORY
       $m - Serial identification (NR)
       $n - Matrix and/or take number (NR)
       $6 - Linkage (NR)
-  306 - PLAYING TIME (NR)
+
+306 - PLAYING TIME (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -3656,8 +3807,9 @@ DIRECTORY
    Subfield Code
       $a - Playing time (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  307 - HOURS, ETC. (R)
+      $8 - Field link and sequence number (R)
+
+307 - HOURS, ETC. (R)
    Indicators
       First - Display constant controller
          # - Hours
@@ -3668,8 +3820,9 @@ DIRECTORY
       $a - Hours (NR)
       $b - Additional information (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  308 - PHYSICAL DESCRIPTION FOR FILMS (ARCHIVAL) (VM) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+308 - PHYSICAL DESCRIPTION FOR FILMS (ARCHIVAL) (VM) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -3683,7 +3836,8 @@ DIRECTORY
       $e - Width (NR)
       $f - Presentation format (NR)
       $6 - Linkage (NR)
-  310 - CURRENT PUBLICATION FREQUENCY (NR)
+
+310 - CURRENT PUBLICATION FREQUENCY (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -3693,8 +3847,9 @@ DIRECTORY
       $a - Current publication frequency (NR)
       $b - Date of current publication frequency (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  315 - FREQUENCY (NR) (CF MP) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+315 - FREQUENCY (NR) (CF MP) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -3704,7 +3859,8 @@ DIRECTORY
       $a - Frequency (R)
       $b - Dates of frequency (R)
       $6 - Linkage (NR)
- 321 - FORMER PUBLICATION FREQUENCY (R)
+
+321 - FORMER PUBLICATION FREQUENCY (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -3714,8 +3870,9 @@ DIRECTORY
       $a - Former publication frequency (NR)
       $b - Dates of former publication frequency (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  340 - PHYSICAL MEDIUM (R)
+      $8 - Field link and sequence number (R)
+
+340 - PHYSICAL MEDIUM (R)
    Indicators 
       First - Undefined
          # - Undefined
@@ -3732,8 +3889,9 @@ DIRECTORY
       $i - Technical specifications of medium (R)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  342 - GEOSPATIAL REFERENCE DATA (R)
+      $8 - Field link and sequence number (R)
+
+342 - GEOSPATIAL REFERENCE DATA (R)
    Indicators
       First - Geospatial reference dimension
          0 - Horizontal coordinate system
@@ -3762,8 +3920,7 @@ DIRECTORY
       $k - Scale factor (NR)
       $l - Height of perspective point above surface (NR)
       $m - Azimuthal angle (NR)
-      $n - Azimuth measure point longitude or straight vertical 
-               longitude from pole (NR)
+      $n - Azimuth measure point longitude or straight vertical longitude from pole (NR)
       $o - Landsat number and path number (NR)
       $p - Zone identifier (NR)
       $q - Ellipsoid name (NR)
@@ -3775,8 +3932,9 @@ DIRECTORY
       $w - Local planar or local georeference information (NR)
       $2 - Reference method used (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  343 - PLANAR COORDINATE DATA (R)
+      $8 - Field link and sequence number (R)
+
+343 - PLANAR COORDINATE DATA (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -3793,8 +3951,9 @@ DIRECTORY
       $h - Bearing reference direction (NR)
       $i - Bearing reference meridian (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  350 - PRICE (NR) (BK AM CF MU VM SE) [OBSOLETE] 
+      $8 - Field link and sequence number (R)
+
+350 - PRICE (NR) (BK AM CF MU VM SE) [OBSOLETE] 
    Indicators
       First - Undefined
          # - Undefined
@@ -3804,7 +3963,8 @@ DIRECTORY
       $a - Price (R)
       $b - Form of issue (R)
       $6 - Linkage (NR)
-  351 - ORGANIZATION AND ARRANGEMENT OF MATERIALS (R)
+
+351 - ORGANIZATION AND ARRANGEMENT OF MATERIALS (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -3816,8 +3976,9 @@ DIRECTORY
       $c - Hierarchical level (NR)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  352 - DIGITAL GRAPHIC REPRESENTATION (R)
+      $8 - Field link and sequence number (R)
+
+352 - DIGITAL GRAPHIC REPRESENTATION (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -3834,8 +3995,9 @@ DIRECTORY
       $i - Indirect reference description (NR)
       $q - Format of the digital image (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  355 - SECURITY CLASSIFICATION CONTROL (R)
+      $8 - Field link and sequence number (R)
+
+355 - SECURITY CLASSIFICATION CONTROL (R)
    Indicators
       First - Controlled element
          0 - Document
@@ -3858,8 +4020,9 @@ DIRECTORY
       $h - Declassification date (NR)
       $j - Authorization (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  357 - ORIGINATOR DISSEMINATION CONTROL (NR)
+      $8 - Field link and sequence number (R)
+
+357 - ORIGINATOR DISSEMINATION CONTROL (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -3871,8 +4034,9 @@ DIRECTORY
       $c - Authorized recipients of material (R)
       $g - Other restrictions (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  359 - RENTAL PRICE (VM) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+359 - RENTAL PRICE (VM) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -3880,7 +4044,8 @@ DIRECTORY
          # - Undefined
    Subfield Code
       $a - Rental price (NR)
-  362 - DATES OF PUBLICATION AND/OR SEQUENTIAL DESIGNATION (R)
+
+362 - DATES OF PUBLICATION AND/OR SEQUENTIAL DESIGNATION (R)
    Indicators
       First - Format of date
          0 - Formatted style
@@ -3892,7 +4057,8 @@ DIRECTORY
       $z - Source of information (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  363 - NORMALIZED DATE AND SEQUENTIAL DESIGNATION (R)
+
+363 - NORMALIZED DATE AND SEQUENTIAL DESIGNATION (R)
    Indicators
       First - Start/End designator
          # - No information provided          
@@ -3921,8 +4087,9 @@ DIRECTORY
       $x - Nonpublic note (R)
       $z - Public note (R) 
       $6 - Linkage (NR) 
-      $8 - Field link and sequence number (NR)  
-  365 - TRADE PRICE (R)
+      $8 - Field link and sequence number (NR)
+
+365 - TRADE PRICE (R)
    Indicators
       First - Undefined
          # - Undefined 
@@ -3944,7 +4111,8 @@ DIRECTORY
       $2 - Source of price type code (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  366 - TRADE AVAILABILITY INFORMATION (R)
+
+366 - TRADE AVAILABILITY INFORMATION (R)
    Indicators
       First - Undefined
          # - Undefined 
@@ -3963,9 +4131,11 @@ DIRECTORY
       $m - Identification of agency (NR)
       $2 - Source of availability status code (NR)
       $6 - Linkage (NR) 
-      $8 - Field link and sequence number (R) 
+      $8 - Field link and sequence number (R)
+
+
 --Series Statement Fields (4XX)--
-  400 - SERIES STATEMENT/ADDED ENTRY--PERSONAL NAME  (R) [US-LOCAL]
+400 - SERIES STATEMENT/ADDED ENTRY--PERSONAL NAME  (R) [US-LOCAL]
    Indicators
       First - Type of personal name entry element
          0 - Forename
@@ -3994,8 +4164,9 @@ DIRECTORY
       $x - International Standard Serial Number  (NR)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number  (R)   
-  410 - SERIES STATEMENT/ADDED ENTRY--CORPORATE NAME (R) [US-LOCAL]
+      $8 - Field link and sequence number  (R)
+
+410 - SERIES STATEMENT/ADDED ENTRY--CORPORATE NAME (R) [US-LOCAL]
    Indicators
       First - Type of corporate name entry element
          0 - Inverted name
@@ -4022,8 +4193,9 @@ DIRECTORY
       $x - International Standard Serial Number (NR)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  411 - SERIES STATEMENT/ADDED ENTRY--MEETING NAME (R) [US-LOCAL]
+      $8 - Field link and sequence number (R)
+
+411 - SERIES STATEMENT/ADDED ENTRY--MEETING NAME (R) [US-LOCAL]
    Indicators
       First - Type of meeting name entry element
          0 - Inverted name
@@ -4051,8 +4223,9 @@ DIRECTORY
       $x - International Standard Serial Number (NR)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  440 - SERIES STATEMENT/ADDED ENTRY--TITLE (R)
+      $8 - Field link and sequence number (R)
+
+440 - SERIES STATEMENT/ADDED ENTRY--TITLE (R) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -4067,12 +4240,14 @@ DIRECTORY
       $x - International Standard Serial Number (NR)
       $0 - Authority record control number (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  490 - SERIES STATEMENT (R)
+      $8 - Field link and sequence number (R)
+
+490 - SERIES STATEMENT (R)
    Indicators
       First - Specifies whether series is traced
          0 - Series not traced
-         1 - Series traced differently
+         1 - Series traced [REDEFINED]
+         1 - Series traced differently 
       Second - Undefined
          # - Undefined
    Subfield Codes
@@ -4080,11 +4255,13 @@ DIRECTORY
       $l - Library of Congress call number (NR)
       $v - Volume number/sequential designation  (R)
       $x - International Standard Serial Number (NR)
+      $3 - Materials specified
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-          
+
+
 --Note Fields (Part 1: 50X-53X)--
-  500 - GENERAL NOTE (R)
+500 - GENERAL NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4098,8 +4275,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  501 - WITH NOTE (R)
+      $8 - Field link and sequence number (R)
+
+501 - WITH NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4109,8 +4287,9 @@ DIRECTORY
       $a - With note (NR)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  502 - DISSERTATION NOTE (R)
+      $8 - Field link and sequence number (R)
+
+502 - DISSERTATION NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4118,9 +4297,15 @@ DIRECTORY
          # - Undefined
    Subfield Codes
       $a - Dissertation note (NR)
+      $b - Degree type (NR)
+      $c - Name of granting institution (NR)  
+      $d - Year of degree granted (NR)
+      $g - Miscellaneous information (R)
+      $o - Dissertation identifier (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  503 - BIBLIOGRAPHIC HISTORY NOTE (R) (BK CF MU) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+503 - BIBLIOGRAPHIC HISTORY NOTE (R) (BK CF MU) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -4129,7 +4314,8 @@ DIRECTORY
    Subfield Codes
       $a - Bibliographic history note (NR)
       $6 - Linkage (NR)
-  504 - BIBLIOGRAPHY, ETC. NOTE (R)
+
+504 - BIBLIOGRAPHY, ETC. NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4139,8 +4325,9 @@ DIRECTORY
       $a - Bibliography, etc. note (NR)
       $b - Number of references (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  505 - FORMATTED CONTENTS NOTE (R)
+      $8 - Field link and sequence number (R)
+
+505 - FORMATTED CONTENTS NOTE (R)
    Indicators
       First - Display constant controller
          0 - Contents
@@ -4157,8 +4344,9 @@ DIRECTORY
       $t - Title (R)
       $u - Uniform Resource Identifier (R) 
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  506 - RESTRICTIONS ON ACCESS NOTE (R)
+      $8 - Field link and sequence number (R)
+
+506 - RESTRICTIONS ON ACCESS NOTE (R)
    Indicators
       First - Restriction
          # - No information provided         
@@ -4178,8 +4366,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  507 - SCALE NOTE FOR GRAPHIC MATERIAL (NR)
+      $8 - Field link and sequence number (R)
+
+507 - SCALE NOTE FOR GRAPHIC MATERIAL (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -4189,8 +4378,9 @@ DIRECTORY
       $a - Representative fraction of scale note (NR)
       $b - Remainder of scale note (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  508 - CREATION/PRODUCTION CREDITS NOTE (R)
+      $8 - Field link and sequence number (R)
+
+508 - CREATION/PRODUCTION CREDITS NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4199,8 +4389,9 @@ DIRECTORY
    Subfield Codes
       $a - Creation/production credits note (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  510 - CITATION/REFERENCES NOTE (R)
+      $8 - Field link and sequence number (R)
+
+510 - CITATION/REFERENCES NOTE (R)
    Indicators
       First - Coverage/location in source
          0 - Coverage unknown
@@ -4217,8 +4408,9 @@ DIRECTORY
       $x - International Standard Serial Number (NR)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  511 - PARTICIPANT OR PERFORMER NOTE (R)
+      $8 - Field link and sequence number (R)
+
+511 - PARTICIPANT OR PERFORMER NOTE (R)
    Indicators
       First - Display constant controller
          # - No information provided (VM MU) [OBSOLETE]
@@ -4231,8 +4423,9 @@ DIRECTORY
    Subfield Codes
       $a - Participant or performer note (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  512 - EARLIER OR LATER VOLUMES SEPARATELY CATALOGED NOTE (SE) (R) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+512 - EARLIER OR LATER VOLUMES SEPARATELY CATALOGED NOTE (SE) (R) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -4241,7 +4434,8 @@ DIRECTORY
    Subfield Codes
       $a - Earlier or later volumes separately cataloged note (NR)
       $6 - Linkage (NR)
-  513 - TYPE OF REPORT AND PERIOD COVERED NOTE (R)
+
+513 - TYPE OF REPORT AND PERIOD COVERED NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4251,8 +4445,9 @@ DIRECTORY
       $a - Type of report (NR)
       $b - Period covered (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  514 - DATA QUALITY NOTE (NR)
+      $8 - Field link and sequence number (R)
+
+514 - DATA QUALITY NOTE (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -4274,8 +4469,9 @@ DIRECTORY
       $u - Uniform Resource Identifier (R)
       $z - Display note (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)    
-  515 - NUMBERING PECULIARITIES NOTE (R)
+      $8 - Field link and sequence number (R)
+
+515 - NUMBERING PECULIARITIES NOTE (R)
    Indicators 
       First - Undefined
          # - Undefined
@@ -4285,8 +4481,9 @@ DIRECTORY
       $a - Numbering peculiarities note (NR)
       $z - Source of note information (NR) (SE) [OBSOLETE]
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  516 - TYPE OF COMPUTER FILE OR DATA NOTE (R)
+      $8 - Field link and sequence number (R)
+
+516 - TYPE OF COMPUTER FILE OR DATA NOTE (R)
    Indicators
       First - Display constant controller
          # - Type of file
@@ -4297,7 +4494,8 @@ DIRECTORY
       $a - Type of computer file or data note (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-   517 - CATEGORIES OF FILMS NOTE (ARCHIVAL) (VM) (NR) [OBSOLETE]
+
+517 - CATEGORIES OF FILMS NOTE (ARCHIVAL) (VM) (NR) [OBSOLETE]
    Indicators
       First - Fiction specification
          0 - Nonfiction
@@ -4310,7 +4508,8 @@ DIRECTORY
       $a - Different formats (NR)
       $b - Content descriptors (R)
       $c - Additional animation techniques (R)
-  518 - DATE/TIME AND PLACE OF AN EVENT NOTE (R)
+
+518 - DATE/TIME AND PLACE OF AN EVENT NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4320,8 +4519,9 @@ DIRECTORY
       $a - Date/time and place of an event note (NR)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  520 - SUMMARY, ETC. (R)
+      $8 - Field link and sequence number (R)
+
+520 - SUMMARY, ETC. (R)
    Indicators
       First - Display constant controller
          # - Summary
@@ -4342,8 +4542,9 @@ DIRECTORY
       $2 - Source (NR)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  521 - TARGET AUDIENCE NOTE (R)
+      $8 - Field link and sequence number (R)
+
+521 - TARGET AUDIENCE NOTE (R)
    Indicators
       First - Display constant controller
          # - Audience
@@ -4360,7 +4561,8 @@ DIRECTORY
       $b - Source (NR)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
+      $8 - Field link and sequence number (R)
+
   522 - GEOGRAPHIC COVERAGE NOTE (R)
    Indicators
       First - Display constant controller
@@ -4372,7 +4574,8 @@ DIRECTORY
       $a - Geographic coverage note (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
- 523 - TIME PERIOD OF CONTENT NOTE (NR) (CF) [OBSOLETE]
+
+523 - TIME PERIOD OF CONTENT NOTE (NR) (CF) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -4382,7 +4585,8 @@ DIRECTORY
       $a - Time period of content note (NR)
       $b - Dates of data collection note (NR)
       $6 - Linkage (NR)
-  524 - PREFERRED CITATION OF DESCRIBED MATERIALS NOTE (R)
+
+524 - PREFERRED CITATION OF DESCRIBED MATERIALS NOTE (R)
    Indicators
       First - Display constant controller
          # - Cite as
@@ -4394,8 +4598,9 @@ DIRECTORY
       $2 - Source of schema used (NR)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  525 - SUPPLEMENT NOTE (R)
+      $8 - Field link and sequence number (R)
+
+525 - SUPPLEMENT NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4405,8 +4610,9 @@ DIRECTORY
       $a - Supplement note (NR)
       $z - Source of note information (NR) (SE) [OBSOLETE]
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  526 - STUDY PROGRAM INFORMATION NOTE (R)
+      $8 - Field link and sequence number (R)
+
+526 - STUDY PROGRAM INFORMATION NOTE (R)
    Indicators
       First - Display constant controller
          0 - Reading program
@@ -4423,8 +4629,9 @@ DIRECTORY
       $z - Public note (R)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  527 - CENSORSHIP NOTE (VM) (R) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+527 - CENSORSHIP NOTE (VM) (R) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -4433,7 +4640,8 @@ DIRECTORY
    Subfield Codes
       $a - Censorship note (NR)
       $6 - Linkage (NR)
-  530 - ADDITIONAL PHYSICAL FORM AVAILABLE NOTE (R)
+
+530 - ADDITIONAL PHYSICAL FORM AVAILABLE NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4448,8 +4656,9 @@ DIRECTORY
       $z - Source of note information (NR) (AM CF VM SE) [OBSOLETE]
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  533 - REPRODUCTION NOTE (R)
+      $8 - Field link and sequence number (R)
+
+533 - REPRODUCTION NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4477,8 +4686,9 @@ DIRECTORY
          13 - Regularity
             # - Not applicable
          14 - Form of item
-      $8 - Field link and sequence number (R)   
-  534 - ORIGINAL VERSION NOTE (R)
+      $8 - Field link and sequence number (R)
+
+534 - ORIGINAL VERSION NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4497,13 +4707,15 @@ DIRECTORY
       $l - Location of original (NR)
       $m - Material specific details (NR)
       $n - Note about original (R)
+      $o - Other resource identifier (R) 
       $p - Introductory phrase (NR)
       $t - Title statement of original (NR)
       $x - International Standard Serial Number (R)
       $z - International Standard Book Number (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  535 - LOCATION OF ORIGINALS/DUPLICATES NOTE (R)
+      $8 - Field link and sequence number (R)
+
+535 - LOCATION OF ORIGINALS/DUPLICATES NOTE (R)
    Indicators 
       First - Additional information about custodian
          0 - Repository (AM) [OBSOLETE]
@@ -4520,10 +4732,11 @@ DIRECTORY
       $g - Repository location code (NR)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-          
+      $8 - Field link and sequence number (R)
+
+
 --Note Fields (Part 2: 53X-58X)--
-  536 - FUNDING INFORMATION NOTE (R)
+536 - FUNDING INFORMATION NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4539,8 +4752,9 @@ DIRECTORY
       $g - Task number (R)
       $h - Work unit number (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  537 - SOURCE OF DATA NOTE (NR) (CF) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+537 - SOURCE OF DATA NOTE (NR) (CF) [OBSOLETE]
    Indicators
       First - Display constant controller
          # - No information provided
@@ -4550,7 +4764,8 @@ DIRECTORY
    Subfield Codes
       $a - Source of data note (NR)
       $6 - Linkage (NR)
-  538 - SYSTEM DETAILS NOTE (R)
+
+538 - SYSTEM DETAILS NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4563,8 +4778,9 @@ DIRECTORY
       $3 - Materials specified  (NR)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  540 - TERMS GOVERNING USE AND REPRODUCTION NOTE (R)
+      $8 - Field link and sequence number (R)
+
+540 - TERMS GOVERNING USE AND REPRODUCTION NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4579,8 +4795,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  541 - IMMEDIATE SOURCE OF ACQUISITION NOTE (R)
+      $8 - Field link and sequence number (R)
+
+541 - IMMEDIATE SOURCE OF ACQUISITION NOTE (R)
    Indicators 
       First - Privacy
          # - No information provided
@@ -4601,8 +4818,40 @@ DIRECTORY
       $3 - Materials specified (NR)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  543 - SOLICITATION INFORMATION NOTE (AM) (R) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+542 - INFORMATION RELATING TO COPYRIGHT STATUS (R)
+   Indicators
+      First - Privacy
+         # - No information provided
+         0 - Private
+         1 - Not private
+      Second - Undefined
+         # - Undefined
+      $a - Personal creator (NR)
+      $b - Personal creator death date (NR)
+      $c - Corporate creator (NR)
+      $d - Copyright holder (R)
+      $e - Copyright holder contact information (R)
+      $f - Copyright statement (R)
+      $g - Copyright date (NR)
+      $h - Copyright renewal date (R)
+      $i - Publication date (NR)
+      $j - Creation date (NR)
+      $k - Publisher (R)
+      $l - Copyright status (NR)
+      $m - Publication status (NR)
+      $n - Note (R)
+      $o - Research date (NR)
+      $q - Assigning agency (NR)
+      $r - Jurisdiction of copyright assessment (NR)
+      $s - Source of information (NR)
+      $u - Uniform Resource Identifier (R)
+      $3 - Materials specified (NR)
+      $6 - Linkage (NR)
+      $8 - Field link and sequence number (R)
+
+543 - SOLICITATION INFORMATION NOTE (AM) (R) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -4611,7 +4860,8 @@ DIRECTORY
    Subfield Codes
       $a - Solicitation information note (NR)
       $6 - Linkage (NR)
-  544 - LOCATION OF OTHER ARCHIVAL MATERIALS NOTE (R)
+
+544 - LOCATION OF OTHER ARCHIVAL MATERIALS NOTE (R)
    Indicators
       First - Relationship
          # - No information provided
@@ -4628,8 +4878,9 @@ DIRECTORY
       $n - Note (R)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  545 - BIOGRAPHICAL OR HISTORICAL DATA (R)
+      $8 - Field link and sequence number (R)
+
+545 - BIOGRAPHICAL OR HISTORICAL DATA (R)
    Indicators
       First - Type of data
          # - No information provided
@@ -4642,8 +4893,9 @@ DIRECTORY
       $b - Expansion (NR)
       $u - Uniform Resource Identifier (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  546 - LANGUAGE NOTE (R)
+      $8 - Field link and sequence number (R)
+
+546 - LANGUAGE NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4655,8 +4907,9 @@ DIRECTORY
       $z - Source of note information (NR) (SE) [OBSOLETE]
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  547 - FORMER TITLE COMPLEXITY NOTE (R)
+      $8 - Field link and sequence number (R)
+
+547 - FORMER TITLE COMPLEXITY NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4666,8 +4919,9 @@ DIRECTORY
       $a - Former title complexity note (NR)
       $z - Source of note information (NR) (SE) [OBSOLETE]
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  550 - ISSUING BODY NOTE (R)
+      $8 - Field link and sequence number (R)
+
+550 - ISSUING BODY NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4680,8 +4934,9 @@ DIRECTORY
       $a - Issuing body note (NR)
       $z - Source of note information (NR) (SE) [OBSOLETE]
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  552 - ENTITY AND ATTRIBUTE INFORMATION NOTE (R)
+      $8 - Field link and sequence number (R)
+
+552 - ENTITY AND ATTRIBUTE INFORMATION NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4708,7 +4963,8 @@ DIRECTORY
       $z - Display note (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  555 - CUMULATIVE INDEX/FINDING AIDS NOTE (R)
+
+555 - CUMULATIVE INDEX/FINDING AIDS NOTE (R)
    Indicators
       First - Display constant controller
          # - Indexes
@@ -4724,8 +4980,9 @@ DIRECTORY
       $u - Uniform Resource Identifier (R)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  556 - INFORMATION ABOUT DOCUMENTATION NOTE (R)
+      $8 - Field link and sequence number (R)
+
+556 - INFORMATION ABOUT DOCUMENTATION NOTE (R)
    Indicators
       First - Display constant controller
          # - Documentation
@@ -4736,8 +4993,9 @@ DIRECTORY
       $a - Information about documentation note (NR)
       $z - International Standard Book Number (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  561 - OWNERSHIP AND CUSTODIAL HISTORY (R)
+      $8 - Field link and sequence number (R)
+
+561 - OWNERSHIP AND CUSTODIAL HISTORY (R)
    Indicators
       First - Privacy
          # - No information provided
@@ -4751,8 +5009,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  562 - COPY AND VERSION IDENTIFICATION NOTE (R)
+      $8 - Field link and sequence number (R)
+
+562 - COPY AND VERSION IDENTIFICATION NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4767,8 +5026,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  563 - BINDING INFORMATION (R)
+      $8 - Field link and sequence number (R)
+
+563 - BINDING INFORMATION (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4780,8 +5040,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  565 - CASE FILE CHARACTERISTICS NOTE (R)
+      $8 - Field link and sequence number (R)
+
+565 - CASE FILE CHARACTERISTICS NOTE (R)
    Indicators
       First - Display constant controller
          # - File size
@@ -4798,7 +5059,8 @@ DIRECTORY
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  567 - METHODOLOGY NOTE (R)
+
+567 - METHODOLOGY NOTE (R)
    Indicators
       First - Display constant controller
          # - Methodology
@@ -4808,8 +5070,9 @@ DIRECTORY
    Subfield Codes
       $a - Methodology note (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  570 - EDITOR NOTE (SE) (R) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+570 - EDITOR NOTE (SE) (R) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -4819,7 +5082,8 @@ DIRECTORY
       $a - Editor note (NR) 
       $z - Source of note information (NR)
       $6 - Linkage (NR)
-  580 - LINKING ENTRY COMPLEXITY NOTE (R)
+
+580 - LINKING ENTRY COMPLEXITY NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4829,8 +5093,9 @@ DIRECTORY
       $a - Linking entry complexity note (NR)
       $z - Source of note information (NR) [OBSOLETE]
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  581 - PUBLICATIONS ABOUT DESCRIBED MATERIALS NOTE (R)
+      $8 - Field link and sequence number (R)
+
+581 - PUBLICATIONS ABOUT DESCRIBED MATERIALS NOTE (R)
    Indicators
       First - Display constant controller
          # - Publications
@@ -4842,8 +5107,9 @@ DIRECTORY
       $z - International Standard Book Number (R)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  582 - RELATED COMPUTER FILES NOTE (R) (CF) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+582 - RELATED COMPUTER FILES NOTE (R) (CF) [OBSOLETE]
    Indicators
       First - Display constant controller
          # - No information provided
@@ -4853,7 +5119,8 @@ DIRECTORY
    Subfield Codes
       $a - Related computer files note (NR)
       $6 - Linkage (NR)
-  583 - ACTION NOTE (R)
+
+583 - ACTION NOTE (R)
    Indicators
       First - Privacy
          # - No information provided
@@ -4883,7 +5150,8 @@ DIRECTORY
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  584 - ACCUMULATION AND FREQUENCY OF USE NOTE (R)
+
+584 - ACCUMULATION AND FREQUENCY OF USE NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4895,8 +5163,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  585 - EXHIBITIONS NOTE (R)
+      $8 - Field link and sequence number (R)
+
+585 - EXHIBITIONS NOTE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -4907,8 +5176,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  586 - AWARDS NOTE (R)
+      $8 - Field link and sequence number (R)
+
+586 - AWARDS NOTE (R)
    Indicators
       First - Display constant controller
          # - Awards
@@ -4919,9 +5189,10 @@ DIRECTORY
       $a - Awards note (NR)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  59X - LOCAL NOTES
-  590 - LOCAL NOTE (BK CF MP MU SE VM MX) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+	  
+--59X - LOCAL NOTES--
+590 - LOCAL NOTE (BK CF MP MU SE VM MX) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -4929,7 +5200,8 @@ DIRECTORY
          # - Undefined
    Subfield Codes
       $a - Local note (NR)
-  590 - RECEIPT DATE NOTE (VM) [OBSOLETE]
+
+590 - RECEIPT DATE NOTE (VM) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -4940,9 +5212,10 @@ DIRECTORY
       $b - Provenance (NR)
       $d - Condition of individual reels (NR)
       $d - Origin of safety copy (NR)
-          
+
+
 --Subject Access Fields (6XX)--
-  600 - SUBJECT ADDED ENTRY--PERSONAL NAME (R)
+600 - SUBJECT ADDED ENTRY--PERSONAL NAME (R)
    Indicators
       First - Type of personal name entry element
          0 - Forename
@@ -4988,8 +5261,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  610 - SUBJECT ADDED ENTRY--CORPORATE NAME (R)
+      $8 - Field link and sequence number (R)
+
+610 - SUBJECT ADDED ENTRY--CORPORATE NAME (R)
    Indicators
       First - Type of corporate name entry element
          0 - Inverted name
@@ -5032,8 +5306,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  611 - SUBJECT ADDED ENTRY--MEETING NAME (R)
+      $8 - Field link and sequence number (R)
+
+611 - SUBJECT ADDED ENTRY--MEETING NAME (R)
    Indicators
       First - Type of meeting name entry element
          0 - Inverted name
@@ -5075,8 +5350,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  630 - SUBJECT ADDED ENTRY--UNIFORM TITLE (R)
+      $8 - Field link and sequence number (R)
+
+630 - SUBJECT ADDED ENTRY--UNIFORM TITLE (R)
    Indicators
       First - Nonfiling characters
          0-9 - Number of nonfiling characters
@@ -5115,8 +5391,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $4 - Relator code (R)
       $6 - Linkage (NR) 
-      $8 - Field link and sequence number (R) 
-  648 - SUBJECT ADDED ENTRY--CHRONOLOGICAL TERM (R)
+      $8 - Field link and sequence number (R)
+
+648 - SUBJECT ADDED ENTRY--CHRONOLOGICAL TERM (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -5139,8 +5416,9 @@ DIRECTORY
       $2 - Source of heading or term (NR)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)    
- 650 - SUBJECT ADDED ENTRY--TOPICAL TERM (R)
+      $8 - Field link and sequence number (R)
+
+650 - SUBJECT ADDED ENTRY--TOPICAL TERM (R)
    Indicators
       First - Level of subject
          # - No information provided
@@ -5171,8 +5449,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  651 - SUBJECT ADDED ENTRY--GEOGRAPHIC NAME (R)
+      $8 - Field link and sequence number (R)
+
+651 - SUBJECT ADDED ENTRY--GEOGRAPHIC NAME (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -5198,8 +5477,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  652 - SUBJECT ADDED ENTRY--REVERSED GEOGRAPHIC (BK MP SE) [OBSOLETE] 
+      $8 - Field link and sequence number (R)
+
+652 - SUBJECT ADDED ENTRY--REVERSED GEOGRAPHIC (BK MP SE) [OBSOLETE] 
    Indicators
       First - Undefined
          # - Undefined
@@ -5210,7 +5490,8 @@ DIRECTORY
       $x - General subdivision (R)
       $y - Chronological subdivision (R)
       $z - Geographic subdivision (R)
-  653 - INDEX TERM--UNCONTROLLED (R)
+
+653 - INDEX TERM--UNCONTROLLED (R)
    Indicators
       First - Level of index term
          # - No information provided
@@ -5229,8 +5510,9 @@ DIRECTORY
    Subfield Codes
       $a - Uncontrolled term (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  654 - SUBJECT ADDED ENTRY--FACETED TOPICAL TERMS (R)
+      $8 - Field link and sequence number (R)
+
+654 - SUBJECT ADDED ENTRY--FACETED TOPICAL TERMS (R)
    Indicators
       First - Level of subject
          # - No information provided
@@ -5252,8 +5534,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  655 - INDEX TERM--GENRE/FORM (R)
+      $8 - Field link and sequence number (R)
+
+655 - INDEX TERM--GENRE/FORM (R)
    Indicators
       First - Type of heading
          # - Basic
@@ -5280,8 +5563,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  656 - INDEX TERM--OCCUPATION (R)
+      $8 - Field link and sequence number (R)
+
+656 - INDEX TERM--OCCUPATION (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -5298,8 +5582,9 @@ DIRECTORY
       $2 - Source of term (NR)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  657 - INDEX TERM--FUNCTION (R)
+      $8 - Field link and sequence number (R)
+
+657 - INDEX TERM--FUNCTION (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -5316,7 +5601,8 @@ DIRECTORY
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  658 - INDEX TERM--CURRICULUM OBJECTIVE (R)
+
+658 - INDEX TERM--CURRICULUM OBJECTIVE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -5330,7 +5616,8 @@ DIRECTORY
       $2 - Source of term or code (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  662 - SUBJECT ADDED ENTRY--HIERARCHICAL PLACE NAME (R)
+
+662 - SUBJECT ADDED ENTRY--HIERARCHICAL PLACE NAME (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -5349,10 +5636,11 @@ DIRECTORY
       $2 - Source of heading or term (NR)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-          
+      $8 - Field link and sequence number (R)
+
+
 --Added Entry Fields (70X-75X)--
-  700 - ADDED ENTRY--PERSONAL NAME (R)
+700 - ADDED ENTRY--PERSONAL NAME (R)
    Indicators
       First - Type of personal name entry element
          0 - Forename
@@ -5393,8 +5681,9 @@ DIRECTORY
       $4 - Relator code (R)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  705 - ADDED ENTRY--PERSONAL NAME (PERFORMER) (MU) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+705 - ADDED ENTRY--PERSONAL NAME (PERFORMER) (MU) [OBSOLETE]
    Indicators
       First - Type of personal name entry element
          0 - Forename
@@ -5423,7 +5712,8 @@ DIRECTORY
       $r - Key for music (NR)
       $s - Version (NR)
       $t - Title of a work (NR)
-  710 - ADDED ENTRY--CORPORATE NAME (R)
+
+710 - ADDED ENTRY--CORPORATE NAME (R)
    Indicators
       First - Type of corporate name entry element
          0 - Inverted name
@@ -5461,8 +5751,9 @@ DIRECTORY
       $4 - Relator code (R)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  711 - ADDED ENTRY--MEETING NAME (R)
+      $8 - Field link and sequence number (R)
+
+711 - ADDED ENTRY--MEETING NAME (R)
    Indicators
       First - Type of meeting name entry element
          0 - Inverted name
@@ -5499,8 +5790,9 @@ DIRECTORY
       $4 - Relator code (R)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  715 - ADDED ENTRY--CORPORATE NAME (PERFORMING GROUP) (MU) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+715 - ADDED ENTRY--CORPORATE NAME (PERFORMING GROUP) (MU) [OBSOLETE]
    Indicators
       First - Type of corporate name entry element
          0 - Inverted name
@@ -5527,7 +5819,8 @@ DIRECTORY
       $s - Version (NR)
       $t - Title of a work (NR)
       $u - Nonprinting information (NR)
-  720 - ADDED ENTRY--UNCONTROLLED NAME (R)
+
+720 - ADDED ENTRY--UNCONTROLLED NAME (R)
    Indicators
       First - Type of name
          # - Not specified
@@ -5540,8 +5833,9 @@ DIRECTORY
       $e - Relator term (R)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  730 - ADDED ENTRY--UNIFORM TITLE (R)
+      $8 - Field link and sequence number (R)
+
+730 - ADDED ENTRY--UNIFORM TITLE (R)
    Indicators
       First - Nonfiling characters
          0-9 - Number of nonfiling characters
@@ -5574,7 +5868,8 @@ DIRECTORY
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  740 - ADDED ENTRY--UNCONTROLLED RELATED/ANALYTICAL TITLE (R)
+
+740 - ADDED ENTRY--UNCONTROLLED RELATED/ANALYTICAL TITLE (R)
    Indicators
       First - Nonfiling characters
          0-9 - Number of nonfiling characters
@@ -5594,7 +5889,8 @@ DIRECTORY
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  751 - ADDED ENTRY--GEOGRAPHIC NAME (R)
+
+751 - ADDED ENTRY--GEOGRAPHIC NAME (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -5608,8 +5904,9 @@ DIRECTORY
       $3 - Materials specified (NR)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  752 - ADDED ENTRY--HIERARCHICAL PLACE NAME (R)
+      $8 - Field link and sequence number (R)
+
+752 - ADDED ENTRY--HIERARCHICAL PLACE NAME (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -5626,8 +5923,9 @@ DIRECTORY
       $0 - Authority record control number (R)
       $2 - Source of heading or term (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  753 - SYSTEM DETAILS ACCESS TO COMPUTER FILES (R)
+      $8 - Field link and sequence number (R)
+
+753 - SYSTEM DETAILS ACCESS TO COMPUTER FILES (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -5638,8 +5936,9 @@ DIRECTORY
       $b - Programming language (NR)
       $c - Operating system (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  754 - ADDED ENTRY--TAXONOMIC IDENTIFICATION (R)
+      $8 - Field link and sequence number (R)
+
+754 - ADDED ENTRY--TAXONOMIC IDENTIFICATION (R)
    Indicators 
       First - Undefined
          # - Undefined
@@ -5654,8 +5953,9 @@ DIRECTORY
       $0 - Authority record control number (R)
       $2 - Source of taxonomic identification (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  755 - ADDED ENTRY--PHYSICAL CHARACTERISTICS (R) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+755 - ADDED ENTRY--PHYSICAL CHARACTERISTICS (R) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -5670,9 +5970,10 @@ DIRECTORY
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
           $8 - Field link and sequence number (R)
-         
+
+
 --Linking Entry Fields (76X-78X)--
-  760 - MAIN SERIES ENTRY (R)
+760 - MAIN SERIES ENTRY (R)
    Indicators
       First - Note controller
          0 - Display note
@@ -5704,7 +6005,8 @@ DIRECTORY
          2 - Type of record
          3 - Bibliographic level
       $8 - Field link and sequence number (R)
-  762 - SUBSERIES ENTRY (R)
+
+762 - SUBSERIES ENTRY (R)
    Indicators
       First - Note controller
          0 - Display note
@@ -5735,8 +6037,9 @@ DIRECTORY
          1 - Form of name
          2 - Type of record
          3 - Bibliographic level
-      $8 - Field link and sequence number (R)   
-  765 - ORIGINAL LANGUAGE ENTRY (R)
+      $8 - Field link and sequence number (R)
+
+765 - ORIGINAL LANGUAGE ENTRY (R)
    Indicators
       First - Note controller
          0 - Display note
@@ -5769,10 +6072,11 @@ DIRECTORY
       $7 - Control subfield (NR)
          0 - Type of main entry heading
          1 - Form of name 
-                 2 - Type of record
+         2 - Type of record
          3 - Bibliographic level
       $8 - Field link and sequence number (R)
-  767 - TRANSLATION ENTRY (R)
+
+767 - TRANSLATION ENTRY (R)
    Indicators
       First - Note controller
          0 - Display note
@@ -5807,8 +6111,9 @@ DIRECTORY
          1 - Form of name
          2 - Type of record
          3 - Bibliographic level
-      $8 - Field link and sequence number (R)   
-  770 - SUPPLEMENT/SPECIAL ISSUE ENTRY (R)
+      $8 - Field link and sequence number (R)
+
+770 - SUPPLEMENT/SPECIAL ISSUE ENTRY (R)
    Indicators
       First - Note controller
          0 - Display note
@@ -5843,8 +6148,9 @@ DIRECTORY
          1 - Form of name
          2 - Type of record
          3 - Bibliographic level
-      $8 - Field link and sequence number (R)   
-  772 - SUPPLEMENT PARENT ENTRY (R)
+      $8 - Field link and sequence number (R)
+
+772 - SUPPLEMENT PARENT ENTRY (R)
    Indicators
       First - Note controller
          0 - Display note
@@ -5880,8 +6186,9 @@ DIRECTORY
          1 - Form of name
          2 - Type of record
          3 - Bibliographic level
-      $8 - Field link and sequence number (R)   
-  773 - HOST ITEM ENTRY (R)
+      $8 - Field link and sequence number (R)
+
+773 - HOST ITEM ENTRY (R)
    Indicators
       First - Note controller
          0 - Display note
@@ -5917,8 +6224,9 @@ DIRECTORY
          1 - Form of name
          2 - Type of record
          3 - Bibliographic level
-      $8 - Field link and sequence number (R)   
-  774 - CONSTITUENT UNIT ENTRY (R)
+      $8 - Field link and sequence number (R)
+
+774 - CONSTITUENT UNIT ENTRY (R)
    Indicators
       First - Note controller
          0 - Display note
@@ -5952,8 +6260,9 @@ DIRECTORY
          1 - Form of name
          2 - Type of record
          3 - Bibliographic level
-      $8 - Field link and sequence number (R)   
-  775 - OTHER EDITION ENTRY (R)
+      $8 - Field link and sequence number (R)
+
+775 - OTHER EDITION ENTRY (R)
    Indicators
       First - Note controller
          0 - Display note
@@ -5994,8 +6303,9 @@ DIRECTORY
          1 - Form of name
          2 - Type of record
          3 - Bibliographic level
-      $8 - Field link and sequence number (R)   
-  776 - ADDITIONAL PHYSICAL FORM ENTRY (R)
+      $8 - Field link and sequence number (R)
+
+776 - ADDITIONAL PHYSICAL FORM ENTRY (R)
    Indicators
       First - Note controller
          0 - Display note
@@ -6030,8 +6340,9 @@ DIRECTORY
          1 - Form of name 
          2 - Type of record
          3 - Bibliographic level
-      $8 - Field link and sequence number (R)  
-  777 - ISSUED WITH ENTRY (R)
+      $8 - Field link and sequence number (R)
+
+777 - ISSUED WITH ENTRY (R)
    Indicators
       First - Note controller
          0 - Display note
@@ -6063,8 +6374,9 @@ DIRECTORY
          1 - Form of name
          2 - Type of record
          3 - Bibliographic level
-      $8 - Field link and sequence number (R)  
-  780 - PRECEDING ENTRY (R)
+      $8 - Field link and sequence number (R)
+
+780 - PRECEDING ENTRY (R)
    Indicators
       First - Note controller
          0 - Display note
@@ -6102,11 +6414,12 @@ DIRECTORY
       $6 - Linkage (NR)
       $7 - Control subfield (NR)
          0 - Type of main entry heading
-         1 - Form of name 
-                 2 - Type of record
+         1 - Form of name
+         2 - Type of record
          3 - Bibliographic level
       $8 - Field link and sequence number (R)
-  785 - SUCCEEDING ENTRY (R)
+
+785 - SUCCEEDING ENTRY (R)
    Indicators
       First - Note controller
          0 - Display note
@@ -6149,7 +6462,8 @@ DIRECTORY
          2 - Type of record
          3 - Bibliographic level
       $8 - Field link and sequence number (R)
-  786 - DATA SOURCE ENTRY (R)
+
+786 - DATA SOURCE ENTRY (R)
    Indicators
       First - Note controller
          0 - Display note
@@ -6187,7 +6501,8 @@ DIRECTORY
          2 - Type of record
          3 - Bibliographic level
       $8 - Field link and sequence number (R)
-  787 - NONSPECIFIC RELATIONSHIP ENTRY (R)
+
+787 - NONSPECIFIC RELATIONSHIP ENTRY (R)
    Indicators
       First - Note controller
          0 - Display note
@@ -6222,9 +6537,10 @@ DIRECTORY
          2 - Type of record
          3 - Bibliographic level
       $8 - Field link and sequence number (R)
-   
+
+
 --Series Added Entry Fields (80X-830)--
-  800 - SERIES ADDED ENTRY--PERSONAL NAME (R)
+800 - SERIES ADDED ENTRY--PERSONAL NAME (R)
    Indicators
       First - Type of personal name entry element
          0 - Forename
@@ -6255,11 +6571,14 @@ DIRECTORY
       $u - Affiliation (NR)
       $v - Volume/sequential designation  (NR)
       $w - Bibliographic record control number (R)
+      $x - International Standard Serial Number (NR)
       $0 - Authority record control number (R)
+      $3 - Materials specified (NR)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  810 - SERIES ADDED ENTRY--CORPORATE NAME (R)
+      $8 - Field link and sequence number (R)
+
+810 - SERIES ADDED ENTRY--CORPORATE NAME (R)
    Indicators
       First - Type of corporate name entry element
          0 - Inverted name
@@ -6288,11 +6607,14 @@ DIRECTORY
       $u - Affiliation (NR)
       $v - Volume/sequential designation (NR)
       $w - Bibliographic record control number (R)
+      $x - International Standard Serial Number (NR)
       $0 - Authority record control number (R)
+      $3 - Materials specified (NR)
       $4 - Relator code (R)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  811 - SERIES ADDED ENTRY--MEETING NAME (R)
+      $8 - Field link and sequence number (R)
+
+811 - SERIES ADDED ENTRY--MEETING NAME (R)
    Indicators
       First - Type of meeting name entry element
          0 - Inverted name
@@ -6319,11 +6641,14 @@ DIRECTORY
       $u - Affiliation (NR)
       $v - Volume/sequential designation (NR)
       $w - Bibliographic record control number (R)
+      $x - International Standard Serial Number (NR)
       $0 - Authority record control number (R)
+      $3 - Materials specified (NR)
       $4 - Relator code (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
-  830 - SERIES ADDED ENTRY--UNIFORM TITLE (R)
+
+830 - SERIES ADDED ENTRY--UNIFORM TITLE (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -6346,10 +6671,13 @@ DIRECTORY
       $t - Title of a work (NR) 
       $v - Volume/sequential designation (NR)
       $w - Bibliographic record control number (R)
+      $x - International Standard Serial Number (NR)
       $0 - Authority record control number (R)
+      $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)   
-  840 - SERIES ADDED ENTRY--TITLE (R) [OBSOLETE]
+      $8 - Field link and sequence number (R)
+
+840 - SERIES ADDED ENTRY--TITLE (R) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -6359,14 +6687,20 @@ DIRECTORY
       $a - Title (NR)
       $h - Medium (NR)
       $v - Volume/sequential designation (NR)
-        
+
+
 --Holdings, Location, Alternate Graphics, etc. Fields (841-88X)--
-  841 - HOLDINGS CODED DATA VALUES (NR)
-  842 - TEXTUAL PHYSICAL FORM DESIGNATOR (NR)
-  843 - REPRODUCTION NOTE (R)
-  844 - NAME OF UNIT (NR)
-  845 - TERMS GOVERNING USE AND REPRODUCTION NOTE (R)
-  850 - HOLDING INSTITUTION (R)
+841 - HOLDINGS CODED DATA VALUES (NR)
+
+842 - TEXTUAL PHYSICAL FORM DESIGNATOR (NR)
+
+843 - REPRODUCTION NOTE (R)
+
+844 - NAME OF UNIT (NR)
+
+845 - TERMS GOVERNING USE AND REPRODUCTION NOTE (R)
+
+850 - HOLDING INSTITUTION (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -6378,6 +6712,7 @@ DIRECTORY
       $d - Inclusive dates (NR) (MU VM SE) [OBSOLETE]
       $e - Retention statement (NR) (CF MU VM SE) [OBSOLETE]
       $8 - Field link and sequence number (R)
+
   851 - LOCATION (R) [OBSOLETE]
    Indicators
       First - Undefined
@@ -6394,7 +6729,8 @@ DIRECTORY
       $g - Repository location code (NR)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-  852 - LOCATION (R)
+
+852 - LOCATION (R)
    Indicators
       First - Shelving scheme
          # - No information provided
@@ -6438,10 +6774,14 @@ DIRECTORY
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
       $8 - Sequence number (NR)
-  853 - CAPTIONS AND PATTERN--BASIC BIBLIOGRAPHIC UNIT (R)
-  854 - CAPTIONS AND PATTERN--SUPPLEMENTARY MATERIAL (R)
-  855 - CAPTIONS AND PATTERN--INDEXES (R)
-  856 - ELECTRONIC LOCATION AND ACCESS (R)
+
+853 - CAPTIONS AND PATTERN--BASIC BIBLIOGRAPHIC UNIT (R)
+
+854 - CAPTIONS AND PATTERN--SUPPLEMENTARY MATERIAL (R)
+
+855 - CAPTIONS AND PATTERN--INDEXES (R)
+
+856 - ELECTRONIC LOCATION AND ACCESS (R)
    Indicators
       First - Access method
          # - No information provided
@@ -6486,21 +6826,35 @@ DIRECTORY
       $2 - Access method (NR)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
-      $8 - Field link and sequence number (R)  
-  863 - ENUMERATION AND CHRONOLOGY--BASIC BIBLIOGRAPHIC UNIT (R)
-  864 - ENUMERATION AND CHRONOLOGY--SUPPLEMENTARY MATERIAL (R)
-  865 - ENUMERATION AND CHRONOLOGY--INDEXES (R)
-  866 - TEXTUAL HOLDINGS--BASIC BIBLIOGRAPHIC UNIT (R)
-  867 - TEXTUAL HOLDINGS--SUPPLEMENTARY MATERIAL (R)
-  868 - TEXTUAL HOLDINGS--INDEXES (R)
-  870 - VARIANT PERSONAL NAME (SE) [OBSOLETE]
-  871 - VARIANT CORPORATE NAME (SE)[OBSOLETE] 
-  872 - VARIANT CONFERENCE OR MEETING NAME (SE) [OBSOLETE]
-  873 - VARIANT UNIFORM TITLE HEADING (SE) [OBSOLETE] 
-  876 - ITEM INFORMATION--BASIC BIBLIOGRAPHIC UNIT (R)
-  877 - ITEM INFORMATION--SUPPLEMENTARY MATERIAL (R)
-  878 - ITEM INFORMATION--INDEXES (R)
-  880 - ALTERNATE GRAPHIC REPRESENTATION (R)
+      $8 - Field link and sequence number (R)
+
+863 - ENUMERATION AND CHRONOLOGY--BASIC BIBLIOGRAPHIC UNIT (R)
+
+864 - ENUMERATION AND CHRONOLOGY--SUPPLEMENTARY MATERIAL (R)
+
+865 - ENUMERATION AND CHRONOLOGY--INDEXES (R)
+
+866 - TEXTUAL HOLDINGS--BASIC BIBLIOGRAPHIC UNIT (R)
+
+867 - TEXTUAL HOLDINGS--SUPPLEMENTARY MATERIAL (R)
+
+868 - TEXTUAL HOLDINGS--INDEXES (R)
+
+870 - VARIANT PERSONAL NAME (SE) [OBSOLETE]
+
+871 - VARIANT CORPORATE NAME (SE)[OBSOLETE]
+
+872 - VARIANT CONFERENCE OR MEETING NAME (SE) [OBSOLETE]
+
+873 - VARIANT UNIFORM TITLE HEADING (SE) [OBSOLETE]
+
+876 - ITEM INFORMATION--BASIC BIBLIOGRAPHIC UNIT (R)
+
+877 - ITEM INFORMATION--SUPPLEMENTARY MATERIAL (R)
+
+878 - ITEM INFORMATION--INDEXES (R)
+
+880 - ALTERNATE GRAPHIC REPRESENTATION (R)
    Indicators
       First - Same as associated field
       Second - Same as associated field
@@ -6509,7 +6863,8 @@ DIRECTORY
       $a-z Same as associated field
       $0-5 Same as associated field
       $7-9 Same as associated field
-  882 - REPLACEMENT RECORD INFORMATION (NR)
+
+882 - REPLACEMENT RECORD INFORMATION (NR)
    Indicators
       First - Undefined
          # - Undefined
@@ -6518,10 +6873,11 @@ DIRECTORY
    Subfield Codes
       $a - Replacement title (R)
       $i - Explanatory text (R)
-      $w - Replacement bibliographic record control number (R) 
-	    $6 - Linkage (NR)
-      $8 - Field link and sequence number (R) 
-  886 - FOREIGN MARC INFORMATION FIELD (R)
+      $w - Replacement bibliographic record control number (R)
+      $6 - Linkage (NR)
+      $8 - Field link and sequence number (R)
+
+886 - FOREIGN MARC INFORMATION FIELD (R)
    Indicators
       First - Type of field
          0 - Leader
@@ -6535,7 +6891,8 @@ DIRECTORY
       $2 - Source of data (NR)
       $a-z - Foreign MARC subfield (R)
       $0-9 - Foreign MARC subfield (R)
-  887 - NON-MARC INFORMATION FIELD (R)
+
+887 - NON-MARC INFORMATION FIELD (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -6545,16 +6902,24 @@ DIRECTORY
       $a - Content of non-MARC field (NR)
       $2 - Source of data (NR)    
 </pre>
+
 <hr>
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-         <tr valign="bottom">
-            <td>
-              <div class="head-nav"><a href="http://www.loc.gov/">Library of
-			  Congress</a> &gt;&gt; <a href="http://www.loc.gov/marc/">MARC</a> &gt;&gt; <strong>Bibliographic Field List </strong></div> 
-               (04/07/2008) 
-            </td>
-            <td align="right"><a href="mailto:ndmso@loc.gov">Contact Us</a></td>
-         </tr>
-      </table>
-   <script type='text/javascript' src='/global/s_code.js'></script></body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr valign="bottom">
+<td>
+<div class="head-nav"><a href="http://www.loc.gov/">Library of
+Congress</a> &gt;&gt; <a href="http://www.loc.gov/marc/">MARC</a>
+&gt;&gt; <strong>Bibliographic Field List</strong></div>
+
+(05/06/2009)</td>
+<td align="right"><a href="mailto:ndmso@loc.gov">Contact
+Us</a></td>
+</tr>
+</table>
+
+<script type='text/javascript' src='/global/s_code.js'>
+</script>
+<script type='text/javascript' src='/global/s_code.js'></script></body>
 </html>
+
+
