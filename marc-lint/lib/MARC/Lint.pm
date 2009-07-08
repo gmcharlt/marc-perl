@@ -1080,6 +1080,7 @@ a       R       Copyright or legal deposit number
 b       NR      Assigning agency
 d       NR      Date
 i       NR      Display text
+z       R       Canceled/invalid copyright or legal deposit number
 2       NR      Source 
 6       NR      Linkage 
 8       R       Field link and sequence number 
@@ -1281,7 +1282,7 @@ e       NR      Description conventions
 8       R       Field link and sequence number 
 
 041     R       LANGUAGE CODE
-ind1    01      Translation indication
+ind1    b01      Translation indication
 ind2    b7      Source of code
 a       R       Language code of text/sound track or separate title 
 b       R       Language code of summary or abstract
@@ -1464,9 +1465,24 @@ ind1    01      Type of edition
 ind2    b04     Source of classification number
 a       R       Classification number 
 b       NR      Item number 
+m       NR      Standard or optional designation
+q       NR      Assigning agency
 2       NR      Edition number 
 6       NR      Linkage 
 8       R       Field link and sequence number 
+
+083     R       ADDITIONAL DEWEY DECIMAL CLASSIFICATION NUMBER
+ind1    01      Type of edition
+ind2    blank   Undefined
+a       R       Classification number
+c       R       Classification number--Ending number of span
+m       NR      Standard or optional designation
+q       NR      Assigning agency
+y       R       Table sequence number for internal subarrangement or add table
+z       R       Table identification
+2       NR      Edition number
+6       NR      Linkage
+8       R       Field link and sequence number
 
 084     R       OTHER CLASSIFICATION NUMBER
 ind1    blank   Undefined
@@ -1476,6 +1492,24 @@ b       NR      Item number
 2       NR      Source of number 
 6       NR      Linkage 
 8       R       Field link and sequence number 
+
+085     R       SYNTHESIZED CLASSIFICATION NUMBER COMPONENTS
+ind1    blank   Undefined
+ind2    blank   Undefined
+a       R       Number where instructions are found-single number or beginning number of span
+b       R       Base number
+c       R       Classification number-ending number of span
+f       R       Facet designator
+r       R       Root number
+s       R       Digits added from classification number in schedule or external table
+t       R       Digits added from internal subarrangement or add table
+u       R       Number being analyzed
+v       R       Number in internal subarrangement or add table where instructions are found
+w       R       Table identification-Internal subarrangement or add table
+y       R       Table sequence number for internal subarrangement or add table
+z       R       Table identification
+6       NR      Linkage
+8       R       Field link and sequence number
 
 086     R       GOVERNMENT DOCUMENT CLASSIFICATION NUMBER
 ind1    b01     Number source
@@ -2099,7 +2133,7 @@ x       NR      International Standard Serial Number
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
-440     R       SERIES STATEMENT/ADDED ENTRY--TITLE
+440     R       SERIES STATEMENT/ADDED ENTRY--TITLE [OBSOLETE]
 ind1    blank   Undefined
 ind2    0-9     Nonfiling characters
 a       NR      Title 
@@ -2119,6 +2153,7 @@ a       R       Series statement
 l       NR      Library of Congress call number 
 v       R       Volume number/sequential designation  
 x       NR      International Standard Serial Number 
+3       NR      Materials specified
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
@@ -2143,6 +2178,11 @@ a       NR      With note
 ind1    blank   Undefined
 ind2    blank   Undefined
 a       NR      Dissertation note 
+b       NR      Degree type
+c       NR      Name of granting institution
+d       NR      Year of degree granted
+g       R       Miscellaneous information
+o       R       Dissertation identifier
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
@@ -2363,6 +2403,7 @@ k       R       Key title of original
 l       NR      Location of original 
 m       NR      Material specific details 
 n       R       Note about original 
+o       R       Other resource identifier
 p       NR      Introductory phrase 
 t       NR      Title statement of original 
 x       R       International Standard Serial Number 
@@ -2436,6 +2477,32 @@ o       R       Type of unit
 5       NR      Institution to which field applies 
 6       NR      Linkage 
 8       R       Field link and sequence number 
+
+542     R       INFORMATION RELATING TO COPYRIGHT STATUS
+ind1    b01     Relationship
+ind2    blank   Undefined
+a       NR      Personal creator
+b       NR      Personal creator death date
+c       NR      Corporate creator
+d       R       Copyright holder
+e       R       Copyright holder contact information
+f       R       Copyright statement
+g       NR      Copyright date
+h       R       Copyright renewal date
+i       NR      Publication date
+j       NR      Creation date
+k       R       Publisher
+l       NR      Copyright status
+m       NR      Publication status
+n       R       Note
+o       NR      Research date
+q       NR      Assigning agency
+r       NR      Jurisdiction of copyright assessment
+s       NR      Source of information
+u       R       Uniform Resource Identifier
+3       NR      Materials specified
+6       NR      Linkage
+8       R       Field link and sequence number
 
 544     R       LOCATION OF OTHER ARCHIVAL MATERIALS NOTE
 ind1    b01     Relationship
@@ -3508,7 +3575,9 @@ t       NR      Title of a work
 u       NR      Affiliation 
 v       NR      Volume/sequential designation  
 w       R       Bibliographic record control number
+x       NR      International Standard Serial Number
 0       R       Authority record control number
+3       NR      Materials specified
 4       R       Relator code 
 6       NR      Linkage 
 8       R       Field link and sequence number 
@@ -3536,7 +3605,9 @@ t       NR      Title of a work
 u       NR      Affiliation 
 v       NR      Volume/sequential designation 
 w       R       Bibliographic record control number
+x       NR      International Standard Serial Number
 0       R       Authority record control number
+3       NR      Materials specified
 4       R       Relator code 
 6       NR      Linkage 
 8       R       Field link and sequence number 
@@ -3562,7 +3633,9 @@ t       NR      Title of a work
 u       NR      Affiliation 
 v       NR      Volume/sequential designation 
 w       R       Bibliographic record control number
+x       NR      International Standard Serial Number
 0       R       Authority record control number
+3       NR      Materials specified
 4       R       Relator code 
 6       NR      Linkage 
 8       R       Field link and sequence number 
@@ -3586,7 +3659,9 @@ s       NR      Version
 t       NR      Title of a work 
 v       NR      Volume/sequential designation 
 w       R       Bibliographic record control number
+x       NR      International Standard Serial Number
 0       R       Authority record control number
+3       NR      Materials specified
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
