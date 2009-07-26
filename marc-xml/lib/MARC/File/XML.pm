@@ -342,17 +342,17 @@ HEADER
     push( @xml, "  <leader>" . escape( $record->leader ) . "</leader>" );
 
     foreach my $field ( $record->fields() ) {
-        my $tag = $field->tag();
+        my ($tag) = escape( $field->tag() );
         if ( $field->is_control_field() ) { 
             my $data = $field->data;
             push( @xml, qq(  <controlfield tag="$tag">) .
                     escape( ($_transcode ? marc8_to_utf8($data) : $data) ). qq(</controlfield>) );
         } else {
-            my $i1 = $field->indicator( 1 );
-            my $i2 = $field->indicator( 2 );
+            my ($i1) = escape( $field->indicator( 1 ) );
+            my ($i2) = escape( $field->indicator( 2 ) );
             push( @xml, qq(  <datafield tag="$tag" ind1="$i1" ind2="$i2">) );
             foreach my $subfield ( $field->subfields() ) { 
-                my ( $code, $data ) = @$subfield;
+                my ( $code, $data ) = ( escape( $$subfield[0] ), $$subfield[1] );
                 push( @xml, qq(    <subfield code="$code">).
                         escape( ($_transcode ? marc8_to_utf8($data) : $data) ).qq(</subfield>) );
             }
