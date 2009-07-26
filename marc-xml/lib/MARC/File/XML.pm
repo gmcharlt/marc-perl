@@ -498,7 +498,7 @@ sub _unimarc_encoding {
     } elsif ($enc eq '50') {
         return 'UTF-8';
     } else {
-        die "Unsupported UNIMARC character encoding [$enc] for XML output for $f; 100$a -> " . $r->subfield(100 => 'a');
+        die "Unsupported UNIMARC character encoding [$enc] for XML output for $f; 100\$a -> " . $r->subfield(100 => 'a');
     }
 }
 
