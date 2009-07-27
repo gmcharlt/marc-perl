@@ -307,7 +307,7 @@ Returns a chunk of XML suitable for placement between the header and the footer.
 sub record {
     my $record = shift;
     my $format = shift;
-    my $without_header = shift;
+    my $include_full_record_header = shift;
     my $enc = shift;
 
     $format ||= $_load_args{RecordFormat};
@@ -326,7 +326,7 @@ sub record {
 
     my @xml = ();
 
-    if ($without_header) {
+    if ($include_full_record_header) {
         push @xml, <<HEADER
 <?xml version="1.0" encoding="$enc"?>
 <record
@@ -469,7 +469,7 @@ returned the XML as a scalar.
 sub encode {
     my $record = shift;
     my $format = shift || $_load_args{RecordFormat};
-    my $without_header = shift;
+    my $without_collection_header = shift;
     my $enc = shift || $_load_args{DefaultEncoding};
 
     if (lc($format) =~ /^unimarc/o) {
@@ -477,9 +477,13 @@ sub encode {
     }
 
     my @xml = ();
-    push( @xml, header( $enc ) ) unless ($without_header);
-    push( @xml, record( $record, $format, $without_header, $enc ) );
-    push( @xml, footer() ) unless ($without_header);
+    push( @xml, header( $enc ) ) unless ($without_collection_header);
+    # verbose, but naming the header output flags this way to avoid
+    # the potential confusion identified in CPAN bug #34082
+    # http://rt.cpan.org/Public/Bug/Display.html?id=34082
+    my $include_full_record_header = ($without_collection_header) ? 1 : 0;
+    push( @xml, record( $record, $format, $include_full_record_header, $enc ) );
+    push( @xml, footer() ) unless ($without_collection_header);
 
     return( join( "\n", @xml ) );
 }
