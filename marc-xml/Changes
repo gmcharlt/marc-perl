@@ -1,10 +1,13 @@
 Revision history for Perl extension MARC-XML
 
-0.91 Wed Mar 25 2009
+0.91 Tue Jul 28 2009
       - Nixing the stray space (always been there) in the schemaLocation
         attribute for single-record output
       - Properly apply the leader modification for USMARC to signal UTF-8
         encoding.
+      - Escape '<', '>', and '&' used as indicator values and subfield labels 
+        during XML output (Bill Erickson)
+      - CPAN RT#34082: clarify names of header output switches
 
 0.90 Fri Dec 14 2007
       - modifications to MARC::File::SAX to use LocalName rather than Name

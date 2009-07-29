@@ -14,7 +14,7 @@ use IO::File;
 use Carp qw( croak );
 use Encode ();
 
-$VERSION = '0.88';
+$VERSION = '0.91';
 
 my $factory = XML::SAX::ParserFactory->new();
 $factory->require_feature(Namespaces);
