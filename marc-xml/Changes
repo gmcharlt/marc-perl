@@ -1,5 +1,9 @@
 Revision history for Perl extension MARC-XML
 
+0.92 Thu Jul 30 22:37:07 EDT 2009
+      - small documentation changes to close RT tickets #48334 and #48333
+        filed by Jonathan from Debian world.
+
 0.91 Tue Jul 28 2009
       - Nixing the stray space (always been there) in the schemaLocation
         attribute for single-record output
