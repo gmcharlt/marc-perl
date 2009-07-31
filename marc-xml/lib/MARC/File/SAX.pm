@@ -1,13 +1,10 @@
 package MARC::File::SAX;
 
-## no POD here since you don't really want to use this module
-## directly. Look at MARC::File::XML instead.
-##
-## MARC::File::SAX is a SAX handler for parsing XML encoded using the 
-## MARC21slim XML schema from the Library of Congress. It builds a MARC::Record
-## object up from SAX events.
-##
-## For more details see: http://www.loc.gov/standards/marcxml/
+=head1 NAME
+
+MARC::File::SAX - SAX handler for parsing MARCXML
+
+=cut 
 
 use strict;
 use XML::SAX;
