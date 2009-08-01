@@ -6,6 +6,7 @@ WriteMakefile(
     'VERSION_FROM'	=> 'lib/MARC/File/XML.pm', 
     'PMLIBDIRS'		=> [ qw( lib/ ) ],
     'AUTHOR'		=> 'Ed Summers <ehs@pobox.com>',
+    'LICENSE'       => 'perl',
     'PREREQ_PM'		=> { 
 			    'XML::SAX'		=> 0.12,
 			    'MARC::Record'	=> 2.0,
