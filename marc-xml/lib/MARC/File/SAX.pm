@@ -12,6 +12,7 @@ use base qw( XML::SAX::Base );
 use Data::Dumper;
 use MARC::Record;
 use MARC::Charset qw(utf8_to_marc8);
+use Carp qw(croak);
 
 =head2 new()
 
@@ -50,16 +51,36 @@ sub start_element {
     my $name = $element->{ LocalName };
     if ( $name eq 'record' ) {
         $self->{ record } = MARC::Record->new();
-    } elsif ( $name eq 'leader' ) { 
-        $self->{ tag } = 'LDR';
-    } elsif ( $name eq 'controlfield' ) {
-        $self->{ tag } = $element->{ Attributes }{ '{}tag' }{ Value };
-    } elsif ( $name eq 'datafield' ) { 
-        $self->{ tag } = $element->{ Attributes }{ '{}tag' }{ Value };
-        $self->{ i1 } = $element->{ Attributes }{ '{}ind1' }{ Value };
-        $self->{ i2 } = $element->{ Attributes }{ '{}ind2' }{ Value };
-    } elsif ( $name eq 'subfield' ) { 
-        $self->{ subcode } = $element->{ Attributes }{ '{}code' }{ Value };
+    } elsif ( $name eq 'collection' ) {
+        # ignore collection wrappers
+    } elsif ( defined $self->{ record } ) {
+        if ( $name eq 'leader' ) { 
+            $self->{ tag } = 'LDR';
+        } elsif ( $name eq 'controlfield' ) {
+            $self->{ tag } = $element->{ Attributes }{ '{}tag' }{ Value };
+        } elsif ( $name eq 'datafield' ) { 
+            $self->{ tag } = $element->{ Attributes }{ '{}tag' }{ Value };
+            $self->{ i1 } = $element->{ Attributes }{ '{}ind1' }{ Value };
+            $self->{ i2 } = $element->{ Attributes }{ '{}ind2' }{ Value };
+        } elsif ( $name eq 'subfield' ) { 
+            $self->{ subcode } = $element->{ Attributes }{ '{}code' }{ Value };
+        }
+    } else {
+        # we've reached a new element but haven't started populating
+        # a MARC::Record yet.  This either means that we've encountered
+        # some non-MARC21slim stuff or the caller's given us an invalid
+        # doc that doesn't include a <record> element.
+        # In the first case, we'll just ignore the element; in the second
+        # case, we'll thow an exception with a better description.
+        #
+        # TODO: to be more consistent with how MARC::File::USMARC handles
+        #        parse errors, rather than throwing an exception we could
+        #        instantiate an empty MARC::Record and set its warnings
+        #        array.
+        #
+        if ( $name eq 'leader' || $name eq 'controlfield' || $name eq 'datafield' || $name eq 'subfield' ) {
+            croak("found MARCXML element $name, but the <record> wrapper is missing");
+        }
     }
 }
 
