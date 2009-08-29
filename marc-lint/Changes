@@ -1,4 +1,4 @@
-1.44    [Unreleased]
+1.44    Sat August 29, 2009
 
         - Updated TODO section with item about verfication of 008 presence and length.
 
@@ -7,6 +7,8 @@
         - Updated _check_article with the exceptions: 'A to ', 'A isn\'t '
         - Updated Lint::DATA section with Update No. 8 (Oct. 2007) 
         - Updated Lint::DATA section with Update No. 9 (Oct. 2008) 
+
+        - Updated MARC::Lint::CodeData with most recent version.
 
 1.43    Wed October 3 19:36:00 CDT 2007
 
