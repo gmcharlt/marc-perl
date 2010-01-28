@@ -1,3 +1,9 @@
+1.45    [Release pending]
+
+        [THINGS THAT MAY BREAK YOUR CODE]
+        
+        - Updated Lint::DATA section with Update No. 10 (Oct. 2009) 
+
 1.44    Sat August 29, 2009
 
         - Updated TODO section with item about verfication of 008 presence and length.
