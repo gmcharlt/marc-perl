@@ -327,13 +327,17 @@ sub insert_fields_after {
     ## find position of $after
     my $fields = $self->{_fields};
     my $pos = 0;
+    my $found = 0;
     foreach my $f (@$fields) {
-        last if ($f == $after);
+        if ($f == $after) {
+            $found = 1;
+            last;
+        }
         $pos++;
     }
 
     ## insert after $after
-    if ($pos+1 >= @$fields) {
+    unless ($found) {
         $self->_warn("Couldn't find field to insert after");
         return;
     }
