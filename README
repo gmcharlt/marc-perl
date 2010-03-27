@@ -1,0 +1,9 @@
+These are searpate projects hosted in the marcpm sourceforge repository.
+
+    marc-record - core marc processing library
+    marc-lint - examine your MARC data for common problems
+    marc-xml - extensions to marc-record for working with MARCXML
+    marc-marcmaker - extensions to marc-record to handle MARCMaker format
+    marc-charset - work with MARC-8 and UTF-8 encodings
+    marc-www - the sourceforge website
+
