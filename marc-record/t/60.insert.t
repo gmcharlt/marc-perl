@@ -4,7 +4,7 @@ use strict;
 use integer;
 use File::Spec;
 
-use Test::More tests=>16;
+use Test::More tests=>20;
 
 BEGIN {
     use_ok( 'MARC::Batch' );
@@ -121,6 +121,20 @@ is( $n, 1 );
 $n = $record->delete_field($newagain);
 is( $n, 1 );
 
+# marker field for last field of record - testing rt55993
+my $new999 = MARC::Field->new('999', ' ', ' ', a => 'last field');
+$nappended = $record->append_fields($new999);
+is ( $nappended, 1, 'added 999 field as last field (RT#55993 test)' );
+
+$nadds = $record->insert_fields_after($new999,$newagain);
+
+is( $nadds, 1, 'added 650 after last field in record (RT#55993 test)' );
+
+$n = $record->delete_field($newagain);
+is( $n, 1 );
+
+$n = $record->delete_field($new999);
+is( $n, 1, 'deleted 999 field' );
 
 ## test insert_record_before
 
