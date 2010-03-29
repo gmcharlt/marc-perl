@@ -23,7 +23,7 @@ is( $subfieldsA[1], 'baz', 'subfield() in list context 2' );
 $field = MARC::Field->new( '000', 'foobar' );
 eval { $field->subfield( 'a' ) };
 like( 
-    $@, qr/Fields below 010 do not have subfields/, 
+    $@, qr/just tags below 010/, 
     'subfield cannot be called on fields < 010' 
 );
 
