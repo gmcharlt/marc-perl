@@ -245,7 +245,7 @@ sub subfield {
 
 sub _all_parms_are_fields {
     for ( @_ ) {
-        return 0 unless ref($_) eq 'MARC::Field';
+        return 0 unless UNIVERSAL::isa($_, 'MARC::Field');
     }
     return 1;
 }
@@ -695,7 +695,7 @@ sub add_fields {
             last; # Bail out, we're done eating parms
 
         # User handed us an object.
-        } elsif ( ref($parm) eq "MARC::Field" ) {
+        } elsif ( UNIVERSAL::isa($_, 'MARC::Field') ) {
             push( @$fields, $parm );
             ++$nfields;
 
