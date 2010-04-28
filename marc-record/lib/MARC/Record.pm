@@ -695,7 +695,7 @@ sub add_fields {
             last; # Bail out, we're done eating parms
 
         # User handed us an object.
-        } elsif ( UNIVERSAL::isa($_, 'MARC::Field') ) {
+        } elsif ( UNIVERSAL::isa($parm, 'MARC::Field') ) {
             push( @$fields, $parm );
             ++$nfields;
 
