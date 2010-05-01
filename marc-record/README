@@ -41,7 +41,7 @@ To install this module type the following:
 
 DEPENDENCIES
 
-MARC::Record now requires a perl version >= 5.8.1 for processing unicode
+MARC::Record now requires a perl version >= 5.8.2 for processing unicode
 correctly.
 
 COPYRIGHT AND LICENCE

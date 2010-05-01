@@ -1,5 +1,5 @@
 # vi:et:sw=4 ts=4
-require v5.8.1;
+require v5.8.2;
 use strict;
 use ExtUtils::MakeMaker;
 
@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker;
     VERSION_FROM    => 'lib/MARC/Record.pm',
     ABSTRACT_FROM   => 'lib/MARC/Record.pm',
     PMLIBDIRS       => [ qw( lib/ ) ],
-    AUTHOR          => 'Mike Rylander <mrylander@gmail.com>',
+    AUTHOR          => 'Galen Charlton <gmcharlt@gmail.com>',
     PREREQ_PM       => {
         'Test::More' => 0,
         'File::Spec' => 0,
