@@ -36,7 +36,7 @@ you could use them on their own, but that wouldn't be very interesting.
 None by default.  Any errors are stored in C<$MARC::Field::ERROR>, which
 C<$MARC::Record> usually bubbles up to C<$MARC::Record::ERROR>.
 
-=head1 CLASS VARIBALES
+=head1 CLASS VARIABLES
 
 B<extra_controlfield_tags>: Some systems (notably Ex Libris's Aleph) throw
 extra control fields in their MARC (e.g., Aleph's MARC-XML tends to have a 
@@ -572,7 +572,7 @@ sub as_formatted() {
 =head2 as_usmarc()
 
 Returns a string for putting into a USMARC file.  It's really only
-useful by C<MARC::Record::as_usmarc()>.
+useful for C<MARC::Record::as_usmarc()>.
 
 =cut
 

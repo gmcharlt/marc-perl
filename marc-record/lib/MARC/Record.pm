@@ -782,7 +782,7 @@ L<MARC::Lint>
 
 =over 4
 
-=item * perl4lib (L<http://www.rice.edu/perl4lib/>)
+=item * perl4lib (L<http://perl4lib.perl.org/>)
 
 A mailing list devoted to the use of Perl in libraries.
 
@@ -796,7 +796,7 @@ The definitive source for all things MARC.
 Online version of the free booklet.  An excellent overview of the MARC format.  Essential.
 
 
-=item * Tag Of The Month (L<http://www.tagofthemonth.com/>)
+=item * Tag Of The Month (L<http://www.follettsoftware.com/sub/tag_of_the_month/>)
 
 Follett Software Company's
 (L<http://www.fsc.follett.com/>) monthly discussion of various MARC tags.

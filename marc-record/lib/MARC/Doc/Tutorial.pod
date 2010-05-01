@@ -33,7 +33,7 @@ however in case you are reading it somewhere else, you can find the latest
 version at CPAN: http://www.cpan.org/modules/by-module/MARC/. You'll notice
 that some sections aren't filled in yet, which is a result of this document
 being a work in progress. If you have ideas for new sections please make a
-suggestion to perl4lib: http://www.rice.edu/perl4lib/.
+suggestion to perl4lib: http://perl4lib.perl.org/.
 
 =head2 History of MARC on CPAN
 
