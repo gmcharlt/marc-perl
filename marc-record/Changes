@@ -1,10 +1,23 @@
 Revision history for Perl extension MARC::Record.
 
-2.0.1
-       [ENHANCEMENTS]
-       - added methods to MARC::Field to allow a (class-level) list of fields that should
-         be considered control fields in addition to 001-009. Includes test t/extra_controlfields.t
-        - added MARC::Record::delete_fields() and t/delete-field.t
+2.0.1 Sat May  1 15:59:54 EDT 2010
+        [ENHANCEMENTS]
+        - improve support for subclassing MARC::Field (Dan Wells)
+        - RT#55993: MARC::Record->insert_fields_after can now insert 
+          after last field in record (Frédéric Demians)
+        - added methods to MARC::Field to allow a (class-level) list of 
+          fields that should be considered control fields in addition 
+          to 001-009. Includes test t/extra_controlfields.t, and 
+          supports alphabetic characters in the tag labels.  The new 
+          methods are
+               allow_controlfield_tags
+               disallow_controlfield_tags
+               is_controlfield_tag
+          (Bill Dueber)
+        - added MARC::Record::delete_fields() and t/delete-field.t 
+          (Ed Summers)
+        - documentation improvements (Mike Rylander and Dan Scott)
+        - baked in minimum Perl version required: 5.8.2
 
 2.0
         [THINGS THAT MAY BREAK YOUR CODE]
