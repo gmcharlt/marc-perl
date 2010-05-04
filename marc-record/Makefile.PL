@@ -10,6 +10,7 @@ use ExtUtils::MakeMaker;
     ABSTRACT_FROM   => 'lib/MARC/Record.pm',
     PMLIBDIRS       => [ qw( lib/ ) ],
     AUTHOR          => 'Galen Charlton <gmcharlt@gmail.com>',
+    LICENSE         => 'perl',
     PREREQ_PM       => {
         'Test::More' => 0,
         'File::Spec' => 0,
