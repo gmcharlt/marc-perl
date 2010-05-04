@@ -46,5 +46,20 @@ correctly.
 
 COPYRIGHT AND LICENCE
 
+Copyright (C) 2001-2010 by contributors:
+
+2001-2007 Andy Lester <marc@petdance.com>
+2002-2007 Ed Summers <ehs@pobox.net>
+2003-2005 Eric Lease Morgan <emorgan@nd.edu>
+2003 Morbus Iff
+2004-2005 Bryan Baldus
+2004 Mark Jordan
+2007 Mike Rylander
+2007 Dan Scott
+2009 Bill Dueber
+2010 Galen Charlton <gmcharlt@gmail.com>
+2010 Frédéric Demians <f.demians@tamil.fr>
+2010 Dan Wells
+
 This software is free software and may be distributed under the same
 terms as Perl itself .

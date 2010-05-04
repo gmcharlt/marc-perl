@@ -1,5 +1,10 @@
 Revision history for Perl extension MARC::Record.
 
+2.0.2 Tue May  4 13:04:07 EDT 2010
+        - RT#57180: put back and expanded copyright statement in README
+          at Debian request
+        - set license element in META.yml
+
 2.0.1 Sat May  1 15:59:54 EDT 2010
         [ENHANCEMENTS]
         - improve support for subclassing MARC::Field (Dan Wells)
