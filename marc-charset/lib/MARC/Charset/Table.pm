@@ -37,7 +37,7 @@ use POSIX;
 use GDBM_File;
 use MARC::Charset::Code;
 use MARC::Charset::Constants qw(:all);
-use Storable qw(freeze thaw);
+use Storable qw(nfreeze thaw);
 
 =head2 new()
 
@@ -66,7 +66,7 @@ sub add_code
     my ($self, $code) = @_;
 
     # the Code object is serialized
-    my $frozen = freeze($code);
+    my $frozen = nfreeze($code);
 
     # to support lookup by marc8 and utf8 values we 
     # stash away the rule in the db using two keys

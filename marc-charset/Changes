@@ -1,5 +1,10 @@
 Revision history for MARC::Charset
 
+1.2 Tue May 11 22:21:13 EDT 2010
+     - use Storable::nfreeze instead of Storable::freeze to get a more
+       portable character set database. Reported and fixed by Niko Tyni
+       of debian http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=579517
+
 1.1 Tue Jun 30 15:51:16 EDT 2009
      - Patch from Damyan Ivanov of the Debian Perl Group to trim the size
        of the character mapping db by 70 times! Uses GDBM_File instead of 
