@@ -268,8 +268,10 @@ For example, this might be the subfields from a 245 field:
 sub subfields {
     my $self = shift;
 
-    $self->_warn( "Control fields (generally, just tags below 010)  do not have subfields" )
-        if $self->is_control_field;
+    if ($self->is_control_field) {
+        $self->_warn( "Control fields (generally, just tags below 010)  do not have subfields" );
+        return;
+    }
 
     my @list;
     my @data = @{$self->{_subfields}};
