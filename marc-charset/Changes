@@ -1,5 +1,12 @@
 Revision history for MARC::Charset
 
+1.3 Wed Sep 29 10:26:49 EDT 2010
+    - added latest codetables.xml from
+      http://www.loc.gov/marc/specifications/codetables.xml (thanks to 
+      Mark Muehlhaeusler for noticing that there were some Arabic updates.
+      I reapplied the changes that François Charette suggested in v0.98
+      which are still not present in LC's codetable :-(
+
 1.2 Tue May 11 22:21:13 EDT 2010
      - use Storable::nfreeze instead of Storable::freeze to get a more
        portable character set database. Reported and fixed by Niko Tyni

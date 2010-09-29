@@ -1,18 +1,16 @@
 <?xml version="1.0"?>
 <codeTables>
-	<codeTable name="Basic and Extended Latin" date="January 2000" number="1">
-		<note>The first column in this table contains the MARC-8 code (in hex) for
-     the character as coming from the G0 graphic set, the second column
-     contains the MARC-8 code (in hex) for the character as coming from the G1
-     graphic set, the third column contains the UCS/Unicode 16-bit code (in
+	<codeTable name="Basic and Extended Latin" date="December 2007" number="1"><!--date="January 2000"-->
+		<characterSet name="Basic Latin (ASCII)" ISOcode="42">
+			<note>The first column in this table contains the MARC-8 code (in hex) for
+     the character if invoked as a C0 control or G0 graphic set and  the second column
+     contains the MARC-8 code (in hex) for the character if invoked as a G1
+     graphic set.  For all codes the third column contains the UCS/Unicode 16-bit code (in
      hex), the fourth column contains the UTF-8 code (in hex) for the UCS
-     characters, the fifth column contains a representation of the character (where possible), 
+     characters, the fifth column (CHAR) contains a representation of the character (where possible), and 
 	 the sixth column contains the MARC character name, followed
      by the UCS name. If the MARC name is the same as or very similar to the
-     UCS name, only the UCS name is given.  For some tables alternate encodings 
-	 in Unicode and UTF-8 are given.  When that occurs the alternate Unicode and 
-	 alternate UTF-8 columns follow the character name. </note>
-		<characterSet name="Basic Latin (ASCII)" ISOcode="42">
+     UCS name, only the UCS name is given.  </note>
 			<code>
 				<marc>1B</marc>
 				<ucs>001B</ucs>
@@ -613,9 +611,18 @@ BRACKET</name>
 			</code>
 		</characterSet>
 		<characterSet name="Extended Latin (ANSEL)" date="January 2000, Updated September 2004" ISOcode="45">
+			<note>The first column in this table contains the MARC-8 code (in hex) for
+     the character if invoked as a C0 control or G0 graphic set and  the second column
+     contains the MARC-8 code (in hex) for the character if invoked as a G1
+     graphic set.  For all codes the third column contains the UCS/Unicode 16-bit code (in
+     hex), the fourth column contains the UTF-8 code (in hex) for the UCS
+     characters, the fifth column (CHAR) contains a representation of the character (where possible), the sixth column (C?) indicates with a "C" that a character is a combining character, and 
+	 the seventh column contains the MARC character name, followed
+     by the UCS name. If the MARC name is the same as or very similar to the
+     UCS name, only the UCS name is given.  For some characters alternate encodings 
+	 in Unicode and UTF-8 are given in the eightth and ninth columns.  </note>
 			<note>Revised June 2004 to add the Eszett (M+C7) and the 
 	 Euro Sign (M+C8) to the MARC-8 set.</note>
-
 			<note>Revised September 2004 to change the mapping from
 	 MARC-8 to Unicode for the Ligature (M+EB and M+EC) from U+FE20 and U+FE21
 	 to U+0361.</note>
@@ -1136,7 +1143,8 @@ BELOW</name>
 		</characterSet>
 	</codeTable>
 	<codeTable name="Greek Symbols" date="January 2000, Updated September 2004" number="2">
-		<note>The first column in this table contains the MARC-8 code (in hex) for
+		<characterSet name="Greek Symbols" ISOcode="67">
+			<note>The first column in this table contains the MARC-8 code (in hex) for
      the character, the second column contains the UCS/Unicode 16-bit code (in
      hex), the third column contains the UTF-8 code (in hex) for the UCS
      character, the fourth column contains a representation of the character (where possible), 
@@ -1153,8 +1161,7 @@ BELOW</name>
 		spelling out of the characters be used when the Latin 
 		extension Greek characters would formerly have been used, 
 		i.e., when they occur in Latin text.  The following 
-		substitutions would be made: [alpha], [beta], and [gamma].</note>
-		<characterSet name="Greek Symbols" ISOcode="67">
+		substitutions would be made: [alpha], [beta], and [gamma]. Alternatively, encodings from the Basic Greek character set can be used.</note>
 			<code>
 				<marc>61</marc>
 				<ucs>03B1</ucs>
@@ -1176,14 +1183,14 @@ BELOW</name>
 		</characterSet>
 	</codeTable>
 	<codeTable name="Subscripts" date="January 2000" number="3">
-		<note>The first column in this table contains the MARC-8 code (in hex) for
+		<characterSet name="Subscripts" ISOcode="62">
+			<note>The first column in this table contains the MARC-8 code (in hex) for
      the character, the second column contains the UCS/Unicode 16-bit code (in
      hex), the third column contains the UTF-8 code (in hex) for the UCS
      character, the fourth column contains a representation of the character (where possible),
 	 the fifth column contains the MARC character name, followed by
      the UCS name. If the MARC name is the same as or very similar to the UCS
      name, only the UCS name is given.</note>
-		<characterSet name="Subscripts" ISOcode="62">
 			<code>
 				<marc>28</marc>
 				<ucs>208D</ucs>
@@ -1273,14 +1280,14 @@ PARENTHESIS</name>
 		</characterSet>
 	</codeTable>
 	<codeTable name="Superscripts" date="January 2000" number="4">
-		<note>The first column in this table contains the MARC-8 code (in hex) for
+		<characterSet name="Superscripts" ISOcode="70">
+			<note>The first column in this table contains the MARC-8 code (in hex) for
      the character, the second column contains the UCS/Unicode 16-bit code (in
      hex), the third column contains the UTF-8 code (in hex) for the UCS
      character, the fourth column contains a representation of the character (where possible),
 	 the fifth column conatins the MARC character name, followed by
      the UCS name. If the MARC name is the same as or very similar to the UCS
      name, only the UCS name is given.</note>
-		<characterSet name="Superscripts" ISOcode="70">
 			<code>
 				<marc>28</marc>
 				<ucs>207D</ucs>
@@ -1371,16 +1378,16 @@ MINUS</name>
 		</characterSet>
 	</codeTable>
 	<codeTable name="Basic Hebrew" date="January 2000" number="5">
-		<note>The first column in this table contains the MARC-8 code (in hex) for
-     the character as coming from the G0 graphic set, the second column
-     contains the MARC-8 code (in hex) for the character as coming from the G1
+		<characterSet name="Basic Hebrew" ISOcode="32">
+			<note>The first column in this table contains the MARC-8 code (in hex) for
+     the character if invoked as a G0 graphic set, the second column
+     contains the MARC-8 code (in hex) for the character if invoked as a G1
      graphic set, the third column contains the UCS/Unicode 16-bit code (in
-     hex), the fourth column contains the UTF-8 code (in hex) for the UCS
-     characters, the fifth column contains a representation of the character (where possible), 
-	 the sixth column contains the MARC character name, followed
+     hex), and the fourth column contains the UTF-8 code (in hex) for the UCS
+     characters.  The fifth column (CHAR) contains a representation of the character (where possible), 
+	 the sixth column (C?) indicates with a "C" that a character is a combining character, and the seventh column contains the MARC character name, followed
      by the UCS name. If the MARC name is the same as or very similar to the
      UCS name, only the UCS name is given.</note>
-		<characterSet name="Basic Hebrew" ISOcode="32">
 			<code>
 				<marc>21</marc>
 				<ucs>0021</ucs>
@@ -1876,16 +1883,16 @@ YUDN</name>
 		</characterSet>
 	</codeTable>
 	<codeTable name="Basic and Extended Cyrillic" date="January 2000" number="6">
-		<note>The first column in this table contains the MARC-8 code (in hex) for
-     the character as coming from the G0 graphic set, the second column
-     contains the MARC-8 code (in hex) for the character as coming from the G1
+		<characterSet name="Basic Cyrillic" ISOcode="4E">
+			<note>The first column in this table contains the MARC-8 code (in hex) for
+     the character if invoked as a G0 graphic set, the second column
+     contains the MARC-8 code (in hex) for the character if invoked as a G1
      graphic set, the third column contains the UCS/Unicode 16-bit code (in
      hex), the fourth column contains the UTF-8 code (in hex) for the UCS
-     characters, the fifth column contains a representation of the character (where possible), 
+     characters, the fifth column (CHAR) contains a representation of the character (where possible), 
 	 the sixth column contains the MARC character name, followed
      by the UCS name. If the MARC name is the same as or very similar to the
      UCS name, only the UCS name is given.</note>
-		<characterSet name="Basic Cyrillic" ISOcode="4E">
 			<code>
 				<marc>21</marc>
 				<ucs>0021</ucs>
@@ -2457,6 +2464,15 @@ YERI</name>
 			</code>
 		</characterSet>
 		<characterSet name="Extended Cyrillic" ISOcode="51">
+			<note>The first column in this table contains the MARC-8 code (in hex) for
+     the character if invoked as a G0 graphic set, the second column
+     contains the MARC-8 code (in hex) for the character if invoked as a G1
+     graphic set, the third column contains the UCS/Unicode 16-bit code (in
+     hex), the fourth column contains the UTF-8 code (in hex) for the UCS
+     characters, the fifth column (CHAR) contains a representation of the character (where possible), 
+	 the sixth column contains the MARC character name, followed
+     by the UCS name. If the MARC name is the same as or very similar to the
+     UCS name, only the UCS name is given.</note>
 			<code>
 				<marc>C0</marc>
 				<ucs>0491</ucs>
@@ -2728,16 +2744,16 @@ U (Byelorussian)</name>
 		</characterSet>
 	</codeTable>
 	<codeTable name="Basic and Extended Arabic" date="July 2001" number="7">
-		<note>The first column in this table contains the MARC-8 code (in hex) for
-     the character as coming from the G0 graphic set, the second column
-     contains the MARC-8 code (in hex) for the character as coming from the G1
+		<characterSet name="Basic Arabic" ISOcode="33">
+			<note>The first column in this table contains the MARC-8 code (in hex) for
+     the character if invoked as a G0 graphic set, the second column
+     contains the MARC-8 code (in hex) for the character if invoked as a G1
      graphic set, the third column contains the UCS/Unicode 16-bit code (in
-     hex), the fourth column contains the UTF-8 code (in hex) for the UCS
-     characters, the fifth column contains a representation of the character (where possible), 
-	 the sixth column contains the MARC character name, followed
+     hex), and the fourth column contains the UTF-8 code (in hex) for the UCS
+     characters.  The fifth column (CHAR) contains a representation of the character (where possible), the sixth column (C?) indicates with a "C" that a character is a combining character, and 
+	 the seventh column contains the MARC character name, followed
      by the UCS name. If the MARC name is the same as or very similar to the
      UCS name, only the UCS name is given.</note>
-		<characterSet name="Basic Arabic" ISOcode="33">
 			<code>
 				<marc>21</marc>
 				<ucs>0021</ucs>
@@ -3248,6 +3264,15 @@ BRACKET</name>
 			</code>
 		</characterSet>
 		<characterSet name="Extended Arabic" ISOcode="34">
+			<note>The first column in this table contains the MARC-8 code (in hex) for
+     the character if invoked as a G0 graphic set, the second column
+     contains the MARC-8 code (in hex) for the character if invoked as a G1
+     graphic set, the third column contains the UCS/Unicode 16-bit code (in
+     hex), and the fourth column contains the UTF-8 code (in hex) for the UCS
+     characters.  The fifth column (CHAR) contains a representation of the character (where possible), the sixth column (C?) indicates with a "C" that a character is a combining character, and 
+	 the seventh column contains the MARC character name, followed
+     by the UCS name. If the MARC name is the same as or very similar to the
+     UCS name, only the UCS name is given.</note>
 			<code>
 				<marc>A1</marc>
 				<ucs>06FD</ucs>
@@ -3802,7 +3827,6 @@ ABOVE</name>
 				<utf-8>CC8C</utf-8>
 				<name>SHORT U / COMBINING CARON</name>
                         </code>
-
                         <!-- 
                         These last two code points were suggested by 
                         François Charette (fcharette@ankabut.net) to 
@@ -3812,9 +3836,11 @@ ABOVE</name>
                         replacing this file with the one from LC 
                         at some future date the presence of these
                         two code points should be confirmed. 
-                        ehs Aug-07-2007.
-                        -->
+                        ehs Aug-07-2007. 
 
+                        Still haven't been updated in latest codetables.xml
+                        as of Sep-29-2010.                        
+                        -->
                         <code>
                                 <marc>8D</marc>
                                 <ucs>200D</ucs>
@@ -3830,16 +3856,16 @@ ABOVE</name>
 		</characterSet>
 	</codeTable>
 	<codeTable name="Greek" date="January 2000" number="8">
-		<note>The first column in this table contains the MARC-8 code (in hex) for
-     the character as coming from the G0 graphic set, the second column
-     contains the MARC-8 code (in hex) for the character as coming from the G1
+		<characterSet name="Basic Greek" ISOcode="53">
+			<note>The first column in this table contains the MARC-8 code (in hex) for
+     the character if invoked as a G0 graphic set, the second column
+     contains the MARC-8 code (in hex) for the character if invoked as a G1
      graphic set, the third column contains the UCS/Unicode 16-bit code (in
-     hex), the fourth column contains the UTF-8 code (in hex) for the UCS
-     characters, the fifth column contains a representation of the character (where possible), 
-	 the sixth column contains the MARC character name, followed
+     hex), and the fourth column contains the UTF-8 code (in hex) for the UCS
+     characters.  The fifth column contains a representation of the character (where possible), the sixth column (C?) indicates with a "C" that a character is a combining character, and 
+	 the seventh column contains the MARC character name, followed
      by the UCS name. If the MARC name is the same as or very similar to the
      UCS name, only the UCS name is given.</note>
-		<characterSet name="Basic Greek" ISOcode="53">
 			<code>
 				<isCombining>true</isCombining>
 				<marc>21</marc>
@@ -38087,6 +38113,8 @@ SIGMA END OF WORD</name>
 				</code>
 				<code>
 					<marc>222B31</marc>
+
+
 					<ucs>6008</ucs>
 					<utf-8>E68088</utf-8>
 					<name>East Asian ideograph</name>
@@ -93539,6 +93567,7 @@ SIGMA END OF WORD</name>
 				<code>
 					<marc>6F5559</marc>
 					<ucs>C5D8</ucs>
+
 					<utf-8>EC9798</utf-8>
 					<name>Korean hangul</name>
 				</code>
