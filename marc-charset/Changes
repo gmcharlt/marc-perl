@@ -1,5 +1,8 @@
 Revision history for MARC::Charset
 
+1.31 Thu Sep 30 10:53:00 EDT 2010
+    - minor revision to get v1.3 Changes into the CPAN distro :-)
+
 1.3 Wed Sep 29 10:26:49 EDT 2010
     - added latest codetables.xml from
       http://www.loc.gov/marc/specifications/codetables.xml (thanks to 

@@ -1,6 +1,6 @@
 package MARC::Charset;
 
-our $VERSION = '1.3';
+our $VERSION = '1.31';
 use strict;
 use warnings;
 
