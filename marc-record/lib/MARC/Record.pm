@@ -12,7 +12,7 @@ use integer;
 use vars qw( $ERROR );
 
 use MARC::Field;
-use Carp qw(croak);
+use Carp qw(croak carp);
 
 =head1 VERSION
 
