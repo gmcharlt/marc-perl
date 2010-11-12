@@ -52,7 +52,7 @@ our $DEFAULT_G1 = EXTENDED_LATIN;
 =head2 ignore_errors()
 
 Tells MARC::Charset whether or not to ignore all encoding errors, and
-returns the current setting.  This is helepfuli if you have records that
+returns the current setting.  This is helpful if you have records that
 contain both MARC8 and UNICODE characters.
 
     my $ignore = MARC::Charset->ignore_errors();
