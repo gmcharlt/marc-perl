@@ -442,29 +442,28 @@ sub decode {
     }
 
     my $rec = MARC::Record->new();
-    my @leaders = $root->getElementsByLocalName('leader');
-    my $leader = $leaders[0]->textContent;
-
-    # this bit is rather questionable
-    my $transcode_to_marc8 = substr($leader, 9, 1) eq 'a' && decideMARC8Binary($format, $enc) ? 1 : 0;
-    substr($leader, 9, 1) = ' ' if $transcode_to_marc8;
-    
-    $rec->leader($leader);
-
     my @fields = ();
+    my $transcode_to_marc8;
     foreach my $elt ($root->getChildrenByLocalName('*')) {
-        if ($elt->localname eq 'controlfield') {
-            push @fields, MARC::Field->new($elt->getAttribute('tag'), $elt->textContent);
-        } elsif ($elt->localname eq 'datafield') {
+        my $elt_name = $elt->localname;
+        if ($elt_name eq 'leader') {
+            # this bit is rather questionable
+            my $leader = $elt->textContent;
+            $transcode_to_marc8 = substr($leader, 9, 1) eq 'a' && decideMARC8Binary($format, $enc) ? 1 : 0;
+            substr($leader, 9, 1) = ' ' if $transcode_to_marc8;
+            $rec->leader($leader);
+        } elsif ($elt_name eq 'controlfield') {
+            push @fields, MARC::Field->new($elt->getAttributeNode('tag')->value, $elt->textContent);
+        } elsif ($elt_name eq 'datafield') {
             my @sfs = ();
             foreach my $sfelt ($elt->getChildrenByLocalName('subfield')) {
-                push @sfs, $sfelt->getAttribute('code'), 
+                push @sfs, $sfelt->getAttributeNode('code')->value, 
                            $transcode_to_marc8 ? utf8_to_marc8($sfelt->textContent()) : $sfelt->textContent();
             }
             push @fields, MARC::Field->new(
-                $elt->getAttribute('tag'),
-                $elt->getAttribute('ind1'),
-                $elt->getAttribute('ind2'),
+                $elt->getAttributeNode('tag')->value,
+                $elt->getAttributeNode('ind1')->value,
+                $elt->getAttributeNode('ind2')->value,
                 @sfs
             );
         }
