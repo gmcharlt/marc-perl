@@ -6,8 +6,7 @@ use vars qw( $VERSION %_load_args );
 use base qw( MARC::File );
 use MARC::Record;
 use MARC::Field;
-use MARC::File::SAX;
-use XML::SAX qw(Namespaces Validation);
+use XML::LibXML;
 
 use MARC::Charset qw( marc8_to_utf8 utf8_to_marc8 );
 use IO::File;
@@ -16,8 +15,7 @@ use Encode ();
 
 $VERSION = '0.92';
 
-my $factory = XML::SAX::ParserFactory->new();
-$factory->require_feature(Namespaces);
+my $parser = XML::LibXML->new();
 
 sub import {
     my $class = shift;
@@ -417,13 +415,11 @@ It is normally invoked by a call to next(), see L<MARC::Batch> or L<MARC::File>.
 
 =cut
 
-sub decode { 
-    my $text; 
-    my $location = '';
+sub decode {
     my $self = shift;
+    my $text;
+    my $location = '';
 
-    ## see MARC::File::USMARC::decode for explanation of what's going on
-    ## here
     if ( ref($self) =~ /^MARC::File/ ) {
         $location = 'in record '.$self->{recnum};
         $text = shift;
@@ -435,16 +431,47 @@ sub decode {
     my $enc = shift || $_load_args{BinaryEncoding};
     my $format = shift || $_load_args{RecordFormat};
 
-    my $handler = MARC::File::SAX->new();
-    my $parser = $factory->parser(
-        Handler => $handler, 
-        ProtocolEncoding => $_load_args{DefaultEncoding}
-    );
-    $parser->{ Handler }{ toMARC8 } = decideMARC8Binary($format,$enc);
+    my $xml = $parser->parse_string($text);
 
-    $parser->parse_string( $text );
+    my $root = $xml->documentElement;
+    croak('MARCXML document has no root element') unless defined $root;
+    if ($root->localname eq 'collection') {
+        my @records = $root->getChildrenByLocalName('record');
+        croak('MARCXML document has no record element') unless @records;
+        $root = $records[0];
+    }
 
-    return( $handler->record() );
+    my $rec = MARC::Record->new();
+    my @leaders = $root->getElementsByLocalName('leader');
+    my $leader = $leaders[0]->textContent;
+
+    # this bit is rather questionable
+    my $transcode_to_marc8 = substr($leader, 9, 1) eq 'a' && decideMARC8Binary($format, $enc) ? 1 : 0;
+    substr($leader, 9, 1) = ' ' if $transcode_to_marc8;
+    
+    $rec->leader($leader);
+
+    my @fields = ();
+    foreach my $elt ($root->getChildrenByLocalName('*')) {
+        if ($elt->localname eq 'controlfield') {
+            push @fields, MARC::Field->new($elt->getAttribute('tag'), $elt->textContent);
+        } elsif ($elt->localname eq 'datafield') {
+            my @sfs = ();
+            foreach my $sfelt ($elt->getChildrenByLocalName('subfield')) {
+                push @sfs, $sfelt->getAttribute('code'), 
+                           $transcode_to_marc8 ? utf8_to_marc8($sfelt->textContent()) : $sfelt->textContent();
+            }
+            push @fields, MARC::Field->new(
+                $elt->getAttribute('tag'),
+                $elt->getAttribute('ind1'),
+                $elt->getAttribute('ind2'),
+                @sfs
+            );
+        }
+    }
+    $rec->append_fields(@fields);
+    return $rec;
+   
 }
 
 sub decideMARC8Binary {
