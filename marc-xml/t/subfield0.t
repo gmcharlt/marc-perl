@@ -3,7 +3,7 @@ use warnings;
 use Test::More tests => 1; 
 use MARC::Batch;
 
-# verify that SAX parser picks up contents of a subfield $0 
+# verify that parser picks up contents of a subfield $0 
 
 my $b = MARC::Batch->new( 'XML', 't/subfield0.xml' );
 my $r = $b->next();
