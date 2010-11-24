@@ -512,8 +512,6 @@ sub _unimarc_encoding {
 
 =item * Support for callback filters in decode().
 
-=item * Command line utilities marc2xml, etc.
-
 =back
 
 =head1 SEE ALSO
