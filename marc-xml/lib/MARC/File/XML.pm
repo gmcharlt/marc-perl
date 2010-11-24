@@ -15,7 +15,7 @@ use Encode ();
 
 $VERSION = '0.93';
 
-my $parser = XML::LibXML->new();
+our $parser;
 
 sub import {
     my $class = shift;
@@ -410,6 +410,11 @@ sub _next {
     return( $xml );
 }
 
+sub _parser {
+    $parser ||= XML::LibXML->new();
+    return $parser;
+}
+
 =head2 decode()
 
 You probably don't ever want to call this method directly. If you do 
@@ -435,6 +440,7 @@ sub decode {
     my $enc = shift || $_load_args{BinaryEncoding};
     my $format = shift || $_load_args{RecordFormat};
 
+    my $parser = _parser();
     my $xml = $parser->parse_string($text);
 
     my $root = $xml->documentElement;
@@ -476,6 +482,22 @@ sub decode {
     $rec->append_fields(@fields);
     return $rec;
    
+}
+
+=head2 MARC::File::XML->set_parser($parser)
+
+Pass a XML::LibXML parser to MARC::File::XML
+for it to use.  This is optional, meant for
+use by applications that maintain a shared
+parser object.
+
+=cut
+
+sub set_parser {
+    my $self = shift;
+
+    $parser = shift;
+    undef $parser unless ref($parser) =~ /XML::LibXML/;
 }
 
 sub decideMARC8Binary {
