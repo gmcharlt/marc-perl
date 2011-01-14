@@ -2,6 +2,7 @@
 ^\.gitignore$
 ^bin/makesfdocs$
 ^bin/testall$
+^MARC-Record-
 
 ### default MANIFEST.SKIP stuff
 # Version control files and dirs.
