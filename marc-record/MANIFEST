@@ -28,6 +28,7 @@ t/64.create.t
 t/66.grouped.t
 t/66.ordered.t
 t/67.subfield.t
+t/68.subfields.t
 t/70.croak.t
 t/75.warnings.t
 t/80.alphatag.t
