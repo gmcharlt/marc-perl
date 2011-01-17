@@ -16,6 +16,7 @@ use ExtUtils::MakeMaker;
         'File::Spec' => 0,
         'File::Find' => 0,
         'Carp' => 0,
+        'JSON' => 0,
     },
     EXE_FILES       => [ qw( bin/marcdump ) ],
     dist            => {
