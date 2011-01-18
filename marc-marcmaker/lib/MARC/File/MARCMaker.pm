@@ -357,7 +357,7 @@ leader with the correct length of the record as it would be if
 written out to a file.
 
 
-sub update_leader() { #from USMARC
+sub update_leader { #from USMARC
         my $self = shift;
 
         my (undef,undef,$reclen,$baseaddress) = $self->_build_tag_directory();
@@ -402,7 +402,7 @@ Turns a MARC::Field into a MARCMaker formatted field string.
 
 =cut
 
-sub as_marcmaker() {
+sub as_marcmaker {
     my $self = shift;
 #    $self = shift if (ref($self)||$self) =~ /^MARC::File/;
 

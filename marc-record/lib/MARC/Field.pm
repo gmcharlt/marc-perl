@@ -133,7 +133,7 @@ the tag doesn't have indicators.
 
 =cut
 
-sub indicator($) {
+sub indicator {
     my $self = shift;
     my $indno = shift;
 
@@ -519,7 +519,7 @@ Note that subfield h comes before subfield b in the output.
 
 =cut
 
-sub as_string() {
+sub as_string {
     my $self = shift;
     my $subfields = shift;
 
@@ -548,7 +548,7 @@ Returns a pretty string for printing in a MARC dump.
 
 =cut
 
-sub as_formatted() {
+sub as_formatted {
     my $self = shift;
 
     my @lines;
@@ -578,7 +578,7 @@ useful for C<MARC::Record::as_usmarc()>.
 
 =cut
 
-sub as_usmarc() {
+sub as_usmarc {
     my $self = shift;
 
     # Control fields are pretty easy
@@ -649,20 +649,20 @@ you're doing some grunt data analysis, you probably don't care.
 
 =cut
 
-sub warnings() {
+sub warnings {
     my $self = shift;
 
     return @{$self->{_warnings}};
 }
 
 # NOTE: _warn is an object method
-sub _warn($) {
+sub _warn {
     my $self = shift;
 
     push( @{$self->{_warnings}}, join( "", @_ ) );
 }
 
-sub _gripe(@) {
+sub _gripe {
     $ERROR = join( "", @_ );
 
     warn $ERROR;
