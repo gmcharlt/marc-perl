@@ -16,12 +16,12 @@ use Carp qw(croak carp);
 
 =head1 VERSION
 
-Version 2.0.2
+Version 2.0.3
 
 =cut
 
 use vars qw( $VERSION );
-$VERSION = '2.0.2';
+$VERSION = '2.0.3';
 
 use Exporter;
 use vars qw( @ISA @EXPORTS @EXPORT_OK );
@@ -101,7 +101,7 @@ Returns the title from the 245 tag.
 
 =cut
 
-sub title() {
+sub title {
     my $self = shift;
 
     my $field = $self->field(245);
@@ -114,7 +114,7 @@ Returns the title proper from the 245 tag, subfields a, n and p.
 
 =cut
 
-sub title_proper() {
+sub title_proper {
     my $self = shift;
 
     my $field = $self->field(245);
@@ -132,7 +132,7 @@ Returns the author from the 100, 110 or 111 tag.
 
 =cut
 
-sub author() {
+sub author {
     my $self = shift;
 
     my $field = $self->field('100|110|111');
@@ -145,7 +145,7 @@ Returns the edition from the 250 tag, subfield a.
 
 =cut
 
-sub edition() {
+sub edition {
     my $self = shift;
 
     my $str = $self->subfield(250,'a');
@@ -158,7 +158,7 @@ Returns the publication date from the 260 tag, subfield c.
 
 =cut
 
-sub publication_date() {
+sub publication_date {
     my $self = shift;
 
     my $str = $self->subfield(260,'c');
@@ -174,7 +174,7 @@ a MARC::Field object for each field in the record.
 
 =cut
 
-sub fields() {
+sub fields {
     my $self = shift;
     return @{$self->{_fields}};
 }
@@ -465,7 +465,7 @@ older versions of MARC::Record.
 
 =cut
 
-sub as_usmarc() {
+sub as_usmarc {
     my $self = shift;
 
     require MARC::File::USMARC;
@@ -479,7 +479,7 @@ Returns a pretty string for printing in a MARC dump.
 
 =cut
 
-sub as_formatted() {
+sub as_formatted {
     my $self = shift;
 
     my @lines = ( "LDR " . ($self->{_leader} || "") );
@@ -632,7 +632,7 @@ be cleared.
 
 =cut
 
-sub warnings() {
+sub warnings {
     my $self = shift;
     my @warnings = @{$self->{_warnings}};
     $self->{_warnings} = [];

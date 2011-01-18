@@ -907,7 +907,7 @@ employers of the various contributors to the code.
 =cut
 
 # Used only to read the stuff from __DATA__
-sub _read_rules() {
+sub _read_rules {
     my $self = shift;
 
     my $tell = tell(DATA);  # Stash the position so we can reset it for next time
@@ -976,7 +976,7 @@ sub _parse_tag_rules {
 }
 
 
-sub _nice_list($) {
+sub _nice_list {
     my $str = shift;
 
     if ( $str =~ s/(\d)-(\d)/$1 thru $2/ ) {
@@ -989,7 +989,7 @@ sub _nice_list($) {
     return join( ", ", @digits ) . " or $last";
 }
 
-sub _ind_regex($) {
+sub _ind_regex {
     my $str = shift;
 
     return qr/^ $/ if $str eq "blank";

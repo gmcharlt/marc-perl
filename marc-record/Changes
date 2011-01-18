@@ -1,5 +1,12 @@
 Revision history for Perl extension MARC::Record.
 
+2.0.3 Fri Jan 14 17:50:12 EST 2011
+        - RT#62296: fix crash when dealing with record bigger than
+          99999 bytes (Alex Arnaud)
+        - test cases for MARC::Field->subfields()
+        - RT#61198: let subfields return an empty array on control
+          fields (Colin Campbell)
+
 2.0.2 Tue May  4 13:04:07 EDT 2010
         - RT#57180: put back and expanded copyright statement in README
           at Debian request

@@ -154,7 +154,7 @@ sub close {
     return;
 }
 
-sub _unimplemented() {
+sub _unimplemented {
     my $self = shift;
     my $method = shift;
     warn "Method $method must be overridden";
@@ -184,8 +184,8 @@ sub _warn {
 }
 
 # NOTE: _gripe can be called as an object method, or not.  Your choice.
-# NOTE: it's use is now depracated use _warn instead
-sub _gripe(@) {
+# NOTE: it's use is now deprecated use _warn instead
+sub _gripe {
     my @parms = @_;
     if ( @parms ) {
         my $self = shift @parms;

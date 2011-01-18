@@ -240,7 +240,7 @@ written out to a file.
 
 =cut
 
-sub update_leader() {
+sub update_leader {
         my $self = shift;
 
         my (undef,undef,$reclen,$baseaddress) = $self->_build_tag_directory();
@@ -305,7 +305,7 @@ including the leader, directory and all the fields.
 
 =cut
 
-sub encode() {
+sub encode {
     my $marc = shift;
     $marc = shift if (ref($marc)||$marc) =~ /^MARC::File/;
 
