@@ -9,7 +9,7 @@ MARC::File::JSON - express MARC as JSON
 use strict;
 use warnings;
 
-use vars qw( $ERROR );
+use vars qw( $VERSION $ERROR );
 
 use MARC::File;
 use vars qw( @ISA ); @ISA = qw( MARC::File );
@@ -17,6 +17,8 @@ use vars qw( @ISA ); @ISA = qw( MARC::File );
 use MARC::Record qw( LEADER_LEN );
 use MARC::Field;
 use JSON;
+
+$VERSION = '0.01';
 
 =head1 SYNOPSIS
 

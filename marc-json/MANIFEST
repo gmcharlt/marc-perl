@@ -1,0 +1,13 @@
+Changes
+lib/MARC/File/JSON.pm
+Makefile.PL
+MANIFEST
+README
+t/00-load.t
+t/10.json.t
+t/boilerplate.t
+t/manifest.t
+t/pod-coverage.t
+t/pod.t
+t/rsinger-example.json
+t/rsinger-example.usmarc
