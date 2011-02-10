@@ -109,7 +109,7 @@ sub decode {
         my $tag = $tags[0];
         if ( ref($field->{$tag}) eq '' ) {
             if ( !$filter_func || $filter_func->( $tag, $field->{$tag} ) ) {
-                push @fields, MARC::Field->new( $tag, $field ); 
+                push @fields, MARC::Field->new( $tag, $field->{$tag} ); 
             }
         } else {
             if  ( !$filter_func || $filter_func->( $tag, $field ) ) {
