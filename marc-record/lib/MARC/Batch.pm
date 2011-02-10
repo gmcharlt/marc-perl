@@ -12,7 +12,7 @@ multiple-file aspects.
 
     use MARC::Batch;
 
-    # If you have werid control fields...
+    # If you have weird control fields...
     use MARC::Field;
     MARC::Field->allow_controlfield_tags('FMT', 'LDX');    
     
