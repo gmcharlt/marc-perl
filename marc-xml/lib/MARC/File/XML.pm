@@ -393,15 +393,22 @@ sub _next {
     return if eof($fh);
 
     ## get a chunk of xml for a record
-    local $/ = '</record>';
+    local $/ = 'record>';
     my $xml = <$fh>;
 
+    ## do we have enough?
+    $xml .= <$fh> if $xml !~ m!</([^:]+:){0,1}record>$!;
     ## trim stuff before the start record element 
-    $xml =~ s/.*<record.*?>/<record>/s;
+    $xml =~ s/.*?<(([^:]+:){0,1})record.*?>/<$1record>/s;
 
     ## return undef if there isn't a good chunk of xml
-    return if ( $xml !~ m|<record>.*</record>|s );
-    
+    return if ( $xml !~ m|<(([^:]+:){0,1})record>.*</\1record>|s );
+
+    ## if we have a namespace prefix, restore the declaration
+    if ($xml =~ /<([^:]+:)record>/) {
+        $xml =~ s!<([^:]+):record>!<$1:record xmlns:$1="http://www.loc.gov/MARC21/slim">!;
+    }
+
     ## return the chunk of xml
     return( $xml );
 }
