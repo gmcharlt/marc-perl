@@ -1,0 +1,47 @@
+MARC-File-JSON
+
+MARC::File::JSON is an extension to MARC::Record that adds
+support for the MARC-in-JSON serialization.  The serialization
+is described at
+
+http://dilettantes.code4lib.org/blog/2010/09/a-proposal-to-serialize-marc-in-json/
+
+This is part of the MARC/Perl project.  For more information,
+please see http://marcpm.sourceforge.net/.
+
+INSTALLATION
+
+To install this module, run the following commands:
+
+	perl Makefile.PL
+	make
+	make test
+	make install
+
+SUPPORT AND DOCUMENTATION
+
+After installing, you can find documentation for this module with the
+perldoc command.
+
+    perldoc MARC::File::JSON
+
+You can also look for information at:
+
+    RT, CPAN's request tracker
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=MARC-File-JSON
+
+    AnnoCPAN, Annotated CPAN documentation
+        http://annocpan.org/dist/MARC-File-JSON
+
+    CPAN Ratings
+        http://cpanratings.perl.org/d/MARC-File-JSON
+
+    Search CPAN
+        http://search.cpan.org/dist/MARC-File-JSON/
+
+LICENSE AND COPYRIGHT
+
+Copyright (C) 2011 Galen Charlton <gmcharlt@gmail.com>
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself. 
