@@ -1,5 +1,16 @@
 Revision history for Perl extension MARC-XML
 
+0.93 Fri Feb 11 17:13:02 EST 2011
+       - When slurping MARCXML records (e.g., via MARC::Batch), can
+         now handle XML files that use a prefix
+         to refer to the http://www.loc.gov/MARC21/slim namespace.
+       - If trying to parse a MARCXML record that has omitted
+         the <record> wrapper element, throw an exception
+         with a more meaningful error message.
+       - adjusted copyright statement further to meet Debian requirements
+         (RT#48333)
+       - set license in Makefile.PL
+ 
 0.92 Thu Jul 30 22:37:07 EDT 2009
       - small documentation changes to close RT tickets #48334 and #48333
         filed by Jonathan from Debian world.
