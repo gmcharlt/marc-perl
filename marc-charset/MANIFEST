@@ -1,8 +1,8 @@
 bin/compile_table
 bin/print_table
 Changes
-etc/codetables.xml
 etc/additional-iii-characters.xml
+etc/codetables.xml
 lib/MARC/Charset.pm
 lib/MARC/Charset/Code.pm
 lib/MARC/Charset/Compiler.pm
@@ -28,8 +28,12 @@ t/hebrew1.marc
 t/hebrew2.marc
 t/hebrew3.marc
 t/hebrew4.marc
+t/iii.t
 t/load.t
+t/marc8_to_utf8.t
 t/no_escape.t
+t/null.t
+t/o-stroke.t
 t/pod.t
 t/space.t
 t/table.t
