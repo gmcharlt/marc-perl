@@ -227,6 +227,7 @@ sub marc8_to_utf8
 
     # return the utf8
     reset_charsets();
+    utf8::upgrade($utf8);
     return $utf8;
 }
 
