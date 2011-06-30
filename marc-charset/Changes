@@ -1,5 +1,8 @@
 Revision history for MARC::Charset
 
+1.32 Thu Jun 30 16:38:32 EDT 2011
+    - make sure utf8 flag set in output of marc8_to_utf8
+
 1.31 Thu Sep 30 10:53:00 EDT 2010
     - minor revision to get v1.3 Changes into the CPAN distro :-)
 
