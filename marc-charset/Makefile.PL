@@ -1,9 +1,6 @@
 use 5.8.0;
 use ExtUtils::MakeMaker;
 
-# try to build the character mapping db
-build_db();
-
 WriteMakefile(
     NAME            => 'MARC::Charset',
     DISTNAME        => 'MARC-Charset',
@@ -19,18 +16,3 @@ WriteMakefile(
                             'GDBM_File'             => 0,
                        },
 );
-
-# build_db will return immediately if we can't use
-# MARC::Charset::Compiler which will typically 
-# happen when dependencies aren't met
-
-sub build_db
-{
-    eval('use lib "lib"; use MARC::Charset::Compiler');
-    return if $@;
-
-    print "compiling marc8/utf8 database, please be patient\n";
-    my $compiler = MARC::Charset::Compiler->new();
-    $compiler->compile('etc/codetables.xml');
-    $compiler->compile('etc/additional-iii-characters.xml');
-}
