@@ -1,5 +1,6 @@
 bin/compile_table
 bin/print_table
+build_db.PL
 Changes
 etc/additional-iii-characters.xml
 etc/codetables.xml

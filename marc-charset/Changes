@@ -1,5 +1,13 @@
 Revision history for MARC::Charset
 
+1.33 Thu Aug  4 23:25:14 EDT 2011
+    - move build_db() to separate .PL script so that module can be
+      built even if Class::Accessor and other dependencies aren't
+      available before Makefile.PL is run.
+    - list GDBM_File as an explicit dependency, assome distributions
+      like ActivePerl don't include it even though it is a
+      core module.
+
 1.32 Thu Jun 30 16:38:32 EDT 2011
     - make sure utf8 flag set in output of marc8_to_utf8
 
