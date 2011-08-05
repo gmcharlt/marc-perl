@@ -4,7 +4,7 @@ Revision history for MARC::Charset
     - move build_db() to separate .PL script so that module can be
       built even if Class::Accessor and other dependencies aren't
       available before Makefile.PL is run.
-    - list GDBM_File as an explicit dependency, assome distributions
+    - list GDBM_File as an explicit dependency, as some distributions
       like ActivePerl don't include it even though it is a
       core module.
 
