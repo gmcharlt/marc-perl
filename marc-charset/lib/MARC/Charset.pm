@@ -75,7 +75,7 @@ sub ignore_errors {
 
 Tells MARC::Charset whether or not to assume UNICODE when an error is
 encountered in ignore_errors mode and returns the current setting.
-This is helepfuli if you have records that contain both MARC8 and UNICODE
+This is helpful if you have records that contain both MARC8 and UNICODE
 characters.
 
     my $setting = MARC::Charset->assume_unicode();
@@ -189,7 +189,7 @@ sub marc8_to_utf8
 
             # gobble up all combining characters for appending later
             # this is necessary because combinging characters precede
-            # the character they modifiy in MARC-8, whereas they follow
+            # the character they modify in MARC-8, whereas they follow
             # the character they modify in UTF-8.
             if ($code->is_combining())
             {
