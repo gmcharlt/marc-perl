@@ -8,7 +8,8 @@ use Encode qw(encode_utf8);
 use MARC::Charset::Constants qw(:all);
 
 MARC::Charset::Code
-    ->mk_accessors(qw(marc ucs name charset is_combining alt));
+    ->mk_accessors(qw(marc ucs name charset is_combining alt
+                      marc_right_half marc_left_half));
 
 =head1 NAME
 
@@ -46,6 +47,16 @@ The MARC-8 character set code.
 =head2 is_combining()
 
 Returns true/false to tell if the character is a combining character.
+
+=head2 marc_left_half()
+
+If the character is the right half of a "double diacritic", returns
+a hex string representing the MARC-8 value of the left half.
+
+=head2 marc_right_half()
+
+If the character is the left half of a "double diacritic", returns
+a hex string representing the MARC-8 value of the right half.
 
 =head2 to_string()
 

@@ -974,6 +974,7 @@ ABOVE</name>
 			<code>
 				<isCombining>true</isCombining>
 				<marc>EB</marc>
+				<marc_right_half>EC</marc_right_half>
 				<ucs>0361</ucs>
 				<utf-8>CDA1</utf-8>
 				<alt>FE20</alt>
@@ -984,6 +985,7 @@ ABOVE</name>
 			<code>
 				<isCombining>true</isCombining>
 				<marc>EC</marc>
+				<marc_left_half>EB</marc_left_half>
 				<ucs></ucs>
 				<utf-8></utf-8>
 				<alt>FE21</alt>
@@ -1103,6 +1105,7 @@ BELOW</name>
 			<code>
 				<isCombining>true</isCombining>
 				<marc>FA</marc>
+				<marc_right_half>FB</marc_right_half>
 				<ucs>0360</ucs>
 				<utf-8>CDA0</utf-8>
 				<alt>FE22</alt>
@@ -1112,6 +1115,7 @@ BELOW</name>
 			<code>
 				<isCombining>true</isCombining>
 				<marc>FB</marc>
+				<marc_left_half>FA</marc_left_half>
 				<ucs></ucs>
 				<utf-8></utf-8>
 				<alt>FE23</alt>
