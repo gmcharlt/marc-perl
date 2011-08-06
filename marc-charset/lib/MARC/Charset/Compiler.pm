@@ -115,7 +115,7 @@ sub end_element
     }
    
     # add these elements
-    elsif ($code and $name =~ /^(marc|ucs|is_combining|alt)$/)
+    elsif ($code and $name =~ /^(marc|ucs|is_combining|alt|marc_right_half|marc_left_half)$/)
     {
         $code->$name($self->text());
     }

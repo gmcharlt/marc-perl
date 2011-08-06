@@ -193,8 +193,20 @@ sub marc8_to_utf8
             # the character they modify in UTF-8.
             if ($code->is_combining())
             {
-                $combining .= $code->char_value();
-	    }
+                # If the current character is the right half of a MARC-8 
+                # ligature or double tilde, we don't want to include
+                # it in the UTF-8 output.  For the explanation, see
+                # http://lcweb2.loc.gov/diglib/codetables/45.html#Note1
+                # Note that if the MARC-8 string includes a right half
+                # without the corresponding left half, the right half will
+                # get dropped instead of being mapped to its UCS alternate.
+                # That's OK since including only one half of a double diacritic
+                # was presumably a mistake to begin with. 
+                unless (defined $code->marc_left_half())
+                {
+                    $combining .= $code->char_value();
+                }
+	        }
             else
             {
                 $utf8 .= $code->char_value() . $combining;
@@ -288,7 +300,22 @@ sub utf8_to_marc8
         if ($code->is_combining())
         {
             my $prev = chop($marc8);
+            if ($code->marc_left_half())
+            {
+                # don't add the MARC-8 right half character
+                # if it was already inserted when the double
+                # diacritic was converted from UTF-8
+                if ($code->marc_value() eq substr($marc8, -1, 1))
+                {
+                    $marc8 .= $prev;
+                    next;
+                } 
+            }
             $marc8 .= $code->marc_value() . $prev;
+            if ($code->marc_right_half())
+            {
+                $marc8 .= chr(hex($code->marc_right_half()));
+            }
             next;
         }
 
