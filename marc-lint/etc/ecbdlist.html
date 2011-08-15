@@ -21,7 +21,7 @@ h3 {text-align:left;}
 h4 {margin-top:.5em; margin-bottom:.5em;}
 .edition {font-weight:bold; text-align:center}
 </style>
-<script type='text/javascript' src='http://www.loc.gov/global/triggerParams.js'></script><script type='text/javascript' src='http://www.loc.gov/global/stdLauncher.js'></script><script type='text/javascript'>Poll();</script></head>
+<script type='text/javascript' src='http://www.loc.gov/global/foresee/foresee-trigger.js'></script></head>
 <body>
 
 <div class="head-nav"><a href="http://www.loc.gov/">Library of
@@ -36,7 +36,7 @@ Congress</a> &gt;&gt; <a href="http://www.loc.gov/marc/">MARC</a>
 <hr>
 
 <div class="edition">1999 Edition<br>
-Update No. 1 (October 2001) through Update No. 10 (October 2009)</div>
+Update No. 1 (October 2001) through Update No. 12 (October 2010)</div>
 
 <hr>
 
@@ -111,7 +111,8 @@ Data</cite></a>.</p>
      18 - Descriptive cataloging form
          # - Non-ISBD
          a - AACR 2
-         i - ISBD
+         c - ISBD punctuation omitted
+         i - ISBD punctuation included
          p - Partial ISBD (BK) [OBSOLETE]
          r - Provisional (VM MP MU) [OBSOLETE]
          u - Unknown
@@ -163,7 +164,8 @@ Data</cite></a>.</p>
         m - Computer file/Electronic resource
      01-04 - Undefined
      05 - Target audience
-     06-08 - Undefined
+     06 - Form of item
+     07-08 - Undefined
      09 - Type of computer file
      10 - Undefined
      11 - Government publication
@@ -1376,6 +1378,8 @@ Data</cite></a>.</p>
          g - Punched paper tape [OBSOLETE]
          h - Magnetic tape [OBSOLETE]
          i - Multimedia [OBSOLETE]
+         o - Online
+         q - Direct electronic
          r - Regular print reproduction
          s - Electronic
          z - Other form of reproduction [OBSOLETE]
@@ -1505,7 +1509,10 @@ Data</cite></a>.</p>
          g - General
          j - Juvenile
          | - No attempt to code
-      23-25 - Undefined
+      23 - Form of item
+         o - Online
+         q - Direct electronic
+      24-25 - Undefined
       26 - Type of computer file
          a - Numeric data
          b - Computer program
@@ -1649,6 +1656,8 @@ Data</cite></a>.</p>
          c - Microopaque
          d - Large print
          f - Braille
+         o - Online
+         q - Direct electronic
          r - Regular print reproduction
          s - Electronic
          | - No attempt to code
@@ -1805,6 +1814,8 @@ Data</cite></a>.</p>
          g - Punched paper tape [   ]
          h - Magnetic tape [OBSOLETE]
          i - Multimedia [OBSOLETE]
+         o - Online
+         q - Direct electronic
          r - Regular print reproduction
          s - Electronic
          x - Other form of reproduction [OBSOLETE]
@@ -1929,6 +1940,8 @@ Data</cite></a>.</p>
          g - Punched paper tape [OBSOLETE]
          h - Magnetic tape [OBSOLETE] 
          i - Multimedia [OBSOLETE]
+         o - Online
+         q - Direct electronic
          s - Electronic
          x - Other physical medium [OBSOLETE]
          z - Other physical medium [OBSOLETE]
@@ -1943,6 +1956,8 @@ Data</cite></a>.</p>
          g - Punched paper tape [OBSOLETE]
          h - Magnetic tape [OBSOLETE]
          i - Multimedia [OBSOLETE]
+         o - Online
+         q - Direct electronic
          r - Regular print reproduction
          s - Electronic
          z - Other form of reproduction [OBSOLETE]
@@ -2143,6 +2158,8 @@ Data</cite></a>.</p>
          c - Microopaque
          d - Large print
          f - Braille
+         o - Online
+         q - Direct electronic
          r - Regular print reproduction
          s - Electronic
          | - No attempt to code
@@ -2197,7 +2214,9 @@ Data</cite></a>.</p>
          h - Magnetic tape [OBSOLETE]
          i - Multimedia [OBSOLETE]
          j - Handwritten transcript [OBSOLETE]
+         o - Online
          p - Photocopy [OBSOLETE]
+         q - Direct electronic
          r - Regular print reproduction
          s - Electronic
          t - Typewritten transcript [OBSOLETE]
@@ -2525,6 +2544,9 @@ Data</cite></a>.</p>
       $a - Formatted date/time (R)
       $b - Geographic classification area code (R)
       $c - Geographic classification subarea code (R)
+      $p - Place of event (R)
+      $0 - Record control number (R)
+      $2 - Source of term (R)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
@@ -2563,6 +2585,7 @@ Data</cite></a>.</p>
       $y - Ending date (NR)
       $z - Name of extraterrestrial body  (NR)
       $2 - Source  (NR)
+      $3 - Materials specified (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
 
@@ -2628,7 +2651,7 @@ Data</cite></a>.</p>
       $b - Language of cataloging (NR)
       $c - Transcribing agency (NR)
       $d - Modifying agency (R)
-      $e - Description conventions (NR)
+      $e - Description conventions (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
 
@@ -4219,6 +4242,73 @@ Data</cite></a>.</p>
       $2 - Source of availability status code (NR)
       $6 - Linkage (NR) 
       $8 - Field link and sequence number (R)
+	  
+380 - FORM OF WORK (R)
+   Indicators
+      First - Undefined
+         # - Undefined 
+      Second - Undefined
+         # - Undefined 
+   Subfield Codes
+      $a - Form of work (R)
+      $0 - Record control number (R)
+      $2 - Source of term (NR)
+      $6 - Linkage (NR) 
+      $8 - Field link and sequence number (R)
+	  
+381 - OTHER DISTINGUISHING CHARACTERISTICS OF WORK OR EXPRESSION (R)
+   Indicators
+      First - Undefined
+         # - Undefined 
+      Second - Undefined
+         # - Undefined 
+   Subfield Codes
+      $a - Other distinguishing characteristic (R)
+      $u - Uniform Resource Identifier (R)
+      $v - Source of information (R)
+      $0 - Record control number (R)
+      $2 - Source of term (NR)
+      $6 - Linkage (NR) 
+      $8 - Field link and sequence number (R)
+	  
+382 - MEDIUM OF PERFORMANCE (R)
+   Indicators
+      First - Undefined
+         # - Undefined 
+      Second - Undefined
+         # - Undefined 
+   Subfield Codes
+      $a - Medium of performance (R)
+      $0 - Record control number (R)
+      $2 - Source of term (NR)
+      $6 - Linkage (NR) 
+      $8 - Field link and sequence number (R)
+	  
+383 - NUMERIC DESIGNATION OF MUSICAL WORK (R)
+   Indicators
+      First - Undefined
+         # - Undefined 
+      Second - Undefined
+         # - Undefined 
+   Subfield Codes
+      $a - Serial number (R)
+      $b - Opus number (R)
+      $c - Thematic index number (R)
+      $6 - Linkage (NR) 
+      $8 - Field link and sequence number (R)
+	  
+384 - KEY (NR)
+   Indicators
+      First - Key type
+         # - Relationship to original unknown
+         0 - Original key
+         1 - Transposed key 
+      Second - Undefined
+         # - Undefined 
+   Subfield Codes
+      $a - Key (NR)
+      $6 - Linkage (NR) 
+      $8 - Field link and sequence number (R)
 
 
 --Series Statement Fields (4XX)--
@@ -4605,6 +4695,11 @@ Data</cite></a>.</p>
          # - Undefined
    Subfield Codes
       $a - Date/time and place of an event note (NR)
+      $d - Date of event (R)
+      $o - Other event information (R)
+      $p - Place of event (R)
+      $0 - Record control number (R)
+      $2 - Source of term (R)
       $3 - Materials specified (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
@@ -5095,6 +5190,7 @@ Data</cite></a>.</p>
    Subfield Codes
       $a - History (NR)
       $b - Time of collation (NR) [OBSOLETE]
+      $0 - Uniform Resource Identifier (R)
       $3 - Materials specified (NR)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
@@ -6634,9 +6730,9 @@ Data</cite></a>.</p>
       $b - Edition (NR)
       $c - Qualifying information (NR)
       $d - Place, publisher, and date of publication (NR)
-      $g - Relationship information (R)
+      $g - Related parts (R)
       $h - Physical description (NR)
-      $i - Display text (NR)
+      $i - Relationship information (R)
       $k - Series data for related item (R)
       $m - Material-specific details (NR)
       $n - Note (R)
@@ -6695,6 +6791,7 @@ Data</cite></a>.</p>
       $0 - Authority record control number (R)
       $3 - Materials specified (NR)
       $4 - Relator code (R)
+      $5 - Institution to which field applies (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
 
@@ -6731,6 +6828,7 @@ Data</cite></a>.</p>
       $0 - Authority record control number (R)
       $3 - Materials specified (NR)
       $4 - Relator code (R)
+      $5 - Institution to which field applies (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
 
@@ -6765,6 +6863,7 @@ Data</cite></a>.</p>
       $0 - Authority record control number (R)
       $3 - Materials specified (NR)
       $4 - Relator code (R)
+      $5 - Institution to which field applies (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
 
@@ -6794,6 +6893,7 @@ Data</cite></a>.</p>
       $x - International Standard Serial Number (NR)
       $0 - Authority record control number (R)
       $3 - Materials specified (NR)
+      $5 - Institution to which field applies (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
 

@@ -1205,6 +1205,9 @@ ind2    b012    Type of event
 a       R       Formatted date/time 
 b       R       Geographic classification area code 
 c       R       Geographic classification subarea code 
+p       R       Place of event
+0       R       Record control number
+2       R       Source of term
 3       NR      Materials specified 
 6       NR      Linkage 
 8       R       Field link and sequence number 
@@ -1232,6 +1235,7 @@ x       NR      Beginning date
 y       NR      Ending date
 z       NR      Name of extraterrestrial body
 2       NR      Source
+3       NR      Materials specified
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
@@ -1277,7 +1281,7 @@ a       NR      Original cataloging agency
 b       NR      Language of cataloging 
 c       NR      Transcribing agency 
 d       R       Modifying agency 
-e       NR      Description conventions 
+e       R       Description conventions 
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
@@ -2098,6 +2102,51 @@ m       NR      Identification of agency
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
+380     R       FORM OF WORK
+ind1    blank   Undefined
+ind2    blank   Undefined
+a       R       Form of work
+0       R       Record control number
+2       NR      Source of term
+6       NR      Linkage
+8       R       Field link and sequence number
+
+381     R       OTHER DISTINGUISHING CHARACTERISTICS OF WORK OR EXPRESSION
+ind1    blank   Undefined
+ind2    blank   Undefined
+a       R       Other distinguishing characteristic
+u       R       Uniform Resource Identifier
+v       R       Source of information
+0       R       Record control number
+2       NR      Source of term
+6       NR      Linkage
+8       R       Field link and sequence number
+
+382     R       MEDIUM OF PERFORMANCE
+ind1    blank   Undefined
+ind2    blank   Undefined
+a       R       Medium of performance
+0       R       Record control number
+2       NR      Source of term
+6       NR      Linkage
+8       R       Field link and sequence number
+
+383     R       NUMERIC DESIGNATION OF MUSICAL WORK
+ind1    blank   Undefined
+ind2    blank   Undefined
+a       R       Serial number
+b       R       Opus number
+c       R       Thematic index number
+6       NR      Linkage
+8       R       Field link and sequence number
+
+384     NR      KEY
+ind1    b01     Key type
+ind2    blank   Undefined
+a       NR      Key
+6       NR      Linkage
+8       R       Field link and sequence number
+
 400     R       SERIES STATEMENT/ADDED ENTRY--PERSONAL NAME 
 ind1    013     Type of personal name entry element
 ind2    01      Pronoun represents main entry
@@ -2332,6 +2381,11 @@ a       NR      Type of computer file or data note
 ind1    blank   Undefined
 ind2    blank   Undefined
 a       NR      Date/time and place of an event note 
+d       R       Date of event
+o       R       Other event information
+p       R       Place of event
+0       R       Record control number
+2       R       Source of term
 3       NR      Materials specified 
 6       NR      Linkage 
 8       R       Field link and sequence number 
@@ -2630,6 +2684,7 @@ z       R       International Standard Book Number
 ind1    b01     Undefined
 ind2    blank   Undefined
 a       NR      History 
+u       R       Uniform Resource Identifier
 3       NR      Materials specified 
 5       NR      Institution to which field applies 
 6       NR      Linkage 
@@ -3639,6 +3694,7 @@ x       NR      International Standard Serial Number
 0       R       Authority record control number
 3       NR      Materials specified
 4       R       Relator code 
+5       R       Institution to which field applies
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
@@ -3669,6 +3725,7 @@ x       NR      International Standard Serial Number
 0       R       Authority record control number
 3       NR      Materials specified
 4       R       Relator code 
+5       R       Institution to which field applies
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
@@ -3697,6 +3754,7 @@ x       NR      International Standard Serial Number
 0       R       Authority record control number
 3       NR      Materials specified
 4       R       Relator code 
+5       R       Institution to which field applies
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
@@ -3722,6 +3780,7 @@ w       R       Bibliographic record control number
 x       NR      International Standard Serial Number
 0       R       Authority record control number
 3       NR      Materials specified
+5       R       Institution to which field applies
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
