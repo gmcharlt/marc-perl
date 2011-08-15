@@ -6,7 +6,7 @@ use warnings;
 #declare the necessary variables
 use vars qw($VERSION @EXPORT_OK %GeogAreaCodes %ObsoleteGeogAreaCodes %LanguageCodes %ObsoleteLanguageCodes %CountryCodes %ObsoleteCountryCodes %Sources600_651 %ObsoleteSources600_651 %Sources655 %ObsoleteSources655);
 
-$VERSION = '1.30';
+$VERSION = '1.31';
 
 use base qw(Exporter AutoLoader);
 
@@ -91,6 +91,19 @@ The scripts above take the MARC code list ASCII version as input.
 They output tab-separated codes for updating the data below.
 
 =head1 VERSION HISTORY
+
+Version 1.31: Updated Aug. 15, 2011.
+
+ -Added new sources codes from Technical Notice of Apr. 28, 2010.
+ -Added new sources codes from Technical Notice of May 26, 2010.
+ -Added new sources codes from Technical Notice of June 18, 2010.
+ -Added new sources codes from Technical Notice of Jan. 5, 2011.
+ -Added new sources codes from Technical Notice of Apr. 13, 2011.
+ -Added new sources codes from Technical Notice of Apr. 22, 2011.
+ -Added new sources codes from Technical Notice of May 20, 2011.
+ -Added new sources codes from Technical Notice of June 14, 2011.
+ -Added new sources codes from Technical Notice of July 15, 2011.
+
 
 Version 1.30: Updated Jan. 27, 2010.
 
@@ -255,17 +268,17 @@ Version 1.00 (original version): First release, Dec. 5, 2004. Uploaded to Source
 
 %ObsoleteCountryCodes = map {($_, 1)} (split "\t", ("ai 	air	ac 	ajr	bwr	cn 	cz 	cp 	ln 	cs 	err	gsr	ge 	gn 	hk 	iw 	iu 	jn 	kzr	kgr	lvr	lir	mh 	mvr	nm 	pt 	rur	ry 	xi 	sk 	xxr	sb 	sv 	tar	tt 	tkr	unr	uk 	ui 	us 	uzr	vn 	vs 	wb 	ys 	yu "));
 
-%Sources600_651 = map {($_, 1)} (split "\t", ("aass	aat	abne	afset	agrifors	agrovoc	agrovocf	agrovocs	aiatsisl	aiatsisp	aiatsiss	aktp	albt	allars	amg	apaist	asft	asrcrfcd	asrcseo	asrctoa	asth	atla	aucsh	barn	bella	bet	bgtchm	bhammf	bhashe	bibalex	biccbmc	bicssc	bidex	bisacsh	bisacmt	bisacrt	bjornson	blmlsh	bt	cabt	cash	cct	ccte	cctf	cdcng	ceeus	chirosh	cht	ciesiniv	cilla	conorsi	csahssa	csalsct	csapa	csh	csht	cstud	czenas	dacs	dcs	ddcrit	dissao	dit	drama	dtict	ebfem	eclas	eet	eflch	eks	embne	ept	ericd	est	eurovocen	eurovocsl	fast	fgtpcm	finmesh	fire	fmesh	fnhl	francis	galestne	gem	georeft	gst	gtt	hamsun	hapi	hkcan	helecon	henn	hlasstg	hoidokki	huc	iaat	ica	icpsr	idas	iescs	iest	ilot	ilpt	inist	inspect	ipat	ipsp	isis	itglit	itoamc	itrt	jhpb	jhpk	jlabsh	kaa	kao	kaunokki	kdm	kitu	kkts	kssbar	kta	ktpt	ktta	kula	kupu	lacnaf	larpcal	lcsh	lcshac	lcstt	lctgm	lemac	lemb	liv	lnmmbr	local	ltcsh	lua	maaq	mar	masa	mech	mesh	mipfesd	mmm	mpirdes	msh	mtirdes	musa	muzeukc	muzeukn	muzeukv	muzvukci	nal	nalnaf	nasat	ncjt	netc	ndllsh	nicem	nimacsc	nlgaf	nlgkk	nlgsh	nlmnaf	nsbncf	ntcpsc	ntcsd	ntissc	nzggn	nznb	ogst	onet	opms	pascal	peri	pha	pkk	pmbok	pmcsg	pmt	poliscit	popinte	precis	prvt	psychit	quiding	qlsp	qrma	qrmak	qtglit	raam	ram	rasuqam	renib	reo	rero	rerovoc	reveal	rma	rpe	rswk	rswkaf	rugeo	rurkp	rvm	sao	sbiao	scbi	scgdst	scisshl	scot	sears	sfit	sgc	sgce	shbe	she	sigle	sipri	sk	skon	slem	smda	snt	socio	sosa	spines	ssg	stw	swd	swemesh	taika	taxhs	tbit	tesa	test	tgn	tho	thub	tlka	tlsh	toit	trt	trtsa	tsht	ttka	tucua	ulan	umitrist	unbisn	unbist	unescot	usaidt	vmj	waqaf	watrest	wgst	wot	wpicsh	ysa"));
+%Sources600_651 = map {($_, 1)} (split "\t", ("aass	aat	abne	afset	agrifors	agrovoc	agrovocf	agrovocs	aiatsisl	aiatsisp	aiatsiss	aktp	albt	allars	amg	apaist	asft	asrcrfcd	asrcseo	asrctoa	asth	atla	aucsh	barn	bella	bet	bgtchm	bhammf	bhashe	bibalex	biccbmc	bicssc	bidex	bisacsh	bisacmt	bisacrt	bjornson	blmlsh	bt	cabt	cash	ccsa	cct	ccte	cctf	cdcng	ceeus	chirosh	cht	ciesiniv	cilla	conorsi	csahssa	csalsct	csapa	csh	csht	cstud	czenas	dacs	dcs	ddcrit	dissao	dit	drama	dtict	ebfem	eclas	eet	eflch	eks	embne	ept	ericd	est	eum	eurovocen	eurovocsl	fast	fgtpcm	finmesh	fire	fmesh	fnhl	francis	galestne	gem	georeft	gst	gtt	hamsun	hapi	hkcan	helecon	henn	hlasstg	hoidokki	hrvmesh	huc	humord	iaat	ica	icpsr	idas	idsbb	idszbz	idszbzes	idszbzna	idszbzzg	idszbzzh	idszbzzk	iescs	iest	ilot	ilpt	inist	inspect	ipat	ipsp	isis	itglit	itoamc	itrt	jhpb	jhpk	jlabsh	jurivoc	kaa	kao	kaunokki	kdm	kitu	kkts	kssbar	kta	ktpt	ktta	kula	kupu	lacnaf	larpcal	lcsh	lcshac	lcstt	lctgm	lemac	lemb	liv	lnmmbr	local	ltcsh	lua	maaq	mar	masa	mech	mesh	mipfesd	mmm	mpirdes	msh	mtirdes	musa	muzeukc	muzeukn	muzeukv	muzvukci	nal	nalnaf	nasat	ncjt	netc	ndllsh	nicem	nimacsc	nlgaf	nlgkk	nlgsh	nlmnaf	norbok	noubomn	noubojur	nsbncf	nskps	ntcpsc	ntcsd	ntissc	nzggn	nznb	ogst	onet	opms	pascal	peri	pha	pkk	pmbok	pmcsg	pmont	pmt	poliscit	popinte	precis	prvt	psychit	quiding	qlsp	qrma	qrmak	qtglit	raam	ram	rasuqam	renib	reo	rero	rerovoc	reveal	rma	rpe	rswk	rswkaf	rugeo	rurkp	rvm	samisk	sao	sbiao	sbt	scbi	scgdst	scisshl	scot	sears	sfit	sgc	sgce	shbe	she	shsples	sigle	sipri	sk	skon	slem	smda	snt	socio	solstad	sosa	spines	ssg	stw	swd	swemesh	taika	taxhs	tbit	tekord	tesa	test	tgn	tho	thub	tlka	tlsh	toit	trt	trtsa	tsht	ttka	tucua	ulan	umitrist	unbisn	unbist	unescot	usaidt	vmj	waqaf	watrest	wgst	wot	wpicsh	ysa"));
 
 #The codes cash, lcsh, lcshac, mesh, nal, and rvm are covered by 2nd indicators in 600-655
 #they are only used when indicators are not available
-%ObsoleteSources600_651 = map {($_, 1)} (split "\t", ("cash	lcsh	lcshac	mesh	nal	reroa	rvm"));
+%ObsoleteSources600_651 = map {($_, 1)} (split "\t", ("cash	lcsh	lcshac	mesh	nal	nobomn	noubojor	reroa	rvm"));
 
-%Sources655 = map {($_, 1)} (split "\t", ("aat	afset	aiatsisl	aiatsisp	aiatsiss	aktp	amg	asrcrfcd	asrcseo	asrctoa	asth	aucsh	barn	bibalex	biccbmc	bgtchm	bisacsh	bisacmt	bisacrt	bjornson	bt	cash	chirosh	cct	cdcng	conorsi	csht	czenas	dacs	dcs	dct	eet	eflch	embne	ept	ericd	estc	eurovocen	eurovocsl	fast	fbg	finmesh	fire	galestne	gem	gmgpc	gsafd	gst	gtlm	hamsun	hapi	hkcan	hoidokki	ica	ilot	itglit	itrt	jhpb	jhpk	kkts	lacnaf	lcsh	lcshac	lcstt	lctgm	lemac	local	maaq	mar	marcgt	mech	mesh	migfg	mim	msh	muzeukc	muzeukn	muzeukv	muzvukci	nal	nalnaf	netc	ngl	nimafc	nlgaf	nlgkk	nlgsh	nlmnaf	nmc	nsbncf	nzggn	nznb	onet	opms	pkk	pmcsg	pmt	quiding	qlsp	qrmak	qtglit	raam	radfg	rasuqam	rbbin	rbgenr	rbpap	rbpri	rbprov	rbpub	rbtyp	reo	rerovoc	reveal	rma	rswk	rswkaf	rugeo	rvm	sao	scbi	sears	sgc	sgce	sgp	sipri	skon	snt	socio	spines	ssg	stw	swd	swemesh	tbit	tesa	tho	thub	toit	tsht	tucua	ulan	vmj	waqaf"));
+%Sources655 = map {($_, 1)} (split "\t", ("aat	afset	aiatsisl	aiatsisp	aiatsiss	aktp	amg	asrcrfcd	asrcseo	asrctoa	asth	aucsh	barn	barngf	bibalex	biccbmc	bgtchm	bisacsh	bisacmt	bisacrt	bjornson	bt	cash	chirosh	cct	cdcng	conorsi	csht	czenas	dacs	dcs	dct	eet	eflch	embne	ept	ericd	estc	eurovocen	eurovocsl	fast	fbg	finmesh	fire	galestne	gatbeg	gem	gmgpc	gsafd	gst	gtlm	hamsun	hapi	hkcan	hoidokki	ica	ilot	itglit	itrt	jhpb	jhpk	kkts	lacnaf	lcgft	lcsh	lcshac	lcstt	lctgm	lemac	local	maaq	mar	marcgt	mech	mesh	migfg	mim	msh	muzeukc	muzeukn	muzeukv	muzvukci	nal	nalnaf	ndlsh	netc	ngl	nimafc	nlgaf	nlgkk	nlgsh	nlmnaf	nmc	nsbncf	nzggn	nznb	onet	opms	pkk	pmcsg	pmt	quiding	qlsp	qrmak	qtglit	raam	radfg	rasuqam	rbbin	rbgenr	rbpap	rbpri	rbprov	rbpub	rbtyp	rdacarrier	rdacontent	rdamedia	reo	rerovoc	reveal	rma	rswk	rswkaf	rugeo	rvm	sao	saogf	scbi	sears	sgc	sgce	sgp	sipri	skon	snt	socio	spines	ssg	stw	swd	swemesh	tbit	tesa	tho	thub	toit	tsht	tucua	ulan	vmj	waqaf"));
 
 #The codes cash, lcsh, lcshac, mesh, nal, and rvm are covered by 2nd indicators in 600-655
 #they are only used when indicators are not available
-%ObsoleteSources655 = map {($_, 1)} (split "\t", ("cash	ftamc	lcsh	lcshac	mesh	nal	reroa	rvm"));
+%ObsoleteSources655 = map {($_, 1)} (split "\t", ("cash	ftamc	lcsh	lcshac	marccarrier	marccontent	marcmedia	mesh	nal	reroa	rvm"));
 
 1;
 
@@ -281,7 +294,7 @@ employers of the various contributors to the code.
 Bryan Baldus
 eijabb@cpan.org
 
-Copyright (c) 2004-2010.
+Copyright (c) 2004-2011.
 
 =cut
 
