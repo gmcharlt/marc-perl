@@ -737,6 +737,7 @@ sub _check_article {
 # may want to make keys lowercase
     my %exceptions = (
         'A & E' => 1,
+        'A & ' => 1,
         'A-' => 1,
         'A+' => 1,
         'A is ' => 1,
@@ -748,6 +749,7 @@ sub _check_article {
         'A to ' => 1,
         'El Nino' => 1,
         'El Salvador' => 1,
+        'L is ' => 1,
         'L-' => 1,
         'La Salle' => 1,
         'Las Vegas' => 1,
@@ -1234,6 +1236,7 @@ t       R       G-ring longitude
 x       NR      Beginning date
 y       NR      Ending date
 z       NR      Name of extraterrestrial body
+0       R       Authority record control number or standard number
 2       NR      Source
 3       NR      Materials specified
 6       NR      Linkage 
@@ -1294,8 +1297,11 @@ d       R       Language code of sung or spoken text
 e       R       Language code of librettos 
 f       R       Language code of table of contents 
 g       R       Language code of accompanying material other than librettos 
-h       R       Language code of original and/or intermediate translations of text 
+h       R       Language code of original
 j       R       Language code of subtitles or captions
+k       R       Language code of intermediate translations
+m       R       Language code of original accompanying materials other than librettos
+n       R       Language code of original libretto
 2       NR      Source of code 
 6       NR      Linkage 
 8       R       Field link and sequence number 
@@ -1311,6 +1317,7 @@ ind2    blank   Undefined
 a       R       Geographic area code 
 b       R       Local GAC code 
 c       R       ISO code 
+0       R       Authority record control number or standard number
 2       R       Source of local code 
 6       NR      Linkage 
 8       R       Field link and sequence number 
@@ -1465,7 +1472,7 @@ x       R       Common auxiliary subdivision
 8       R       Field link and sequence number 
 
 082     R       DEWEY DECIMAL CLASSIFICATION NUMBER
-ind1    01      Type of edition
+ind1    017     Type of edition
 ind2    b04     Source of classification number
 a       R       Classification number 
 b       NR      Item number 
@@ -1476,7 +1483,7 @@ q       NR      Assigning agency
 8       R       Field link and sequence number 
 
 083     R       ADDITIONAL DEWEY DECIMAL CLASSIFICATION NUMBER
-ind1    01      Type of edition
+ind1    017     Type of edition
 ind2    blank   Undefined
 a       R       Classification number
 c       R       Classification number--Ending number of span
@@ -1493,6 +1500,7 @@ ind1    blank   Undefined
 ind2    blank   Undefined
 a       R       Classification number 
 b       NR      Item number 
+q       NR      Assigning agency
 2       NR      Source of number 
 6       NR      Linkage 
 8       R       Field link and sequence number 
@@ -1827,6 +1835,16 @@ a       NR      Projected publication date
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
+264     R       PRODUCTION, PUBLICATION, DISTRIBUTION, MANUFACTURE, AND COPYRIGHT NOTICE
+ind1    b23     Sequence of statements
+ind2    01234   Function of entity
+a       R       Place of production, publication, distribution, manufacture
+b       R       Name of producer, publisher, distributor, manufacturer
+c       R       Date of production, publication, distribution, manufacture, or copyright notice
+3       NR      Materials specified
+6       NR      Linkage
+8       R       Field link and sequence number (R)
+
 270     R       ADDRESS
 ind1    b12     Level
 ind2    b07     Type of address
@@ -1937,6 +1955,13 @@ e       R       Support
 f       R       Production rate/ratio 
 h       R       Location within medium 
 i       R       Technical specifications of medium 
+j       R       Generation
+k       R       Layout
+m       R       Book format
+n       R       Font size
+o       R       Polarity
+0       R       Authority record control number or standard number
+2       NR      Source
 3       NR      Materials specified 
 6       NR      Linkage 
 8       R       Field link and sequence number 
@@ -1984,6 +2009,60 @@ h       NR      Bearing reference direction
 i       NR      Bearing reference meridian 
 6       NR      Linkage 
 8       R       Field link and sequence number 
+
+344     R       SOUND CHARACTERISTICS
+ind1    blank   Undefined
+ind2    blank   Undefined
+a       R       Type of recording
+b       R       Recording medium
+c       R       Playing speed
+d       R       Groove characteristic
+e       R       Track configuration
+f       R       Tape configuration
+g       R       Configuration of playback channels
+h       R       Special playback characteristics
+0       R       Authority record control number or standard number
+2       NR      Source
+3       NR      Materials specified
+6       NR      Linkage
+8       R       Field link and sequence number
+
+345     R       PROJECTION CHARACTERISTICS OF MOVING IMAGE
+ind1    blank   Undefined
+ind2    blank   Undefined
+a       R       Presentation format
+b       R       Projection speed
+0       R       Authority record control number or standard number
+2       NR      Source
+3       NR      Materials specified
+6       NR      Linkage
+8       R       Field link and sequence number
+
+346     R       VIDEO CHARACTERISTICS
+ind1    blank   Undefined
+ind2    blank   Undefined
+a       R       Video format
+b       R       Broadcast standard
+0       R       Authority record control number or standard number
+2       NR      Source
+3       NR      Materials specified
+6       NR      Linkage
+8       R       Field link and sequence number
+
+347     R       DIGITAL FILE CHARACTERISTICS
+ind1    blank   Undefined
+ind2    blank   Undefined
+a       R       File type
+b       R       Encoding format
+c       R       File size
+d       R       Resolution
+e       R       Regional encoding
+f       R       Transmission speed
+0       R       Authority record control number or standard number
+2       NR      Source
+3       NR      Materials specified
+6       NR      Linkage
+8       R       Field link and sequence number
 
 351     R       ORGANIZATION AND ARRANGEMENT OF MATERIALS
 ind1    blank   Undefined
@@ -2102,6 +2181,15 @@ m       NR      Identification of agency
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
+377     R       ASSOCIATED LANGUAGE
+ind1    blank   Undefined
+ind2    b7      Undefined
+a       R       Language code
+l       R       Language term
+2       NR      Source
+6       NR      Linkage
+8       R       Field link and sequence number
+
 380     R       FORM OF WORK
 ind1    blank   Undefined
 ind2    blank   Undefined
@@ -2123,9 +2211,15 @@ v       R       Source of information
 8       R       Field link and sequence number
 
 382     R       MEDIUM OF PERFORMANCE
-ind1    blank   Undefined
-ind2    blank   Undefined
+ind1    b01     Undefined
+ind2    b01     Undefined
 a       R       Medium of performance
+b       R       Soloist
+d       R       Doubling instrument
+n       R       Number of performers of the same medium
+p       R       Alternative medium of performance
+s       R       Total number of performers
+v       R       Note
 0       R       Record control number
 2       NR      Source of term
 6       NR      Linkage
@@ -2137,6 +2231,9 @@ ind2    blank   Undefined
 a       R       Serial number
 b       R       Opus number
 c       R       Thematic index number
+d       NR      Thematic index code
+e       NR      Publisher associated with opus number
+2       NR      Source
 6       NR      Linkage
 8       R       Field link and sequence number
 

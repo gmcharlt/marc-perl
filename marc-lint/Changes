@@ -3,6 +3,7 @@
         [THINGS THAT MAY BREAK YOUR CODE]
         
         - Updated Lint::DATA section with Update No. 10 (Oct. 2009) through Update No. 14 (Apr. 2012)
+        - Updated _check_article with the exceptions: 'A & ', 'L is '
 
 1.44    Sat August 29, 2009
 
