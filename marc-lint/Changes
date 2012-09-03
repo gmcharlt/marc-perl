@@ -1,3 +1,9 @@
+1.46    Mon Sept. 3, 2012
+
+        [THINGS THAT MAY BREAK YOUR CODE]
+        - Updated MARC::Lint::CodeData with most recent version.
+
+
 1.45    Sat June 30, 2012
 
         [THINGS THAT MAY BREAK YOUR CODE]
