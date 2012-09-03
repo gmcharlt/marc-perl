@@ -8,7 +8,7 @@ use MARC::Field;
 
 use MARC::Lint::CodeData qw(%GeogAreaCodes %ObsoleteGeogAreaCodes %LanguageCodes %ObsoleteLanguageCodes);
 
-our $VERSION = 1.45;
+our $VERSION = 1.46;
 
 =head1 NAME
 
