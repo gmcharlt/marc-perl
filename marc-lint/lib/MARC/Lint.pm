@@ -8,7 +8,7 @@ use MARC::Field;
 
 use MARC::Lint::CodeData qw(%GeogAreaCodes %ObsoleteGeogAreaCodes %LanguageCodes %ObsoleteLanguageCodes);
 
-our $VERSION = 1.46;
+our $VERSION = 1.47;
 
 =head1 NAME
 
@@ -555,12 +555,12 @@ sub check_245 {
     } # while
     
     # 245 must end in period (may want to make this less restrictive by allowing trailing spaces)
-    #do 2 checks--for final punctuation (MARC21 rule), and for period (LCRI 1.0C, Nov. 2003)
+    #do 2 checks--for final punctuation (MARC21 rule), and for period (LCRI 1.0C, Nov. 2003; LCPS 1.7.1)
     if ($newsubfields[$#newsubfields] !~ /[.?!]$/) {
         $self->warn ( "245: Must end with . (period).");
     }
     elsif($newsubfields[$#newsubfields] =~ /[?!]$/) {
-        $self->warn ( "245: MARC21 allows ? or ! as final punctuation but LCRI 1.0C, Nov. 2003, requires period.");
+        $self->warn ( "245: MARC21 allows ? or ! as final punctuation but LCRI 1.0C, Nov. 2003 (LCPS 1.7.1 for RDA records), requires period.");
     }
 
     ##Check for first subfield
@@ -1158,6 +1158,7 @@ ind1    012345  Type of publisher number
 ind2    0123    Note/added entry controller
 a       NR      Publisher number 
 b       NR      Source 
+q       R       Qualifying information
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
@@ -3994,6 +3995,19 @@ a       R       Replacement title
 i       R       Explanatory text
 w       R       Replacement bibliographic record control number
 6       NR      Linkage
+8       R       Field link and sequence number
+
+883     R       MACHINE-GENERATED METADATA PROVENANCE
+ind1    b01     Type of field
+ind2    blank   Undefined
+a       NR      Generation process
+c       NR      Confidence value
+d       NR      Generation date
+q       NR      Generation agency
+x       NR      Validity end date
+u       NR      Uniform Resource Identifier
+w       R       Bibliographic record control number
+0       R       Authority record control number or standard number
 8       R       Field link and sequence number
 
 886     R       FOREIGN MARC INFORMATION FIELD
