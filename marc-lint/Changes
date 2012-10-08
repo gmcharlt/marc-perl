@@ -1,3 +1,8 @@
+1.47    Mon Oct. 8, 2012
+        [THINGS THAT MAY BREAK YOUR CODE]
+        - Updated Lint::DATA section with Update No. 15 (Sept. 2012)
+        - Revised wording in check_245 ending punctuation to account for LC Policy Statement (for RDA records), matching LCRI, for always ending 245 with a period.
+
 1.46    Mon Sept. 3, 2012
 
         [THINGS THAT MAY BREAK YOUR CODE]
