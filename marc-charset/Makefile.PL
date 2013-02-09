@@ -1,6 +1,9 @@
 use 5.8.0;
 use ExtUtils::MakeMaker;
 
+use strict;
+use warnings;
+
 WriteMakefile(
     NAME            => 'MARC::Charset',
     DISTNAME        => 'MARC-Charset',

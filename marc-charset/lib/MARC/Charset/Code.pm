@@ -69,7 +69,7 @@ ucs().
 
 =cut
 
-sub char_value() 
+sub char_value
 {
     return chr(hex(shift->ucs()));
 }
@@ -98,7 +98,7 @@ Returns the name of the character set, instead of the code.
 
 =cut
 
-sub charset_name()
+sub charset_name
 {
     return MARC::Charset::Constants::charset_name(shift->charset_value());
 }

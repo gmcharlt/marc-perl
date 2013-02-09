@@ -95,7 +95,7 @@ sub get_code
     my $db = $self->db();
     my $frozen = $db->{$key};
     return thaw($frozen) if $frozen;
-    return undef;
+    return;
 }
 
 
@@ -184,7 +184,7 @@ sub brand_new
 sub _init 
 {
     my ($self,$opts) = @_;
-    tie my %db, 'GDBM_File', db_path(), $opts, 0644;
+    tie my %db, 'GDBM_File', db_path(), $opts, 0644; ## no critic (ValuesAndExpressions::ProhibitLeadingZeros)
     $self->{db} = \%db;
 }
 

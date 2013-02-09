@@ -1,8 +1,9 @@
 package MARC::Charset;
 
-our $VERSION = '1.33';
 use strict;
 use warnings;
+
+our $VERSION = '1.33';
 
 use base qw(Exporter);
 our @EXPORT_OK = qw(marc8_to_utf8 utf8_to_marc8);

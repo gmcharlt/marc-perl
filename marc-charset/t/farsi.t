@@ -36,8 +36,8 @@ use warnings;
 
 use MARC::Charset qw(marc8_to_utf8);
 
-open FARSI, 't/farsi.marc';
-my @lines = <FARSI>;
+open my $FARSI, '<', 't/farsi.marc';
+my @lines = <$FARSI>;
 
 foreach my $line (@lines) {
   ok marc8_to_utf8($line);
