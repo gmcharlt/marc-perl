@@ -19,7 +19,7 @@ by Andy Lester.
 
 =cut
 
-open( my $fh, "../lib/MARC/Lint.pm" ) or die "Can't open module";
+open( my $fh, '<', "../lib/MARC/Lint.pm" ) or die "Can't open module";
 while ( <$fh> ) {
     print;
     last if /^__DATA__/;

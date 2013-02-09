@@ -437,9 +437,9 @@ sub check_041 {
 
                 foreach my $code041 (@codes041) {
                     #see if language code matches valid code
-                    my $validlang = 1 if ($LanguageCodes{$code041});
+                    my $validlang = $LanguageCodes{$code041} ? 1 : 0;
                     #look for invalid code match if valid code was not matched
-                    my $obsoletelang = 1 if ($ObsoleteLanguageCodes{$code041});
+                    my $obsoletelang = $ObsoleteLanguageCodes{$code041} ? 1 : 0;
 
                     # skip valid subfields
                     unless ($validlang) {
@@ -491,9 +491,9 @@ sub check_043 {
         elsif ($newsubfields[$index] eq 'a') {
 
             #see if geog area code matches valid code
-            my $validgac = 1 if ($GeogAreaCodes{$newsubfields[$index+1]});
+            my $validgac = $GeogAreaCodes{$newsubfields[$index+1]} ? 1 : 0;
             #look for obsolete code match if valid code was not matched
-            my $obsoletegac = 1 if ($ObsoleteGeogAreaCodes{$newsubfields[$index+1]});
+            my $obsoletegac = $ObsoleteGeogAreaCodes{$newsubfields[$index+1]} ? 1 : 0;
 
             # skip valid subfields
             unless ($validgac) {
