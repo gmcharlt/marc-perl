@@ -374,11 +374,8 @@ my %ESCAPES = (
     '<'     => '&lt;',
     '>'     => '&gt;',
 );
-my $ESCAPE_REGEX = 
-    eval 'qr/' . 
-    join( '|', map { $_ = "\Q$_\E" } keys %ESCAPES ) .
-    '/;'
-    ;
+my $_base_escape_regex = join( '|', map { "\Q$_\E" } keys %ESCAPES );
+my $ESCAPE_REGEX = qr/$_base_escape_regex/;
 
 sub escape {
     my $string = shift;

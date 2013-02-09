@@ -1,3 +1,6 @@
+use strict;
+use warnings;
+
 use Test::More tests => 23;
 
 use Data::Dumper;
@@ -33,7 +36,7 @@ my @leaders = (
 '00696nam  22002538a 4500',
 );
 
-$count = 0;
+my $count = 0;
 while ( my $record = $batch->next() ) { 
     $count++;
     is( $record->leader(), shift(@leaders), "found leader $count" );

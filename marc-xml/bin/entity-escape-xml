@@ -1,4 +1,8 @@
 #!/usr/bin/perl
+
+use strict;
+use warnings;
+
 use Unicode::Normalize;
 binmode(STDIN,':utf8');
 

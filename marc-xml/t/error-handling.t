@@ -4,9 +4,9 @@ use Test::More tests => 1;
 use MARC::Record;
 use MARC::File::XML;
 
-open IN, '<', 't/invalid.xml';
-my $xml = join('', <IN>);
-close IN;
+open my $IN, '<', 't/invalid.xml';
+my $xml = join('', <$IN>);
+close $IN;
 my $r;
 eval { $r = MARC::Record->new_from_xml($xml, 'UTF-8'); };
 if ($@) {
