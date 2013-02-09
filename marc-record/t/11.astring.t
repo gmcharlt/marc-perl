@@ -1,8 +1,9 @@
-#!perl -Tw
-
-use Test::More ( tests => 5 );
+#!perl -T
 
 use strict;
+use warnings;
+
+use Test::More ( tests => 5 );
 use File::Spec;
 
 BEGIN {

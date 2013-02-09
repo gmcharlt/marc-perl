@@ -68,7 +68,7 @@ sub in {
     ## return undef if we weren't able to open it
     else {
         $filename = $arg;
-        $fh = eval { local *FH; open( FH, $arg ) or die; *FH{IO}; };
+        $fh = eval { local *FH; open( FH, '<', $arg ) or die; *FH{IO}; };
         if ( $@ ) {
             $MARC::File::ERROR = "Couldn't open $filename: $@";
             return;

@@ -81,9 +81,9 @@ is( scalar(@fields), 2, 'field(regex)' );
 my $marc = $record->as_usmarc();
 
 my $filename = "$$.usmarc";
-open(OUT,">$filename");
-print OUT $record->as_usmarc();
-close(OUT);
+open(my $OUT, '>', $filename);
+print $OUT $record->as_usmarc();
+close($OUT);
 
 my $file = MARC::File::USMARC->in( $filename );
 isa_ok( $file, 'MARC::File::USMARC', "Opened $filename" );

@@ -1,4 +1,7 @@
-#!perl -Tw
+#!perl -T
+
+use strict;
+use warnings;
 
 use Test::More tests=>9;
 
@@ -21,7 +24,7 @@ isa_ok( $f200, "MARC::Field", "F200 ok" );
 
 INSERT_FIELDS_AFTER: {
     eval {
-	$n = $record->insert_fields_after( $f100, 'blah' );
+	    my $n = $record->insert_fields_after( $f100, 'blah' );
     };
 
     like( $@, qr/All arguments must be MARC::Field objects/, 
@@ -42,7 +45,7 @@ INSERT_FIELDS_BEFORE: {
 
 INSERT_GROUPED_FIELD: {
     eval {
-	$n = $record->insert_grouped_field( 'blah' );
+	    my $n = $record->insert_grouped_field( 'blah' );
     };
 
     like( $@, qr/Argument must be MARC::Field object/,

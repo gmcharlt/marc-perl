@@ -28,9 +28,9 @@ my @lifnames = ( 'lineendings-0a.lif', 'lineendings-0d.lif', 'lineendings-0d0a.l
 
 foreach my $lifname (@lifnames) {
     my $liffile = File::Spec->catfile( 't', $lifname );
-    open(IN, $liffile );
-    my $str = join( '', <IN> );
-    close IN;
+    open(my $IN, '<', $liffile );
+    my $str = join( '', <$IN> );
+    close $IN;
 
     ## attempt to use decode() on it
 
@@ -49,9 +49,9 @@ DECODE_MICROLIF_FUNCTION: {
 
 ## slurp up some usmarc
 my $marcname = File::Spec->catfile( 't', 'sample1.usmarc' );
-open(IN, $marcname );
-my $str = join( '', <IN> );
-close IN;
+open(my $IN, '<', $marcname );
+my $str = join( '', <$IN> );
+close $IN;
 
 ## attempt to use decode on it
 

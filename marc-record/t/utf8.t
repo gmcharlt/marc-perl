@@ -33,10 +33,10 @@ CREATE_FILE: {
 
     ## write record to disk, telling perl (as we should) that we
     ## will be writing utf8 unicode
-    open( OUT, ">$filename" );
-    binmode( OUT, ':utf8' ); # so we don't get a warning
-    print OUT $r->as_usmarc();
-    close( OUT );
+    open( my $OUT, '>', $filename );
+    binmode( $OUT, ':utf8' ); # so we don't get a warning
+    print $OUT $r->as_usmarc();
+    close( $OUT );
 }
 
 ## open the file back up, get the record, and see if our Aleph
@@ -73,9 +73,9 @@ WRITE_ANSEL: {
     my $nadds = $r->append_fields( $f );
     is( $nadds, 1, "Added one field" );
 
-    open( OUT, ">$filename" );
-    print OUT $r->as_usmarc();
-    close( OUT );    
+    open( my $OUT, '>', $filename );
+    print $OUT $r->as_usmarc();
+    close( $OUT );    
 }
 
 READ_ANSEL: {
