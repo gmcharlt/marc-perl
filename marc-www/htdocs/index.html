@@ -12,11 +12,11 @@
 
 <p>MARC/Perl is a Perl 5 library for reading, manipulating, outputting and
 converting bibliographic records in the <a
-href="http://lcweb.loc.gov/marc/">MARC</a> format. The <b>MA</b>chine
+href="http://loc.gov/marc/">MARC</a> format. The <b>MA</b>chine
 <b>R</b>eadable <b>C</b>ataloging format was designed by the Library of Congress
 in the late 1960s in order to allow libraries to convert their card catalogs
 into a digital format. The MARC format was standardized as <a
-href="http://www.niso.org/standards/resources/Z39-2.pdf">ANSI/NISO Z39.2</a> 
+href="http://www.niso.org/apps/group_public/download.php/6677/Information%20Interchange%20Format.pdf">ANSI/NISO Z39.2</a> 
 in 1971 and is now being used by libraries around the world to provide 
 computerized access to their collections.</p>
 
@@ -84,19 +84,19 @@ download the MARC::Record library and install.</p>
 
 <ul>
 
-<li><a href="http://www.savory.org/aclibrary/acsearch.html">Adat Chaverim Library</a>: used MARC.pm to create a web-searchable online catalog using freely available USMARC records from the Library of Congress.</li>
+<li>>Adat Chaverim Library: used MARC.pm to create a web-searchable online catalog using freely available USMARC records from the Library of Congress.</li>
 
 <li><a href="http://www.aip.org/">American Institute of Physics</a>: have 
 used MARC.pm to validate bibliographic data uploaded via the web.</li>
 
-<li><a href="http://cddc.uchicago.edu/">Chicago Digital Distribution Center</a>
+<li><a href="http://www.press.uchicago.edu/cdc.html">Chicago Digital Distribution Center</a>
 : uses MARC::Record, in conjunction with Net::Z3950, to retrieve and harvest
 USMARC records.  The MARC metadata serve as the basis for the online catalog 
 of titles in the <a href="http://www.bibliovault.org/">BiblioVault</a>, 
 a digital book repository, for CDDC client presses.</li>
 
-<li><a href="http://cufts.lib.sfu.ca/cufts2marc.shtml">cufts2marc</a>:
-cufts2marc is a utility for generating USMARC bibliographic records for the
+<li>cufts2marc:
+cufts2marc was a utility for generating USMARC bibliographic records for the
 full-text journals in the collections described in the CUFTS link resolver
 knowledgebase. CUFTS is part of the reSearcher suite of open source tools for
 locating and managing electronic information resources, developed at Simon
@@ -116,19 +116,19 @@ when moving to a new ILS.</li>
 
 <li><a href="http://www.ilo.org">International Labour Office</a>: have used MARC::Record to translate English language subject headings into French and Spanish; and also to create a current awareness service for their library.</li> 
 
-<li><a href="http://jake.lib.sfu.ca/jake2marc/">jake2marc</a>: The Jointly Administered Knowledge Environment ( <a href="http://jake.sourceforge.net/">jake</a> ) is an open source project that (among other things) uses MARC.pm to provide a 'save-as-MARC' mechanism for serial titles available in over 190 databases. Jake creates the USMARC data out of publicly available metadata for the electronic/print serials.</li>
+<li>jake2marc: The Jointly Administered Knowledge Environment (<a href="http://en.wikipedia.org/wiki/Jointly_Administered_Knowledge_Environment">jake</a>) was an open source project that (among other things) used MARC.pm to provide a 'save-as-MARC' mechanism for serial titles available in over 190 databases. Jake created the USMARC data out of publicly available metadata for the electronic/print serials.</li>
 
 <li><a href="http://www.koha-community.org">Koha</a>: An open source library system
 made in New Zealand by the Horowhenua Library Trust and Katipo Communications 
 Ltd. Koha implements a full catalogue, OPAC, circulation, and acquisition 
 system...and it uses MARC::Record.</a></li>
 
-<li><a href="http://bookworm.lboro.ac.uk/distribution.html">Loughborough
+<li><a href="http://blog.lboro.ac.uk/lorls/">Loughborough
 University Library Reading List System</a>: uses MARC.pm, along with Net::Z3950,
-and MySQL to create a book list management system. This system is available is
-being distributed under the GNU General Public License.</li> 
+and MySQL to create a book list management system. This system is <a href="http://blog.lboro.ac.uk/lorls/downloads">available</a> 
+under the GNU General Public License.</li> 
 
-<li><a href="http://milton.mse.jhu.edu/">Milton S. Eisenhower Library (Johns Hopkins University)</a>: used MARC.pm to remove 049 fields from MARC records.</li>
+<li><a href="http://www.library.jhu.edu/">Milton S. Eisenhower Library (Johns Hopkins University)</a>: used MARC.pm to remove 049 fields from MARC records.</li>
 
 <li><a href="http://www.nald.ca/">National Adult Literacy Database</a>: using MARC::Record to import MARC data into a relational database as well as perform A MARC to Dublin Core metadata crosswalk.</li>
 
@@ -136,7 +136,7 @@ being distributed under the GNU General Public License.</li>
 
 <li><a href="http://search.cpan.org/author/MIRK/Net-Z3950-0.34/Z3950.pm">Net::Z3950</a>: Net::Z3950 is a CPAN module for creating clients and servers that query and return metadata records using the Z39.50 protocol. It is actually a Perl wrapper around the <a href="http://www.indexdata.dk/yaz/">yaz</a> C library. Net::Z3950 uses MARC.pm to render raw MARC data, and has plans to move support over to MARC::Record.</li> 
 
-<li><a href="http://www.nd.edu/libraries/">Notre Dame University Library</a>: 
+<li><a href="http://www.library.nd.edu/">Notre Dame University Library</a>: 
 is using MARC::Record to extract data from their Ex Libris Aleph ILS in order 
 to populate a MySQL database that powers their web-based current awareness 
 service.  </li>
@@ -154,18 +154,17 @@ allows users to share databases over a network.</li>
 <li><a href="http://library.tamu.edu/">Texas A&M General Libraries</a>: are using MARC.pm  for database cleanup activities such as: 1) deleting 856 fields that do not provide useful links and constructing new 856 fields based on other data in the record; 2) deleting 856 $k subfields and moving the data into 852 $m.</li>
 
 <li><a href="http://www.law.uconn.edu/library/">University of Connecticut Law
-Library</a>: are using MARC.pm to process NetLibrary records. Peter Murray has
-written up the project and made code available <a href="http://www.pandc.org/peter/work/projects/parseNetLibrary.html">here</a>.</li>
+Library</a>: used MARC.pm to process NetLibrary records. Peter Murray has
+written up the project and made code available <a href="http://www.rice.edu/perl4lib/archives/2001-10/msg00001.html">here</a>.</li>
 
 <li><a href="http://www.herts.ac.uk/lis/">University of Hertfordshire</a>: have
 used MARC.pm to create MARC records for batches of items such as local exam papers and ejournals.</li>
 
 <li><a href="http://www.uta.edu">University of Texas Library at Arlington</a>: 
 have used MARC.pm to customize netLibrary records prior to import into a 
-Voyager online catalog.  Michael Doran (Systems Librarian at UT) has written 
-up the <a href='http://rocky.uta.edu/doran/preprocess/'>project</a>.</li>
+Voyager online catalog.</li>
 
-<li><a href="http://www.viva.lib.va.us/viva/tech/cat/">Virtual Library of Virginia</a>: created over 8000 USMARC records from TEI encoded texts.</li>
+<li><a href="http://www.vivalib.org/">Virtual Library of Virginia</a>: created over 8000 USMARC records from TEI encoded texts.</li>
 
 </ul>
 
@@ -173,16 +172,16 @@ up the <a href='http://rocky.uta.edu/doran/preprocess/'>project</a>.</li>
 
 <ul>
 
-<li><a href="http://1010wins.com/topstories/winstopstories_story_314154119.html">Queens Library Offers Services In Cyrillic</a>: MARC::Record used to 
+<li>Queens Library Offers Services In Cyrillic: MARC::Record used to 
 massage transliterated Russian back into Cyrillic.</li>
 
-<li><a href="http://www.elag2003.ch/pres/pres_davies.pdf">Models for
-multilingual subject access in online library catalogues: the ILO experience</a>, Ron Davies, International Labour Organization.</li>
+<li>Models for
+multilingual subject access in online library catalogues: the ILO experience, Ron Davies, International Labour Organization.</li>
 
 <li><a href="http://library.smc.edu/btorder/">Automatic generation of Sirsi
 Unicorn order records</a>, Steve Hunt, Santa Monica College Library.</li> 
 
-<li><a href="http://rocky.uta.edu/doran/preprocess/">MARC.pm & Prebulk</a>,  
+<li>>MARC.pm & Prebulk,  
 Michael Doran, University of Texas.</li>
 
 <li><a href="writings/viva.html">Using MARC.pm with batches of MARC records: the
