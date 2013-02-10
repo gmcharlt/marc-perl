@@ -96,7 +96,7 @@ sub new {
         for my $indcode ( qw( _ind1 _ind2 ) ) {
             my $indicator = shift;
             scalar(@_) or croak("Field $tagno must have indicators (use ' ' for empty indicators)");
-            if ($indicator !~ /^[0-9A-Za-z ]$/ ) {
+            unless ($self->is_valid_indicator($indicator)) {
                 $self->_warn( "Invalid indicator \"$indicator\" forced to blank" ) unless ($indicator eq "");
                 $indicator = " ";
             }
@@ -168,6 +168,30 @@ sub indicator {
     }
 }
 
+=head2 set_indicator($indno, $indval)
+
+Set the indicator position I<$indno> to the value
+specified by I<$indval>.  Croaks if the indicator position,
+is invalid, the field is a control field and thus
+doesn't have indicators, or if the new indicator value
+is invalid.
+
+=cut
+
+sub set_indicator {
+    my $self = shift;
+    my $indno = shift;
+    my $indval = shift;
+
+    croak('Indicator number must be 1 or 2')
+      unless defined $indno && $indno =~ /^[12]$/;
+    croak('Cannot set indicator for control field')
+      if $self->is_control_field;
+    croak('Indicator value is invalid') unless $self->is_valid_indicator($indval);
+
+    $self->{"_ind$indno"} = $indval;
+}
+
 =head2 allow_controlfield_tags($tag, $tag2, ...)
 
 Add $tags to class-level list of strings to consider valid control fields tags (in addition to 001 through 009).
@@ -213,6 +237,19 @@ sub is_valid_tag {
     my $self = shift;
     my $tag = shift;
     return 1 if defined $tag && $tag =~ /^[0-9A-Za-z]{3}$/;
+    return 0;
+}
+
+=head2 is_valid_indicator($indval) -- is the given indicator value valid?
+
+Generally called as a class method (e.g., MARC::Field->is_valid_indicator('4'))
+
+=cut
+
+sub is_valid_indicator {
+    my $self = shift;
+    my $indval = shift;
+    return 1 if defined $indval && $indval =~ /^[0-9A-Za-z ]$/;
     return 0;
 }
 
