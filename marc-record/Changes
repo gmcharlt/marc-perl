@@ -1,5 +1,34 @@
 Revision history for Perl extension MARC::Record.
 
+2.0.4 Sat Feb  9 19:01:47 PST 2013
+        [ENHANCEMENTS]
+        - add MARC::Field->set_indicator($indpos, $indval), a mutator
+          for indicators
+        - add MARC::Field->set_tag to allow tags to be renamed
+          (Robin Sheat)
+        - delete_subfield(), if given a single subfield label as its
+          argument, will delete all instances of the specified
+          subfield, increasing its DWIM factor
+        - improved POD for MARC::Field->delete_subfield()
+        [FIXES]
+        - RT#70346: delete_subfield() no longer clears entire field if
+          arguments are badly formatted
+        - croak if invalid arguments are passed to delete_subfield()
+        - fix error in tutorial (thanks to Tom Burton-West for the
+          catch)
+        - RT#76990: emit leader of correct length even if record longer
+          than 99,999 octets (Julian Maurice)
+        - RT#67094: croak with correct error if attempting to create
+          MARC::Field sans subfields
+        - corrected POD for indicator() method
+        - move tag validity check to new class method,
+          is_valid_tag($tagno)
+        - move indicator validity check to new class method,
+          is_valid_indicator($indval)
+        - have MARC::Record pass perlcritic --gentle (mostly)
+        - remove function prototypes
+          (see http://www.perlmonks.org/?node_id=861966)
+
 2.0.3 Fri Jan 14 17:50:12 EST 2011
         - RT#62296: fix crash when dealing with record bigger than
           99999 bytes (Alex Arnaud)

@@ -16,12 +16,12 @@ use Carp qw(croak carp);
 
 =head1 VERSION
 
-Version 2.0.3
+Version 2.0.4
 
 =cut
 
 use vars qw( $VERSION );
-$VERSION = '2.0.3';
+$VERSION = '2.0.4';
 
 use Exporter;
 use vars qw( @ISA @EXPORTS @EXPORT_OK );
@@ -875,6 +875,8 @@ employers of the various contributors to the code.
 =item * Ed Summers
 
 =item * Mike Rylander
+
+=item * Galen Charlton
 
 =back
 
