@@ -125,20 +125,20 @@ sub tag {
     return $self->{_tag};
 }
 
-=head2 settag(tag)
+=head2 set_tag(tag)
 
 Changes the tag number of this field. Updates the control status accordingly.
 Will C<croak> if an invalid value is passed in.
 
 =cut
 
-sub settag {
+sub set_tag {
     my ( $self, $tagno ) = @_;
 
     ( $tagno =~ /^[0-9A-Za-z]{3}$/ )
       or croak("Tag \"$tagno\" is not a valid tag.");
     $self->{_tag}              = $tagno;
-    $self->{_is_control_field} = is_controlfield_tag($tagno);
+    $self->{_is_control_field} = MARC::Field->is_controlfield_tag($tagno);
 }
 
 =head2 indicator(indno)
