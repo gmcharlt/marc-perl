@@ -406,21 +406,45 @@ use the pos parameter:
     # delete subfield u at first or second position
     $field->delete_subfield(code => 'u', pos => [0,1]);
 
+    # delete the second subfield, no matter what it is
+    $field->delete_subfield(pos => 1);
+
 You can specify a regex to for only deleting subfields that match:
 
    # delete any subfield u that matches zombo.com
    $field->delete_subfield(code => 'u', match => qr/zombo.com/);
 
+   # delete any subfield that matches quux
+   $field->delete_subfield(match => qr/quux/);
+
+You can also pass a single subfield label:
+
+  # delete all subfield u
+  $field->delete_subfield('u');
+
 =cut
 
 sub delete_subfield {
-    my ($self, %options) = @_;
+    my ($self, @options) = @_;
+
+    my %options;
+    if (scalar(@options) == 1) {
+        $options{code} = $options[0];
+    } elsif (0 == scalar(@options) % 2) {
+        %options = @options;
+    } else {
+        croak 'delete_subfield must be called with single scalar or a hash';
+    }
+
     my $codes = _normalize_arrayref($options{code});
     my $positions = _normalize_arrayref($options{'pos'});
     my $match = $options{match};
    
     croak 'match must be a compiled regex' 
       if $match and ref($match) ne 'Regexp';
+
+   croak 'must supply subfield code(s) and/or subfield position(s) and/or match patterns to delete_subfield'
+      unless $match or (@$codes > 0) or (@$positions > 0);
 
     my @current_subfields = @{$self->{_subfields}};
     my @new_subfields = ();
