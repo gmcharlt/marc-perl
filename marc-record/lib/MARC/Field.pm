@@ -95,7 +95,7 @@ sub new {
     } else {
         for my $indcode ( qw( _ind1 _ind2 ) ) {
             my $indicator = shift;
-            scalar(@_) or croak("Field $tagno must have indicators (use ' ' for empty indicators)");
+            defined($indicator) or croak("Field $tagno must have indicators (use ' ' for empty indicators)");
             unless ($self->is_valid_indicator($indicator)) {
                 $self->_warn( "Invalid indicator \"$indicator\" forced to blank" ) unless ($indicator eq "");
                 $indicator = " ";
