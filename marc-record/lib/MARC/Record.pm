@@ -562,7 +562,8 @@ sub set_leader_lengths {
     my $reclen = shift;
     my $baseaddr = shift;
     if ($reclen > 99999) {
-            carp( "Record length of $reclen is larger than the MARC spec allows (99999 bytes)." );
+        carp( "Record length of $reclen is larger than the MARC spec allows (99999 bytes)." );
+        $reclen = 99999;
     }
     substr($self->{_leader},0,5)  = sprintf("%05d",$reclen);
     substr($self->{_leader},12,5) = sprintf("%05d",$baseaddr);
