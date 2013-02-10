@@ -14,3 +14,5 @@ blibdirs
 *tar
 *gz
 cover_db
+MYMETA.json
+MYMETA.yml
