@@ -1,4 +1,13 @@
-These are separate projects hosted in the marcpm sourceforge repository.
+MARC/Perl is a set of Perl 5 libraries for reading, manipulating,
+outputting and converting bibliographic records in the MARC format.
+The MAchine Readable Cataloging format was designed by the Library
+of Congress in the late 1960s in order to allow libraries to convert
+their card catalogs into a digital format. The MARC format was
+standardized as ANSI/NISO Z39.2 in 1971 and is now being used by
+libraries around the world to provide computerized access to their
+collections.
+
+These are the separate projects that make up MARC/Perl:
 
     marc-record - core MARC processing library
     marc-lint - examine your MARC data for common problems
@@ -7,3 +16,15 @@ These are separate projects hosted in the marcpm sourceforge repository.
     marc-charset - work with MARC-8 and UTF-8 encodings
     marc-www - the sourceforge website
 
+The home page of the MARC/Perl project is
+
+    http://marcpm.sourceforge.net
+
+The primary code repository can be viewed at
+
+    https://sourceforge.net/p/marcpm/code/
+
+Frequently updated mirrors are available at
+
+    https://github.com/gmcharlt/marc-perl.git
+    https://gitorious.org/marc-perl/marc-perl/
