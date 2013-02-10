@@ -130,7 +130,7 @@ you'd like to read in the record and print out its title.
    2
    3   ## create a MARC::Batch object.
    4   use MARC::Batch;
-   5   my $batch = MARC::Batch('USMARC', 'file.dat');
+   5   my $batch = MARC::Batch->new('USMARC', 'file.dat');
    6
    7   ## get a MARC record from the MARC::Batch object.
    8   ## the $record will be a MARC::Record object.
