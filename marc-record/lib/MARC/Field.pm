@@ -79,7 +79,7 @@ sub new {
     ## add_controlfield
     
     my $tagno = shift;
-    ($tagno =~ /^[0-9A-Za-z]{3}$/)
+    $class->is_valid_tag($tagno)
         or croak( "Tag \"$tagno\" is not a valid tag." );
     my $is_control = $class->is_controlfield_tag($tagno);
 
@@ -135,10 +135,10 @@ Will C<croak> if an invalid value is passed in.
 sub set_tag {
     my ( $self, $tagno ) = @_;
 
-    ( $tagno =~ /^[0-9A-Za-z]{3}$/ )
+    $self->is_valid_tag($tagno)
       or croak("Tag \"$tagno\" is not a valid tag.");
     $self->{_tag}              = $tagno;
-    $self->{_is_control_field} = MARC::Field->is_controlfield_tag($tagno);
+    $self->{_is_control_field} = $self->is_controlfield_tag($tagno);
 }
 
 =head2 indicator(indno)
@@ -198,6 +198,19 @@ sub disallow_controlfield_tags {
   foreach my $tag (@_) {
     delete $extra_controlfield_tags{$tag};
   }
+}
+
+=head2 is_valid_tag($tag) -- is the given tag valid?
+
+Generally called as a class method (e.g., MARC::Field->is_valid_tag('001'))
+
+=cut
+
+sub is_valid_tag {
+    my $self = shift;
+    my $tag = shift;
+    return 1 if defined $tag && $tag =~ /^[0-9A-Za-z]{3}$/;
+    return 0;
 }
 
 =head2 is_controlfield_tag($tag) -- does the given tag denote a control field?
