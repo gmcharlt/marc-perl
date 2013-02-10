@@ -1,6 +1,6 @@
 #!perl -Tw
 
-use Test::More tests => 17;
+use Test::More tests => 18;
 use strict;
 use File::Spec;
 
@@ -23,6 +23,12 @@ is( $r->field(100)->indicator(2), 2, 'not disturbed' );
 $r->append_fields( MARC::Field->new( 111, 2, '-didk', a=> 'foo' ) );
 is ($r->field(111)->indicator(1), 2, 'not disturbed' );
 is ($r->field(111)->indicator(2), ' ', 'invalid indicator squashed to space' );
+
+# make sure 
+eval {
+    my $ind = $r->field(100)->indicator(3);
+};
+ok($@ && $@ =~ 'Indicator number must be 1 or 2', 'croaked trying to retrieve indicator 3');
 
 ## read a file which has an invalid indicator (a hyphen) and make sure it does 
 ## not affect a valid indicator

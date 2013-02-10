@@ -143,9 +143,10 @@ sub set_tag {
 
 =head2 indicator(indno)
 
-Returns the specified indicator.  Returns C<undef> and sets
-C<$MARC::Field::ERROR> if the I<indno> is not 1 or 2, or if
-the tag doesn't have indicators.
+Returns the specified indicator.  Returns C<undef> and logs
+a warning if field is a control field and thus doesn't have
+indicators.  If the field is not a control field, croaks
+if the I<indno> is not 1 or 2.
 
 =cut
 
@@ -153,8 +154,10 @@ sub indicator {
     my $self = shift;
     my $indno = shift;
 
-    $self->_warn( "Control fields (generally, those with tags below 010) do not have indicators" )
-        if $self->is_control_field;
+    if ($self->is_control_field) {
+        $self->_warn( "Control fields (generally, those with tags below 010) do not have indicators" );
+        return;
+    }
 
     if ( $indno == 1 ) {
         return $self->{_ind1};
