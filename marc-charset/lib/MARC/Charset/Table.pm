@@ -34,7 +34,12 @@ UCS code point. These keys map to a serialized MARC::Charset::Code object.
 use strict;
 use warnings;
 use POSIX;
-use GDBM_File;
+BEGIN {
+    @AnyDBM_File::ISA = qw(GDBM_File DB_File NDBM_File ODBM_File SDBM_File);
+    # SDBM_File is last on the list because it produces the largest database
+    # on disk.
+}
+use AnyDBM_File;
 use MARC::Charset::Code;
 use MARC::Charset::Constants qw(:all);
 use Storable qw(nfreeze thaw);
@@ -49,7 +54,7 @@ sub new
 {
     my $class = shift;
     my $self = bless {}, ref($class) || $class;
-    $self->_init(&GDBM_READER);
+    $self->_init(O_RDONLY);
     return $self;
 }
 
@@ -78,8 +83,9 @@ sub add_code
 
     # stash away the utf8 lookup key (only if it's not already there!)
     # this means that the sets that appear in the xml file will have
-    # precedence ascii/ansel
-    $self->{db}->{$utf8_key} = $frozen unless exists $self->{db}->{$utf8_key};
+    # precedence ascii/ansel.  Note that we're using 'defined' instead of
+    # 'exists' because NDBM_File and ODBM_File don't support 'exists'.
+    $self->{db}->{$utf8_key} = $frozen unless defined $self->{db}->{$utf8_key};
 }
 
 
@@ -174,7 +180,8 @@ sub brand_new
 {
     my $class = shift;
     my $self = bless {}, ref($class) || $class;
-    $self->_init(&GDBM_WRCREAT);
+    $self->_init(O_CREAT|O_RDWR);
+
     return $self;
 }
 
@@ -183,8 +190,8 @@ sub brand_new
 
 sub _init 
 {
-    my ($self,$opts) = @_;
-    tie my %db, 'GDBM_File', db_path(), $opts, 0644; ## no critic (ValuesAndExpressions::ProhibitLeadingZeros)
+    my ($self, $dbm_opts) = @_;
+    tie my %db, 'AnyDBM_File', db_path(), $dbm_opts, 0644; ## no critic (ValuesAndExpressions::ProhibitLeadingZeros)
     $self->{db} = \%db;
 }
 
