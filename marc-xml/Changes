@@ -1,5 +1,14 @@
 Revision history for Perl extension MARC-XML
 
+1.0  Sun Feb 10 21:32:32 PST 2013
+       - Use XML::LibXML rather than XML::SAX to parse MARCXML records.
+         This offers a significant speed improvement for record parsing;
+         in some tests, parsing time on a large file was reduced by 80%.
+         This also avoids problems caused by character encoding bugs in
+         XML::SAX::PurePerl.
+       - Add method to let client code give MARC::File::XML a shared
+         XML::LibXML parser object.
+
 0.93 Fri Feb 11 17:13:02 EST 2011
        - When slurping MARCXML records (e.g., via MARC::Batch), can
          now handle XML files that use a prefix

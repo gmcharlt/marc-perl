@@ -2,11 +2,9 @@ bin/entity-escape-xml
 bin/marc2xml
 bin/xml2marc
 Changes
-lib/MARC/File/SAX.pm
 lib/MARC/File/XML.pm
 Makefile.PL
 MANIFEST
-META.yml
 README
 t/batch-ns.t
 t/batch-ns.xml
@@ -19,6 +17,7 @@ t/escape.t
 t/invalid.xml
 t/namespace.t
 t/namespace.xml
+t/parser.t
 t/record.dat
 t/subfield0.t
 t/subfield0.xml
