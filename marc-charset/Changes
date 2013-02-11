@@ -1,5 +1,34 @@
 Revision history for MARC::Charset
 
+1.34 Mon Feb 11 09:10:35 PST 2013
+    - RT#83257: use AnyDBM_File rather than hardcode GDBM_File
+    
+      To improve portability, use AnyDBM_File to select a DBM
+      rather than rely on GDBM_File.  GDBM_File apparently used
+      to be a core module, but not all distributions included it,
+      particularly OS X.  In any event, GDBM_File is no longer
+      core.
+    
+      This patch also includes a tweak to allow MARC::Charset to
+      work with NDBM_File and ODBM_File, neither of which
+      support 'exists'.
+    
+      I've tested MARC::Charset successfully on the following
+      DBMs:
+    
+      - GDBM_File
+      - DB_File
+      - NDBM_File
+      - ODBM_File
+      - SDBM_File
+    
+      This is also my preferred order; SDBM_File is selected last
+      because it produces the biggest data file on disk.
+
+    - RT#38912: fix mapping of double diacritics (ligature and double
+      tilde).
+      Thanks to Thomas P. Ventimiglia for the bug report and test case.
+
 1.33 Thu Aug  4 23:25:14 EDT 2011
     - move build_db() to separate .PL script so that module can be
       built even if Class::Accessor and other dependencies aren't
