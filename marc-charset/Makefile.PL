@@ -16,6 +16,5 @@ WriteMakefile(
                             'XML::SAX'              => 0,
                             'Class::Accessor'       => 0,
                             'Unicode::Normalize'    => 0,
-                            'GDBM_File'             => 0,
                        },
 );
