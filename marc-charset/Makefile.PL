@@ -9,7 +9,11 @@ WriteMakefile(
     DISTNAME        => 'MARC-Charset',
     VERSION_FROM    => 'lib/MARC/Charset.pm',
     ABSTRACT_FROM   => 'lib/MARC/Charset.pm',
-    AUTHOR          => 'Ed Summers <ehs@pobox.com>',
+    AUTHOR          => [
+                            'Ed Summers <ehs@pobox.com>',
+                            'Galen Charlton <gmcharlt@gmail.com>',
+                       ],
+    LICENSE         => 'perl',
     PMLIBDIRS       => ['lib'],
     PREREQ_PM       => {
                             'Test::More'            => 0, 
