@@ -16,12 +16,12 @@ use Carp qw(croak carp);
 
 =head1 VERSION
 
-Version 2.0.4
+Version 2.0.5
 
 =cut
 
 use vars qw( $VERSION );
-$VERSION = '2.0.4';
+$VERSION = '2.0.5';
 
 use Exporter;
 use vars qw( @ISA @EXPORTS @EXPORT_OK );

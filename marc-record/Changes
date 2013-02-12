@@ -1,5 +1,9 @@
 Revision history for Perl extension MARC::Record.
 
+2.0.5 Mon Feb 11 20:39:10 PST 2013
+        - fix use of qw(...) in test case so that module passes
+          tests with Perl 5.17.x.
+
 2.0.4 Sat Feb  9 19:01:47 PST 2013
         [ENHANCEMENTS]
         - add MARC::Field->set_indicator($indpos, $indval), a mutator
