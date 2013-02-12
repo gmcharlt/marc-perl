@@ -11,7 +11,7 @@ foreach my $i (1..9) {
 }
 
 # Should not be control fields
-foreach my $i qw(010 011 555 FMT) {
+foreach my $i (qw(010 011 555 FMT)) {
   my $field = MARC::Field->new($i, 0, 0, 'a', 'Hello');
   ok(!$field->is_control_field, "Non-control showing up as such for $i");
 }
@@ -19,7 +19,7 @@ foreach my $i qw(010 011 555 FMT) {
 # Add the FMT
 MARC::Field->allow_controlfield_tags('FMT');
 
-foreach my $i qw(001 002 003 004 005 FMT) {
+foreach my $i (qw(001 002 003 004 005 FMT)) {
   my $field = MARC::Field->new( $i, "TestData $i");
   ok($field->is_control_field, "$i correctly identified as control field");
   is($field->data, "TestData $i", "Got it back out");
