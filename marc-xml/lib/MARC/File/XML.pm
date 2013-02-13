@@ -7,6 +7,7 @@ use base qw( MARC::File );
 use MARC::Record;
 use MARC::Field;
 use XML::LibXML;
+use XML::LibXML::Reader;
 
 use MARC::Charset qw( marc8_to_utf8 utf8_to_marc8 );
 use IO::File;
@@ -386,28 +387,19 @@ sub _next {
     my $self = shift;
     my $fh = $self->{ fh };
 
-    ## return undef at the end of the file
-    return if eof($fh);
-
-    ## get a chunk of xml for a record
-    local $/ = 'record>';
-    my $xml = <$fh>;
-
-    ## do we have enough?
-    $xml .= <$fh> if $xml !~ m!</([^:]+:){0,1}record>$!;
-    ## trim stuff before the start record element 
-    $xml =~ s/.*?<(([^:]+:){0,1})record.*?>/<$1record>/s;
-
-    ## return undef if there isn't a good chunk of xml
-    return if ( $xml !~ m|<(([^:]+:){0,1})record>.*</\1record>|s );
-
-    ## if we have a namespace prefix, restore the declaration
-    if ($xml =~ /<([^:]+:)record>/) {
-        $xml =~ s!<([^:]+):record>!<$1:record xmlns:$1="http://www.loc.gov/MARC21/slim">!;
+    unless ($self->{reader}) {
+        $self->{reader} = XML::LibXML::Reader->new(IO => $self->{fh});
+    };
+    while ($self->{reader}->read) {
+        if ($self->{reader}->localName eq 'record' &&
+            $self->{reader}->nodeType != XML_READER_TYPE_END_ELEMENT) {
+my $foo = $self->{reader}->copyCurrentNode(1);
+#die Dumper($foo); use Data::Dumper;
+            return $foo;
+            #return $self->{reader}->readOuterXml();
+        }
     }
-
-    ## return the chunk of xml
-    return( $xml );
+    return;
 }
 
 sub _parser {
@@ -441,9 +433,15 @@ sub decode {
     my $format = shift || $_load_args{RecordFormat};
 
     my $parser = _parser();
-    my $xml = $parser->parse_string($text);
 
-    my $root = $xml->documentElement;
+    my $root;
+    if (ref($text) eq 'XML::LibXML::Element') {
+        $root = $text;
+    } else {
+        my $xml = $parser->parse_string($text);
+        $root = $xml->documentElement;
+    }
+
     croak('MARCXML document has no root element') unless defined $root;
     if ($root->localname eq 'collection') {
         my @records = $root->getChildrenByLocalName('record');
