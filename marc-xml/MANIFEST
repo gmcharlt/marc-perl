@@ -10,6 +10,9 @@ t/batch-ns.t
 t/batch-ns.xml
 t/batch.t
 t/batch.xml
+t/empty-record-2.xml
+t/empty-record.t
+t/empty-record.xml
 t/encode.t
 t/error-handling.t
 t/escape.mrc

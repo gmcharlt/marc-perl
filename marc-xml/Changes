@@ -1,5 +1,8 @@
 Revision history for Perl extension MARC-XML
 
+1.0.1 Fri Feb 15 08:25:04 PST 2013
+       - RT#83284: return empty MARC::Record given empty <record/>
+
 1.0  Sun Feb 10 21:32:32 PST 2013
        - Use XML::LibXML rather than XML::SAX to parse MARCXML records.
          This offers a significant speed improvement for record parsing;
