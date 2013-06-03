@@ -645,7 +645,7 @@ sub warnings {
 C<add_fields()> is now deprecated, and users are encouraged to use
 C<append_fields()>, C<insert_fields_after()>, and C<insert_fields_before()>
 since they do what you want probably. It is still here though, for backwards
-compatability.
+compatibility.
 
 C<add_fields()> adds MARC::Field objects to the end of the list.  Returns the
 number of fields added, or C<undef> if there was an error.

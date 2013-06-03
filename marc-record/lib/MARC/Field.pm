@@ -470,7 +470,7 @@ sub delete_subfield {
 =head2 delete_subfields()
 
 Delete all subfields with a given subfield code. This is here for backwards
-compatability, you should use the more flexible delete_subfield().
+compatibility, you should use the more flexible delete_subfield().
 
 =cut
 
