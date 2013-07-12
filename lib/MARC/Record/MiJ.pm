@@ -40,14 +40,39 @@ our $VERSION = '0.01';
   my $mij_structure = MARC::Record::MiJ->to_mij_structure($r);
   my $r = MARC::Record::MiJ->new_from_mij_structure($mij_structure);
 
+=head1 DESCRIPTION
 
+Reads and writes MARC-in-JSON structures and strings as supported by pymarc/ruby-marc/marc4j and
+described at http://dilettantes.code4lib.org/blog/2010/09/a-proposal-to-serialize-marc-in-json/
+
+Don't confuse with another (incompatible) JSON encoding in the module C<MARC::File::JSON>, which
+to the best of my knowledge isn't supported by other readers/writers.
+
+For reading, you probably don't need to use this directly; take a look at C<MARC::File::MiJ> for reading in 
+newline-delimited marc-in-json files by itself or in conjunction with C<MARC::Batch>.
+
+The MARC::Record distribution doesn't so much do do writing out files. You can do something like this:
+
+    # convert file from marc binary to marc-in-json
+    use MARC::Batch;
+    use MARC::Record::MiJ;
+    my $batch = MARC::Batch->new('USMARC', 'file.mrc');
+    open(my $jsonfile, '>', 'file.ndj' );
+    while (my $r = $batch->next) {
+      print $jsonfile MARC::Record::MiJ->to_mij($r), "\n";
+    }
+    close $jsonfile;
+
+...to produce newline-delimited marc-in-json from a binary file.
 
 
 =head1 SUBROUTINES/METHODS
 
 =head2 json
 
-Get a json object to work with (memoized)
+Get a json object to work with (memoized). We want to control it so we make sure 
+it's not doing anything pretty (like, say, putting newlines in, which woudl make it
+harder to produce newline-delimited json file).
 
 =cut
 

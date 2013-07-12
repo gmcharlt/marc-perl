@@ -30,9 +30,14 @@ Use by itself or with MARC::Batch
     my $reader = new MARC::Batch('MiJ', $jsonfilename);
     while (my $r = $batch->next) { ... }
 
-    # or...
+    # or, use it without MARC::Batch
     my $reader = MARC::File::MiJ->in($jsonfilename);
     
+=head1 DESCRIPTION
+
+A subclass of MARC::File for reading MARC records encoded as newline-delimited marc-in-json,
+as supported by pymarc/ruby-marc/marc4j and
+described at http://dilettantes.code4lib.org/blog/2010/09/a-proposal-to-serialize-marc-in-json/.
 
 
 
