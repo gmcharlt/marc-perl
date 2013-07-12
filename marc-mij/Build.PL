@@ -16,8 +16,8 @@ my $builder = Module::Build->new(
         'Test::More' => 0,
     },
     requires => {
-        #'ABC'              => 1.6,
-        #'Foo::Bar::Module' => 5.0401,
+        'ex::monkeypatched' => 0,
+        'JSON'              => 0,
     },
     add_to_cleanup     => [ 'MARC-MiJ-*' ],
     create_makefile_pl => 'traditional',
