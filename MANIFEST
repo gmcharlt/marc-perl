@@ -1,0 +1,11 @@
+Build.PL
+Changes
+lib/MARC/File/MARC_IN_JSON.pm
+lib/MARC/File/MiJ.pm
+lib/MARC/Record/MARC_IN_JSON.pm
+lib/MARC/Record/MiJ.pm
+MANIFEST			This list of files
+README
+t/00-load.t
+t/boilerplate.t
+t/camel.usmarc
