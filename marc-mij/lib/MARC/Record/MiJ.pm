@@ -258,7 +258,10 @@ Add C<new_from_mij_structure($mij_structure) and C<to_mij_structure()> to MARC::
 ex::monkeypatched->inject('MARC::Record' =>
   new_from_mij_structure => sub { my $class = shift; my $mij = shift; return 
     MARC::Record::MiJ->new_from_mij_structure($mij)},
-  to_mij_structure => sub { my $self = shift; return  MARC::Record::MiJ->to_mij_structure($self) }
+  to_mij_structure => sub { my $self = shift; return  MARC::Record::MiJ->to_mij_structure($self) },
+  new_from_mij => sub { my $class = shift; my $mij = shift; return MARC::Record::MiJ->new($mij) },
+  to_mij => sub { my $self = shift; return MARC::Record::MiJ->to_mij($self) }
+  
 );
 
 

@@ -38,6 +38,8 @@ is($mij_string, $mij_string2, "Dumper output is identical");
 # Test monkey patching
 is_deeply($r->to_mij_structure, $r2->to_mij_structure, "Monkey patch \$r->to_mij_structure");
 is_deeply(MARC::Record->new_from_mij_structure($mij_structure), MARC::Record->new_from_mij_structure($mij_structure2), "Monkey patch MARC::Record->new_from_mij_structure");
+is_deeply($r, MARC::Record->new_from_mij($r->to_mij));
+
 
 
 # memoized json thing working?
