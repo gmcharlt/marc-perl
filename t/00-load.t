@@ -72,6 +72,12 @@ foreach my $i (0..8) {
   is($binrecords[$i]->as_formatted, $rubyjsonrecords[$i]->as_formatted, "Record $i matches");
 }
 
+# check to make sure we can call #in directly
+
+$r = MARC::File::MiJ->in($jsonfile)->next;
+is_deeply($r, $rubyjsonrecords[0], "Both MARC::Batch and MARC::File::MiJ work");
+
+
 # Check to make sure created records are identical by getting the raw ruby json
 # and decoding it to a hashref, and using perl to turn the (already verified 
 # to be identical) records into json and then decoding

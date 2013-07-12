@@ -115,6 +115,8 @@ sub to_mij_structure {
 
 =head2 controlfield_to_mij_structure($field)
 
+Turn a MARC::Record controlfield into an appropriate hash
+
 =cut
 
 sub controlfield_to_mij_structure {
@@ -123,6 +125,9 @@ sub controlfield_to_mij_structure {
 }
 
 =head2 valuefield_to_mij_structure($field)
+
+Turn a MARC::Record valuefield into an appropriate hash
+
 
 =cut
 
@@ -139,6 +144,9 @@ sub valuefield_to_mij_structure {
 }
 
 =head2 subfield_to_mij_structure($sf) 
+
+Turn a MARC::Record subfield pair (arrayref duple of code/value) into an appropriate hash
+
 
 =cut
 
@@ -170,6 +178,11 @@ sub new_from_mij_structure {
   return $r; 
 }
 
+=head2 new_field_from_mij_structure($f)
+
+Given a field structure, create an appropriate (control or variable) field
+
+=cut
 
 sub new_field_from_mij_structure {
   my $mijf = shift;
@@ -189,6 +202,12 @@ sub new_field_from_mij_structure {
 
 }
 
+=head2 new_datafield_from_mij_structure
+
+Support for new_field_from_mij_structure; do the more complex work
+of creating a datafield
+
+=cut
 
 sub new_datafield_from_mij_structure {
   my ($tag, $h) = @_;

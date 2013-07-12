@@ -9,7 +9,7 @@ use base qw(MARC::File);
 
 =head1 NAME
 
-MARC::File::MiJ - Read/Write newline-delimited marc-in-json files
+MARC::File::MiJ - Read newline-delimited marc-in-json files
 
 =head1 VERSION
 
@@ -21,6 +21,19 @@ our $VERSION = '0.01';
 
 
 =head1 SYNOPSIS
+
+Use by itself or with MARC::Batch
+
+    use MARC::Batch;
+    use MARC::File::MiJ;
+
+    my $reader = new MARC::Batch('MiJ', $jsonfilename);
+    while (my $r = $batch->next) { ... }
+
+    # or...
+    my $reader = MARC::File::MiJ->in($jsonfilename);
+    
+
 
 
 =head1 SUBROUTINES/METHODS
