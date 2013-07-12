@@ -28,7 +28,8 @@ our $VERSION = '0.01';
   my $r = MARC::Record->new_from_mij($str);
   my $json = $r->to_mij;
 
-  # You can also work with the underlying hash/array structure
+  # You can also work with the underlying hash/array structure if you're dealing with
+  # json serialization/deserialization on your own
 
   my $mij_structure = $r->to_mij_structure;
   my $r = MARC::Record->new_from_mij_structure($mij_structure);
