@@ -9,3 +9,6 @@ t/boilerplate.t
 t/camel.usmarc
 t/test.mrc
 t/test.ndj
+Makefile.PL
+META.yml
+META.json
