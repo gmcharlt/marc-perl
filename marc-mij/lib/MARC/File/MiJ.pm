@@ -89,8 +89,8 @@ Bill Dueber, C<< <dueberb at umich.edu> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-marc-mij at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=MARC-MiJ>.  I will be notified, and then you'll
+Please report any bugs or feature requests to C<bug-MARC-File-MiJ at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=MARC-File-MiJ>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
 
@@ -109,19 +109,19 @@ You can also look for information at:
 
 =item * RT: CPAN's request tracker (report bugs here)
 
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=MARC-MiJ>
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=MARC-File-MiJ>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
-L<http://annocpan.org/dist/MARC-MiJ>
+L<http://annocpan.org/dist/MARC-File-MiJ>
 
 =item * CPAN Ratings
 
-L<http://cpanratings.perl.org/d/MARC-MiJ>
+L<http://cpanratings.perl.org/d/MARC-File-MiJ>
 
 =item * Search CPAN
 
-L<http://search.cpan.org/dist/MARC-MiJ/>
+L<http://search.cpan.org/dist/MARC-File-MiJ/>
 
 =back
 
@@ -133,36 +133,8 @@ L<http://search.cpan.org/dist/MARC-MiJ/>
 
 Copyright 2013 Bill Dueber.
 
-This program is distributed under the (Revised) BSD License:
-L<http://www.opensource.org/licenses/BSD-3-Clause>
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions
-are met:
-
-* Redistributions of source code must retain the above copyright
-notice, this list of conditions and the following disclaimer.
-
-* Redistributions in binary form must reproduce the above copyright
-notice, this list of conditions and the following disclaimer in the
-documentation and/or other materials provided with the distribution.
-
-* Neither the name of Bill Dueber's Organization
-nor the names of its contributors may be used to endorse or promote
-products derived from this software without specific prior written
-permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+This software is free software and may be distributed under the same
+terms as Perl itself.
 
 
 =cut
