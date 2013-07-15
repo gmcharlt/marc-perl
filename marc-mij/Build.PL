@@ -5,7 +5,7 @@ use Module::Build;
 
 my $builder = Module::Build->new(
     module_name         => 'MARC::File::MiJ',
-    license             => 'bsd',
+    license             => 'perl',
     dist_author         => q{Bill Dueber <dueberb@umich.edu>},
     dist_version_from   => 'lib/MARC/File/MiJ.pm',
     release_status      => 'stable',
