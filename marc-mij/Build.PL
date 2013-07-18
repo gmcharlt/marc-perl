@@ -18,6 +18,8 @@ my $builder = Module::Build->new(
     requires => {
         'ex::monkeypatched' => 0,
         'JSON'              => 0,
+        'MARC::File'        => 0,
+        'MARC::Record'      => 0,
     },
     add_to_cleanup     => [ 'MARC-MiJ-*' ],
     create_makefile_pl => 'traditional',
