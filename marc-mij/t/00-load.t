@@ -16,6 +16,7 @@ use MARC::Batch;
 use File::Spec;
 
 use Data::Dumper;
+$Data::Dumper::Sortkeys = 1;
 
 my $filename = File::Spec->catfile( 't', 'camel.usmarc' );
 my $batch = new MARC::Batch( 'USMARC', $filename );
