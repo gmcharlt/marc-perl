@@ -1,5 +1,8 @@
 Revision history for MARC-MiJ
 
+0.04    2013/07/23
+        - fix test failure noise on some *BSD platforms
+
 0.03    2013/07/18
         - list all dependencies to make automated testers happy
 
