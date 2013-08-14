@@ -181,8 +181,26 @@ sub marc8_to_utf8
             # extract the next code point to examine
 	    my $chunk = substr($marc8, $index, $char_size);
 
-            # look up the character to see if it's in our mapping 
-            my $code = $table->lookup_by_marc8($charset, $chunk);
+            my $code;
+            if ($char_size == 1) {
+                my $codepoint = ord($chunk);
+                if ($codepoint >= 0x21 && $codepoint <= 0x7e) {
+                    # character is G0
+                    $code = $table->lookup_by_marc8($G0, $chunk);
+                } elsif ($codepoint >= 0xa1 && $codepoint <= 0xfe) {
+                    # character is G1, map it to G0 before atttempting lookup
+                    $code = $table->lookup_by_marc8($G1, chr($codepoint - 128));
+                } elsif ($codepoint >= 0x88 && $codepoint <= 0x8e) {
+                    # in the C1 range used by MARC8
+                    $code = $table->lookup_by_marc8(EXTENDED_LATIN, $chunk);
+                } elsif ($codepoint >= 0x1b && $codepoint <= 0x1f) {
+                    # in the C0 range used by MARC8
+                    $code = $table->lookup_by_marc8(BASIC_LATIN, $chunk);
+                }
+            } else {
+                # EACC doesn't need G0/G1 conversion
+                $code = $table->lookup_by_marc8($charset, $chunk);
+            }
 
             # try the next character set if no mapping was found
             next CHARSET_LOOP if ! $code;
@@ -335,6 +353,7 @@ sub utf8_to_marc8
                 $marc8 .= $code->get_escape();
                 $G0 = $charset_value;
             }
+            $marc8 .= $code->marc_value();
         }
 
         # look to see if we need to escape to a new G1 charset
@@ -343,9 +362,12 @@ sub utf8_to_marc8
         {
             $marc8 .= $code->get_escape();
             $G1 = $charset_value;
+            $marc8 .= chr(ord($code->marc_value()) + 128);
         }
-
-        $marc8 .= $code->marc_value();
+        else
+        {
+            $marc8 .= $code->marc_value();
+        }
     }
 
     # escape back to default G0 if necessary
