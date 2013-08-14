@@ -1,6 +1,6 @@
 Revision history for MARC::Charset
 
-1.34 Tue Aug 13 17:31:31 PDT 2013
+1.35 Tue Aug 13 19:50:55 PDT 2013
     - improve conversion of certain composed characters to MARC8
     
       Some characters should not be fully decomposed
@@ -28,6 +28,18 @@ Revision history for MARC::Charset
       as G1.
 
       This fixes RT#63271
+
+    - have MARC::Charset::Code->marc_value() handle G0/G1 conversion
+    
+      Since there's at present no need to do things like have
+      ANSEL be the G0 character set when converting from UTF8 to
+      MARC8, this commit centralizes the logic for deciding
+      whether to return the G0 or G1 MARC8 representation of a
+      character.
+    
+      Also add MARC::Charset::Code->g0_marc_value(), which returns
+      the G0 representation of the character for use by the
+      character DB.
 
     - New test cases for converting Vietnamese and Extended Cyrillic
       text.
