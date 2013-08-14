@@ -114,6 +114,24 @@ sub end_element
         $self->{current_code} = undef;
     }
    
+    elsif ($code and $name eq 'marc')
+    {
+        my $codepoint = $self->text();
+        if ($self->{current_charset} eq '51' || 
+            $self->{current_charset} eq '34' ||
+            $self->{current_charset} eq '45')
+        {
+            # codetables.xml supplied by the Library of Congress mistakenly
+            # lists the G1 value of characters in the extended Latin, extended
+            # Cyrillic and extended Arabic sets rather than the G0 value.  
+            # MARC::Charset's table uses the G0 value internally.
+
+            if (hex($codepoint) >= 0xa1 && hex($codepoint) <= 0xfe) {
+                $codepoint = sprintf("%x", hex($codepoint) - 128);
+            }
+        }
+        $code->marc($codepoint);
+    }
     # add these elements
     elsif ($code and $name =~ /^(marc|ucs|is_combining|alt|marc_right_half|marc_left_half)$/)
     {
