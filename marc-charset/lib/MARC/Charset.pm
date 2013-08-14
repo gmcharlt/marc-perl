@@ -423,7 +423,6 @@ sub utf8_to_marc8
                 $marc8 .= $code->get_escape();
                 $G0 = $charset_value;
             }
-            $marc8 .= $code->marc_value();
         }
 
         # look to see if we need to escape to a new G1 charset
@@ -432,12 +431,9 @@ sub utf8_to_marc8
         {
             $marc8 .= $code->get_escape();
             $G1 = $charset_value;
-            $marc8 .= chr(ord($code->marc_value()) + 128);
         }
-        else
-        {
-            $marc8 .= $code->marc_value();
-        }
+
+        $marc8 .= $code->marc_value();
     }
 
     # escape back to default G0 if necessary

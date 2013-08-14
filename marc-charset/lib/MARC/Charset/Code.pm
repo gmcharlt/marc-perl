@@ -74,9 +74,31 @@ sub char_value
     return chr(hex(shift->ucs()));
 }
 
+=head2 g0_marc_value()
+
+The string representing the MARC-8 encoding
+for lookup.
+
+=cut
+
+sub g0_marc_value
+{
+    my $code = shift;
+    my $marc = $code->marc();
+    if ($code->charset_name eq 'CJK') {
+        return 
+            chr(hex(substr($marc,0,2))) .
+            chr(hex(substr($marc,2,2))) .
+            chr(hex(substr($marc,4,2)));
+    } else {
+         return chr(hex($marc));
+    }
+}
+
 =head2 marc_value()
 
-The string representing the MARC-8 encoding.
+The string representing the MARC-8 encodingA
+for output.
 
 =cut
 
@@ -84,11 +106,18 @@ sub marc_value
 {
     my $code = shift;
     my $marc = $code->marc();
-    return chr(hex($marc)) unless $code->charset_name eq 'CJK';
-    return 
-        chr(hex(substr($marc,0,2))) .
-        chr(hex(substr($marc,2,2))) .
-        chr(hex(substr($marc,4,2)));
+    if ($code->charset_name eq 'CJK') {
+        return 
+            chr(hex(substr($marc,0,2))) .
+            chr(hex(substr($marc,2,2))) .
+            chr(hex(substr($marc,4,2)));
+    } else {
+        if ($code->default_charset_group() eq 'G0') {
+            return chr(hex($marc));
+        } else {
+            return chr(hex($marc) + 128);
+        }
+    }
 }
 
 
@@ -134,7 +163,7 @@ MARC-8 value.
 sub marc8_hash_code 
 {
     my $self = shift;
-    return sprintf('%s:%s', $self->charset_value(), $self->marc_value());
+    return sprintf('%s:%s', $self->charset_value(), $self->g0_marc_value());
 }
 
 
