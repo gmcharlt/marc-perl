@@ -19,6 +19,7 @@ t/cjk3.marc
 t/cjk4.marc
 t/code.t
 t/cyrillic.marc
+t/cyrillic.t
 t/decompose.t
 t/double-diacritics.t
 t/escape1.t
@@ -39,3 +40,4 @@ t/pod.t
 t/space.t
 t/table.t
 t/utf8.t
+t/vietnamese.t

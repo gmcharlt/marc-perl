@@ -1,5 +1,37 @@
 Revision history for MARC::Charset
 
+1.34 Tue Aug 13 17:31:31 PDT 2013
+    - improve conversion of certain composed characters to MARC8
+    
+      Some characters should not be fully decomposed
+      before converting them to MARC8.  This patch adds
+      a table of such characters, based on Annex A of
+      http://www.loc.gov/marc/marbi/2006/2006-04.html
+      and on some sample records provided by Jason
+      Stephenson of MVLC.
+
+    - recognize G0 and G1 characters properly
+    
+      When converting from MARC8 to UTF8, MARC::Charset now
+      properly recognizes if a (single-byte) MARC8 character falls
+      in G0 or G1.
+
+      This is part of the fix for RT#63271 (converting characters
+      in the Extended Cyrillic character set), but should also
+      fix similar issues with converting characters in the extended
+      Arabic set.
+
+      This commit also means that all MARC8 character sets that support
+      both G0 and G1 wll be properly converted, regardless of whether
+      they're currently set as the G0 or G1 character set.  For example,
+      it is now possible to convert Extended Latin as G0 or Basic Latin
+      as G1.
+
+      This fixes RT#63271
+
+    - New test cases for converting Vietnamese and Extended Cyrillic
+      text.
+    
 1.34 Mon Feb 11 09:10:35 PST 2013
     - RT#83257: use AnyDBM_File rather than hardcode GDBM_File
     
