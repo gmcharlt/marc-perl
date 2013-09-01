@@ -21,7 +21,7 @@ h3 {text-align:left;}
 h4 {margin-top:.5em; margin-bottom:.5em;}
 .edition {font-weight:bold; text-align:center}
 </style>
-<script type="text/javascript" src="http://www.loc.gov/global/foresee/foresee-trigger.js"></script></head>
+<script type="text/javascript" src="http://cdn.loc.gov/js/global/foresee/foresee-trigger.js"></script></head>
 <body>
 
 <div class="head-nav"><a href="http://www.loc.gov/">Library of
@@ -36,7 +36,7 @@ Congress</a> &gt;&gt; <a href="http://www.loc.gov/marc/">MARC</a>
 <hr>
 
 <div class="edition">1999 Edition<br>
-Update No. 1 (October 2001) through Update No. 15 (September 2012)</div>
+Update No. 1 (October 2001) through Update No. 16 (April 2013)</div>
 
 <hr>
 
@@ -1776,6 +1776,7 @@ Data</cite></a>.</p>
          i - Condensed score
          j - Performer-conductor part
          k - Vocal score
+         l - Score
          m - Multiple score formats
          n - Not applicable
          u - Unknown
@@ -2250,7 +2251,7 @@ Data</cite></a>.</p>
          e - Control by item
          u - Unknown
 
-  009 - PHYSICAL DESCRIPTION FIXED-FIELD FOR ARCHIVAL COLLECTION (VM) - [OBSOLETE]
+009 - PHYSICAL DESCRIPTION FIXED-FIELD FOR ARCHIVAL COLLECTION (VM) - [OBSOLETE]
     Character Positions
       00 - Genealogical stage
       01 - Technical stage
@@ -2795,6 +2796,8 @@ Data</cite></a>.</p>
       $k - Beginning or single date created (NR)
       $l - Ending date created (NR)
       $m - Beginning of date valid (NR)
+      $o - Single or starting date for aggregated content (NR)
+      $p - Ending date for aggregated content (NR)
       $n - End of date valid (NR)
       $2 - Source of date (NR)
       $6 - Linkage (NR)
@@ -3154,7 +3157,7 @@ Data</cite></a>.</p>
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
 
-083 - ADDITIONAL DEWEY DECIMAL CLASSIFICATION NUMBER
+083 - ADDITIONAL DEWEY DECIMAL CLASSIFICATION NUMBER (R)
    Indicators
       First - Type of edition
          0 - Full edition
@@ -3187,7 +3190,7 @@ Data</cite></a>.</p>
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
 	  
-085  SYNTHESIZED CLASSIFICATION NUMBER COMPONENTS (R)
+085 - SYNTHESIZED CLASSIFICATION NUMBER COMPONENTS (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -3615,7 +3618,7 @@ Data</cite></a>.</p>
 
 
 --Edition, Imprint, etc. Fields 250-270--
-250 - EDITION STATEMENT (NR)
+250 - EDITION STATEMENT (R)
    Indicators
       First - Undefined
          # - Undefined
@@ -3624,6 +3627,7 @@ Data</cite></a>.</p>
    Subfield Codes
       $a - Edition statement (NR)
       $b - Remainder of edition statement (NR)
+      $3 - Materials specified (NR)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
 
@@ -4440,6 +4444,40 @@ Data</cite></a>.</p>
       $a - Key (NR)
       $6 - Linkage (NR) 
       $8 - Field link and sequence number (R)
+      
+385 - AUDIENCE CHARACTERISTICS (R)
+   Indicators
+      First - Undefined
+         # - Undefined 
+      Second - Undefined
+         # - Undefined 
+   Subfield Codes
+      $a - Audience term (R)
+      $b - Audience code (R)
+      $m - Demographic group term (NR)
+      $n - Demographic group code (NR)
+      $0 - Authority record control number or standard number (R)
+      $2 - Source (NR)
+      $3 - Materials specified (NR)
+      $6 - Linkage (NR) 
+      $8 - Field link and sequence number (R)
+
+386 - CREATOR/CONTRIBUTOR CHARACTERISTICS (R)
+   Indicators
+      First - Undefined
+         # - Undefined 
+      Second - Undefined
+         # - Undefined 
+   Subfield Codes
+      $a - Creator/contributor term (R)
+      $b - Creator/contributor code (R)
+      $m - Demographic group term (NR)
+      $n - Demographic group code (NR)
+      $0 - Authority record control number or standard number (R)
+      $2 - Source (NR)
+      $3 - Materials specified (NR)
+      $6 - Linkage (NR) 
+      $8 - Field link and sequence number (R)
 
 
 --Series Statement Fields (4XX)--
@@ -4877,7 +4915,7 @@ Data</cite></a>.</p>
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
 
-  522 - GEOGRAPHIC COVERAGE NOTE (R)
+522 - GEOGRAPHIC COVERAGE NOTE (R)
    Indicators
       First - Display constant controller
          # - Geographic coverage
@@ -5723,8 +5761,10 @@ Data</cite></a>.</p>
 
 648 - SUBJECT ADDED ENTRY--CHRONOLOGICAL TERM (R)
    Indicators
-      First - Undefined
-         # - Undefined
+      First - Type of date or time period
+         # - No information provided
+         0 - Date or time perioed covered or depicted
+         1 - Date or time period of creation or origin
       Second - Thesaurus
          0 - Library of Congress Subject Headings
          1 - LC subject headings for children's literature
@@ -7064,7 +7104,7 @@ Data</cite></a>.</p>
       $e - Retention statement (NR) (CF MU VM SE) [OBSOLETE]
       $8 - Field link and sequence number (R)
 
-  851 - LOCATION (R) [OBSOLETE]
+851 - LOCATION (R) [OBSOLETE]
    Indicators
       First - Undefined
          # - Undefined
@@ -7193,7 +7233,7 @@ Data</cite></a>.</p>
 
 870 - VARIANT PERSONAL NAME (SE) [OBSOLETE]
 
-871 - VARIANT CORPORATE NAME (SE)[OBSOLETE]
+871 - VARIANT CORPORATE NAME (SE) [OBSOLETE]
 
 872 - VARIANT CONFERENCE OR MEETING NAME (SE) [OBSOLETE]
 
@@ -7281,7 +7321,7 @@ Data</cite></a>.</p>
 Congress</a> &gt;&gt; <a href="http://www.loc.gov/marc/">MARC</a>
 &gt;&gt; <strong>Bibliographic Field List</strong></div>
 
-(09/19/2012)</td>
+(04/29/2013)</td>
 <td align="right"><a href="mailto:ndmso@loc.gov">Contact
 Us</a></td>
 </tr>
@@ -7289,7 +7329,7 @@ Us</a></td>
 
 <script type='text/javascript' src='/global/s_code.js'>
 </script>
-<script type='text/javascript' src='http://www.loc.gov/global/s_code.js'></script></body>
+<script type='text/javascript' src='http://cdn.loc.gov/js/global/metrics/sc/v25.2/2.0/s_code.js'></script></body>
 </html>
 
 
