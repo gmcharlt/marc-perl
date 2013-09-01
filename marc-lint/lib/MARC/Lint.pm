@@ -1355,6 +1355,8 @@ k       NR      Beginning or single date created
 l       NR      Ending date created 
 m       NR      Beginning of date valid 
 n       NR      End of date valid 
+o       NR      Single or starting date for aggregated content
+p       NR      Ending date for aggregated content
 2       NR      Source of date 
 6       NR      Linkage 
 8       R       Field link and sequence number 
@@ -1742,11 +1744,12 @@ x       NR      International Standard Serial Number
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
-250     NR      EDITION STATEMENT
+250     R       EDITION STATEMENT
 ind1    blank   Undefined
 ind2    blank   Undefined
 a       NR      Edition statement 
 b       NR      Remainder of edition statement 
+3       NR      Materials specified
 6       NR      Linkage 
 8       R       Field link and sequence number 
 
@@ -2242,6 +2245,32 @@ e       NR      Publisher associated with opus number
 ind1    b01     Key type
 ind2    blank   Undefined
 a       NR      Key
+6       NR      Linkage
+8       R       Field link and sequence number
+
+385     R       AUDIENCE CHARACTERISTICS
+ind1    blank   Undefined
+ind2    blank   Undefined
+a       R       Audience term
+b       R       Audience code
+m       NR      Demographic group term
+n       NR      Demographic group code
+0       R       Authority record control number or standard number
+2       NR      Source
+3       NR      Materials specified
+6       NR      Linkage
+8       R       Field link and sequence number
+
+386 - CREATOR/CONTRIBUTOR CHARACTERISTICS (R)
+ind1    blank   Undefined
+ind2    blank   Undefined
+a       R       Creator/contributor term
+b       R       Creator/contributor code
+m       NR      Demographic group term
+n       NR      Demographic group code
+0       R       Authority record control number or standard number
+2       NR      Source
+3       NR      Materials specified
 6       NR      Linkage
 8       R       Field link and sequence number
 
@@ -3032,7 +3061,7 @@ z       R       Geographic subdivision
 8       R       Field link and sequence number 
 
 648     R       SUBJECT ADDED ENTRY--CHRONOLOGICAL TERM
-ind1    blank   Undefined
+ind1    b01     Type of date or time period
 ind2    01234567    Thesaurus
 a       NR      Chronological term 
 v       R       Form subdivision 
