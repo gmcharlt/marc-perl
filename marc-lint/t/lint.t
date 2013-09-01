@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 use File::Spec;
-use Test::More tests=>41;
+use Test::More tests=>40;
 
 BEGIN { use_ok( 'MARC::File::USMARC' ); }
 BEGIN { use_ok( 'MARC::Lint' ); }
@@ -108,7 +108,7 @@ FROM_TEXT: {
         q{100: Indicator 2 must be blank but it's "4"},
         q{245: Indicator 1 must be 0 or 1 but it's "9"},
         q{245: Subfield _a is not repeatable.},
-        q{250: Field is not repeatable.},
+#        q{250: Field is not repeatable.}, #obsolete now that 250 is repeatable
         q{260: Subfield _r is not allowed.},
         q{856: Indicator 2 must be blank, 0, 1, 2 or 8 but it's "3"},
     );
