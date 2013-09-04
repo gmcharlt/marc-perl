@@ -211,7 +211,7 @@ sub warnings {
     my ($self,@new) = @_;
     if ( @new ) {
         push( @{ $self->{warnings} }, @new );
-        print STDERR join( "\n", @new ) if $self->{'warn'};
+        print STDERR join( "\n", @new ) . "\n" if $self->{'warn'};
     } else {
         my @old = @{ $self->{warnings} };
         $self->{warnings} = [];
