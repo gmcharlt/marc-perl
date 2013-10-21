@@ -587,11 +587,11 @@ sub replace_with {
 }
 
 
-=head2 as_string( [$subfields] )
+=head2 as_string( [$subfields] [, $delimiter] )
 
-Returns a string of all subfields run together.  A space is added to
-the result between each subfield.  The tag number and subfield
-character are not included.
+Returns a string of all subfields run together. A space is added to
+the result between each subfield, unless the delimiter parameter is
+passed.  The tag number and subfield character are not included.
 
 Subfields appear in the output string in the order in which they
 occur in the field.
@@ -607,6 +607,8 @@ If C<$subfields> is specified, then only those subfields will be included.
                 );
   print $field->as_string( 'abh' ); # Only those three subfields
   # prints 'Abraham Lincoln [videorecording] : preserving the union /'.
+  print $field->as_string( 'ab', '--' ); # Only those two subfields, with a delimiter
+  # prints 'Abraham Lincoln--preserving the union /'.
 
 Note that subfield h comes before subfield b in the output.
 
@@ -615,6 +617,7 @@ Note that subfield h comes before subfield b in the output.
 sub as_string {
     my $self = shift;
     my $subfields = shift;
+    my $delimiter = shift // " ";
 
     if ( $self->is_control_field ) {
         return $self->{_data};
@@ -631,7 +634,7 @@ sub as_string {
         push( @subs, $text ) if !$subfields || $code =~ /^[$subfields]$/;
     } # for
 
-    return join( " ", @subs );
+    return join( $delimiter, @subs );
 }
 
 
