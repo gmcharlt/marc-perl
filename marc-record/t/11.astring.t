@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More ( tests => 5 );
+use Test::More ( tests => 6 );
 use File::Spec;
 
 BEGIN {
@@ -27,5 +27,10 @@ is(
     $f245->as_string( 'ac' ), 
     'ActivePerl with ASP and ADO / Tobias Martinsson.',
     'as_string() with two subfields'
+);
+is( 
+    $f245->as_string( 'ac', "\t" ), 
+    'ActivePerl with ASP and ADO /' . "\t" . 'Tobias Martinsson.',
+    'as_string() with two subfields and delimiter'
 );
 

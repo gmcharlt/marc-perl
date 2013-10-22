@@ -617,7 +617,8 @@ Note that subfield h comes before subfield b in the output.
 sub as_string {
     my $self = shift;
     my $subfields = shift;
-    my $delimiter = shift // " ";
+    my $delimiter = shift;
+    $delimiter = " " unless defined $delimiter;
 
     if ( $self->is_control_field ) {
         return $self->{_data};
