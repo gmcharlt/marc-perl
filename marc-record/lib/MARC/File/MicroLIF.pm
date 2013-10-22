@@ -7,6 +7,7 @@ MARC::File::MicroLIF - MicroLIF-specific file handling
 =cut
 
 use strict;
+use warnings;
 use integer;
 use vars qw( $ERROR );
 

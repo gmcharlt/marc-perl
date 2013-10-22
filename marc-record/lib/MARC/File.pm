@@ -7,6 +7,7 @@ MARC::File - Base class for files of MARC records
 =cut
 
 use strict;
+use warnings;
 use integer;
 
 use vars qw( $ERROR );

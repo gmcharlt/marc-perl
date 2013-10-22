@@ -7,6 +7,7 @@ MARC::Record - Perl extension for handling MARC records
 =cut
 
 use strict;
+use warnings;
 use integer;
 
 use vars qw( $ERROR );
