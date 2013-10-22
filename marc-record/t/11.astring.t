@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More ( tests => 6 );
+use Test::More ( tests => 7 );
 use File::Spec;
 
 BEGIN {
@@ -34,3 +34,9 @@ is(
     'as_string() with two subfields and delimiter'
 );
 
+my $field = MARC::Field->new('650', ' ', ' ', a => 'History', '0' => '(DLC)12345');
+is(
+    $field->as_string('0'),
+    '(DLC)12345',
+    q{as_string('0') includes only subfield $0, not entire field}
+);

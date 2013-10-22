@@ -639,7 +639,7 @@ sub as_string {
         my $offset = ($i-1)*2;
         my $code = $subs->[$offset];
         my $text = $subs->[$offset+1];
-        push( @subs, $text ) if !$subfields || $code =~ /^[$subfields]$/;
+        push( @subs, $text ) if !defined($subfields) || $code =~ /^[$subfields]$/;
     } # for
 
     return join( $delimiter, @subs );
