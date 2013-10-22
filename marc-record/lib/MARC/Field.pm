@@ -397,6 +397,9 @@ delete_subfield() allows you to remove subfields from a field:
     # delete any subfield a or u in the field
     $field->delete_subfield(code => ['a', 'u']);
 
+    # delete any subfield code matching a compiled regular expression
+    $field->delete_subfield(code => qr/[^a-z0-9]/);
+
 If you want to only delete subfields at a particular position you can 
 use the pos parameter:
 
@@ -455,7 +458,11 @@ sub delete_subfield {
         $subfield_num += 1;
         my $subfield_code = shift @current_subfields;
         my $subfield_value = shift @current_subfields;
-        if ((@$codes==0 or grep {$_ eq $subfield_code} @$codes)
+        if ((@$codes==0 or 
+            grep {
+                (ref($_) eq 'Regexp' && $subfield_code =~ $_) ||
+                (ref($_) ne 'Regexp' && $_ eq $subfield_code)
+            } @$codes)
             and (!$match or $subfield_value =~ $match) 
             and (@$positions==0 or grep {$_ == $subfield_num} @$positions)) {
             $removed += 1;

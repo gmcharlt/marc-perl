@@ -1,11 +1,15 @@
 use strict;
 use warnings;
-use Test::More tests => 15;
+use Test::More tests => 16;
 use MARC::Field;
 
 my $field = MARC::Field->new('245', '0', '1', a=>'foo', b=>'bar', a=>'baz');
 $field->delete_subfield(code => 'a');
 is $field->as_string, 'bar', 'delete by subfield code';
+
+$field = MARC::Field->new('245', '0', '1', a=>'foo', b=>'bar', a=>'baz');
+$field->delete_subfield(code => qr/[^a]/);
+is $field->as_string(), 'foo baz', 'delete by regex on subfield code';
 
 $field = MARC::Field->new('245', '0', '1', a=>'foo', b=>'bar', c=>'baz');
 $field->delete_subfield(code => ['a','c']);
