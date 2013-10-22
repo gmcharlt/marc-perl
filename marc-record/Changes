@@ -1,5 +1,26 @@
 Revision history for Perl extension MARC::Record.
 
+2.0.6 Tue Oct 22 16:17:06 UTC 2013
+        [ENHANCEMENTS]
+        - MARC::Field->as_string() now accepts an optional second
+          parameter to specify the delimiter to use between
+          subfields. (Tomas Cohen Arazi)
+        - MARC::Field->delete_subfield() can now accept a regexp
+          to specify the subfields to remove.  For example, to
+          remove all numeric subfields, one can say:
+
+          $field->delete_subfield(code => qr/\d/);
+
+          (Jason Stephenson)
+        [FIXES]
+        - the warnings pragma is now used throughout MARC::Record
+        - $field->as_string('0') now returns the contents of
+          subfield $0 rather than the contents of all of the
+          subfields in the field.
+        - RT#88421: add newline after printing warnings
+          (Jason Stephenson)
+        - RT#85804: fix spelling glitch (Gregor Herrmann)
+
 2.0.5 Mon Feb 11 20:39:10 PST 2013
         - fix use of qw(...) in test case so that module passes
           tests with Perl 5.17.x.
