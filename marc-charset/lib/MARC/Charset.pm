@@ -305,9 +305,11 @@ sub marc8_to_utf8
 
         if (!$found)
         {
-            warn(sprintf("no mapping found for [0x\%X] at position $index in $marc8 ".
+            warn(sprintf("no mapping found for [0x\%X] at position $index ",
+                          unpack('C',substr($marc8,$index,1))) .
+                " in $marc8 " .
                 "g0=".MARC::Charset::Constants::charset_name($G0) . " " .
-                "g1=".MARC::Charset::Constants::charset_name($G1), unpack('C',substr($marc8,$index,1))));
+                "g1=".MARC::Charset::Constants::charset_name($G1));
             if (!$ignore_errors)
             {
                 reset_charsets();
