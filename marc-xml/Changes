@@ -1,5 +1,17 @@
 Revision history for Perl extension MARC-XML
 
+1.0.2 Tue Jan 21 17:18:37 UTC 2014
+       - MARC::File::XML will now die upon parsing a record that
+         declares an external entity and tries to use it. This
+         prevents the potential unwanted disclosure of the contents
+         of files on the server by applications that embed this module.
+         If, for some reason, an application needs to process MARCXML
+         records that contain external entities, set_parser() can be
+         used to force the use of an XML::LibXML parser that is
+         configured to process external entities.
+    
+         The issue was reported by John Lightsey.
+
 1.0.1 Fri Feb 15 08:25:04 PST 2013
        - RT#83284: return empty MARC::Record given empty <record/>
 

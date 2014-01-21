@@ -17,6 +17,7 @@ t/encode.t
 t/error-handling.t
 t/escape.mrc
 t/escape.t
+t/external-entities.t
 t/invalid.xml
 t/namespace.t
 t/namespace.xml
