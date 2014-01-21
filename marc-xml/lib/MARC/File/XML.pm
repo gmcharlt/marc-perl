@@ -411,7 +411,11 @@ sub _next {
 }
 
 sub _parser {
-    $parser ||= XML::LibXML->new();
+    $parser ||= XML::LibXML->new(
+        ext_ent_handler => sub {
+            die "External entities are not supported\n";
+        }
+    );
     return $parser;
 }
 
@@ -492,7 +496,10 @@ sub decode {
 Pass a XML::LibXML parser to MARC::File::XML
 for it to use.  This is optional, meant for
 use by applications that maintain a shared
-parser object.
+parser object or which require that external
+entities be processed.  Note that the latter
+is a potential security risk; see
+L<https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Processing>.
 
 =cut
 
