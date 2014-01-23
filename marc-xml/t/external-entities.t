@@ -26,7 +26,7 @@ is($marc_ent->subfield('245', 'c'), 'Henriette Avram', 'can expand normal entity
 # disable fetching external entities.
 my $xml_ext_ent = q(<?xml version="1.0" standalone="no" ?>
 <!DOCTYPE subfield [
-    <!ENTITY questionable SYSTEM "file://XXX">
+    <!ENTITY questionable SYSTEM "XXX">
 ]>
 <record>
     <datafield tag="245" ind1="0" ind2="0">
@@ -41,7 +41,14 @@ my $xml_ext_ent = q(<?xml version="1.0" standalone="no" ?>
 # cause ext_ent_handler to be ignored.
 my $tmp = File::Temp->new();
 print $tmp 'boo!';
-$xml_ext_ent =~ s/XXX/$tmp/g;
+my $filename = $tmp->filename;
+if ($^O eq 'MSWin32') {
+    # normalize filename so that it works as
+    # part of a file URI, without having to require URI::file
+    $filename =~ s!\\!/!g;
+    $filename = "$filename";
+}
+$xml_ext_ent =~ s!XXX!file://$filename!g;
 
 my $marc_ext_ent;
 eval {
