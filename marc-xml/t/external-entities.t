@@ -46,7 +46,7 @@ if ($^O eq 'MSWin32') {
     # normalize filename so that it works as
     # part of a file URI, without having to require URI::file
     $filename =~ s!\\!/!g;
-    $filename = "$filename";
+    $filename = "/$filename";
 }
 $xml_ext_ent =~ s!XXX!file://$filename!g;
 
