@@ -1,5 +1,8 @@
 Revision history for Perl extension MARC-XML
 
+1.0.3 Thu Jan 23 05:02:52 UTC 2014
+       - fix t/external-entities.t to pass on Strawberry
+
 1.0.2 Tue Jan 21 17:18:37 UTC 2014
        - MARC::File::XML will now die upon parsing a record that
          declares an external entity and tries to use it. This
