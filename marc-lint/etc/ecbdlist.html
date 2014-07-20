@@ -36,7 +36,7 @@ Congress</a> &gt;&gt; <a href="http://www.loc.gov/marc/">MARC</a>
 <hr>
 
 <div class="edition">1999 Edition<br>
-Update No. 1 (October 2001) through Update No. 16 (April 2013)</div>
+Update No. 1 (October 2001) through Update No. 18 (April 2014)</div>
 
 <hr>
 
@@ -1078,7 +1078,7 @@ Data</cite></a>.</p>
          | - No attempt to code
       04 - Configuration of playback channels
          m - Monaural
-         q - Quadraphonic
+         q - Quadraphonic, multichannel, or surround
          s - Stereophonic
          u - Unknown
          z - Other
@@ -2313,6 +2313,7 @@ Data</cite></a>.</p>
          # - Undefined
    Subfield Codes
       $a - National bibliography number (R)
+      $q - Qualifying information (R)
       $z - Canceled/Invalid national bibliography number (R)
       $2 - Source (NR)
       $6 - Linkage (NR)
@@ -2374,6 +2375,7 @@ Data</cite></a>.</p>
    Subfield Codes
       $a - International Standard Book Number (NR)
       $c - Terms of availability (NR)
+      $q - Qualifying information (R)
       $z - Canceled/invalid ISBN (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
@@ -2414,6 +2416,7 @@ Data</cite></a>.</p>
       $a - Standard number or code (NR)
       $c - Terms of availability (NR)
       $d - Additional codes following the standard number or code (NR)
+      $q - Qualifying information (R)
       $z - Canceled/invalid standard number or code (R)
       $2 - Source of number or code (NR)
       $6 - Linkage (NR)
@@ -2436,8 +2439,8 @@ Data</cite></a>.</p>
       Second - Undefined
          # - Undefined
    Subfield Codes
-      $a - First and second groups of characters (R)
-      $b - Third and fourth groups of characters (R)
+      $a - First and second groups of characters (NR)
+      $b - Third and fourth groups of characters (NR)
       $c - Date (NR)
       $d - Number of volume or part (R)
       $e - Unparsed fingerprint (NR)
@@ -2454,6 +2457,7 @@ Data</cite></a>.</p>
          # - Undefined
    Subfield Codes
       $a - Standard technical report number (NR)
+      $q - Qualifying information (R)
       $z - Canceled/invalid number (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
@@ -3010,6 +3014,7 @@ Data</cite></a>.</p>
       $a - Classification number (NR)
       $b - Item number (NR)
       $2 - Source of call/class number (NR)
+      $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
 
 060 - NATIONAL LIBRARY OF MEDICINE CALL NUMBER (R)
@@ -3098,7 +3103,7 @@ Data</cite></a>.</p>
    Indicators
       First - Undefined
          # - Undefined
-      Second - Source specified in subfield $2
+      Second - Code source
          0 - NAL subject category code list
          7 - Code source specified in subfield $2
    Subfield Codes
@@ -3314,7 +3319,7 @@ Data</cite></a>.</p>
    Subfield Codes
       $a - Corporate name or jurisdiction name as entry element (NR)
       $b - Subordinate unit (R)
-      $c - Location of meeting (NR)
+      $c - Location of meeting (R)
       $d - Date of meeting or treaty signing (R)
       $e - Relator term (R)
       $f - Date of a work (NR)
@@ -3325,7 +3330,7 @@ Data</cite></a>.</p>
       $p - Name of part/section of a work (R)
       $t - Title of a work (NR)
       $u - Affiliation (NR)
-      $0 - Authority record control number (R)
+      $0 - Authority record control number or standard number (R)
       $4 - Relator code (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
@@ -3342,7 +3347,7 @@ Data</cite></a>.</p>
    Subfield Codes
       $a - Meeting name or jurisdiction name as entry element (NR)
       $b - Number (BK CF MP MU SE VM MX) [OBSOLETE]
-      $c - Location of meeting (NR)
+      $c - Location of meeting (R)
       $d - Date of meeting (NR)
       $e - Subordinate unit (R)
       $f - Date of a work (NR)
@@ -3355,7 +3360,7 @@ Data</cite></a>.</p>
       $q - Name of meeting following jurisdiction name entry element (NR)
       $t - Title of a work (NR)
       $u - Affiliation (NR)
-      $0 - Authority record control number (R)
+      $0 - Authority record control number or standard number (R)
       $4 - Relator code (R)
       $6 - Linkage (NR)
       $8 - Field link and sequence number (R)
@@ -4168,7 +4173,7 @@ Data</cite></a>.</p>
       $c - File size (R)
       $d - Resolution (R)
       $e - Regional encoding (R)
-      $f - Transmission speed (R)
+      $f - Encoded bitrate (R)
       $0 - Authority record control number or standard number (R)
       $2 - Source (NR)
       $3 - Materials specified (NR)
@@ -4399,10 +4404,14 @@ Data</cite></a>.</p>
 	  
 382 - MEDIUM OF PERFORMANCE (R)
    Indicators
-      First - Undefined
-         # - Undefined 
-      Second - Undefined
-         # - Undefined 
+      First - Display constant controller
+         # - No information provided
+         0 - Medium of performance
+         1 - Partial medium of performance 
+      Second - Access control
+         # - No information provided
+         0 - Not intended for access
+         1 - Intended for access
    Subfield Codes
       $a - Medium of performance (R)
       $b - Soloist (R)
@@ -5196,6 +5205,7 @@ Data</cite></a>.</p>
       $m - Publication status (NR)
       $n - Note (R)
       $o - Research date (NR)
+      $p - Country of publication or creation (R)
       $q - Assigning agency (NR)
       $r - Jurisdiction of copyright assessment (NR)
       $s - Source of information (NR)
@@ -5359,7 +5369,7 @@ Data</cite></a>.</p>
    Subfield Codes
       $a - History (NR)
       $b - Time of collation (NR) [OBSOLETE]
-      $0 - Uniform Resource Identifier (R)
+      $u - Uniform Resource Identifier (R)
       $3 - Materials specified (NR)
       $5 - Institution to which field applies (NR)
       $6 - Linkage (NR)
@@ -5547,8 +5557,10 @@ Data</cite></a>.</p>
 	  
 588 - SOURCE OF DESCRIPTION NOTE (R)
    Indicators
-      First - Undefined
-         # - Undefined
+      First - Display constant controller
+         # - No information provided
+         0 - Source of description
+         1 - Latest issue consulted
       Second - Undefined
          # - Undefined
    Subfield Codes
@@ -5647,7 +5659,7 @@ Data</cite></a>.</p>
    Subfield Codes
       $a - Corporate name or jurisdiction name as entry element (NR)
       $b - Subordinate unit (R)
-      $c - Location of meeting (NR)
+      $c - Location of meeting (R)
       $d - Date of meeting or treaty signing (R)
       $e - Relator term (R)
       $f - Date of a work (NR)
@@ -5667,7 +5679,7 @@ Data</cite></a>.</p>
       $x - General subdivision (R)
       $y - Chronological subdivision (R)
       $z - Geographic subdivision (R)
-      $0 - Authority record control number (R)
+      $0 - Authority record control number or standard number (R)
       $2 - Source of heading or term (NR)
       $3 - Materials specified (NR)
       $4 - Relator code (R)
@@ -5692,7 +5704,7 @@ Data</cite></a>.</p>
    Subfield Codes
       $a - Meeting name or jurisdiction name as entry element (NR)
       $b - Number (BK CF MP MU SE VM MX) [OBSOLETE]
-      $c - Location of meeting (NR)
+      $c - Location of meeting (R)
       $d - Date of meeting (NR)
       $e - Subordinate unit (R)
       $f - Date of a work (NR)
@@ -5711,7 +5723,7 @@ Data</cite></a>.</p>
       $x - General subdivision (R)
       $y - Chronological subdivision (R)
       $z - Geographic subdivision (R)
-      $0 - Authority record control number (R)
+      $0 - Authority record control number or standard number (R)
       $2 - Source of heading or term (NR)
       $3 - Materials specified (NR)
       $4 - Relator code (R)
@@ -5763,7 +5775,7 @@ Data</cite></a>.</p>
    Indicators
       First - Type of date or time period
          # - No information provided
-         0 - Date or time perioed covered or depicted
+         0 - Date or time period covered or depicted
          1 - Date or time period of creation or origin
       Second - Thesaurus
          0 - Library of Congress Subject Headings
@@ -6098,7 +6110,7 @@ Data</cite></a>.</p>
    Subfield Codes
       $a - Corporate name or jurisdiction name as entry element (NR)
       $b - Subordinate unit (R)
-      $c - Location of meeting (NR)
+      $c - Location of meeting (R)
       $d - Date of meeting or treaty signing (R)
       $e - Relator term (R)
       $f - Date of a work (NR)
@@ -6116,7 +6128,7 @@ Data</cite></a>.</p>
       $t - Title of a work (NR)
       $u - Affiliation (NR)
       $x - International Standard Serial Number (NR)
-      $0 - Authority record control number (R)
+      $0 - Authority record control number or standard number (R)
       $3 - Materials specified (NR)
       $4 - Relator code (R)
       $5 - Institution to which field applies (NR)
@@ -6139,7 +6151,7 @@ Data</cite></a>.</p>
    Subfield Codes
       $a - Meeting name or jurisdiction name as entry element (NR)
       $b - Number (BK CF MP MU SE VM MX) [OBSOLETE]
-      $c - Location of meeting (NR)
+      $c - Location of meeting (R)
       $d - Date of meeting (NR)
       $e - Subordinate unit (R)
       $f - Date of a work (NR)
@@ -6156,7 +6168,7 @@ Data</cite></a>.</p>
       $t - Title of a work (NR)
       $u - Affiliation (NR)
       $x - International Standard Serial Number (NR)
-      $0 - Authority record control number (R)
+      $0 - Authority record control number or standard number (R)
       $3 - Materials specified (NR)
       $4 - Relator code (R)
       $5 - Institution to which field applies (NR)
@@ -6964,6 +6976,9 @@ Data</cite></a>.</p>
       $4 - Relator code (R)
       $5 - Institution to which field applies (R)
       $6 - Linkage (NR)
+      $7 - Control subfield (NR)
+         0 - Type of record
+         1 - Bibliographic level
       $8 - Field link and sequence number (R)
 
 810 - SERIES ADDED ENTRY--CORPORATE NAME (R)
@@ -6977,7 +6992,7 @@ Data</cite></a>.</p>
    Subfield Codes
       $a - Corporate name or jurisdiction name as entry element (NR)
       $b - Subordinate unit (R)
-      $c - Location of meeting (NR)
+      $c - Location of meeting (R)
       $d - Date of meeting or treaty signing (R)
       $e - Relator term (R)
       $f - Date of a work (NR)
@@ -6996,11 +7011,14 @@ Data</cite></a>.</p>
       $v - Volume/sequential designation (NR)
       $w - Bibliographic record control number (R)
       $x - International Standard Serial Number (NR)
-      $0 - Authority record control number (R)
+      $0 - Authority record control number or standard number (R)
       $3 - Materials specified (NR)
       $4 - Relator code (R)
       $5 - Institution to which field applies (R)
       $6 - Linkage (NR)
+      $7 - Control subfield (NR)
+         0 - Type of record
+         1 - Bibliographic level
       $8 - Field link and sequence number (R)
 
 811 - SERIES ADDED ENTRY--MEETING NAME (R)
@@ -7013,7 +7031,7 @@ Data</cite></a>.</p>
          # - Undefined
    Subfield Codes
       $a - Meeting name or jurisdiction name as entry element (NR)
-      $c - Location of meeting (NR)
+      $c - Location of meeting (R)
       $d - Date of meeting (NR)
       $e - Subordinate unit (R)
       $f - Date of a work (NR)
@@ -7031,11 +7049,14 @@ Data</cite></a>.</p>
       $v - Volume/sequential designation (NR)
       $w - Bibliographic record control number (R)
       $x - International Standard Serial Number (NR)
-      $0 - Authority record control number (R)
+      $0 - Authority record control number or standard number (R)
       $3 - Materials specified (NR)
       $4 - Relator code (R)
       $5 - Institution to which field applies (R)
       $6 - Linkage (NR)
+      $7 - Control subfield (NR)
+         0 - Type of record
+         1 - Bibliographic level
       $8 - Field link and sequence number (R)
 
 830 - SERIES ADDED ENTRY--UNIFORM TITLE (R)
@@ -7066,6 +7087,9 @@ Data</cite></a>.</p>
       $3 - Materials specified (NR)
       $5 - Institution to which field applies (R)
       $6 - Linkage (NR)
+      $7 - Control subfield (NR)
+         0 - Type of record
+         1 - Bibliographic level
       $8 - Field link and sequence number (R)
 
 840 - SERIES ADDED ENTRY--TITLE (R) [OBSOLETE]
@@ -7321,7 +7345,7 @@ Data</cite></a>.</p>
 Congress</a> &gt;&gt; <a href="http://www.loc.gov/marc/">MARC</a>
 &gt;&gt; <strong>Bibliographic Field List</strong></div>
 
-(04/29/2013)</td>
+(04/28/2014)</td>
 <td align="right"><a href="mailto:ndmso@loc.gov">Contact
 Us</a></td>
 </tr>
