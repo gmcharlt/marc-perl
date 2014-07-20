@@ -8,7 +8,7 @@ use MARC::Field;
 
 use MARC::Lint::CodeData qw(%GeogAreaCodes %ObsoleteGeogAreaCodes %LanguageCodes %ObsoleteLanguageCodes);
 
-our $VERSION = 1.47;
+our $VERSION = 1.48	;
 
 =head1 NAME
 
@@ -36,6 +36,11 @@ MARC::Lint - Perl extension for checking validity of MARC records
 Given the following MARC record:
 
     LDR 00000nam  22002538a 4500
+    040    _aMdSSJTT
+           _cMdSSJTT
+    040    _aMdSSJTT
+           _beng
+           _cMdSSJTT
     100 14 _aWall, Larry.
     110 1  _aO'Reilly & Associates.
     245 90 _aProgramming Perl /
@@ -55,7 +60,7 @@ the following errors are generated:
     100: Indicator 2 must be blank but it's "4"
     245: Indicator 1 must be 0 or 1 but it's "9"
     245: Subfield _a is not repeatable.
-    250: Field is not repeatable.
+    040: Field is not repeatable.
     260: Subfield _r is not allowed.
     856: Indicator 2 must be blank, 0, 1, 2 or 8 but it's "3"
 
@@ -1061,7 +1066,8 @@ f       R       Party to document
 015     R       NATIONAL BIBLIOGRAPHY NUMBER
 ind1    blank   Undefined
 ind2    blank   Undefined
-a       R       National bibliography number 
+a       R       National bibliography number
+q       R       Qualifying information
 z       R       Canceled/Invalid national bibliography number
 2       NR      Source 
 6       NR      Linkage 
@@ -1099,6 +1105,7 @@ ind1    blank   Undefined
 ind2    blank   Undefined
 a       NR      International Standard Book Number 
 c       NR      Terms of availability 
+q       R       Qualifying information
 z       R       Canceled/invalid ISBN 
 6       NR      Linkage 
 8       R       Field link and sequence number 
@@ -1121,6 +1128,7 @@ ind2    b01     Difference indicator
 a       NR      Standard number or code 
 c       NR      Terms of availability 
 d       NR      Additional codes following the standard number or code 
+q       R       Qualifying information
 z       R       Canceled/invalid standard number or code 
 2       NR      Source of number or code 
 6       NR      Linkage 
@@ -1149,6 +1157,7 @@ e       NR      Unparsed fingerprint
 ind1    blank   Undefined
 ind2    blank   Undefined
 a       NR      Standard technical report number 
+q       R       Qualifying information
 z       R       Canceled/invalid number 
 6       NR      Linkage 
 8       R       Field link and sequence number 
@@ -1571,7 +1580,7 @@ ind1    012     Type of corporate name entry element
 ind2    blank   Undefined
 a       NR      Corporate name or jurisdiction name as entry element 
 b       R       Subordinate unit 
-c       NR      Location of meeting 
+c       R       Location of meeting 
 d       R       Date of meeting or treaty signing 
 e       R       Relator term 
 f       NR      Date of a work 
@@ -1591,7 +1600,7 @@ u       NR      Affiliation
 ind1    012     Type of meeting name entry element
 ind2    blank   Undefined
 a       NR      Meeting name or jurisdiction name as entry element 
-c       NR      Location of meeting 
+c       R       Location of meeting 
 d       NR      Date of meeting 
 e       R       Subordinate unit 
 f       NR      Date of a work 
@@ -2061,7 +2070,7 @@ b       R       Encoding format
 c       R       File size
 d       R       Resolution
 e       R       Regional encoding
-f       R       Transmission speed
+f       R       Encoded bitrate
 0       R       Authority record control number or standard number
 2       NR      Source
 3       NR      Materials specified
@@ -2928,7 +2937,7 @@ a       NR      Awards note
 8       R       Field link and sequence number 
 
 588     R       SOURCE OF DESCRIPTION NOTE
-ind1    blank   Undefined
+ind1    b01     Display constant controller
 ind2    blank   Undefined
 a       NR      Source of description note
 5       NR      Institution to which field applies 
@@ -2974,7 +2983,7 @@ ind1    012     Type of corporate name entry element
 ind2    01234567    Thesaurus
 a       NR      Corporate name or jurisdiction name as entry element 
 b       R       Subordinate unit 
-c       NR      Location of meeting 
+c       R       Location of meeting 
 d       R       Date of meeting or treaty signing 
 e       R       Relator term 
 f       NR      Date of a work 
@@ -3005,7 +3014,7 @@ z       R       Geographic subdivision
 ind1    012     Type of meeting name entry element
 ind2    01234567    Thesaurus
 a       NR      Meeting name or jurisdiction name as entry element 
-c       NR      Location of meeting 
+c       R       Location of meeting 
 d       NR      Date of meeting 
 e       R       Subordinate unit 
 f       NR      Date of a work 
@@ -3244,7 +3253,7 @@ ind1    012     Type of corporate name entry element
 ind2    b2      Type of added entry
 a       NR      Corporate name or jurisdiction name as entry element 
 b       R       Subordinate unit 
-c       NR      Location of meeting 
+c       R       Location of meeting 
 d       R       Date of meeting or treaty signing 
 e       R       Relator term 
 f       NR      Date of a work 
@@ -3273,7 +3282,7 @@ x       NR      International Standard Serial Number
 ind1    012     Type of meeting name entry element
 ind2    b2      Type of added entry
 a       NR      Meeting name or jurisdiction name as entry element 
-c       NR      Location of meeting 
+c       R       Location of meeting 
 d       NR      Date of meeting 
 e       R       Subordinate unit 
 f       NR      Date of a work 
@@ -3823,6 +3832,7 @@ x       NR      International Standard Serial Number
 4       R       Relator code 
 5       R       Institution to which field applies
 6       NR      Linkage 
+7       NR      Control subfield
 8       R       Field link and sequence number 
 
 810     R       SERIES ADDED ENTRY--CORPORATE NAME
@@ -3830,7 +3840,7 @@ ind1    012     Type of corporate name entry element
 ind2    blank   Undefined
 a       NR      Corporate name or jurisdiction name as entry element 
 b       R       Subordinate unit 
-c       NR      Location of meeting 
+c       R       Location of meeting 
 d       R       Date of meeting or treaty signing 
 e       R       Relator term 
 f       NR      Date of a work 
@@ -3854,13 +3864,14 @@ x       NR      International Standard Serial Number
 4       R       Relator code 
 5       R       Institution to which field applies
 6       NR      Linkage 
+7       NR      Control subfield
 8       R       Field link and sequence number 
 
 811     R       SERIES ADDED ENTRY--MEETING NAME
 ind1    012     Type of meeting name entry element
 ind2    blank   Undefined
 a       NR      Meeting name or jurisdiction name as entry element 
-c       NR      Location of meeting 
+c       R       Location of meeting 
 d       NR      Date of meeting 
 e       R       Subordinate unit 
 f       NR      Date of a work 
@@ -3883,6 +3894,7 @@ x       NR      International Standard Serial Number
 4       R       Relator code 
 5       R       Institution to which field applies
 6       NR      Linkage 
+7       NR      Control subfield
 8       R       Field link and sequence number 
 
 830     R       SERIES ADDED ENTRY--UNIFORM TITLE
@@ -3909,6 +3921,7 @@ x       NR      International Standard Serial Number
 3       NR      Materials specified
 5       R       Institution to which field applies
 6       NR      Linkage 
+7       NR      Control subfield
 8       R       Field link and sequence number 
 
 841     NR      HOLDINGS CODED DATA VALUES
