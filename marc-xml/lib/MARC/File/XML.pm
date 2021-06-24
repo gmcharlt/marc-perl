@@ -414,6 +414,7 @@ sub _next {
 
 sub _parser {
     $parser ||= XML::LibXML->new(
+        expand_entities => 1,
         ext_ent_handler => sub {
             die "External entities are not supported\n";
         }
