@@ -1,0 +1,91 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  test:
+    name: ${{ matrix.distribution.name }} (perl ${{ matrix.perl }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # A recent stable release and an older one still in common use.
+        # Bump these as new Perls ship; there's nothing special about
+        # either number.
+        perl: ['5.34', '5.40']
+        distribution:
+          - name: marc-record
+            needs: ''
+            build: makemaker
+            cpan_deps: ''
+          - name: marc-charset
+            needs: ''
+            build: makemaker
+            cpan_deps: 'XML::SAX Class::Accessor Unicode::Normalize'
+          - name: marc-lint
+            needs: marc-record
+            build: makemaker
+            cpan_deps: 'Business::ISBN'
+          - name: marc-xml
+            needs: 'marc-record marc-charset'
+            build: makemaker
+            cpan_deps: 'XML::LibXML Test::Warn'
+          - name: marc-marcmaker
+            needs: marc-record
+            build: makemaker
+            cpan_deps: ''
+          - name: marc-mij
+            needs: marc-record
+            build: modulebuild
+            cpan_deps: 'Module::Build JSON ex::monkeypatched'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: ${{ matrix.perl }}
+
+      - name: Install system dependencies
+        # libxml2-dev is only needed to build XML::LibXML (marc-xml),
+        # but installing it unconditionally keeps this step identical
+        # across every matrix cell.
+        run: sudo apt-get update && sudo apt-get install -y libxml2-dev
+
+      - name: Install CPAN dependencies
+        if: matrix.distribution.cpan_deps != ''
+        run: cpanm --notest ${{ matrix.distribution.cpan_deps }}
+
+      - name: Build sibling distributions this one depends on
+        if: matrix.distribution.needs != ''
+        run: |
+          set -e
+          EXTRA_LIB=""
+          for d in ${{ matrix.distribution.needs }}; do
+            (cd "$d" && perl Makefile.PL && make)
+            EXTRA_LIB="$PWD/$d/blib/lib:$PWD/$d/blib/arch:$EXTRA_LIB"
+          done
+          echo "PERL5LIB=$EXTRA_LIB$PERL5LIB" >> "$GITHUB_ENV"
+
+      # Sibling distributions are built from this checkout, not
+      # installed from CPAN, so a change to e.g. marc-record is
+      # exercised by marc-lint/marc-xml/marc-marcmaker/marc-mij's own
+      # test suites too, not just marc-record's.
+
+      - name: Build and test (ExtUtils::MakeMaker)
+        if: matrix.distribution.build == 'makemaker'
+        working-directory: ${{ matrix.distribution.name }}
+        run: |
+          perl Makefile.PL
+          make
+          make test
+
+      - name: Build and test (Module::Build)
+        if: matrix.distribution.build == 'modulebuild'
+        working-directory: ${{ matrix.distribution.name }}
+        run: |
+          perl Build.PL
+          ./Build
+          ./Build test
