@@ -1,0 +1,100 @@
+=encoding UTF-8
+
+=head1 NAME
+
+MARC::Record and its family
+
+=head1 SYNOPSIS
+
+The MARC::* series of modules create a simple object-oriented
+abstraction of MARC record handling.  The files are:
+
+=over 4
+
+=item MARC::Doc::Tutorial
+
+A tutorial explaining how to use MARC::Record.
+
+=item MARC::Record
+
+The core class for representing a single MARC record.
+
+=item MARC::Field
+
+Another core class for representing a single field in a record.
+
+=item MARC::Batch
+
+The basic object for access to a batch of one or more MARC records.
+
+=item MARC::File
+
+Base class for the MARC file.
+
+=item MARC::File::USMARC, MARC::File::MicroLIF
+
+Subclasses of MARC::File specific to the USMARC and MicroLIF formats.
+
+=item MARC::Lint
+
+Extension to check MARC records for validity.
+
+=back
+
+=head1 INSTALLATION
+
+To install this module type the following:
+
+    perl Makefile.PL
+    make
+    make test
+    make install
+
+=head1 DEPENDENCIES
+
+MARC::Record now requires a perl version >= 5.8.2 for processing unicode
+correctly.
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2001-2013 by contributors:
+
+=over 4
+
+=item 2001-2007 Andy Lester <marc@petdance.com>
+
+=item 2002-2007 Ed Summers <ehs@pobox.net>
+
+=item 2003-2005 Eric Lease Morgan <emorgan@nd.edu>
+
+=item 2003 Morbus Iff
+
+=item 2004-2005 Bryan Baldus
+
+=item 2004 Mark Jordan
+
+=item 2007 Mike Rylander
+
+=item 2007 Dan Scott
+
+=item 2009 Bill Dueber
+
+=item 2010-2013 Galen Charlton <gmcharlt@gmail.com>
+
+=item 2010 Frédéric Demians <f.demians@tamil.fr>
+
+=item 2010 Dan Wells
+
+=item 2010 Alex Arnaud <alex.arnaud@biblibre.com>
+
+=item 2010 Colin Campbell <colin.campbell@ptfs-europe.com>
+
+=item 2013 Robin Sheat <robin@catalyst.net.nz>
+
+=back
+
+This software is free software and may be distributed under the same
+terms as Perl itself. See the F<LICENSE> file included with this
+distribution.
+
+=cut

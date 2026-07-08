@@ -3,9 +3,10 @@ bin/marc2xml
 bin/xml2marc
 Changes
 lib/MARC/File/XML.pm
+LICENSE
 Makefile.PL
 MANIFEST
-README
+README.pod
 t/batch-ns.t
 t/batch-ns.xml
 t/batch.t

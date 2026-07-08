@@ -1,0 +1,38 @@
+=encoding UTF-8
+
+=head1 NAME
+
+MARC::File::MARCMaker
+
+=head1 DESCRIPTION
+
+MARC::File::MARCMaker -- Work with MARC data encoded in LC's MARCMaker and
+MARCBreaker format. This is based on code from the original MARC.pm, rewritten
+for MARC::Record compatibility.
+
+=head1 INSTALLATION
+
+To install this module type the following:
+
+    perl Makefile.PL
+    make
+    make test
+    make install
+
+=head1 DEPENDENCIES
+
+=over 4
+
+=item * MARC::Record
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2005 Baldus, Summers
+
+This software is free software and may be distributed under the same
+terms as Perl itself. See the F<LICENSE> file included with this
+distribution.
+
+=cut

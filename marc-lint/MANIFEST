@@ -4,9 +4,10 @@ etc/ecbdlist.html
 etc/specs
 lib/MARC/Lint/CodeData.pm
 lib/MARC/Lint.pm
+LICENSE
 Makefile.PL
 MANIFEST
-README
+README.pod
 t/camel.usmarc
 t/check020.t
 t/check041043.t

@@ -1,0 +1,40 @@
+=encoding UTF-8
+
+=head1 NAME
+
+MARC::Lint
+
+=head1 DESCRIPTION
+
+MARC::Lint provides a mechanism for validating MARC records. MARC::Lint
+was once a part of the MARC::Record distribution, but was split out to
+ease maintenance and development.
+
+=head1 INSTALLATION
+
+To install this module type the following:
+
+    perl Makefile.PL
+    make
+    make test
+    make install
+
+=head1 DEPENDENCIES
+
+=over 4
+
+=item * MARC::Record
+
+=item * Business::ISBN
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2001-2020 Baldus, Lester, Summers
+
+This software is free software and may be distributed under the same
+terms as Perl itself. See the F<LICENSE> file included with this
+distribution.
+
+=cut

@@ -8,9 +8,10 @@ lib/MARC/File/Encode.pm
 lib/MARC/File/MicroLIF.pm
 lib/MARC/File/USMARC.pm
 lib/MARC/Record.pm
+LICENSE
 Makefile.PL
 MANIFEST
-README
+README.pod
 t/00.load.t
 t/10.camel.t
 t/11.astring.t
