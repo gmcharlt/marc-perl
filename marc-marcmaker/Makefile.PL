@@ -6,6 +6,7 @@ use ExtUtils::MakeMaker;
     DISTNAME      => 'MARC-File-MARCMaker',
     VERSION_FROM  => 'lib/MARC/File/MARCMaker.pm',
     AUTHOR        => 'Bryan Baldus <eijabb@cpan.org>',
+    LICENSE       => 'perl',
     PREREQ_PM     => {
                         'Test::More' => 0,
                         'MARC::Record' => 0,

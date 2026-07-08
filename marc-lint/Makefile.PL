@@ -7,6 +7,7 @@ use ExtUtils::MakeMaker;
     VERSION_FROM  => 'lib/MARC/Lint.pm',
     ABSTRACT_FROM => 'lib/MARC/Lint.pm',
     AUTHOR        => 'Bryan Baldus <eijabb@cpan.org>',
+    LICENSE       => 'perl',
     PREREQ_PM     => {
                         'Test::More' => 0,
                         'MARC::Record' => 0,
