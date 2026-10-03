@@ -32,7 +32,10 @@ jobs:
           - name: marc-xml
             needs: 'marc-record marc-charset'
             build: makemaker
-            cpan_deps: 'XML::LibXML Test::Warn'
+            # a bit ugly, but since each variation is run
+            # independently, also need to install the deps
+            # for the siblings
+            cpan_deps: 'XML::LibXML Test::Warn XML::SAX Class::Accessor Unicode::Normalize'
           - name: marc-marcmaker
             needs: marc-record
             build: makemaker
