@@ -13,6 +13,19 @@ WriteMakefile(
                             'Galen Charlton <gmcharlt@gmail.com>',
                        ],
     'LICENSE'       => 'perl',
+    'META_MERGE'    => {
+        'meta-spec' => { version => 2 },
+        resources   => {
+            repository => {
+                type => 'git',
+                url  => 'https://github.com/perl4lib/marc-perl.git',
+                web  => 'https://github.com/perl4lib/marc-perl/tree/master/marc-xml',
+            },
+            bugtracker => {
+                web => 'https://github.com/perl4lib/marc-perl/issues',
+            },
+        },
+    },
     'PREREQ_PM'     => {
                             'XML::LibXML'   => 1.66,
                             'MARC::Record'  => 2.0,

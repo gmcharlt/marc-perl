@@ -9,6 +9,19 @@ my $builder = Module::Build->new(
     dist_author         => q{Bill Dueber <dueberb@umich.edu>},
     dist_version_from   => 'lib/MARC/File/MiJ.pm',
     release_status      => 'stable',
+    meta_merge          => {
+        'meta-spec' => { version => 2 },
+        resources   => {
+            repository => {
+                type => 'git',
+                url  => 'https://github.com/perl4lib/marc-perl.git',
+                web  => 'https://github.com/perl4lib/marc-perl/tree/master/marc-mij',
+            },
+            bugtracker => {
+                web => 'https://github.com/perl4lib/marc-perl/issues',
+            },
+        },
+    },
     configure_requires => {
         'Module::Build' => 0,
     },
