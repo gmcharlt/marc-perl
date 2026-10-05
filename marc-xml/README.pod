@@ -36,7 +36,7 @@ This module requires these other modules and libraries:
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2003-2009 Ed Summers and contributors
+Copyright (C) 2003-2026 Ed Summers and contributors
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. See the F<LICENSE> file
