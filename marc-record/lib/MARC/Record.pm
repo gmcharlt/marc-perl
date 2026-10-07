@@ -199,16 +199,16 @@ sub field {
 
     my @list = ();
     for my $tag ( @specs ) {
-        my $regex = $field_regex{ $tag };
+        my $regex = (defined $tag) ? $field_regex{ $tag } : undef;
 
         # Compile & stash it if necessary
-        if ( not defined $regex ) {
+        if ( not defined $regex and defined $tag ) {
             $regex = qr/^$tag$/;
             $field_regex{ $tag } = $regex;
         } # not defined
 
         for my $maybe ( $self->fields ) {
-            if ( $maybe->tag =~ $regex ) {
+            if ( defined $regex and $maybe->tag =~ $regex ) {
                 return $maybe unless wantarray;
 
                 push( @list, $maybe );
